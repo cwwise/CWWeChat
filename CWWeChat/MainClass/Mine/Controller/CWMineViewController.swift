@@ -44,7 +44,7 @@ extension CWMineViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.section == 0 {
-            return 90
+            return 87
         }
         
         return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
@@ -65,7 +65,7 @@ extension CWMineViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
 //        let settingVC = CWMineSettingViewController()
 //        settingVC.hidesBottomBarWhenPushed = true
 //        self.navigationController?.pushViewController(settingVC, animated: true)
