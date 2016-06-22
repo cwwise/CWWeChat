@@ -6,15 +6,29 @@
 
 ##目录
 - [更新日志](#更新日志)
+- [截图](#GIF)
+  - [UI部分](#UI部分)
+  - [更改资料部分](#更改资料部分)
+  - [登陆注册部分](#登陆注册部分)
+  - [IM部分](#IM部分)
 - [Bug反馈](#Bug反馈)
 - [联系我](#联系我) 
 
 ##<a id="更新日志"></a>更新日志
 * 2016.6.23 开始仿写微信项目，完成主体界面的基本布局
 
+##<a id="GIF"></a>截图
+###<a id="UI部分"></a>UI部分
+ ![image](https://github.com/wei18810109052/CWWeChat/blob/master/Source/Images/Simulator_Mine.png)
+
 ##<a id="Bug反馈"></a>Bug反馈
 [Bug反馈](https://github.com/Wzxhaha/WWeChat/issues/new)
 
 ##<a id="联系我"></a>联系我
 如果你有建议欢迎发邮件至email: wei18810109052@163.com
+
+##参考和感谢
+
+[WWeChat](https://github.com/Wzxhaha/WWeChat) 
+
 
