@@ -1,0 +1,44 @@
+//
+//  UIImage+Extension.swift
+//  CWWeChat
+//
+//  Created by chenwei on 16/6/22.
+//  Copyright © 2016年 chenwei. All rights reserved.
+//
+
+/*
+ https://github.com/AliSoftware/SwiftGen 在电脑上安装这个工具，自动生成 Asset 的 image enum 的 Extension
+ 
+ 切换到xcassets所在的文件夹
+ 命令：swiftgen images path
+ */
+
+typealias CWAsset = Asset
+
+{%if images %}
+#if os(iOS)
+  import UIKit.UIImage
+  typealias Image = UIImage
+#elseif os(OSX)
+  import AppKit.NSImage
+  typealias Image = NSImage
+#endif
+
+enum {{enumName}}: String {
+  {% for image in images %}
+  case {{image|swiftIdentifier}} = "{{image}}"
+  {% endfor %}
+
+  var image: Image {
+    return Image(asset: self)
+  }
+}
+
+extension Image {
+  convenience init!(asset: {{enumName}}) {
+    self.init(named: asset.rawValue)
+  }
+}
+{% else %}
+// No image found
+{% endif %}
