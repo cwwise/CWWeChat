@@ -1,6 +1,6 @@
-![image](https://github.com/wei18810109052/CWWeChat/raw/master/WWeChat.png)
+![image](https://github.com/wei18810109052/CWWeChat/blob/master/Source/Images/CWWeChatIcon.png)
 ## CWWeChat
-[![License](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://github.com/Wzxhaha/WWeChat/blob/master/LICENSE)
+[![License](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://github.com/wei18810109052/CWWeChat/blob/master/LICENSE)
 
 - 如果你喜欢，欢迎Star、Fork!
 
