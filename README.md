@@ -2,7 +2,8 @@
 ## CWWeChat
 [![License](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://github.com/wei18810109052/CWWeChat/blob/master/LICENSE)
 
-- 如果你喜欢，欢迎Star、Fork!
+* 2016.6开始，仿做一个微信，将持续更新直至完成。swift版本，集成XMPP聊天。
+* 如果你喜欢，欢迎Star、Fork!
 
 ##目录
 - [更新日志](#更新日志)
