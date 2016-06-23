@@ -1,5 +1,5 @@
 //
-//  CWChatUserModel.swift
+//  CWContactUser.swift
 //  CWWeChat
 //
 //  Created by chenwei on 16/4/2.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CWChatUserModel: NSObject {
+class CWContactUser: NSObject {
 
     //用户id
     var userId: String!
