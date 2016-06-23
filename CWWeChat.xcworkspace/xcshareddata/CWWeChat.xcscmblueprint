@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "82ABA09605E862558192F51B5229404A9131B534",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C2850A415EF9BD39E00BAAEB31DAC6D6B9671FB1" : 0,
+    "82ABA09605E862558192F51B5229404A9131B534" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D8A42473-45F7-4108-86BD-FC4C79323970",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C2850A415EF9BD39E00BAAEB31DAC6D6B9671FB1" : "CWXMPPChat\/",
+    "82ABA09605E862558192F51B5229404A9131B534" : "CWWeChat\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CWWeChat",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CWWeChat.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/wei18810109052\/CWWeChat.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "82ABA09605E862558192F51B5229404A9131B534"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/wei18810109052\/CWXMPPChat.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C2850A415EF9BD39E00BAAEB31DAC6D6B9671FB1"
+    }
+  ]
+}

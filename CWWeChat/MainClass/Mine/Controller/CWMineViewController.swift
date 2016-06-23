@@ -26,17 +26,6 @@ class CWMineViewController: CWMenuViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -68,8 +57,10 @@ extension CWMineViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
-//        let settingVC = CWMineSettingViewController()
-//        settingVC.hidesBottomBarWhenPushed = true
-//        self.navigationController?.pushViewController(settingVC, animated: true)
+        
+        let settingVC = CWMineSettingViewController()
+        settingVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(settingVC, animated: true)
+    
     }
 }

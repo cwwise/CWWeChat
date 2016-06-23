@@ -53,6 +53,25 @@
 		1FD3ED761D1BAA05004FBA63 /* CWContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED751D1BAA05004FBA63 /* CWContactManager.swift */; };
 		1FD3ED7B1D1BAEB2004FBA63 /* ContactList.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3ED7A1D1BAEB2004FBA63 /* ContactList.json */; };
 		1FD3ED7D1D1BBE6F004FBA63 /* NSString+PinYin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED7C1D1BBE6F004FBA63 /* NSString+PinYin.swift */; };
+		1FD3ED801D1C1320004FBA63 /* CWLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED7F1D1C1320004FBA63 /* CWLoginViewController.swift */; };
+		1FD3ED821D1C2B48004FBA63 /* CWMineSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED811D1C2B48004FBA63 /* CWMineSettingViewController.swift */; };
+		1FD3ED841D1C2BA4004FBA63 /* CWMineSettingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED831D1C2BA4004FBA63 /* CWMineSettingHelper.swift */; };
+		1FD3ED861D1C2BF8004FBA63 /* CWAccountSafetyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED851D1C2BF8004FBA63 /* CWAccountSafetyHelper.swift */; };
+		1FD3ED881D1C2C4F004FBA63 /* CWMessageInformSettingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED871D1C2C4F004FBA63 /* CWMessageInformSettingHelper.swift */; };
+		1FD3ED8A1D1C2C78004FBA63 /* CWPrivacySettingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED891D1C2C78004FBA63 /* CWPrivacySettingHelper.swift */; };
+		1FD3ED8C1D1C2C9E004FBA63 /* CWCommonSettingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED8B1D1C2C9E004FBA63 /* CWCommonSettingHelper.swift */; };
+		1FD3ED8E1D1C2D0C004FBA63 /* CWAccountSafetyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED8D1D1C2D0C004FBA63 /* CWAccountSafetyViewController.swift */; };
+		1FD3ED901D1C2D49004FBA63 /* CWMessageInformSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED8F1D1C2D49004FBA63 /* CWMessageInformSettingController.swift */; };
+		1FD3ED921D1C2D73004FBA63 /* CWPrivacySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED911D1C2D73004FBA63 /* CWPrivacySettingViewController.swift */; };
+		1FD3ED941D1C2D93004FBA63 /* CWCommonSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED931D1C2D93004FBA63 /* CWCommonSettingViewController.swift */; };
+		1FD3ED971D1C2DD6004FBA63 /* CWWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED961D1C2DD6004FBA63 /* CWWebViewController.swift */; };
+		1FD3ED991D1C2E18004FBA63 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED981D1C2E18004FBA63 /* UIBarButtonItem+Extensions.swift */; };
+		1FD3ED9B1D1C2E2C004FBA63 /* UIView+Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED9A1D1C2E2C004FBA63 /* UIView+Frame.swift */; };
+		1FD3ED9D1D1C2E79004FBA63 /* CWHelpAndFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED9C1D1C2E79004FBA63 /* CWHelpAndFeedbackViewController.swift */; };
+		1FD3ED9F1D1C302C004FBA63 /* CWAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED9E1D1C302C004FBA63 /* CWAboutViewController.swift */; };
+		1FD3EDA11D1C30A4004FBA63 /* CWAboutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EDA01D1C30A4004FBA63 /* CWAboutHeaderView.swift */; };
+		1FD3EDA31D1C335D004FBA63 /* CWAboutSettingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EDA21D1C335D004FBA63 /* CWAboutSettingHelper.swift */; };
+		1FD3EDA51D1C39EC004FBA63 /* UIApplication+CWChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EDA41D1C39EC004FBA63 /* UIApplication+CWChat.swift */; };
 		47A602EC777BF8B3F63924D8 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECE23B265D75A03FB5C6A9 /* Pods_CWWeChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +124,25 @@
 		1FD3ED751D1BAA05004FBA63 /* CWContactManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWContactManager.swift; sourceTree = "<group>"; };
 		1FD3ED7A1D1BAEB2004FBA63 /* ContactList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContactList.json; sourceTree = "<group>"; };
 		1FD3ED7C1D1BBE6F004FBA63 /* NSString+PinYin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+PinYin.swift"; sourceTree = "<group>"; };
+		1FD3ED7F1D1C1320004FBA63 /* CWLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWLoginViewController.swift; sourceTree = "<group>"; };
+		1FD3ED811D1C2B48004FBA63 /* CWMineSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMineSettingViewController.swift; sourceTree = "<group>"; };
+		1FD3ED831D1C2BA4004FBA63 /* CWMineSettingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMineSettingHelper.swift; sourceTree = "<group>"; };
+		1FD3ED851D1C2BF8004FBA63 /* CWAccountSafetyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAccountSafetyHelper.swift; sourceTree = "<group>"; };
+		1FD3ED871D1C2C4F004FBA63 /* CWMessageInformSettingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageInformSettingHelper.swift; sourceTree = "<group>"; };
+		1FD3ED891D1C2C78004FBA63 /* CWPrivacySettingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWPrivacySettingHelper.swift; sourceTree = "<group>"; };
+		1FD3ED8B1D1C2C9E004FBA63 /* CWCommonSettingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWCommonSettingHelper.swift; sourceTree = "<group>"; };
+		1FD3ED8D1D1C2D0C004FBA63 /* CWAccountSafetyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAccountSafetyViewController.swift; sourceTree = "<group>"; };
+		1FD3ED8F1D1C2D49004FBA63 /* CWMessageInformSettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageInformSettingController.swift; sourceTree = "<group>"; };
+		1FD3ED911D1C2D73004FBA63 /* CWPrivacySettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWPrivacySettingViewController.swift; sourceTree = "<group>"; };
+		1FD3ED931D1C2D93004FBA63 /* CWCommonSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWCommonSettingViewController.swift; sourceTree = "<group>"; };
+		1FD3ED961D1C2DD6004FBA63 /* CWWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWWebViewController.swift; sourceTree = "<group>"; };
+		1FD3ED981D1C2E18004FBA63 /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
+		1FD3ED9A1D1C2E2C004FBA63 /* UIView+Frame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Frame.swift"; sourceTree = "<group>"; };
+		1FD3ED9C1D1C2E79004FBA63 /* CWHelpAndFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWHelpAndFeedbackViewController.swift; sourceTree = "<group>"; };
+		1FD3ED9E1D1C302C004FBA63 /* CWAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAboutViewController.swift; sourceTree = "<group>"; };
+		1FD3EDA01D1C30A4004FBA63 /* CWAboutHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAboutHeaderView.swift; sourceTree = "<group>"; };
+		1FD3EDA21D1C335D004FBA63 /* CWAboutSettingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAboutSettingHelper.swift; sourceTree = "<group>"; };
+		1FD3EDA41D1C39EC004FBA63 /* UIApplication+CWChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+CWChat.swift"; sourceTree = "<group>"; };
 		1FECE23B265D75A03FB5C6A9 /* Pods_CWWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E6F8F41CBA137291D180E0E /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
 		80C4EC6CB95B1523B42971BD /* Pods-CWWeChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -188,6 +226,9 @@
 				1FD3EB2C1D1ADA13004FBA63 /* UIColor+Extension.swift */,
 				1FD3EB2D1D1ADA13004FBA63 /* UIImage+CWChat.swift */,
 				1FD3ED7C1D1BBE6F004FBA63 /* NSString+PinYin.swift */,
+				1FD3ED981D1C2E18004FBA63 /* UIBarButtonItem+Extensions.swift */,
+				1FD3ED9A1D1C2E2C004FBA63 /* UIView+Frame.swift */,
+				1FD3EDA41D1C39EC004FBA63 /* UIApplication+CWChat.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -205,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				1FD3EB381D1ADA18004FBA63 /* Base */,
+				1FD3ED7E1D1C130E004FBA63 /* Login */,
 				1FD3EB321D1ADA18004FBA63 /* AddressBook */,
 				1FD3EB3B1D1ADA18004FBA63 /* Discover */,
 				1FD3EB411D1ADA18004FBA63 /* Message */,
@@ -263,6 +305,7 @@
 		1FD3EB381D1ADA18004FBA63 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				1FD3ED951D1C2DCE004FBA63 /* CWWebView */,
 				1FD3EB881D1AE3DE004FBA63 /* CWSearch */,
 				1FD3EB721D1AE046004FBA63 /* CWMenu */,
 				1FD3EB551D1ADA93004FBA63 /* CWSetting */,
@@ -374,6 +417,13 @@
 			isa = PBXGroup;
 			children = (
 				1FD3EB491D1ADA18004FBA63 /* CWMineViewController.swift */,
+				1FD3ED811D1C2B48004FBA63 /* CWMineSettingViewController.swift */,
+				1FD3ED8D1D1C2D0C004FBA63 /* CWAccountSafetyViewController.swift */,
+				1FD3ED8F1D1C2D49004FBA63 /* CWMessageInformSettingController.swift */,
+				1FD3ED911D1C2D73004FBA63 /* CWPrivacySettingViewController.swift */,
+				1FD3ED931D1C2D93004FBA63 /* CWCommonSettingViewController.swift */,
+				1FD3ED9C1D1C2E79004FBA63 /* CWHelpAndFeedbackViewController.swift */,
+				1FD3ED9E1D1C302C004FBA63 /* CWAboutViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -382,6 +432,12 @@
 			isa = PBXGroup;
 			children = (
 				1FD3EB7E1D1AE10C004FBA63 /* CWMineHelper.swift */,
+				1FD3ED831D1C2BA4004FBA63 /* CWMineSettingHelper.swift */,
+				1FD3ED851D1C2BF8004FBA63 /* CWAccountSafetyHelper.swift */,
+				1FD3ED871D1C2C4F004FBA63 /* CWMessageInformSettingHelper.swift */,
+				1FD3ED891D1C2C78004FBA63 /* CWPrivacySettingHelper.swift */,
+				1FD3ED8B1D1C2C9E004FBA63 /* CWCommonSettingHelper.swift */,
+				1FD3EDA21D1C335D004FBA63 /* CWAboutSettingHelper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -397,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				1FD3EB801D1AE115004FBA63 /* CWMineUserCell.swift */,
+				1FD3EDA01D1C30A4004FBA63 /* CWAboutHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -540,6 +597,22 @@
 			path = Contact;
 			sourceTree = "<group>";
 		};
+		1FD3ED7E1D1C130E004FBA63 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1FD3ED7F1D1C1320004FBA63 /* CWLoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		1FD3ED951D1C2DCE004FBA63 /* CWWebView */ = {
+			isa = PBXGroup;
+			children = (
+				1FD3ED961D1C2DD6004FBA63 /* CWWebViewController.swift */,
+			);
+			path = CWWebView;
+			sourceTree = "<group>";
+		};
 		708B293B2F2F8567BDC9E8B2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -681,27 +754,43 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FD3EB5A1D1ADAA8004FBA63 /* CWSettingViewController.swift in Sources */,
+				1FD3ED901D1C2D49004FBA63 /* CWMessageInformSettingController.swift in Sources */,
 				1FD3EB5E1D1ADABA004FBA63 /* CWSettingGroup.swift in Sources */,
 				1FD3ED6E1D1B76D5004FBA63 /* CWAddressBookHeaderView.swift in Sources */,
+				1FD3EDA51D1C39EC004FBA63 /* UIApplication+CWChat.swift in Sources */,
+				1FD3ED9D1D1C2E79004FBA63 /* CWHelpAndFeedbackViewController.swift in Sources */,
 				1FD3EB9F1D1AEC6B004FBA63 /* ChatTimeTool.swift in Sources */,
 				1FD3EB831D1AE1DB004FBA63 /* CWContactUser.swift in Sources */,
 				1FD3EB541D1ADA1D004FBA63 /* ViewController.swift in Sources */,
 				1FD3EB9A1D1AEB87004FBA63 /* CWConversationCell.swift in Sources */,
+				1FD3ED991D1C2E18004FBA63 /* UIBarButtonItem+Extensions.swift in Sources */,
 				1FD3EB811D1AE115004FBA63 /* CWMineUserCell.swift in Sources */,
+				1FD3ED921D1C2D73004FBA63 /* CWPrivacySettingViewController.swift in Sources */,
 				1FD3EB691D1ADB17004FBA63 /* CWSettingHeaderTitleView.swift in Sources */,
+				1FD3ED9F1D1C302C004FBA63 /* CWAboutViewController.swift in Sources */,
 				1FD3EB6A1D1ADB17004FBA63 /* CWSettingFooterTitleView.swift in Sources */,
 				1FD3ED7D1D1BBE6F004FBA63 /* NSString+PinYin.swift in Sources */,
 				1FD3ED761D1BAA05004FBA63 /* CWContactManager.swift in Sources */,
 				1FD3EB8C1D1AE456004FBA63 /* CWChatFriendCell.swift in Sources */,
 				1FD3EB771D1AE04D004FBA63 /* CWMenuViewController.swift in Sources */,
+				1FD3ED941D1C2D93004FBA63 /* CWCommonSettingViewController.swift in Sources */,
+				1FD3ED8E1D1C2D0C004FBA63 /* CWAccountSafetyViewController.swift in Sources */,
 				1FD3EB661D1ADB17004FBA63 /* CWSettingCell.swift in Sources */,
 				1FD3EB901D1AEAFD004FBA63 /* CWChatViewController.swift in Sources */,
 				1FD3EB7D1D1AE092004FBA63 /* CWDiscoverHelper.swift in Sources */,
+				1FD3ED8A1D1C2C78004FBA63 /* CWPrivacySettingHelper.swift in Sources */,
+				1FD3ED9B1D1C2E2C004FBA63 /* UIView+Frame.swift in Sources */,
 				1FD3EB301D1ADA13004FBA63 /* UIImage+CWChat.swift in Sources */,
+				1FD3EDA11D1C30A4004FBA63 /* CWAboutHeaderView.swift in Sources */,
 				1FD3EB251D1ADA08004FBA63 /* AppDelegate.swift in Sources */,
 				1FD3EB4E1D1ADA18004FBA63 /* CWChatNavigationController.swift in Sources */,
+				1FD3ED801D1C1320004FBA63 /* CWLoginViewController.swift in Sources */,
+				1FD3ED841D1C2BA4004FBA63 /* CWMineSettingHelper.swift in Sources */,
+				1FD3ED8C1D1C2C9E004FBA63 /* CWCommonSettingHelper.swift in Sources */,
 				1FD3EB941D1AEB56004FBA63 /* CWConversationModel.swift in Sources */,
 				1FD3EB7B1D1AE061004FBA63 /* CWMenuCell.swift in Sources */,
+				1FD3ED861D1C2BF8004FBA63 /* CWAccountSafetyHelper.swift in Sources */,
+				1FD3ED881D1C2C4F004FBA63 /* CWMessageInformSettingHelper.swift in Sources */,
 				1FD3ED741D1B9EFF004FBA63 /* CWContactGroup.swift in Sources */,
 				1FD3EB851D1AE310004FBA63 /* CWAddressBookViewController+Delegate.swift in Sources */,
 				1FD3EB9D1D1AEC15004FBA63 /* CWChatUIConstant.swift in Sources */,
@@ -717,9 +806,12 @@
 				1FD3EB4D1D1ADA18004FBA63 /* CWAddressBookViewController.swift in Sources */,
 				1FD3EB6E1D1ADDBC004FBA63 /* CWUIUtility.swift in Sources */,
 				1FD3EB511D1ADA18004FBA63 /* CWConversationsViewController.swift in Sources */,
+				1FD3ED971D1C2DD6004FBA63 /* CWWebViewController.swift in Sources */,
 				1FD3EB5D1D1ADABA004FBA63 /* CWSettingItem.swift in Sources */,
 				1FD3EB2F1D1ADA13004FBA63 /* UIColor+Extension.swift in Sources */,
+				1FD3ED821D1C2B48004FBA63 /* CWMineSettingViewController.swift in Sources */,
 				1FD3EB871D1AE33D004FBA63 /* CWAddressBookSearchController.swift in Sources */,
+				1FD3EDA31D1C335D004FBA63 /* CWAboutSettingHelper.swift in Sources */,
 				1FD3EB681D1ADB17004FBA63 /* CWSettingSwitchCell.swift in Sources */,
 				1FD3EB651D1ADB17004FBA63 /* CWSettingProtocol.swift in Sources */,
 				1FD3EB501D1ADA18004FBA63 /* CWDiscoverViewController.swift in Sources */,
