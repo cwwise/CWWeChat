@@ -9,8 +9,6 @@
 - [更新日志](#更新日志)
 - [截图](#GIF)
   - [UI部分](#UI部分)
-  - [更改资料部分](#更改资料部分)
-  - [登陆注册部分](#登陆注册部分)
   - [IM部分](#IM部分)
 - [Bug反馈](#Bug反馈)
 - [联系我](#联系我) 
@@ -20,7 +18,7 @@
 
 ##<a id="GIF"></a>截图
 ###<a id="UI部分"></a>UI部分
- ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Address.png)
+ ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Address_1.png)
   ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Discover.png)
    ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Mine.png)
 
