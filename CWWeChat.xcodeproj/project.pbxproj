@@ -41,7 +41,6 @@
 		1FD3EB871D1AE33D004FBA63 /* CWAddressBookSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB861D1AE33D004FBA63 /* CWAddressBookSearchController.swift */; };
 		1FD3EB8A1D1AE3E3004FBA63 /* CWSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB891D1AE3E3004FBA63 /* CWSearchController.swift */; };
 		1FD3EB8C1D1AE456004FBA63 /* CWChatFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB8B1D1AE456004FBA63 /* CWChatFriendCell.swift */; };
-		1FD3EB8E1D1AE516004FBA63 /* CWFriendsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB8D1D1AE516004FBA63 /* CWFriendsHelper.swift */; };
 		1FD3EB901D1AEAFD004FBA63 /* CWChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB8F1D1AEAFD004FBA63 /* CWChatViewController.swift */; };
 		1FD3EB941D1AEB56004FBA63 /* CWConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB931D1AEB56004FBA63 /* CWConversationModel.swift */; };
 		1FD3EB961D1AEB6D004FBA63 /* CWMessageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB951D1AEB6D004FBA63 /* CWMessageProtocol.swift */; };
@@ -94,7 +93,6 @@
 		1FD3EB861D1AE33D004FBA63 /* CWAddressBookSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAddressBookSearchController.swift; sourceTree = "<group>"; };
 		1FD3EB891D1AE3E3004FBA63 /* CWSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWSearchController.swift; sourceTree = "<group>"; };
 		1FD3EB8B1D1AE456004FBA63 /* CWChatFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatFriendCell.swift; sourceTree = "<group>"; };
-		1FD3EB8D1D1AE516004FBA63 /* CWFriendsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWFriendsHelper.swift; sourceTree = "<group>"; };
 		1FD3EB8F1D1AEAFD004FBA63 /* CWChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatViewController.swift; sourceTree = "<group>"; };
 		1FD3EB931D1AEB56004FBA63 /* CWConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWConversationModel.swift; sourceTree = "<group>"; };
 		1FD3EB951D1AEB6D004FBA63 /* CWMessageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageProtocol.swift; sourceTree = "<group>"; };
@@ -248,7 +246,6 @@
 		1FD3EB361D1ADA18004FBA63 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				1FD3EB8D1D1AE516004FBA63 /* CWFriendsHelper.swift */,
 				1FD3ED751D1BAA05004FBA63 /* CWContactManager.swift */,
 			);
 			path = Other;
@@ -706,7 +703,6 @@
 				1FD3EB941D1AEB56004FBA63 /* CWConversationModel.swift in Sources */,
 				1FD3EB7B1D1AE061004FBA63 /* CWMenuCell.swift in Sources */,
 				1FD3ED741D1B9EFF004FBA63 /* CWContactGroup.swift in Sources */,
-				1FD3EB8E1D1AE516004FBA63 /* CWFriendsHelper.swift in Sources */,
 				1FD3EB851D1AE310004FBA63 /* CWAddressBookViewController+Delegate.swift in Sources */,
 				1FD3EB9D1D1AEC15004FBA63 /* CWChatUIConstant.swift in Sources */,
 				1FD3EB961D1AEB6D004FBA63 /* CWMessageProtocol.swift in Sources */,

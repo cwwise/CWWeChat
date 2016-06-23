@@ -17,7 +17,9 @@ class CWAddressBookViewController: UIViewController {
     var groupList = [CWContactGroup]()
     var sectionHeaders = [String]()
     
-    var contactHelper = CWContactManager.shareContactManager
+    lazy var contactHelper: CWContactManager = {
+        return CWContactManager.shareContactManager
+    }()
     
     lazy var searchController: CWSearchController = {
         let searchController = CWSearchController(searchResultsController: self.searchResultController)
@@ -28,6 +30,15 @@ class CWAddressBookViewController: UIViewController {
         return searchController
     }()
     
+    lazy var footerLabel: UILabel = {
+        let frame = CGRect(x: 0, y: 0, width: Screen_Width, height: 50)
+       let footerLabel = UILabel(frame: frame)
+        footerLabel.textAlignment = .Center
+        footerLabel.font = UIFont.systemFontOfSize(17)
+        footerLabel.textColor = UIColor.grayColor()
+        return footerLabel
+    }()
+    
     //搜索结果
     var searchResultController:CWAddressBookSearchController = {
         let searchResultController = CWAddressBookSearchController()
@@ -35,14 +46,18 @@ class CWAddressBookViewController: UIViewController {
     }()
     
     lazy var tableView:UITableView = {
-        let tableView = UITableView(frame: self.view.bounds, style: .Grouped)
+        let tableView = UITableView(frame: self.view.bounds, style: .Plain)
         tableView.backgroundColor = UIColor.tableViewBackgroundColorl()
-        tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.sectionIndexBackgroundColor = UIColor.clearColor()
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        
         tableView.registerClass(CWChatFriendCell.self, forCellReuseIdentifier: "cell")
         tableView.registerClass(CWAddressBookHeaderView.self, forHeaderFooterViewReuseIdentifier: CWAddressBookHeaderView.identifier)
         tableView.tableHeaderView = self.searchController.searchBar
+        tableView.tableFooterView = self.footerLabel
+
         return tableView
     }()
     
@@ -50,7 +65,14 @@ class CWAddressBookViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         
-//        contactHelper.dataChangeBlock =
+        let block = { (groupListData:[CWContactGroup], sectionHeadersData:[String], count: Int) -> Void in
+            self.groupList = groupListData
+            self.sectionHeaders = sectionHeadersData
+            self.footerLabel.text = "\(count)位联系人"
+            self.tableView.reloadData()
+        }
+        
+        contactHelper.dataChangeBlock = block
     
     }
     
@@ -83,6 +105,10 @@ extension CWAddressBookViewController: UITableViewDataSource {
         return cell
     }
     
+    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+        return self.sectionHeaders
+    }
+    
 }
 
 private let HEIGHT_FRIEND_CELL:CGFloat   =   54.0
@@ -98,9 +124,15 @@ extension CWAddressBookViewController: UITableViewDelegate {
         if section == 0 {
             return 0
         }
-        return HEIGHT_FRIEND_CELL
+        return HEIGHT_HEADER
     }
     
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWAddressBookHeaderView.identifier) as! CWAddressBookHeaderView
+        let group = groupList[section];
+        headerView.text = group.groupName
+        return headerView
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)

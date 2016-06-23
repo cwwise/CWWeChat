@@ -10,6 +10,9 @@ import UIKit
 import SwiftyJSON
 import CocoaLumberjack
 
+//好友列表刷新
+let CWFriendsNeedReloadNotification:String = "com.CWFriendsNeedReloadNotification.chat"
+
 /// 管理联系人
 class CWContactManager: NSObject {
     
@@ -35,6 +38,15 @@ class CWContactManager: NSObject {
         super.init()
         self.setupDefaultGroup()
         initTestData()
+    }
+    
+    class func findContact(userId:String?) -> CWContactUser? {
+//        for user in CWContactManager.shareContactManager.contactsData {
+//            if userId == user.userId {
+//                return user
+//            }
+//        }
+        return nil
     }
     
     ///初始化测试数据
@@ -129,6 +141,7 @@ class CWContactManager: NSObject {
         
         if self.dataChangeBlock != nil {
             dispatch_async(dispatch_get_main_queue(), { 
+                DDLogDebug(self.sortSectionHeaders.description)
                 self.dataChangeBlock!(self.sortContactsData,self.sortSectionHeaders,self.contactsData.count)
             })
         }

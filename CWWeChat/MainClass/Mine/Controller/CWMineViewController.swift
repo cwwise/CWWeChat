@@ -58,6 +58,8 @@ extension CWMineViewController {
             model.userId = "chenwei@chenweiim.com"
             model.nikeName = "陈威"
             model.userName = "chenwei19921222"
+            model.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/tom@chenweiim.com"
+
             cell.userModel = model
             return cell
         }
