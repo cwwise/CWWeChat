@@ -23,6 +23,6 @@ target 'CWWeChat' do
   pod 'CocoaLumberjack/Swift'
   
   #聊天
-  pod 'XMPPFramework'
+  pod 'CocoaAsyncSocket'
 
 end
