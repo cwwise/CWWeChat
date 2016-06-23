@@ -1,5 +1,5 @@
 //
-//  ChatFriendCell.swift
+//  CWChatFriendCell.swift
 //  CWChat
 //
 //  Created by chenwei on 16/4/11.
@@ -13,10 +13,10 @@ import AlamofireImage
 let  FRIENDS_SPACE_X:CGFloat     =    10.0
 let  FRIENDS_SPACE_Y:CGFloat     =    9.0
 
-class ChatFriendCell: UITableViewCell {
+class CWChatFriendCell: UITableViewCell {
     
     ///用户model
-    var userModel:CWChatUserModel? {
+    var userModel:CWContactUser? {
         didSet {
             self.setupUI()
         }
@@ -75,7 +75,7 @@ class ChatFriendCell: UITableViewCell {
         if (userModel.avatarPath != nil) {
             self.avatarImageView.image = UIImage(named: userModel.avatarPath!)
         } else {
-            self.avatarImageView.af_setImageWithURL(NSURL(string: userModel.avatarURL)!)
+//            self.avatarImageView.af_setImageWithURL(NSURL(string: userModel.avatarURL!)!)
         }
         self.usernameLabel.text = userModel.nikeName;
     }

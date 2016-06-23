@@ -54,7 +54,7 @@ extension CWMineViewController {
         
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("usercell", forIndexPath: indexPath) as! CWMineUserCell
-            let model = CWChatUserModel()
+            let model = CWContactUser()
             model.userId = "chenwei@chenweiim.com"
             model.nikeName = "陈威"
             model.userName = "chenwei19921222"

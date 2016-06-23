@@ -13,7 +13,7 @@ let MINE_SPACE_Y: CGFloat  =  12.0
 
 class CWMineUserCell: UITableViewCell {
 
-    var userModel: CWChatUserModel? {
+    var userModel: CWContactUser? {
         didSet {
             self.setupUserInfomation()
         }
@@ -94,7 +94,7 @@ class CWMineUserCell: UITableViewCell {
             return
         }
     
-        let url = NSURL(string: userModel.avatarURL)!
+        let url = NSURL(string: userModel.avatarURL!)!
         self.avatarImageView.af_setImageWithURL(url)
 
         nikenameLabel.text = userModel.nikeName

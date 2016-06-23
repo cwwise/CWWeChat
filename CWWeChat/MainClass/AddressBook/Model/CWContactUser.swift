@@ -12,25 +12,38 @@ class CWContactUser: NSObject {
 
     //用户id
     var userId: String!
+    
     //用户名
     var userName: String?
     //昵称
-    var nikeName: String?
+    var nikeName: String? {
+        willSet {
+            //不相同的时候 设置获取拼音和拼音的首字母
+            if (newValue != nikeName) && newValue != nil {
+                self.pinying = newValue!.pinYingString(true)
+                self.pinyingInitial = newValue!.pinYingString()
+            }
+        }
+    }
     //备注名
     var remarkName: String?
+    
     //头像URL
-    var avatarURL: String {
-        let avatarURL = "http://o7ve5wypa.bkt.clouddn.com/"+self.userId
-        return avatarURL
-    }
+    var avatarURL: String?
     //头像路径
     var avatarPath: String?
     
     var isOnline: Bool = false
-    
-    init(info: Dictionary<String, AnyObject>) {
-        
-    }
+
+    /**
+     *  拼音
+     *
+     *  来源：备注 > 昵称 > 用户名
+     */
+    ///拼音缩写
+    var pinying: String = ""
+    ///拼音首字母
+    var pinyingInitial: String = ""
     
     override init() {
         super.init()
@@ -40,10 +53,14 @@ class CWContactUser: NSObject {
         return self.userId.hash
     }
     
+    override var description: String {
+        return self.nikeName!.pinYingString(true)+self.nikeName!
+    }
+    
 }
 
 
-func ==(lhs: CWChatUserModel, rhs: CWChatUserModel) -> Bool {
+func ==(lhs: CWContactUser, rhs: CWContactUser) -> Bool {
     return lhs.userId == rhs.userId
 }
 

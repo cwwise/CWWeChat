@@ -13,8 +13,8 @@ let Height_FriendsCell: CGFloat = 54
 /// 搜索结果
 class CWAddressBookSearchController: UIViewController {
 
-    internal var friendsData:[CWChatUserModel]?
-    private  var searchFriendData = [CWChatUserModel]()
+    internal var friendsData:[CWContactUser]?
+    private  var searchFriendData = [CWContactUser]()
     
     lazy var tableView:UITableView = {
         let frame = CGRect(x: 0, y: 64, width: Screen_Width, height: Screen_Height-Screen_NavigationHeight)
@@ -23,7 +23,7 @@ class CWAddressBookSearchController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.registerClass(ChatFriendCell.self, forCellReuseIdentifier: "ChatFriendCell")
+        tableView.registerClass(CWChatFriendCell.self, forCellReuseIdentifier: "ChatFriendCell")
         return tableView
     }()
     
@@ -54,7 +54,7 @@ extension CWAddressBookSearchController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ChatFriendCell") as! ChatFriendCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ChatFriendCell") as! CWChatFriendCell
         cell.userModel = self.searchFriendData[indexPath.row]
         return cell
     }
