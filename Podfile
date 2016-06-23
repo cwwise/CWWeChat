@@ -24,5 +24,7 @@ target 'CWWeChat' do
   
   #聊天
   pod 'CocoaAsyncSocket'
+  
+  pod 'MMXXMPPFramework'
 
 end

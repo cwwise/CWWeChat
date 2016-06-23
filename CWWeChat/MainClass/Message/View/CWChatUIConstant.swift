@@ -16,3 +16,10 @@ internal struct ChatConversationCellUI {
     
 }
 
+
+//消息在左边的时候， 文字距离屏幕左边的距离
+let kChatTextLeftPadding: CGFloat = 72
+//消息在左边的时候， 文字距离屏幕左边的距离
+let kChatTextRightPadding: CGFloat = 82
+//消息在右边， 70：文本离屏幕左的距离，  82：文本离屏幕右的距
+let kChatTextMaxWidth: CGFloat = Screen_Width - kChatTextLeftPadding - kChatTextRightPadding

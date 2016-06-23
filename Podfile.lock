@@ -12,6 +12,9 @@ PODS:
     - CocoaAsyncSocket/RunLoop
   - CocoaAsyncSocket/GCD (7.4.3)
   - CocoaAsyncSocket/RunLoop (7.4.3)
+  - CocoaLumberjack (2.3.0):
+    - CocoaLumberjack/Default (= 2.3.0)
+    - CocoaLumberjack/Extensions (= 2.3.0)
   - CocoaLumberjack/Core (2.3.0)
   - CocoaLumberjack/Default (2.3.0):
     - CocoaLumberjack/Core
@@ -19,6 +22,38 @@ PODS:
     - CocoaLumberjack/Default
   - CocoaLumberjack/Swift (2.3.0):
     - CocoaLumberjack/Extensions
+  - MMXXMPPFramework (3.6.15):
+    - MMXXMPPFramework/Core (= 3.6.15)
+    - MMXXMPPFramework/CoreDataStorage (= 3.6.15)
+    - MMXXMPPFramework/Reconnect (= 3.6.15)
+    - MMXXMPPFramework/Roster (= 3.6.15)
+    - MMXXMPPFramework/XEP-0016 (= 3.6.15)
+    - MMXXMPPFramework/XEP-0060 (= 3.6.15)
+    - MMXXMPPFramework/XEP-0082 (= 3.6.15)
+    - MMXXMPPFramework/XEP-0106 (= 3.6.15)
+    - MMXXMPPFramework/XEP-0203 (= 3.6.15)
+  - MMXXMPPFramework/Core (3.6.15):
+    - CocoaAsyncSocket (~> 7.4.1)
+    - CocoaLumberjack (~> 2.2)
+  - MMXXMPPFramework/CoreDataStorage (3.6.15):
+    - MMXXMPPFramework/Core
+  - MMXXMPPFramework/Reconnect (3.6.15):
+    - MMXXMPPFramework/Core
+  - MMXXMPPFramework/Roster (3.6.15):
+    - MMXXMPPFramework/Core
+    - MMXXMPPFramework/CoreDataStorage
+    - MMXXMPPFramework/XEP-0203
+  - MMXXMPPFramework/XEP-0016 (3.6.15):
+    - MMXXMPPFramework/Core
+  - MMXXMPPFramework/XEP-0060 (3.6.15):
+    - MMXXMPPFramework/Core
+  - MMXXMPPFramework/XEP-0082 (3.6.15):
+    - MMXXMPPFramework/Core
+  - MMXXMPPFramework/XEP-0106 (3.6.15):
+    - MMXXMPPFramework/Core
+  - MMXXMPPFramework/XEP-0203 (3.6.15):
+    - MMXXMPPFramework/Core
+    - MMXXMPPFramework/XEP-0082
   - SnapKit (0.21.0)
   - SQLite.swift (0.10.1)
   - SwiftyJSON (2.3.2)
@@ -29,6 +64,7 @@ DEPENDENCIES:
   - ChameleonFramework/Swift
   - CocoaAsyncSocket
   - CocoaLumberjack/Swift
+  - MMXXMPPFramework
   - SnapKit
   - SQLite.swift
   - SwiftyJSON
@@ -39,10 +75,11 @@ SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
+  MMXXMPPFramework: 12ac458346387dc8a3fb157dc56db65e13be5a9b
   SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
   SQLite.swift: 6a6e4b034efc317ce4e203b6af2d3024fee2b570
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: a1256019e307f98d110cb0665763a4e58357f8f0
+PODFILE CHECKSUM: 1470a37c5b9c6d7e09296385a31a5f76f8ac18af
 
 COCOAPODS: 1.0.1

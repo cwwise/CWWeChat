@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWChatViewController: UIViewController {
+class CWChatViewController: CWBaseMessageViewController {
 
     var toId: String?
     

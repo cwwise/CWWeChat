@@ -8,10 +8,11 @@
 
 import UIKit
 
-class CWConversationsViewController: UIViewController {
+class CWConversationsViewController: CWBaseMessageViewController {
 
     var conversationList = [CWConversationModel]()
-    
+    let manager = CWXMPPManager.shareXMPPManager
+
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: self.view.bounds, style: .Plain)
         tableView.backgroundColor = UIColor.whiteColor()
@@ -29,6 +30,8 @@ class CWConversationsViewController: UIViewController {
         setupUI()
         registerCellClass()
         addDefaultData()
+        
+        manager.connectProcess()
         // Do any additional setup after loading the view.
     }
     

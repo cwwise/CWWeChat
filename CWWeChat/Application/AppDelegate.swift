@@ -39,11 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         defaultDebugLevel = .Debug
         
-        DDLogVerbose("Verbose");
-        DDLogDebug("Debug");
-        DDLogInfo("Info");
-        DDLogWarn("Warn");
-        DDLogError("Error");
     }
 
     func applicationWillResignActive(application: UIApplication) {
