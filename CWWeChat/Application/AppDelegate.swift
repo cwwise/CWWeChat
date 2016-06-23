@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = UIColor.whiteColor()
         self.window?.makeKeyAndVisible()
         setupLogger()
+        registerRemoteNotification()
         return true
     }
     
@@ -38,7 +39,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLog.addLogger(fileLogger)
         
         defaultDebugLevel = .Debug
+    }
+    
+    func registerRemoteNotification() {
         
+        UIApplication.sharedApplication().registerForRemoteNotifications()
+        let userSetting = UIUserNotificationSettings(forTypes: [.Sound,.Alert, .Badge], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(userSetting)
+
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        DDLogDebug(deviceToken.description)
     }
 
     func applicationWillResignActive(application: UIApplication) {
