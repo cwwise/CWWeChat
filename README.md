@@ -20,7 +20,9 @@
 
 ##<a id="GIF"></a>截图
 ###<a id="UI部分"></a>UI部分
- ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Mine.png)
+ ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Address.png)
+  ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Discover.png)
+   ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Mine.png)
 
 ##<a id="Bug反馈"></a>Bug反馈
 [Bug反馈](https://github.com/Wzxhaha/WWeChat/issues/new)
