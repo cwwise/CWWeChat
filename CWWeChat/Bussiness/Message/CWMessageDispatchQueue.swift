@@ -22,10 +22,12 @@ protocol CWMessageDispatchQueueDelegate: class {
  */
 class CWMessageDispatchQueue: NSObject {
 
+    /// 消息分发的队列
     weak var delegate: CWMessageDispatchQueueDelegate?
     
     /// 线程队列
     var messageQueue:NSOperationQueue
+    
     override init() {
         messageQueue = NSOperationQueue()
         messageQueue.name = "发送消息"

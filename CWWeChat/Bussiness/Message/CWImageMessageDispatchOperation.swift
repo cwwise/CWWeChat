@@ -8,6 +8,11 @@
 
 import UIKit
 
+/**
+ 图片发送类
+ 
+ 图片发送，需要先上传文件到服务器，再发送消息到对方。
+ */
 class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
 
 }

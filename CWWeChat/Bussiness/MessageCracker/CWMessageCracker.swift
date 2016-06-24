@@ -16,18 +16,24 @@ protocol CWMessageCrackerDelegate: NSObjectProtocol {
     func receiveNewMessage(message: CWMessageModel)
 }
 
-/// 消息接收处理
+/**
+ 消息接收处理类
+ 
+ */
 class CWMessageCracker: XMPPModule {
     
+    class func shareMessageCracker() -> CWMessageCracker {
+        return CWXMPPManager.shareXMPPManager.messageCracker
+    }
+    
+    /// 消息处理
     lazy var messagehandle: CWChatMessageHandle = {
        let messagehandle = CWChatMessageHandle()
         messagehandle.delegate = self
         return messagehandle
     }()
     
-    class func shareMessageCracker() -> CWMessageCracker {
-        return CWXMPPManager.shareXMPPManager.messageCracker
-    }
+
     
     override init!(dispatchQueue queue: dispatch_queue_t!) {
         super.init(dispatchQueue: queue)
@@ -97,7 +103,14 @@ extension CWMessageCracker: CWMessageHandleProtocol {
         }
     }
     
-    ///检查当前是否在聊天界面
+    /**
+      检查当前是否在聊天界面
+     
+       * 通过delegate来检查，是根据实际情况想的。
+       * 或者通过 UIApplication来获取前台的ViewController进行判断
+     
+     - returns: YES则代表 聊天详情界面在前台
+     */
     func inspectChatViewControllerFront() -> Bool {
         
         //检查delegate 是否存在，存在就执行方法
@@ -105,11 +118,11 @@ extension CWMessageCracker: CWMessageHandleProtocol {
             return false
         }
         
-        ///遍历出所有的delegate
+        //遍历出所有的delegate，查看
         let delegateEnumerator = multicastDelegate.delegateEnumerator()
         var delegate: AnyObject?
         var queue: dispatch_queue_t?
-        
+        //通过GCDMulticastDelegate类 来检查。
         return delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue, ofClass: CWChatViewController.self)
     }
 }

@@ -27,6 +27,7 @@ protocol CWMessageTransmitterDelegate:class {
  */
 class CWMessageTransmitter: XMPPModule {
 
+    /// 不算是单例，单例 只在manager中，方便管理，还不知道是不是最佳方法
     class func shareMessageTransmitter() -> CWMessageTransmitter {
         return CWXMPPManager.shareXMPPManager.messageTransmitter
     }
@@ -82,22 +83,5 @@ class CWMessageTransmitter: XMPPModule {
         return XMPPMessage(fromElement: message)
     }
     
-    #if test
-    //MARK: 另一种实现方式
-    //可以自定义delegate来完成,
-    private var delegateArray = [CWMessageTransmitterDelegate]()
-    func addMessageSendDelegate(delegate: CWMessageTransmitterDelegate) {
-        delegateArray.append(delegate)
-    }
-    
-    func removeMessageSendDelegate(delegate: CWMessageTransmitterDelegate) {
-        delegateArray = delegateArray.filter{ $0 !== delegate}
-    }
-    #endif
-    
-    func sendMessageResult(result: Bool) {
- 
-        
-    }
     
 }

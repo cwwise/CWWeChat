@@ -65,6 +65,10 @@ class CWAddressBookViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         
+        self.groupList = contactHelper.sortContactsData
+        self.sectionHeaders = contactHelper.sortSectionHeaders
+        self.footerLabel.text = "\(contactHelper.contactCount)位联系人"
+        
         let block = { (groupListData:[CWContactGroup], sectionHeadersData:[String], count: Int) -> Void in
             self.groupList = groupListData
             self.sectionHeaders = sectionHeadersData

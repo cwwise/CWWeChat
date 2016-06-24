@@ -8,6 +8,11 @@
 
 import UIKit
 
+/**
+ 文字消息发送
+ 
+ 是文字的情况下，直接发送
+ */
 class CWTextMessageDispatchOperation: CWMessageDispatchOperation {
 
     override func sendMessage() {

@@ -16,7 +16,7 @@ let Max_RepeatCount:Int = 5
 class CWMessageDispatchOperation: NSOperation {
     
     weak var chatMessage: CWMessageProtocol?
-        /// 进度回调的block
+    /// 进度回调的block
     var progressBlock: ((Float,Bool)-> Void)?
     
     /// 控制并发的变量
@@ -66,12 +66,13 @@ class CWMessageDispatchOperation: NSOperation {
             self.didChangeValueForKey("isCancelled")
         }
     }
-    
+    /// 消息发送结果
     var messageSendResult:Bool
-    //重复执行的次数
+    
+    /// 重复执行的次数
     internal var repeatCount: Int = 0
     
-    //简化代码
+    /// 简化代码
     var messageTransmitter: CWMessageTransmitter {
         return CWMessageTransmitter.shareMessageTransmitter()
     }
