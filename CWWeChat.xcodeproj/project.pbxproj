@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F651BE31D1CDF400080C203 /* CWWeChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651BE21D1CDF400080C203 /* CWWeChatUITests.swift */; };
+		1F651BEB1D1CE2D90080C203 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651BEA1D1CE2D90080C203 /* SnapshotHelper.swift */; };
 		1FD3EB251D1ADA08004FBA63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB201D1ADA08004FBA63 /* AppDelegate.swift */; };
 		1FD3EB261D1ADA08004FBA63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3EB211D1ADA08004FBA63 /* Assets.xcassets */; };
 		1FD3EB271D1ADA08004FBA63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3EB221D1ADA08004FBA63 /* Main.storyboard */; };
@@ -113,6 +114,7 @@
 		1F651BE01D1CDF400080C203 /* CWWeChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWWeChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F651BE21D1CDF400080C203 /* CWWeChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWWeChatUITests.swift; sourceTree = "<group>"; };
 		1F651BE41D1CDF400080C203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F651BEA1D1CE2D90080C203 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		1FD3EAFA1D1ABBF8004FBA63 /* CWWeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWWeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FD3EB201D1ADA08004FBA63 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FD3EB211D1ADA08004FBA63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				1F651BE21D1CDF400080C203 /* CWWeChatUITests.swift */,
+				1F651BEA1D1CE2D90080C203 /* SnapshotHelper.swift */,
 				1F651BE41D1CDF400080C203 /* Info.plist */,
 			);
 			path = CWWeChatUITests;
@@ -960,6 +963,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F651BE31D1CDF400080C203 /* CWWeChatUITests.swift in Sources */,
+				1F651BEB1D1CE2D90080C203 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
