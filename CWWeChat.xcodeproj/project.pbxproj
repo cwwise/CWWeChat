@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F651BE31D1CDF400080C203 /* CWWeChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651BE21D1CDF400080C203 /* CWWeChatUITests.swift */; };
 		1FD3EB251D1ADA08004FBA63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB201D1ADA08004FBA63 /* AppDelegate.swift */; };
 		1FD3EB261D1ADA08004FBA63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3EB211D1ADA08004FBA63 /* Assets.xcassets */; };
 		1FD3EB271D1ADA08004FBA63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3EB221D1ADA08004FBA63 /* Main.storyboard */; };
@@ -87,10 +88,31 @@
 		1FD3EDC41D1C47D7004FBA63 /* CWBaseMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EDC31D1C47D7004FBA63 /* CWBaseMessageViewController.swift */; };
 		1FD3EDC61D1C4802004FBA63 /* CWMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EDC51D1C4802004FBA63 /* CWMessageModel.swift */; };
 		1FD3EDC81D1C48AA004FBA63 /* NSString+Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EDC71D1C48AA004FBA63 /* NSString+Chat.swift */; };
+		1FD3EDDE1D1CC180004FBA63 /* CWWeChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EDDD1D1CC180004FBA63 /* CWWeChatTests.swift */; };
 		47A602EC777BF8B3F63924D8 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECE23B265D75A03FB5C6A9 /* Pods_CWWeChat.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		1F651BE51D1CDF400080C203 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1FD3EAF21D1ABBF8004FBA63 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1FD3EAF91D1ABBF8004FBA63;
+			remoteInfo = CWWeChat;
+		};
+		1FD3EDE01D1CC180004FBA63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1FD3EAF21D1ABBF8004FBA63 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1FD3EAF91D1ABBF8004FBA63;
+			remoteInfo = CWWeChat;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		1F651BE01D1CDF400080C203 /* CWWeChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWWeChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F651BE21D1CDF400080C203 /* CWWeChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWWeChatUITests.swift; sourceTree = "<group>"; };
+		1F651BE41D1CDF400080C203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FD3EAFA1D1ABBF8004FBA63 /* CWWeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWWeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FD3EB201D1ADA08004FBA63 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FD3EB211D1ADA08004FBA63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -173,12 +195,22 @@
 		1FD3EDC31D1C47D7004FBA63 /* CWBaseMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWBaseMessageViewController.swift; sourceTree = "<group>"; };
 		1FD3EDC51D1C4802004FBA63 /* CWMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageModel.swift; sourceTree = "<group>"; };
 		1FD3EDC71D1C48AA004FBA63 /* NSString+Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Chat.swift"; sourceTree = "<group>"; };
+		1FD3EDDB1D1CC180004FBA63 /* CWWeChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWWeChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FD3EDDD1D1CC180004FBA63 /* CWWeChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWWeChatTests.swift; sourceTree = "<group>"; };
+		1FD3EDDF1D1CC180004FBA63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FECE23B265D75A03FB5C6A9 /* Pods_CWWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E6F8F41CBA137291D180E0E /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
 		80C4EC6CB95B1523B42971BD /* Pods-CWWeChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1F651BDD1D1CDF400080C203 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FD3EAF71D1ABBF8004FBA63 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -187,13 +219,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1FD3EDD81D1CC180004FBA63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F651BE11D1CDF400080C203 /* CWWeChatUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1F651BE21D1CDF400080C203 /* CWWeChatUITests.swift */,
+				1F651BE41D1CDF400080C203 /* Info.plist */,
+			);
+			path = CWWeChatUITests;
+			sourceTree = "<group>";
+		};
 		1FD3EAF11D1ABBF8004FBA63 = {
 			isa = PBXGroup;
 			children = (
 				1FD3EAFC1D1ABBF8004FBA63 /* CWWeChat */,
+				1FD3EDDC1D1CC180004FBA63 /* CWWeChatTests */,
+				1F651BE11D1CDF400080C203 /* CWWeChatUITests */,
 				1FD3EAFB1D1ABBF8004FBA63 /* Products */,
 				708B293B2F2F8567BDC9E8B2 /* Pods */,
 				D4D82FF81D0D0B3BE50DD4EE /* Frameworks */,
@@ -205,6 +255,8 @@
 			isa = PBXGroup;
 			children = (
 				1FD3EAFA1D1ABBF8004FBA63 /* CWWeChat.app */,
+				1FD3EDDB1D1CC180004FBA63 /* CWWeChatTests.xctest */,
+				1F651BE01D1CDF400080C203 /* CWWeChatUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -698,6 +750,15 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		1FD3EDDC1D1CC180004FBA63 /* CWWeChatTests */ = {
+			isa = PBXGroup;
+			children = (
+				1FD3EDDD1D1CC180004FBA63 /* CWWeChatTests.swift */,
+				1FD3EDDF1D1CC180004FBA63 /* Info.plist */,
+			);
+			path = CWWeChatTests;
+			sourceTree = "<group>";
+		};
 		708B293B2F2F8567BDC9E8B2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -718,6 +779,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1F651BDF1D1CDF400080C203 /* CWWeChatUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F651BE91D1CDF400080C203 /* Build configuration list for PBXNativeTarget "CWWeChatUITests" */;
+			buildPhases = (
+				1F651BDC1D1CDF400080C203 /* Sources */,
+				1F651BDD1D1CDF400080C203 /* Frameworks */,
+				1F651BDE1D1CDF400080C203 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1F651BE61D1CDF400080C203 /* PBXTargetDependency */,
+			);
+			name = CWWeChatUITests;
+			productName = CWWeChatUITests;
+			productReference = 1F651BE01D1CDF400080C203 /* CWWeChatUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		1FD3EAF91D1ABBF8004FBA63 /* CWWeChat */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FD3EB0C1D1ABBF9004FBA63 /* Build configuration list for PBXNativeTarget "CWWeChat" */;
@@ -738,6 +817,24 @@
 			productReference = 1FD3EAFA1D1ABBF8004FBA63 /* CWWeChat.app */;
 			productType = "com.apple.product-type.application";
 		};
+		1FD3EDDA1D1CC180004FBA63 /* CWWeChatTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1FD3EDE41D1CC180004FBA63 /* Build configuration list for PBXNativeTarget "CWWeChatTests" */;
+			buildPhases = (
+				1FD3EDD71D1CC180004FBA63 /* Sources */,
+				1FD3EDD81D1CC180004FBA63 /* Frameworks */,
+				1FD3EDD91D1CC180004FBA63 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1FD3EDE11D1CC180004FBA63 /* PBXTargetDependency */,
+			);
+			name = CWWeChatTests;
+			productName = CWWeChatTests;
+			productReference = 1FD3EDDB1D1CC180004FBA63 /* CWWeChatTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -749,8 +846,16 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = chenwei;
 				TargetAttributes = {
+					1F651BDF1D1CDF400080C203 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 1FD3EAF91D1ABBF8004FBA63;
+					};
 					1FD3EAF91D1ABBF8004FBA63 = {
 						CreatedOnToolsVersion = 7.3.1;
+					};
+					1FD3EDDA1D1CC180004FBA63 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 1FD3EAF91D1ABBF8004FBA63;
 					};
 				};
 			};
@@ -768,11 +873,20 @@
 			projectRoot = "";
 			targets = (
 				1FD3EAF91D1ABBF8004FBA63 /* CWWeChat */,
+				1FD3EDDA1D1CC180004FBA63 /* CWWeChatTests */,
+				1F651BDF1D1CDF400080C203 /* CWWeChatUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1F651BDE1D1CDF400080C203 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FD3EAF81D1ABBF8004FBA63 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -780,6 +894,13 @@
 				1FD3EB261D1ADA08004FBA63 /* Assets.xcassets in Resources */,
 				1FD3ED7B1D1BAEB2004FBA63 /* ContactList.json in Resources */,
 				1FD3EB271D1ADA08004FBA63 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1FD3EDD91D1CC180004FBA63 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,6 +955,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1F651BDC1D1CDF400080C203 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F651BE31D1CDF400080C203 /* CWWeChatUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FD3EAF61D1ABBF8004FBA63 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -918,7 +1047,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1FD3EDD71D1CC180004FBA63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FD3EDDE1D1CC180004FBA63 /* CWWeChatTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1F651BE61D1CDF400080C203 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1FD3EAF91D1ABBF8004FBA63 /* CWWeChat */;
+			targetProxy = 1F651BE51D1CDF400080C203 /* PBXContainerItemProxy */;
+		};
+		1FD3EDE11D1CC180004FBA63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1FD3EAF91D1ABBF8004FBA63 /* CWWeChat */;
+			targetProxy = 1FD3EDE01D1CC180004FBA63 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1FD3EB221D1ADA08004FBA63 /* Main.storyboard */ = {
@@ -932,6 +1082,28 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1F651BE71D1CDF400080C203 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CWWeChatUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWWeChatUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = CWWeChat;
+			};
+			name = Debug;
+		};
+		1F651BE81D1CDF400080C203 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CWWeChatUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWWeChatUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = CWWeChat;
+			};
+			name = Release;
+		};
 		1FD3EB0A1D1ABBF9004FBA63 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1046,9 +1218,41 @@
 			};
 			name = Release;
 		};
+		1FD3EDE21D1CC180004FBA63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = CWWeChatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWWeChatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CWWeChat.app/CWWeChat";
+			};
+			name = Debug;
+		};
+		1FD3EDE31D1CC180004FBA63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = CWWeChatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWWeChatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CWWeChat.app/CWWeChat";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1F651BE91D1CDF400080C203 /* Build configuration list for PBXNativeTarget "CWWeChatUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F651BE71D1CDF400080C203 /* Debug */,
+				1F651BE81D1CDF400080C203 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		1FD3EAF51D1ABBF8004FBA63 /* Build configuration list for PBXProject "CWWeChat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1063,6 +1267,15 @@
 			buildConfigurations = (
 				1FD3EB0D1D1ABBF9004FBA63 /* Debug */,
 				1FD3EB0E1D1ABBF9004FBA63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1FD3EDE41D1CC180004FBA63 /* Build configuration list for PBXNativeTarget "CWWeChatTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1FD3EDE21D1CC180004FBA63 /* Debug */,
+				1FD3EDE31D1CC180004FBA63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
