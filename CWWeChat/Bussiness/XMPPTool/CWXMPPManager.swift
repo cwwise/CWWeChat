@@ -17,6 +17,8 @@ let hostPort:UInt16 = 5222
 
 let password = "123456"
 
+public typealias XMPPStatusListener = (CWXMPPStatus -> Void)
+
 class CWXMPPManager: NSObject {
     
     ///单例
@@ -28,6 +30,7 @@ class CWXMPPManager: NSObject {
     ///xmpp重新连接
     private var xmppReconnect: XMPPReconnect
     
+    private(set) var messageDispatchQueue: CWMessageDispatchQueue
     ///消息发送
     private(set) var messageTransmitter: CWMessageTransmitter
     ///消息解析
@@ -35,7 +38,9 @@ class CWXMPPManager: NSObject {
     ///消息回执(XEP-0184)
 //    private var deliveryReceipts: XMPPMessageDeliveryReceipts
     ///获取好友请求
-    var xmppRoster: XMPPRoster
+    private var xmppRoster: XMPPRoster
+    
+    internal var statusListener: XMPPStatusListener?
     
     ///当前连接状态
     var currentState: CWXMPPStatus {
@@ -60,6 +65,7 @@ class CWXMPPManager: NSObject {
         xmppStream = XMPPStream()
         xmppReconnect = XMPPReconnect()
         messageTransmitter = CWMessageTransmitter()
+        messageDispatchQueue = CWMessageDispatchQueue()
         messageCracker = CWMessageCracker()
         let xmppRosterStorage = XMPPRosterMemoryStorage()
         xmppRoster = XMPPRoster(rosterStorage: xmppRosterStorage, dispatchQueue: xmppQueue)
@@ -155,6 +161,14 @@ class CWXMPPManager: NSObject {
         xmppStream.sendElement(offline)
     }
     
+    // MARK: 监听
+    
+    func xmppStatusChange(status:CWXMPPStatus) {
+        if let listenrer = self.statusListener {
+            listenrer(status)
+        }
+    }
+    
     ///MARK: 销毁
     deinit {
         xmppReconnect.removeDelegate(self, delegateQueue: xmppQueue)
@@ -175,11 +189,13 @@ extension CWXMPPManager: XMPPStreamDelegate {
     ///
     func xmppStreamWillConnect(sender: XMPPStream!) {
         DDLogDebug("开始连接")
+        xmppStatusChange(.Connecting)
     }
     
     ///连接失败
     func xmppStreamDidDisconnect(sender: XMPPStream!, withError error: NSError!) {
         DDLogDebug("断开连接")
+        xmppStatusChange(.Disconnected)
     }
     
     ///已经连接，就输入密码
@@ -188,6 +204,7 @@ extension CWXMPPManager: XMPPStreamDelegate {
         do {
             try xmppStream.authenticateWithPassword(password)
         } catch let error as NSError {
+            xmppStatusChange(.Error)
             DDLogError(error.description)
         }
     }

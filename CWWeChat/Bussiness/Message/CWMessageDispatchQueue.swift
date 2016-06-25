@@ -19,11 +19,17 @@ protocol CWMessageDispatchQueueDelegate: class {
 /**
   消息分发的队列
  
+ 需要监听网络状态和xmpp连接状态 根据状态来 停止和继续消息发送线程
+ 
  */
 class CWMessageDispatchQueue: NSObject {
-
+    
     /// 消息分发的队列
     weak var delegate: CWMessageDispatchQueueDelegate?
+    
+    var xmppManager:CWXMPPManager {
+        return CWXMPPManager.shareXMPPManager
+    }
     
     /// 线程队列
     var messageQueue:NSOperationQueue
@@ -32,8 +38,14 @@ class CWMessageDispatchQueue: NSObject {
         messageQueue = NSOperationQueue()
         messageQueue.name = "发送消息"
         messageQueue.maxConcurrentOperationCount = 5
-        messageQueue.suspended = false
+        messageQueue.suspended = true
         super.init()
+        monitorNetworkStatus()
+    }
+    
+    /// 监听网络状态和XMPP连接状态
+    func monitorNetworkStatus() {
+        
     }
     
     func sendMessage(message: CWMessageProtocol, replaceMessage replace:Bool=false) {
@@ -53,9 +65,11 @@ class CWMessageDispatchQueue: NSObject {
         }
         objc_sync_exit(self)
         
+        /// 获取消息
         let operation = CWMessageDispatchOperation.dispatchOperationWithMessage(message)
         messageQueue.addOperation(operation)
         
+        //Bugfix:这里可能导致循环引用
         /**
          *  消息发送线程完成后，执行的方法。
          */

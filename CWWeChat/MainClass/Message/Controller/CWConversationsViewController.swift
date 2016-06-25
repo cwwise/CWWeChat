@@ -43,6 +43,19 @@ class CWConversationsViewController: CWBaseMessageViewController {
     
     func registerCellClass() {
         self.tableView.registerClass(CWConversationCell.self, forCellReuseIdentifier: CWConversationCell.reuseIdentifier)
+        //测试发送消息
+        let rightBarItem = UIBarButtonItem(title: "发送", style: .Plain, target: self, action: #selector(sendMessage))
+        self.navigationItem.rightBarButtonItem = rightBarItem
+    }
+    
+    func sendMessage() {
+        let random = arc4random_uniform(10000)
+        let to = "tom"+"@chenweiim.com";
+        
+        let message = CWMessageModel()
+        manager.messageTransmitter
+        
+        manager.messageTransmitter.sendMessage(String(random), toId: to, messageId: String.UUIDString())
     }
     
     func addDefaultData() {

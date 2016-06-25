@@ -15,8 +15,13 @@ let Max_RepeatCount:Int = 5
 /// 发送消息的基类
 class CWMessageDispatchOperation: NSOperation {
     
+    /// 消息实体
     weak var chatMessage: CWMessageProtocol?
-    /// 进度回调的block
+    /**
+      进度回调的block
+     
+      进度条和发送结果。
+    */
     var progressBlock: ((Float,Bool)-> Void)?
     
     /// 控制并发的变量
@@ -30,6 +35,10 @@ class CWMessageDispatchOperation: NSOperation {
     
     override var cancelled: Bool {
         return local_cancelled
+    }
+    
+    override var ready: Bool {
+        return local_ready
     }
     
     /// 实现并发需要设置为YES
@@ -66,12 +75,23 @@ class CWMessageDispatchOperation: NSOperation {
             self.didChangeValueForKey("isCancelled")
         }
     }
+    
+    private var local_ready:Bool = false {
+        willSet {
+            self.willChangeValueForKey("isReady")
+        }
+        didSet {
+            self.didChangeValueForKey("isReady")
+        }
+    }
+    
     /// 消息发送结果
     var messageSendResult:Bool
     
     /// 重复执行的次数
     internal var repeatCount: Int = 0
     
+    // BugFix: 只读属性会导致循环引用么？
     /// 简化代码
     var messageTransmitter: CWMessageTransmitter {
         return CWMessageTransmitter.shareMessageTransmitter()
@@ -138,7 +158,11 @@ class CWMessageDispatchOperation: NSOperation {
         sendMessage()
     }
     
-    ///发送消息
+    /**
+     发送消息
+     
+     需要子类重写方法
+     */
     func sendMessage() {
 //        endOperation()
     }
@@ -157,7 +181,6 @@ class CWMessageDispatchOperation: NSOperation {
         self.local_finished = true
         messageTransmitter.removeDelegate(self)
     }
-
     
     deinit {
         DDLogDebug("operation销毁")
@@ -165,7 +188,8 @@ class CWMessageDispatchOperation: NSOperation {
     
 }
 
-extension CWMessageDispatchOperation:CWMessageTransmitterDelegate {
+// MARK: - 消息结果反馈
+extension CWMessageDispatchOperation {
    
     func messageSendCallback(result:Bool) {
         if result == false {

@@ -13,11 +13,6 @@ import MMXXMPPFramework
 ///发送消息等待时间
 let sendMessageTimeoutInterval: NSTimeInterval = 30
 
-protocol CWMessageTransmitterDelegate:class {
-    //消息发送结果
-    func messageSendCallback(result:Bool)
-}
-
 /**
  消息发送的类
  

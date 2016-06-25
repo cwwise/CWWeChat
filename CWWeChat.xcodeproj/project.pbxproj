@@ -719,11 +719,11 @@
 		1FD3EDAD1D1C4642004FBA63 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				1FD3EDB11D1C4642004FBA63 /* CWMessageTransmitter.swift */,
 				1FD3EDB01D1C4642004FBA63 /* CWMessageDispatchQueue.swift */,
 				1FD3EDAF1D1C4642004FBA63 /* CWMessageDispatchOperation.swift */,
 				1FD3EDB21D1C4642004FBA63 /* CWTextMessageDispatchOperation.swift */,
 				1FD3EDAE1D1C4642004FBA63 /* CWImageMessageDispatchOperation.swift */,
+				1FD3EDB11D1C4642004FBA63 /* CWMessageTransmitter.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
