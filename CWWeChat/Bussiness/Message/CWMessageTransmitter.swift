@@ -20,22 +20,21 @@ let sendMessageTimeoutInterval: NSTimeInterval = 30
  * 发送消息
  
  */
-class CWMessageTransmitter: XMPPModule {
+class CWMessageTransmitter: NSObject {
 
+    internal var xmppStream: XMPPStream {
+        return CWXMPPManager.shareXMPPManager.xmppStream
+    }
+    
     /// 不算是单例，单例 只在manager中，方便管理，还不知道是不是最佳方法
     class func shareMessageTransmitter() -> CWMessageTransmitter {
         return CWXMPPManager.shareXMPPManager.messageTransmitter
     }
     
-    override init!(dispatchQueue queue: dispatch_queue_t!) {
-        super.init(dispatchQueue: queue)
-    }
-    
-    override init!() {
+    override init() {
         super.init()
     }
     
-
     /**
      发送消息
      

@@ -26,7 +26,7 @@ class CWXMPPManager: NSObject {
     
     private var xmppQueue: dispatch_queue_t
     ///xmpp流
-    private var xmppStream: XMPPStream
+    internal var xmppStream: XMPPStream
     ///xmpp重新连接
     private var xmppReconnect: XMPPReconnect
     
@@ -64,9 +64,11 @@ class CWXMPPManager: NSObject {
 
         xmppStream = XMPPStream()
         xmppReconnect = XMPPReconnect()
+        
         messageTransmitter = CWMessageTransmitter()
         messageDispatchQueue = CWMessageDispatchQueue()
         messageCracker = CWMessageCracker()
+        
         let xmppRosterStorage = XMPPRosterMemoryStorage()
         xmppRoster = XMPPRoster(rosterStorage: xmppRosterStorage, dispatchQueue: xmppQueue)
         
@@ -113,7 +115,7 @@ class CWXMPPManager: NSObject {
         let resource = "weiweideMacBook-Simulator"
         let timeoutInterval:NSTimeInterval = 10
 
-        xmppStream.myJID = XMPPJID.jidWithUser("chenwei", domain: xmppDomain, resource: resource)
+        xmppStream.myJID = XMPPJID.jidWithUser("tom", domain: xmppDomain, resource: resource)
         
         xmppStream.hostName = hostName
         xmppStream.hostPort = hostPort
@@ -204,7 +206,6 @@ extension CWXMPPManager: XMPPStreamDelegate {
         do {
             try xmppStream.authenticateWithPassword(password)
         } catch let error as NSError {
-            xmppStatusChange(.Error)
             DDLogError(error.description)
         }
     }
@@ -212,11 +213,13 @@ extension CWXMPPManager: XMPPStreamDelegate {
     ///验证失败
     func xmppStream(sender: XMPPStream!, didNotAuthenticate error: DDXMLElement!) {
         DDLogDebug("认证失败")
+        xmppStatusChange(.Error)
     }
     
     ///验证成功
     func xmppStreamDidAuthenticate(sender: XMPPStream!) {
         DDLogDebug("认证成功")
+        xmppStatusChange(.Connected)
         //上线
         goOnline()
     }
@@ -251,7 +254,6 @@ extension CWXMPPManager: XMPPStreamDelegate {
         }
         
     }
-    
     
     func xmppStream(sender: XMPPStream!, didReceiveIQ iq: XMPPIQ!) -> Bool {
         return true

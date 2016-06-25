@@ -27,10 +27,6 @@ class CWMessageDispatchQueue: NSObject {
     /// 消息分发的队列
     weak var delegate: CWMessageDispatchQueueDelegate?
     
-    var xmppManager:CWXMPPManager {
-        return CWXMPPManager.shareXMPPManager
-    }
-    
     /// 线程队列
     var messageQueue:NSOperationQueue
     
@@ -38,7 +34,7 @@ class CWMessageDispatchQueue: NSObject {
         messageQueue = NSOperationQueue()
         messageQueue.name = "发送消息"
         messageQueue.maxConcurrentOperationCount = 5
-        messageQueue.suspended = true
+        messageQueue.suspended = false
         super.init()
         monitorNetworkStatus()
     }
@@ -67,6 +63,7 @@ class CWMessageDispatchQueue: NSObject {
         
         /// 获取消息
         let operation = CWMessageDispatchOperation.dispatchOperationWithMessage(message)
+        operation.local_ready = true
         messageQueue.addOperation(operation)
         
         //Bugfix:这里可能导致循环引用

@@ -49,13 +49,15 @@ class CWConversationsViewController: CWBaseMessageViewController {
     }
     
     func sendMessage() {
-        let random = arc4random_uniform(10000)
-        let to = "tom"+"@chenweiim.com";
         
+        let to = "chenwei"+"@"+xmppDomain;
         let message = CWMessageModel()
-        manager.messageTransmitter
+        message.messageReceiveId = to
+        message.content = "Hello world"
+        message.messageType = .Text
         
-        manager.messageTransmitter.sendMessage(String(random), toId: to, messageId: String.UUIDString())
+        manager.messageDispatchQueue.sendMessage(message)
+        
     }
     
     func addDefaultData() {

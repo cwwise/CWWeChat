@@ -76,7 +76,7 @@ class CWMessageDispatchOperation: NSOperation {
         }
     }
     
-    private var local_ready:Bool = false {
+    internal var local_ready:Bool = false {
         willSet {
             self.willChangeValueForKey("isReady")
         }
@@ -121,6 +121,7 @@ class CWMessageDispatchOperation: NSOperation {
         self.chatMessage = message
         repeatCount = 1
         messageSendResult = false
+        
         super.init()
     }
     
@@ -139,13 +140,14 @@ class CWMessageDispatchOperation: NSOperation {
         self.performSelectorInBackground(#selector(CWMessageDispatchOperation.main), withObject: nil)
     }
     
+    /// 取消线程发送
     override func cancel() {
         
         self.local_cancelled = true
         super.cancel()
     }
 
-    ///主要执行的过程
+    /// 主要执行的过程
     override func main() {
     
         if self.finished || self.cancelled {

@@ -21,7 +21,7 @@ class CWTextMessageDispatchOperation: CWMessageDispatchOperation {
             return
         }
         
-        let toId = chatMessage.messageSendId
+        let toId = chatMessage.messageReceiveId
         let messageId = chatMessage.messageID
         let content = chatMessage.content
 
