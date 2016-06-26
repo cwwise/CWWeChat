@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F2E5C911D1F9F6F00CCE130 /* CWBaseMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2E5C8F1D1F9F6F00CCE130 /* CWBaseMessageCell.swift */; };
+		1F2E5C921D1F9F6F00CCE130 /* CWTextMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2E5C901D1F9F6F00CCE130 /* CWTextMessageCell.swift */; };
 		1F651BE31D1CDF400080C203 /* CWWeChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651BE21D1CDF400080C203 /* CWWeChatUITests.swift */; };
 		1F651BEB1D1CE2D90080C203 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651BEA1D1CE2D90080C203 /* SnapshotHelper.swift */; };
 		1F651C311D1F91290080C203 /* CWInputToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651C301D1F91290080C203 /* CWInputToolBar.swift */; };
@@ -114,6 +116,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F2E5C8F1D1F9F6F00CCE130 /* CWBaseMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWBaseMessageCell.swift; sourceTree = "<group>"; };
+		1F2E5C901D1F9F6F00CCE130 /* CWTextMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTextMessageCell.swift; sourceTree = "<group>"; };
 		1F651BE01D1CDF400080C203 /* CWWeChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWWeChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F651BE21D1CDF400080C203 /* CWWeChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWWeChatUITests.swift; sourceTree = "<group>"; };
 		1F651BE41D1CDF400080C203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -240,6 +244,8 @@
 		1F2E5C8E1D1F9DE600CCE130 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				1F2E5C8F1D1F9F6F00CCE130 /* CWBaseMessageCell.swift */,
+				1F2E5C901D1F9F6F00CCE130 /* CWTextMessageCell.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -1022,6 +1028,7 @@
 				1FD3EB8C1D1AE456004FBA63 /* CWChatFriendCell.swift in Sources */,
 				1FD3EB771D1AE04D004FBA63 /* CWMenuViewController.swift in Sources */,
 				1FD3ED941D1C2D93004FBA63 /* CWCommonSettingViewController.swift in Sources */,
+				1F2E5C911D1F9F6F00CCE130 /* CWBaseMessageCell.swift in Sources */,
 				1FD3EDBD1D1C4642004FBA63 /* CWMessageTransmitter.swift in Sources */,
 				1FD3ED8E1D1C2D0C004FBA63 /* CWAccountSafetyViewController.swift in Sources */,
 				1FD3EB661D1ADB17004FBA63 /* CWSettingCell.swift in Sources */,
@@ -1054,6 +1061,7 @@
 				1FD3EB7F1D1AE10C004FBA63 /* CWMineHelper.swift in Sources */,
 				1FD3EB711D1ADF03004FBA63 /* CWChatConst.swift in Sources */,
 				1FD3EB521D1ADA18004FBA63 /* CWMineViewController.swift in Sources */,
+				1F2E5C921D1F9F6F00CCE130 /* CWTextMessageCell.swift in Sources */,
 				1FD3EB791D1AE058004FBA63 /* CWMenuItem.swift in Sources */,
 				1FD3EDBC1D1C4642004FBA63 /* CWMessageDispatchQueue.swift in Sources */,
 				1FD3EB671D1ADB17004FBA63 /* CWSettingButtonCell.swift in Sources */,

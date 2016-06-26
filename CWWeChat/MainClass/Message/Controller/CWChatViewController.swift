@@ -13,7 +13,7 @@ class CWChatViewController: CWBaseMessageViewController {
     var toId: String?
     
     /// 消息数据数组
-    var messageList = Array<CWMessageProtocol>()
+    var messageList = Array<CWMessageModel>()
     
     /// TableView
     lazy var tableView: UITableView = {
@@ -55,6 +55,15 @@ class CWChatViewController: CWBaseMessageViewController {
         self.view.addSubview(self.chatToolBar)
     }
     
+    /**
+     注册cell class
+     */
+    func registerCell() {
+        
+        tableView.registerClass(CWBaseMessageCell.self, forCellReuseIdentifier: CWMessageType.None.reuseIdentifier())
+        tableView.registerClass(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.Text.reuseIdentifier())
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -87,10 +96,9 @@ extension CWChatViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let message = messageList[indexPath.row]
-        let chatMessageCell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
-//        let chatMessageCell = tableView.dequeueReusableCellWithIdentifier(message.messageType.reuseIdentifier()) as! UITableViewCell
-//        chatMessageCell.delegate = self
-//        chatMessageCell.setMessage(message)
+        
+        let chatMessageCell = tableView.dequeueReusableCellWithIdentifier(message.messageType.reuseIdentifier(), forIndexPath: indexPath) as! CWBaseMessageCell
+        chatMessageCell.updateMessage(message)
         return chatMessageCell
     }
 }
