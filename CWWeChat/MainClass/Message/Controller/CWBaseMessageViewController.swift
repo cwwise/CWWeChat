@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CocoaLumberjack
 
 /**
  会话类和消息类的基类
@@ -14,10 +15,6 @@ import UIKit
  设计这个基类，一方面是简化一些代码
  */
 class CWBaseMessageViewController: UIViewController {
-
-    var messageTransmitter:CWMessageTransmitter = {
-        return CWMessageTransmitter.shareMessageTransmitter()
-    }()
     
     var messageCracker:CWMessageCracker = {
         return CWMessageCracker.shareMessageCracker()
@@ -43,7 +40,7 @@ class CWBaseMessageViewController: UIViewController {
     
     deinit {
         messageCracker.removeDelegate(self)
-        print("\(self.classForCoder)销毁")
+        DDLogDebug("\(self.classForCoder)销毁")
     }
 }
 

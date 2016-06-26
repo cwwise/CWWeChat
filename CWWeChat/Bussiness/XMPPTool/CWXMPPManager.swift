@@ -30,9 +30,9 @@ class CWXMPPManager: NSObject {
     ///xmpp重新连接
     private var xmppReconnect: XMPPReconnect
     
-    private(set) var messageDispatchQueue: CWMessageDispatchQueue
     ///消息发送
     private(set) var messageTransmitter: CWMessageTransmitter
+    private(set) var messageDispatchQueue: CWMessageDispatchQueue
     ///消息解析
     private(set) var messageCracker: CWMessageCracker
     ///消息回执(XEP-0184)
@@ -64,8 +64,9 @@ class CWXMPPManager: NSObject {
 
         xmppStream = XMPPStream()
         xmppReconnect = XMPPReconnect()
-        
+        //实际发送消息者
         messageTransmitter = CWMessageTransmitter()
+        
         messageDispatchQueue = CWMessageDispatchQueue()
         messageCracker = CWMessageCracker()
         
@@ -96,7 +97,6 @@ class CWXMPPManager: NSObject {
 //        deliveryReceipts.autoSendMessageDeliveryReceipts = true
         
         ///消息发送
-        messageTransmitter.activate(xmppStream)
         messageCracker.activate(xmppStream)
         
       

@@ -94,7 +94,7 @@ class CWMessageDispatchOperation: NSOperation {
     // BugFix: 只读属性会导致循环引用么？
     /// 简化代码
     var messageTransmitter: CWMessageTransmitter {
-        return CWMessageTransmitter.shareMessageTransmitter()
+        return CWXMPPManager.shareXMPPManager.messageTransmitter
     }
     
     /**
@@ -155,7 +155,6 @@ class CWMessageDispatchOperation: NSOperation {
             return
         }
         
-        messageTransmitter.addDelegate(self, delegateQueue: nil)
         //发送消息的任务
         sendMessage()
     }
@@ -181,7 +180,6 @@ class CWMessageDispatchOperation: NSOperation {
     func endOperation() {
         self.local_executing = false
         self.local_finished = true
-        messageTransmitter.removeDelegate(self)
     }
     
     deinit {
@@ -197,13 +195,11 @@ extension CWMessageDispatchOperation {
         if result == false {
             repeatCount += 1
             if repeatCount > Max_RepeatCount {
-                messageTransmitter.removeDelegate(self)
                 noticationWithOperationState(false)
             } else {
                 sendMessage()
             }
         } else {
-            messageTransmitter.removeDelegate(self)
             noticationWithOperationState(true)
         }
     }

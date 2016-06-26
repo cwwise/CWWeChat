@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1F651BE31D1CDF400080C203 /* CWWeChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651BE21D1CDF400080C203 /* CWWeChatUITests.swift */; };
 		1F651BEB1D1CE2D90080C203 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651BEA1D1CE2D90080C203 /* SnapshotHelper.swift */; };
+		1F651C311D1F91290080C203 /* CWInputToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651C301D1F91290080C203 /* CWInputToolBar.swift */; };
+		1F651C331D1F915F0080C203 /* CWMessageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651C321D1F915F0080C203 /* CWMessageTextView.swift */; };
+		1F651C351D1F91F00080C203 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651C341D1F91F00080C203 /* UIButton+Extensions.swift */; };
 		1FD3EB251D1ADA08004FBA63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB201D1ADA08004FBA63 /* AppDelegate.swift */; };
 		1FD3EB261D1ADA08004FBA63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3EB211D1ADA08004FBA63 /* Assets.xcassets */; };
 		1FD3EB271D1ADA08004FBA63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3EB221D1ADA08004FBA63 /* Main.storyboard */; };
@@ -115,6 +118,9 @@
 		1F651BE21D1CDF400080C203 /* CWWeChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWWeChatUITests.swift; sourceTree = "<group>"; };
 		1F651BE41D1CDF400080C203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F651BEA1D1CE2D90080C203 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		1F651C301D1F91290080C203 /* CWInputToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInputToolBar.swift; sourceTree = "<group>"; };
+		1F651C321D1F915F0080C203 /* CWMessageTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageTextView.swift; sourceTree = "<group>"; };
+		1F651C341D1F91F00080C203 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		1FD3EAFA1D1ABBF8004FBA63 /* CWWeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWWeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FD3EB201D1ADA08004FBA63 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FD3EB211D1ADA08004FBA63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -241,6 +247,15 @@
 			path = CWWeChatUITests;
 			sourceTree = "<group>";
 		};
+		1F651C2F1D1F90FB0080C203 /* ToolBar */ = {
+			isa = PBXGroup;
+			children = (
+				1F651C301D1F91290080C203 /* CWInputToolBar.swift */,
+				1F651C321D1F915F0080C203 /* CWMessageTextView.swift */,
+			);
+			path = ToolBar;
+			sourceTree = "<group>";
+		};
 		1FD3EAF11D1ABBF8004FBA63 = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +335,7 @@
 				1FD3ED981D1C2E18004FBA63 /* UIBarButtonItem+Extensions.swift */,
 				1FD3ED9A1D1C2E2C004FBA63 /* UIView+Frame.swift */,
 				1FD3EDA41D1C39EC004FBA63 /* UIApplication+CWChat.swift */,
+				1F651C341D1F91F00080C203 /* UIButton+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -488,6 +504,7 @@
 		1FD3EB461D1ADA18004FBA63 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F651C2F1D1F90FB0080C203 /* ToolBar */,
 				1FD3EB991D1AEB87004FBA63 /* Conversation */,
 				1FD3EB9C1D1AEC15004FBA63 /* CWChatUIConstant.swift */,
 			);
@@ -983,6 +1000,7 @@
 				1FD3EB541D1ADA1D004FBA63 /* ViewController.swift in Sources */,
 				1FD3EB9A1D1AEB87004FBA63 /* CWConversationCell.swift in Sources */,
 				1FD3ED991D1C2E18004FBA63 /* UIBarButtonItem+Extensions.swift in Sources */,
+				1F651C311D1F91290080C203 /* CWInputToolBar.swift in Sources */,
 				1FD3EDBF1D1C4642004FBA63 /* CWMessageCracker.swift in Sources */,
 				1FD3EB811D1AE115004FBA63 /* CWMineUserCell.swift in Sources */,
 				1FD3ED921D1C2D73004FBA63 /* CWPrivacySettingViewController.swift in Sources */,
@@ -1016,6 +1034,7 @@
 				1FD3ED841D1C2BA4004FBA63 /* CWMineSettingHelper.swift in Sources */,
 				1FD3ED8C1D1C2C9E004FBA63 /* CWCommonSettingHelper.swift in Sources */,
 				1FD3EDC11D1C4642004FBA63 /* CWChatMessageHandle.swift in Sources */,
+				1F651C331D1F915F0080C203 /* CWMessageTextView.swift in Sources */,
 				1FD3EB941D1AEB56004FBA63 /* CWConversationModel.swift in Sources */,
 				1FD3EB7B1D1AE061004FBA63 /* CWMenuCell.swift in Sources */,
 				1FD3ED861D1C2BF8004FBA63 /* CWAccountSafetyHelper.swift in Sources */,
@@ -1042,6 +1061,7 @@
 				1FD3EB2F1D1ADA13004FBA63 /* UIColor+Extension.swift in Sources */,
 				1FD3ED821D1C2B48004FBA63 /* CWMineSettingViewController.swift in Sources */,
 				1FD3EB871D1AE33D004FBA63 /* CWAddressBookSearchController.swift in Sources */,
+				1F651C351D1F91F00080C203 /* UIButton+Extensions.swift in Sources */,
 				1FD3EDC01D1C4642004FBA63 /* CWBaseMessageHandle.swift in Sources */,
 				1FD3EDA31D1C335D004FBA63 /* CWAboutSettingHelper.swift in Sources */,
 				1FD3EB681D1ADB17004FBA63 /* CWSettingSwitchCell.swift in Sources */,
@@ -1256,6 +1276,7 @@
 				1F651BE81D1CDF400080C203 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1FD3EAF51D1ABBF8004FBA63 /* Build configuration list for PBXProject "CWWeChat" */ = {
 			isa = XCConfigurationList;

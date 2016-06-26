@@ -26,11 +26,6 @@ class CWMessageTransmitter: NSObject {
         return CWXMPPManager.shareXMPPManager.xmppStream
     }
     
-    /// 不算是单例，单例 只在manager中，方便管理，还不知道是不是最佳方法
-    class func shareMessageTransmitter() -> CWMessageTransmitter {
-        return CWXMPPManager.shareXMPPManager.messageTransmitter
-    }
-    
     override init() {
         super.init()
     }
@@ -73,7 +68,7 @@ class CWMessageTransmitter: NSObject {
         message.addAttributeWithName("to", stringValue: to)
 //        message.addReceiptRequest()
         message.addBody(body)
-        print(message)
+        DDLogDebug(message.description)
         return XMPPMessage(fromElement: message)
     }
     
