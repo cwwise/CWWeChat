@@ -12,6 +12,8 @@
 		1F651C311D1F91290080C203 /* CWInputToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651C301D1F91290080C203 /* CWInputToolBar.swift */; };
 		1F651C331D1F915F0080C203 /* CWMessageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651C321D1F915F0080C203 /* CWMessageTextView.swift */; };
 		1F651C351D1F91F00080C203 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651C341D1F91F00080C203 /* UIButton+Extensions.swift */; };
+		1F651C391D1F9D840080C203 /* CWBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651C371D1F9D840080C203 /* CWBadgeView.swift */; };
+		1F651C3A1D1F9D840080C203 /* CWConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651C381D1F9D840080C203 /* CWConversationCell.swift */; };
 		1FD3EB251D1ADA08004FBA63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB201D1ADA08004FBA63 /* AppDelegate.swift */; };
 		1FD3EB261D1ADA08004FBA63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3EB211D1ADA08004FBA63 /* Assets.xcassets */; };
 		1FD3EB271D1ADA08004FBA63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3EB221D1ADA08004FBA63 /* Main.storyboard */; };
@@ -49,8 +51,6 @@
 		1FD3EB901D1AEAFD004FBA63 /* CWChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB8F1D1AEAFD004FBA63 /* CWChatViewController.swift */; };
 		1FD3EB941D1AEB56004FBA63 /* CWConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB931D1AEB56004FBA63 /* CWConversationModel.swift */; };
 		1FD3EB961D1AEB6D004FBA63 /* CWMessageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB951D1AEB6D004FBA63 /* CWMessageProtocol.swift */; };
-		1FD3EB9A1D1AEB87004FBA63 /* CWConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB971D1AEB87004FBA63 /* CWConversationCell.swift */; };
-		1FD3EB9B1D1AEB87004FBA63 /* CWBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB981D1AEB87004FBA63 /* CWBadgeView.swift */; };
 		1FD3EB9D1D1AEC15004FBA63 /* CWChatUIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB9C1D1AEC15004FBA63 /* CWChatUIConstant.swift */; };
 		1FD3EB9F1D1AEC6B004FBA63 /* ChatTimeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EB9E1D1AEC6B004FBA63 /* ChatTimeTool.swift */; };
 		1FD3ED6E1D1B76D5004FBA63 /* CWAddressBookHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3ED6D1D1B76D5004FBA63 /* CWAddressBookHeaderView.swift */; };
@@ -121,6 +121,8 @@
 		1F651C301D1F91290080C203 /* CWInputToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInputToolBar.swift; sourceTree = "<group>"; };
 		1F651C321D1F915F0080C203 /* CWMessageTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageTextView.swift; sourceTree = "<group>"; };
 		1F651C341D1F91F00080C203 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		1F651C371D1F9D840080C203 /* CWBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWBadgeView.swift; sourceTree = "<group>"; };
+		1F651C381D1F9D840080C203 /* CWConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWConversationCell.swift; sourceTree = "<group>"; };
 		1FD3EAFA1D1ABBF8004FBA63 /* CWWeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWWeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FD3EB201D1ADA08004FBA63 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FD3EB211D1ADA08004FBA63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -160,8 +162,6 @@
 		1FD3EB8F1D1AEAFD004FBA63 /* CWChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatViewController.swift; sourceTree = "<group>"; };
 		1FD3EB931D1AEB56004FBA63 /* CWConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWConversationModel.swift; sourceTree = "<group>"; };
 		1FD3EB951D1AEB6D004FBA63 /* CWMessageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageProtocol.swift; sourceTree = "<group>"; };
-		1FD3EB971D1AEB87004FBA63 /* CWConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWConversationCell.swift; sourceTree = "<group>"; };
-		1FD3EB981D1AEB87004FBA63 /* CWBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWBadgeView.swift; sourceTree = "<group>"; };
 		1FD3EB9C1D1AEC15004FBA63 /* CWChatUIConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatUIConstant.swift; sourceTree = "<group>"; };
 		1FD3EB9E1D1AEC6B004FBA63 /* ChatTimeTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTimeTool.swift; sourceTree = "<group>"; };
 		1FD3ED6D1D1B76D5004FBA63 /* CWAddressBookHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAddressBookHeaderView.swift; sourceTree = "<group>"; };
@@ -237,6 +237,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F2E5C8E1D1F9DE600CCE130 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		1F651BE11D1CDF400080C203 /* CWWeChatUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +261,15 @@
 				1F651C321D1F915F0080C203 /* CWMessageTextView.swift */,
 			);
 			path = ToolBar;
+			sourceTree = "<group>";
+		};
+		1F651C361D1F9D840080C203 /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				1F651C371D1F9D840080C203 /* CWBadgeView.swift */,
+				1F651C381D1F9D840080C203 /* CWConversationCell.swift */,
+			);
+			path = Conversation;
 			sourceTree = "<group>";
 		};
 		1FD3EAF11D1ABBF8004FBA63 = {
@@ -504,8 +520,9 @@
 		1FD3EB461D1ADA18004FBA63 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F2E5C8E1D1F9DE600CCE130 /* Message */,
+				1F651C361D1F9D840080C203 /* Conversation */,
 				1F651C2F1D1F90FB0080C203 /* ToolBar */,
-				1FD3EB991D1AEB87004FBA63 /* Conversation */,
 				1FD3EB9C1D1AEC15004FBA63 /* CWChatUIConstant.swift */,
 			);
 			path = View;
@@ -671,16 +688,6 @@
 				1FD3EDC51D1C4802004FBA63 /* CWMessageModel.swift */,
 			);
 			path = Message;
-			sourceTree = "<group>";
-		};
-		1FD3EB991D1AEB87004FBA63 /* Conversation */ = {
-			isa = PBXGroup;
-			children = (
-				1FD3EB971D1AEB87004FBA63 /* CWConversationCell.swift */,
-				1FD3EB981D1AEB87004FBA63 /* CWBadgeView.swift */,
-			);
-			name = Conversation;
-			path = ../../../../../../GitFolder/CWXMPPChat/CWXMPPChat/MainClass/Message/View/Conversation;
 			sourceTree = "<group>";
 		};
 		1FD3ED771D1BAE8B004FBA63 /* Resources */ = {
@@ -998,13 +1005,13 @@
 				1FD3EB9F1D1AEC6B004FBA63 /* ChatTimeTool.swift in Sources */,
 				1FD3EB831D1AE1DB004FBA63 /* CWContactUser.swift in Sources */,
 				1FD3EB541D1ADA1D004FBA63 /* ViewController.swift in Sources */,
-				1FD3EB9A1D1AEB87004FBA63 /* CWConversationCell.swift in Sources */,
 				1FD3ED991D1C2E18004FBA63 /* UIBarButtonItem+Extensions.swift in Sources */,
 				1F651C311D1F91290080C203 /* CWInputToolBar.swift in Sources */,
 				1FD3EDBF1D1C4642004FBA63 /* CWMessageCracker.swift in Sources */,
 				1FD3EB811D1AE115004FBA63 /* CWMineUserCell.swift in Sources */,
 				1FD3ED921D1C2D73004FBA63 /* CWPrivacySettingViewController.swift in Sources */,
 				1FD3EDC61D1C4802004FBA63 /* CWMessageModel.swift in Sources */,
+				1F651C391D1F9D840080C203 /* CWBadgeView.swift in Sources */,
 				1FD3EB691D1ADB17004FBA63 /* CWSettingHeaderTitleView.swift in Sources */,
 				1FD3ED9F1D1C302C004FBA63 /* CWAboutViewController.swift in Sources */,
 				1FD3EB6A1D1ADB17004FBA63 /* CWSettingFooterTitleView.swift in Sources */,
@@ -1047,7 +1054,6 @@
 				1FD3EB7F1D1AE10C004FBA63 /* CWMineHelper.swift in Sources */,
 				1FD3EB711D1ADF03004FBA63 /* CWChatConst.swift in Sources */,
 				1FD3EB521D1ADA18004FBA63 /* CWMineViewController.swift in Sources */,
-				1FD3EB9B1D1AEB87004FBA63 /* CWBadgeView.swift in Sources */,
 				1FD3EB791D1AE058004FBA63 /* CWMenuItem.swift in Sources */,
 				1FD3EDBC1D1C4642004FBA63 /* CWMessageDispatchQueue.swift in Sources */,
 				1FD3EB671D1ADB17004FBA63 /* CWSettingButtonCell.swift in Sources */,
@@ -1061,6 +1067,7 @@
 				1FD3EB2F1D1ADA13004FBA63 /* UIColor+Extension.swift in Sources */,
 				1FD3ED821D1C2B48004FBA63 /* CWMineSettingViewController.swift in Sources */,
 				1FD3EB871D1AE33D004FBA63 /* CWAddressBookSearchController.swift in Sources */,
+				1F651C3A1D1F9D840080C203 /* CWConversationCell.swift in Sources */,
 				1F651C351D1F91F00080C203 /* UIButton+Extensions.swift in Sources */,
 				1FD3EDC01D1C4642004FBA63 /* CWBaseMessageHandle.swift in Sources */,
 				1FD3EDA31D1C335D004FBA63 /* CWAboutSettingHelper.swift in Sources */,
