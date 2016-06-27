@@ -68,6 +68,7 @@ class CWAddressBookViewController: UIViewController {
         self.groupList = contactHelper.sortContactsData
         self.sectionHeaders = contactHelper.sortSectionHeaders
         self.footerLabel.text = "\(contactHelper.contactCount)位联系人"
+        self.searchResultController.friendsData = contactHelper.contactsData
         
         let block = { (groupListData:[CWContactGroup], sectionHeadersData:[String], count: Int) -> Void in
             self.groupList = groupListData
@@ -140,6 +141,15 @@ extension CWAddressBookViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        
+        if index == 0 {
+            tableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: tableView.width, height: tableView.height), animated: false)
+            return -1
+        }
+        return index
     }
     
 }

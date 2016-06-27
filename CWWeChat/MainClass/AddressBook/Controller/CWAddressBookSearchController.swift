@@ -69,7 +69,7 @@ extension CWAddressBookSearchController: UITableViewDataSource {
 extension CWAddressBookSearchController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
 }
@@ -79,6 +79,22 @@ extension CWAddressBookSearchController: UISearchResultsUpdating {
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         
+        let text = searchController.searchBar.text
+        searchFriendData.removeAll()
+        guard let friendsData = friendsData, let searchText = text else {
+            tableView.reloadData()
+            return
+        }
+        
+        for user in friendsData {
+            if user.pinying.containsString(searchText) ||
+               user.userName!.containsString(searchText) ||
+               user.nikeName!.containsString(searchText){
+                
+                searchFriendData.append(user)
+            }
+        }
+        tableView.reloadData()
     }
 }
 

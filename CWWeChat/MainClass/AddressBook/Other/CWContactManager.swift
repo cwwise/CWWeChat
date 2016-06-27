@@ -23,7 +23,7 @@ class CWContactManager: NSObject {
     ///默认的分组
     private var defaultGroup: CWContactGroup!
     ///联系人 最原始的数据
-    private var contactsData = [CWContactUser]()
+    var contactsData = [CWContactUser]()
     
     var sortContactsData = [CWContactGroup]()
     var sortSectionHeaders = [String]()
