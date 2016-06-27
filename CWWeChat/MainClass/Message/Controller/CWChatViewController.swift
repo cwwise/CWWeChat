@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import CocoaLumberjack
 
 class CWChatViewController: CWBaseMessageViewController {
 
-    var toId: String?
+    var contactId: String!
     
     /// 消息数据数组
     var messageList = Array<CWMessageModel>()
@@ -34,7 +35,7 @@ class CWChatViewController: CWBaseMessageViewController {
         let frame = CGRect(x: 0, y: Screen_Height-45,
                            width: Screen_Width, height: 45)
         let chatToolBar = CWInputToolBar(frame:frame)
-//        chatToolBar.delegate = self
+        chatToolBar.delegate = self
         return chatToolBar
     }()
     
@@ -43,6 +44,7 @@ class CWChatViewController: CWBaseMessageViewController {
         self.view.backgroundColor = UIColor.whiteColor()
 
         setupUI()
+        registerCell()
     }
     
     /**
@@ -103,3 +105,69 @@ extension CWChatViewController: UITableViewDataSource {
     }
 }
 
+
+extension CWChatViewController {
+    
+    /**
+     是否需要显示消息的时间
+     
+     - parameter date: 当前消息的发送时间
+     
+     - returns: 是否需要显示
+     */
+    func messageNeedShowTime(date:NSDate) -> Bool {
+        
+//        msgAccumulate += 1
+//        let messageInterval = date.timeIntervalSince1970 - lastDateInterval
+//        //消息间隔
+//        if msgAccumulate > MAX_SHOWTIME_MESSAGE_COUNT ||
+//            lastDateInterval == 0 ||
+//            messageInterval > MAX_SHOWTIME_MESSAGE_SECOND{
+//            lastDateInterval = date.timeIntervalSince1970
+//            msgAccumulate = 0
+//            return true
+//        }
+        return false
+    }
+    
+}
+
+
+extension CWChatViewController: CWInputToolBarDelegate {
+    
+    func chatInputView(inputView: CWInputToolBar, sendText text: String) {
+        DDLogDebug("发送文字:\(text)")
+        
+        let message = CWMessageModel()
+        message.content = text
+        message.messageOwnerType = .Myself
+        sendMessage(message)
+    }
+    
+    func chatInputView(inputView: CWInputToolBar, sendImage imageName: String ,extentInfo:Dictionary<String,AnyObject>) {
+        
+    }
+    
+    
+    /**
+     发送消息体
+     
+     发送消息 先保存数据库 保存成功后天就到数据库，并且发送到服务器
+     - parameter message: 消息体
+     */
+    func sendMessage(message: CWMessageProtocol)  {
+        
+        message.messageSendId = CWUserAccount.sharedUserAccount.userID
+        message.messageReceiveId = contactId
+        
+//        message.showTime = messageNeedShowTime(message.messageSendDate)
+        if dbMessageStore.addMessage(message) {
+            transmitterMessage(message)
+            messageList.append(message)
+            let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
+            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+            updateMessageAndScrollBottom(false)
+        }
+    }
+
+}

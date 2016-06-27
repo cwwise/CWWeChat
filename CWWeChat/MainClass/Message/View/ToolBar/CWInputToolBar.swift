@@ -8,8 +8,18 @@
 
 import UIKit
 
+/// toolBar代理事件
+protocol CWInputToolBarDelegate: class {
+    ///发送文字
+    func chatInputView(inputView: CWInputToolBar, sendText text: String)
+    ///发送图片
+    func chatInputView(inputView: CWInputToolBar, sendImage imageName: String ,extentInfo:Dictionary<String,AnyObject>)
+}
+
 class CWInputToolBar: UIView {
 
+    weak var delegate: CWInputToolBarDelegate?
+    
     /// 输入框
     var inputTextView:CWMessageTextView = {
         let inputTextView = CWMessageTextView(frame:CGRectZero)
@@ -59,7 +69,6 @@ class CWInputToolBar: UIView {
     
     var kKeyboardImage:UIImage = CWAsset.ToolViewKeyboard.image
     var kKeyboardImageHL:UIImage = CWAsset.ToolViewKeyboardHL.image
-    
     
     //MARK: 初始化
     override init(frame: CGRect) {
@@ -172,5 +181,36 @@ class CWInputToolBar: UIView {
 
 // MARK: - UITextViewDelegate
 extension CWInputToolBar: UITextViewDelegate {
+
+    func textViewDidEndEditing(textView: UITextView) {
+        textView.resignFirstResponder()
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+        if text == "\n" {
+            sendCurrentTextViewText()
+            return false
+        }
+        return true
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        
+        
+    }
+    
+    ///发送文字
+    func sendCurrentTextViewText() {
+        guard self.inputTextView.text.characters.count > 0 else {
+            return
+        }
+        
+        if let delegate = self.delegate {
+            delegate.chatInputView(self, sendText: self.inputTextView.text)
+        }
+        //还有待修改
+        self.inputTextView.text = ""
+    }
 
 }

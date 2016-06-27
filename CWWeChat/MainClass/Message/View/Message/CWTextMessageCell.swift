@@ -28,8 +28,6 @@ class CWTextMessageCell: CWBaseMessageCell {
         super.updateMessage(message)
         
         messageLabel.text = message!.content
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
