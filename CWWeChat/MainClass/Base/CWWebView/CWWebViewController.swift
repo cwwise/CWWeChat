@@ -151,7 +151,7 @@ class CWWebViewController: UIViewController {
     
     deinit {
         
-        
+        //直接初始化之后 销毁的话，会出现问题，观察者没有添加 就销魂 会崩溃。待解决
         if urlString != "" {
             self.webView.removeObserver(self, forKeyPath: "estimatedProgress")
             self.webView.scrollView.removeObserver(self, forKeyPath: "backgroundColor")
