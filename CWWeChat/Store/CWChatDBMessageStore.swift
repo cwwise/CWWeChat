@@ -11,6 +11,9 @@ import SQLite
 
 class CWChatDBMessageStore: NSObject {
 
+    /// 当前用户的唯一id，创建数据库名称
+    var userId: String
+    
     ///消息数据库的单利
     var recordDBStore:CWChatDBRecordStore = {
         return CWChatDBDataManager.sharedInstance.dbRecordStore
@@ -22,12 +25,12 @@ class CWChatDBMessageStore: NSObject {
     let id = Expression<Int64>("id")
     //
     let messageid = Expression<String>("msgid")
-    let userId = Expression<String>("uid")
+    let uId = Expression<String>("uid")
     let friendId = Expression<String>("fid")
     //时间
     let date = Expression<String>("date")
     /// 单聊群聊
-    let partner_type = Expression<Int>("partner_type")
+    let chat_type = Expression<Int>("partner_type")
     /// 所属人
     let own_type = Expression<Int>("own_type")
     /// 消息类型
@@ -63,6 +66,7 @@ class CWChatDBMessageStore: NSObject {
         }
     }()
     
+    /// 数据库路径
     lazy var path: String = {
         let documentPath = NSHomeDirectory().stringByAppendingString("/Documents")
         let path = "\(documentPath)/User/\(self.userId)/Chat/DB/"
@@ -70,10 +74,11 @@ class CWChatDBMessageStore: NSObject {
             try! NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
         }
         return path.stringByAppendingString("chatmessage.sqlite3")
-        
     }()
     
-    private override init() {
+    //MARK: 初始化
+    init(userId: String) {
+        self.userId = userId
         super.init()
         createMessageTable()
     }
@@ -90,11 +95,11 @@ class CWChatDBMessageStore: NSObject {
                 
                 t.column(id, primaryKey: .Autoincrement)
                 t.column(messageid, unique: true)
-                t.column(userId)
+                t.column(uId)
                 t.column(friendId)
                 t.column(date)
                 
-                t.column(partner_type, defaultValue: 0)
+                t.column(chat_type, defaultValue: 0)
                 t.column(own_type, defaultValue: 0)
                 t.column(msg_type, defaultValue: 0)
                 
@@ -112,6 +117,48 @@ class CWChatDBMessageStore: NSObject {
         } catch let error as NSError {
             print(error.description)
         }
+    }
+    
+    
+    /**
+     添加消息
+     
+     - parameter message: 消息体
+     
+     - returns: 添加消息的结果
+     */
+    func addMessage(message: CWMessageProtocol) -> Bool {
+        
+        guard let userID = message.messageSendId, let friendID = message.messageReceiveId else {
+            print("插入消息失败: 消息体缺少参数, \(message.messageID)")
+            return false
+        }
+        //时间
+        let dataString = "\(message.messageSendDate.timeIntervalSince1970)"
+        do {
+//            let jsonData = try! NSJSONSerialization.dataWithJSONObject(message.contentInfo!, options: .PrettyPrinted)
+//            let strJson = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as? String ?? ""
+            let rowid = try messageDB.run(messageTable.insert(messageid <- message.messageID,
+                uId <- userID,
+                friendId <- friendID,
+                date <- dataString,
+                chat_type <- message.chatType.rawValue,
+                own_type <- message.messageOwnerType.rawValue,
+                msg_type <- message.messageType.rawValue,
+                content <- "",
+                send_status <- message.messageSendState.rawValue,
+//                received_status <- message.messageReadState.rawValue,
+//                upload_status <- message.messageUploadState.rawValue,
+                ext1 <- ""))
+            print("插入消息成功: \(rowid), \(message.messageID)")
+            
+//            recordDBStore.addRecordByMessage(message, needUnread: message.messageOwnerType != .Myself)
+            
+        } catch {
+            print("插入消息失败: \(error), \(message.messageID)")
+            return false
+        }
+        return true
     }
     
     

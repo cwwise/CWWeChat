@@ -158,13 +158,13 @@ protocol CWMessageProtocol: NSObjectProtocol {
 //    ///是否用户名称
 //    var showUsername:Bool { get set }
 //
-//    var messageSendDate:NSDate {get set}       //消息发送时间
+    var messageSendDate:NSDate {get set}       //消息发送时间
 //
-//    var partnerType:CWChatType {get set}     //消息接收者
-//    var messageOwnerType:CWMessageOwnerType {get set}  //消息所属类型
-    var messageType:CWMessageType {get set}            //消息类型
+    var chatType: CWChatType {get set}     //消息接收者
+    var messageOwnerType: CWMessageOwnerType {get set}  //消息所属类型
+    var messageType: CWMessageType {get set}            //消息类型
 //
-//    var messageSendState:CWMessageSendState {get set}  //消息发送状态
+    var messageSendState:CWMessageSendState {get set}  //消息发送状态
 //    var messageReadState:CWMessageReadState {get set}  //消息读取状态
 //    var messagePlayState:CWMessagePlayState {get set}  //消息播放状态
 //    var messageUploadState:CWMessageUploadState {get set} //消息上传状态

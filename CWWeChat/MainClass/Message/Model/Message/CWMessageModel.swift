@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class CWMessageModel: NSObject,CWMessageProtocol {
 
     ///消息ID
@@ -24,11 +23,13 @@ class CWMessageModel: NSObject,CWMessageProtocol {
     ///消息所属者
     var messageOwnerType: CWMessageOwnerType
     ///消息发送时间
-    var messageDate: String
+    var messageSendDate: NSDate
+    
+    ///消息状态
+    var messageSendState: CWMessageSendState
     
     var composing: Bool
-    ///消息状态
-    var messageState: CWMessageSendState
+
     
     var content: String? {
         didSet {
@@ -62,8 +63,8 @@ class CWMessageModel: NSObject,CWMessageProtocol {
         messageOwnerType = .None
         chatType = .None
         composing = false
-        messageDate = ChatTimeTool.stringFromDate(NSDate())
-        messageState = .None
+        messageSendDate = NSDate()
+        messageSendState = .None
         super.init()
     }
 }

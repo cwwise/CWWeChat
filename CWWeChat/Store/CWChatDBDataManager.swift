@@ -12,6 +12,7 @@ class CWChatDBDataManager: NSObject {
     
     // TODO: 单例有些不好，想想怎么去解决。
     static let sharedInstance = CWChatDBDataManager()
+    
     //用户id
     private(set) var userID:String
     //消息会话记录
@@ -22,7 +23,8 @@ class CWChatDBDataManager: NSObject {
     private override init() {
         self.userID = CWUserAccount.sharedUserAccount.userID
         dbRecordStore = CWChatDBRecordStore(userId: self.userID)
-        dbMessageStore = CWChatDBMessageStore()
+        dbMessageStore = CWChatDBMessageStore(userId: self.userID)
+        super.init()
     }
     
     
