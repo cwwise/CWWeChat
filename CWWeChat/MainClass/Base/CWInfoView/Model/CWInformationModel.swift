@@ -24,6 +24,11 @@ class CWInformationModel: NSObject {
     ///副标题
     var subTitle: String?
     
+    ///是否显示箭头（默认YES）
+    var showDisclosureIndicator: Bool = true
+    ///禁止高亮（默认NO）
+    var disableHighlight: Bool = false
+    
     init(title: String, subTitle: String? = nil, type: CWSettingItemType = .Default) {
         self.title = title
         self.subTitle = subTitle

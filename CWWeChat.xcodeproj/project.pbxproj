@@ -99,6 +99,8 @@
 		EDC6A0AE1D22B434002C2AEE /* CWDetailContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */; };
 		EDC6A0B41D22B50D002C2AEE /* CWInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */; };
 		EDC6A0B61D22B911002C2AEE /* CWInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */; };
+		EDC6A0B81D22BE96002C2AEE /* CWInformationButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B71D22BE96002C2AEE /* CWInformationButtonCell.swift */; };
+		EDC6A0BA1D22BF80002C2AEE /* CWInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B91D22BF80002C2AEE /* CWInformationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,6 +221,8 @@
 		EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWDetailContactViewController.swift; sourceTree = "<group>"; };
 		EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationModel.swift; sourceTree = "<group>"; };
 		EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationCell.swift; sourceTree = "<group>"; };
+		EDC6A0B71D22BE96002C2AEE /* CWInformationButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationButtonCell.swift; sourceTree = "<group>"; };
+		EDC6A0B91D22BF80002C2AEE /* CWInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -838,6 +842,7 @@
 		EDC6A0B01D22B4CB002C2AEE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				EDC6A0B91D22BF80002C2AEE /* CWInformationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -854,6 +859,7 @@
 			isa = PBXGroup;
 			children = (
 				EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */,
+				EDC6A0B71D22BE96002C2AEE /* CWInformationButtonCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1122,11 +1128,13 @@
 				EDC6A0AE1D22B434002C2AEE /* CWDetailContactViewController.swift in Sources */,
 				1FD3EB6E1D1ADDBC004FBA63 /* CWUIUtility.swift in Sources */,
 				1FD3EB511D1ADA18004FBA63 /* CWConversationsViewController.swift in Sources */,
+				EDC6A0B81D22BE96002C2AEE /* CWInformationButtonCell.swift in Sources */,
 				1FD3ED971D1C2DD6004FBA63 /* CWWebViewController.swift in Sources */,
 				1FD3EB5D1D1ADABA004FBA63 /* CWSettingItem.swift in Sources */,
 				1FD3EB2F1D1ADA13004FBA63 /* UIColor+Extension.swift in Sources */,
 				1FD3ED821D1C2B48004FBA63 /* CWMineSettingViewController.swift in Sources */,
 				1FD3EB871D1AE33D004FBA63 /* CWAddressBookSearchController.swift in Sources */,
+				EDC6A0BA1D22BF80002C2AEE /* CWInformationViewController.swift in Sources */,
 				1F651C3A1D1F9D840080C203 /* CWConversationCell.swift in Sources */,
 				1F651C351D1F91F00080C203 /* UIButton+Extensions.swift in Sources */,
 				1FD3EDC01D1C4642004FBA63 /* CWBaseMessageHandle.swift in Sources */,
