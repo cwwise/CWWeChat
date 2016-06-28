@@ -30,6 +30,7 @@ class CWConversationsViewController: CWBaseMessageViewController {
         setupUI()
         registerCellClass()
         addDefaultData()
+        setupFriends()
         
         manager.connectProcess()
         // Do any additional setup after loading the view.
@@ -46,6 +47,11 @@ class CWConversationsViewController: CWBaseMessageViewController {
         //测试发送消息
         let rightBarItem = UIBarButtonItem(title: "发送", style: .Plain, target: self, action: #selector(sendMessage))
         self.navigationItem.rightBarButtonItem = rightBarItem
+    }
+    
+    func setupFriends() {
+        let manager = CWContactManager.shareContactManager
+        print(manager.contactCount)
     }
     
     func sendMessage() {
