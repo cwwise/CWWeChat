@@ -33,16 +33,12 @@ class CWMessageCracker: XMPPModule {
         return messagehandle
     }()
     
-
-    
     override init!(dispatchQueue queue: dispatch_queue_t!) {
         super.init(dispatchQueue: queue)
     }
     
     override init!() {
         super.init()
-        
- 
     }
 }
 
@@ -52,14 +48,14 @@ extension CWMessageCracker: XMPPStreamDelegate {
      收到消息 并处理
      */
     func xmppStream(sender: XMPPStream!, didReceiveMessage message: XMPPMessage!) {
-        print(message)
         //如果是聊天消息
         if message.isChatMessage() {
+            
+            DDLogDebug(message.description)
             
             let cwMessage = CWXMPPMessage(message: message)
             //处理消息
             messagehandle.handleMessage(cwMessage)
-            
             
         }
         

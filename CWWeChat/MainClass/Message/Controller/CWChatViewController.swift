@@ -13,6 +13,16 @@ class CWChatViewController: CWBaseMessageViewController {
 
     var contactId: String!
     
+    //存储数据库
+    var dbMessageStore:CWChatDBMessageStore = {
+       return CWChatDBDataManager.sharedInstance.dbMessageStore
+    }()
+    
+    /// 消息发送主要的类
+    var messageDispatchQueue:CWMessageDispatchQueue = {
+        return CWXMPPManager.shareXMPPManager.messageDispatchQueue
+    }()
+    
     /// 消息数据数组
     var messageList = Array<CWMessageModel>()
     
@@ -162,12 +172,39 @@ extension CWChatViewController: CWInputToolBarDelegate {
         
 //        message.showTime = messageNeedShowTime(message.messageSendDate)
         if dbMessageStore.addMessage(message) {
-            transmitterMessage(message)
-            messageList.append(message)
+            dispatchMessage(message)
+//            messageList.append(message)
             let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
             self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
             updateMessageAndScrollBottom(false)
         }
     }
 
+    
+    ///滚动到底部
+    func updateMessageAndScrollBottom(animated:Bool = true) {
+        if messageList.count == 0 {
+            return
+        }
+        let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
+        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
+    }
+}
+
+// MARK: - 发送消息部分
+extension CWChatViewController {
+    
+    
+    //重复发送消息
+    
+    /**
+     发送消息到服务器
+     
+     - parameter message: 消息体
+     */
+    private func dispatchMessage(message: CWMessageProtocol) {
+        messageDispatchQueue.sendMessage(message)
+    }
+    
+    
 }

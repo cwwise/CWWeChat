@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// 当前登录的用户model
 class CWUserAccount: NSObject {
    
     static let sharedUserAccount = CWUserAccount()
@@ -20,6 +21,7 @@ class CWUserAccount: NSObject {
         }
     }
     
+    ///
     init(chatuser: CWContactUser = CWContactUser()) {
         self.chatuser = chatuser
     }

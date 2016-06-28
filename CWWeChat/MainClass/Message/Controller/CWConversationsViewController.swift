@@ -137,7 +137,7 @@ extension CWConversationsViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let chatVC = CWChatViewController()
-        chatVC.toId = self.conversationList[indexPath.row].partnerID
+        chatVC.contactId = self.conversationList[indexPath.row].partnerID
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)
     }

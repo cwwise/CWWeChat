@@ -25,8 +25,9 @@ class CWChatMessageHandle: CWBaseMessageHandle {
             messageObject.chatType = .Single
             messageObject.composing = message.composing
             //如果是离线消息，则消息时间，重新设置。
+            //2016-06-25T17:11:13.354Z
             if let delayDateString = message.delayDateString {
-                messageObject.messageDate = delayDateString
+                messageObject.messageSendDate = ChatTimeTool.dateFromString(delayDateString, formatter: KMessageTimeFormate)
             }
             
             if let delegate = self.delegate  {

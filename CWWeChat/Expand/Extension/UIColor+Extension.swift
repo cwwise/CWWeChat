@@ -16,7 +16,7 @@ extension UIColor {
     }
     
     //tableView背景色
-    class func tableViewBackgroundColorl() -> UIColor {
+    class func tableViewBackgroundColor() -> UIColor {
         return UIColor(hexString: "#EFEFF4")
     }
     

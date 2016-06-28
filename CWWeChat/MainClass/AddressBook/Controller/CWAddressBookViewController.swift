@@ -47,10 +47,11 @@ class CWAddressBookViewController: UIViewController {
     
     lazy var tableView:UITableView = {
         let tableView = UITableView(frame: self.view.bounds, style: .Plain)
-        tableView.backgroundColor = UIColor.tableViewBackgroundColorl()
+        tableView.backgroundColor = UIColor.tableViewBackgroundColor()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.sectionIndexBackgroundColor = UIColor.clearColor()
+        tableView.sectionIndexColor = UIColor.grayColor()
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         
         tableView.registerClass(CWChatFriendCell.self, forCellReuseIdentifier: "cell")
@@ -84,7 +85,7 @@ class CWAddressBookViewController: UIViewController {
     func setupUI() {
         self.title = "通讯录"
         self.view.addSubview(tableView)
-        self.view.backgroundColor = UIColor.tableViewBackgroundColorl()
+        self.view.backgroundColor = UIColor.tableViewBackgroundColor()
     }
     
     deinit {
