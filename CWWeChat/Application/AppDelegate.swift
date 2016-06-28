@@ -20,7 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabbarVC = CWChatTabBarController()
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        self.window?.rootViewController = tabbarVC
+        let guideVC = UIStoryboard.guideViewController()
+        
+        self.window?.rootViewController = guideVC
         
         self.window?.backgroundColor = UIColor.whiteColor()
         self.window?.makeKeyAndVisible()

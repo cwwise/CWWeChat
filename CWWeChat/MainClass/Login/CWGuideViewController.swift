@@ -10,18 +10,32 @@ import UIKit
 
 class CWGuideViewController: UIViewController {
 
+    @IBOutlet weak var launchImageView: UIImageView!
+    
+    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        
+        let imageNameArray = ["LaunchImage",
+                              "LaunchImage-700-568h",
+                              "LaunchImage-800-667h",
+                              "LaunchImage-800-Portrait-736h"]
+        
+        print(imageNameArray[2])
+        print(UIImage(named: imageNameArray[2]))
+        print(launchImageView)
+        launchImageView.image = UIImage(named: imageNameArray[2])
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 

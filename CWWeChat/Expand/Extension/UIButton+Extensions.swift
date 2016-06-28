@@ -20,4 +20,14 @@ extension UIButton {
         self.layer.borderWidth = 0.5
         self.layer.borderColor = color.CGColor
     }
+    
+    /**
+     button 提交Style
+     */
+    public func commitStyle() {
+        
+        //设置字体大小颜色
+        
+        
+    }
 }

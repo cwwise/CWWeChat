@@ -51,6 +51,7 @@ class CWAddressBookViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.sectionIndexBackgroundColor = UIColor.clearColor()
+        tableView.sectionIndexColor = UIColor.grayColor()
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         
         tableView.registerClass(CWChatFriendCell.self, forCellReuseIdentifier: "cell")

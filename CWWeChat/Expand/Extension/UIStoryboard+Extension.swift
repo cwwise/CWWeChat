@@ -8,6 +8,16 @@
 
 import UIKit
 
-class UIStoryboard_Extension: UIStoryboard {
-
+extension UIStoryboard {
+    
+    class func mainStoryboard() -> UIStoryboard {
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        return storyboard
+    }
+    
+    class func guideViewController() -> UIViewController {
+        let guideViewController = self.mainStoryboard().instantiateViewControllerWithIdentifier("CWGuideViewController")
+        return guideViewController
+    }
+    
 }

@@ -9,6 +9,8 @@
 import UIKit
 
 let KTimeFormate:String = "yyyy-MM-dd HH:mm:ss:SSS"
+let KMessageTimeFormate:String = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+
 
 class ChatTimeTool: NSObject {
 
@@ -32,7 +34,18 @@ class ChatTimeTool: NSObject {
         return dateString
     }
     
-    internal class func stringFromDateString(dateString: String, fromDateFormat: String, toDateFormat: String = KTimeFormate) -> String? {
+    internal class func dateFromString(dateString: String, formatter string: String) -> NSDate {
+        let formatter = shareChatTimeTool.formatter
+        //格式化时间
+        formatter.dateFormat = string
+        let date = formatter.dateFromString(dateString)
+        if date == nil {
+            return NSDate()
+        }
+        return date!
+    }
+    
+    internal class func stringFromDateString(dateString: String, fromDateFormat: String = KMessageTimeFormate, toDateFormat: String = KTimeFormate) -> String? {
         let formatter = shareChatTimeTool.formatter
         //格式化时间
         formatter.dateFormat = fromDateFormat
