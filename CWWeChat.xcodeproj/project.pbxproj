@@ -17,6 +17,7 @@
 		1F2E5CA21D221FE200CCE130 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2E5CA11D221FE200CCE130 /* UIStoryboard+Extension.swift */; };
 		1F2E5CA41D223D5000CCE130 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2E5CA31D223D5000CCE130 /* UIImage+Extension.swift */; };
 		1F2E5CA61D225DA600CCE130 /* CWToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2E5CA51D225DA600CCE130 /* CWToastView.swift */; };
+		1F2E5CA81D226FBF00CCE130 /* CWToastShowProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2E5CA71D226FBF00CCE130 /* CWToastShowProtocol.swift */; };
 		1F651BE31D1CDF400080C203 /* CWWeChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651BE21D1CDF400080C203 /* CWWeChatUITests.swift */; };
 		1F651BEB1D1CE2D90080C203 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651BEA1D1CE2D90080C203 /* SnapshotHelper.swift */; };
 		1F651C311D1F91290080C203 /* CWInputToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F651C301D1F91290080C203 /* CWInputToolBar.swift */; };
@@ -134,6 +135,7 @@
 		1F2E5CA11D221FE200CCE130 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		1F2E5CA31D223D5000CCE130 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		1F2E5CA51D225DA600CCE130 /* CWToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWToastView.swift; sourceTree = "<group>"; };
+		1F2E5CA71D226FBF00CCE130 /* CWToastShowProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWToastShowProtocol.swift; sourceTree = "<group>"; };
 		1F651BE01D1CDF400080C203 /* CWWeChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWWeChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F651BE21D1CDF400080C203 /* CWWeChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWWeChatUITests.swift; sourceTree = "<group>"; };
 		1F651BE41D1CDF400080C203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				1F2E5CA51D225DA600CCE130 /* CWToastView.swift */,
+				1F2E5CA71D226FBF00CCE130 /* CWToastShowProtocol.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1116,6 +1119,7 @@
 				1FD3ED881D1C2C4F004FBA63 /* CWMessageInformSettingHelper.swift in Sources */,
 				1FD3EDC21D1C4642004FBA63 /* CWHTTPSessionManager.swift in Sources */,
 				1F2E5CA61D225DA600CCE130 /* CWToastView.swift in Sources */,
+				1F2E5CA81D226FBF00CCE130 /* CWToastShowProtocol.swift in Sources */,
 				1FD3ED741D1B9EFF004FBA63 /* CWContactGroup.swift in Sources */,
 				1FD3EB851D1AE310004FBA63 /* CWAddressBookViewController+Delegate.swift in Sources */,
 				1FD3EB9D1D1AEC15004FBA63 /* CWChatUIConstant.swift in Sources */,

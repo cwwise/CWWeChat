@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWLoginViewController: UIViewController {
+class CWLoginViewController: UIViewController, CWToastShowProtocol {
     
     lazy var userNameTextField: UITextField = {
         let userNameTextField = UITextField()
@@ -59,6 +59,9 @@ class CWLoginViewController: UIViewController {
         backItem.setTitleTextAttributes(dict, forState: .Normal)
         self.navigationItem.leftBarButtonItem = backItem
         
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+
         //顶部文字
         let label = UILabel()
         label.text = "使用账号和密码登录"
@@ -125,7 +128,7 @@ class CWLoginViewController: UIViewController {
         let userName = userNameTextField.text!
         let password = passwordTextField.text!
         
-        
+        self.showToast(.ShowMessage, text: "加载中...")
     }
     
     override func didReceiveMemoryWarning() {
