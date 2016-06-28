@@ -21,7 +21,7 @@ class CWChatDBDataManager: NSObject {
     private(set) var dbMessageStore:CWChatDBMessageStore
 
     private override init() {
-        self.userID = CWUserAccount.sharedUserAccount.userID
+        self.userID = CWUserAccount.sharedUserAccount().userID
         dbRecordStore = CWChatDBRecordStore(userId: self.userID)
         dbMessageStore = CWChatDBMessageStore(userId: self.userID)
         super.init()

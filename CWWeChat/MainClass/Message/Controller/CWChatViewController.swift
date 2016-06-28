@@ -14,7 +14,7 @@ class CWChatViewController: CWBaseMessageViewController {
     var contactId: String!
     
     //存储数据库
-    var dbMessageStore:CWChatDBMessageStore = {
+    lazy var dbMessageStore:CWChatDBMessageStore = {
        return CWChatDBDataManager.sharedInstance.dbMessageStore
     }()
     
@@ -24,7 +24,7 @@ class CWChatViewController: CWBaseMessageViewController {
     }()
     
     /// 消息数据数组
-    var messageList = Array<CWMessageModel>()
+    var messageList = Array<CWMessageProtocol>()
     
     /// TableView
     lazy var tableView: UITableView = {
@@ -101,13 +101,13 @@ extension CWChatViewController: UITableViewDataSource {
         return messageList.count
     }
     
-//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        let message = messageList[indexPath.row]
-//        return message.messageFrame.heightOfCell
-//    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let message = messageList[indexPath.row] as! CWMessageModel
+        return message.cellHeight
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let message = messageList[indexPath.row]
+        let message = messageList[indexPath.row] as! CWMessageModel
         
         let chatMessageCell = tableView.dequeueReusableCellWithIdentifier(message.messageType.reuseIdentifier(), forIndexPath: indexPath) as! CWBaseMessageCell
         chatMessageCell.updateMessage(message)
@@ -150,6 +150,7 @@ extension CWChatViewController: CWInputToolBarDelegate {
         
         let message = CWMessageModel()
         message.content = text
+        message.messageType = .Text
         message.messageOwnerType = .Myself
         sendMessage(message)
     }
@@ -167,13 +168,13 @@ extension CWChatViewController: CWInputToolBarDelegate {
      */
     func sendMessage(message: CWMessageProtocol)  {
         
-        message.messageSendId = CWUserAccount.sharedUserAccount.userID
+        message.messageSendId = CWUserAccount.sharedUserAccount().userID
         message.messageReceiveId = contactId
         
 //        message.showTime = messageNeedShowTime(message.messageSendDate)
         if dbMessageStore.addMessage(message) {
-            dispatchMessage(message)
-//            messageList.append(message)
+//            dispatchMessage(message)
+            messageList.append(message)
             let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
             self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
             updateMessageAndScrollBottom(false)
@@ -193,9 +194,6 @@ extension CWChatViewController: CWInputToolBarDelegate {
 
 // MARK: - 发送消息部分
 extension CWChatViewController {
-    
-    
-    //重复发送消息
     
     /**
      发送消息到服务器

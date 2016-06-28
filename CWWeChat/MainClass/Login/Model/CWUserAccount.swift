@@ -11,7 +11,10 @@ import UIKit
 /// 当前登录的用户model
 class CWUserAccount: NSObject {
    
-    static let sharedUserAccount = CWUserAccount()
+    class func sharedUserAccount() -> CWUserAccount {
+        let applegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        return applegate.userModel!
+    }
    
     var chatuser: CWContactUser
     

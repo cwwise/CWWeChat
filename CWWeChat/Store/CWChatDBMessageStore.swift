@@ -15,7 +15,7 @@ class CWChatDBMessageStore: NSObject {
     var userId: String
     
     ///消息数据库的单利
-    var recordDBStore:CWChatDBRecordStore = {
+    lazy var recordDBStore:CWChatDBRecordStore = {
         return CWChatDBDataManager.sharedInstance.dbRecordStore
     }()
     

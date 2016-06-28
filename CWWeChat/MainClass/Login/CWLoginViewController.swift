@@ -128,7 +128,24 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
         let userName = userNameTextField.text!
         let password = passwordTextField.text!
         
-        self.showToast(.ShowMessage, text: "加载中...")
+//        self.showToast(.ShowMessage, text: "加载中...")
+        if userName == "" || password == "" {
+            
+        }
+        
+        //初始化当前用户模型
+        let user = CWContactUser()
+        user.userId = "chewei"
+        user.userName = "chenwei"
+        user.nikeName = "陈威"
+        
+        let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
+        let account = CWUserAccount(chatuser: user)
+        appdelegate.userModel = account
+        
+        
+        appdelegate.loginSuccess()
     }
     
     override func didReceiveMemoryWarning() {

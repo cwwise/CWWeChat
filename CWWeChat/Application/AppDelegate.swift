@@ -12,16 +12,14 @@ import CocoaLumberjack
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var userModel: CWUserAccount?
     var window: UIWindow?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         self.showGuideViewController()
-        
-        
         
         self.window?.backgroundColor = UIColor.whiteColor()
         self.window?.makeKeyAndVisible()
@@ -32,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registerRemoteNotification()
         return true
     }
-    
     
     
     func showGuideViewController() {

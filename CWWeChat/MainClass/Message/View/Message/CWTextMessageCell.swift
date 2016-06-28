@@ -28,6 +28,22 @@ class CWTextMessageCell: CWBaseMessageCell {
         super.updateMessage(message)
         
         messageLabel.text = message!.content
+        
+        
+        if message?.messageOwnerType == .Myself {
+            
+            let sendImage = CWAsset.Message_receiver_bg.image.resizableImage()
+            let sendImageHL = CWAsset.Message_receiver_bgHL.image.resizableImage()
+            
+            self.messageBackgroundView.image = sendImage
+            self.messageBackgroundView.highlightedImage = sendImageHL
+            
+            
+        } else if message?.messageOwnerType == .Other {
+            
+            
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
