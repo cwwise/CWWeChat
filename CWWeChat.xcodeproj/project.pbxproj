@@ -96,6 +96,9 @@
 		1FD3EDC81D1C48AA004FBA63 /* NSString+Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EDC71D1C48AA004FBA63 /* NSString+Chat.swift */; };
 		1FD3EDDE1D1CC180004FBA63 /* CWWeChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3EDDD1D1CC180004FBA63 /* CWWeChatTests.swift */; };
 		47A602EC777BF8B3F63924D8 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECE23B265D75A03FB5C6A9 /* Pods_CWWeChat.framework */; };
+		EDC6A0AE1D22B434002C2AEE /* CWDetailContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */; };
+		EDC6A0B41D22B50D002C2AEE /* CWInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */; };
+		EDC6A0B61D22B911002C2AEE /* CWInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -213,6 +216,9 @@
 		1FECE23B265D75A03FB5C6A9 /* Pods_CWWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E6F8F41CBA137291D180E0E /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
 		80C4EC6CB95B1523B42971BD /* Pods-CWWeChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.debug.xcconfig"; sourceTree = "<group>"; };
+		EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWDetailContactViewController.swift; sourceTree = "<group>"; };
+		EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationModel.swift; sourceTree = "<group>"; };
+		EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,6 +404,7 @@
 		1FD3EB331D1ADA18004FBA63 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				EDC6A0AC1D22B416002C2AEE /* CWDetailContactViewController */,
 				1FD3EB341D1ADA18004FBA63 /* CWAddressBookViewController.swift */,
 				1FD3EB841D1AE310004FBA63 /* CWAddressBookViewController+Delegate.swift */,
 				1FD3EB861D1AE33D004FBA63 /* CWAddressBookSearchController.swift */,
@@ -434,6 +441,7 @@
 		1FD3EB381D1ADA18004FBA63 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				EDC6A0AF1D22B4CB002C2AEE /* CWInfoView */,
 				1FD3ED951D1C2DCE004FBA63 /* CWWebView */,
 				1FD3EB881D1AE3DE004FBA63 /* CWSearch */,
 				1FD3EB721D1AE046004FBA63 /* CWMenu */,
@@ -809,6 +817,47 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EDC6A0AC1D22B416002C2AEE /* CWDetailContactViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */,
+			);
+			path = CWDetailContactViewController;
+			sourceTree = "<group>";
+		};
+		EDC6A0AF1D22B4CB002C2AEE /* CWInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				EDC6A0B01D22B4CB002C2AEE /* Controller */,
+				EDC6A0B11D22B4CB002C2AEE /* Model */,
+				EDC6A0B21D22B4CB002C2AEE /* Views */,
+			);
+			path = CWInfoView;
+			sourceTree = "<group>";
+		};
+		EDC6A0B01D22B4CB002C2AEE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EDC6A0B11D22B4CB002C2AEE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EDC6A0B21D22B4CB002C2AEE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1037,6 +1086,7 @@
 				1FD3ED8A1D1C2C78004FBA63 /* CWPrivacySettingHelper.swift in Sources */,
 				1FD3EDC81D1C48AA004FBA63 /* NSString+Chat.swift in Sources */,
 				1FD3EDA81D1C45AF004FBA63 /* CWXMPPProtocol.swift in Sources */,
+				EDC6A0B41D22B50D002C2AEE /* CWInformationModel.swift in Sources */,
 				1FD3EDBE1D1C4642004FBA63 /* CWTextMessageDispatchOperation.swift in Sources */,
 				1FD3ED9B1D1C2E2C004FBA63 /* UIView+Frame.swift in Sources */,
 				1FD3EB301D1ADA13004FBA63 /* UIImage+CWChat.swift in Sources */,
@@ -1068,6 +1118,8 @@
 				1FD3EB8A1D1AE3E3004FBA63 /* CWSearchController.swift in Sources */,
 				1FD3EB4F1D1ADA18004FBA63 /* CWChatTabBarController.swift in Sources */,
 				1FD3EB4D1D1ADA18004FBA63 /* CWAddressBookViewController.swift in Sources */,
+				EDC6A0B61D22B911002C2AEE /* CWInformationCell.swift in Sources */,
+				EDC6A0AE1D22B434002C2AEE /* CWDetailContactViewController.swift in Sources */,
 				1FD3EB6E1D1ADDBC004FBA63 /* CWUIUtility.swift in Sources */,
 				1FD3EB511D1ADA18004FBA63 /* CWConversationsViewController.swift in Sources */,
 				1FD3ED971D1C2DD6004FBA63 /* CWWebViewController.swift in Sources */,
