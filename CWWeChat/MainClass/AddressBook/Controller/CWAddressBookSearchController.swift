@@ -32,7 +32,7 @@ class CWAddressBookSearchController: UIViewController {
         
         self.view.addSubview(tableView)
 //        self.automaticallyAdjustsScrollViewInsets = false
-        self.view.backgroundColor = UIColor.tableViewBackgroundColorl()
+        self.view.backgroundColor = UIColor.tableViewBackgroundColor()
     }
 
     override func didReceiveMemoryWarning() {

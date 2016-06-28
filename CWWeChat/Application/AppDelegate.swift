@@ -17,18 +17,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let tabbarVC = CWChatTabBarController()
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        let guideVC = UIStoryboard.guideViewController()
+        self.showGuideViewController()
         
-        self.window?.rootViewController = guideVC
+        
         
         self.window?.backgroundColor = UIColor.whiteColor()
         self.window?.makeKeyAndVisible()
+        
+        //设置logger
         setupLogger()
+        //注册推送信息
         registerRemoteNotification()
         return true
+    }
+    
+    
+    
+    func showGuideViewController() {
+        let guideVC = UIStoryboard.guideViewController()
+        self.window?.rootViewController = guideVC
+    }
+    
+    func showLoginViewController() {
+        let guideVC = UIStoryboard.guideViewController()
+        self.window?.rootViewController = guideVC
+    }
+    
+    func loginSuccess() {
+        let tabbarVC = CWChatTabBarController()
+        self.window?.rootViewController = tabbarVC
     }
     
     ///设置Log日志

@@ -47,7 +47,7 @@ class CWAddressBookViewController: UIViewController {
     
     lazy var tableView:UITableView = {
         let tableView = UITableView(frame: self.view.bounds, style: .Plain)
-        tableView.backgroundColor = UIColor.tableViewBackgroundColorl()
+        tableView.backgroundColor = UIColor.tableViewBackgroundColor()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.sectionIndexBackgroundColor = UIColor.clearColor()
@@ -85,7 +85,7 @@ class CWAddressBookViewController: UIViewController {
     func setupUI() {
         self.title = "通讯录"
         self.view.addSubview(tableView)
-        self.view.backgroundColor = UIColor.tableViewBackgroundColorl()
+        self.view.backgroundColor = UIColor.tableViewBackgroundColor()
     }
     
     deinit {

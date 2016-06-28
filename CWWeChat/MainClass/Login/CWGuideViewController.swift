@@ -18,15 +18,11 @@ class CWGuideViewController: UIViewController {
         super.viewDidLoad()
 
         
-        
         let imageNameArray = ["LaunchImage",
                               "LaunchImage-700-568h",
                               "LaunchImage-800-667h",
                               "LaunchImage-800-Portrait-736h"]
-        
-        print(imageNameArray[2])
-        print(UIImage(named: imageNameArray[2]))
-        print(launchImageView)
+
         launchImageView.image = UIImage(named: imageNameArray[2])
         // Do any additional setup after loading the view.
     }
@@ -36,6 +32,11 @@ class CWGuideViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func buttonAction(sender: UIButton) {
+        let loginVC = CWLoginViewController()
+        let nav = UINavigationController(rootViewController: loginVC)
+        self.presentViewController(nav, animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 
