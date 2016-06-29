@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CocoaLumberjack
 
 protocol CWMessageHandleProtocol:NSObjectProtocol {
     func handleResult(handle: CWBaseMessageHandle, message: CWMessageModel, isDelay: Bool)
@@ -55,7 +54,7 @@ class CWBaseMessageHandle: NSObject {
             }
             
         } catch let error as NSError {
-            DDLogError(error.description)
+            CWLogError(error.description)
             return (body, .Text)
         }
         

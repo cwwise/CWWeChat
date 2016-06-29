@@ -17,13 +17,13 @@ enum CWSettingItemType {
     func reuseIdentifier() -> String {
         switch self {
         case .Default:
-            return CWSettingCell.identifier
+            return CWSettingCell.reuseIdentifier
         case .TitleButton:
-            return CWSettingButtonCell.identifier
+            return CWSettingButtonCell.reuseIdentifier
         case .Switch:
-            return CWSettingSwitchCell.identifier
+            return CWSettingSwitchCell.reuseIdentifier
         default:
-            return CWSettingCell.identifier
+            return CWSettingCell.reuseIdentifier
         }
     }
 }

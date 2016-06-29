@@ -17,30 +17,6 @@ protocol CWSettingDataProtocol: class {
     var settingItem: CWSettingItem! {set get}
 }
 
-protocol CWTableViewCellIdentifierProtocol {
-    static var reuseIdentifier: String {get}
-}
+extension UITableViewHeaderFooterView: Reusable  {}
+extension UITableViewCell: Reusable  {}
 
-extension CWTableViewCellIdentifierProtocol where Self: UITableViewCell {
-    static var reuseIdentifier: String {
-        return NSStringFromClass(self).componentsSeparatedByString(".").last! as String
-    }
-}
-
-extension CWTableViewCellIdentifierProtocol where Self: UITableViewHeaderFooterView {
-    static var reuseIdentifier: String {
-        return NSStringFromClass(self).componentsSeparatedByString(".").last! as String
-    }
-}
-
-extension UITableViewCell: CWTableViewCellIdentifierProtocol  {
-    class var identifier: String {
-        return self.reuseIdentifier
-    }
-}
-
-extension UITableViewHeaderFooterView: CWTableViewCellIdentifierProtocol  {
-    class var identifier: String {
-        return self.reuseIdentifier
-    }
-}

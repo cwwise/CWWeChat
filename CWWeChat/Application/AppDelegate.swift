@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        self.showGuideViewController()
+//        showGuideViewController()
+        loginSuccess()
         
         self.window?.backgroundColor = UIColor.whiteColor()
         self.window?.makeKeyAndVisible()
@@ -28,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupLogger()
         //注册推送信息
         registerRemoteNotification()
+        
         return true
     }
     
@@ -43,6 +45,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loginSuccess() {
+        
+        //初始化当前用户模型
+        let user = CWContactUser()
+        user.userId = "chewei"
+        user.userName = "chenwei"
+        user.nikeName = "陈威"
+        
+        let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let account = CWUserAccount(chatuser: user)
+        appdelegate.userModel = account
+        
         let tabbarVC = CWChatTabBarController()
         self.window?.rootViewController = tabbarVC
     }
@@ -68,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        DDLogDebug(deviceToken.description)
+        CWLogDebug(deviceToken.description)
     }
 
     func applicationWillResignActive(application: UIApplication) {

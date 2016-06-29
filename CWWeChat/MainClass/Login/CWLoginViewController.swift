@@ -67,7 +67,7 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
         label.text = "使用账号和密码登录"
         label.textColor = UIColor.blackColor()
         label.textAlignment = .Center
-        label.font = UIFont.systemFontOfSize(20)
+        label.font = UIFont.systemFontOfSize(19)
         self.view.addSubview(label)
         let margin: CGFloat = 20
         label.snp_makeConstraints { (make) in
@@ -133,20 +133,11 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
             
         }
         
-        //初始化当前用户模型
-        let user = CWContactUser()
-        user.userId = "chewei"
-        user.userName = "chenwei"
-        user.nikeName = "陈威"
-        
         let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-
-        let account = CWUserAccount(chatuser: user)
-        appdelegate.userModel = account
-        
-        
         appdelegate.loginSuccess()
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

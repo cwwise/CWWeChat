@@ -26,11 +26,13 @@ let NAMELABEL_SPACE_Y: CGFloat =   1.0
 let MESSAGEBG_SPACE_X: CGFloat  =     5.0
 let MESSAGEBG_SPACE_Y: CGFloat    =  1.0
 
+
 /// 聊天界面baseCell
 class CWBaseMessageCell: UITableViewCell {
     
     ///
     var message:CWMessageModel?
+    
     ///用户名称
     var usernameLabel:UILabel = {
         let usernameLabel = UILabel()
@@ -50,12 +52,12 @@ class CWBaseMessageCell: UITableViewCell {
     }()
     
     ///手势操作
-    internal private(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+    private(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bubbleTapped(_:)))
         return tapGestureRecognizer
     }()
     
-    internal private (set) lazy var longPressGestureRecognizer: UILongPressGestureRecognizer = {
+    private (set) lazy var longPressGestureRecognizer: UILongPressGestureRecognizer = {
         let longpressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(bubbleLongPressed(_:)))
         longpressGestureRecognizer.delegate = self
         return longpressGestureRecognizer
@@ -71,7 +73,7 @@ class CWBaseMessageCell: UITableViewCell {
     
     //引导
     var activityView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-    var errorButton:UIButton = {
+    lazy var errorButton:UIButton = {
         let errorButton = UIButton(type: .Custom)
         errorButton.setImage(UIImage(named:"message_sendfaild"), forState: .Normal)
         errorButton.sizeToFit()

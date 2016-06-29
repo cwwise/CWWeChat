@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CocoaLumberjack
 
 ///重复发送次数
 let Max_RepeatCount:Int = 5
@@ -183,7 +182,7 @@ class CWMessageDispatchOperation: NSOperation {
     }
     
     deinit {
-        DDLogDebug("operation销毁")
+        CWLogDebug("operation销毁")
     }
     
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CocoaLumberjack
 
 /**
  会话类和消息类的基类
@@ -40,7 +39,7 @@ class CWBaseMessageViewController: UIViewController {
     
     deinit {
         messageCracker.removeDelegate(self)
-        DDLogDebug("\(self.classForCoder)销毁")
+        CWLogDebug("\(self.classForCoder)销毁")
     }
 }
 

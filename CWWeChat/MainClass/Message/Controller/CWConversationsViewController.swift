@@ -50,8 +50,7 @@ class CWConversationsViewController: CWBaseMessageViewController {
     }
     
     func setupFriends() {
-        let manager = CWContactManager.shareContactManager
-        print(manager.contactCount)
+        _ = CWContactManager.shareContactManager
     }
     
     func sendMessage() {

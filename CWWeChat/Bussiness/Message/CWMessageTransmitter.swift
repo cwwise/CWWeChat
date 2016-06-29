@@ -68,7 +68,7 @@ class CWMessageTransmitter: NSObject {
         message.addAttributeWithName("to", stringValue: to)
 //        message.addReceiptRequest()
         message.addBody(body)
-        DDLogDebug(message.description)
+        CWLogDebug(message.description)
         return XMPPMessage(fromElement: message)
     }
     

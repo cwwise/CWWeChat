@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import CocoaLumberjack
 
 class CWChatViewController: CWBaseMessageViewController {
 
     var contactId: String!
-    
+
     //存储数据库
     lazy var dbMessageStore:CWChatDBMessageStore = {
        return CWChatDBDataManager.sharedInstance.dbMessageStore
@@ -146,7 +145,7 @@ extension CWChatViewController {
 extension CWChatViewController: CWInputToolBarDelegate {
     
     func chatInputView(inputView: CWInputToolBar, sendText text: String) {
-        DDLogDebug("发送文字:\(text)")
+        CWLogDebug("发送文字:\(text)")
         
         let message = CWMessageModel()
         message.content = text
@@ -172,13 +171,13 @@ extension CWChatViewController: CWInputToolBarDelegate {
         message.messageReceiveId = contactId
         
 //        message.showTime = messageNeedShowTime(message.messageSendDate)
-        if dbMessageStore.addMessage(message) {
+//        if dbMessageStore.addMessage(message) {
 //            dispatchMessage(message)
             messageList.append(message)
             let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
             self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
             updateMessageAndScrollBottom(false)
-        }
+//        }
     }
 
     

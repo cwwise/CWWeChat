@@ -55,7 +55,7 @@ class CWAddressBookViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         
         tableView.registerClass(CWChatFriendCell.self, forCellReuseIdentifier: "cell")
-        tableView.registerClass(CWAddressBookHeaderView.self, forHeaderFooterViewReuseIdentifier: CWAddressBookHeaderView.identifier)
+        tableView.registerClass(CWAddressBookHeaderView.self, forHeaderFooterViewReuseIdentifier: CWAddressBookHeaderView.reuseIdentifier)
         tableView.tableHeaderView = self.searchController.searchBar
         tableView.tableFooterView = self.footerLabel
 
@@ -134,7 +134,7 @@ extension CWAddressBookViewController: UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWAddressBookHeaderView.identifier) as! CWAddressBookHeaderView
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWAddressBookHeaderView.reuseIdentifier) as! CWAddressBookHeaderView
         let group = groupList[section];
         headerView.text = group.groupName
         return headerView

@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import CocoaLumberjack
 
 //好友列表刷新
 let CWFriendsNeedReloadNotification:String = "com.CWFriendsNeedReloadNotification.chat"
@@ -54,7 +53,7 @@ class CWContactManager: NSObject {
         ///读取数据
         let path = NSBundle.mainBundle().pathForResource("ContactList", ofType: "json")
         guard let filepath = path else {
-            DDLogError("不存在 ContactList.json 文件。")
+            CWLogError("不存在 ContactList.json 文件。")
             return
         }
         let contantData = NSData(contentsOfFile: filepath)
@@ -141,7 +140,7 @@ class CWContactManager: NSObject {
         
         if self.dataChangeBlock != nil {
             dispatch_async(dispatch_get_main_queue(), { 
-                DDLogDebug(self.sortSectionHeaders.description)
+                CWLogDebug(self.sortSectionHeaders.description)
                 self.dataChangeBlock!(self.sortContactsData,self.sortSectionHeaders,self.contactsData.count)
             })
         }

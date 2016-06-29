@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 import MMXXMPPFramework
 
-
 let xmppDomain:String = "chatimswift.com"
 let hostName = "127.0.0.1"
 let hostPort:UInt16 = 5222
@@ -123,7 +122,7 @@ class CWXMPPManager: NSObject {
         do {
             try xmppStream.connectWithTimeout(timeoutInterval)
         } catch let error as NSError {
-            DDLogDebug(error.description)
+            CWLogDebug(error.description)
         }
     }
     
@@ -138,7 +137,7 @@ class CWXMPPManager: NSObject {
         reachable = NetworkReachabilityManager(host: "https://www.baidu.com")
         reachable?.startListening()
         let listener = { (status: NetworkReachabilityManager.NetworkReachabilityStatus) in
-            DDLogDebug("网络状态:\(status)")
+            CWLogDebug("网络状态:\(self.reachable?.isReachable)")
         }
         reachable?.listener = listener
     }
@@ -190,19 +189,19 @@ extension CWXMPPManager: XMPPStreamDelegate {
     
     ///
     func xmppStreamWillConnect(sender: XMPPStream!) {
-        DDLogDebug("开始连接")
+        CWLogDebug("开始连接")
         xmppStatusChange(.Connecting)
     }
     
     ///连接失败
     func xmppStreamDidDisconnect(sender: XMPPStream!, withError error: NSError!) {
-        DDLogDebug("断开连接")
+        CWLogDebug("断开连接")
         xmppStatusChange(.Disconnected)
     }
     
     ///已经连接，就输入密码
     func xmppStreamDidConnect(sender: XMPPStream!) {
-        DDLogDebug("连接成功")
+        CWLogDebug("连接成功")
         do {
             try xmppStream.authenticateWithPassword(password)
         } catch let error as NSError {
@@ -212,13 +211,13 @@ extension CWXMPPManager: XMPPStreamDelegate {
     
     ///验证失败
     func xmppStream(sender: XMPPStream!, didNotAuthenticate error: DDXMLElement!) {
-        DDLogDebug("认证失败")
+        CWLogDebug("认证失败")
         xmppStatusChange(.Error)
     }
     
     ///验证成功
     func xmppStreamDidAuthenticate(sender: XMPPStream!) {
-        DDLogDebug("认证成功")
+        CWLogDebug("认证成功")
         xmppStatusChange(.Connected)
         //上线
         goOnline()
@@ -266,7 +265,7 @@ extension CWXMPPManager: XMPPRosterDelegate {
     
     ///收到好友列表
     func xmppRosterDidEndPopulating(sender: XMPPRoster!) {
-        DDLogDebug("获取好友信息界面")
+        CWLogDebug("获取好友信息界面")
         let story = sender.xmppRosterStorage as! XMPPRosterMemoryStorage
         let userArray = story.sortedUsersByName() as! [XMPPUser]
         

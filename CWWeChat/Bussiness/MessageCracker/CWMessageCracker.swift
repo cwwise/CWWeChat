@@ -51,7 +51,7 @@ extension CWMessageCracker: XMPPStreamDelegate {
         //如果是聊天消息
         if message.isChatMessage() {
             
-            DDLogDebug(message.description)
+            CWLogDebug(message.description)
             
             let cwMessage = CWXMPPMessage(message: message)
             //处理消息
@@ -78,7 +78,7 @@ extension CWMessageCracker: CWMessageHandleProtocol {
         //先处理消息
         //如果不在聊天界面，则播放声音和震动
         if !inspectChatViewControllerFront() {
-            DDLogDebug("聊天界面--震动")
+            CWLogDebug("聊天界面--震动")
         }
         
         //检查delegate 是否存在，存在就执行方法

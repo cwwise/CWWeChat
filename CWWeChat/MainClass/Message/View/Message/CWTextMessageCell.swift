@@ -29,7 +29,6 @@ class CWTextMessageCell: CWBaseMessageCell {
         
         messageLabel.text = message!.content
         
-        
         if message?.messageOwnerType == .Myself {
             
             let sendImage = CWAsset.Message_receiver_bg.image.resizableImage()
@@ -38,6 +37,13 @@ class CWTextMessageCell: CWBaseMessageCell {
             self.messageBackgroundView.image = sendImage
             self.messageBackgroundView.highlightedImage = sendImageHL
             
+            self.messageLabel.snp_remakeConstraints(closure: { (make) in
+                
+            })
+            
+            self.messageBackgroundView.snp_updateConstraints(closure: { (make) in
+//                make.right.equalTo(<#T##other: CGFloat##CGFloat#>)
+            })
             
         } else if message?.messageOwnerType == .Other {
             

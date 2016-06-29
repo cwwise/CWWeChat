@@ -9,12 +9,17 @@
 import UIKit
 
 /**
+ 一些部分参照 https://github.com/scalessec/Toast-Swift/blob/master/Toast/Toast.swift
+ */
+
+
+/**
  Toast样式
  
  - Loading:     加载中
  - ShowMessage: 显示消息
  */
-enum CWToastViewStyle {
+public enum CWToastViewStyle {
     case Loading
     case ShowMessage
 }
@@ -22,7 +27,20 @@ enum CWToastViewStyle {
 let ToastView_Width: CGFloat = 120
 let ToastView_Height: CGFloat = 120
 
-class CWToastView: UIView {
+public class CWToastView: UIView {
+    
+    /**
+     Swift closures can't be directly associated with objects via the
+     Objective-C runtime, so the (ugly) solution is to wrap them in a
+     class that can be used with associated objects.
+     */
+    private class ToastCompletionWrapper {
+        var completion: ((Bool) -> Void)?
+        
+        init(_ completion: ((Bool) -> Void)?) {
+            self.completion = completion
+        }
+    }
     
     var text: String = "" {
         didSet {
@@ -72,20 +90,52 @@ class CWToastView: UIView {
         self.addSubview(textLabel)
     }
     
-    override func intrinsicContentSize() -> CGSize {
+    override public func intrinsicContentSize() -> CGSize {
         return CGSize(width: 120, height: 120)
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         spinner.center = CGPoint(x: ToastView_Width/2, y: ToastView_Height/2-10)
         imageView.center = CGPoint(x: ToastView_Width/2, y: ToastView_Height/2-10)
         textLabel.center = CGPoint(x: ToastView_Width/2, y: ToastView_Height/2+30)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: 显示方法
+    /***/
+    /**
+     Creates and presents a new toast view with a message. Duration, position, and
+     style can be set explicitly.
+     
+     @param message The message to be displayed
+     @param duration The toast duration
+     @param position The toast's position
+     @param style The style. The shared style will be used when nil
+     */
+    public func makeToast(message: String, duration: NSTimeInterval, style: CWToastViewStyle) {
+        self.makeToast(message, duration: duration, style: style, completion: nil)
+    }
+    
+    public func makeToast(message: String?, duration: NSTimeInterval, style: CWToastViewStyle = .Loading, completion: ((didTap: Bool) -> Void)?) {
+ 
+    
+    }
     
 }
+
+
+
+
+public class CWToastManager {
+    
+    public static let shared = CWToastManager()
+
+    
+    
+}
+
+

@@ -26,5 +26,8 @@ target 'CWWeChat' do
   pod 'CocoaAsyncSocket'
   
   pod 'MMXXMPPFramework'
+  
+#  pod 'Fabric'
+#  pod 'Crashlytics'
 
 end

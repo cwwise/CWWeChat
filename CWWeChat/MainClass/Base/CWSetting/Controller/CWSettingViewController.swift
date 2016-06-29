@@ -40,13 +40,13 @@ class CWSettingViewController: UITableViewController {
     func registerCell() {
         
         self.tableView.registerClass(CWSettingFooterTitleView.self,
-                                     forHeaderFooterViewReuseIdentifier: CWSettingFooterTitleView.identifier)
+                                     forHeaderFooterViewReuseIdentifier: CWSettingFooterTitleView.reuseIdentifier)
         self.tableView.registerClass(CWSettingHeaderTitleView.self,
-                                     forHeaderFooterViewReuseIdentifier: CWSettingHeaderTitleView.identifier)
+                                     forHeaderFooterViewReuseIdentifier: CWSettingHeaderTitleView.reuseIdentifier)
 
-        self.tableView.registerClass(CWSettingCell.self, forCellReuseIdentifier: CWSettingCell.identifier)
-        self.tableView.registerClass(CWSettingButtonCell.self, forCellReuseIdentifier: CWSettingButtonCell.identifier)
-        self.tableView.registerClass(CWSettingSwitchCell.self, forCellReuseIdentifier: CWSettingSwitchCell.identifier)
+        self.tableView.registerClass(CWSettingCell.self, forCellReuseIdentifier: CWSettingCell.reuseIdentifier)
+        self.tableView.registerClass(CWSettingButtonCell.self, forCellReuseIdentifier: CWSettingButtonCell.reuseIdentifier)
+        self.tableView.registerClass(CWSettingSwitchCell.self, forCellReuseIdentifier: CWSettingSwitchCell.reuseIdentifier)
 
     }
 
@@ -87,7 +87,7 @@ class CWSettingViewController: UITableViewController {
             return nil
         }
         
-        let settingHeaderTitleView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWSettingHeaderTitleView.identifier) as! CWSettingHeaderTitleView
+        let settingHeaderTitleView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWSettingHeaderTitleView.reuseIdentifier) as! CWSettingHeaderTitleView
         settingHeaderTitleView.text = group.headerTitle
         return settingHeaderTitleView
     }
@@ -97,7 +97,7 @@ class CWSettingViewController: UITableViewController {
         if group.footerTitle == nil {
             return nil
         }
-        let settingfooterTitleView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWSettingFooterTitleView.identifier) as! CWSettingFooterTitleView
+        let settingfooterTitleView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWSettingFooterTitleView.reuseIdentifier) as! CWSettingFooterTitleView
         settingfooterTitleView.text = group.footerTitle
         return settingfooterTitleView
     }
