@@ -45,6 +45,7 @@ class CWMessageTransmitter: NSObject {
         let messageElement = self.messageElement(content, to: toId, messageId: messageId)
         
         var receipte: XMPPElementReceipt?
+        CWPlayMessageAudio.playSoundEffect("sendmsg.caf")
         self.xmppStream.sendElement(messageElement, andGetReceipt: &receipte)
         guard let elementReceipte = receipte else {
             return false

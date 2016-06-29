@@ -82,6 +82,7 @@ extension CWMessageCracker: CWMessageHandleProtocol {
         //如果不在聊天界面，则播放声音和震动
         if !inspectChatViewControllerFront() {
             CWLogDebug("聊天界面--震动")
+            CWPlayMessageAudio.playSoundEffect("receivemsg.caf")
         }
         
         //检查delegate 是否存在，存在就执行方法

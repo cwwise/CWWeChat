@@ -72,6 +72,9 @@ class CWChatViewController: CWBaseMessageViewController {
         self.view.addSubview(self.chatToolBar)
         
         self.messageDispatchQueue.delegate = self
+        
+        let user = CWContactManager.findContact(contactId)
+        self.friendUser = user
     }
     
     /**
@@ -189,6 +192,16 @@ extension CWChatViewController: CWInputToolBarDelegate {
     }
 
     
+    /**
+     发送消息到服务器
+     
+     - parameter message: 消息体
+     */
+    func dispatchMessage(message: CWMessageProtocol) {
+        messageDispatchQueue.sendMessage(message)
+    }
+    
+    
     ///滚动到底部
     func updateMessageAndScrollBottom(animated:Bool = true) {
         if messageList.count == 0 {
@@ -197,37 +210,7 @@ extension CWChatViewController: CWInputToolBarDelegate {
         let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
         self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
     }
+    
+    
 }
 
-// MARK: - 发送消息部分
-extension CWChatViewController: CWMessageDispatchQueueDelegate {
-    
-    func chatmessageSendState(message: CWMessageProtocol, sendState state: Bool) {
-        
-    }
-    
-    func uploadDataProgress(message: CWMessageProtocol, progress: CGFloat, result: Bool) {
-        
-    }
-    
-    /**
-     发送消息到服务器
-     
-     - parameter message: 消息体
-     */
-    private func dispatchMessage(message: CWMessageProtocol) {
-        messageDispatchQueue.sendMessage(message)
-    }
-    
-    
-    ///收到消息
-    override func receiveNewMessage(message: CWMessageModel) {
-        CWLogInfo(message)
-        
-        messageList.append(message)
-        let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
-        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-        updateMessageAndScrollBottom(false)
-    }
-    
-}

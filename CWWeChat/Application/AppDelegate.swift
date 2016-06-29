@@ -48,9 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //初始化当前用户模型
         let user = CWContactUser()
-        user.userId = "chewei"
-        user.userName = "chenwei"
-        user.nikeName = "陈威"
+        user.userId = "tom@chenweiim.com"
+        user.userName = "Tom"
+        user.nikeName = "汤姆"
+        user.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/tom@chenweiim.com"
         
         let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         

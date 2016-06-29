@@ -111,6 +111,12 @@
 		1FEBDA311D23D5FE008EFFB0 /* CWChatViewController+SendMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBDA301D23D5FE008EFFB0 /* CWChatViewController+SendMessage.swift */; };
 		1FEBDA331D23D642008EFFB0 /* CWChatViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBDA321D23D642008EFFB0 /* CWChatViewController+Keyboard.swift */; };
 		47A602EC777BF8B3F63924D8 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECE23B265D75A03FB5C6A9 /* Pods_CWWeChat.framework */; };
+		ED845DF51D242F0700262AE2 /* CWPlayMessageAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED845DF41D242F0700262AE2 /* CWPlayMessageAudio.swift */; };
+		ED845DFC1D24305300262AE2 /* receivemsg.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED845DF71D24305300262AE2 /* receivemsg.caf */; };
+		ED845DFD1D24305300262AE2 /* sendmsg.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED845DF81D24305300262AE2 /* sendmsg.caf */; };
+		ED845DFE1D24305300262AE2 /* shake_match.wav in Resources */ = {isa = PBXBuildFile; fileRef = ED845DF91D24305300262AE2 /* shake_match.wav */; };
+		ED845DFF1D24305300262AE2 /* shake_nomatch.wav in Resources */ = {isa = PBXBuildFile; fileRef = ED845DFA1D24305300262AE2 /* shake_nomatch.wav */; };
+		ED845E001D24305300262AE2 /* shake_sound_male.wav in Resources */ = {isa = PBXBuildFile; fileRef = ED845DFB1D24305300262AE2 /* shake_sound_male.wav */; };
 		EDC6A0AE1D22B434002C2AEE /* CWDetailContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */; };
 		EDC6A0B41D22B50D002C2AEE /* CWInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */; };
 		EDC6A0B61D22B911002C2AEE /* CWInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */; };
@@ -248,6 +254,12 @@
 		1FECE23B265D75A03FB5C6A9 /* Pods_CWWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E6F8F41CBA137291D180E0E /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
 		80C4EC6CB95B1523B42971BD /* Pods-CWWeChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.debug.xcconfig"; sourceTree = "<group>"; };
+		ED845DF41D242F0700262AE2 /* CWPlayMessageAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWPlayMessageAudio.swift; sourceTree = "<group>"; };
+		ED845DF71D24305300262AE2 /* receivemsg.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = receivemsg.caf; sourceTree = "<group>"; };
+		ED845DF81D24305300262AE2 /* sendmsg.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sendmsg.caf; sourceTree = "<group>"; };
+		ED845DF91D24305300262AE2 /* shake_match.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shake_match.wav; sourceTree = "<group>"; };
+		ED845DFA1D24305300262AE2 /* shake_nomatch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shake_nomatch.wav; sourceTree = "<group>"; };
+		ED845DFB1D24305300262AE2 /* shake_sound_male.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shake_sound_male.wav; sourceTree = "<group>"; };
 		EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWDetailContactViewController.swift; sourceTree = "<group>"; };
 		EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationModel.swift; sourceTree = "<group>"; };
 		EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationCell.swift; sourceTree = "<group>"; };
@@ -716,6 +728,7 @@
 			isa = PBXGroup;
 			children = (
 				1FD3EB701D1ADF03004FBA63 /* CWChatConst.swift */,
+				ED845DF41D242F0700262AE2 /* CWPlayMessageAudio.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -781,6 +794,7 @@
 		1FD3ED771D1BAE8B004FBA63 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ED845DF61D24305300262AE2 /* Audio */,
 				1FD3ED781D1BAE8B004FBA63 /* TestData */,
 			);
 			path = Resources;
@@ -904,6 +918,18 @@
 				1FECE23B265D75A03FB5C6A9 /* Pods_CWWeChat.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ED845DF61D24305300262AE2 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				ED845DF71D24305300262AE2 /* receivemsg.caf */,
+				ED845DF81D24305300262AE2 /* sendmsg.caf */,
+				ED845DF91D24305300262AE2 /* shake_match.wav */,
+				ED845DFA1D24305300262AE2 /* shake_nomatch.wav */,
+				ED845DFB1D24305300262AE2 /* shake_sound_male.wav */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 		EDC6A0AC1D22B416002C2AEE /* CWDetailContactViewController */ = {
@@ -1064,9 +1090,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED845DFC1D24305300262AE2 /* receivemsg.caf in Resources */,
 				1FD3EB261D1ADA08004FBA63 /* Assets.xcassets in Resources */,
+				ED845E001D24305300262AE2 /* shake_sound_male.wav in Resources */,
 				1FD3ED7B1D1BAEB2004FBA63 /* ContactList.json in Resources */,
 				1FD3EB271D1ADA08004FBA63 /* Main.storyboard in Resources */,
+				ED845DFD1D24305300262AE2 /* sendmsg.caf in Resources */,
+				ED845DFE1D24305300262AE2 /* shake_match.wav in Resources */,
+				ED845DFF1D24305300262AE2 /* shake_nomatch.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1185,6 +1216,7 @@
 				1FD3EDBE1D1C4642004FBA63 /* CWTextMessageDispatchOperation.swift in Sources */,
 				1FD3ED9B1D1C2E2C004FBA63 /* UIView+Frame.swift in Sources */,
 				1FD3EB301D1ADA13004FBA63 /* UIImage+CWChat.swift in Sources */,
+				ED845DF51D242F0700262AE2 /* CWPlayMessageAudio.swift in Sources */,
 				1FD3EDBA1D1C4642004FBA63 /* CWImageMessageDispatchOperation.swift in Sources */,
 				1FD3EDA11D1C30A4004FBA63 /* CWAboutHeaderView.swift in Sources */,
 				1FD3EB251D1ADA08004FBA63 /* AppDelegate.swift in Sources */,

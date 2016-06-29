@@ -131,8 +131,11 @@ class CWBaseMessageCell: UITableViewCell {
             
         }
         
+        
         if message.messageOwnerType == .Myself {
-            let string = "http://o7ve5wypa.bkt.clouddn.com/"+"tom@chenweiim.com"
+
+            let string = CWUserAccount.sharedUserAccount().chatuser.avatarURL!
+            
             self.avatarButton.af_setImageForState(.Normal, URL: NSURL(string:string)!)
             self.avatarButton.left = Screen_Width - kChatAvatarMarginLeft - AVATAR_WIDTH
             
@@ -143,7 +146,10 @@ class CWBaseMessageCell: UITableViewCell {
             })
             
         } else {
-            let string = "http://o7ve5wypa.bkt.clouddn.com/"+"jerry@chenweiim.com"
+            
+            let userModel = CWContactManager.findContact(message.messageSendId!)
+            let string = userModel!.avatarURL!
+            
             self.avatarButton.af_setImageForState(.Normal, URL: NSURL(string:string)!)
             
             self.avatarButton.snp_remakeConstraints(closure: { (make) in

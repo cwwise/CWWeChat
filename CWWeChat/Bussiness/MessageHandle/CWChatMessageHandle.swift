@@ -16,9 +16,11 @@ class CWChatMessageHandle: CWBaseMessageHandle {
             
             let body = message.body
             let from = message.from
-            
+            let to = message.to
+
             let messageObject = CWMessageModel()
             messageObject.messageSendId = from
+            messageObject.messageReceiveId = to
             messageObject.content = body
             messageObject.messageID = message.messageId
             messageObject.messageOwnerType = .Other

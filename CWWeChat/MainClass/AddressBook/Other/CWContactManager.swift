@@ -39,12 +39,13 @@ class CWContactManager: NSObject {
         initTestData()
     }
     
-    class func findContact(userId:String?) -> CWContactUser? {
-//        for user in CWContactManager.shareContactManager.contactsData {
-//            if userId == user.userId {
-//                return user
-//            }
-//        }
+    class func findContact(userId:String) -> CWContactUser? {
+        let name = userId.componentsSeparatedByString("@").first
+        for user in CWContactManager.shareContactManager.contactsData {
+            if (user.userId.containsString(name!)) {
+                return user
+            }
+        }
         return nil
     }
     
