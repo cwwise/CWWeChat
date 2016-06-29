@@ -35,6 +35,6 @@ let Screen_NavigationHeight:CGFloat = 64
     }
     
     func CWLogDebug(object: AnyObject) {
-        CWLogDebug(object.description)
+        DDLogDebug(object.description)
     }
 //}
