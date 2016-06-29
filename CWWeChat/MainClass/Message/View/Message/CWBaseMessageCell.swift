@@ -101,8 +101,8 @@ class CWBaseMessageCell: UITableViewCell {
         //头像
         self.avatarButton.snp_makeConstraints { (make) in
             make.right.equalTo(self.contentView).offset(-AVATAR_SPACE_X)
-            make.width.height.equalTo(AVATAR_WIDTH);
             make.top.equalTo(self.contentView).offset(AVATAR_SPACE_Y)
+            make.width.height.equalTo(AVATAR_WIDTH);
         }
         
         self.usernameLabel.snp_makeConstraints { (make) in
@@ -135,27 +135,42 @@ class CWBaseMessageCell: UITableViewCell {
             let string = "http://o7ve5wypa.bkt.clouddn.com/"+"tom@chenweiim.com"
             self.avatarButton.af_setImageForState(.Normal, URL: NSURL(string:string)!)
             self.avatarButton.left = Screen_Width - kChatAvatarMarginLeft - AVATAR_WIDTH
+            
+            self.avatarButton.snp_remakeConstraints(closure: { (make) in
+                make.width.height.equalTo(AVATAR_WIDTH);
+                make.top.equalTo(self.contentView).offset(AVATAR_SPACE_Y)
+                make.right.equalTo(self.contentView).offset(-AVATAR_SPACE_X)
+            })
+            
         } else {
             let string = "http://o7ve5wypa.bkt.clouddn.com/"+"jerry@chenweiim.com"
             self.avatarButton.af_setImageForState(.Normal, URL: NSURL(string:string)!)
-            self.avatarButton.left = kChatAvatarMarginLeft
+            
+            self.avatarButton.snp_remakeConstraints(closure: { (make) in
+                make.width.height.equalTo(AVATAR_WIDTH);
+                make.top.equalTo(self.contentView).offset(AVATAR_SPACE_Y)
+                make.left.equalTo(self.contentView).offset(AVATAR_SPACE_X)
+            })
+            
         }
         
         self.usernameLabel.snp_updateConstraints { (make) in
-            make.height.equalTo(NAMELABEL_HEIGHT)
+            make.height.equalTo(0)
         }
         
         if  self.message?.messageOwnerType != message.messageOwnerType {
+          
             self.messageBackgroundView.snp_remakeConstraints(closure: { (make) in
                 
                 if message.messageOwnerType == .Myself {
                     make.right.equalTo(self.avatarButton.snp_left).offset(-MESSAGEBG_SPACE_X)
                 } else {
-                    make.right.equalTo(self.avatarButton.snp_left).offset(-MESSAGEBG_SPACE_X)
+                    make.left.equalTo(self.avatarButton.snp_right).offset(MESSAGEBG_SPACE_X)
                 }
                 make.top.equalTo(self.usernameLabel.snp_bottom).offset(-MESSAGEBG_SPACE_Y);
                 
             })
+            
         }
         
         

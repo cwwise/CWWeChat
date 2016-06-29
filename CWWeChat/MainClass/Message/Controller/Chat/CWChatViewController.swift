@@ -12,6 +12,12 @@ class CWChatViewController: CWBaseMessageViewController {
 
     var contactId: String!
 
+    var friendUser: CWContactUser? {
+        didSet {
+            self.title = friendUser?.nikeName
+        }
+    }
+    
     //存储数据库
     lazy var dbMessageStore:CWChatDBMessageStore = {
        return CWChatDBDataManager.sharedInstance.dbMessageStore
@@ -64,6 +70,8 @@ class CWChatViewController: CWBaseMessageViewController {
         self.view.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(self.tableView)
         self.view.addSubview(self.chatToolBar)
+        
+        self.messageDispatchQueue.delegate = self
     }
     
     /**
@@ -109,6 +117,7 @@ extension CWChatViewController: UITableViewDataSource {
         let message = messageList[indexPath.row] as! CWMessageModel
         
         let chatMessageCell = tableView.dequeueReusableCellWithIdentifier(message.messageType.reuseIdentifier(), forIndexPath: indexPath) as! CWBaseMessageCell
+        
         chatMessageCell.updateMessage(message)
         return chatMessageCell
     }
@@ -169,10 +178,9 @@ extension CWChatViewController: CWInputToolBarDelegate {
         
         message.messageSendId = CWUserAccount.sharedUserAccount().userID
         message.messageReceiveId = contactId
-        
 //        message.showTime = messageNeedShowTime(message.messageSendDate)
 //        if dbMessageStore.addMessage(message) {
-//            dispatchMessage(message)
+            dispatchMessage(message)
             messageList.append(message)
             let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
             self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
@@ -192,7 +200,15 @@ extension CWChatViewController: CWInputToolBarDelegate {
 }
 
 // MARK: - 发送消息部分
-extension CWChatViewController {
+extension CWChatViewController: CWMessageDispatchQueueDelegate {
+    
+    func chatmessageSendState(message: CWMessageProtocol, sendState state: Bool) {
+        
+    }
+    
+    func uploadDataProgress(message: CWMessageProtocol, progress: CGFloat, result: Bool) {
+        
+    }
     
     /**
      发送消息到服务器
@@ -203,5 +219,15 @@ extension CWChatViewController {
         messageDispatchQueue.sendMessage(message)
     }
     
+    
+    ///收到消息
+    override func receiveNewMessage(message: CWMessageModel) {
+        CWLogInfo(message)
+        
+        messageList.append(message)
+        let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
+        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        updateMessageAndScrollBottom(false)
+    }
     
 }

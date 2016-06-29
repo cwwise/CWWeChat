@@ -51,7 +51,10 @@ extension CWMessageCracker: XMPPStreamDelegate {
         //如果是聊天消息
         if message.isChatMessage() {
             
-            CWLogDebug(message.description)
+//            CWLogDebug(message.description)
+            if message.isChatMessageWithBody() == false {
+                return
+            }
             
             let cwMessage = CWXMPPMessage(message: message)
             //处理消息
@@ -94,7 +97,11 @@ extension CWMessageCracker: CWMessageHandleProtocol {
         while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) {
             //执行Delegate的方法
             if let delegate = delegate as? CWBaseMessageViewController {
-                delegate.receiveNewMessage(message)
+                
+                dispatch_async(dispatch_get_main_queue(), { 
+                    delegate.receiveNewMessage(message)
+                })
+                
             }
         }
     }

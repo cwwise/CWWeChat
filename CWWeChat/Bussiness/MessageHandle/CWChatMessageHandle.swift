@@ -23,6 +23,7 @@ class CWChatMessageHandle: CWBaseMessageHandle {
             messageObject.messageID = message.messageId
             messageObject.messageOwnerType = .Other
             messageObject.chatType = .Single
+            messageObject.messageType = .Text
             messageObject.composing = message.composing
             //如果是离线消息，则消息时间，重新设置。
             //2016-06-25T17:11:13.354Z

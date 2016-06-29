@@ -10,7 +10,9 @@ import UIKit
 import Alamofire
 import MMXXMPPFramework
 
-let xmppDomain:String = "chatimswift.com"
+//let xmppDomain:String = "chatimswift.com"
+let xmppDomain:String = "chenweiim.com"
+
 let hostName = "127.0.0.1"
 let hostPort:UInt16 = 5222
 
