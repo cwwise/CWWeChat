@@ -40,7 +40,7 @@ class CWMessageModel: NSObject,CWMessageProtocol {
                 let attributes = [NSForegroundColorAttributeName:UIColor.whiteColor(),
                                   NSFontAttributeName: UIFont.systemFontOfSize(16)]
                 let contentSize = content.boundingRectWithSize(size, options: .UsesLineFragmentOrigin, attributes: attributes, context: nil).size
-                cellHeight = ceil(contentSize.height)+1
+                cellHeight = ceil(contentSize.height)+1 + 40
             }
             
         }

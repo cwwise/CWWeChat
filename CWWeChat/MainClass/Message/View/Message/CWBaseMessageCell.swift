@@ -145,6 +145,20 @@ class CWBaseMessageCell: UITableViewCell {
             make.height.equalTo(NAMELABEL_HEIGHT)
         }
         
+        if  self.message?.messageOwnerType != message.messageOwnerType {
+            self.messageBackgroundView.snp_remakeConstraints(closure: { (make) in
+                
+                if message.messageOwnerType == .Myself {
+                    make.right.equalTo(self.avatarButton.snp_left).offset(-MESSAGEBG_SPACE_X)
+                } else {
+                    make.right.equalTo(self.avatarButton.snp_left).offset(-MESSAGEBG_SPACE_X)
+                }
+                make.top.equalTo(self.usernameLabel.snp_bottom).offset(-MESSAGEBG_SPACE_Y);
+                
+            })
+        }
+        
+        
         self.message = message
     }
     
