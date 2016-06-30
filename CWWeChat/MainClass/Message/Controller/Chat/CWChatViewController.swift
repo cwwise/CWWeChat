@@ -10,17 +10,29 @@ import UIKit
 
 class CWChatViewController: CWBaseMessageViewController {
 
-    var contactId: String!
+    
+    typealias CWCompleteAction = ()-> Void
 
+    var contactId: String!
     var friendUser: CWContactUser? {
         didSet {
             self.title = friendUser?.nikeName
         }
     }
     
+    /// 显示消息时间相关的
+    var lastDateInterval:NSTimeInterval = 0
+    var messageAccumulate:Int = 0
+    var currentDate:NSDate = NSDate()
+    
     //存储数据库
     lazy var dbMessageStore:CWChatDBMessageStore = {
        return CWChatDBDataManager.sharedInstance.dbMessageStore
+    }()
+    
+    //存储数据库
+    lazy var dbRecordStore:CWChatDBRecordStore = {
+        return CWChatDBDataManager.sharedInstance.dbRecordStore
     }()
     
     /// 消息发送主要的类
@@ -60,6 +72,12 @@ class CWChatViewController: CWBaseMessageViewController {
 
         setupUI()
         registerCell()
+        registerKeyboardNotifacation()
+        
+        self.refreshLocalMessage {
+            //将消息插入数组 并刷新列表 并滚动到最下面
+            self.updateMessageAndScrollBottom(false)
+        }
     }
     
     /**
@@ -84,6 +102,10 @@ class CWChatViewController: CWBaseMessageViewController {
         
         tableView.registerClass(CWBaseMessageCell.self, forCellReuseIdentifier: CWMessageType.None.reuseIdentifier())
         tableView.registerClass(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.Text.reuseIdentifier())
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func didReceiveMemoryWarning() {

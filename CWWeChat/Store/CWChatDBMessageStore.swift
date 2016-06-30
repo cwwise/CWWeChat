@@ -11,6 +11,8 @@ import SQLite
 
 class CWChatDBMessageStore: NSObject {
 
+    typealias CWChatHistoryMessagesHandle = ([CWMessageProtocol], NSDate,Bool) -> ()
+
     /// 当前用户的唯一id，创建数据库名称
     var userId: String
     
@@ -164,6 +166,97 @@ class CWChatDBMessageStore: NSObject {
 
     
 }
+
+extension CWChatDBMessageStore {
+    
+    //MARK: 查询消息
+    /**
+     查询用户聊天数据
+     
+     - parameter userID:    用户id
+     - parameter partnerID: 朋友id
+     - parameter fromDate:  开始时间
+     - parameter count:     开始条数
+     - parameter handle:    消息查询结果
+     */
+    func messagesByUserID(userID:String, partnerID:String, fromDate:NSDate, count:Int = 30 ,handle:CWChatHistoryMessagesHandle) {
+        
+        let dateInterval = "\(fromDate.timeIntervalSince1970)"
+        let query = messageTable.filter(userId == userID && friendId==partnerID && date < dateInterval).order(date.desc).limit(count)
+        do {
+            let count = messageDB.scalar(messageTable.filter(userId == userID && friendId==partnerID).count)
+            let result = try messageDB.prepare(query)
+            
+            var listData = [CWMessageProtocol]()
+            //需要反转，得到正确的顺序
+            for row in result.reverse() {
+                let message = createDBMessageByFMResult(row)
+                listData.append(message)
+            }
+            
+            handle(listData, fromDate ,listData.count > count)
+        } catch {
+            print("查询消息失败: \(error)")
+        }
+        
+    }
+    
+    /**
+     根据用户id和朋友的id获取最后一天消息
+     
+     - parameter userID:    用户唯一标示
+     - parameter partnerID: 对方唯一标示
+     
+     - returns: 最后一个消息对象
+     */
+    func lastMessageByUserID(userID:String, partnerID:String) -> CWMessageProtocol? {
+        let query = messageTable.filter(uId == userID && friendId==partnerID).order(date.desc).limit(1)
+        if let row = messageDB.pluck(query) {
+            let message = createDBMessageByFMResult(row)
+            return message
+        } else {
+            return nil
+        }
+    }
+    
+    /**
+     根据结果返回消息的数组
+     
+     - parameter result: 数据库返回的数据结果 SQLite.Row
+     
+     - returns: 消息的数组
+     */
+    func createDBMessageByFMResult(row:Row) -> CWMessageProtocol {
+        
+//        let type = CWMessageType(rawValue: row[msg_type])!
+        let message = CWMessageModel()
+        message.messageID = row[messageid]
+        message.messageSendId = row[uId]
+        message.messageReceiveId = row[friendId]
+        
+        message.messageSendDate = NSDate(timeIntervalSince1970: Double(row[date])!)
+        message.chatType = CWChatType(rawValue: row[chat_type])!
+        message.messageType = CWMessageType(rawValue: row[msg_type])!
+        message.messageOwnerType = CWMessageOwnerType(rawValue: row[own_type])!
+        
+        message.messageSendState = CWMessageSendState(rawValue: row[send_status])!
+//        message.messageReadState = ChatMessageReadState(rawValue: row[received_status])!
+        
+//        message.messagePlayState = ChatMessagePlayState(state: row[play_status])
+//        message.messageUploadState = ChatMessageUploadState(rawValue: row[upload_status])!
+        
+        
+        let string = row[content]! as String
+//        let infoJson = JSON(data: string.dataUsingEncoding(NSUTF8StringEncoding)!)
+//        message.contentInfo = infoJson.dictionaryObject
+        message.content = string
+        
+        return message
+    }
+    
+    
+}
+
 
 extension CWChatDBMessageStore {
     //MARK: 删除消息数据
