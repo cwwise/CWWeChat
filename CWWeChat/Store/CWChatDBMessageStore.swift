@@ -145,14 +145,14 @@ class CWChatDBMessageStore: NSObject {
                 chat_type <- message.chatType.rawValue,
                 own_type <- message.messageOwnerType.rawValue,
                 msg_type <- message.messageType.rawValue,
-                content <- "",
+                content <- message.content,
                 send_status <- message.messageSendState.rawValue,
 //                received_status <- message.messageReadState.rawValue,
 //                upload_status <- message.messageUploadState.rawValue,
                 ext1 <- ""))
-            print("插入消息成功: \(rowid), \(message.messageID)")
+            CWLogDebug("插入消息成功: \(rowid), \(message.messageID)")
             
-//            recordDBStore.addRecordByMessage(message, needUnread: message.messageOwnerType != .Myself)
+            recordDBStore.addRecordByMessage(message, needUnread: message.messageOwnerType != .Myself)
             
         } catch {
             print("插入消息失败: \(error), \(message.messageID)")
@@ -161,5 +161,57 @@ class CWChatDBMessageStore: NSObject {
         return true
     }
     
+
     
+}
+
+extension CWChatDBMessageStore {
+    //MARK: 删除消息数据
+    /**
+     删除一条消息
+     
+     - parameter messageID: 消息唯一的id messageID
+     */
+    func deleteMessageByMessageID(messageID:String) -> Bool {
+        let query = messageTable.filter(messageID == messageid)
+        do {
+            let rowid = try messageDB.run(query.delete())
+            print("删除消息成功: \(rowid), \(messageID)")
+            return true
+        } catch {
+            print("删除消息失败: \(error)")
+            return false
+        }
+    }
+    
+    /**
+     删除当前用户指定人的聊天记录
+     
+     - parameter uid: 用户id
+     - parameter fid: 朋友id
+     
+     - returns: 删除消息的结果
+     */
+    func deleteMessageByUid(uid:String, fid:String) -> Bool {
+        let query = messageTable.filter(userId == uid && friendId == fid)
+        do {
+            let rowid = try messageDB.run(query.delete())
+            print("删除消息成功: \(rowid)")
+            return true
+        } catch {
+            print("删除消息失败: \(error)")
+            return false
+        }
+    }
+    
+    /**
+     删除所有聊天记录
+     */
+    func deleteAllMessage() {
+        do {
+            try messageDB.run(messageTable.delete())
+        } catch {
+            print(error)
+        }
+    }
 }

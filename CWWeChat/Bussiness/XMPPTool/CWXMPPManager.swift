@@ -10,20 +10,14 @@ import UIKit
 import Alamofire
 import MMXXMPPFramework
 
-//let xmppDomain:String = "chatimswift.com"
-let xmppDomain:String = "chenweiim.com"
-
-let hostName = "127.0.0.1"
-let hostPort:UInt16 = 5222
 
 let password = "123456"
 
 public typealias XMPPStatusListener = (CWXMPPStatus -> Void)
 
 class CWXMPPManager: NSObject {
-    
     ///单例
-    internal static let shareXMPPManager = CWXMPPManager()
+    static let shareXMPPManager = CWXMPPManager()
     
     private var xmppQueue: dispatch_queue_t
     ///xmpp流
@@ -62,7 +56,7 @@ class CWXMPPManager: NSObject {
     ///初始化方法
     private override init() {
         xmppQueue = dispatch_queue_create("com.cwxmppchat.cwcoder", DISPATCH_QUEUE_CONCURRENT)
-
+        
         xmppStream = XMPPStream()
         xmppReconnect = XMPPReconnect()
         //实际发送消息者
@@ -115,11 +109,12 @@ class CWXMPPManager: NSObject {
         //可以添加是哪个端
         let resource = "weiweideMacBook-Simulator"
         let timeoutInterval:NSTimeInterval = 10
+        let xmppDomain = CWXMPPConfigure.shareXMPPConfigure().xmppDomain
 
         xmppStream.myJID = XMPPJID.jidWithUser("tom", domain: xmppDomain, resource: resource)
         
-        xmppStream.hostName = hostName
-        xmppStream.hostPort = hostPort
+        xmppStream.hostName = CWXMPPConfigure.shareXMPPConfigure().hostName
+        xmppStream.hostPort = CWXMPPConfigure.shareXMPPConfigure().hostPort
         
         do {
             try xmppStream.connectWithTimeout(timeoutInterval)
@@ -187,7 +182,6 @@ class CWXMPPManager: NSObject {
 
 // MARK: - XMPPStreamDelegate
 extension CWXMPPManager: XMPPStreamDelegate {
-    
     
     ///
     func xmppStreamWillConnect(sender: XMPPStream!) {

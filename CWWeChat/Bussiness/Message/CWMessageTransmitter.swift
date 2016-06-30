@@ -66,11 +66,16 @@ class CWMessageTransmitter: NSObject {
     func messageElement(body: String, to: String, messageId: String) -> XMPPMessage {
         //消息内容
         let message = XMPPMessage(type: "chat", elementID: messageId)
-        message.addAttributeWithName("to", stringValue: to)
+        message.addAttributeWithName("to", stringValue: chatJidString(to))
 //        message.addReceiptRequest()
         message.addBody(body)
         CWLogDebug(message.description)
         return XMPPMessage(fromElement: message)
+    }
+    
+    //统一通过方法转换获取JID
+    func chatJidString(name: String) -> String {
+        return name + "@" + CWXMPPConfigure.shareXMPPConfigure().xmppDomain
     }
     
     

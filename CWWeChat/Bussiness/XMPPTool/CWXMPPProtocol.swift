@@ -16,7 +16,6 @@ public enum CWUserStatus: String {
     case None = "none"
     case Online = "available"
     case Offline = "unavailable"
-    
 }
 
 /**

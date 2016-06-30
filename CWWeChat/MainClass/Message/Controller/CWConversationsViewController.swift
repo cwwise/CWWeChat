@@ -55,7 +55,7 @@ class CWConversationsViewController: CWBaseMessageViewController {
     
     func sendMessage() {
         
-        let to = "chenwei"+"@"+xmppDomain;
+        let to = "chenwei";
         let message = CWMessageModel()
         message.messageReceiveId = to
         message.content = "Hello world"
@@ -68,17 +68,17 @@ class CWConversationsViewController: CWBaseMessageViewController {
     func addDefaultData() {
         
         let model1 = CWConversationModel()
-        model1.partnerID = "tom@chenweiim.com"
+        model1.partnerID = "tom"
         model1.content = "Tom"
         model1.conversationDate = NSDate()
         
         let model2 = CWConversationModel()
-        model2.partnerID = "jerry@chenweiim.com"
+        model2.partnerID = "jerry"
         model2.content = "Jerry"
         model2.conversationDate = NSDate()
         
         let model3 = CWConversationModel()
-        model3.partnerID = "chenwei@chenweiim.com"
+        model3.partnerID = "chenwei"
         model3.content = "Chenwei"
         model3.conversationDate = NSDate()
         
