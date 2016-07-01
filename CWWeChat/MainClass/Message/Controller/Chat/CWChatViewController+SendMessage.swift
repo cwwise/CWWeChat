@@ -23,12 +23,13 @@ extension CWChatViewController: CWMessageDispatchQueueDelegate {
     
     ///收到消息
     override func receiveNewMessage(message: CWMessageModel) {
-        CWLogInfo(message)
         
-        messageList.append(message)
-        let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
-        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-        updateMessageAndScrollBottom(false)
+        if self.dbMessageStore.addMessage(message) {
+            messageList.append(message)
+            let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
+            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+            updateMessageAndScrollBottom(false)
+        }
     }
     
     
@@ -40,7 +41,6 @@ extension CWChatViewController: CWMessageDispatchQueueDelegate {
         
         let userid = CWUserAccount.sharedUserAccount().userID
         //先将此条对话的未读条数设置0
-        
         dbRecordStore.updateUnReadCountToZeroWithUserId(userid, fid: friendUser!.userId)
         //获取数据
         dbMessageStore.messagesByUserID(userid, partnerID: friendUser!.userId, fromDate: currentDate, count: 15) { (array:[CWMessageProtocol], date:NSDate,needMore:Bool) in

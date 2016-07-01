@@ -75,6 +75,8 @@ class CWChatViewController: CWBaseMessageViewController {
         registerKeyboardNotifacation()
         
         self.refreshLocalMessage {
+            //先刷新数据，再滚动到底部
+            self.tableView.reloadData()
             //将消息插入数组 并刷新列表 并滚动到最下面
             self.updateMessageAndScrollBottom(false)
         }

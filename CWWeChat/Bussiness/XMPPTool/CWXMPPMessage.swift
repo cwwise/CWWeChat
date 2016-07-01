@@ -22,15 +22,15 @@ class CWXMPPMessage: NSObject {
     var to: String
     
     var body: String?
-    var delayDateString: String?
+    var delayDate: NSDate?
     var composing: Bool = false
     
     init(message: XMPPMessage) {
         
         self.type = message.type()
         self.messageId = message.attributeForName("id").stringValue()
-        self.from = message.attributeForName("from").stringValue()
-        self.to = message.attributeForName("to").stringValue()
+        self.from = message.attributeForName("from").stringValue().componentsSeparatedByString("@").first!
+        self.to = message.attributeForName("to").stringValue().componentsSeparatedByString("/").first!
         self.body = message.body()
         
         //对方正在输入
@@ -48,7 +48,7 @@ class CWXMPPMessage: NSObject {
             
             let formatter = "yyyy-MM-dd'T'HH:mm:ss'Z'"
             let delayTime = delayElement.attributeStringValueForName("stamp")
-            self.delayDateString = ChatTimeTool.stringFromDateString(delayTime, fromDateFormat: formatter)
+            self.delayDate = ChatTimeTool.dateFromString(delayTime, formatter: formatter)
         }
         super.init()
     }

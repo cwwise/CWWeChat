@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //初始化当前用户模型
         let user = CWContactUser()
-        user.userId = "tom@chenweiim.com"
+        user.userId = "tom@"+CWXMPPConfigure.shareXMPPConfigure().xmppDomain
         user.userName = "Tom"
         user.nikeName = "汤姆"
         user.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/tom@chenweiim.com"
@@ -60,6 +60,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let tabbarVC = CWChatTabBarController()
         self.window?.rootViewController = tabbarVC
+        
+        loadDB()
+    }
+    
+    //初始化数据库
+    func loadDB() {
+        dispatch_async(dispatch_get_global_queue(0, 0)) { 
+            let _ = CWChatDBDataManager.sharedInstance
+        }
     }
     
     ///设置Log日志

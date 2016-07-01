@@ -9,12 +9,21 @@
 import UIKit
 import SQLite
 
+/**
+ 消息管理类
+ 
+ 使用SQLite.swift
+ 
+ 可以[查看sql](https://github.com/stephencelis/SQLite.swift/issues/399)
+ 
+ */
 class CWChatDBMessageStore: NSObject {
 
     typealias CWChatHistoryMessagesHandle = ([CWMessageProtocol], NSDate,Bool) -> ()
 
+    // TODO: 修改名称避免过程中的问题,需要修改一些变量名称
     /// 当前用户的唯一id，创建数据库名称
-    var userId: String
+    var current_userId: String
     
     ///消息数据库的单利
     lazy var recordDBStore:CWChatDBRecordStore = {
@@ -27,6 +36,7 @@ class CWChatDBMessageStore: NSObject {
     let id = Expression<Int64>("id")
     //
     let messageid = Expression<String>("msgid")
+    //用户唯一id
     let uId = Expression<String>("uid")
     let friendId = Expression<String>("fid")
     //时间
@@ -71,16 +81,17 @@ class CWChatDBMessageStore: NSObject {
     /// 数据库路径
     lazy var path: String = {
         let documentPath = NSHomeDirectory().stringByAppendingString("/Documents")
-        let path = "\(documentPath)/User/\(self.userId)/Chat/DB/"
+        let path = "\(documentPath)/User/\(self.current_userId)/Chat/DB/"
         if !NSFileManager.defaultManager().fileExistsAtPath(path) {
             try! NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
         }
+        CWLogDebug(path)
         return path.stringByAppendingString("chatmessage.sqlite3")
     }()
     
     //MARK: 初始化
     init(userId: String) {
-        self.userId = userId
+        self.current_userId = userId
         super.init()
         createMessageTable()
     }
@@ -162,9 +173,6 @@ class CWChatDBMessageStore: NSObject {
         }
         return true
     }
-    
-
-    
 }
 
 extension CWChatDBMessageStore {
@@ -182,9 +190,10 @@ extension CWChatDBMessageStore {
     func messagesByUserID(userID:String, partnerID:String, fromDate:NSDate, count:Int = 30 ,handle:CWChatHistoryMessagesHandle) {
         
         let dateInterval = "\(fromDate.timeIntervalSince1970)"
-        let query = messageTable.filter(userId == userID && friendId==partnerID && date < dateInterval).order(date.desc).limit(count)
+        let query = messageTable.filter(uId == userID && friendId==partnerID && date < dateInterval).order(date.desc).limit(count)
+        CWLogDebug(query.asSQL())
         do {
-            let count = messageDB.scalar(messageTable.filter(userId == userID && friendId==partnerID).count)
+            let count = messageDB.scalar(messageTable.filter(uId == userID && friendId==partnerID).count)
             let result = try messageDB.prepare(query)
             
             var listData = [CWMessageProtocol]()
@@ -196,7 +205,7 @@ extension CWChatDBMessageStore {
             
             handle(listData, fromDate ,listData.count > count)
         } catch {
-            print("查询消息失败: \(error)")
+            CWLogError("查询消息失败: \(error)")
         }
         
     }
@@ -286,7 +295,7 @@ extension CWChatDBMessageStore {
      - returns: 删除消息的结果
      */
     func deleteMessageByUid(uid:String, fid:String) -> Bool {
-        let query = messageTable.filter(userId == uid && friendId == fid)
+        let query = messageTable.filter(uId == uid && friendId == fid)
         do {
             let rowid = try messageDB.run(query.delete())
             print("删除消息成功: \(rowid)")

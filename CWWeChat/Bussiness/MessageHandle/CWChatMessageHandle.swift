@@ -19,8 +19,8 @@ class CWChatMessageHandle: CWBaseMessageHandle {
             let to = message.to
 
             let messageObject = CWMessageModel()
-            messageObject.messageSendId = from
-            messageObject.messageReceiveId = to
+            messageObject.messageSendId = to
+            messageObject.messageReceiveId = from
             messageObject.content = body
             messageObject.messageID = message.messageId
             messageObject.messageOwnerType = .Other
@@ -29,8 +29,8 @@ class CWChatMessageHandle: CWBaseMessageHandle {
             messageObject.composing = message.composing
             //如果是离线消息，则消息时间，重新设置。
             //2016-06-25T17:11:13.354Z
-            if let delayDateString = message.delayDateString {
-                messageObject.messageSendDate = ChatTimeTool.dateFromString(delayDateString, formatter: KMessageTimeFormate)
+            if let delayDate = message.delayDate {
+                messageObject.messageSendDate = delayDate
             }
             
             if let delegate = self.delegate  {

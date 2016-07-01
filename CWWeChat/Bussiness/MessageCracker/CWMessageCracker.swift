@@ -45,13 +45,19 @@ class CWMessageCracker: XMPPModule {
 extension CWMessageCracker: XMPPStreamDelegate {
     
     /**
+     <message xmlns="jabber:client" from="chenwei@chatimswift.com/chenweideMacBook-Pro" to="tom@chatimswift.com/weiweideMacBook-Simulator" type="chat" id="purple38f1c379">
+     <active xmlns="http://jabber.org/protocol/chatstates"></active>
+     <body>12321</body>
+     </message>
+     */
+    /**
      收到消息 并处理
      */
     func xmppStream(sender: XMPPStream!, didReceiveMessage message: XMPPMessage!) {
         //如果是聊天消息
         if message.isChatMessage() {
             
-//            CWLogDebug(message.description)
+            CWLogDebug(message.description)
             if message.isChatMessageWithBody() == false {
                 return
             }
