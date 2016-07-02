@@ -84,6 +84,9 @@ extension CWMessageCracker: CWMessageHandleProtocol {
     ///消息处理结果
     func handleResult(handle: CWBaseMessageHandle, message: CWMessageModel, isDelay: Bool) {
        
+        let dbMessageStore = CWChatDBDataManager.sharedInstance.dbMessageStore
+        dbMessageStore.addMessage(message)
+        
         //先处理消息
         //如果不在聊天界面，则播放声音和震动
         if !inspectChatViewControllerFront() {
@@ -104,8 +107,8 @@ extension CWMessageCracker: CWMessageHandleProtocol {
         while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) {
             //执行Delegate的方法
             if let delegate = delegate as? CWBaseMessageViewController {
-                
-                dispatch_async(dispatch_get_main_queue(), { 
+
+                dispatch_async(dispatch_get_main_queue(), {
                     delegate.receiveNewMessage(message)
                 })
                 

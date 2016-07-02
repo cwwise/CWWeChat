@@ -11,7 +11,16 @@ import UIKit
 class CWConversationsViewController: CWBaseMessageViewController {
 
     var conversationList = [CWConversationModel]()
+    
+    //存储数据库
+    lazy var dbRecordStore:CWChatDBRecordStore = {
+        return CWChatDBDataManager.sharedInstance.dbRecordStore
+    }()
+    
     let manager = CWXMPPManager.shareXMPPManager
+    
+    var userID: String = CWUserAccount.sharedUserAccount().userID
+
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: self.view.bounds, style: .Plain)
@@ -29,10 +38,12 @@ class CWConversationsViewController: CWBaseMessageViewController {
 
         setupUI()
         registerCellClass()
-        addDefaultData()
         setupFriends()
         
         manager.connectProcess()
+        
+        conversationList = dbRecordStore.allMessageRecordByUid(userID)
+        self.tableView.reloadData()
         // Do any additional setup after loading the view.
     }
     
@@ -55,38 +66,7 @@ class CWConversationsViewController: CWBaseMessageViewController {
     
     func sendMessage() {
         
-        let to = "chenwei";
-        let message = CWMessageModel()
-        message.messageReceiveId = to
-        message.content = "Hello world"
-        message.messageType = .Text
         
-        manager.messageDispatchQueue.sendMessage(message)
-        
-    }
-    
-    func addDefaultData() {
-        
-        let model1 = CWConversationModel()
-        model1.partnerID = "tom"
-        model1.content = "Tom"
-        model1.conversationDate = NSDate()
-        
-        let model2 = CWConversationModel()
-        model2.partnerID = "jerry"
-        model2.content = "Jerry"
-        model2.conversationDate = NSDate()
-        
-        let model3 = CWConversationModel()
-        model3.partnerID = "chenwei"
-        model3.content = "Chenwei"
-        model3.conversationDate = NSDate()
-        
-        conversationList.append(model1)
-        conversationList.append(model2)
-        conversationList.append(model3)
-        
-        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,17 +74,6 @@ class CWConversationsViewController: CWBaseMessageViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 //MARK: UITableViewDelegate

@@ -16,18 +16,11 @@ public enum CWConversationClueType: Int {
     case PointWithNumber
 }
 
-///会话的类型
-public enum CWConversationType: Int {
-    case Personal
-    case Group
-}
-
-
 //MARK: 消息
 ///消息聊天类型
 public enum CWChatType: Int {
     case None
-    case Single
+    case Personal
     case Group
 }
 

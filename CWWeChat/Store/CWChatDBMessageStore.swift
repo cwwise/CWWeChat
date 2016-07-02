@@ -9,6 +9,8 @@
 import UIKit
 import SQLite
 
+
+
 /**
  消息管理类
  
@@ -143,7 +145,7 @@ class CWChatDBMessageStore: NSObject {
     func addMessage(message: CWMessageProtocol) -> Bool {
         
         guard let userID = message.messageSendId, let friendID = message.messageReceiveId else {
-            print("插入消息失败: 消息体缺少参数, \(message.messageID)")
+            CWLogError("插入消息失败: 消息体缺少参数, \(message.messageID)")
             return false
         }
         //时间
@@ -151,24 +153,25 @@ class CWChatDBMessageStore: NSObject {
         do {
 //            let jsonData = try! NSJSONSerialization.dataWithJSONObject(message.contentInfo!, options: .PrettyPrinted)
 //            let strJson = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as? String ?? ""
-            let rowid = try messageDB.run(messageTable.insert(messageid <- message.messageID,
-                uId <- userID,
-                friendId <- friendID,
-                date <- dataString,
-                chat_type <- message.chatType.rawValue,
-                own_type <- message.messageOwnerType.rawValue,
-                msg_type <- message.messageType.rawValue,
-                content <- message.content,
-                send_status <- message.messageSendState.rawValue,
-//                received_status <- message.messageReadState.rawValue,
-//                upload_status <- message.messageUploadState.rawValue,
-                ext1 <- ""))
-            CWLogDebug("插入消息成功: \(rowid), \(message.messageID)")
+            let sql = messageTable.insert(messageid <- message.messageID,
+                                          uId <- userID,
+                                          friendId <- friendID,
+                                          date <- dataString,
+                                          chat_type <- message.chatType.rawValue,
+                                          own_type <- message.messageOwnerType.rawValue,
+                                          msg_type <- message.messageType.rawValue,
+                                          content <- message.content,
+                                          send_status <- message.messageSendState.rawValue,
+                                          //                received_status <- message.messageReadState.rawValue,
+                //                upload_status <- message.messageUploadState.rawValue,
+                ext1 <- "")
             
+            let rowid = try messageDB.run(sql)
+            CWLogDebug("插入消息成功: \(message.messageID), \(rowid)")
             recordDBStore.addRecordByMessage(message, needUnread: message.messageOwnerType != .Myself)
             
         } catch {
-            print("插入消息失败: \(error), \(message.messageID)")
+            CWLogDebug("插入消息失败: \(error), \(message.messageID)")
             return false
         }
         return true

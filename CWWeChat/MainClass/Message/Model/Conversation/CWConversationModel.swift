@@ -21,7 +21,7 @@ class CWConversationModel: NSObject {
     ///时间
     var conversationDate: NSDate?
     ///会话类型
-    var conversationType: CWConversationType
+    var conversationType: CWChatType
     ///未读数量
     var unreadCount:Int = 0
     ///内容

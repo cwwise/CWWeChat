@@ -21,10 +21,8 @@ class CWXMPPConfigure: NSObject {
     var hostPort: UInt16
     
     override init() {
-//        xmppDomain = "121.41.129.248"
-//        hostName = "121.41.129.248"
         xmppDomain = "chatimswift.com"
-        hostName = "127.0.0.1"
+        hostName = "192.168.31.100"
         hostPort = 5222
         super.init()
     }

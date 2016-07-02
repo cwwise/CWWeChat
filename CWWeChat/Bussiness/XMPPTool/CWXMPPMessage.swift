@@ -30,7 +30,7 @@ class CWXMPPMessage: NSObject {
         self.type = message.type()
         self.messageId = message.attributeForName("id").stringValue()
         self.from = message.attributeForName("from").stringValue().componentsSeparatedByString("@").first!
-        self.to = message.attributeForName("to").stringValue().componentsSeparatedByString("/").first!
+        self.to = message.attributeForName("to").stringValue().componentsSeparatedByString("@").first!
         self.body = message.body()
         
         //对方正在输入
@@ -45,7 +45,6 @@ class CWXMPPMessage: NSObject {
         
         let delayElement = message.elementForName("delay")
         if (delayElement != nil) {
-            
             let formatter = "yyyy-MM-dd'T'HH:mm:ss'Z'"
             let delayTime = delayElement.attributeStringValueForName("stamp")
             self.delayDate = ChatTimeTool.dateFromString(delayTime, formatter: formatter)
@@ -56,5 +55,4 @@ class CWXMPPMessage: NSObject {
     override var description: String {
         return "[type:"
     }
-    
 }

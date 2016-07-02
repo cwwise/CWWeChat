@@ -17,16 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        //设置logger
+        setupLogger()
+        
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        showGuideViewController()
-//        loginSuccess()
+//        showGuideViewController()
+        loginSuccess()
         
         self.window?.backgroundColor = UIColor.whiteColor()
         self.window?.makeKeyAndVisible()
         
-        //设置logger
-        setupLogger()
         //注册推送信息
         registerRemoteNotification()
         
@@ -80,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fileLogger.logFileManager.maximumNumberOfLogFiles = 7
         DDLog.addLogger(fileLogger)
         
-//        defaultDebugLevel = .Debug
+        defaultDebugLevel = .Debug
     }
     
     func registerRemoteNotification() {
