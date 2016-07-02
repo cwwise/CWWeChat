@@ -17,6 +17,8 @@ internal struct ChatConversationCellUI {
 }
 
 
+let defaultHeadeImage = CWAsset.Default_head.image
+
 //消息在左边的时候， 文字距离屏幕左边的距离
 let kChatTextLeftPadding: CGFloat = 72
 //消息在左边的时候， 文字距离屏幕左边的距离

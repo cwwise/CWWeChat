@@ -17,6 +17,8 @@ extension CWChatViewController {
      */
     func registerKeyboardNotifacation() {
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CWChatViewController.hideKeyboard))
+        self.tableView.addGestureRecognizer(tapGesture)
         NSNotificationCenter.defaultCenter().addObserver(self,
                                                          selector: #selector(CWChatViewController.handleWillHideKeyboard(_:)),
                                                          name: UIKeyboardWillHideNotification, object: nil)
@@ -24,20 +26,32 @@ extension CWChatViewController {
         NSNotificationCenter.defaultCenter().addObserver(self,
                                                          selector: #selector(CWChatViewController.handleWillShowKeyboard(_:)),
                                                          name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(CWChatViewController.handleWillShowKeyboard(_:)),
+                                                         name: UIKeyboardWillChangeFrameNotification, object: nil)
         
+    }
+    
+    
+    func hideKeyboard() {
+        self.view.endEditing(true)
     }
     
     
     ///键盘将要隐藏
     func handleWillHideKeyboard(notification: NSNotification)  {
-        keyboardWillShowHide(notification)
+        keyboardWillShowHide(notification, hideKeyBoard:true)
+    }
+    
+    func keyboardWillChangeFrame(notification: NSNotification) {
+        
     }
     
     func handleWillShowKeyboard(notification: NSNotification)  {
         keyboardWillShowHide(notification)
     }
     
-    func keyboardWillShowHide(notification:NSNotification) {
+    func keyboardWillShowHide(notification:NSNotification, hideKeyBoard: Bool = false) {
         
         let keyboardFrameValue = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         let keyboardFrame = keyboardFrameValue.CGRectValue()
@@ -45,13 +59,17 @@ extension CWChatViewController {
         let duration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         let curveNumber = UIViewAnimationCurve(rawValue:curve)
         
-
         UIView.animateWithDuration(duration,
                                    delay: 0,
                                    options: self.animationOptionsForCurve(curveNumber!),
                                    animations: {
                                     
-                                    CWLogDebug(NSStringFromCGRect(keyboardFrame))
+                                    if hideKeyBoard {
+                                        self.chatToolBar.bottom = self.view.height
+                                    } else {
+                                        self.chatToolBar.bottom = self.view.height-keyboardFrame.height
+                                    }
+                                    
                                     
         }) { (bool) in
             

@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-//        showGuideViewController()
-        loginSuccess()
+        showGuideViewController()
+//        loginSuccess()
         
         self.window?.backgroundColor = UIColor.whiteColor()
         self.window?.makeKeyAndVisible()
@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //初始化当前用户模型
         let user = CWContactUser()
-        user.userId = "tom@"+CWXMPPConfigure.shareXMPPConfigure().xmppDomain
+        user.userId = "tom"
         user.userName = "Tom"
         user.nikeName = "汤姆"
         user.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/tom@chenweiim.com"
@@ -80,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fileLogger.logFileManager.maximumNumberOfLogFiles = 7
         DDLog.addLogger(fileLogger)
         
-        defaultDebugLevel = .Debug
+//        defaultDebugLevel = .Debug
     }
     
     func registerRemoteNotification() {

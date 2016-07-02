@@ -17,6 +17,12 @@ class CWUserAccount: NSObject {
     }
    
     var chatuser: CWContactUser
+
+    //登录xmpp需要的密码
+    var password: String = "123456"
+    var resource: String {
+        return "weiweideMacBook-Simulator"
+    }
     
     var userID:String {
         get {

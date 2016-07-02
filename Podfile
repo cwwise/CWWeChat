@@ -21,12 +21,15 @@ target 'CWWeChat' do
   
   #log日志
   pod 'CocoaLumberjack/Swift'
-  
+
   #聊天
   pod 'CocoaAsyncSocket'
   
   pod 'MMXXMPPFramework'
-  
+
+#  pod 'PNXMPPFramework'
+
+
 #  pod 'Fabric'
 #  pod 'Crashlytics'
 

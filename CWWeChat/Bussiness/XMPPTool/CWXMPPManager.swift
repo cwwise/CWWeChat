@@ -76,6 +76,8 @@ class CWXMPPManager: NSObject {
         ///xmpp
         xmppStream.enableBackgroundingOnSocket = true
         xmppStream.addDelegate(self, delegateQueue: xmppQueue)
+        xmppStream.hostName = CWXMPPConfigure.shareXMPPConfigure().hostName
+        xmppStream.hostPort = CWXMPPConfigure.shareXMPPConfigure().hostPort
         
         ///好友
         xmppRoster.activate(xmppStream)
@@ -107,19 +109,17 @@ class CWXMPPManager: NSObject {
         }
         
         //可以添加是哪个端
-        let resource = "weiweideMacBook-Simulator"
         let timeoutInterval:NSTimeInterval = 10
         let xmppDomain = CWXMPPConfigure.shareXMPPConfigure().xmppDomain
+        let userName = CWUserAccount.sharedUserAccount().userID
+        let resource = CWUserAccount.sharedUserAccount().resource
 
-        xmppStream.myJID = XMPPJID.jidWithUser("tom", domain: xmppDomain, resource: resource)
-        
-        xmppStream.hostName = CWXMPPConfigure.shareXMPPConfigure().hostName
-        xmppStream.hostPort = CWXMPPConfigure.shareXMPPConfigure().hostPort
-        
+        xmppStream.myJID = XMPPJID.jidWithUser(userName, domain: xmppDomain, resource: resource)
+    
         do {
             try xmppStream.connectWithTimeout(timeoutInterval)
         } catch let error as NSError {
-            CWLogDebug(error.description)
+            CWLogError(error.description)
         }
     }
     
@@ -139,7 +139,6 @@ class CWXMPPManager: NSObject {
         reachable?.listener = listener
     }
     
-    
     func applicationWillEnterForeground(application: UIApplication) {
         
     }
@@ -147,6 +146,7 @@ class CWXMPPManager: NSObject {
     func applicationWillResignActive(application: UIApplication) {
         
     }
+    
     
     //发送在线信息
     func goOnline() {
@@ -160,7 +160,6 @@ class CWXMPPManager: NSObject {
     }
     
     // MARK: 监听
-    
     func xmppStatusChange(status:CWXMPPStatus) {
         if let listenrer = self.statusListener {
             listenrer(status)
@@ -177,7 +176,6 @@ class CWXMPPManager: NSObject {
         
         reachable?.stopListening()
     }
-
 }
 
 // MARK: - XMPPStreamDelegate
@@ -201,7 +199,7 @@ extension CWXMPPManager: XMPPStreamDelegate {
         do {
             try xmppStream.authenticateWithPassword(password)
         } catch let error as NSError {
-            DDLogError(error.description)
+            CWLogError(error.description)
         }
     }
     

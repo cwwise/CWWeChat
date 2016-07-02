@@ -10,7 +10,7 @@ import UIKit
 
 class CWChatViewController: CWBaseMessageViewController {
 
-    
+    /// block定义
     typealias CWCompleteAction = ()-> Void
 
     var contactId: String!

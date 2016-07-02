@@ -125,6 +125,9 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
     
     func loginButtonAction() {
         
+        self.view.endEditing(true)
+
+        
         let userName = userNameTextField.text!
         let password = passwordTextField.text!
         
