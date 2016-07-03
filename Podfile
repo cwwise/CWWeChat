@@ -27,10 +27,6 @@ target 'CWWeChat' do
   
   pod 'MMXXMPPFramework'
 
-#  pod 'PNXMPPFramework'
-
-
-#  pod 'Fabric'
-#  pod 'Crashlytics'
+  pod 'Qiniu'
 
 end

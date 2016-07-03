@@ -10,15 +10,21 @@
 import UIKit
 import SQLite
 
+protocol CWChatDBRecordStoreDelegate:class {
+    func needUpdateRecordList(record: CWConversationModel, isAdd: Bool)
+}
+
 class CWChatDBRecordStore: NSObject {
     
     ///用户id
     var current_userId: String
+    weak var delegate: CWChatDBRecordStoreDelegate?
     
     let recordTable = Table("record")
-    //消息唯一id
-    let userId = Expression<String>("uid")
     
+    let id = Expression<Int64>("id")
+    //消息id
+    let userId = Expression<String>("uid")
     let friendId = Expression<String>("fid")
     let record_type = Expression<Int>("record_type")
     //时间
@@ -69,13 +75,13 @@ class CWChatDBRecordStore: NSObject {
     func createMessageTable() {
         do {
             try recordDB.run(recordTable.create(ifNotExists: true) { t in
+                t.column(id, primaryKey: .Autoincrement)
                 t.column(userId)
                 t.column(friendId)
                 t.column(record_type, defaultValue:0)
                 t.column(date)
                 t.column(unread_count, defaultValue:0)
                 t.column(ext1,defaultValue:"")
-                t.primaryKey(userId,friendId)
                 })
         } catch let error as NSError {
             CWLogError(error)
@@ -101,12 +107,18 @@ class CWChatDBRecordStore: NSObject {
             let query = recordTable.filter(userId==message.messageSendId! && friendId == message.messageReceiveId!)
             let count = recordDB.scalar(query.count)
             if count == 0 {
-                try recordDB.run(recordTable.insert(userId <- message.messageSendId!,
+               let rowid = try recordDB.run(recordTable.insert(userId <- message.messageSendId!,
                     friendId <- message.messageReceiveId!,
                     record_type <- message.messageType.rawValue,
                     date <- dataString,
                     unread_count <- unreadCount,
                     ext1 <- ""))
+                if let delegate = delegate {
+                    let record = lastUpdateRecordById(message.messageSendId!, fid: message.messageReceiveId!)
+                    dispatch_async_safely_to_main_queue({
+                        delegate.needUpdateRecordList(record, isAdd: true)
+                    })
+                }
                 return true
             } else {
                 return updateRecord(message, unread_count: unreadCount)
@@ -125,6 +137,12 @@ class CWChatDBRecordStore: NSObject {
             let dataString = "\(message.messageSendDate.timeIntervalSince1970)"
             try recordDB.run(query.update(date <- dataString,
                 unread_count <- count))
+            if let delegate = delegate {
+                let record = lastUpdateRecordById(message.messageSendId!, fid: message.messageReceiveId!)
+                dispatch_async_safely_to_main_queue({ 
+                    delegate.needUpdateRecordList(record, isAdd: false)
+                })
+            }
         } catch let error as NSError {
             CWLogError(error)
         }
@@ -177,19 +195,7 @@ class CWChatDBRecordStore: NSObject {
             let query = recordTable.filter(userId==uid).order(date)
             let result = try recordDB.prepare(query)
             for row in result.reverse() {
-                
-                let record = CWConversationModel()
-                record.conversationDate = NSDate(timeIntervalSince1970: Double(row[date])!)
-                record.unreadCount = row[unread_count]
-                record.partnerID = row[friendId]
-                record.conversationType = CWChatType(rawValue: row[record_type])!
-               
-                //设置record的值
-                let message = messageDBStore.lastMessageByUserID(uid, partnerID: record.partnerID!)
-                if (message != nil) {
-                    record.conversationDate = message?.messageSendDate
-                    record.content = message!.content
-                }
+                let record = createDBRecordByFMResult(row, uid: uid)
                 recordList.append(record)
             }
             return recordList
@@ -202,7 +208,39 @@ class CWChatDBRecordStore: NSObject {
     }
     
     //根据消息
+    func createDBRecordByFMResult(row:Row,uid: String) -> CWConversationModel  {
+        let record = CWConversationModel()
+        record.conversationDate = NSDate(timeIntervalSince1970: Double(row[date])!)
+        record.unreadCount = row[unread_count]
+        record.partnerID = row[friendId]
+        record.conversationType = CWChatType(rawValue: row[record_type])!
+        
+        //设置record的值
+        let message = messageDBStore.lastMessageByUserID(uid, partnerID: record.partnerID!)
+        if (message != nil) {
+            record.conversationDate = message?.messageSendDate
+            record.content = message!.content
+        }
+        return record
+    }
     
+    func lastUpdateRecordById(uid: String,fid:String) -> CWConversationModel {
+        
+        do {
+            var record = CWConversationModel()
+            let query = recordTable.filter(uid == uid && fid == friendId)
+            let result = try recordDB.prepare(query)
+            print(query.asSQL(),result)
+            for row in result.reverse() {
+                
+                record = createDBRecordByFMResult(row, uid: uid)
+            }
+            return record
+        } catch {
+            print(error)
+            return CWConversationModel()
+        }
+    }
     
     
     // MARK: 删除消息
@@ -214,15 +252,14 @@ class CWChatDBRecordStore: NSObject {
      
      - returns: 删除结果
      */
-    func deleteMessageRecordByUid(uid:String, fid:String, deletemessage delete:Bool=true) -> Bool{
+    func deleteMessageRecordByUid(uid:String, fid:String, deletemessage delete:Bool=false) -> Bool{
         do {
             let query = recordTable.filter(userId==uid && friendId==fid)
             let rowid = try recordDB.run(query.delete())
-            print("删除消息成功: \(rowid)")
+            CWLogDebug("删除消息成功: \(rowid)")
             if delete {
                 messageDBStore.deleteMessageByUid(uid, fid: fid)
             }
-            
             return true
         } catch {
             print(error)
@@ -242,7 +279,6 @@ class CWChatDBRecordStore: NSObject {
         do {
             let query = recordTable.filter(userId==uid)
             let rowid = try recordDB.run(query.delete())
-            print("删除所有对话成功: \(rowid)")
             if delete {
                 messageDBStore.deleteAllMessage()
             }

@@ -119,7 +119,7 @@ public enum CWMessagePlayState : Int {
 }
 
 /**
- 消息上传状态
+ 消息上传状态(争对资源文件)
  
  - None:    没有状态默认
  - Loading: 上传当中
@@ -160,7 +160,7 @@ protocol CWMessageProtocol: NSObjectProtocol {
     var messageSendState:CWMessageSendState {get set}  //消息发送状态
 //    var messageReadState:CWMessageReadState {get set}  //消息读取状态
 //    var messagePlayState:CWMessagePlayState {get set}  //消息播放状态
-//    var messageUploadState:CWMessageUploadState {get set} //消息上传状态
+    var messageUploadState:CWMessageUploadState {get set} //消息上传状态
 //    //
 //    //
 //    var conversationContent:String {get}

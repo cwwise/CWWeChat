@@ -206,12 +206,12 @@ extension CWChatViewController: CWInputToolBarDelegate {
         message.messageSendId = CWUserAccount.sharedUserAccount().userID
         message.messageReceiveId = contactId
 //        message.showTime = messageNeedShowTime(message.messageSendDate)
-        if dbMessageStore.addMessage(message) {
-            dispatchMessage(message)
-            messageList.append(message)
-            let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
+        dbMessageStore.appendMessage(message) { (isSuccess) in
+            self.dispatchMessage(message)
+            self.messageList.append(message)
+            let indexPath = NSIndexPath(forRow: self.messageList.count-1, inSection: 0)
             self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-            updateMessageAndScrollBottom(false)
+            self.updateMessageAndScrollBottom(false)
         }
     }
 

@@ -15,4 +15,20 @@ import UIKit
  */
 class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
 
+    var imageUploadState:CWMessageUploadState = .None
+
+    override func sendMessage() {
+        
+        guard let chatMessage = self.chatMessage else {
+            return
+        }
+        
+        let toId = chatMessage.messageReceiveId
+        let messageId = chatMessage.messageID
+        let content = chatMessage.content
+        
+        let sendResult = messageTransmitter.sendMessage(content!, toId: toId!, messageId: messageId)
+        messageSendCallback(sendResult)
+    }
+    
 }

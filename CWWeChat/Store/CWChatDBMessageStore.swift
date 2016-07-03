@@ -9,8 +9,6 @@
 import UIKit
 import SQLite
 
-
-
 /**
  消息管理类
  
@@ -21,7 +19,8 @@ import SQLite
  */
 class CWChatDBMessageStore: NSObject {
 
-    typealias CWChatHistoryMessagesHandle = ([CWMessageProtocol], NSDate,Bool) -> ()
+    typealias ChatHistoryMessagesHandle = ([CWMessageProtocol], NSDate,Bool) -> ()
+    typealias InsertMessageAction = (Bool) -> ()
 
     // TODO: 修改名称避免过程中的问题,需要修改一些变量名称
     /// 当前用户的唯一id，创建数据库名称
@@ -142,11 +141,14 @@ class CWChatDBMessageStore: NSObject {
      
      - returns: 添加消息的结果
      */
-    func addMessage(message: CWMessageProtocol) -> Bool {
+    func appendMessage(message: CWMessageProtocol, complete: InsertMessageAction) {
         
         guard let userID = message.messageSendId, let friendID = message.messageReceiveId else {
             CWLogError("插入消息失败: 消息体缺少参数, \(message.messageID)")
-            return false
+            dispatch_async_safely_to_main_queue({ 
+                complete(false)
+            })
+            return
         }
         //时间
         let dataString = "\(message.messageSendDate.timeIntervalSince1970)"
@@ -169,12 +171,16 @@ class CWChatDBMessageStore: NSObject {
             let rowid = try messageDB.run(sql)
             CWLogDebug("插入消息成功: \(message.messageID), \(rowid)")
             recordDBStore.addRecordByMessage(message, needUnread: message.messageOwnerType != .Myself)
-            
         } catch {
             CWLogDebug("插入消息失败: \(error), \(message.messageID)")
-            return false
+            dispatch_async_safely_to_main_queue({
+                complete(false)
+            })
+            
         }
-        return true
+        dispatch_async_safely_to_main_queue({
+            complete(true)
+        })
     }
 }
 
@@ -190,7 +196,7 @@ extension CWChatDBMessageStore {
      - parameter count:     开始条数
      - parameter handle:    消息查询结果
      */
-    func messagesByUserID(userID:String, partnerID:String, fromDate:NSDate, count:Int = 30 ,handle:CWChatHistoryMessagesHandle) {
+    func messagesByUserID(userID:String, partnerID:String, fromDate:NSDate, count:Int = 30 ,handle:ChatHistoryMessagesHandle) {
         
         let dateInterval = "\(fromDate.timeIntervalSince1970)"
         let query = messageTable.filter(uId == userID && friendId==partnerID && date < dateInterval).order(date.desc).limit(count)

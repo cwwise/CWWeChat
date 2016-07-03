@@ -85,12 +85,13 @@ extension CWMessageCracker: CWMessageHandleProtocol {
     func handleResult(handle: CWBaseMessageHandle, message: CWMessageModel, isDelay: Bool) {
        
         let dbMessageStore = CWChatDBDataManager.sharedInstance.dbMessageStore
-        dbMessageStore.addMessage(message)
+        dbMessageStore.appendMessage(message) { (bool) in
+            CWLogDebug("收到消息。。")
+        }
         
         //先处理消息
         //如果不在聊天界面，则播放声音和震动
         if !inspectChatViewControllerFront() {
-            CWLogDebug("聊天界面--震动")
             CWPlayMessageAudio.playSoundEffect("receivemsg.caf")
         }
         

@@ -29,12 +29,12 @@ class CWTextMessageCell: CWBaseMessageCell {
     }
     
     ///赋值
-    override func updateMessage(message: CWMessageModel?) {
+    override func updateMessage(message: CWMessageModel) {
         super.updateMessage(message)
         
-        messageLabel.text = message!.content
+        messageLabel.text = message.content
         
-        if message?.messageOwnerType == .Myself {
+        if message.messageOwnerType == .Myself {
             
             let sendImage = CWAsset.Message_sender_bg.image.resizableImage()
             let sendImageHL = CWAsset.Message_sender_bgHL.image.resizableImage()
@@ -52,7 +52,7 @@ class CWTextMessageCell: CWBaseMessageCell {
                 make.bottom.equalTo(self.messageLabel).offset(MSG_SPACE_BTM);
             })
             
-        } else if message?.messageOwnerType == .Other {
+        } else if message.messageOwnerType == .Other {
             
             let sendImage = CWAsset.Message_receiver_bg.image.resizableImage()
             let sendImageHL = CWAsset.Message_receiver_bgHL.image.resizableImage()

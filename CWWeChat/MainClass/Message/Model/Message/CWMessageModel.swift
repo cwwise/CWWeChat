@@ -28,6 +28,8 @@ class CWMessageModel: NSObject,CWMessageProtocol {
     ///消息状态
     var messageSendState: CWMessageSendState
     
+    var messageUploadState: CWMessageUploadState
+    
     var composing: Bool
 
     
@@ -65,6 +67,7 @@ class CWMessageModel: NSObject,CWMessageProtocol {
         composing = false
         messageSendDate = NSDate()
         messageSendState = .None
+        messageUploadState = .None
         super.init()
     }
 }

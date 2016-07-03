@@ -121,11 +121,7 @@ class CWBaseMessageCell: UITableViewCell {
     }
     
     ///赋值
-    func updateMessage(message: CWMessageModel?) {
-        
-        guard let message = message else {
-            return
-        }
+    func updateMessage(message: CWMessageModel) {
         
         if self.message?.messageOwnerType != message.messageOwnerType {
             
@@ -197,6 +193,28 @@ class CWBaseMessageCell: UITableViewCell {
     func bubbleLongPressed(longPressGestureRecognizer: UILongPressGestureRecognizer) {
         if longPressGestureRecognizer.state == .Began {
 
+        }
+    }
+    
+    //MARK: 更新状态
+    //上传消息进度（图片和视频）
+    func updateProgressView(progress:CGFloat, result: CWMessageUploadState) {
+        
+    }
+    
+    //更新消息状态
+    func updateMessageCellState() {
+        if self.message?.messageSendState == .Sending {
+            activityView.startAnimating()
+            errorButton.hidden = true
+        }
+            //如果失败就显示重发按钮
+        else if self.message?.messageSendState == .Fail {
+            activityView.stopAnimating()
+            errorButton.hidden = false
+        } else {
+            activityView.stopAnimating()
+            errorButton.hidden = true
         }
     }
     

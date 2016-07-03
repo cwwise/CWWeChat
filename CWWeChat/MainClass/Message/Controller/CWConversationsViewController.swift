@@ -18,7 +18,6 @@ class CWConversationsViewController: CWBaseMessageViewController {
     }()
     
     let manager = CWXMPPManager.shareXMPPManager
-    
     var userID: String = CWUserAccount.sharedUserAccount().userID
 
 
@@ -40,6 +39,7 @@ class CWConversationsViewController: CWBaseMessageViewController {
         registerCellClass()
         setupFriends()
         
+        self.dbRecordStore.delegate = self
         manager.connectProcess()
         
         conversationList = dbRecordStore.allMessageRecordByUid(userID)
@@ -85,10 +85,11 @@ extension CWConversationsViewController: UITableViewDelegate {
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: deleteTitle) { (action:UITableViewRowAction, indexPath) in
             
             //获取当前model
-            _ = self.conversationList[indexPath.row]
+            let conversation = self.conversationList[indexPath.row]
             //数组中删除
             self.conversationList.removeAtIndex(indexPath.row)
             //从数据库中删除
+            self.dbRecordStore.deleteMessageRecordByUid(self.userID, fid: conversation.partnerID)
             //删除
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
@@ -124,3 +125,25 @@ extension CWConversationsViewController: UITableViewDataSource {
         return cell
     }
 }
+
+
+extension CWConversationsViewController: CWChatDBRecordStoreDelegate {
+    
+    func needUpdateRecordList(record: CWConversationModel, isAdd: Bool) {
+        
+        if isAdd {
+            self.conversationList.insert(record, atIndex: 0)
+            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        } else {
+            self.conversationList = self.conversationList.filter({$0.partnerID != record.partnerID})
+            self.conversationList.insert(record, atIndex: 0)
+            self.tableView.reloadData()
+//            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+//            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        }
+        
+      
+    }
+}
+
