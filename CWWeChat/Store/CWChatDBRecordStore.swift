@@ -278,7 +278,7 @@ class CWChatDBRecordStore: NSObject {
     func deleteAllMessageRecordByUid(uid:String, deletemessage delete:Bool=false) -> Bool{
         do {
             let query = recordTable.filter(userId==uid)
-            let rowid = try recordDB.run(query.delete())
+            let _ = try recordDB.run(query.delete())
             if delete {
                 messageDBStore.deleteAllMessage()
             }

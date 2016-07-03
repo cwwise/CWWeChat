@@ -17,12 +17,10 @@ class CWUserAccount: NSObject {
     }
    
     var chatuser: CWContactUser
-
+    
     //登录xmpp需要的密码
     var password: String = "123456"
-    var resource: String {
-        return "weiweideMacBook-Simulator"
-    }
+    var resource: String = "weiweideMacBook-Simulator"
     
     var userID:String {
         get {
@@ -33,5 +31,15 @@ class CWUserAccount: NSObject {
     ///
     init(chatuser: CWContactUser = CWContactUser()) {
         self.chatuser = chatuser
+    }
+    
+    func pathUserChatImage(imageName: String) -> String {
+        let documentPath = NSHomeDirectory().stringByAppendingString("/Documents")
+        let userId = self.userID
+        let path = "\(documentPath)/User/\(userId)/Chat/Images/"
+        if !NSFileManager.defaultManager().fileExistsAtPath(path) {
+            try! NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
+        }
+        return path.stringByAppendingString(imageName)
     }
 }

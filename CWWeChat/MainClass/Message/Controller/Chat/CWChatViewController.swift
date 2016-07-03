@@ -53,6 +53,7 @@ class CWChatViewController: CWBaseMessageViewController {
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.separatorStyle = .None
+        tableView.estimatedRowHeight = 50
         tableView.dataSource = self
         return tableView
     }()
@@ -191,6 +192,12 @@ extension CWChatViewController: CWInputToolBarDelegate {
     }
     
     func chatInputView(inputView: CWInputToolBar, sendImage imageName: String ,extentInfo:Dictionary<String,AnyObject>) {
+        
+        let message = CWMessageModel()
+        message.content = imageName
+        message.messageType = .Image
+        message.messageOwnerType = .Myself
+        self.dispatchMessage(message)
         
     }
     

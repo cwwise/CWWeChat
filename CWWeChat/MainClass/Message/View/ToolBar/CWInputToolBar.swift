@@ -156,7 +156,12 @@ class CWInputToolBar: UIView {
     }
     
     func moreButtonSelector(button: UIButton) {
-
+        let pickerVC = UIImagePickerController()
+        pickerVC.sourceType = .PhotoLibrary
+        pickerVC.delegate = self
+        if let viewcontroller = UIApplication.sharedApplication().keyWindow?.rootViewController {
+            viewcontroller.presentViewController(pickerVC, animated: true, completion: nil)
+        }
     }
     
     func voiceButtonAction(button: UIButton) {
@@ -214,3 +219,27 @@ extension CWInputToolBar: UITextViewDelegate {
     }
 
 }
+
+extension CWInputToolBar:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let imagename = "\(String.UUIDString())"
+        let path = CWUserAccount.sharedUserAccount().pathUserChatImage(imagename)
+        NSFileManager.saveContentImage(image, imagePath: path)
+        if let delegate = self.delegate {
+            delegate.chatInputView(self, sendImage: imagename, extentInfo:["size":NSStringFromCGSize(image.size)])
+        }
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func video(videoPath: String, didFinishSavingWithError error: NSError, contextInfo info: UnsafeMutablePointer<Void>) {
+        print("保存成功")
+    }
+}
+

@@ -143,7 +143,7 @@ class CWBaseMessageCell: UITableViewCell {
             
         } else {
             
-            let userModel = CWContactManager.findContact(message.messageSendId!)
+            let userModel = CWContactManager.findContact(message.messageReceiveId!)
             let string = userModel!.avatarURL!
             
             self.avatarButton.af_setImageForState(.Normal, URL: NSURL(string:string)!)

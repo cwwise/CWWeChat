@@ -16,9 +16,20 @@ import UIKit
 class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
 
     var imageUploadState:CWMessageUploadState = .None
-
+    let manager = CWResourceUploadManager.sharedInstance
+    
     override func sendMessage() {
         
+        guard let chatMessage = self.chatMessage else {
+            return
+        }
+        
+        //上传照片
+        manager.uploadImage(chatMessage.content!)
+        
+    }
+    
+    func sendContentMessage() {
         guard let chatMessage = self.chatMessage else {
             return
         }
