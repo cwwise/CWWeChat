@@ -32,24 +32,36 @@ class CWMessageModel: NSObject,CWMessageProtocol {
     
     var composing: Bool
 
-    
     var content: String? {
         didSet {
             
             if let content: NSString = content {
                 
-                let size = CGSize(width: kChatTextMaxWidth, height: CGFloat.max)
-                let attributes = [NSForegroundColorAttributeName:UIColor.whiteColor(),
-                                  NSFontAttributeName: UIFont.systemFontOfSize(16)]
-                let contentSize = content.boundingRectWithSize(size, options: .UsesLineFragmentOrigin, attributes: attributes, context: nil).size
-                cellHeight = ceil(contentSize.height)+1 + 40
+              
+                
+              
             }
             
         }
     }
     
+    var messageFrame: CWMessageFrame?
+    
     //计算的高度储存使用，默认0
-    private(set) var cellHeight: CGFloat = 0
+    var cellHeight: CGFloat {
+        get {
+            
+            let size = CGSize(width: kChatTextMaxWidth, height: CGFloat.max)
+            let attributes = [NSForegroundColorAttributeName:UIColor.whiteColor(),
+                              NSFontAttributeName: UIFont.systemFontOfSize(16)]
+            let contentSize = content!.boundingRectWithSize(size, options: .UsesLineFragmentOrigin, attributes: attributes, context: nil).size
+            return ceil(contentSize.height)+1 + 40
+            
+        }
+        set {
+            self.cellHeight = newValue
+        }
+    }
 
     /// 在会话界面显示
     var conversationContent:String {

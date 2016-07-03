@@ -48,8 +48,8 @@ public enum CWMessageOwnerType : Int {
 
 ///消息类型
 public enum CWMessageType : Int {
-    case None               //未知
-    case Time               //时间
+    case None  = -1          //未知
+    case Time  = 0         //时间
     
     case Text               //文字
     case Image              //图片
@@ -127,10 +127,10 @@ public enum CWMessagePlayState : Int {
  - Fail:    上传失败
  */
 public enum CWMessageUploadState: Int {
-    case None    = -1
-    case Loading = 0
-    case Success = 1
-    case Fail    = 2
+    case None
+    case Loading
+    case Success
+    case Fail
 }
 
 

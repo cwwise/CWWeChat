@@ -12,6 +12,8 @@ protocol CWXMPPProtocol {
     
 }
 
+let CWXMPPMessageChatType:String = "chat"
+
 public enum CWUserStatus: String {
     case None = "none"
     case Online = "available"

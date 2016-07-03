@@ -25,20 +25,37 @@ class CWImageMessageCell: CWBaseMessageCell {
     override func updateMessage(message: CWMessageModel) {
         super.updateMessage(message)
         
-        let imageMessage = message as! CWImageMessageModel
         //如果是自己发送，在右边
         if message.messageOwnerType == .Myself {
             let sendImage = CWAsset.Message_sender_bg.image.resizableImage()
             messageImageView.backgroundImage = sendImage
+            
+            messageImageView.snp_remakeConstraints(closure: { (make) in
+                make.top.equalTo(self.messageBackgroundView)
+                make.right.equalTo(self.messageBackgroundView)
+            })
+            
+            
         } else {
             let receiveImage = CWAsset.Message_receiver_bg.image.resizableImage()
             messageImageView.backgroundImage = receiveImage
+            
+            messageImageView.snp_remakeConstraints(closure: { (make) in
+                make.top.equalTo(self.messageBackgroundView)
+                make.left.equalTo(self.messageBackgroundView)
+            })
+            
         }
+        
+        messageImageView.snp_updateConstraints { (make) in
+//            make.size.equalTo(<#T##other: CGFloat##CGFloat#>)
+        }
+        
 //        let imagePath = NSFileManager.pathUserChatImage(imageMessage.imagePath!)
 //        messageImageView.setThumbnailPath(imagePath)
-        updateProgressView(0, result: message.messageUploadState)
+//        updateProgressView(0, result: message.messageUploadState)
         
-        updateMessageCellState()
+//        updateMessageCellState()
     }
     
     override func updateProgressView(progress:CGFloat, result: CWMessageUploadState) {

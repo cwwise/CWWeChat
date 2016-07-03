@@ -107,7 +107,7 @@ class CWChatDBRecordStore: NSObject {
             let query = recordTable.filter(userId==message.messageSendId! && friendId == message.messageReceiveId!)
             let count = recordDB.scalar(query.count)
             if count == 0 {
-               let rowid = try recordDB.run(recordTable.insert(userId <- message.messageSendId!,
+               let _ = try recordDB.run(recordTable.insert(userId <- message.messageSendId!,
                     friendId <- message.messageReceiveId!,
                     record_type <- message.messageType.rawValue,
                     date <- dataString,
@@ -225,14 +225,11 @@ class CWChatDBRecordStore: NSObject {
     }
     
     func lastUpdateRecordById(uid: String,fid:String) -> CWConversationModel {
-        
         do {
             var record = CWConversationModel()
             let query = recordTable.filter(uid == uid && fid == friendId)
             let result = try recordDB.prepare(query)
-            print(query.asSQL(),result)
             for row in result.reverse() {
-                
                 record = createDBRecordByFMResult(row, uid: uid)
             }
             return record

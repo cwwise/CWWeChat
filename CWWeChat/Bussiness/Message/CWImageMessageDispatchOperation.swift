@@ -16,17 +16,39 @@ import UIKit
 class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
 
     var imageUploadState:CWMessageUploadState = .None
-    let manager = CWResourceUploadManager.sharedInstance
+    let manager = CWResourceUploadManager()
     
     override func sendMessage() {
+        
+        if imageUploadState == .Success {
+            sendContentMessage()
+        } else {
+            uploadImage()
+        }
+        
+    }
+    
+    func uploadImage() {
         
         guard let chatMessage = self.chatMessage else {
             return
         }
-        
         //上传照片
-        manager.uploadImage(chatMessage.content!)
-        
+        manager.uploadImage(chatMessage.content!) { (progress, result) in
+            if result == true && progress == 1.0 {
+                CWLogDebug("上传成功..")
+                self.imageUploadState = .Success
+                self.sendContentMessage()
+            }
+            else if result == false && progress == 0.0 {
+                CWLogDebug("上传失败..")
+                self.imageUploadState = .Fail
+            }
+            else {
+                self.imageUploadState = .Loading
+                CWLogDebug("上传进度: \(progress)")
+            }
+        }
     }
     
     func sendContentMessage() {
@@ -36,9 +58,9 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
         
         let toId = chatMessage.messageReceiveId
         let messageId = chatMessage.messageID
-        let content = chatMessage.content
+        let content = chatMessage.content!
         
-        let sendResult = messageTransmitter.sendMessage(content!, toId: toId!, messageId: messageId)
+        let sendResult = messageTransmitter.sendMessage(content, toId: toId!, messageId: messageId, type: 2)
         messageSendCallback(sendResult)
     }
     

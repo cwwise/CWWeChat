@@ -12,32 +12,35 @@ import Qiniu
 let token_key = "9tsvBuxK559rDYQdXGipXiLyWlru9hDyP2LzOB9S:EbR4FPoarTXBsAB_2nT8_5bi3qk=:eyJzY29wZSI6ImNoYXRtZXNzYWdlLWltYWdlIiwiZGVhZGxpbmUiOjE0Njc2MTIwNDR9"
 
 class CWResourceUploadManager: NSObject {
-
-    static let sharedInstance = CWResourceUploadManager()
     
+    typealias UploadImageHandle = (Float, Bool) -> Void
+
     var manager:QNUploadManager
-    private override init() {
+    
+    override init() {
         manager = QNUploadManager()
         super.init()
     }
     
     
-    func uploadImage(imageName: String) {
+    func uploadImage(imageName: String, handle: UploadImageHandle) {
         
+        //
         let progressHandler = { (string: String!, progess: Float!) in
-//            print(string,progess)
+            handle(progess,false)
         }
         
         let filePath = CWUserAccount.sharedUserAccount().pathUserChatImage(imageName)
-
-        
-        let token = QNUpToken.parse(token_key)
-        print(token.bucket)
         
         let option = QNUploadOption(mime: nil, progressHandler: progressHandler, params: nil, checkCrc: false, cancellationSignal: nil)
         self.manager.putFile(filePath, key: imageName, token: token_key, complete: { (response, string, info) in
-            print(response)
-            print(string)
+           
+            if response != nil {
+                handle(1.0,true)
+            } else {
+                handle(0,false)
+            }
+            
             }, option: option)
 
     }

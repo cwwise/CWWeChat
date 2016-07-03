@@ -105,6 +105,8 @@ class CWChatViewController: CWBaseMessageViewController {
         
         tableView.registerClass(CWBaseMessageCell.self, forCellReuseIdentifier: CWMessageType.None.reuseIdentifier())
         tableView.registerClass(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.Text.reuseIdentifier())
+        tableView.registerClass(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.Image.reuseIdentifier())
+
     }
     
     deinit {
@@ -185,22 +187,23 @@ extension CWChatViewController: CWInputToolBarDelegate {
         CWLogDebug("发送文字:\(text)")
         
         let message = CWMessageModel()
-        message.content = text
         message.messageType = .Text
         message.messageOwnerType = .Myself
+        message.content = text
         sendMessage(message)
     }
     
     func chatInputView(inputView: CWInputToolBar, sendImage imageName: String ,extentInfo:Dictionary<String,AnyObject>) {
         
         let message = CWMessageModel()
-        message.content = imageName
         message.messageType = .Image
         message.messageOwnerType = .Myself
-        self.dispatchMessage(message)
+        message.content = imageName
+        message.messageSendId = CWUserAccount.sharedUserAccount().userID
+        message.messageReceiveId = contactId
         
+        self.dispatchMessage(message)
     }
-    
     
     /**
      发送消息体

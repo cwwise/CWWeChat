@@ -1,5 +1,5 @@
 //
-//  CWImageMessageModel.swift
+//  CWMessageFrame.swift
 //  CWWeChat
 //
 //  Created by chenwei on 16/7/3.
@@ -8,8 +8,7 @@
 
 import UIKit
 
-class CWImageMessageModel: CWMessageModel {
-    
-    
-    
+struct CWMessageFrame {
+    var cellOfHeight: CGFloat
+    var contentSize: CGSize
 }

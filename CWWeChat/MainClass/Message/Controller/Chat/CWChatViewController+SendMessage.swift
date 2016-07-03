@@ -24,10 +24,10 @@ extension CWChatViewController: CWMessageDispatchQueueDelegate {
     ///收到消息
     override func receiveNewMessage(message: CWMessageModel) {
         
-            messageList.append(message)
-            let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
-            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-            updateMessageAndScrollBottom(false)
+        messageList.append(message)
+        let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
+        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        updateMessageAndScrollBottom(false)
     }
     
     

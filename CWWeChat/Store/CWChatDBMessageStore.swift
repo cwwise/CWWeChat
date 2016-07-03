@@ -168,8 +168,8 @@ class CWChatDBMessageStore: NSObject {
                 //                upload_status <- message.messageUploadState.rawValue,
                 ext1 <- "")
             
-            let rowid = try messageDB.run(sql)
-            CWLogDebug("插入消息成功: \(message.messageID), \(rowid)")
+            try messageDB.run(sql)
+            CWLogDebug("插入消息成功: \(message.messageID)")
             recordDBStore.addRecordByMessage(message, needUnread: message.messageOwnerType != .Myself)
         } catch {
             CWLogDebug("插入消息失败: \(error), \(message.messageID)")
@@ -200,7 +200,6 @@ extension CWChatDBMessageStore {
         
         let dateInterval = "\(fromDate.timeIntervalSince1970)"
         let query = messageTable.filter(uId == userID && friendId==partnerID && date < dateInterval).order(date.desc).limit(count)
-        CWLogDebug(query.asSQL())
         do {
             let count = messageDB.scalar(messageTable.filter(uId == userID && friendId==partnerID).count)
             let result = try messageDB.prepare(query)

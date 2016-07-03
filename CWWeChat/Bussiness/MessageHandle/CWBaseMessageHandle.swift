@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MMXXMPPFramework
 
 protocol CWMessageHandleProtocol:NSObjectProtocol {
     func handleResult(handle: CWBaseMessageHandle, message: CWMessageModel, isDelay: Bool)
@@ -22,10 +23,22 @@ class CWBaseMessageHandle: NSObject {
         super.init()
     }
     
-    func handleMessage(message: CWXMPPMessage) {
+    func handleMessage(message: XMPPMessage) {
         
     }
     
+    
+    func analyMessageContent(message: XMPPMessage) -> (String, CWMessageType) {
+        let body = message.elementForName("body")
+        let type = body.attributeForName("type")
+        if type == nil {
+            return (body.stringValue(), CWMessageType(rawValue: 1)!)
+        }
+        let typeValue = Int(type.stringValue())!
+        return (body.stringValue(), CWMessageType(rawValue: typeValue)!)
+    }
+    
+    //这是争对第二种方式获取消息的类型
     /**
      解析消息体，根据消息的前缀 正则匹配出，解析消息的类型
      

@@ -62,9 +62,8 @@ extension CWMessageCracker: XMPPStreamDelegate {
                 return
             }
             
-            let cwMessage = CWXMPPMessage(message: message)
             //处理消息
-            messagehandle.handleMessage(cwMessage)
+            messagehandle.handleMessage(message)
             
         }
         
