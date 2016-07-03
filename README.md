@@ -38,12 +38,13 @@
  ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Mine.png)
 
 ##<a id="Bug反馈"></a>Bug反馈
-[Bug反馈](https://github.com/Wzxhaha/WWeChat/issues/new)
+[Bug反馈](https://github.com/wei18810109052/CWWeChat/issues)
 
 ##<a id="联系我"></a>联系我
 如果你有建议欢迎发邮件至email: wei18810109052@163.com
 
 ##参考和感谢
 [WWeChat](https://github.com/Wzxhaha/WWeChat) 
+
 [TLChat](https://github.com/tbl00c/TLChat)
 
