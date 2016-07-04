@@ -22,8 +22,6 @@ class CWConversationCell: UITableViewCell {
     ///头像
     private var headerImageView:UIImageView = {
         let headerImageView = UIImageView()
-        headerImageView.clipsToBounds = true
-        headerImageView.layer.cornerRadius = 3
         return headerImageView
     }()
 
@@ -53,6 +51,7 @@ class CWConversationCell: UITableViewCell {
     ///badgeView
     private var badgeView:CWBadgeView = {
         let badgeView = CWBadgeView()
+        badgeView.backgroundColor = UIColor.clearColor()
         return badgeView
     }()
     
@@ -62,10 +61,10 @@ class CWConversationCell: UITableViewCell {
         self.selectionStyle = UITableViewCellSelectionStyle.Default
         
         self.contentView.addSubview(self.headerImageView)
-        self.contentView.addSubview(self.badgeView)
         self.contentView.addSubview(self.usernameLabel)
         self.contentView.addSubview(self.timeLabel)
         self.contentView.addSubview(self.detailInfoLabel)
+        self.headerImageView.addSubview(self.badgeView)
         
         setupViewFrame()
     }

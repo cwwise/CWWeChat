@@ -51,6 +51,7 @@ class CWConversationsViewController: CWBaseMessageViewController {
         
         self.title = "微信"
         self.view.addSubview(self.tableView)
+        self.tabBarItem.badgeValue = self.dbRecordStore.allUnreadMessage()
     }
     
     func registerCellClass() {
@@ -66,6 +67,7 @@ class CWConversationsViewController: CWBaseMessageViewController {
     
     func sendMessage() {
         
+
         
     }
 
@@ -131,6 +133,7 @@ extension CWConversationsViewController: CWChatDBRecordStoreDelegate {
     
     func needUpdateRecordList(record: CWConversationModel, isAdd: Bool) {
         
+        self.tabBarItem.badgeValue = self.dbRecordStore.allUnreadMessage()
         if isAdd {
             self.conversationList.insert(record, atIndex: 0)
             let indexPath = NSIndexPath(forRow: 0, inSection: 0)
@@ -142,8 +145,17 @@ extension CWConversationsViewController: CWChatDBRecordStoreDelegate {
 //            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
 //            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
         }
-        
-      
+    }
+    
+    func updateUnReadCount(record: CWConversationModel) {
+        //只是更新unReadCount
+        for conversation in conversationList {
+            if record.partnerID == conversation.partnerID {
+                conversation.unreadCount = 0
+            }
+        }
+        self.tableView.reloadData()
+        self.tabBarItem.badgeValue = self.dbRecordStore.allUnreadMessage()
     }
 }
 

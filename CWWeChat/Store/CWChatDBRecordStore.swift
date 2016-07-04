@@ -10,7 +10,11 @@
 import UIKit
 import SQLite
 
+/// 用来更新会话界面的逻辑。
 protocol CWChatDBRecordStoreDelegate:class {
+    /// 用来更新未读数量
+    func updateUnReadCount(record: CWConversationModel)
+    /// 当收到消息 刷新会话界面
     func needUpdateRecordList(record: CWConversationModel, isAdd: Bool)
 }
 
@@ -176,11 +180,26 @@ class CWChatDBRecordStore: NSObject {
         let query = recordTable.filter(userId==uid && friendId==fid)
         do {
             try recordDB.run(query.update(unread_count <- 0))
+            if let delegate = delegate {
+                let record = lastUpdateRecordById(uid, fid: fid)
+                dispatch_async_safely_to_main_queue({
+                    delegate.updateUnReadCount(record)
+                })
+            }
         } catch {
             print(error)
         }
     }
     
+    
+    func allUnreadMessage() -> String? {
+    
+        let sum = recordDB.scalar(recordTable.select(unread_count.sum))
+        if sum == nil || sum == 0 {
+            return nil
+        }
+        return "\(Int(sum!))"
+    }
     
     //MARK: 获取所有会话
     /**

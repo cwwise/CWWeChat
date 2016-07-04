@@ -57,11 +57,10 @@ extension CWMessageCracker: XMPPStreamDelegate {
         //如果是聊天消息
         if message.isChatMessage() {
             
-            CWLogDebug(message.description)
             if message.isChatMessageWithBody() == false {
                 return
             }
-            
+            CWLogDebug(message.description)
             //处理消息
             messagehandle.handleMessage(message)
             
