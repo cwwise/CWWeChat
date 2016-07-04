@@ -6,6 +6,7 @@
 * 如果你喜欢，欢迎Star、Fork!
 
 ##目录
+- [运行说明](#运行说明)
 - [更新日志](#更新日志)
 - [截图](#GIF)
   - [UI部分](#UI部分)
@@ -13,7 +14,16 @@
 - [Bug反馈](#Bug反馈)
 - [联系我](#联系我) 
 
+##<a id="运行说明"></a>运行说明
+运行环境Xcode7.3 iOS8以上，使用swift2.2，swift3将在项目大体完成后，进行改进。
+项目使用cocoaPod管理，下载之后运行pod install
+之后需要安装[ejabberd](https://www.process-one.net/en/ejabberd/downloads/),可以按照我写的简易[教材](https://github.com/wei18810109052/CWWeChat/wiki/XMPP%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA)安装。
+安装好之后，可以查看[脚本文件](https://github.com/wei18810109052/CWWeChat/blob/master/scripts/createuser.sh)，注册用户。便于测试。
+
+
 ##<a id="更新日志"></a>更新日志
+* 2016.7.3  添加七牛图片存储部分，待完成图片发送部分。
+* 2016.6.28 完成xmpp聊天部分，发送，存储，显示的流程
 * 2016.6.26 对消息部分整理和消息发送界面简单实现
 * 2016.6.25 添加xmpp逻辑处理以及xmpp服务器搭建教程
 * 2016.6.24 完成通讯录界面和一部分我的设置界面
@@ -28,12 +38,13 @@
  ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Mine.png)
 
 ##<a id="Bug反馈"></a>Bug反馈
-[Bug反馈](https://github.com/Wzxhaha/WWeChat/issues/new)
+[Bug反馈](https://github.com/wei18810109052/CWWeChat/issues)
 
 ##<a id="联系我"></a>联系我
 如果你有建议欢迎发邮件至email: wei18810109052@163.com
 
 ##参考和感谢
 [WWeChat](https://github.com/Wzxhaha/WWeChat) 
+
 [TLChat](https://github.com/tbl00c/TLChat)
 
