@@ -122,7 +122,7 @@ class CWConversationCell: UITableViewCell {
         
         if let userModel = userModel {
             
-            self.headerImageView.af_setImageWithURL(NSURL(string: userModel.avatarURL!)!)
+            self.headerImageView.af_setImageWithURL(NSURL(string: userModel.avatarURL!)!, placeholderImage: defaultHeadeImage)
             self.usernameLabel.text = userModel.nikeName
         }
         

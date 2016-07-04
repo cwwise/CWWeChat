@@ -117,20 +117,20 @@ extension CWAddressBookViewController: UITableViewDataSource {
     
 }
 
-private let HEIGHT_FRIEND_CELL:CGFloat   =   54.0
-private let HEIGHT_HEADER:CGFloat        =   22.0
+private let heightOfFriendcell:CGFloat   =   54.0
+private let height_header:CGFloat        =   22.0
 
 extension CWAddressBookViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return HEIGHT_FRIEND_CELL
+        return heightOfFriendcell
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 0
         }
-        return HEIGHT_HEADER
+        return height_header
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -142,6 +142,12 @@ extension CWAddressBookViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        if indexPath.section == 0 {
+            
+            
+            return
+        }
         
         let chatVC = CWChatViewController()
         let userModel = groupList[indexPath.section][indexPath.row]

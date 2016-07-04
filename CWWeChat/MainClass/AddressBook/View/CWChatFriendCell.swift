@@ -29,24 +29,25 @@ class CWChatFriendCell: UITableViewCell {
     
     lazy var usernameLabel:UILabel = {
         let usernameLabel = UILabel()
+        usernameLabel.backgroundColor = UIColor.whiteColor()
         usernameLabel.font = UIFont.systemFontOfSize(15)
         return usernameLabel
     }()
     
-    lazy var subTitleLabel:UILabel = {
-        let subTitleLabel = UILabel()
-        subTitleLabel.font = UIFont.systemFontOfSize(14.0)
-        subTitleLabel.textColor = UIColor.grayColor()
-        subTitleLabel.hidden = true
-        return subTitleLabel
-    }()
+//    lazy var subTitleLabel:UILabel = {
+//        let subTitleLabel = UILabel()
+//        subTitleLabel.font = UIFont.systemFontOfSize(14.0)
+//        subTitleLabel.textColor = UIColor.grayColor()
+//        subTitleLabel.hidden = true
+//        return subTitleLabel
+//    }()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         self.contentView.addSubview(avatarImageView)
         self.contentView.addSubview(usernameLabel)
-        self.contentView.addSubview(subTitleLabel)
+//        self.contentView.addSubview(subTitleLabel)
         addSnap()
     }
     
@@ -75,7 +76,7 @@ class CWChatFriendCell: UITableViewCell {
         if (userModel.avatarPath != nil) {
             self.avatarImageView.image = UIImage(named: userModel.avatarPath!)
         } else {
-            self.avatarImageView.af_setImageWithURL(NSURL(string: userModel.avatarURL!)!)
+            self.avatarImageView.af_setImageWithURL(NSURL(string: userModel.avatarURL!)!, placeholderImage: defaultHeadeImage)
         }
         self.usernameLabel.text = userModel.nikeName;
     }

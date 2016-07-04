@@ -28,5 +28,6 @@ target 'CWWeChat' do
   pod 'MMXXMPPFramework'
 
   pod 'Qiniu'
+  pod 'MBProgressHUD'
 
 end

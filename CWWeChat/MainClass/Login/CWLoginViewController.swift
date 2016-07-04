@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class CWLoginViewController: UIViewController, CWToastShowProtocol {
     
@@ -16,6 +17,7 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
         userNameTextField.font = UIFont.systemFontOfSize(14)
         userNameTextField.placeholder = "微信号/邮箱地址/QQ号"
         userNameTextField.leftViewMode = .Always
+        userNameTextField.addTarget(self, action: #selector(textValueChanged(_:)), forControlEvents: .EditingChanged)
         userNameTextField.keyboardType = .ASCIICapable
         userNameTextField.spellCheckingType = .No
         userNameTextField.delegate = self
@@ -31,6 +33,7 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
         passwordTextField.leftViewMode = .Always
         passwordTextField.secureTextEntry = true
         passwordTextField.delegate = self
+        passwordTextField.addTarget(self, action: #selector(textValueChanged(_:)), forControlEvents: .EditingChanged)
         passwordTextField.leftView = self.leftView("密码")
         return passwordTextField
     }()
@@ -127,7 +130,6 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
         
         self.view.endEditing(true)
 
-        
         let userName = userNameTextField.text!
         let password = passwordTextField.text!
         
@@ -136,11 +138,29 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
             
         }
         
-        let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appdelegate.loginSuccess()
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.mode = .Indeterminate
+        hud.labelText = "Loading..."
+        dispatch_async(dispatch_get_global_queue(0, 0)) { 
+            sleep(3)
+            dispatch_async_safely_to_main_queue({ 
+                hud.hide(true)
+                let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appdelegate.loginSuccess()
+            })
+          
+        }
     }
     
+    func textValueChanged(textField: UITextField) {
+        let first = judgeTextFieldIsAvailable(userNameTextField)
+        let seconde = judgeTextFieldIsAvailable(passwordTextField)
+        self.loginButton.enabled = first && seconde
+    }
     
+    func judgeTextFieldIsAvailable(textField: UITextField) -> Bool {
+        return textField.text?.characters.count >= 6
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -175,13 +195,6 @@ extension CWLoginViewController: UITextFieldDelegate {
         if string.characters.count + (textField.text?.characters.count)! > 25 {
             return false
         }
-        
-        if passwordTextField.text != "" && userNameTextField.text != "" {
-            loginButton.enabled = true
-        } else {
-            loginButton.enabled = false
-        }
-        
         
         return true
     }

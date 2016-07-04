@@ -95,12 +95,13 @@ class CWContactManager: NSObject {
         let othergroup = CWContactGroup(groupName: "#")
         
         var currentGroup: CWContactGroup?
-        var lastInitial = "#"
+        var lastInitial = "-1"
         
         for userModel in contactsData {
+            
             //首字母
             let initial = userModel.pinyingInitial
-    
+//            CWLogDebug(initial)
             if initial.characters.count == 0 {
                 othergroup.append(userModel)
                 continue
@@ -111,16 +112,14 @@ class CWContactManager: NSObject {
                 
                 if (currentGroup != nil) && currentGroup!.contactCount > 0 {
                     analyzeGroupData.append(currentGroup!)
-                    sectionHeaders.append(initial)
+                    sectionHeaders.append(currentGroup!.groupName!)
                 }
                 lastInitial = initial
                 currentGroup = CWContactGroup(groupName: initial)
                 currentGroup?.append(userModel)
                 
             } else {
-                
                 currentGroup!.append(userModel)
-            
             }
         }
         
@@ -128,6 +127,7 @@ class CWContactManager: NSObject {
             analyzeGroupData.append(currentGroup!)
             sectionHeaders.append(lastInitial)
         }
+        
         if (othergroup.contactCount > 0) {
             analyzeGroupData.append(othergroup)
             sectionHeaders.append(othergroup.groupName!)
