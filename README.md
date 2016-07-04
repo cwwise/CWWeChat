@@ -22,6 +22,7 @@
 
 
 ##<a id="更新日志"></a>更新日志
+* 2016.7.4  完成会话界面，显示未读数量的逻辑。下一步主要完善消息发送界面。
 * 2016.7.3  添加七牛图片存储部分，待完成图片发送部分。
 * 2016.6.28 完成xmpp聊天部分，发送，存储，显示的流程
 * 2016.6.26 对消息部分整理和消息发送界面简单实现
@@ -31,11 +32,13 @@
 
 ##<a id="GIF"></a>截图
 ###<a id="UI部分"></a>UI部分
- ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Address_1.png)
+ ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Message_2.png)
+
+ ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Address_2.png)
  
- ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Discover.png)
+ ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Discover_2.png)
  
- ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Mine.png)
+ ![image](https://github.com/wei18810109052/CWWeChat/blob/master/source/Images/Simulator_Mine_2.png)
 
 ##<a id="Bug反馈"></a>Bug反馈
 [Bug反馈](https://github.com/wei18810109052/CWWeChat/issues)
