@@ -15,7 +15,7 @@ let Max_RepeatCount:Int = 5
 class CWMessageDispatchOperation: NSOperation {
     
     /// 消息实体
-    weak var chatMessage: CWMessageProtocol?
+    weak var chatMessage: CWMessageModel?
     /**
       进度回调的block
      
@@ -103,7 +103,7 @@ class CWMessageDispatchOperation: NSOperation {
      
      - returns: 返回对应的消息Operation
      */
-    class func dispatchOperationWithMessage(message:CWMessageProtocol) -> CWMessageDispatchOperation {
+    class func dispatchOperationWithMessage(message:CWMessageModel) -> CWMessageDispatchOperation {
         
         if message.messageType == .Text {
             return CWTextMessageDispatchOperation(message:message)
@@ -116,7 +116,7 @@ class CWMessageDispatchOperation: NSOperation {
         }
     }
     
-    init(message: CWMessageProtocol) {
+    init(message: CWMessageModel) {
         self.chatMessage = message
         repeatCount = 1
         messageSendResult = false

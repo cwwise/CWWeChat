@@ -19,7 +19,7 @@ import SQLite
  */
 class CWChatDBMessageStore: NSObject {
 
-    typealias ChatHistoryMessagesHandle = ([CWMessageProtocol], NSDate,Bool) -> ()
+    typealias ChatHistoryMessagesHandle = ([CWMessageModel], NSDate,Bool) -> ()
     typealias InsertMessageAction = (Bool) -> ()
 
     // TODO: 修改名称避免过程中的问题,需要修改一些变量名称
@@ -141,7 +141,7 @@ class CWChatDBMessageStore: NSObject {
      
      - returns: 添加消息的结果
      */
-    func appendMessage(message: CWMessageProtocol, complete: InsertMessageAction) {
+    func appendMessage(message: CWMessageModel, complete: InsertMessageAction) {
         
         guard let userID = message.messageSendId, let friendID = message.messageReceiveId else {
             CWLogError("插入消息失败: 消息体缺少参数, \(message.messageID)")
@@ -204,7 +204,7 @@ extension CWChatDBMessageStore {
             let count = messageDB.scalar(messageTable.filter(uId == userID && friendId==partnerID).count)
             let result = try messageDB.prepare(query)
             
-            var listData = [CWMessageProtocol]()
+            var listData = [CWMessageModel]()
             //需要反转，得到正确的顺序
             for row in result.reverse() {
                 let message = createDBMessageByFMResult(row)
@@ -226,7 +226,7 @@ extension CWChatDBMessageStore {
      
      - returns: 最后一个消息对象
      */
-    func lastMessageByUserID(userID:String, partnerID:String) -> CWMessageProtocol? {
+    func lastMessageByUserID(userID:String, partnerID:String) -> CWMessageModel? {
         let query = messageTable.filter(uId == userID && friendId==partnerID).order(date.desc).limit(1)
         if let row = messageDB.pluck(query) {
             let message = createDBMessageByFMResult(row)
@@ -243,7 +243,7 @@ extension CWChatDBMessageStore {
      
      - returns: 消息的数组
      */
-    func createDBMessageByFMResult(row:Row) -> CWMessageProtocol {
+    func createDBMessageByFMResult(row:Row) -> CWMessageModel {
         
 //        let type = CWMessageType(rawValue: row[msg_type])!
         let message = CWMessageModel()

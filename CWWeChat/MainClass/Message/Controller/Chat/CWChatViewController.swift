@@ -41,7 +41,7 @@ class CWChatViewController: CWBaseMessageViewController {
     }()
     
     /// 消息数据数组
-    var messageList = Array<CWMessageProtocol>()
+    var messageList = Array<CWMessageModel>()
     
     /// TableView
     lazy var tableView: UITableView = {
@@ -139,12 +139,12 @@ extension CWChatViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let message = messageList[indexPath.row] as! CWMessageModel
+        let message = messageList[indexPath.row] 
         return message.cellHeight
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let message = messageList[indexPath.row] as! CWMessageModel
+        let message = messageList[indexPath.row] 
         
         let chatMessageCell = tableView.dequeueReusableCellWithIdentifier(message.messageType.reuseIdentifier(), forIndexPath: indexPath) as! CWBaseMessageCell
         
@@ -211,7 +211,7 @@ extension CWChatViewController: CWInputToolBarDelegate {
      发送消息 先保存数据库 保存成功后天就到数据库，并且发送到服务器
      - parameter message: 消息体
      */
-    func sendMessage(message: CWMessageProtocol)  {
+    func sendMessage(message: CWMessageModel)  {
         
         message.messageSendId = CWUserAccount.sharedUserAccount().userID
         message.messageReceiveId = contactId
@@ -219,8 +219,9 @@ extension CWChatViewController: CWInputToolBarDelegate {
         dbMessageStore.appendMessage(message) { (isSuccess) in
             self.dispatchMessage(message)
             self.messageList.append(message)
-            let indexPath = NSIndexPath(forRow: self.messageList.count-1, inSection: 0)
-            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+            self.tableView.reloadData()
+//            let indexPath = NSIndexPath(forRow: self.messageList.count-1, inSection: 0)
+//            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
             self.updateMessageAndScrollBottom(false)
         }
     }
@@ -231,7 +232,7 @@ extension CWChatViewController: CWInputToolBarDelegate {
      
      - parameter message: 消息体
      */
-    func dispatchMessage(message: CWMessageProtocol) {
+    func dispatchMessage(message: CWMessageModel) {
         messageDispatchQueue.sendMessage(message)
     }
     

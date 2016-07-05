@@ -11,11 +11,11 @@ import UIKit
 // MARK: - 发送消息部分
 extension CWChatViewController: CWMessageDispatchQueueDelegate {
     
-    func chatmessageSendState(message: CWMessageProtocol, sendState state: Bool) {
+    func chatmessageSendState(message: CWMessageModel, sendState state: Bool) {
         
     }
     
-    func uploadDataProgress(message: CWMessageProtocol, progress: CGFloat, result: Bool) {
+    func uploadDataProgress(message: CWMessageModel, progress: CGFloat, result: Bool) {
         
     }
     
@@ -25,9 +25,11 @@ extension CWChatViewController: CWMessageDispatchQueueDelegate {
     override func receiveNewMessage(message: CWMessageModel) {
         
         messageList.append(message)
+//        self.tableView.reloadData()
         let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
-        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-        updateMessageAndScrollBottom(false)
+        self.tableView.insertRowsAtBottom([indexPath])
+//        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+//        updateMessageAndScrollBottom(false)
     }
     
     
@@ -41,7 +43,7 @@ extension CWChatViewController: CWMessageDispatchQueueDelegate {
         //先将此条对话的未读条数设置0
         dbRecordStore.updateUnReadCountToZeroWithUserId(userid, fid: friendUser!.userId)
         //获取数据
-        dbMessageStore.messagesByUserID(userid, partnerID: friendUser!.userId, fromDate: currentDate, count: 15) { (array:[CWMessageProtocol], date:NSDate,needMore:Bool) in
+        dbMessageStore.messagesByUserID(userid, partnerID: friendUser!.userId, fromDate: currentDate, count: 15) { (array:[CWMessageModel], date:NSDate,needMore:Bool) in
             
             guard array.count > 0 else {
                 return

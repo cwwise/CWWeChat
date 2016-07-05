@@ -101,7 +101,7 @@ class CWChatDBRecordStore: NSObject {
      
      - returns: 添加消息的结果
      */
-    func addRecordByMessage(message: CWMessageProtocol, needUnread unread:Bool = false) -> Bool {
+    func addRecordByMessage(message: CWMessageModel, needUnread unread:Bool = false) -> Bool {
         let dataString = "\(message.messageSendDate.timeIntervalSince1970)"
         var unreadCount = unreadMessageByUid(message.messageSendId!, fid: message.messageReceiveId!)
         if unread {
@@ -134,7 +134,7 @@ class CWChatDBRecordStore: NSObject {
     }
     
     // MARK: 更新消息
-    func updateRecord(message:CWMessageProtocol, unread_count count:Int = 0) -> Bool {
+    func updateRecord(message:CWMessageModel, unread_count count:Int = 0) -> Bool {
         
         let query = recordTable.filter(userId==message.messageSendId! && friendId == message.messageReceiveId!)
         do {

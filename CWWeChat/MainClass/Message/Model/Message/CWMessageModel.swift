@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWMessageModel: NSObject,CWMessageProtocol {
+class CWMessageModel: NSObject {
 
     ///消息ID
     var messageID: String
@@ -24,26 +24,18 @@ class CWMessageModel: NSObject,CWMessageProtocol {
     var messageOwnerType: CWMessageOwnerType
     ///消息发送时间
     var messageSendDate: NSDate
-    
+//    var messageReceivedDate: NSDate
+
     ///消息状态
     var messageSendState: CWMessageSendState
-    
+//    var messageReadState: CWMessageReadState   //消息读取状态
+
     var messageUploadState: CWMessageUploadState
     
-    var composing: Bool
-
-    var content: String? {
-        didSet {
-            
-            if let content: NSString = content {
-                
-              
-                
-              
-            }
-            
-        }
-    }
+    /// 消息内容
+    var messageContent: CWMessageContent?
+    
+    var content: String?
     
     var messageFrame: CWMessageFrame?
     
@@ -76,7 +68,6 @@ class CWMessageModel: NSObject,CWMessageProtocol {
         messageType = .None
         messageOwnerType = .None
         chatType = .None
-        composing = false
         messageSendDate = NSDate()
         messageSendState = .None
         messageUploadState = .None

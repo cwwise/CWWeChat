@@ -44,6 +44,7 @@ PODS:
   - CocoaLumberjack/Swift (2.3.0):
     - CocoaLumberjack/Extensions
   - HappyDNS (0.3.5)
+  - MBProgressHUD (0.9.2)
   - MMXXMPPFramework (3.6.15):
     - MMXXMPPFramework/Core (= 3.6.15)
     - MMXXMPPFramework/CoreDataStorage (= 3.6.15)
@@ -89,6 +90,7 @@ DEPENDENCIES:
   - ChameleonFramework/Swift
   - CocoaAsyncSocket
   - CocoaLumberjack/Swift
+  - MBProgressHUD
   - MMXXMPPFramework
   - Qiniu
   - SnapKit
@@ -103,12 +105,13 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   HappyDNS: 6f8cf46fa7c0b98a6591fe8ecb2e08d9907a6e8b
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MMXXMPPFramework: 12ac458346387dc8a3fb157dc56db65e13be5a9b
   Qiniu: 8958e70c02fb563c8c04d555bb5041441c5f4216
   SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
   SQLite.swift: 6a6e4b034efc317ce4e203b6af2d3024fee2b570
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 18db57d8b06ba32e5467a11bf991e8fb34e46b00
+PODFILE CHECKSUM: e488f5c2426a60f03db4a673530a56318121908d
 
 COCOAPODS: 1.0.1

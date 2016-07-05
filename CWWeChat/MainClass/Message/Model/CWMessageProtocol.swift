@@ -137,34 +137,3 @@ public enum CWMessageUploadState: Int {
 let  MAX_SHOWTIME_MESSAGE_COUNT:Int  =     10
 let  MAX_SHOWTIME_MESSAGE_SECOND:Double =     30
 
-//MARK: 消息的协议
-///消息的协议
-protocol CWMessageProtocol: NSObjectProtocol {
-    
-    var messageID: String { get }            //消息ID
-    var messageSendId: String?  { get set }         //发送者ID
-    var messageReceiveId: String? {get set}          //接收者ID
-    
-    var content: String? {get set}
-//    ///是否显示时间
-//    var showTime:Bool { get set }
-//    ///是否用户名称
-//    var showUsername:Bool { get set }
-//
-    var messageSendDate:NSDate {get set}       //消息发送时间
-//
-    var chatType: CWChatType {get set}     //消息接收者
-    var messageOwnerType: CWMessageOwnerType {get set}  //消息所属类型
-    var messageType: CWMessageType {get set}            //消息类型
-//
-    var messageSendState:CWMessageSendState {get set}  //消息发送状态
-//    var messageReadState:CWMessageReadState {get set}  //消息读取状态
-//    var messagePlayState:CWMessagePlayState {get set}  //消息播放状态
-    var messageUploadState:CWMessageUploadState {get set} //消息上传状态
-//    //
-//    //
-//    var conversationContent:String {get}
-//    var contentInfo:Dictionary<String,AnyObject>? {get}
-}
-
-
