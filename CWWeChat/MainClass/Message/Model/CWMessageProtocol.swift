@@ -127,7 +127,7 @@ public enum CWMessagePlayState : Int {
  - Fail:    上传失败
  */
 public enum CWMessageUploadState: Int {
-    case None
+    case None = -1
     case Loading
     case Success
     case Fail

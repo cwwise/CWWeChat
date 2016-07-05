@@ -13,7 +13,7 @@ protocol CWInputToolBarDelegate: class {
     ///发送文字
     func chatInputView(inputView: CWInputToolBar, sendText text: String)
     ///发送图片
-    func chatInputView(inputView: CWInputToolBar, sendImage imageName: String ,extentInfo:Dictionary<String,AnyObject>)
+    func chatInputView(inputView: CWInputToolBar, sendImage imageName: String ,extentInfo:Dictionary<String,String>)
 }
 
 class CWInputToolBar: UIView {

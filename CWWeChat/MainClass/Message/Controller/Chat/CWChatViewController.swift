@@ -105,7 +105,7 @@ class CWChatViewController: CWBaseMessageViewController {
         
         tableView.registerClass(CWBaseMessageCell.self, forCellReuseIdentifier: CWMessageType.None.reuseIdentifier())
         tableView.registerClass(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.Text.reuseIdentifier())
-        tableView.registerClass(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.Image.reuseIdentifier())
+        tableView.registerClass(CWImageMessageCell.self, forCellReuseIdentifier: CWMessageType.Image.reuseIdentifier())
 
     }
     
@@ -147,7 +147,6 @@ extension CWChatViewController: UITableViewDataSource {
         let message = messageList[indexPath.row] 
         
         let chatMessageCell = tableView.dequeueReusableCellWithIdentifier(message.messageType.reuseIdentifier(), forIndexPath: indexPath) as! CWBaseMessageCell
-        
         chatMessageCell.updateMessage(message)
         return chatMessageCell
     }
@@ -187,22 +186,21 @@ extension CWChatViewController: CWInputToolBarDelegate {
         CWLogDebug("发送文字:\(text)")
         
         let messageContent = CWTextMessageContent(content: text)
-        
         let message = CWMessageModel(targetId: contactId, content: messageContent)
         message.content = text
         sendMessage(message)
     }
     
-    func chatInputView(inputView: CWInputToolBar, sendImage imageName: String ,extentInfo:Dictionary<String,AnyObject>) {
+    func chatInputView(inputView: CWInputToolBar, sendImage imageName: String ,extentInfo:Dictionary<String,String>) {
         
-        let message = CWMessageModel()
-        message.messageType = .Image
-        message.messageOwnerType = .Myself
+        let messageContent = CWImageMessageContent(imageURI: imageName)
+        let sizeString = extentInfo["size"]! as String
+        messageContent.imageSize = CGSizeFromString(sizeString)
+        
+        let message = CWMessageModel(targetId: contactId, content: messageContent)
         message.content = imageName
-        message.messageSendId = CWUserAccount.sharedUserAccount().userID
-        message.messageTargetId = contactId
+        sendMessage(message)
         
-        self.dispatchMessage(message)
     }
     
     /**

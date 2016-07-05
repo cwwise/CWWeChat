@@ -17,6 +17,26 @@ extension CWChatViewController: CWMessageDispatchQueueDelegate {
     
     func uploadDataProgress(message: CWMessageModel, progress: CGFloat, result: Bool) {
         
+        CWLogDebug("上传进度: \(progress)")
+        //找到消息 修改消息状态 保存数据库
+        let index = self.messageList.indexOf({$0.messageID == message.messageID})
+//        message.messageUploadState = CWMessageUploadState(rawValue:Int(result))!
+//        self.dbMessageStore.updateMessageStateByMessage(message)
+        
+        guard let localIndex = index else {
+            return
+        }
+        //防止cell 不在显示区域崩溃的问题
+        let indexPath = NSIndexPath(forRow: localIndex, inSection: 0)
+        guard let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? CWBaseMessageCell else {
+            return
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            cell.updateProgressView(CGFloat(progress), result: CWMessageUploadState(rawValue:Int(result))!)
+        })
+        
+        
     }
     
 

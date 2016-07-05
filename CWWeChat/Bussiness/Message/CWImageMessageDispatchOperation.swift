@@ -35,6 +35,11 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
         }
         //上传照片
         manager.uploadImage(chatMessage.content!) { (progress, result) in
+            
+            if let progressBlock = self.progressBlock {
+                progressBlock(progress, result)
+            }
+            
             if result == true && progress == 1.0 {
                 CWLogDebug("上传成功..")
                 self.imageUploadState = .Success
@@ -46,7 +51,6 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
             }
             else {
                 self.imageUploadState = .Loading
-                CWLogDebug("上传进度: \(progress)")
             }
         }
     }

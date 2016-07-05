@@ -39,22 +39,6 @@ class CWMessageModel: NSObject {
     
     var content: String?
     
-//    //计算的高度储存使用，默认0
-//    var cellHeight: CGFloat {
-//        get {
-//            
-//            let size = CGSize(width: kChatTextMaxWidth, height: CGFloat.max)
-//            let attributes = [NSForegroundColorAttributeName:UIColor.whiteColor(),
-//                              NSFontAttributeName: UIFont.systemFontOfSize(16)]
-//            let contentSize = content!.boundingRectWithSize(size, options: .UsesLineFragmentOrigin, attributes: attributes, context: nil).size
-//            return ceil(contentSize.height)+1 + 40
-//            
-//        }
-//        set {
-//            self.cellHeight = newValue
-//        }
-//    }
-
     /// 在会话界面显示
     var conversationContent:String {
         get {
@@ -86,8 +70,10 @@ class CWMessageModel: NSObject {
             let size = CGSize(width: kChatTextMaxWidth, height: CGFloat.max)
             let attributes = [NSForegroundColorAttributeName:UIColor.whiteColor(),
                               NSFontAttributeName: UIFont.systemFontOfSize(16)]
-            let contentSize = contentString.boundingRectWithSize(size, options: .UsesLineFragmentOrigin, attributes: attributes, context: nil).size
-            let heightOfCell = ceil(contentSize.height)+1 + 40
+            var contentSize = contentString.boundingRectWithSize(size, options: .UsesLineFragmentOrigin, attributes: attributes, context: nil).size
+            
+            contentSize = CGSize(width: ceil(contentSize.width), height: ceil(contentSize.height)+1)
+            let heightOfCell = contentSize.height + 40
             
             self.messageFrame = CWMessageFrame(heightOfCell: heightOfCell, contentSize: contentSize)
         }

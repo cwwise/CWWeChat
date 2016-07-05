@@ -22,7 +22,7 @@ class CWChatImageView: UIView {
     
     let indicatorbackgroundView:UIView = {
         let indicatorbackgroundView = UIView()
-        indicatorbackgroundView.backgroundColor = UIColor(hexString: "#80808080")
+        indicatorbackgroundView.backgroundColor = UIColor(hexString: "#808080", withAlpha: 0.8)
         return indicatorbackgroundView
     }()
     
@@ -112,7 +112,7 @@ class CWChatImageView: UIView {
             self.indicatorbackgroundView.hidden = false
             self.activityView.startAnimating()
             self.indicatorLable.hidden = false
-            self.indicatorLable.text = "\(progress)%"
+            self.indicatorLable.text = String(format: "%02d%%",Int(progress*100))
         } else {
             self.indicatorbackgroundView.hidden = true
             self.activityView.stopAnimating()

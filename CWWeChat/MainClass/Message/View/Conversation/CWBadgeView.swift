@@ -63,12 +63,11 @@ class CWBadgeView: UIView {
         
         newFrame.origin.x = superviewWidth - (viewWidth / 2.0);
         newFrame.origin.y = -viewHeight / 2.0;
-        
-        let x = ceilf(Float(CGRectGetMidX(newFrame)))
-        let y = ceilf(Float(CGRectGetMidY(newFrame)))
+        let x = ceil(CGRectGetMidX(newFrame))
+        let y = ceil(CGRectGetMidY(newFrame))
         
         self.bounds = CGRectIntegral(CGRectMake(0, 0, CGRectGetWidth(newFrame), CGRectGetHeight(newFrame)));
-        self.center = CGPointMake(CGFloat(x), CGFloat(y));
+        self.center = CGPointMake(x, y);
         
         self.setNeedsDisplay()
     }

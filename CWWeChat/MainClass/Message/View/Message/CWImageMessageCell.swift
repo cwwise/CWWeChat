@@ -47,13 +47,15 @@ class CWImageMessageCell: CWBaseMessageCell {
             
         }
         
-        messageImageView.snp_updateConstraints { (make) in
-//            make.size.equalTo(<#T##other: CGFloat##CGFloat#>)
+        self.messageImageView.snp_updateConstraints { (make) in
+            make.size.equalTo(message.messageFrame.contentSize)
         }
         
-//        let imagePath = NSFileManager.pathUserChatImage(imageMessage.imagePath!)
-//        messageImageView.setThumbnailPath(imagePath)
-//        updateProgressView(0, result: message.messageUploadState)
+        let imageMessageContent = message.messageContent as! CWImageMessageContent
+        
+        let imagePath = CWUserAccount.sharedUserAccount().pathUserChatImage(imageMessageContent.imageUrl!)
+        messageImageView.setThumbnailPath(imagePath)
+        updateProgressView(0, result: message.messageUploadState)
         
 //        updateMessageCellState()
     }

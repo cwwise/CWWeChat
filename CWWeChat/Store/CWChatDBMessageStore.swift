@@ -59,7 +59,7 @@ class CWChatDBMessageStore: NSObject {
     /// 上传状态
     let upload_status = Expression<Int>("upload_status")
     
-    let ext1 = Expression<String?>("ext1")
+    let ext1 = Expression<String>("ext1")
     
     lazy var messageDB:Connection = {
         //数据
@@ -153,6 +153,12 @@ class CWChatDBMessageStore: NSObject {
         //时间
         let dataString = "\(message.messageSendDate.timeIntervalSince1970)"
         do {
+            var extString = ""
+            if message.messageType == .Image {
+                let imageContent = message.messageContent as! CWImageMessageContent
+                extString = NSStringFromCGSize(imageContent.imageSize)
+            }
+            
 //            let jsonData = try! NSJSONSerialization.dataWithJSONObject(message.contentInfo!, options: .PrettyPrinted)
 //            let strJson = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as? String ?? ""
             let sql = messageTable.insert(messageid <- message.messageID,
@@ -166,7 +172,7 @@ class CWChatDBMessageStore: NSObject {
                                           send_status <- message.messageSendState.rawValue,
                                           //                received_status <- message.messageReadState.rawValue,
                 //                upload_status <- message.messageUploadState.rawValue,
-                ext1 <- "")
+                ext1 <- extString)
             
             try messageDB.run(sql)
             CWLogDebug("插入消息成功: \(message.messageID)")
@@ -262,7 +268,11 @@ extension CWChatDBMessageStore {
         case .Text:
             messageContent = CWTextMessageContent(content: string)
         default:
-            messageContent = CWTextMessageContent(content: string)
+            
+            messageContent = CWImageMessageContent(imageURI: string) as CWImageMessageContent
+            let sizeString = row[ext1]
+            let imageMessageContent = messageContent as! CWImageMessageContent
+            imageMessageContent.imageSize = CGSizeFromString(sizeString)
         }
         
         
@@ -276,6 +286,41 @@ extension CWChatDBMessageStore {
         message.messageSendState = CWMessageSendState(rawValue: row[send_status])!
         
         return message
+    }
+    
+    
+    //MARK: 更新消息
+    /**
+     更新消息状态
+     
+     - parameter message: 消息
+     
+     - returns: 返回修改结果
+     */
+    func updateMessageStateByMessage(message: CWMessageModel?) -> Bool {
+        
+        guard let message = message else {
+            return false
+        }
+        
+        let filter = messageTable.filter(messageid == message.messageID)
+        do {
+            
+            //更新消息状态4中状态
+            //消息发送状态
+            //消息读取状态
+            //消息播放状态
+            //消息上传状态
+            try messageDB.run(filter.update(send_status <- message.messageSendState.rawValue,
+//                received_status <- message.messageReadState.rawValue,
+//                play_status <- (message.messagePlayState.rawValue>=1),
+                upload_status <- message.messageUploadState.rawValue))
+            CWLogDebug("修改消息状态成功: \(message.messageID)")
+            return true
+        } catch {
+            return false
+        }
+        
     }
     
     
