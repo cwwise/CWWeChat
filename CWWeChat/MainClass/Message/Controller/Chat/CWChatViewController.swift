@@ -139,8 +139,8 @@ extension CWChatViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let message = messageList[indexPath.row] 
-        return message.cellHeight
+        let message = messageList[indexPath.row]
+        return message.messageFrame.heightOfCell
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -186,9 +186,9 @@ extension CWChatViewController: CWInputToolBarDelegate {
     func chatInputView(inputView: CWInputToolBar, sendText text: String) {
         CWLogDebug("发送文字:\(text)")
         
-        let message = CWMessageModel()
-        message.messageType = .Text
-        message.messageOwnerType = .Myself
+        let messageContent = CWTextMessageContent(content: text)
+        
+        let message = CWMessageModel(targetId: contactId, content: messageContent)
         message.content = text
         sendMessage(message)
     }
@@ -200,7 +200,7 @@ extension CWChatViewController: CWInputToolBarDelegate {
         message.messageOwnerType = .Myself
         message.content = imageName
         message.messageSendId = CWUserAccount.sharedUserAccount().userID
-        message.messageReceiveId = contactId
+        message.messageTargetId = contactId
         
         self.dispatchMessage(message)
     }
@@ -214,7 +214,6 @@ extension CWChatViewController: CWInputToolBarDelegate {
     func sendMessage(message: CWMessageModel)  {
         
         message.messageSendId = CWUserAccount.sharedUserAccount().userID
-        message.messageReceiveId = contactId
 //        message.showTime = messageNeedShowTime(message.messageSendDate)
         dbMessageStore.appendMessage(message) { (isSuccess) in
             self.dispatchMessage(message)

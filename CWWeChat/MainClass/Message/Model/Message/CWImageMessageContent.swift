@@ -16,7 +16,7 @@ class CWImageMessageContent: CWMessageContent {
     var thumbnailImage: UIImage?
      /// 实际图片URL
     var imageUrl: String?
-    
+    var imageSize: CGSize = CGSizeZero
     
     init(image: UIImage) {
         self.originalImage = image

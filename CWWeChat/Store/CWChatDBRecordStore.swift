@@ -103,22 +103,22 @@ class CWChatDBRecordStore: NSObject {
      */
     func addRecordByMessage(message: CWMessageModel, needUnread unread:Bool = false) -> Bool {
         let dataString = "\(message.messageSendDate.timeIntervalSince1970)"
-        var unreadCount = unreadMessageByUid(message.messageSendId!, fid: message.messageReceiveId!)
+        var unreadCount = unreadMessageByUid(message.messageSendId!, fid: message.messageTargetId!)
         if unread {
             unreadCount += 1
         }
         do {
-            let query = recordTable.filter(userId==message.messageSendId! && friendId == message.messageReceiveId!)
+            let query = recordTable.filter(userId==message.messageSendId! && friendId == message.messageTargetId!)
             let count = recordDB.scalar(query.count)
             if count == 0 {
                let _ = try recordDB.run(recordTable.insert(userId <- message.messageSendId!,
-                    friendId <- message.messageReceiveId!,
+                    friendId <- message.messageTargetId!,
                     record_type <- message.messageType.rawValue,
                     date <- dataString,
                     unread_count <- unreadCount,
                     ext1 <- ""))
                 if let delegate = delegate {
-                    let record = lastUpdateRecordById(message.messageSendId!, fid: message.messageReceiveId!)
+                    let record = lastUpdateRecordById(message.messageSendId!, fid: message.messageTargetId!)
                     dispatch_async_safely_to_main_queue({
                         delegate.needUpdateRecordList(record, isAdd: true)
                     })
@@ -136,13 +136,13 @@ class CWChatDBRecordStore: NSObject {
     // MARK: 更新消息
     func updateRecord(message:CWMessageModel, unread_count count:Int = 0) -> Bool {
         
-        let query = recordTable.filter(userId==message.messageSendId! && friendId == message.messageReceiveId!)
+        let query = recordTable.filter(userId==message.messageSendId! && friendId == message.messageTargetId!)
         do {
             let dataString = "\(message.messageSendDate.timeIntervalSince1970)"
             try recordDB.run(query.update(date <- dataString,
                 unread_count <- count))
             if let delegate = delegate {
-                let record = lastUpdateRecordById(message.messageSendId!, fid: message.messageReceiveId!)
+                let record = lastUpdateRecordById(message.messageSendId!, fid: message.messageTargetId!)
                 dispatch_async_safely_to_main_queue({ 
                     delegate.needUpdateRecordList(record, isAdd: false)
                 })

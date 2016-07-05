@@ -20,6 +20,7 @@ class CWTextMessageCell: CWBaseMessageCell {
         let messageLabel = UILabel()
         messageLabel.font = UIFont.systemFontOfSize(16)
         messageLabel.numberOfLines = 0
+//        messageLabel.backgroundColor = UIColor.cyanColor()
         return messageLabel
     }()
     
@@ -32,7 +33,8 @@ class CWTextMessageCell: CWBaseMessageCell {
     override func updateMessage(message: CWMessageModel) {
         super.updateMessage(message)
         
-        messageLabel.text = message.content
+        let textMessage = message.messageContent as! CWTextMessageContent
+        messageLabel.text = textMessage.content
         
         if message.messageOwnerType == .Myself {
             
@@ -72,6 +74,9 @@ class CWTextMessageCell: CWBaseMessageCell {
             
         }
         
+        self.messageLabel.snp_updateConstraints { (make) in
+            make.size.equalTo(message.messageFrame.contentSize)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

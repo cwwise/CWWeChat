@@ -143,7 +143,7 @@ class CWChatDBMessageStore: NSObject {
      */
     func appendMessage(message: CWMessageModel, complete: InsertMessageAction) {
         
-        guard let userID = message.messageSendId, let friendID = message.messageReceiveId else {
+        guard let userID = message.messageSendId, let friendID = message.messageTargetId else {
             CWLogError("插入消息失败: 消息体缺少参数, \(message.messageID)")
             dispatch_async_safely_to_main_queue({ 
                 complete(false)
@@ -245,18 +245,7 @@ extension CWChatDBMessageStore {
      */
     func createDBMessageByFMResult(row:Row) -> CWMessageModel {
         
-//        let type = CWMessageType(rawValue: row[msg_type])!
-        let message = CWMessageModel()
-        message.messageID = row[messageid]
-        message.messageSendId = row[uId]
-        message.messageReceiveId = row[friendId]
-        
-        message.messageSendDate = NSDate(timeIntervalSince1970: Double(row[date])!)
-        message.chatType = CWChatType(rawValue: row[chat_type])!
-        message.messageType = CWMessageType(rawValue: row[msg_type])!
-        message.messageOwnerType = CWMessageOwnerType(rawValue: row[own_type])!
-        
-        message.messageSendState = CWMessageSendState(rawValue: row[send_status])!
+        let ownerType = CWMessageOwnerType(rawValue: row[own_type])!
 //        message.messageReadState = ChatMessageReadState(rawValue: row[received_status])!
         
 //        message.messagePlayState = ChatMessagePlayState(state: row[play_status])
@@ -266,7 +255,25 @@ extension CWChatDBMessageStore {
         let string = row[content]! as String
 //        let infoJson = JSON(data: string.dataUsingEncoding(NSUTF8StringEncoding)!)
 //        message.contentInfo = infoJson.dictionaryObject
+        
+        var messageContent = CWMessageContent()
+        let messageType = CWMessageType(rawValue: row[msg_type])!
+        switch messageType {
+        case .Text:
+            messageContent = CWTextMessageContent(content: string)
+        default:
+            messageContent = CWTextMessageContent(content: string)
+        }
+        
+        
+        let message = CWMessageModel(targetId: row[friendId], messageID: row[messageid],
+                                     ownerType: ownerType, content: messageContent)
+        
         message.content = string
+        message.messageSendDate = NSDate(timeIntervalSince1970: Double(row[date])!)
+        message.chatType = CWChatType(rawValue: row[chat_type])!
+        message.messageSendId = row[uId]
+        message.messageSendState = CWMessageSendState(rawValue: row[send_status])!
         
         return message
     }

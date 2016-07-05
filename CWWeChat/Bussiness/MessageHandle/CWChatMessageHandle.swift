@@ -17,17 +17,26 @@ class CWChatMessageHandle: CWBaseMessageHandle {
             
             let from = message.from().user
             let to = message.to().user
+            let messageID = message.attributeForName("id").stringValue()
             
             let (body, type) = self.analyMessageContent(message)
-
-            let messageObject = CWMessageModel()
-            messageObject.messageSendId = to
-            messageObject.messageReceiveId = from
+            
+            var messageContent = CWMessageContent()
+            switch type {
+            case .Text:
+                messageContent = CWTextMessageContent(content: body)
+            default:
+                messageContent = CWTextMessageContent(content: body)
+            }
+            
+            let messageObject = CWMessageModel(targetId: from, messageID: messageID,
+                                         ownerType: .Other, content: messageContent)
+            
             messageObject.content = body
-            messageObject.messageID = message.attributeForName("id").stringValue()
-            messageObject.messageOwnerType = .Other
             messageObject.chatType = .Personal
-            messageObject.messageType = type
+            messageObject.messageSendId = to
+            
+            
             //如果是离线消息，则消息时间，重新设置。
             //2016-06-25T17:11:13.354Z
             let delayElement = message.elementForName("delay")

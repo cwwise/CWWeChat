@@ -12,8 +12,7 @@ extension String {
     
     public static func UUIDString() -> String {
         let uuid = NSUUID().UUIDString
-        let uuidString = uuid.stringByReplacingOccurrencesOfString("-", withString: "")
-        return uuidString
+        return uuid
     }
     
     public func trimWhitespace() -> String {

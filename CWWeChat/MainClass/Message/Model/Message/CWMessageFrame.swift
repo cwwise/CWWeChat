@@ -9,6 +9,12 @@
 import UIKit
 
 struct CWMessageFrame {
-    var cellOfHeight: CGFloat
+    var heightOfCell: CGFloat
     var contentSize: CGSize
+    
+    init(heightOfCell: CGFloat, contentSize: CGSize) {
+        self.heightOfCell = heightOfCell
+        self.contentSize = contentSize
+    }
+    
 }
