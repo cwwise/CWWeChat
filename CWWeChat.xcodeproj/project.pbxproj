@@ -126,6 +126,8 @@
 		ED845DFE1D24305300262AE2 /* shake_match.wav in Resources */ = {isa = PBXBuildFile; fileRef = ED845DF91D24305300262AE2 /* shake_match.wav */; };
 		ED845DFF1D24305300262AE2 /* shake_nomatch.wav in Resources */ = {isa = PBXBuildFile; fileRef = ED845DFA1D24305300262AE2 /* shake_nomatch.wav */; };
 		ED845E001D24305300262AE2 /* shake_sound_male.wav in Resources */ = {isa = PBXBuildFile; fileRef = ED845DFB1D24305300262AE2 /* shake_sound_male.wav */; };
+		ED8FD8DF1D2C809500915622 /* CWContactDetailUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FD8DE1D2C809500915622 /* CWContactDetailUserCell.swift */; };
+		ED8FD8E11D2C817500915622 /* CWContactDetailAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FD8E01D2C817500915622 /* CWContactDetailAlbumCell.swift */; };
 		EDC6A0AE1D22B434002C2AEE /* CWDetailContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */; };
 		EDC6A0B41D22B50D002C2AEE /* CWInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */; };
 		EDC6A0B61D22B911002C2AEE /* CWInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */; };
@@ -278,6 +280,8 @@
 		ED845DF91D24305300262AE2 /* shake_match.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shake_match.wav; sourceTree = "<group>"; };
 		ED845DFA1D24305300262AE2 /* shake_nomatch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shake_nomatch.wav; sourceTree = "<group>"; };
 		ED845DFB1D24305300262AE2 /* shake_sound_male.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shake_sound_male.wav; sourceTree = "<group>"; };
+		ED8FD8DE1D2C809500915622 /* CWContactDetailUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWContactDetailUserCell.swift; sourceTree = "<group>"; };
+		ED8FD8E01D2C817500915622 /* CWContactDetailAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWContactDetailAlbumCell.swift; sourceTree = "<group>"; };
 		EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWDetailContactViewController.swift; sourceTree = "<group>"; };
 		EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationModel.swift; sourceTree = "<group>"; };
 		EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationCell.swift; sourceTree = "<group>"; };
@@ -963,6 +967,8 @@
 			isa = PBXGroup;
 			children = (
 				EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */,
+				ED8FD8DE1D2C809500915622 /* CWContactDetailUserCell.swift */,
+				ED8FD8E01D2C817500915622 /* CWContactDetailAlbumCell.swift */,
 			);
 			path = CWDetailContactViewController;
 			sourceTree = "<group>";
@@ -1245,6 +1251,8 @@
 				1F7DEC381D293ACA007AEFEF /* CWMessageFrame.swift in Sources */,
 				1FD3EDBE1D1C4642004FBA63 /* CWTextMessageDispatchOperation.swift in Sources */,
 				1FD3ED9B1D1C2E2C004FBA63 /* UIView+Frame.swift in Sources */,
+				ED8FD8DF1D2C809500915622 /* CWContactDetailUserCell.swift in Sources */,
+				ED8FD8E11D2C817500915622 /* CWContactDetailAlbumCell.swift in Sources */,
 				1FD3EB301D1ADA13004FBA63 /* UIImage+CWChat.swift in Sources */,
 				ED845DF51D242F0700262AE2 /* CWPlayMessageAudio.swift in Sources */,
 				1FD3EDBA1D1C4642004FBA63 /* CWImageMessageDispatchOperation.swift in Sources */,

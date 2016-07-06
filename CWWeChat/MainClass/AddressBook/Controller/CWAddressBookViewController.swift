@@ -149,9 +149,9 @@ extension CWAddressBookViewController: UITableViewDelegate {
             return
         }
         
-        let chatVC = CWChatViewController()
+        let chatVC = CWDetailContactViewController()
         let userModel = groupList[indexPath.section][indexPath.row]
-        chatVC.contactId = userModel?.userId
+        chatVC.contactModel = userModel
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)
     }

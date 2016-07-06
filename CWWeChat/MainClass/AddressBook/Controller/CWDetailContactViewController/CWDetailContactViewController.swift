@@ -8,14 +8,24 @@
 
 import UIKit
 
-class CWDetailContactViewController: UIViewController {
+class CWDetailContactViewController: CWInformationViewController {
 
+    var contactModel: CWContactUser?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.view.backgroundColor = UIColor.whiteColor()
+        self.title = "详细资料"
 
+        
         // Do any additional setup after loading the view.
     }
+    
+    func registerCellClass() {
+
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
