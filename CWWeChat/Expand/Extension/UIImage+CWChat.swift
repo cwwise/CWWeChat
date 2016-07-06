@@ -47,6 +47,8 @@ enum Asset: String {
   case NewFriend_contacts = "newFriend_contacts"
   case NewFriend_google = "newFriend_google"
   case NewFriend_qq = "newFriend_qq"
+  case Nav_chat_multi = "nav_chat_multi"
+  case Nav_chat_single = "nav_chat_single"
   case ToolViewEmotion = "ToolViewEmotion"
   case ToolViewEmotionHL = "ToolViewEmotionHL"
   case ToolViewInputVoice = "ToolViewInputVoice"
@@ -81,6 +83,10 @@ enum Asset: String {
   case Tabbar_me = "tabbar_me"
   case Tabbar_meHL = "tabbar_meHL"
   case TabbarBkg = "tabbarBkg"
+  case Button_disable = "button_disable"
+  case Button_normal = "button_normal"
+  case Button_select = "button_select"
+  case Show_success = "show_success"
 
   var image: Image {
     return Image(asset: self)
@@ -92,6 +98,3 @@ extension Image {
     self.init(named: asset.rawValue)
   }
 }
-
-
-

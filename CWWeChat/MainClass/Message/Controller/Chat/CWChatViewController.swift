@@ -43,6 +43,8 @@ class CWChatViewController: CWBaseMessageViewController {
     /// 消息数据数组
     var messageList = Array<CWMessageModel>()
     
+    //MARK: UI属性
+
     /// TableView
     lazy var tableView: UITableView = {
         let frame = CGRect(x: 0, y: 0,
@@ -66,6 +68,12 @@ class CWChatViewController: CWBaseMessageViewController {
         chatToolBar.delegate = self
         return chatToolBar
     }()
+    
+    lazy var rightBarItem: UIBarButtonItem = {
+        let rightBarItem = UIBarButtonItem(image: CWAsset.Nav_chat_single.image, style: .Plain, target: self, action: #selector(CWChatViewController.rightBarItemDown(_:)))
+        return rightBarItem
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +100,8 @@ class CWChatViewController: CWBaseMessageViewController {
         self.view.addSubview(self.tableView)
         self.view.addSubview(self.chatToolBar)
         
+        self.navigationItem.rightBarButtonItem = rightBarItem
+        
         self.messageDispatchQueue.delegate = self
         
         let user = CWContactManager.findContact(contactId)
@@ -107,6 +117,12 @@ class CWChatViewController: CWBaseMessageViewController {
         tableView.registerClass(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.Text.reuseIdentifier())
         tableView.registerClass(CWImageMessageCell.self, forCellReuseIdentifier: CWMessageType.Image.reuseIdentifier())
 
+    }
+    
+    func rightBarItemDown(barItem: UIBarButtonItem) {
+        let chatDetailVC = CWChatDetailViewController()
+        chatDetailVC.contactModel = friendUser
+        self.navigationController?.pushViewController(chatDetailVC, animated: true)
     }
     
     deinit {

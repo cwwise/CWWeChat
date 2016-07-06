@@ -41,7 +41,7 @@ class CWSettingSwitchCell: UITableViewCell, CWSettingDataProtocol {
         
         self.contentView.addSubview(titleLabel)
         self.accessoryView = cellSwitch
-        
+        self.selectionStyle = .None
         p_addSnap()
     }
     
