@@ -18,6 +18,7 @@ class CWInformationCell: UITableViewCell {
     
     private lazy var subTitleLabel:UILabel = {
         let subTitleLabel = UILabel()
+        subTitleLabel.font = UIFont.systemFontOfSize(15)
         return subTitleLabel
     }()
     

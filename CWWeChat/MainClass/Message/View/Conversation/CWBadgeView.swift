@@ -22,7 +22,7 @@ class CWBadgeView: UIView {
     var cornerRadius: CGFloat = 10.0
     
     var badgeBackgroundColor: UIColor = UIColor.redColor()
-    var badgeTextFont: UIFont = UIFont.boldSystemFontOfSize(UIFont.systemFontSize())
+    var badgeTextFont: UIFont = UIFont.systemFontOfSize(15)
     
     var badgeValue:Int = 0 {
         didSet {
@@ -94,23 +94,16 @@ class CWBadgeView: UIView {
         CGContextRestoreGState(context)
         
         
-        
-        
         /* Stroke */
         CGContextSaveGState(context);
-        
         CGContextAddPath(context, borderPath.CGPath);
-        
         CGContextSetLineWidth(context, self.badgeStrokeWidth);
         CGContextSetStrokeColorWithColor(context, self.badgeStrokeColor.CGColor);
-        
         CGContextDrawPath(context, .Stroke);
-        
         CGContextRestoreGState(context);
         
         
         /* Text */
-        
         CGContextSaveGState(context)
         
         var textFrame = rectToDraw;

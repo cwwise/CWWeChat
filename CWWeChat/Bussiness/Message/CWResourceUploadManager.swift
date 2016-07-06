@@ -9,7 +9,7 @@
 import UIKit
 import Qiniu
 
-let token_key = "9tsvBuxK559rDYQdXGipXiLyWlru9hDyP2LzOB9S:cQKjc-Xd3ELg5n7_T4AL7qM7q6I=:eyJkZWFkbGluZSI6MTQ2ODA0NjAzOSwic2NvcGUiOiJjaGF0bWVzc2FnZS1pbWFnZSJ9"
+let token_key = "9tsvBuxK559rDYQdXGipXiLyWlru9hDyP2LzOB9S:Yd6o3LD6-qNlV94Hiv4D0dpCoq0=:eyJzY29wZSI6ImNoYXRtZXNzYWdlLWltYWdlIiwiZGVhZGxpbmUiOjE0Njc4NTcyNjh9"
 
 class CWResourceUploadManager: NSObject {
     

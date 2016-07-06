@@ -117,12 +117,16 @@ class CWChatDBRecordStore: NSObject {
                     date <- dataString,
                     unread_count <- unreadCount,
                     ext1 <- ""))
-                if let delegate = delegate {
-                    let record = lastUpdateRecordById(message.messageSendId!, fid: message.messageTargetId!)
-                    dispatch_async_safely_to_main_queue({
-                        delegate.needUpdateRecordList(record, isAdd: true)
-                    })
+                let uid = message.messageSendId!
+                let fid = message.messageTargetId!
+                guard let delegate = delegate, let record = lastUpdateRecordById(uid, fid: fid) else {
+                    return true
                 }
+                
+                dispatch_async_safely_to_main_queue({
+                    delegate.needUpdateRecordList(record, isAdd: false)
+                })
+                
                 return true
             } else {
                 return updateRecord(message, unread_count: unreadCount)
@@ -141,12 +145,17 @@ class CWChatDBRecordStore: NSObject {
             let dataString = "\(message.messageSendDate.timeIntervalSince1970)"
             try recordDB.run(query.update(date <- dataString,
                 unread_count <- count))
-            if let delegate = delegate {
-                let record = lastUpdateRecordById(message.messageSendId!, fid: message.messageTargetId!)
-                dispatch_async_safely_to_main_queue({ 
-                    delegate.needUpdateRecordList(record, isAdd: false)
-                })
+            
+            let uid = message.messageSendId!
+            let fid = message.messageTargetId!
+            guard let delegate = delegate, let record = lastUpdateRecordById(uid, fid: fid) else {
+                return true
             }
+            
+            dispatch_async_safely_to_main_queue({
+                delegate.needUpdateRecordList(record, isAdd: false)
+            })
+            return true
         } catch let error as NSError {
             CWLogError(error)
         }
@@ -180,12 +189,14 @@ class CWChatDBRecordStore: NSObject {
         let query = recordTable.filter(userId==uid && friendId==fid)
         do {
             try recordDB.run(query.update(unread_count <- 0))
-            if let delegate = delegate {
-                let record = lastUpdateRecordById(uid, fid: fid)
-                dispatch_async_safely_to_main_queue({
-                    delegate.updateUnReadCount(record)
-                })
+            guard let delegate = delegate, let record = lastUpdateRecordById(uid, fid: fid) else {
+                return
             }
+            
+            dispatch_async_safely_to_main_queue({
+                delegate.updateUnReadCount(record)
+            })
+            
         } catch {
             print(error)
         }
@@ -243,18 +254,26 @@ class CWChatDBRecordStore: NSObject {
         return record
     }
     
-    func lastUpdateRecordById(uid: String,fid:String) -> CWConversationModel {
+    func lastUpdateRecordById(uid: String,fid:String) -> CWConversationModel? {
         do {
-            var record = CWConversationModel()
             let query = recordTable.filter(uid == uid && fid == friendId)
+           
+            //查看是否存在
+            let count = recordDB.scalar(query.count)
+            if count == 0 {
+                return nil
+            }
+            
+            var record = CWConversationModel()
             let result = try recordDB.prepare(query)
             for row in result.reverse() {
                 record = createDBRecordByFMResult(row, uid: uid)
             }
             return record
+            
         } catch {
             print(error)
-            return CWConversationModel()
+            return nil
         }
     }
     

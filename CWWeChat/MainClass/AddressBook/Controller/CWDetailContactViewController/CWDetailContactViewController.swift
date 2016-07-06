@@ -10,20 +10,24 @@ import UIKit
 
 class CWDetailContactViewController: CWInformationViewController {
 
-    var contactModel: CWContactUser?
+    var contactModel: CWContactUser? {
+        didSet {
+            self.dataSource = CWContactManager.shareContactManager.contactDetailArrayByUserInfo(contactModel!)
+            self.tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.whiteColor()
         self.title = "详细资料"
-
-        
+        registerCellClass()
         // Do any additional setup after loading the view.
     }
     
     func registerCellClass() {
-
+        self.tableView.registerReusableCell(CWContactDetailUserCell)
+        self.tableView.registerReusableCell(CWContactDetailAlbumCell)
     }
     
 
@@ -31,16 +35,18 @@ class CWDetailContactViewController: CWInformationViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
+extension CWDetailContactViewController {
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func informationButtonCellClicked(info: CWInformationModel) {
+        
+        if info.title == "发消息" {
+            let chatVC = CWChatViewController()
+            chatVC.contactId = self.contactModel?.userId
+            self.navigationController?.pushViewController(chatVC, animated: true)
+        }
+        
     }
-    */
-
+    
 }

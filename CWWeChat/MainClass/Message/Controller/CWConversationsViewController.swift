@@ -148,6 +148,7 @@ extension CWConversationsViewController: CWChatDBRecordStoreDelegate {
     }
     
     func updateUnReadCount(record: CWConversationModel) {
+        
         //只是更新unReadCount
         for conversation in conversationList {
             if record.partnerID == conversation.partnerID {

@@ -27,10 +27,16 @@ class CWInformationViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+ 
+        registerCell()
         // Do any additional setup after loading the view.
     }
     
+    func registerCell() {
+        self.tableView.registerClass(CWInformationCell.self, forCellReuseIdentifier: CWInformationCell.reuseIdentifier)
+        self.tableView.registerClass(CWInformationButtonCell.self, forCellReuseIdentifier: CWInformationButtonCell.reuseIdentifier)
+        self.tableView.registerClass(CWInformationHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: CWInformationHeaderFooterView.reuseIdentifier)
+    }
     
 
     override func didReceiveMemoryWarning() {
@@ -38,25 +44,29 @@ class CWInformationViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    deinit {
+        CWLogDebug("\(self.classForCoder)销毁")
     }
-    */
+
 
 }
 
+// MARK: - UITableViewDataSource
 extension CWInformationViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CWMenuCell", forIndexPath: indexPath) as! CWMenuCell
+        
         let menuItem = dataSource[indexPath.section][indexPath.row]
-//        cell.menuItem = menuItem
+        if menuItem.type == .Button {
+            let cell = tableView.dequeueReusableCellWithIdentifier(CWInformationButtonCell.reuseIdentifier) as! CWInformationButtonCell
+            cell.informationModel = menuItem
+            cell.delegate = self
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(CWInformationCell.reuseIdentifier, forIndexPath: indexPath) as! CWInformationCell
+        cell.informationModel = menuItem
+        
         return cell
     }
     
@@ -69,6 +79,10 @@ extension CWInformationViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let menuItem = dataSource[indexPath.section][indexPath.row]
+        if menuItem.type == .Button {
+            return 55
+        }
         return 44.0
     }
     
@@ -79,13 +93,29 @@ extension CWInformationViewController {
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 5
     }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWInformationHeaderFooterView.reuseIdentifier)
+    }
+    
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWInformationHeaderFooterView.reuseIdentifier)
+    }
 }
 
+// MARK: - UITableViewDelegate
 extension CWInformationViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
+        
+    }
+}
+
+extension CWInformationViewController: CWInformationButtonCellDelegate {
+    
+    func informationButtonCellClicked(info: CWInformationModel) {
         
     }
 }
