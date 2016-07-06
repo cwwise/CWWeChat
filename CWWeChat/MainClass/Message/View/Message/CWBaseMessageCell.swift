@@ -8,23 +8,36 @@
 
 import UIKit
 
+protocol ChatMessageCellDelegate:NSObjectProtocol {
+    //头像点击
+    func messageCellUserAvatarDidClick(user:CWContactUser)
+    
+    //消息体选中
+    func messagecellDidSelect(cell: CWBaseMessageCell)
+    
+    //MARK: UIMenuController消息
+    func messageDelete(cell: CWBaseMessageCell)
+    
+    func messageCopy(cell: CWBaseMessageCell)
+}
+
 // TODO: 修改命名
 
 ///头像
-let AVATAR_WIDTH:CGFloat        = 38.0
-let AVATAR_SPACE_X:CGFloat      = 8.0
-let AVATAR_SPACE_Y:CGFloat      = 12.0
+let kAvaterWidth:  CGFloat      = 38.0
+let kAvaterSpaceX: CGFloat      = 8.0
+let kAvaterSpaceY: CGFloat      = 12.0
 
 let kChatAvatarMarginLeft: CGFloat = 10             //头像的 margin left
 let kChatAvatarMarginTop: CGFloat = 0               //头像的 margin top
 let kChatAvatarWidth: CGFloat = 40                  //头像的宽度
 
-let NAMELABEL_HEIGHT: CGFloat  =   14.0
-let NAMELABEL_SPACE_X: CGFloat =   12.0
-let NAMELABEL_SPACE_Y: CGFloat =   1.0
+let kNameLabelHeight: CGFloat =   14.0
+let kNameLabelSpaceX: CGFloat =   12.0
+let kNamelabelSpaceY: CGFloat =   1.0
 
-let MESSAGEBG_SPACE_X: CGFloat  =     5.0
-let MESSAGEBG_SPACE_Y: CGFloat    =  1.0
+let kMessagebgSpaceX: CGFloat  =  5.0
+let kMessagebgSpaceY: CGFloat  =  1.0
 
 
 /// 聊天界面baseCell
@@ -44,7 +57,7 @@ class CWBaseMessageCell: UITableViewCell {
     ///头像
     lazy var avatarButton:UIButton = {
         let avatarButton = UIButton(type: .Custom)
-        avatarButton.frame.size = CGSize(width: AVATAR_WIDTH, height: AVATAR_WIDTH)
+        avatarButton.frame.size = CGSize(width: kAvaterWidth, height: kAvaterWidth)
         avatarButton.addTarget(self,
                                action: #selector(avatarButtonClickDown(_:)),
                                forControlEvents: UIControlEvents.TouchUpInside)
@@ -100,19 +113,19 @@ class CWBaseMessageCell: UITableViewCell {
         
         //头像
         self.avatarButton.snp_makeConstraints { (make) in
-            make.right.equalTo(self.contentView).offset(-AVATAR_SPACE_X)
-            make.top.equalTo(self.contentView).offset(AVATAR_SPACE_Y)
-            make.width.height.equalTo(AVATAR_WIDTH);
+            make.right.equalTo(self.contentView).offset(-kAvaterSpaceX)
+            make.top.equalTo(self.contentView).offset(kAvaterSpaceY)
+            make.width.height.equalTo(kAvaterWidth);
         }
         
         self.usernameLabel.snp_makeConstraints { (make) in
-            make.top.equalTo(self.avatarButton).offset(-NAMELABEL_SPACE_Y)
-            make.right.equalTo(self.avatarButton.snp_left).offset(-NAMELABEL_SPACE_X)
+            make.top.equalTo(self.avatarButton).offset(-kNamelabelSpaceY)
+            make.right.equalTo(self.avatarButton.snp_left).offset(-kNameLabelSpaceX)
         }
     
         self.messageBackgroundView.snp_makeConstraints { (make) in
-            make.right.equalTo(self.avatarButton.snp_left).offset(-MESSAGEBG_SPACE_X);
-            make.top.equalTo(self.usernameLabel.snp_bottom).offset(-MESSAGEBG_SPACE_Y);
+            make.right.equalTo(self.avatarButton.snp_left).offset(-kMessagebgSpaceX);
+            make.top.equalTo(self.usernameLabel.snp_bottom).offset(-kMessagebgSpaceY);
         }
     }
     
@@ -133,12 +146,12 @@ class CWBaseMessageCell: UITableViewCell {
             let string = CWUserAccount.sharedUserAccount().chatuser.avatarURL!
             
             self.avatarButton.af_setImageForState(.Normal, URL: NSURL(string:string)!)
-            self.avatarButton.left = Screen_Width - kChatAvatarMarginLeft - AVATAR_WIDTH
+            self.avatarButton.left = Screen_Width - kChatAvatarMarginLeft - kAvaterWidth
             
             self.avatarButton.snp_remakeConstraints(closure: { (make) in
-                make.width.height.equalTo(AVATAR_WIDTH);
-                make.top.equalTo(self.contentView).offset(AVATAR_SPACE_Y)
-                make.right.equalTo(self.contentView).offset(-AVATAR_SPACE_X)
+                make.width.height.equalTo(kAvaterWidth);
+                make.top.equalTo(self.contentView).offset(kAvaterSpaceY)
+                make.right.equalTo(self.contentView).offset(-kAvaterSpaceX)
             })
             
         } else {
@@ -149,9 +162,9 @@ class CWBaseMessageCell: UITableViewCell {
             self.avatarButton.af_setImageForState(.Normal, URL: NSURL(string:string)!)
             
             self.avatarButton.snp_remakeConstraints(closure: { (make) in
-                make.width.height.equalTo(AVATAR_WIDTH);
-                make.top.equalTo(self.contentView).offset(AVATAR_SPACE_Y)
-                make.left.equalTo(self.contentView).offset(AVATAR_SPACE_X)
+                make.width.height.equalTo(kAvaterWidth);
+                make.top.equalTo(self.contentView).offset(kAvaterSpaceY)
+                make.left.equalTo(self.contentView).offset(kAvaterSpaceX)
             })
             
         }
@@ -165,11 +178,11 @@ class CWBaseMessageCell: UITableViewCell {
             self.messageBackgroundView.snp_remakeConstraints(closure: { (make) in
                 
                 if message.messageOwnerType == .Myself {
-                    make.right.equalTo(self.avatarButton.snp_left).offset(-MESSAGEBG_SPACE_X)
+                    make.right.equalTo(self.avatarButton.snp_left).offset(-kMessagebgSpaceX)
                 } else {
-                    make.left.equalTo(self.avatarButton.snp_right).offset(MESSAGEBG_SPACE_X)
+                    make.left.equalTo(self.avatarButton.snp_right).offset(kMessagebgSpaceX)
                 }
-                make.top.equalTo(self.usernameLabel.snp_bottom).offset(-MESSAGEBG_SPACE_Y);
+                make.top.equalTo(self.usernameLabel.snp_bottom).offset(-kMessagebgSpaceY);
                 
             })
             

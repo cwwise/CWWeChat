@@ -19,6 +19,16 @@ class CWBaseMessageViewController: UIViewController {
         return CWMessageCracker.shareMessageCracker()
     }()
     
+    //存储数据库
+    lazy var dbMessageStore:CWChatDBMessageStore = {
+        return CWChatDBDataManager.sharedInstance.dbMessageStore
+    }()
+    
+    //存储数据库
+    lazy var dbRecordStore:CWChatDBRecordStore = {
+        return CWChatDBDataManager.sharedInstance.dbRecordStore
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,7 +55,6 @@ class CWBaseMessageViewController: UIViewController {
 
 // MARK: - CWMessageCrackerDelegate
 extension CWBaseMessageViewController: CWMessageCrackerDelegate {
-    
     //获取到消息
     func receiveNewMessage(message: CWMessageModel) {
         

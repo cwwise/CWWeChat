@@ -12,14 +12,8 @@ class CWConversationsViewController: CWBaseMessageViewController {
 
     var conversationList = [CWConversationModel]()
     
-    //存储数据库
-    lazy var dbRecordStore:CWChatDBRecordStore = {
-        return CWChatDBDataManager.sharedInstance.dbRecordStore
-    }()
-    
     let manager = CWXMPPManager.shareXMPPManager
     var userID: String = CWUserAccount.sharedUserAccount().userID
-
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: self.view.bounds, style: .Plain)
@@ -56,19 +50,10 @@ class CWConversationsViewController: CWBaseMessageViewController {
     
     func registerCellClass() {
         self.tableView.registerClass(CWConversationCell.self, forCellReuseIdentifier: CWConversationCell.reuseIdentifier)
-        //测试发送消息
-        let rightBarItem = UIBarButtonItem(title: "发送", style: .Plain, target: self, action: #selector(sendMessage))
-        self.navigationItem.rightBarButtonItem = rightBarItem
     }
     
     func setupFriends() {
         _ = CWContactManager.shareContactManager
-    }
-    
-    func sendMessage() {
-        
-
-        
     }
 
     override func didReceiveMemoryWarning() {

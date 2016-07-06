@@ -40,9 +40,14 @@ class CWMessageModel: NSObject {
     var content: String?
     
     /// 在会话界面显示
-    var conversationContent:String {
-        get {
-            return "子类定义"
+    var conversationContent:String? {
+        switch messageType {
+        case .Text:
+            return self.content
+        case .Image:
+            return "[图片]"
+        default:
+            return self.content
         }
     }
     

@@ -13,10 +13,7 @@ class CWTimeMessageCell: UITableViewCell {
     var message:CWMessageModel?
     
     private let kChatTimeLabelMaxWdith : CGFloat = Screen_Width - 30*2
-    private let kChatTimeLabelPaddingLeft: CGFloat = 6   //左右分别留出 6 像素的留白
-    private let kChatTimeLabelPaddingTop: CGFloat = 3   //上下分别留出 3 像素的留白
     private let kChatTimeLabelMarginTop: CGFloat = 10   //顶部 10 px
-    
     
     lazy var timeLabel: UILabel = {
         let timeLabel = UILabel()
@@ -49,7 +46,6 @@ class CWTimeMessageCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()

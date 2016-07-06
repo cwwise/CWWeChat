@@ -25,16 +25,6 @@ class CWChatViewController: CWBaseMessageViewController {
     var messageAccumulate:Int = 0
     var currentDate:NSDate = NSDate()
     
-    //存储数据库
-    lazy var dbMessageStore:CWChatDBMessageStore = {
-       return CWChatDBDataManager.sharedInstance.dbMessageStore
-    }()
-    
-    //存储数据库
-    lazy var dbRecordStore:CWChatDBRecordStore = {
-        return CWChatDBDataManager.sharedInstance.dbRecordStore
-    }()
-    
     /// 消息发送主要的类
     var messageDispatchQueue:CWMessageDispatchQueue = {
         return CWXMPPManager.shareXMPPManager.messageDispatchQueue
@@ -44,7 +34,6 @@ class CWChatViewController: CWBaseMessageViewController {
     var messageList = Array<CWMessageModel>()
     
     //MARK: UI属性
-
     /// TableView
     lazy var tableView: UITableView = {
         let frame = CGRect(x: 0, y: 0,
