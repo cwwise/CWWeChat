@@ -9,8 +9,9 @@
 import UIKit
 
 class CWContactDetailUserCell: UITableViewCell {
-
-    var contactModel: CWContactUser?
+    
+    let mine_space_x: CGFloat  =  14.0
+    let mine_space_y: CGFloat  =  12.0
     
     var userModel: CWContactUser? {
         didSet {
@@ -26,27 +27,42 @@ class CWContactDetailUserCell: UITableViewCell {
         return avatarImageView
     }()
     
+    /// 用户名
+    private lazy var usernameLabel:UILabel = {
+        let usernameLabel = UILabel()
+        usernameLabel.font = UIFont.systemFontOfSize(17)
+        return usernameLabel
+    }()
+    
+    /// 微信号
+    private lazy var wxnameLabel:UILabel = {
+        let wxnameLabel = UILabel()
+        wxnameLabel.font = UIFont.systemFontOfSize(14)
+        wxnameLabel.textColor = UIColor.grayColor()
+        return wxnameLabel
+    }()
+    
+    /// 昵称
     private lazy var nikenameLabel:UILabel = {
         let nikenameLabel = UILabel()
-        nikenameLabel.font = UIFont.systemFontOfSize(17)
+        nikenameLabel.font = UIFont.systemFontOfSize(14)
+        nikenameLabel.textColor = UIColor.grayColor()
         return nikenameLabel
     }()
     
-    private lazy var usernameLabel:UILabel = {
-        let usernameLabel = UILabel()
-        usernameLabel.font = UIFont.systemFontOfSize(14)
-        return usernameLabel
-    }()
+ 
     
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.accessoryType = .DisclosureIndicator
-        self.contentView.addSubview(avatarImageView)
-        self.contentView.addSubview(nikenameLabel)
-        self.contentView.addSubview(usernameLabel)
+        self.accessoryType = .None
+        self.selectionStyle = .None
         
+        self.contentView.addSubview(avatarImageView)
+        self.contentView.addSubview(usernameLabel)
+        self.contentView.addSubview(wxnameLabel)
+        self.contentView.addSubview(nikenameLabel)
         p_addSnap()
     }
     
@@ -54,26 +70,29 @@ class CWContactDetailUserCell: UITableViewCell {
     func p_addSnap() {
         //头像
         avatarImageView.snp_makeConstraints { (make) in
-            make.left.equalTo(MINE_SPACE_X)
-            make.top.equalTo(MINE_SPACE_Y)
+            make.left.equalTo(mine_space_x)
+            make.top.equalTo(mine_space_y)
             make.width.equalTo(self.avatarImageView.snp_height)
             make.centerY.equalTo(self.contentView)
         }
         
-        //昵称
-        nikenameLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(self.avatarImageView.snp_right).offset(MINE_SPACE_Y)
-            make.bottom.equalTo(self.avatarImageView.snp_centerY).offset(-3.5)
+        //用户名
+        usernameLabel.snp_makeConstraints { (make) in
+            make.top.equalTo(self.avatarImageView.snp_top).offset(3.0)
+            make.left.equalTo(self.avatarImageView.snp_right).offset(mine_space_y)
         }
         
         //用户名
-        usernameLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(self.nikenameLabel)
-            make.top.equalTo(self.avatarImageView.snp_centerY).offset(5.0)
+        wxnameLabel.snp_makeConstraints { (make) in
+            make.left.equalTo(self.usernameLabel)
+            make.top.equalTo(self.usernameLabel.snp_bottom).offset(5.0)
         }
         
-
-        
+        //昵称
+        nikenameLabel.snp_makeConstraints { (make) in
+            make.left.equalTo(self.usernameLabel)
+            make.top.equalTo(self.wxnameLabel.snp_bottom).offset(3.0)
+        }
     }
     
     func setupUserInfomation() {
@@ -85,12 +104,19 @@ class CWContactDetailUserCell: UITableViewCell {
         let url = NSURL(string: userModel.avatarURL!)!
         self.avatarImageView.af_setImageWithURL(url)
         
-        nikenameLabel.text = userModel.nikeName
+        usernameLabel.text = userModel.userName
         if let userName = userModel.userName {
-            usernameLabel.text = "微信号:"+userName
+            wxnameLabel.text = "微信号:"+userName
         } else {
-            usernameLabel.text = ""
+            wxnameLabel.text = ""
         }
+        
+        if let nikeName = userModel.nikeName {
+            nikenameLabel.text = "昵称:"+nikeName
+        } else {
+            nikenameLabel.text = "昵称:"+""
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

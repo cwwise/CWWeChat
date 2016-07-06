@@ -8,11 +8,13 @@
 
 import UIKit
 
-let MINE_SPACE_X: CGFloat  =  14.0
-let MINE_SPACE_Y: CGFloat  =  12.0
+
 
 class CWMineUserCell: UITableViewCell {
 
+    let mine_space_x: CGFloat  =  14.0
+    let mine_space_y: CGFloat  =  12.0
+    
     var userModel: CWContactUser? {
         didSet {
             self.setupUserInfomation()
@@ -61,15 +63,15 @@ class CWMineUserCell: UITableViewCell {
     func p_addSnap() {
         //头像
         avatarImageView.snp_makeConstraints { (make) in
-            make.left.equalTo(MINE_SPACE_X)
-            make.top.equalTo(MINE_SPACE_Y)
+            make.left.equalTo(mine_space_x)
+            make.top.equalTo(mine_space_y)
             make.width.equalTo(self.avatarImageView.snp_height)
             make.centerY.equalTo(self.contentView)
         }
         
         //昵称
         nikenameLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(self.avatarImageView.snp_right).offset(MINE_SPACE_Y)
+            make.left.equalTo(self.avatarImageView.snp_right).offset(mine_space_x)
             make.bottom.equalTo(self.avatarImageView.snp_centerY).offset(-3.5)
         }
         

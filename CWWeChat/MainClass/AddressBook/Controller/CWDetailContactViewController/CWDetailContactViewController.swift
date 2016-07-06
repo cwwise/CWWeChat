@@ -10,6 +10,9 @@ import UIKit
 
 class CWDetailContactViewController: CWInformationViewController {
 
+    let height_User_Cell: CGFloat = 90
+    let height_Album_Cell: CGFloat = 90
+
     var contactModel: CWContactUser? {
         didSet {
             self.dataSource = CWContactManager.shareContactManager.contactDetailArrayByUserInfo(contactModel!)
@@ -26,8 +29,9 @@ class CWDetailContactViewController: CWInformationViewController {
     }
     
     func registerCellClass() {
-        self.tableView.registerReusableCell(CWContactDetailUserCell)
-        self.tableView.registerReusableCell(CWContactDetailAlbumCell)
+        self.tableView.registerClass(CWContactDetailUserCell.self, forCellReuseIdentifier: CWContactDetailUserCell.reuseIdentifier)
+        self.tableView.registerClass(CWContactDetailAlbumCell.self, forCellReuseIdentifier: CWContactDetailAlbumCell.reuseIdentifier)
+        
     }
     
 
@@ -38,6 +42,37 @@ class CWDetailContactViewController: CWInformationViewController {
 }
 
 extension CWDetailContactViewController {
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let menuItem = dataSource[indexPath.section][indexPath.row]
+        if menuItem.type == .Other {
+            if indexPath.section == 0 {
+                let cell = tableView.dequeueReusableCellWithIdentifier(CWContactDetailUserCell.reuseIdentifier) as! CWContactDetailUserCell
+                cell.userModel = self.contactModel
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCellWithIdentifier(CWContactDetailAlbumCell.reuseIdentifier) as! CWContactDetailAlbumCell
+                cell.infoModel = menuItem
+                return cell
+            }
+        }
+        
+        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        let menuItem = dataSource[indexPath.section][indexPath.row]
+        if menuItem.type == .Other {
+            if indexPath.section == 0 {
+                return height_User_Cell
+            }
+            return height_Album_Cell
+        }
+        
+        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+    }
+    
     
     override func informationButtonCellClicked(info: CWInformationModel) {
         

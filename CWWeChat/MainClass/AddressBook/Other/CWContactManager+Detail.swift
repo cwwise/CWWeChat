@@ -20,7 +20,7 @@ extension CWContactManager {
         
         let telephone = CWInformationModel(title: "电话号码", subTitle: "18810109052")
         telephone.showDisclosureIndicator = false
-        
+        telephone.disableHighlight = true
         
         if (user.remarkName == nil) {
             let remark = CWInformationModel(title: "设置备注和标签")

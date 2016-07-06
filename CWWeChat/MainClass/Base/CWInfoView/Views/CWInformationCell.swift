@@ -8,6 +8,8 @@
 
 import UIKit
 
+let left_infocell_subTitle_space = Screen_Width * 0.28
+
 class CWInformationCell: UITableViewCell {
 
     var informationModel: CWInformationModel? {
@@ -36,7 +38,7 @@ class CWInformationCell: UITableViewCell {
         self.subTitleLabel.snp_makeConstraints { (make) in
             make.centerY.equalTo(self.contentView)
             make.right.equalTo(self.contentView)
-            make.left.equalTo(self.contentView).offset(Screen_Width*0.25)
+            make.left.equalTo(self.contentView).offset(left_infocell_subTitle_space)
         }
     }
     
@@ -49,7 +51,7 @@ class CWInformationCell: UITableViewCell {
         self.subTitleLabel.text = informationModel.subTitle
         
         self.accessoryType = informationModel.showDisclosureIndicator ? .DisclosureIndicator : .None
-        self.selectionStyle = informationModel.disableHighlight ? .Default : .None
+        self.selectionStyle = informationModel.disableHighlight ? .None : .Default
     }
     
     required init?(coder aDecoder: NSCoder) {
