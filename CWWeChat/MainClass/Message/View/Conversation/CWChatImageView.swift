@@ -15,6 +15,7 @@ class CWChatImageView: UIView {
     /// 放置内容
     var contentImageView: UIImageView = {
         let contentImageView = UIImageView()
+        contentImageView.backgroundColor = UIColor.grayColor()
         return contentImageView
     }()
     //引导
@@ -83,26 +84,37 @@ class CWChatImageView: UIView {
     
     
     func setThumbnailPath(imagePath: String?) {
+        contentImageView.image = nil
         if imagePath == nil {
             return
         }
-        
         self.contentImageView.image = UIImage(named: imagePath!)
+    }
+    
+    func setThumbnailURL(imageURL: String?) {
+        contentImageView.image = nil
+        guard let imageURL = imageURL else {
+            return
+        }
         
-        return
-        let url = NSURL(string: imagePath!)
-        let imageFilter = AspectScaledToFitSizeFilter(size: self.frame.size)
+        let httpHost = "http://7xsmd8.com1.z0.glb.clouddn.com/"
+        let url = NSURL(string: httpHost+imageURL)
         let progress = {(bytesRead: Int64, totalBytesRead: Int64, totalExpectedBytesToRead: Int64) in
-            print(totalBytesRead/totalExpectedBytesToRead)
+            let progress = CGFloat(totalBytesRead)/CGFloat(totalExpectedBytesToRead)
+            self.updateProgressView(progress, result: .Loading)
         }
         contentImageView.af_setImageWithURL(url!, placeholderImage: nil,
-                                filter: imageFilter,
-                                progress: progress) { response in
-                                 if let image = response.result.value {
-                                        self.contentImageView.image = image
-                                    }    
-                            
-                                    
+                                            progress: progress) { response in
+                                                if let image = response.result.value {
+                                                    self.contentImageView.image = image
+                                                    let path = CWUserAccount.sharedUserAccount().pathUserChatImage(imageURL)
+                                                    NSFileManager.saveContentImage(image, imagePath: path)
+                                                    self.updateProgressView(1, result: .Success)
+                                                } else {
+                                                    self.updateProgressView(0, result: .Fail)
+                                                }
+                                                
+                                                
         }
     }
     

@@ -25,6 +25,11 @@ class CWChatMessageHandle: CWBaseMessageHandle {
             switch type {
             case .Text:
                 messageContent = CWTextMessageContent(content: body)
+            case .Image:
+                let expand = message.elementForName("body").attributeForName("expand").stringValue()!
+                messageContent = CWImageMessageContent(imageURI: body) as CWImageMessageContent
+                let imageMessageContent = messageContent as! CWImageMessageContent
+                imageMessageContent.imageSize = CGSizeFromString(expand)
             default:
                 messageContent = CWTextMessageContent(content: body)
             }

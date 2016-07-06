@@ -52,9 +52,15 @@ class CWImageMessageCell: CWBaseMessageCell {
         }
         
         let imageMessageContent = message.messageContent as! CWImageMessageContent
+        if let imagePath = imageMessageContent.imagePath {
+            let imagePath = CWUserAccount.sharedUserAccount().pathUserChatImage(imagePath)
+            messageImageView.setThumbnailPath(imagePath)
+        }
+        else if let imageUrl = imageMessageContent.imageUrl {
+            messageImageView.setThumbnailURL(imageUrl)
+        }
         
-        let imagePath = CWUserAccount.sharedUserAccount().pathUserChatImage(imageMessageContent.imageUrl!)
-        messageImageView.setThumbnailPath(imagePath)
+        
         updateProgressView(0, result: message.messageUploadState)
         
 //        updateMessageCellState()
