@@ -135,6 +135,10 @@
 		ED8FD8E81D2D4B7100915622 /* CWUserGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FD8E71D2D4B7100915622 /* CWUserGroupCell.swift */; };
 		ED8FD8EA1D2D581600915622 /* CWTimeMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FD8E91D2D581600915622 /* CWTimeMessageCell.swift */; };
 		ED8FD8EC1D2D65C300915622 /* CWGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FD8EB1D2D65C300915622 /* CWGameViewController.swift */; };
+		ED8FD8F11D2D69CD00915622 /* CWMoreKeyboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FD8EF1D2D69CD00915622 /* CWMoreKeyboardItem.swift */; };
+		ED8FD8F21D2D69CD00915622 /* CWMoreKeyboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FD8F01D2D69CD00915622 /* CWMoreKeyboardCell.swift */; };
+		ED8FD8F41D2D6A2800915622 /* ChatKeyboardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FD8F31D2D6A2800915622 /* ChatKeyboardDelegate.swift */; };
+		ED8FD8F61D2D6A5A00915622 /* CWMoreKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FD8F51D2D6A5A00915622 /* CWMoreKeyboard.swift */; };
 		EDC6A0AE1D22B434002C2AEE /* CWDetailContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */; };
 		EDC6A0B41D22B50D002C2AEE /* CWInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */; };
 		EDC6A0B61D22B911002C2AEE /* CWInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */; };
@@ -296,6 +300,10 @@
 		ED8FD8E71D2D4B7100915622 /* CWUserGroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWUserGroupCell.swift; sourceTree = "<group>"; };
 		ED8FD8E91D2D581600915622 /* CWTimeMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTimeMessageCell.swift; sourceTree = "<group>"; };
 		ED8FD8EB1D2D65C300915622 /* CWGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWGameViewController.swift; sourceTree = "<group>"; };
+		ED8FD8EF1D2D69CD00915622 /* CWMoreKeyboardItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMoreKeyboardItem.swift; sourceTree = "<group>"; };
+		ED8FD8F01D2D69CD00915622 /* CWMoreKeyboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMoreKeyboardCell.swift; sourceTree = "<group>"; };
+		ED8FD8F31D2D6A2800915622 /* ChatKeyboardDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatKeyboardDelegate.swift; sourceTree = "<group>"; };
+		ED8FD8F51D2D6A5A00915622 /* CWMoreKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMoreKeyboard.swift; sourceTree = "<group>"; };
 		EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWDetailContactViewController.swift; sourceTree = "<group>"; };
 		EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationModel.swift; sourceTree = "<group>"; };
 		EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationCell.swift; sourceTree = "<group>"; };
@@ -387,6 +395,7 @@
 		1F651C2F1D1F90FB0080C203 /* ToolBar */ = {
 			isa = PBXGroup;
 			children = (
+				ED8FD8ED1D2D69BC00915622 /* Keyboard */,
 				1F651C301D1F91290080C203 /* CWInputToolBar.swift */,
 				1F651C321D1F915F0080C203 /* CWMessageTextView.swift */,
 			);
@@ -991,6 +1000,25 @@
 			path = ChatDetail;
 			sourceTree = "<group>";
 		};
+		ED8FD8ED1D2D69BC00915622 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				ED8FD8EE1D2D69BC00915622 /* ChatMoreKeyboard */,
+				ED8FD8F31D2D6A2800915622 /* ChatKeyboardDelegate.swift */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		ED8FD8EE1D2D69BC00915622 /* ChatMoreKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				ED8FD8F51D2D6A5A00915622 /* CWMoreKeyboard.swift */,
+				ED8FD8EF1D2D69CD00915622 /* CWMoreKeyboardItem.swift */,
+				ED8FD8F01D2D69CD00915622 /* CWMoreKeyboardCell.swift */,
+			);
+			path = ChatMoreKeyboard;
+			sourceTree = "<group>";
+		};
 		EDC6A0AC1D22B416002C2AEE /* CWDetailContactViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1238,6 +1266,7 @@
 				1FD3ED901D1C2D49004FBA63 /* CWMessageInformSettingController.swift in Sources */,
 				1FD3EB5E1D1ADABA004FBA63 /* CWSettingGroup.swift in Sources */,
 				1FD3ED6E1D1B76D5004FBA63 /* CWAddressBookHeaderView.swift in Sources */,
+				ED8FD8F61D2D6A5A00915622 /* CWMoreKeyboard.swift in Sources */,
 				1FD3EDA51D1C39EC004FBA63 /* UIApplication+CWChat.swift in Sources */,
 				1FD3EDC41D1C47D7004FBA63 /* CWBaseMessageViewController.swift in Sources */,
 				1F2E5C971D21093A00CCE130 /* CWUserAccount.swift in Sources */,
@@ -1267,6 +1296,7 @@
 				1FD3EB8C1D1AE456004FBA63 /* CWChatFriendCell.swift in Sources */,
 				1F2E5CA41D223D5000CCE130 /* UIImage+Extension.swift in Sources */,
 				1FD3EB771D1AE04D004FBA63 /* CWMenuViewController.swift in Sources */,
+				ED8FD8F21D2D69CD00915622 /* CWMoreKeyboardCell.swift in Sources */,
 				1FB011461D235FBD00C9815A /* UIViewController+Logger.swift in Sources */,
 				1FD3ED941D1C2D93004FBA63 /* CWCommonSettingViewController.swift in Sources */,
 				1F2E5C911D1F9F6F00CCE130 /* CWBaseMessageCell.swift in Sources */,
@@ -1282,6 +1312,7 @@
 				1F7DEC381D293ACA007AEFEF /* CWMessageFrame.swift in Sources */,
 				1FA4DD9F1D2CA0DB0052CB91 /* CWInformationHeaderFooterView.swift in Sources */,
 				1FD3EDBE1D1C4642004FBA63 /* CWTextMessageDispatchOperation.swift in Sources */,
+				ED8FD8F41D2D6A2800915622 /* ChatKeyboardDelegate.swift in Sources */,
 				1FD3ED9B1D1C2E2C004FBA63 /* UIView+Frame.swift in Sources */,
 				ED8FD8DF1D2C809500915622 /* CWContactDetailUserCell.swift in Sources */,
 				ED8FD8E11D2C817500915622 /* CWContactDetailAlbumCell.swift in Sources */,
@@ -1292,6 +1323,7 @@
 				1FD3EB251D1ADA08004FBA63 /* AppDelegate.swift in Sources */,
 				ED46AD8B1D2BF5780015FCB0 /* CWMessageContent.swift in Sources */,
 				1FD3EB4E1D1ADA18004FBA63 /* CWChatNavigationController.swift in Sources */,
+				ED8FD8F11D2D69CD00915622 /* CWMoreKeyboardItem.swift in Sources */,
 				1FD3ED801D1C1320004FBA63 /* CWLoginViewController.swift in Sources */,
 				1F2E5C9A1D210DEC00CCE130 /* CWChatDBDataManager.swift in Sources */,
 				1FD3ED841D1C2BA4004FBA63 /* CWMineSettingHelper.swift in Sources */,

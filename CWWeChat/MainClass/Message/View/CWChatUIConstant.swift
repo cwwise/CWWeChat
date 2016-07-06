@@ -29,3 +29,29 @@ let kChatTextMaxWidth: CGFloat = Screen_Width - kChatTextLeftPadding - kChatText
 let kChatImageMaxWidth = Screen_Width * 0.45
 let kChatImageMinWidth = Screen_Width * 0.25
 
+
+public enum CWEmojiType: Int {
+    case Emoji
+    case Favorite
+    case Face
+    case Image
+}
+
+public enum CWChatBarStatus: Int {
+    case Init
+    case Voice
+    case More
+    case Emoji
+    case Keyboard
+}
+
+
+
+///键盘相关的枚举
+public enum CWMoreKeyboardItemType: Int {
+    case Image
+    case Camera
+    case Video
+    case Position
+}
+
