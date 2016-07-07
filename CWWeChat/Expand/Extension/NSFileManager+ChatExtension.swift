@@ -12,10 +12,10 @@ import UIKit
 extension NSFileManager {
     
     class func saveContentImage(image: UIImage?,imagePath path:String) {
-        guard let image = image else {
+        guard let image = image where NSFileManager.defaultManager().fileExistsAtPath(path) == false else {
             return
         }
-        var data = UIImageJPEGRepresentation(image, 0.8)
+        var data = UIImageJPEGRepresentation(image, 1)
         if data == nil {
             data = UIImagePNGRepresentation(image)
         }
@@ -23,9 +23,5 @@ extension NSFileManager {
             print("保存图片成功----")
         }
     }
-
-    
-
-    
 }
 

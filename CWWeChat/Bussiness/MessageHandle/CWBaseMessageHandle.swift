@@ -27,7 +27,7 @@ class CWBaseMessageHandle: NSObject {
         
     }
     
-    
+    //解析到消息后，应该先下载。还需要优化。
     func analyMessageContent(message: XMPPMessage) -> (String, CWMessageType) {
         let body = message.elementForName("body")
         let type = body.attributeForName("type")

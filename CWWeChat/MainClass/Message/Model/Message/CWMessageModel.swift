@@ -40,9 +40,14 @@ class CWMessageModel: NSObject {
     var content: String?
     
     /// 在会话界面显示
-    var conversationContent:String {
-        get {
-            return "子类定义"
+    var conversationContent:String? {
+        switch messageType {
+        case .Text:
+            return self.content
+        case .Image:
+            return "[图片]"
+        default:
+            return self.content
         }
     }
     
@@ -84,7 +89,7 @@ class CWMessageModel: NSObject {
             var contentSize: CGSize = CGSizeZero
             let imageMessage = content as! CWImageMessageContent
             
-            if let imagePath = imageMessage.imageUrl  {
+            if let imagePath = imageMessage.imagePath  {
                 let local_imagePath = CWUserAccount.sharedUserAccount().pathUserChatImage(imagePath)
                 let isExist = NSFileManager.defaultManager().fileExistsAtPath(local_imagePath)
                 
@@ -102,6 +107,18 @@ class CWMessageModel: NSObject {
                     }
                 } else {
                     contentSize = CGSize(width: 60, height: 60)
+                }
+            } else {
+                let imageSize = imageMessage.imageSize
+                //根据图片的比例大小计算图片的frame
+                if imageSize.width > imageSize.height {
+                    var height = kChatImageMaxWidth * imageSize.height / imageSize.width
+                    height = [kChatImageMinWidth,height].maxElement()!
+                    contentSize = CGSize(width: ceil(kChatImageMaxWidth), height: ceil(height))
+                } else {
+                    var width = kChatImageMaxWidth * imageSize.width / imageSize.height
+                    width = [kChatImageMinWidth,width].maxElement()!
+                    contentSize = CGSize(width: ceil(width), height: ceil(kChatImageMaxWidth))
                 }
             }
             

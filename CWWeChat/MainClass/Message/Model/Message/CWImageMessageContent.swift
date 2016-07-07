@@ -16,10 +16,17 @@ class CWImageMessageContent: CWMessageContent {
     var thumbnailImage: UIImage?
      /// 实际图片URL
     var imageUrl: String?
+    var imagePath: String?
+    
     var imageSize: CGSize = CGSizeZero
     
     init(image: UIImage) {
         self.originalImage = image
+        super.init()
+    }
+    
+    init(imagePath: String) {
+        self.imagePath = imagePath
         super.init()
     }
     

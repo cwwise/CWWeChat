@@ -120,14 +120,11 @@ class CWConversationCell: UITableViewCell {
         let userModel = CWContactManager.findContact(conversationModel.partnerID)
         
         if let userModel = userModel {
-            
             self.headerImageView.af_setImageWithURL(NSURL(string: userModel.avatarURL!)!, placeholderImage: defaultHeadeImage)
             self.usernameLabel.text = userModel.nikeName
         }
         
-        if let date = conversationModel.conversationDate {
-            self.timeLabel.text = ChatTimeTool.timeStringFromSinceDate(date)
-        }
+        self.timeLabel.text = ChatTimeTool.timeStringFromSinceDate(conversationModel.conversationDate)
         
         self.detailInfoLabel.text = conversationModel.content
         

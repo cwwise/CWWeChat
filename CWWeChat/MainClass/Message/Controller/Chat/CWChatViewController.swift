@@ -25,16 +25,6 @@ class CWChatViewController: CWBaseMessageViewController {
     var messageAccumulate:Int = 0
     var currentDate:NSDate = NSDate()
     
-    //存储数据库
-    lazy var dbMessageStore:CWChatDBMessageStore = {
-       return CWChatDBDataManager.sharedInstance.dbMessageStore
-    }()
-    
-    //存储数据库
-    lazy var dbRecordStore:CWChatDBRecordStore = {
-        return CWChatDBDataManager.sharedInstance.dbRecordStore
-    }()
-    
     /// 消息发送主要的类
     var messageDispatchQueue:CWMessageDispatchQueue = {
         return CWXMPPManager.shareXMPPManager.messageDispatchQueue
@@ -43,6 +33,7 @@ class CWChatViewController: CWBaseMessageViewController {
     /// 消息数据数组
     var messageList = Array<CWMessageModel>()
     
+    //MARK: UI属性
     /// TableView
     lazy var tableView: UITableView = {
         let frame = CGRect(x: 0, y: 0,
@@ -67,19 +58,32 @@ class CWChatViewController: CWBaseMessageViewController {
         return chatToolBar
     }()
     
+    lazy var rightBarItem: UIBarButtonItem = {
+        let rightBarItem = UIBarButtonItem(image: CWAsset.Nav_chat_single.image, style: .Plain, target: self, action: #selector(CWChatViewController.rightBarItemDown(_:)))
+        return rightBarItem
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
 
+        let time = CWMessageModel()
+        time.content = " 12:30  "
+        time.messageType = .Time
+        messageList.append(time)
+        
         setupUI()
         registerCell()
         registerKeyboardNotifacation()
         
         self.refreshLocalMessage {
+            
             //先刷新数据，再滚动到底部
             self.tableView.reloadData()
             //将消息插入数组 并刷新列表 并滚动到最下面
             self.updateMessageAndScrollBottom(false)
+            
         }
     }
     
@@ -91,6 +95,8 @@ class CWChatViewController: CWBaseMessageViewController {
         self.view.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(self.tableView)
         self.view.addSubview(self.chatToolBar)
+        
+        self.navigationItem.rightBarButtonItem = rightBarItem
         
         self.messageDispatchQueue.delegate = self
         
@@ -106,7 +112,14 @@ class CWChatViewController: CWBaseMessageViewController {
         tableView.registerClass(CWBaseMessageCell.self, forCellReuseIdentifier: CWMessageType.None.reuseIdentifier())
         tableView.registerClass(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.Text.reuseIdentifier())
         tableView.registerClass(CWImageMessageCell.self, forCellReuseIdentifier: CWMessageType.Image.reuseIdentifier())
+        tableView.registerClass(CWTimeMessageCell.self, forCellReuseIdentifier: CWMessageType.Time.reuseIdentifier())
 
+    }
+    
+    func rightBarItemDown(barItem: UIBarButtonItem) {
+        let chatDetailVC = CWChatDetailViewController()
+        chatDetailVC.contactModel = friendUser
+        self.navigationController?.pushViewController(chatDetailVC, animated: true)
     }
     
     deinit {
@@ -140,11 +153,20 @@ extension CWChatViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let message = messageList[indexPath.row]
+        if message.messageType == .Time {
+            return 40
+        }
         return message.messageFrame.heightOfCell
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let message = messageList[indexPath.row] 
+        
+        if message.messageType == .Time {
+            let timeMessageCell = tableView.dequeueReusableCellWithIdentifier(message.messageType.reuseIdentifier(), forIndexPath: indexPath) as! CWTimeMessageCell
+            timeMessageCell.updateMessage(message)
+            return timeMessageCell
+        }
         
         let chatMessageCell = tableView.dequeueReusableCellWithIdentifier(message.messageType.reuseIdentifier(), forIndexPath: indexPath) as! CWBaseMessageCell
         chatMessageCell.updateMessage(message)
@@ -164,21 +186,19 @@ extension CWChatViewController {
      */
     func messageNeedShowTime(date:NSDate) -> Bool {
         
-//        msgAccumulate += 1
-//        let messageInterval = date.timeIntervalSince1970 - lastDateInterval
-//        //消息间隔
-//        if msgAccumulate > MAX_SHOWTIME_MESSAGE_COUNT ||
-//            lastDateInterval == 0 ||
-//            messageInterval > MAX_SHOWTIME_MESSAGE_SECOND{
-//            lastDateInterval = date.timeIntervalSince1970
-//            msgAccumulate = 0
-//            return true
-//        }
+        messageAccumulate += 1
+        let messageInterval = date.timeIntervalSince1970 - lastDateInterval
+        //消息间隔
+        if messageAccumulate > MAX_SHOWTIME_MESSAGE_COUNT ||
+            lastDateInterval == 0 ||
+            messageInterval > MAX_SHOWTIME_MESSAGE_SECOND{
+            lastDateInterval = date.timeIntervalSince1970
+            messageAccumulate = 0
+            return true
+        }
         return false
     }
     
 }
-
-
 
 

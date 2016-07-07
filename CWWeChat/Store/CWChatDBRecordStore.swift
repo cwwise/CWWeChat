@@ -247,9 +247,9 @@ class CWChatDBRecordStore: NSObject {
         
         //设置record的值
         let message = messageDBStore.lastMessageByUserID(uid, partnerID: record.partnerID!)
-        if (message != nil) {
-            record.conversationDate = message?.messageSendDate
-            record.content = message!.content
+        if let message = message {
+            record.conversationDate = message.messageSendDate
+            record.content = message.conversationContent
         }
         return record
     }

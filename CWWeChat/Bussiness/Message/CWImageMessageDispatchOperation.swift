@@ -64,7 +64,13 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
         let messageId = chatMessage.messageID
         let content = chatMessage.content!
         
-        let sendResult = messageTransmitter.sendMessage(content, toId: toId!, messageId: messageId, type: 2)
+        let messageContent = chatMessage.messageContent as! CWImageMessageContent
+        let expand = NSStringFromCGSize(messageContent.imageSize)
+        let sendResult = messageTransmitter.sendMessage(content,
+                                                        toId: toId!,
+                                                        messageId: messageId,
+                                                        type: 2,
+                                                        expand: expand)
         messageSendCallback(sendResult)
     }
     

@@ -19,7 +19,7 @@ class CWConversationModel: NSObject {
     ///TODO: 待修改
     var partnerID: String!
     ///时间
-    var conversationDate: NSDate?
+    var conversationDate: NSDate
     ///会话类型
     var conversationType: CWChatType
     ///未读数量
@@ -33,6 +33,7 @@ class CWConversationModel: NSObject {
     
     override init() {
         //默认是个人
+        conversationDate = NSDate()
         conversationType = .Personal
         super.init()
     }

@@ -40,9 +40,9 @@ class CWMessageTransmitter: NSObject {
      
      - returns: 发送消息的结果
      */
-    func sendMessage(content:String, toId:String, messageId:String, type:Int = 1) -> Bool {
+    func sendMessage(content:String, toId:String, messageId:String, type:Int = 1, expand: String? = nil) -> Bool {
         
-        let messageElement = self.messageElement(content, to: toId, messageId: messageId, type: type)
+        let messageElement = self.messageElement(content, to: toId, messageId: messageId, type: type, expand: expand)
         
         var receipte: XMPPElementReceipt?
         CWPlayMessageAudio.playSoundEffect("sendmsg.caf")
@@ -63,7 +63,7 @@ class CWMessageTransmitter: NSObject {
      
      - returns: 消息XMPPMessage的实体
      */
-    func messageElement(body: String, to: String, messageId: String, type:Int = 1) -> XMPPMessage {
+    func messageElement(body: String, to: String, messageId: String, type:Int = 1, expand: String? = nil) -> XMPPMessage {
         //消息内容
         let message = XMPPMessage(type: "chat", elementID: messageId)
         message.addAttributeWithName("to", stringValue: chatJidString(to))
@@ -73,6 +73,10 @@ class CWMessageTransmitter: NSObject {
         //第一种是在消息body中添加type的属性。
         let bodyElement = DDXMLElement.elementWithName("body", stringValue: body) as! DDXMLElement
         bodyElement.addAttributeWithName("type", integerValue: type)
+        if let expand = expand {
+            bodyElement.addAttributeWithName("expand", stringValue: expand)
+        }
+        
         message.addChild(bodyElement)
         
         //第二种根据消息不同在消息body添加前缀,在CWMessageDispatchOperation发送中添加。

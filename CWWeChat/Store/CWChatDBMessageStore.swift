@@ -267,12 +267,14 @@ extension CWChatDBMessageStore {
         switch messageType {
         case .Text:
             messageContent = CWTextMessageContent(content: string)
-        default:
+        case .Image:
             
-            messageContent = CWImageMessageContent(imageURI: string) as CWImageMessageContent
+            messageContent = CWImageMessageContent(imagePath: string) as CWImageMessageContent
             let sizeString = row[ext1]
             let imageMessageContent = messageContent as! CWImageMessageContent
             imageMessageContent.imageSize = CGSizeFromString(sizeString)
+        default:
+            messageContent = CWTextMessageContent(content: string)
         }
         
         
