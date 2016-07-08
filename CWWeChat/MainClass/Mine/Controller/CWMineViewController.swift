@@ -58,6 +58,13 @@ extension CWMineViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
         
+        if indexPath.section == 0 {
+            let mineInformationVC = CWMineInformationViewController()
+            mineInformationVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(mineInformationVC, animated: true)
+            return
+        }
+        
         let settingVC = CWMineSettingViewController()
         settingVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(settingVC, animated: true)
