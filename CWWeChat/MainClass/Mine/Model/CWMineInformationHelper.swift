@@ -36,7 +36,7 @@ class CWMineInformationHelper: NSObject {
         }
         
         let qrCodeItem = CWSettingItem(title: "我的二维码")
-        qrCodeItem.rightImageURL = "mine_cell_myQR"
+        qrCodeItem.rightImagePath = "mine_cell_myQR"
         
         let locationItem = CWSettingItem(title: "我的地址")
         

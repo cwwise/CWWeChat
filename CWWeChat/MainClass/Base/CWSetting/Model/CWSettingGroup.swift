@@ -49,6 +49,14 @@ class CWSettingGroup: NSObject {
         self.setValue(footerTitle, forKey: "footerTitle")
     }
     
+    subscript(index : Int) -> CWSettingItem? {
+        if index > count {
+            return nil
+        }
+        return sectionItems[index]
+    }
+
+    
     func itemObjectAtIndex(index: Int) -> CWSettingItem {
         return sectionItems[index]
     }

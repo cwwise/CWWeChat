@@ -19,6 +19,11 @@ class CWMineInformationViewController: CWSettingViewController {
         self.settingDataSource = helper.mineInfoData
         // Do any additional setup after loading the view.
     }
+    
+    override func registerCell() {
+        super.registerCell()
+        self.tableView.registerClass(CWMineInformationAvatarCell.self, forCellReuseIdentifier: CWMineInformationAvatarCell.reuseIdentifier)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -37,3 +42,28 @@ class CWMineInformationViewController: CWSettingViewController {
     */
 
 }
+
+extension CWMineInformationViewController {
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let item = self.settingDataSource[indexPath.section][indexPath.row]
+        if item?.title == "头像" {
+            let cell = tableView.dequeueReusableCellWithIdentifier(CWMineInformationAvatarCell.reuseIdentifier) as! CWMineInformationAvatarCell
+            cell.settingItem = item
+            return cell
+        }
+        
+        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+    }
+    
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            return 85.0
+        }
+        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+    }
+    
+}
+
