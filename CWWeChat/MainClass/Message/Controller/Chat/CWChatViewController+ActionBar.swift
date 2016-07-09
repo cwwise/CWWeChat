@@ -41,13 +41,16 @@ extension CWChatViewController: CWInputToolBarDelegate {
     func sendMessage(message: CWMessageModel)  {
         
         message.messageSendId = CWUserAccount.sharedUserAccount().userID
-        //        message.showTime = messageNeedShowTime(message.messageSendDate)
+        message.showTime = messageNeedShowTime(message.messageSendDate)
+        if message.showTime {
+            self.addTimeMeesage(message.messageSendDate)
+        }
         dbMessageStore.appendMessage(message) { (isSuccess) in
             self.dispatchMessage(message)
             self.messageList.append(message)
             self.tableView.reloadData()
-            //            let indexPath = NSIndexPath(forRow: self.messageList.count-1, inSection: 0)
-            //            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+            //let indexPath = NSIndexPath(forRow: self.messageList.count-1, inSection: 0)
+            //self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
             self.updateMessageAndScrollBottom(false)
         }
     }
@@ -72,5 +75,35 @@ extension CWChatViewController: CWInputToolBarDelegate {
         self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
     }
     
+    
+    /**
+     是否需要显示消息的时间
+     
+     - parameter date: 当前消息的发送时间
+     
+     - returns: 是否需要显示
+     */
+    func messageNeedShowTime(date:NSDate) -> Bool {
+        
+        messageAccumulate += 1
+        let messageInterval = date.timeIntervalSince1970 - lastDateInterval
+        //消息间隔
+        if messageAccumulate > MAX_SHOWTIME_MESSAGE_COUNT ||
+            lastDateInterval == 0 ||
+            messageInterval > MAX_SHOWTIME_MESSAGE_SECOND{
+            lastDateInterval = date.timeIntervalSince1970
+            messageAccumulate = 0
+            return true
+        }
+        return false
+    }
+    
+    func addTimeMeesage(date: NSDate) {
+        let timeString = "  \(ChatTimeTool.timeStringFromSinceDate(date))  "
+        let time = CWMessageModel()
+        time.content = timeString
+        time.messageType = .Time
+        messageList.append(time)
+    }
     
 }

@@ -67,11 +67,6 @@ class CWChatViewController: CWBaseMessageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
-
-        let time = CWMessageModel()
-        time.content = " 12:30  "
-        time.messageType = .Time
-        messageList.append(time)
         
         setupUI()
         registerCell()
@@ -154,7 +149,7 @@ extension CWChatViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let message = messageList[indexPath.row]
         if message.messageType == .Time {
-            return 40
+            return 25
         }
         return message.messageFrame.heightOfCell
     }
@@ -204,31 +199,5 @@ extension CWChatViewController: ChatMessageCellDelegate {
     }
 }
 
-
-extension CWChatViewController {
-    
-    /**
-     是否需要显示消息的时间
-     
-     - parameter date: 当前消息的发送时间
-     
-     - returns: 是否需要显示
-     */
-    func messageNeedShowTime(date:NSDate) -> Bool {
-        
-        messageAccumulate += 1
-        let messageInterval = date.timeIntervalSince1970 - lastDateInterval
-        //消息间隔
-        if messageAccumulate > MAX_SHOWTIME_MESSAGE_COUNT ||
-            lastDateInterval == 0 ||
-            messageInterval > MAX_SHOWTIME_MESSAGE_SECOND{
-            lastDateInterval = date.timeIntervalSince1970
-            messageAccumulate = 0
-            return true
-        }
-        return false
-    }
-    
-}
 
 
