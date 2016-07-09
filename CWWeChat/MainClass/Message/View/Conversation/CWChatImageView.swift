@@ -118,6 +118,7 @@ class CWChatImageView: UIView {
         }
     }
     
+    /// 更新cell状态
     func updateProgressView(progress:CGFloat, result: CWMessageUploadState) {
         
         if result == .Loading {

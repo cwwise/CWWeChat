@@ -45,7 +45,6 @@ class CWConversationsViewController: CWBaseMessageViewController {
     func setupXMPP() {
         /// 设置xmpp状态
         let listener = { (status: CWXMPPStatus) in
-            CWLogDebug("XMPP连接状态:\(status.rawValue)")
             var title = "微信"
             switch status {
             case .Connected:

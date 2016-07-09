@@ -169,8 +169,38 @@ extension CWChatViewController: UITableViewDataSource {
         }
         
         let chatMessageCell = tableView.dequeueReusableCellWithIdentifier(message.messageType.reuseIdentifier(), forIndexPath: indexPath) as! CWBaseMessageCell
+        chatMessageCell.delegate = self
         chatMessageCell.updateMessage(message)
         return chatMessageCell
+    }
+}
+
+// MARK: - ChatMessageCellDelegate
+extension CWChatViewController: ChatMessageCellDelegate {
+    
+    func messageCellUserAvatarDidClick(userId: String) {
+        let chatVC = CWDetailContactViewController()
+        chatVC.contactID = userId
+        chatVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(chatVC, animated: true)
+    }
+    
+    func messagecellDidSelect(cell: CWBaseMessageCell) {
+        
+        if let message = cell.message {
+            if message.messageType == .Text {
+                let textMessage = message.messageContent as! CWTextMessageContent
+                let displayView = CWChatTextDisplayView()
+                displayView.showInView(self.navigationController!.view, attrText: textMessage.attributeText)
+            }
+            else if message.messageType == .Image {
+                let _ = message.messageContent as! CWImageMessageContent
+                let browserVC = CWPhotoBrowserController()
+//                browserVC.imageArray = [NSFileManager.pathUserChatImage(imageMessage.imagePath!)]
+                self.navigationController?.pushViewController(browserVC, animated: true)
+            }
+        }
+        
     }
 }
 

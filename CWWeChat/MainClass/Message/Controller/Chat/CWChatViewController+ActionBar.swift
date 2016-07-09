@@ -22,7 +22,7 @@ extension CWChatViewController: CWInputToolBarDelegate {
     
     func chatInputView(inputView: CWInputToolBar, sendImage imageName: String ,extentInfo:Dictionary<String,String>) {
         
-        let messageContent = CWImageMessageContent(imageURI: imageName)
+        let messageContent = CWImageMessageContent(imagePath: imageName)
         let sizeString = extentInfo["size"]! as String
         messageContent.imageSize = CGSizeFromString(sizeString)
         

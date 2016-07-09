@@ -10,18 +10,16 @@ import UIKit
 
 protocol ChatMessageCellDelegate:NSObjectProtocol {
     //头像点击
-    func messageCellUserAvatarDidClick(user:CWContactUser)
+    func messageCellUserAvatarDidClick(userId: String)
     
     //消息体选中
     func messagecellDidSelect(cell: CWBaseMessageCell)
     
     //MARK: UIMenuController消息
-    func messageDelete(cell: CWBaseMessageCell)
+//    func messageDelete(cell: CWBaseMessageCell)
     
-    func messageCopy(cell: CWBaseMessageCell)
+//    func messageCopy(cell: CWBaseMessageCell)
 }
-
-// TODO: 修改命名
 
 ///头像
 let kAvaterWidth:  CGFloat      = 38.0
@@ -42,6 +40,8 @@ let kMessagebgSpaceY: CGFloat  =  1.0
 
 /// 聊天界面baseCell
 class CWBaseMessageCell: UITableViewCell {
+    
+    weak var delegate: ChatMessageCellDelegate?
     
     ///
     var message:CWMessageModel?
@@ -70,6 +70,13 @@ class CWBaseMessageCell: UITableViewCell {
         return tapGestureRecognizer
     }()
     
+    private(set) lazy var doubletapGesture: UITapGestureRecognizer = {
+        let doubletapGesture = UITapGestureRecognizer(target: self, action: #selector(bubbleDoubleTapped(_:)))
+        doubletapGesture.numberOfTapsRequired = 2
+        self.tapGestureRecognizer.requireGestureRecognizerToFail(doubletapGesture)
+        return doubletapGesture
+    }()
+    
     private (set) lazy var longPressGestureRecognizer: UILongPressGestureRecognizer = {
         let longpressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(bubbleLongPressed(_:)))
         longpressGestureRecognizer.delegate = self
@@ -81,6 +88,9 @@ class CWBaseMessageCell: UITableViewCell {
         let messageBackgroundView = UIImageView()
         messageBackgroundView.userInteractionEnabled = true
         
+        messageBackgroundView.addGestureRecognizer(self.longPressGestureRecognizer)
+        messageBackgroundView.addGestureRecognizer(self.doubletapGesture)
+
         return messageBackgroundView
     }()
     
@@ -140,7 +150,6 @@ class CWBaseMessageCell: UITableViewCell {
             
         }
         
-        
         if message.messageOwnerType == .Myself {
 
             let string = CWUserAccount.sharedUserAccount().chatuser.avatarURL!
@@ -173,8 +182,8 @@ class CWBaseMessageCell: UITableViewCell {
             make.height.equalTo(0)
         }
         
-        if  self.message?.messageOwnerType != message.messageOwnerType {
-          
+        if self.message?.messageOwnerType != message.messageOwnerType {
+            
             self.messageBackgroundView.snp_remakeConstraints(closure: { (make) in
                 
                 if message.messageOwnerType == .Myself {
@@ -185,9 +194,7 @@ class CWBaseMessageCell: UITableViewCell {
                 make.top.equalTo(self.usernameLabel.snp_bottom).offset(-kMessagebgSpaceY);
                 
             })
-            
         }
-        
         
         self.message = message
     }
@@ -196,11 +203,28 @@ class CWBaseMessageCell: UITableViewCell {
     ///头像点击
     func avatarButtonClickDown(button:UIButton) {
         
+        guard let delegate = self.delegate,let message = self.message  else {
+            return
+        }
+        
+        if message.messageOwnerType == .Myself {
+            delegate.messageCellUserAvatarDidClick(message.messageSendId!)
+        } else {
+            delegate.messageCellUserAvatarDidClick(message.messageTargetId!)
+        }
+        
     }
     
     ///手势事件
     func bubbleTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-
+        CWLogDebug("bubbleTapped(:_)")
+    }
+    
+    func bubbleDoubleTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        guard let delegate = self.delegate else {
+            return
+        }
+        delegate.messagecellDidSelect(self)
     }
     
     func bubbleLongPressed(longPressGestureRecognizer: UILongPressGestureRecognizer) {
