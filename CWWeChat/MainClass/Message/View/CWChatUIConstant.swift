@@ -46,7 +46,6 @@ public enum CWChatBarStatus: Int {
 }
 
 
-
 ///键盘相关的枚举
 public enum CWMoreKeyboardItemType: Int {
     case Image

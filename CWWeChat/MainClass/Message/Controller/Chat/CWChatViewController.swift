@@ -33,6 +33,12 @@ class CWChatViewController: CWBaseMessageViewController {
     /// 消息数据数组
     var messageList = Array<CWMessageModel>()
     
+    /// 键盘相关
+    lazy var moreKeyBoardhelper: CWMoreKeyBoardHelper = {
+       let moreKeyBoardhelper = CWMoreKeyBoardHelper()
+        return moreKeyBoardhelper
+    }()
+    
     //MARK: UI属性
     /// TableView
     lazy var tableView: UITableView = {
@@ -73,7 +79,6 @@ class CWChatViewController: CWBaseMessageViewController {
         registerKeyboardNotifacation()
         
         self.refreshLocalMessage {
-            
             //先刷新数据，再滚动到底部
             self.tableView.reloadData()
             //将消息插入数组 并刷新列表 并滚动到最下面
