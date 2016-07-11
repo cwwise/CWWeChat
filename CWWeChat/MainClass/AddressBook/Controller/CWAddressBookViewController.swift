@@ -144,8 +144,6 @@ extension CWAddressBookViewController: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         if indexPath.section == 0 {
-            
-            
             return
         }
         

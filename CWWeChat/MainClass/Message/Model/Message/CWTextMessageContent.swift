@@ -14,6 +14,12 @@ class CWTextMessageContent: CWMessageContent {
     /// 文本消息内容
     var content: String
     
+    ///展示text用的
+    lazy var attributeText:NSAttributedString = {
+        let attributeText = self.content.messageAttributedString()
+        return attributeText
+    }()
+    
     init(content: String) {
         self.content = content
         super.init()

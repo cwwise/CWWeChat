@@ -10,6 +10,11 @@ import Foundation
 
 extension CWContactManager {
     
+    func contactDetailArrayByUserID(userId: String) -> [[CWInformationModel]] {
+        let user = CWContactManager.findContact(userId)
+        return self.contactDetailArrayByUserInfo(user!)
+    }
+    
     func contactDetailArrayByUserInfo(user: CWContactUser) -> [[CWInformationModel]] {
         
         var contactDetailArray = [[CWInformationModel]]()

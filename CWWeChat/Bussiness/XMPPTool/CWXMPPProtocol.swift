@@ -29,12 +29,12 @@ public enum CWUserStatus: String {
  - Connecting:   连接中
  - Disconnected: 未连接
  */
-public enum CWXMPPStatus {
-    case None
-    case Error
-    case Connected
-    case Connecting
-    case Disconnected
+public enum CWXMPPStatus: String {
+    case None = ""
+    case Error = "连接错误"
+    case Connected = "已经连接..."
+    case Connecting = "正在连接"
+    case Disconnected = "未连接"
 }
 
 /**

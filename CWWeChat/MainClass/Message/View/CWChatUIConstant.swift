@@ -46,12 +46,18 @@ public enum CWChatBarStatus: Int {
 }
 
 
-
 ///键盘相关的枚举
 public enum CWMoreKeyboardItemType: Int {
     case Image
     case Camera
     case Video
+    case VideoCall
+    case Wallet
+    case Transfer
     case Position
+    case Favorite
+    case BusinessCard
+    case Voice
+    case Cards
 }
 

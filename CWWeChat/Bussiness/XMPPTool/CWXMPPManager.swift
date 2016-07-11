@@ -10,9 +10,6 @@ import UIKit
 import Alamofire
 import MMXXMPPFramework
 
-
-let password = "123456"
-
 public typealias XMPPStatusListener = (CWXMPPStatus -> Void)
 
 class CWXMPPManager: NSObject {
@@ -21,7 +18,7 @@ class CWXMPPManager: NSObject {
     
     private var xmppQueue: dispatch_queue_t
     ///xmpp流
-    internal var xmppStream: XMPPStream
+    var xmppStream: XMPPStream
     ///xmpp重新连接
     private var xmppReconnect: XMPPReconnect
     
@@ -35,8 +32,12 @@ class CWXMPPManager: NSObject {
     ///获取好友请求
     private var xmppRoster: XMPPRoster
     
-    internal var statusListener: XMPPStatusListener?
+    /// XMPP状态
+    var statusListener: XMPPStatusListener?
     
+    /// 网络状态监听
+    var reachable: NetworkReachabilityManager?
+
     ///当前连接状态
     var currentState: CWXMPPStatus {
         var state: CWXMPPStatus = .None
@@ -51,7 +52,6 @@ class CWXMPPManager: NSObject {
         return state
     }
     
-    var reachable: NetworkReachabilityManager?
     
     ///初始化方法
     private override init() {
@@ -175,6 +175,8 @@ class CWXMPPManager: NSObject {
         xmppStream.disconnect()
         
         reachable?.stopListening()
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }
 
@@ -197,6 +199,7 @@ extension CWXMPPManager: XMPPStreamDelegate {
     func xmppStreamDidConnect(sender: XMPPStream!) {
         CWLogDebug("连接成功")
         do {
+            let password = CWUserAccount.sharedUserAccount().password
             try xmppStream.authenticateWithPassword(password)
         } catch let error as NSError {
             CWLogError(error.description)

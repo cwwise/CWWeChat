@@ -32,6 +32,7 @@ class CWMessageModel: NSObject {
 
     var messageUploadState: CWMessageUploadState
     
+    var showTime: Bool = false
     /// 消息内容
     var messageContent: CWMessageContent?
     

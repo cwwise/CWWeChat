@@ -13,7 +13,7 @@ class CWTimeMessageCell: UITableViewCell {
     var message:CWMessageModel?
     
     private let kChatTimeLabelMaxWdith : CGFloat = Screen_Width - 30*2
-    private let kChatTimeLabelMarginTop: CGFloat = 10   //顶部 10 px
+    private let kChatTimeLabelMarginTop: CGFloat = 2   //顶部 10 px
     
     lazy var timeLabel: UILabel = {
         let timeLabel = UILabel()
@@ -31,6 +31,7 @@ class CWTimeMessageCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(self.timeLabel)
         self.backgroundColor = UIColor.clearColor()
+//        self.selectionStyle = .None
         self.timeLabel.snp_makeConstraints { (make) in
             make.height.equalTo(20)
             make.centerX.equalTo(self.contentView)

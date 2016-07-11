@@ -33,6 +33,12 @@ class CWChatViewController: CWBaseMessageViewController {
     /// 消息数据数组
     var messageList = Array<CWMessageModel>()
     
+    /// 键盘相关
+    lazy var moreKeyBoardhelper: CWMoreKeyBoardHelper = {
+       let moreKeyBoardhelper = CWMoreKeyBoardHelper()
+        return moreKeyBoardhelper
+    }()
+    
     //MARK: UI属性
     /// TableView
     lazy var tableView: UITableView = {
@@ -67,18 +73,12 @@ class CWChatViewController: CWBaseMessageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
-
-        let time = CWMessageModel()
-        time.content = " 12:30  "
-        time.messageType = .Time
-        messageList.append(time)
         
         setupUI()
         registerCell()
         registerKeyboardNotifacation()
         
         self.refreshLocalMessage {
-            
             //先刷新数据，再滚动到底部
             self.tableView.reloadData()
             //将消息插入数组 并刷新列表 并滚动到最下面
@@ -154,7 +154,7 @@ extension CWChatViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let message = messageList[indexPath.row]
         if message.messageType == .Time {
-            return 40
+            return 25
         }
         return message.messageFrame.heightOfCell
     }
@@ -169,102 +169,40 @@ extension CWChatViewController: UITableViewDataSource {
         }
         
         let chatMessageCell = tableView.dequeueReusableCellWithIdentifier(message.messageType.reuseIdentifier(), forIndexPath: indexPath) as! CWBaseMessageCell
+        chatMessageCell.delegate = self
         chatMessageCell.updateMessage(message)
         return chatMessageCell
     }
 }
 
-
-extension CWChatViewController {
+// MARK: - ChatMessageCellDelegate
+extension CWChatViewController: ChatMessageCellDelegate {
     
-    /**
-     是否需要显示消息的时间
-     
-     - parameter date: 当前消息的发送时间
-     
-     - returns: 是否需要显示
-     */
-    func messageNeedShowTime(date:NSDate) -> Bool {
-        
-        messageAccumulate += 1
-        let messageInterval = date.timeIntervalSince1970 - lastDateInterval
-        //消息间隔
-        if messageAccumulate > MAX_SHOWTIME_MESSAGE_COUNT ||
-            lastDateInterval == 0 ||
-            messageInterval > MAX_SHOWTIME_MESSAGE_SECOND{
-            lastDateInterval = date.timeIntervalSince1970
-            messageAccumulate = 0
-            return true
-        }
-        return false
+    func messageCellUserAvatarDidClick(userId: String) {
+        let chatVC = CWDetailContactViewController()
+        chatVC.contactID = userId
+        chatVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
+    func messagecellDidSelect(cell: CWBaseMessageCell) {
+        
+        if let message = cell.message {
+            if message.messageType == .Text {
+                let textMessage = message.messageContent as! CWTextMessageContent
+                let displayView = CWChatTextDisplayView()
+                displayView.showInView(self.navigationController!.view, attrText: textMessage.attributeText)
+            }
+            else if message.messageType == .Image {
+                let _ = message.messageContent as! CWImageMessageContent
+                let browserVC = CWPhotoBrowserController()
+//                browserVC.imageArray = [NSFileManager.pathUserChatImage(imageMessage.imagePath!)]
+                self.navigationController?.pushViewController(browserVC, animated: true)
+            }
+        }
+        
+    }
 }
 
 
-extension CWChatViewController: CWInputToolBarDelegate {
-    
-    func chatInputView(inputView: CWInputToolBar, sendText text: String) {
-        CWLogDebug("发送文字:\(text)")
-        
-        let messageContent = CWTextMessageContent(content: text)
-        let message = CWMessageModel(targetId: contactId, content: messageContent)
-        message.content = text
-        sendMessage(message)
-    }
-    
-    func chatInputView(inputView: CWInputToolBar, sendImage imageName: String ,extentInfo:Dictionary<String,String>) {
-        
-        let messageContent = CWImageMessageContent(imagePath: imageName)
-        let sizeString = extentInfo["size"]! as String
-        messageContent.imageSize = CGSizeFromString(sizeString)
-        
-        let message = CWMessageModel(targetId: contactId, content: messageContent)
-        message.content = imageName
-        sendMessage(message)
-        
-    }
-    
-    /**
-     发送消息体
-     
-     发送消息 先保存数据库 保存成功后天就到数据库，并且发送到服务器
-     - parameter message: 消息体
-     */
-    func sendMessage(message: CWMessageModel)  {
-        
-        message.messageSendId = CWUserAccount.sharedUserAccount().userID
-//        message.showTime = messageNeedShowTime(message.messageSendDate)
-        dbMessageStore.appendMessage(message) { (isSuccess) in
-            self.dispatchMessage(message)
-            self.messageList.append(message)
-            self.tableView.reloadData()
-//            let indexPath = NSIndexPath(forRow: self.messageList.count-1, inSection: 0)
-//            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-            self.updateMessageAndScrollBottom(false)
-        }
-    }
-
-    
-    /**
-     发送消息到服务器
-     
-     - parameter message: 消息体
-     */
-    func dispatchMessage(message: CWMessageModel) {
-        messageDispatchQueue.sendMessage(message)
-    }
-    
-    
-    ///滚动到底部
-    func updateMessageAndScrollBottom(animated:Bool = true) {
-        if messageList.count == 0 {
-            return
-        }
-        let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
-        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
-    }
-    
-    
-}
 

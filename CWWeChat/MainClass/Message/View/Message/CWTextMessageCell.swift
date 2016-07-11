@@ -18,7 +18,7 @@ class CWTextMessageCell: CWBaseMessageCell {
     //TODO: 将字体大小用类来管理
     private var messageLabel: UILabel = {
         let messageLabel = UILabel()
-        messageLabel.font = UIFont.systemFontOfSize(16)
+        messageLabel.font = UIFont.fontTextMessageText()
         messageLabel.numberOfLines = 0
 //        messageLabel.backgroundColor = UIColor.cyanColor()
         return messageLabel

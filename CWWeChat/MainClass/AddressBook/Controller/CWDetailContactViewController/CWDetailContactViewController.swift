@@ -20,6 +20,13 @@ class CWDetailContactViewController: CWInformationViewController {
         }
     }
     
+    var contactID: String? {
+        didSet {
+            let user = CWContactManager.findContact(contactID!)
+            self.contactModel = user
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +38,6 @@ class CWDetailContactViewController: CWInformationViewController {
     func registerCellClass() {
         self.tableView.registerClass(CWContactDetailUserCell.self, forCellReuseIdentifier: CWContactDetailUserCell.reuseIdentifier)
         self.tableView.registerClass(CWContactDetailAlbumCell.self, forCellReuseIdentifier: CWContactDetailAlbumCell.reuseIdentifier)
-        
     }
     
 
@@ -69,7 +75,6 @@ extension CWDetailContactViewController {
             }
             return height_Album_Cell
         }
-        
         return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
     

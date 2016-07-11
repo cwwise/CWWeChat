@@ -8,8 +8,12 @@
 
 import UIKit
 
+/**
+ ImageCell
+ */
 class CWImageMessageCell: CWBaseMessageCell {
 
+    /// 自定义ImageView
     lazy var messageImageView:CWChatImageView = {
         let messageImageView = CWChatImageView(frame:CGRectZero)
         messageImageView.userInteractionEnabled = false
@@ -35,8 +39,8 @@ class CWImageMessageCell: CWBaseMessageCell {
                 make.right.equalTo(self.messageBackgroundView)
             })
             
-            
         } else {
+            
             let receiveImage = CWAsset.Message_receiver_bg.image.resizableImage()
             messageImageView.backgroundImage = receiveImage
             
@@ -44,13 +48,14 @@ class CWImageMessageCell: CWBaseMessageCell {
                 make.top.equalTo(self.messageBackgroundView)
                 make.left.equalTo(self.messageBackgroundView)
             })
-            
         }
         
+        //设置size
         self.messageImageView.snp_updateConstraints { (make) in
             make.size.equalTo(message.messageFrame.contentSize)
         }
         
+        //根据图片的类型，加载不同的路径，存在问题(如何让本地和远端统一)
         let imageMessageContent = message.messageContent as! CWImageMessageContent
         if let imagePath = imageMessageContent.imagePath {
             let imagePath = CWUserAccount.sharedUserAccount().pathUserChatImage(imagePath)
@@ -62,10 +67,10 @@ class CWImageMessageCell: CWBaseMessageCell {
         
         
         updateProgressView(0, result: message.messageUploadState)
-        
 //        updateMessageCellState()
     }
     
+    /// 更新cell状态
     override func updateProgressView(progress:CGFloat, result: CWMessageUploadState) {
         messageImageView.updateProgressView(progress, result: result)
     }

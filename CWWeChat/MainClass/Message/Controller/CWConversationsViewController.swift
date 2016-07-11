@@ -33,12 +33,31 @@ class CWConversationsViewController: CWBaseMessageViewController {
         registerCellClass()
         setupFriends()
         
+        setupXMPP()
+        
         self.dbRecordStore.delegate = self
-        manager.connectProcess()
         
         conversationList = dbRecordStore.allMessageRecordByUid(userID)
         self.tableView.reloadData()
         // Do any additional setup after loading the view.
+    }
+    
+    func setupXMPP() {
+        /// 设置xmpp状态
+        let listener = { (status: CWXMPPStatus) in
+            var title = "微信"
+            switch status {
+            case .Connected:
+                break
+            default:
+                title += "(\(status.rawValue))"
+            }
+            dispatch_async_safely_to_main_queue({ 
+                self.title = title
+            })
+        }
+        manager.statusListener = listener
+        manager.connectProcess()
     }
     
     func setupUI() {
