@@ -14,6 +14,12 @@ protocol CWMyExpressionCellDelegate: class{
 
 class CWMyExpressionCell: UITableViewCell {
 
+    var group: CWEmojiGroup? {
+        didSet {
+            setupInfo()
+        }
+    }
+    
     var delegate: CWMyExpressionCellDelegate?
     
     var deleteButton: UIButton = {
@@ -23,6 +29,24 @@ class CWMyExpressionCell: UITableViewCell {
         deleteButton.titleLabel?.font = UIFont.systemFontOfSize(13)
         return deleteButton
     }()
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.accessoryView = self.deleteButton
+    }
+    
+    func setupInfo() {
+        guard let group = group else {
+            return
+        }
+        self.textLabel?.text = group.groupName
+        self.imageView?.image = UIImage(named: group.groupIconPath!)
+
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

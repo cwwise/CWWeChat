@@ -1,5 +1,5 @@
 //
-//  CWChatEmojiGroup.swift
+//  CWEmojiGroup.swift
 //  CWWeChat
 //
 //  Created by chenwei on 16/7/9.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWChatEmojiGroup: NSObject {
+class CWEmojiGroup: NSObject {
 
     var type:CWEmojiType? {
         

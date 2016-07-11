@@ -31,6 +31,7 @@ class CWMyExpressionViewController: CWSettingViewController {
             let cancleItem = UIBarButtonItem(title: "取消", style: .Plain, target: self, action: #selector(CWExpressionViewController.cancelBarButtonDown))
             self.navigationItem.leftBarButtonItem = cancleItem
         }
+        self.tableView.registerClass(CWMyExpressionCell.self, forCellReuseIdentifier: CWMyExpressionCell.reuseIdentifier)
     }
     
     func cancelBarButtonDown() {
@@ -45,16 +46,20 @@ class CWMyExpressionViewController: CWSettingViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension CWMyExpressionViewController {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let group = self.settingDataSource[indexPath.section];
+        if let _ = group.headerTitle {
+            let emojiGroup = group.itemObjectAtIndex(indexPath.row) as! CWEmojiGroup
+            let cell = tableView.dequeueReusableCellWithIdentifier(CWMyExpressionCell.reuseIdentifier) as! CWMyExpressionCell
+            cell.group = emojiGroup
+            return cell
+        }
+        
+        
+        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
     }
-    */
-
 }

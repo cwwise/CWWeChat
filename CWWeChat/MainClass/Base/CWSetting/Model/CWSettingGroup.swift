@@ -35,7 +35,7 @@ class CWSettingGroup: NSObject {
         return sectionItems.count
     }
 
-    var sectionItems: [CWSettingItem]
+    var sectionItems: [AnyObject]
     
     //http://www.jianshu.com/p/bf6a8a054156
     init(headerTitle: String? = nil, footerTitle: String? = nil,items: [CWSettingItem]) {
@@ -53,11 +53,11 @@ class CWSettingGroup: NSObject {
         if index > count {
             return nil
         }
-        return sectionItems[index]
+        return sectionItems[index] as? CWSettingItem
     }
 
     
-    func itemObjectAtIndex(index: Int) -> CWSettingItem {
+    func itemObjectAtIndex(index: Int) -> AnyObject {
         return sectionItems[index]
     }
     

@@ -68,8 +68,8 @@ class CWSettingViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-        let item = settingDataSource[indexPath.section].itemObjectAtIndex(indexPath.row)
-        let cell = tableView.dequeueReusableCellWithIdentifier(item.type.reuseIdentifier(), forIndexPath: indexPath)
+        let item = settingDataSource[indexPath.section][indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier(item!.type.reuseIdentifier(), forIndexPath: indexPath)
         // Configure the cell...
         if let cell = cell as? CWSettingDataProtocol {
             cell.settingItem = item

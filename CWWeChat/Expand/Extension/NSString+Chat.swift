@@ -49,7 +49,7 @@ extension String {
                 //获取原字符串中对应的值
                 let subStr = self.substringWithRange(stringRange)
                 
-                let group = CWChatEmojiGroup()
+                let group = CWEmojiGroup()
                 for emoji in group.emojiData {
                     
                     if (emoji.title == subStr) {

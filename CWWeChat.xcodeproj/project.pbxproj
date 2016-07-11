@@ -10,7 +10,7 @@
 		1F1E22FF1D313EBB00318614 /* CWChatTextDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E22FE1D313EBB00318614 /* CWChatTextDisplayView.swift */; };
 		1F1E23011D313FCE00318614 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E23001D313FCE00318614 /* UIFont+Extension.swift */; };
 		1F1E23051D31412200318614 /* CWChatEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E23031D31412200318614 /* CWChatEmoji.swift */; };
-		1F1E23061D31412200318614 /* CWChatEmojiGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E23041D31412200318614 /* CWChatEmojiGroup.swift */; };
+		1F1E23061D31412200318614 /* CWEmojiGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E23041D31412200318614 /* CWEmojiGroup.swift */; };
 		1F1E23091D3145C100318614 /* CWPhotoBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E23081D3145C100318614 /* CWPhotoBrowserController.swift */; };
 		1F1E230C1D31463400318614 /* CWPhotoBrowserScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E230B1D31463400318614 /* CWPhotoBrowserScrollView.swift */; };
 		1F1E230E1D31466800318614 /* CWPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E230D1D31466800318614 /* CWPhotoCollectionViewCell.swift */; };
@@ -183,7 +183,7 @@
 		1F1E22FE1D313EBB00318614 /* CWChatTextDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatTextDisplayView.swift; sourceTree = "<group>"; };
 		1F1E23001D313FCE00318614 /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		1F1E23031D31412200318614 /* CWChatEmoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatEmoji.swift; sourceTree = "<group>"; };
-		1F1E23041D31412200318614 /* CWChatEmojiGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatEmojiGroup.swift; sourceTree = "<group>"; };
+		1F1E23041D31412200318614 /* CWEmojiGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWEmojiGroup.swift; sourceTree = "<group>"; };
 		1F1E23081D3145C100318614 /* CWPhotoBrowserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWPhotoBrowserController.swift; sourceTree = "<group>"; };
 		1F1E230B1D31463400318614 /* CWPhotoBrowserScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWPhotoBrowserScrollView.swift; sourceTree = "<group>"; };
 		1F1E230D1D31466800318614 /* CWPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -381,7 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				1F1E23031D31412200318614 /* CWChatEmoji.swift */,
-				1F1E23041D31412200318614 /* CWChatEmojiGroup.swift */,
+				1F1E23041D31412200318614 /* CWEmojiGroup.swift */,
 			);
 			path = Emoji;
 			sourceTree = "<group>";
@@ -1453,7 +1453,7 @@
 				1F2E5C9C1D210E4300CCE130 /* CWChatDBRecordStore.swift in Sources */,
 				1FD3EDC11D1C4642004FBA63 /* CWChatMessageHandle.swift in Sources */,
 				1F651C331D1F915F0080C203 /* CWMessageTextView.swift in Sources */,
-				1F1E23061D31412200318614 /* CWChatEmojiGroup.swift in Sources */,
+				1F1E23061D31412200318614 /* CWEmojiGroup.swift in Sources */,
 				1FD3EB941D1AEB56004FBA63 /* CWConversationModel.swift in Sources */,
 				1F7895751D24EC2200713D57 /* CWXMPPConfigure.swift in Sources */,
 				1F908D801D2F63F700B276E3 /* CWMineInformationViewController.swift in Sources */,
