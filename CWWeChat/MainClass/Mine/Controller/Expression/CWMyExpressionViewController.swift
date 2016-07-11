@@ -20,6 +20,11 @@ class CWMyExpressionViewController: CWSettingViewController {
         super.viewDidLoad()
 
         self.title = "我的表情"
+        
+        let helper = CWMineExpressionHelper()
+        self.settingDataSource = helper.expressionData
+        
+        setupUI()
         // Do any additional setup after loading the view.
     }
     

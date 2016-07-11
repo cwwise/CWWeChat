@@ -155,6 +155,7 @@
 		EDAF733E1D33ED4A00B68983 /* CWExpressionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAF733D1D33ED4A00B68983 /* CWExpressionViewController.swift */; };
 		EDAF73401D33F04000B68983 /* CWMyExpressionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAF733F1D33F04000B68983 /* CWMyExpressionViewController.swift */; };
 		EDAF73431D33F14800B68983 /* CWMyExpressionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAF73421D33F14800B68983 /* CWMyExpressionCell.swift */; };
+		EDAF73451D33FDA600B68983 /* CWMineExpressionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAF73441D33FDA600B68983 /* CWMineExpressionHelper.swift */; };
 		EDC6A0AE1D22B434002C2AEE /* CWDetailContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */; };
 		EDC6A0B41D22B50D002C2AEE /* CWInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */; };
 		EDC6A0B61D22B911002C2AEE /* CWInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */; };
@@ -336,6 +337,7 @@
 		EDAF733D1D33ED4A00B68983 /* CWExpressionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWExpressionViewController.swift; sourceTree = "<group>"; };
 		EDAF733F1D33F04000B68983 /* CWMyExpressionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMyExpressionViewController.swift; sourceTree = "<group>"; };
 		EDAF73421D33F14800B68983 /* CWMyExpressionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMyExpressionCell.swift; sourceTree = "<group>"; };
+		EDAF73441D33FDA600B68983 /* CWMineExpressionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CWMineExpressionHelper.swift; path = CWWeChat/MainClass/Mine/View/Expression/CWMineExpressionHelper.swift; sourceTree = SOURCE_ROOT; };
 		EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWDetailContactViewController.swift; sourceTree = "<group>"; };
 		EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationModel.swift; sourceTree = "<group>"; };
 		EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationCell.swift; sourceTree = "<group>"; };
@@ -817,6 +819,7 @@
 		1FD3EB4B1D1ADA18004FBA63 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				EDAF73441D33FDA600B68983 /* CWMineExpressionHelper.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1512,6 +1515,7 @@
 				1FD3EB681D1ADB17004FBA63 /* CWSettingSwitchCell.swift in Sources */,
 				1FD3EDBB1D1C4642004FBA63 /* CWMessageDispatchOperation.swift in Sources */,
 				1FD3EB651D1ADB17004FBA63 /* CWSettingProtocol.swift in Sources */,
+				EDAF73451D33FDA600B68983 /* CWMineExpressionHelper.swift in Sources */,
 				1FB011481D236EE400C9815A /* CWChatMessageDataSource.swift in Sources */,
 				1FD3EB501D1ADA18004FBA63 /* CWDiscoverViewController.swift in Sources */,
 				1FB0114A1D236F8F00C9815A /* CWTableView+Dequeuing.swift in Sources */,

@@ -38,7 +38,7 @@ class CWSettingGroup: NSObject {
     var sectionItems: [AnyObject]
     
     //http://www.jianshu.com/p/bf6a8a054156
-    init(headerTitle: String? = nil, footerTitle: String? = nil,items: [CWSettingItem]) {
+    init(headerTitle: String? = nil, footerTitle: String? = nil,items: [AnyObject]) {
         self.sectionItems = items
         super.init()
         

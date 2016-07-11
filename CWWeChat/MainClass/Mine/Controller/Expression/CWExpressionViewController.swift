@@ -48,7 +48,8 @@ class CWExpressionViewController: UIViewController {
     }
     
     func rightBarButtonDown() {
-        
+        let myExpression = CWMyExpressionViewController()
+        self.navigationController?.pushViewController(myExpression, animated: true)
     }
     
     func segmentedControlChanged(segmentedControl: UISegmentedControl)  {
