@@ -139,6 +139,9 @@
 		ED8FD8F21D2D69CD00915622 /* CWMoreKeyboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FD8F01D2D69CD00915622 /* CWMoreKeyboardCell.swift */; };
 		ED8FD8F41D2D6A2800915622 /* ChatKeyboardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FD8F31D2D6A2800915622 /* ChatKeyboardDelegate.swift */; };
 		ED8FD8F61D2D6A5A00915622 /* CWMoreKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FD8F51D2D6A5A00915622 /* CWMoreKeyboard.swift */; };
+		EDAF733E1D33ED4A00B68983 /* CWExpressionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAF733D1D33ED4A00B68983 /* CWExpressionViewController.swift */; };
+		EDAF73401D33F04000B68983 /* CWMyExpressionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAF733F1D33F04000B68983 /* CWMyExpressionViewController.swift */; };
+		EDAF73431D33F14800B68983 /* CWMyExpressionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAF73421D33F14800B68983 /* CWMyExpressionCell.swift */; };
 		EDC6A0AE1D22B434002C2AEE /* CWDetailContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */; };
 		EDC6A0B41D22B50D002C2AEE /* CWInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */; };
 		EDC6A0B61D22B911002C2AEE /* CWInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */; };
@@ -304,6 +307,9 @@
 		ED8FD8F01D2D69CD00915622 /* CWMoreKeyboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMoreKeyboardCell.swift; sourceTree = "<group>"; };
 		ED8FD8F31D2D6A2800915622 /* ChatKeyboardDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatKeyboardDelegate.swift; sourceTree = "<group>"; };
 		ED8FD8F51D2D6A5A00915622 /* CWMoreKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMoreKeyboard.swift; sourceTree = "<group>"; };
+		EDAF733D1D33ED4A00B68983 /* CWExpressionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWExpressionViewController.swift; sourceTree = "<group>"; };
+		EDAF733F1D33F04000B68983 /* CWMyExpressionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMyExpressionViewController.swift; sourceTree = "<group>"; };
+		EDAF73421D33F14800B68983 /* CWMyExpressionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMyExpressionCell.swift; sourceTree = "<group>"; };
 		EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWDetailContactViewController.swift; sourceTree = "<group>"; };
 		EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationModel.swift; sourceTree = "<group>"; };
 		EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationCell.swift; sourceTree = "<group>"; };
@@ -695,6 +701,7 @@
 		1FD3EB481D1ADA18004FBA63 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				EDAF733C1D33ED3900B68983 /* Expression */,
 				1FD3EB491D1ADA18004FBA63 /* CWMineViewController.swift */,
 				1FD3ED811D1C2B48004FBA63 /* CWMineSettingViewController.swift */,
 				1FD3ED8D1D1C2D0C004FBA63 /* CWAccountSafetyViewController.swift */,
@@ -731,6 +738,7 @@
 		1FD3EB4C1D1ADA18004FBA63 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EDAF73411D33F13400B68983 /* Expression */,
 				1FD3EB801D1AE115004FBA63 /* CWMineUserCell.swift */,
 				1FD3EDA01D1C30A4004FBA63 /* CWAboutHeaderView.swift */,
 			);
@@ -1019,6 +1027,23 @@
 			path = ChatMoreKeyboard;
 			sourceTree = "<group>";
 		};
+		EDAF733C1D33ED3900B68983 /* Expression */ = {
+			isa = PBXGroup;
+			children = (
+				EDAF733D1D33ED4A00B68983 /* CWExpressionViewController.swift */,
+				EDAF733F1D33F04000B68983 /* CWMyExpressionViewController.swift */,
+			);
+			path = Expression;
+			sourceTree = "<group>";
+		};
+		EDAF73411D33F13400B68983 /* Expression */ = {
+			isa = PBXGroup;
+			children = (
+				EDAF73421D33F14800B68983 /* CWMyExpressionCell.swift */,
+			);
+			path = Expression;
+			sourceTree = "<group>";
+		};
 		EDC6A0AC1D22B416002C2AEE /* CWDetailContactViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1265,6 +1290,7 @@
 				1FD3EB5A1D1ADAA8004FBA63 /* CWSettingViewController.swift in Sources */,
 				1FD3ED901D1C2D49004FBA63 /* CWMessageInformSettingController.swift in Sources */,
 				1FD3EB5E1D1ADABA004FBA63 /* CWSettingGroup.swift in Sources */,
+				EDAF73431D33F14800B68983 /* CWMyExpressionCell.swift in Sources */,
 				1FD3ED6E1D1B76D5004FBA63 /* CWAddressBookHeaderView.swift in Sources */,
 				ED8FD8F61D2D6A5A00915622 /* CWMoreKeyboard.swift in Sources */,
 				1FD3EDA51D1C39EC004FBA63 /* UIApplication+CWChat.swift in Sources */,
@@ -1293,9 +1319,11 @@
 				1FD3ED761D1BAA05004FBA63 /* CWContactManager.swift in Sources */,
 				1FBF98191D28AACC00BBDBEB /* CWImageMessageCell.swift in Sources */,
 				1FD3EDAC1D1C45E5004FBA63 /* CWXMPPManager.swift in Sources */,
+				EDAF73401D33F04000B68983 /* CWMyExpressionViewController.swift in Sources */,
 				1FD3EB8C1D1AE456004FBA63 /* CWChatFriendCell.swift in Sources */,
 				1F2E5CA41D223D5000CCE130 /* UIImage+Extension.swift in Sources */,
 				1FD3EB771D1AE04D004FBA63 /* CWMenuViewController.swift in Sources */,
+				EDAF733E1D33ED4A00B68983 /* CWExpressionViewController.swift in Sources */,
 				ED8FD8F21D2D69CD00915622 /* CWMoreKeyboardCell.swift in Sources */,
 				1FB011461D235FBD00C9815A /* UIViewController+Logger.swift in Sources */,
 				1FD3ED941D1C2D93004FBA63 /* CWCommonSettingViewController.swift in Sources */,
