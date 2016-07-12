@@ -257,7 +257,6 @@ extension CWChatDBMessageStore {
 //        message.messagePlayState = ChatMessagePlayState(state: row[play_status])
 //        message.messageUploadState = ChatMessageUploadState(rawValue: row[upload_status])!
         
-        
         let string = row[content]! as String
 //        let infoJson = JSON(data: string.dataUsingEncoding(NSUTF8StringEncoding)!)
 //        message.contentInfo = infoJson.dictionaryObject
@@ -268,11 +267,13 @@ extension CWChatDBMessageStore {
         case .Text:
             messageContent = CWTextMessageContent(content: string)
         case .Image:
-            
             messageContent = CWImageMessageContent(imagePath: string) as CWImageMessageContent
             let sizeString = row[ext1]
             let imageMessageContent = messageContent as! CWImageMessageContent
             imageMessageContent.imageSize = CGSizeFromString(sizeString)
+        case .Voice:
+            messageContent = CWVoiceMessageContent(voicePath: string) as CWVoiceMessageContent
+            
         default:
             messageContent = CWTextMessageContent(content: string)
         }

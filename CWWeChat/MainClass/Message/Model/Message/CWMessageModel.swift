@@ -47,6 +47,8 @@ class CWMessageModel: NSObject {
             return self.content
         case .Image:
             return "[图片]"
+        case .Voice:
+            return "[声音]"
         default:
             return self.content
         }
@@ -123,7 +125,7 @@ class CWMessageModel: NSObject {
                 }
             }
             
-            let heightOfCell = ceil(contentSize.height)+1 + 20
+            let heightOfCell = ceil(contentSize.height)+1 + 10
             self.messageFrame = CWMessageFrame(heightOfCell: heightOfCell, contentSize: contentSize)
             
         }
@@ -134,12 +136,12 @@ class CWMessageModel: NSObject {
             let voiceMessage = content as! CWVoiceMessageContent
             
             var contentSize: CGSize = CGSizeZero
-            let heightOfCell: CGFloat = 30
+            let heightOfCell: CGFloat = 60
             
-            if let voiceLength = voiceMessage.voiceLength {
-                let scale: CGFloat = CGFloat(voiceLength)/60.0
-                contentSize = CGSize(width: ceil(scale*kChatVoiceMaxWidth), height: 20)
-            }
+//            if let voiceLength = voiceMessage.voiceLength {
+                let scale: CGFloat = CGFloat(10)/60.0
+                contentSize = CGSize(width: ceil(scale*kChatVoiceMaxWidth)+30, height: kAvaterWidth+12)
+//            }
 
             self.messageFrame = CWMessageFrame(heightOfCell: heightOfCell, contentSize: contentSize)
             

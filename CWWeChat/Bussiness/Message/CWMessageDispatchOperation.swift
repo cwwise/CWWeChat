@@ -111,6 +111,9 @@ class CWMessageDispatchOperation: NSOperation {
         else if message.messageType == .Image {
             return CWImageMessageDispatchOperation(message:message)
         }
+        else if message.messageType == .Voice {
+            return CWVoiceMessageDispatchOperation(message:message)
+        }
         else {
             return CWMessageDispatchOperation(message:message)
         }

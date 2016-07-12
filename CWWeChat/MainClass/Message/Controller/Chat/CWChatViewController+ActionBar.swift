@@ -21,7 +21,6 @@ extension CWChatViewController: CWInputToolBarDelegate {
     }
     
     func chatInputView(inputView: CWInputToolBar, sendImage imageName: String ,extentInfo:Dictionary<String,String>) {
-        
         let messageContent = CWImageMessageContent(imagePath: imageName)
         let sizeString = extentInfo["size"]! as String
         messageContent.imageSize = CGSizeFromString(sizeString)
@@ -29,7 +28,14 @@ extension CWChatViewController: CWInputToolBarDelegate {
         let message = CWMessageModel(targetId: contactId, content: messageContent)
         message.content = imageName
         sendMessage(message)
+    }
+    
+    func chatInputView(inputView: CWInputToolBar, sendVoice voicePath: String) {
         
+        let voiceContent = CWVoiceMessageContent(voicePath: voicePath)
+        let message = CWMessageModel(targetId: contactId, content: voiceContent)
+        message.content = voicePath
+        sendMessage(message)
     }
     
     /**

@@ -9,13 +9,10 @@
 import UIKit
 
 //MARK: UI相关
-internal struct ChatConversationCellUI {
-    
+public struct ChatConversationCellUI {
     static let headerImageViewLeftPadding:CGFloat = 10.0
     static let headerImageViewTopPadding:CGFloat = 10.0
-    
 }
-
 
 let defaultHeadeImage = CWAsset.Default_head.image
 
@@ -30,8 +27,8 @@ let kChatTextMaxWidth: CGFloat = Screen_Width - kChatTextLeftPadding - kChatText
 let kChatImageMaxWidth = Screen_Width * 0.45
 let kChatImageMinWidth = Screen_Width * 0.25
 
-let kChatVoiceMaxWidth = Screen_Width * 0.25
-let kChatVoiceMinWidth = Screen_Width * 0.45
+let kChatVoiceMinWidth = Screen_Width * 0.25
+let kChatVoiceMaxWidth = Screen_Width * 0.60
 
 public enum CWEmojiType: Int {
     case Emoji

@@ -32,7 +32,8 @@ class CWChatViewController: CWBaseMessageViewController {
     
     /// 消息数据数组
     var messageList = Array<CWMessageModel>()
-    
+    var voicePlayer: CWVoicePlayer!
+
     /// 键盘相关
     lazy var moreKeyBoardhelper: CWMoreKeyBoardHelper = {
        let moreKeyBoardhelper = CWMoreKeyBoardHelper()
@@ -112,6 +113,7 @@ class CWChatViewController: CWBaseMessageViewController {
         tableView.registerClass(CWBaseMessageCell.self, forCellReuseIdentifier: CWMessageType.None.reuseIdentifier())
         tableView.registerClass(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.Text.reuseIdentifier())
         tableView.registerClass(CWImageMessageCell.self, forCellReuseIdentifier: CWMessageType.Image.reuseIdentifier())
+        tableView.registerClass(CWVoiceMessageCell.self, forCellReuseIdentifier: CWMessageType.Voice.reuseIdentifier())
         tableView.registerClass(CWTimeMessageCell.self, forCellReuseIdentifier: CWMessageType.Time.reuseIdentifier())
 
     }
@@ -199,6 +201,16 @@ extension CWChatViewController: ChatMessageCellDelegate {
             let browserVC = CWPhotoBrowserController()
             //                browserVC.imageArray = [NSFileManager.pathUserChatImage(imageMessage.imagePath!)]
             self.navigationController?.pushViewController(browserVC, animated: true)
+        }
+        
+        else if message.messageType == .Voice {
+            //FIX: 必须用成员变量 否则会释放，导致无法播放
+            //播放之后 状态修改为已经播放保存到数据库
+//            let voiceMessage = message.messageContent as! CWVoiceMessageContent
+//            voiceMessage.messagePlayState = .Played
+//            self.dbMessageStore.updateMessageStateByMessage(voiceMessage)
+            voicePlayer = CWVoicePlayer(message: message)
+            voicePlayer.startPlay()
         }
         
     }

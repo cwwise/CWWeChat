@@ -14,6 +14,18 @@ protocol CWInputToolBarDelegate: class {
     func chatInputView(inputView: CWInputToolBar, sendText text: String)
     ///发送图片
     func chatInputView(inputView: CWInputToolBar, sendImage imageName: String ,extentInfo:Dictionary<String,String>)
+    
+    /**
+     发送录音
+     
+     - parameter chatToolBar: chatToolBar
+     - parameter voicePath:   录音文件路径
+     */
+    func chatInputView(inputView: CWInputToolBar, sendVoice voicePath: String)
+    
+    
+//    func chatInputView(inputView: CWInputToolBar, changeChatBarStatus fromstatus:CWChatBarStatus, toStatus:CWChatBarStatus)
+
 }
 
 class CWInputToolBar: UIView {
@@ -57,6 +69,30 @@ class CWInputToolBar: UIView {
         return moreButton
     }()
     
+    lazy var recordButton: UIButton = {
+        let recordButton = UIButton(type: .Custom)
+        recordButton.setTitle("按住     说话", forState: .Normal)
+        recordButton.titleLabel?.font = UIFont.systemFontOfSize(14.0)
+        recordButton.setBackgroundImage(UIImage.imageWithColor(UIColor(hexString: "#F6F6F6")), forState: .Normal)
+        recordButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        recordButton.layer.borderColor = UIColor(hexString: "#DADADA").CGColor
+        recordButton.layer.borderWidth = 1
+        recordButton.layer.cornerRadius = 5.0
+        recordButton.layer.masksToBounds = true
+        recordButton.hidden = true
+        
+        recordButton.addTarget(self, action: #selector(recordClick(_:)), forControlEvents: .TouchDown)
+        recordButton.addTarget(self, action: #selector(recordComplection(_:)), forControlEvents: .TouchUpInside)
+        recordButton.addTarget(self, action: #selector(recordDragOut(_:)), forControlEvents: .TouchDragOutside)
+        recordButton.addTarget(self, action: #selector(recordDragIn(_:)), forControlEvents: .TouchDragInside)
+                recordButton.addTarget(self, action: #selector(recordCancel(_:)), forControlEvents: .TouchUpOutside)
+        
+        return recordButton
+    }()
+    
+    var record: CWVoiceRecorder?
+    var status: CWChatBarStatus = .Init
+
     //按钮的图片
     var kVoiceImage:UIImage = CWAsset.ToolViewInputVoice.image
     var kVoiceImageHL:UIImage = CWAsset.ToolViewInputVoiceHL.image
@@ -89,7 +125,8 @@ class CWInputToolBar: UIView {
         addSubview(self.emotionButton)
         addSubview(self.moreButton)
         addSubview(self.inputTextView)
-        
+        addSubview(self.recordButton)
+
         setupFrame()
     }
     
@@ -147,6 +184,7 @@ class CWInputToolBar: UIView {
         inputTextView.frame = CGRect(x: textViewLeftMargin, y: 4.5, width: width, height: height)
         inputTextView.delegate = self
         
+        recordButton.frame = inputTextView.frame
     }
     
     
@@ -165,7 +203,65 @@ class CWInputToolBar: UIView {
     }
     
     func voiceButtonAction(button: UIButton) {
+    
+        
+        if self.status == .Voice {
+            
+            if let delegate = self.delegate {
+//                delegate.chatInputView(self, changeChatBarStatus: self.status, toStatus: .Keyboard)
+            }
+            
+            self.inputTextView.becomeFirstResponder()
+            self.inputTextView.hidden = false
+            self.recordButton.hidden = true
+            
+            self.status = .Keyboard
+            voiceButton.setNormalImage(self.kVoiceImage, highlighted:self.kVoiceImageHL)
+            
+        } else {
+            
+            if let delegate = self.delegate {
+                //            delegate.chatInputView(self, changeChatBarStatus: self.status, toStatus: .Voice)
+            }
+            
+            if self.status == .Keyboard {
+                self.inputTextView.resignFirstResponder()
+            }
+            
+            self.inputTextView.hidden = true
+            self.recordButton.hidden = false
+            
+            self.status = .Voice
+            voiceButton.setNormalImage(self.kKeyboardImage, highlighted:self.kKeyboardImageHL)
+            
+        }
+        
 
+    
+    }
+
+    //MARK: 录音相关的
+    func recordCancel(button: UIButton) {
+        record!.cancelRecord()
+    }
+
+    func recordComplection(button: UIButton) {
+        record?.stopRecord()
+    }
+    
+    func recordDragOut(button: UIButton) {
+        print("recordDragOut")
+    }
+    
+    func recordDragIn(button: UIButton) {
+        print("recordDragIn")
+    }
+    
+    ///录音按钮按下
+    func recordClick(button: UIButton) {
+        record = CWVoiceRecorder()
+        record?.delegate = self
+        record?.startRecord()
     }
     
     
@@ -182,6 +278,15 @@ class CWInputToolBar: UIView {
         return ((self.maxLines() + 1.0) * self.textViewLineHeight());
     }
     
+}
+
+extension CWInputToolBar: CWVoiceRecorderDelegate {
+    
+    func voiceRecorder(success: Bool, recordname filename:String) {
+        if let delegate = self.delegate {
+            delegate.chatInputView(self, sendVoice: record!.voiceName)
+        }
+    }
 }
 
 // MARK: - UITextViewDelegate
@@ -220,6 +325,7 @@ extension CWInputToolBar: UITextViewDelegate {
 
 }
 
+// 暂时的，需要修改。
 extension CWInputToolBar:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true, completion: nil)

@@ -14,6 +14,7 @@ class CWVoicePlayer: NSObject {
     private var player: AVAudioPlayer?
     private var message: CWMessageModel?
     
+    
     //初始化
     override init() {
         super.init()
@@ -42,6 +43,7 @@ class CWVoicePlayer: NSObject {
             return
         }
         let filePath = CWUserAccount.sharedUserAccount().pathUserChatVoice(voicePath)
+
         do {
             player = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: filePath))
             player?.prepareToPlay()
@@ -50,6 +52,7 @@ class CWVoicePlayer: NSObject {
             print(error)
         }
     }
+    
     
     func startPlay() {
         if (player?.playing == true) {
@@ -67,7 +70,6 @@ class CWVoicePlayer: NSObject {
             player?.stop()
         }
     }
-    
     
     deinit {
         changeProximityMonitorEnableState(false)
