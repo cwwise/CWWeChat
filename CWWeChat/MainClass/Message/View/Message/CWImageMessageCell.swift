@@ -16,8 +16,15 @@ class CWImageMessageCell: CWBaseMessageCell {
     /// 自定义ImageView
     lazy var messageImageView:CWChatImageView = {
         let messageImageView = CWChatImageView(frame:CGRectZero)
-        messageImageView.userInteractionEnabled = false
+        messageImageView.userInteractionEnabled = true
+        messageImageView.addGestureRecognizer(self.tapGestureRecognizer)
         return messageImageView
+    }()
+    
+    ///手势操作
+    private(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bubbleTapped(_:)))
+        return tapGestureRecognizer
     }()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

@@ -51,18 +51,12 @@ class CWPhotoCollectionViewCell: UICollectionViewCell {
     
     func photoFill() {
         
-//        let url = NSURL(string: photoModel)
-//        let imageFilter = AspectScaledToFitSizeFilter(size: self.frame.size)
-//        let progress = {(bytesRead: Int64, totalBytesRead: Int64, totalExpectedBytesToRead: Int64) in
-//            print(totalBytesRead/totalExpectedBytesToRead)
-//        }
-//        scrollView.imageView.af_setImageWithURL(url!, placeholderImage: nil,
-//                                                filter: imageFilter,
-//                                                progress: progress) { response in
-//                                                    if let image = response.result.value {
-//                                                        self.scrollView.imageView.image = image
-//                                                    }
-//        }
+        let url = NSURL(string: photoURL)
+        scrollView.imageView.af_setImageWithURL(url!) { response in
+                                                    if let image = response.result.value {
+                                                        self.scrollView.imageView.image = image
+                                                    }
+        }
     }
     
     

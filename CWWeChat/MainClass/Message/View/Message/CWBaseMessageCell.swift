@@ -8,13 +8,32 @@
 
 import UIKit
 
+/**
+ *  cell的点击代理方法
+ */
 protocol ChatMessageCellDelegate:NSObjectProtocol {
-    //头像点击
+    
+    /**
+     头像点击的代理方法
+     
+     - parameter userId: 用户唯一id
+     */
     func messageCellUserAvatarDidClick(userId: String)
     
-    //消息体选中
-    func messagecellDidSelect(cell: CWBaseMessageCell)
+    /**
+     消息cell点击事件
+     
+     - parameter cell: 点击的cell
+     */
+    func messageCellDidSelect(cell: CWBaseMessageCell)
     
+    /**
+     消息cell 双击的点击事件(争对文本)
+     
+     - parameter cell: 点击的cell
+     */
+    func messageCellDoubleClick(cell: CWBaseMessageCell)
+
     //MARK: UIMenuController消息
 //    func messageDelete(cell: CWBaseMessageCell)
     
@@ -64,16 +83,9 @@ class CWBaseMessageCell: UITableViewCell {
         return avatarButton
     }()
     
-    ///手势操作
-    private(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bubbleTapped(_:)))
-        return tapGestureRecognizer
-    }()
-    
     private(set) lazy var doubletapGesture: UITapGestureRecognizer = {
         let doubletapGesture = UITapGestureRecognizer(target: self, action: #selector(bubbleDoubleTapped(_:)))
         doubletapGesture.numberOfTapsRequired = 2
-        self.tapGestureRecognizer.requireGestureRecognizerToFail(doubletapGesture)
         return doubletapGesture
     }()
     
@@ -90,7 +102,7 @@ class CWBaseMessageCell: UITableViewCell {
         
         messageBackgroundView.addGestureRecognizer(self.longPressGestureRecognizer)
         messageBackgroundView.addGestureRecognizer(self.doubletapGesture)
-
+        
         return messageBackgroundView
     }()
     
@@ -215,17 +227,23 @@ class CWBaseMessageCell: UITableViewCell {
         
     }
     
-    ///手势事件
+    // MARK: 手势事件
     func bubbleTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        CWLogDebug("bubbleTapped(:_)")
+        guard let delegate = self.delegate else {
+            return
+        }
+        delegate.messageCellDidSelect(self)
+
     }
     
     func bubbleDoubleTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         guard let delegate = self.delegate else {
             return
         }
-        delegate.messagecellDidSelect(self)
+        delegate.messageCellDoubleClick(self)
     }
+    
+    
     
     func bubbleLongPressed(longPressGestureRecognizer: UILongPressGestureRecognizer) {
         if longPressGestureRecognizer.state == .Began {

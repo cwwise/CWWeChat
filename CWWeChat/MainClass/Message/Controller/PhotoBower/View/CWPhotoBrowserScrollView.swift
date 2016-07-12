@@ -29,7 +29,7 @@ class CWPhotoBrowserScrollView: UIScrollView {
     ///配置
     func setupUI() {
         imageView = UIImageView()
-        
+        imageView.contentMode = .ScaleAspectFit
         self.addSubview(imageView)
     }
     

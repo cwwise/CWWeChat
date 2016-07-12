@@ -84,7 +84,7 @@ class CWMessageModel: NSObject {
             self.messageFrame = CWMessageFrame(heightOfCell: heightOfCell, contentSize: contentSize)
         }
         
-        else  if content.isKindOfClass(CWImageMessageContent.self) {
+        else if content.isKindOfClass(CWImageMessageContent.self) {
             self.messageType = .Image
 
             var contentSize: CGSize = CGSizeZero
@@ -128,9 +128,24 @@ class CWMessageModel: NSObject {
             
         }
         
+        else if content.isKindOfClass(CWVoiceMessageContent.self) {
+
+            self.messageType = .Voice
+            let voiceMessage = content as! CWVoiceMessageContent
+            
+            var contentSize: CGSize = CGSizeZero
+            let heightOfCell: CGFloat = 30
+            
+            if let voiceLength = voiceMessage.voiceLength {
+                let scale: CGFloat = CGFloat(voiceLength)/60.0
+                contentSize = CGSize(width: ceil(scale*kChatVoiceMaxWidth), height: 20)
+            }
+
+            self.messageFrame = CWMessageFrame(heightOfCell: heightOfCell, contentSize: contentSize)
+            
+        }
     }
-    
-    
+
     
     
 }

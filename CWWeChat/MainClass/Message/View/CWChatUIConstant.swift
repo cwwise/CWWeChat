@@ -26,9 +26,12 @@ let kChatTextRightPadding: CGFloat = 82
 //消息在右边， 70：文本离屏幕左的距离，  82：文本离屏幕右的距
 let kChatTextMaxWidth: CGFloat = Screen_Width - kChatTextLeftPadding - kChatTextRightPadding
 
+//图片
 let kChatImageMaxWidth = Screen_Width * 0.45
 let kChatImageMinWidth = Screen_Width * 0.25
 
+let kChatVoiceMaxWidth = Screen_Width * 0.25
+let kChatVoiceMinWidth = Screen_Width * 0.45
 
 public enum CWEmojiType: Int {
     case Emoji

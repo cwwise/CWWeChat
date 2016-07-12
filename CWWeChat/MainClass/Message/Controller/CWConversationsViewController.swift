@@ -53,7 +53,7 @@ class CWConversationsViewController: CWBaseMessageViewController {
                 title += "(\(status.rawValue))"
             }
             dispatch_async_safely_to_main_queue({ 
-                self.title = title
+                self.navigationItem.title = title
             })
         }
         manager.statusListener = listener

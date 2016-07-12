@@ -42,4 +42,15 @@ class CWUserAccount: NSObject {
         }
         return path.stringByAppendingString(imageName)
     }
+    
+    func pathUserChatVoice(imageName: String) -> String {
+        let documentPath = NSHomeDirectory().stringByAppendingString("/Documents")
+        let userId = self.userID
+        let path = "\(documentPath)/User/\(userId)/Chat/Voices/"
+        if !NSFileManager.defaultManager().fileExistsAtPath(path) {
+            try! NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
+        }
+        return path.stringByAppendingString(imageName)
+    }
+    
 }
