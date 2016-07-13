@@ -30,9 +30,10 @@ extension CWChatViewController: CWInputToolBarDelegate {
         sendMessage(message)
     }
     
-    func chatInputView(inputView: CWInputToolBar, sendVoice voicePath: String) {
-        
+    func chatInputView(inputView: CWInputToolBar, sendVoice voicePath: String, recordTime: Float) {
+    
         let voiceContent = CWVoiceMessageContent(voicePath: voicePath)
+        voiceContent.voiceLength = recordTime
         let message = CWMessageModel(targetId: contactId, content: voiceContent)
         message.content = voicePath
         sendMessage(message)

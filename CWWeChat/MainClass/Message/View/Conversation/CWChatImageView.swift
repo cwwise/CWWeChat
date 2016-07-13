@@ -81,14 +81,12 @@ class CWChatImageView: UIView {
         self.indicatorLable.frame.center = CGPoint(x: self.bounds.midX, y: self.bounds.midY+8)
     }
     
-    
-    
     func setThumbnailPath(imagePath: String?) {
         contentImageView.image = nil
-        if imagePath == nil {
+        guard let imagePath = imagePath else {
             return
         }
-        self.contentImageView.image = UIImage(named: imagePath!)
+        self.contentImageView.yy_imageURL = NSURL(fileURLWithPath: imagePath)
     }
     
     func setThumbnailURL(imageURL: String?) {
@@ -99,7 +97,7 @@ class CWChatImageView: UIView {
         
         let httpHost = "http://7xsmd8.com1.z0.glb.clouddn.com/"
         let url = NSURL(string: httpHost+imageURL)
-        contentImageView.yy_setImageWithURL(url, placeholder: nil, options: .ShowNetworkActivity) { (image, url, type, stage, error) in
+        contentImageView.yy_setImageWithURL(url, placeholder: nil, options: [.ShowNetworkActivity, .IgnoreDiskCache]) { (image, url, type, stage, error) in
             
             if let image = image {
                 self.contentImageView.image = image

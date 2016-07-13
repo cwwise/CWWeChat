@@ -21,7 +21,7 @@ protocol CWInputToolBarDelegate: class {
      - parameter chatToolBar: chatToolBar
      - parameter voicePath:   录音文件路径
      */
-    func chatInputView(inputView: CWInputToolBar, sendVoice voicePath: String)
+    func chatInputView(inputView: CWInputToolBar, sendVoice voicePath: String, recordTime: Float)
     
     
 //    func chatInputView(inputView: CWInputToolBar, changeChatBarStatus fromstatus:CWChatBarStatus, toStatus:CWChatBarStatus)
@@ -31,7 +31,7 @@ protocol CWInputToolBarDelegate: class {
 class CWInputToolBar: UIView {
 
     weak var delegate: CWInputToolBarDelegate?
-    
+    weak var voiceIndicatorView: CWVoiceIndicatorView?
     /// 输入框
     var inputTextView:CWMessageTextView = {
         let inputTextView = CWMessageTextView(frame:CGRectZero)
@@ -282,9 +282,15 @@ class CWInputToolBar: UIView {
 
 extension CWInputToolBar: CWVoiceRecorderDelegate {
     
-    func voiceRecorder(success: Bool, recordname filename:String) {
+    func audioRecordUpdateMetra(metra: Float) {
+        print("11111\(metra)")
+        voiceIndicatorView?.recording()
+        voiceIndicatorView?.updateMetersValue(metra)
+    }
+    
+    func audioRecordFinish(filename: String, recordTime: Float) {
         if let delegate = self.delegate {
-            delegate.chatInputView(self, sendVoice: record!.voiceName)
+            delegate.chatInputView(self, sendVoice: filename, recordTime: recordTime)
         }
     }
 }

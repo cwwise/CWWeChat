@@ -11,29 +11,65 @@ import UIKit
 /// 录音的提示图
 class CWVoiceIndicatorView: UIView {
     
-    var cancelImageView: UIImageView!  //取消提示
-    var signalValueImageView: UIImageView!   //音量的图片
-    var recordingView: UIView!  //录音整体的 view，控制是否隐藏
-    var tooShotPromptImageView: UIImageView!  //录音时间太短的提示
+    /// 取消提示
+    lazy var cancelImageView: UIImageView = {
+        let cancelImageView = UIImageView()
+        cancelImageView.image = CWAsset.RecordCancel.image
+        return cancelImageView
+    }()
+    
+    /// 录音整体的 view，控制是否隐藏
+    lazy  var recordingView: UIView = {
+        let recordingView = UIView()
+        recordingView.size = CGSize(width: 100, height: 100)
+        return recordingView
+    }()
+    
+    var voiceSignalImageView: UIImageView = {
+        let voiceSignalImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 62, height: 100))
+        voiceSignalImageView.image = CWAsset.RecordingBkg.image
+        return voiceSignalImageView
+    }()
+
+    
+    ///音量的图片
+    var signalValueImageView: UIImageView = {
+        let signalValueImageView = UIImageView(frame: CGRect(x: 62, y: 0, width: 38, height: 100))
+        signalValueImageView.image = CWAsset.RecordingSignal001.image
+        return signalValueImageView
+    }()
+    
+    
+    
+    //录音时间太短的提示
+    lazy var tooShotPromptImageView: UIImageView = {
+        let tooShotPromptImageView = UIImageView()
+        tooShotPromptImageView.image = CWAsset.MessageTooShort.image
+        return tooShotPromptImageView
+    }()
     
      //中央的灰色背景 view
-    var centerView: UIView! {
-        didSet {
-            centerView.layer.cornerRadius = 4.0
-            centerView.layer.masksToBounds = true
-        }
-    }
+//    var centerView: UIView! {
+//        didSet {
+//            centerView.layer.cornerRadius = 4.0
+//            centerView.layer.masksToBounds = true
+//        }
+//    }
     
     //提示的 label
-    var noteLabel: UILabel! {
-        didSet {
-            noteLabel.layer.cornerRadius = 2.0
-            noteLabel.layer.masksToBounds = true
-        }
-    }
+    lazy var noteLabel: UILabel = {
+       let noteLabel = UILabel()
+        noteLabel.textAlignment = .Center
+        noteLabel.text = "手指上滑，取消发送"
+        noteLabel.font = UIFont.systemFontOfSize(14)
+        noteLabel.textColor = UIColor(hexString: "81BAFE")
+        noteLabel.layer.cornerRadius = 2.0
+        noteLabel.layer.masksToBounds = true
+        return noteLabel
+    }()
     
-    override init (frame : CGRect) {
-        super.init(frame : frame)
+    override init (frame: CGRect) {
+        super.init(frame: frame)
         self.initContent()
     }
     
@@ -47,7 +83,29 @@ class CWVoiceIndicatorView: UIView {
     }
     
     func initContent() {
+        self.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         
+        self.addSubview(self.tooShotPromptImageView)
+        self.addSubview(self.cancelImageView)
+        self.addSubview(self.noteLabel)
+        
+        self.addSubview(self.recordingView)
+        self.recordingView.addSubview(self.voiceSignalImageView)
+        self.recordingView.addSubview(self.signalValueImageView)
+        
+        noteLabel.snp_makeConstraints { (make) in
+            make.left.equalTo(8)
+            make.right.equalTo(-8)
+            make.height.equalTo(20)
+            make.bottom.equalTo(-6)
+        }
+        
+        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.recordingView.center = self.bounds.center
     }
 
 }
@@ -106,17 +164,18 @@ extension CWVoiceIndicatorView {
         index = index > 7 ? 7 : index
         index = index < 0 ? 0 : index
         
-//        let array = [
-//            TSAsset.RecordingSignal001.image,
-//            TSAsset.RecordingSignal002.image,
-//            TSAsset.RecordingSignal003.image,
-//            TSAsset.RecordingSignal004.image,
-//            TSAsset.RecordingSignal005.image,
-//            TSAsset.RecordingSignal006.image,
-//            TSAsset.RecordingSignal007.image,
-//            TSAsset.RecordingSignal008.image,
-//            ]
-//        self.signalValueImageView.image = array.get(index)
+        let array = [
+            CWAsset.RecordingSignal001.image,
+            CWAsset.RecordingSignal002.image,
+            CWAsset.RecordingSignal003.image,
+            CWAsset.RecordingSignal004.image,
+            CWAsset.RecordingSignal005.image,
+            CWAsset.RecordingSignal006.image,
+            CWAsset.RecordingSignal007.image,
+            CWAsset.RecordingSignal008.image,
+            ]
+        
+        self.signalValueImageView.image = array[index]
         
     }
 }

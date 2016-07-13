@@ -11,7 +11,7 @@ import UIKit
 class CWVoiceMessageContent: CWMessageContent {
 
     /// 录音长度
-    var voiceLength: Int?
+    var voiceLength: Float?
     /// 网络路径
     var voiceURL: String?
     /// 本地路径

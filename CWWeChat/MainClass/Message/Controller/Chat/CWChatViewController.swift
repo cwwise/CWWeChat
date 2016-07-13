@@ -62,6 +62,7 @@ class CWChatViewController: CWBaseMessageViewController {
                            width: Screen_Width, height: 45)
         let chatToolBar = CWInputToolBar(frame:frame)
         chatToolBar.delegate = self
+        chatToolBar.voiceIndicatorView = self.voiceIndicatorView
         return chatToolBar
     }()
     
@@ -73,17 +74,16 @@ class CWChatViewController: CWBaseMessageViewController {
         voiceIndicatorView.hidden = true
         self.view.addSubview(voiceIndicatorView)
         voiceIndicatorView.snp_makeConstraints(closure: { (make) in
-            make.top.equalTo(self.view.snp_top).offset(100)
-            make.left.equalTo(self.view.snp_left)
-            make.bottom.equalTo(self.view.snp_bottom).offset(-100)
-            make.right.equalTo(self.view.snp_right)
+            make.centerX.equalTo(self.view)
+            make.centerY.equalTo(self.view).offset(-20)
+            make.size.equalTo(CGSize(width: 150, height: 150))
         })
         return voiceIndicatorView
     }()
 
     
     lazy var rightBarItem: UIBarButtonItem = {
-        let rightBarItem = UIBarButtonItem(image: CWAsset.Nav_chat_single.image, style: .Plain, target: self, action: #selector(CWChatViewController.rightBarItemDown(_:)))
+        let rightBarItem = UIBarButtonItem(image: CWAsset.Nav_chat_single.image, style: .Plain, target: self, action: #selector(rightBarItemDown(_:)))
         return rightBarItem
     }()
     
@@ -136,6 +136,8 @@ class CWChatViewController: CWBaseMessageViewController {
     }
     
     func rightBarItemDown(barItem: UIBarButtonItem) {
+        self.voiceIndicatorView.hidden = false
+        return
         let chatDetailVC = CWChatDetailViewController()
         chatDetailVC.contactModel = friendUser
         self.navigationController?.pushViewController(chatDetailVC, animated: true)

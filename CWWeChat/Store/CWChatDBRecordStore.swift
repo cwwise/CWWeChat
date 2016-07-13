@@ -113,7 +113,7 @@ class CWChatDBRecordStore: NSObject {
             if count == 0 {
                let _ = try recordDB.run(recordTable.insert(userId <- message.messageSendId!,
                     friendId <- message.messageTargetId!,
-                    record_type <- message.messageType.rawValue,
+                    record_type <- message.chatType.rawValue,
                     date <- dataString,
                     unread_count <- unreadCount,
                     ext1 <- ""))

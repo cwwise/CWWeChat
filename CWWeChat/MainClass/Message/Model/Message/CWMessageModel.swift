@@ -138,10 +138,10 @@ class CWMessageModel: NSObject {
             var contentSize: CGSize = CGSizeZero
             let heightOfCell: CGFloat = 60
             
-//            if let voiceLength = voiceMessage.voiceLength {
+            if let voiceLength = voiceMessage.voiceLength {
                 let scale: CGFloat = CGFloat(10)/60.0
                 contentSize = CGSize(width: ceil(scale*kChatVoiceMaxWidth)+30, height: kAvaterWidth+12)
-//            }
+            }
 
             self.messageFrame = CWMessageFrame(heightOfCell: heightOfCell, contentSize: contentSize)
             
