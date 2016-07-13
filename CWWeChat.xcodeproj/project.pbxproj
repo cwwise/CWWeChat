@@ -161,6 +161,7 @@
 		EDAF734C1D35236100B68983 /* CWVoiceMessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAF734B1D35236100B68983 /* CWVoiceMessageContent.swift */; };
 		EDAF734E1D35342500B68983 /* CWVoiceMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAF734D1D35342500B68983 /* CWVoiceMessageCell.swift */; };
 		EDAF73501D353D4E00B68983 /* CWVoiceMessageDispatchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAF734F1D353D4E00B68983 /* CWVoiceMessageDispatchOperation.swift */; };
+		EDAF73521D35B1F500B68983 /* CWVoiceIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAF73511D35B1F500B68983 /* CWVoiceIndicatorView.swift */; };
 		EDC6A0AE1D22B434002C2AEE /* CWDetailContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */; };
 		EDC6A0B41D22B50D002C2AEE /* CWInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */; };
 		EDC6A0B61D22B911002C2AEE /* CWInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */; };
@@ -348,6 +349,7 @@
 		EDAF734B1D35236100B68983 /* CWVoiceMessageContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWVoiceMessageContent.swift; sourceTree = "<group>"; };
 		EDAF734D1D35342500B68983 /* CWVoiceMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWVoiceMessageCell.swift; sourceTree = "<group>"; };
 		EDAF734F1D353D4E00B68983 /* CWVoiceMessageDispatchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWVoiceMessageDispatchOperation.swift; sourceTree = "<group>"; };
+		EDAF73511D35B1F500B68983 /* CWVoiceIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWVoiceIndicatorView.swift; sourceTree = "<group>"; };
 		EDC6A0AD1D22B434002C2AEE /* CWDetailContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWDetailContactViewController.swift; sourceTree = "<group>"; };
 		EDC6A0B31D22B50D002C2AEE /* CWInformationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationModel.swift; sourceTree = "<group>"; };
 		EDC6A0B51D22B911002C2AEE /* CWInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWInformationCell.swift; sourceTree = "<group>"; };
@@ -1153,6 +1155,7 @@
 			children = (
 				EDAF73471D351E5C00B68983 /* CWVoiceRecorder.swift */,
 				EDAF73491D3522C300B68983 /* CWVoicePlayer.swift */,
+				EDAF73511D35B1F500B68983 /* CWVoiceIndicatorView.swift */,
 			);
 			name = MultiMedia;
 			path = Multimedia;
@@ -1530,6 +1533,7 @@
 				1FD3EB5D1D1ADABA004FBA63 /* CWSettingItem.swift in Sources */,
 				1FD3EB2F1D1ADA13004FBA63 /* UIColor+Extension.swift in Sources */,
 				1F2A7A221D329AF600195E54 /* CWMoreKeyBoardHelper.swift in Sources */,
+				EDAF73521D35B1F500B68983 /* CWVoiceIndicatorView.swift in Sources */,
 				1FD3ED821D1C2B48004FBA63 /* CWMineSettingViewController.swift in Sources */,
 				1F2E5CA21D221FE200CCE130 /* UIStoryboard+Extension.swift in Sources */,
 				1FD3EB871D1AE33D004FBA63 /* CWAddressBookSearchController.swift in Sources */,

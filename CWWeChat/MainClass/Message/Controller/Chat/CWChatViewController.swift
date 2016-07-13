@@ -65,6 +65,23 @@ class CWChatViewController: CWBaseMessageViewController {
         return chatToolBar
     }()
     
+    /**
+     初始化 VoiceIndicator
+     */
+    lazy var voiceIndicatorView: CWVoiceIndicatorView = {
+        let voiceIndicatorView = CWVoiceIndicatorView()
+        voiceIndicatorView.hidden = true
+        self.view.addSubview(voiceIndicatorView)
+        voiceIndicatorView.snp_makeConstraints(closure: { (make) in
+            make.top.equalTo(self.view.snp_top).offset(100)
+            make.left.equalTo(self.view.snp_left)
+            make.bottom.equalTo(self.view.snp_bottom).offset(-100)
+            make.right.equalTo(self.view.snp_right)
+        })
+        return voiceIndicatorView
+    }()
+
+    
     lazy var rightBarItem: UIBarButtonItem = {
         let rightBarItem = UIBarButtonItem(image: CWAsset.Nav_chat_single.image, style: .Plain, target: self, action: #selector(CWChatViewController.rightBarItemDown(_:)))
         return rightBarItem
