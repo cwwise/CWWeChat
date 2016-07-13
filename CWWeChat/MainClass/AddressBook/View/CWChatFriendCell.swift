@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-import AlamofireImage
+import YYWebImage
 
 let  FRIENDS_SPACE_X:CGFloat     =    10.0
 let  FRIENDS_SPACE_Y:CGFloat     =    9.0
@@ -73,10 +73,11 @@ class CWChatFriendCell: UITableViewCell {
             return
         }
         
-        if (userModel.avatarPath != nil) {
-            self.avatarImageView.image = UIImage(named: userModel.avatarPath!)
+        //本地图片icon
+        if let avatarPath = userModel.avatarPath {
+            self.avatarImageView.image = UIImage(named: avatarPath)
         } else {
-            self.avatarImageView.af_setImageWithURL(NSURL(string: userModel.avatarURL!)!, placeholderImage: defaultHeadeImage)
+            self.avatarImageView.yy_setImageWithURL(NSURL(string: userModel.avatarURL!), placeholder: defaultHeadeImage)
         }
         self.usernameLabel.text = userModel.nikeName;
     }

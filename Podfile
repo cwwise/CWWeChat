@@ -14,8 +14,9 @@ target 'CWWeChat' do
   
   #网络请求
   pod 'Alamofire'
-  pod 'AlamofireImage'
-  
+#  pod 'AlamofireImage'
+
+  pod 'YYWebImage'
   #数据库
   pod 'SQLite.swift'
   

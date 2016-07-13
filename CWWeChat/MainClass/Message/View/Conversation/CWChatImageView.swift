@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AlamofireImage
+import YYWebImage
 
 ///下载展示imageView
 class CWChatImageView: UIView {
@@ -99,23 +99,18 @@ class CWChatImageView: UIView {
         
         let httpHost = "http://7xsmd8.com1.z0.glb.clouddn.com/"
         let url = NSURL(string: httpHost+imageURL)
-        let progress = {(bytesRead: Int64, totalBytesRead: Int64, totalExpectedBytesToRead: Int64) in
-            let progress = CGFloat(totalBytesRead)/CGFloat(totalExpectedBytesToRead)
-            self.updateProgressView(progress, result: .Loading)
+        contentImageView.yy_setImageWithURL(url, placeholder: nil, options: .ShowNetworkActivity) { (image, url, type, stage, error) in
+            
+            if let image = image {
+                self.contentImageView.image = image
+                let path = CWUserAccount.sharedUserAccount().pathUserChatImage(imageURL)
+                NSFileManager.saveContentImage(image, imagePath: path)
+                self.updateProgressView(1, result: .Success)
+            } else {
+                self.updateProgressView(0, result: .Fail)
+            }            
         }
-        contentImageView.af_setImageWithURL(url!, placeholderImage: nil,
-                                            progress: progress) { response in
-                                                if let image = response.result.value {
-                                                    self.contentImageView.image = image
-                                                    let path = CWUserAccount.sharedUserAccount().pathUserChatImage(imageURL)
-                                                    NSFileManager.saveContentImage(image, imagePath: path)
-                                                    self.updateProgressView(1, result: .Success)
-                                                } else {
-                                                    self.updateProgressView(0, result: .Fail)
-                                                }
-                                                
-                                                
-        }
+
     }
     
     /// 更新cell状态

@@ -21,6 +21,12 @@ class CWVoiceMessageCell: CWBaseMessageCell {
         return contentImageView
     }()
     
+    ///手势操作
+    private(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bubbleTapped(_:)))
+        return tapGestureRecognizer
+    }()
+    
     lazy var redTipImageView:UIImageView = {
         let redTipImageView = UIImageView()
         redTipImageView.frame.size = CGSize(width: redtip_width,height: redtip_width)
@@ -34,7 +40,7 @@ class CWVoiceMessageCell: CWBaseMessageCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.messageBackgroundView.addSubview(contentImageView)
         self.messageBackgroundView.addSubview(redTipImageView)
-        
+        messageBackgroundView.addGestureRecognizer(self.tapGestureRecognizer)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -166,7 +166,7 @@ class CWBaseMessageCell: UITableViewCell {
 
             let string = CWUserAccount.sharedUserAccount().chatuser.avatarURL!
             
-            self.avatarButton.af_setImageForState(.Normal, URL: NSURL(string:string)!)
+            self.avatarButton.yy_setBackgroundImageWithURL(NSURL(string:string), forState: .Normal, placeholder: defaultHeadeImage)
             self.avatarButton.left = Screen_Width - kChatAvatarMarginLeft - kAvaterWidth
             
             self.avatarButton.snp_remakeConstraints(closure: { (make) in
@@ -180,7 +180,7 @@ class CWBaseMessageCell: UITableViewCell {
             let userModel = CWContactManager.findContact(message.messageTargetId!)
             let string = userModel!.avatarURL!
             
-            self.avatarButton.af_setImageForState(.Normal, URL: NSURL(string:string)!)
+            self.avatarButton.yy_setBackgroundImageWithURL(NSURL(string:string), forState: .Normal, placeholder: defaultHeadeImage)
             
             self.avatarButton.snp_remakeConstraints(closure: { (make) in
                 make.width.height.equalTo(kAvaterWidth);

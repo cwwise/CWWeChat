@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class CWMineUserCell: UITableViewCell {
 
     let mine_space_x: CGFloat  =  14.0
@@ -96,8 +94,8 @@ class CWMineUserCell: UITableViewCell {
             return
         }
     
-        let url = NSURL(string: userModel.avatarURL!)!
-        self.avatarImageView.af_setImageWithURL(url)
+        let url = NSURL(string: userModel.avatarURL!)
+        self.avatarImageView.yy_setImageWithURL(url, placeholder: defaultHeadeImage)
 
         nikenameLabel.text = userModel.nikeName
         if let userName = userModel.userName {

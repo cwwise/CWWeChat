@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AlamofireImage
+import YYWebImage
 
 let settingCellLeftMargin: CGFloat = 15
 
@@ -76,7 +76,7 @@ class CWSettingCell: UITableViewCell, CWSettingDataProtocol {
         if let rightImagePath = settingItem.rightImagePath {
             rightImageView.image = UIImage(named: rightImagePath)
         } else if let rightImageURL = settingItem.rightImageURL  {
-            rightImageView.af_setImageWithURL(NSURL(string: rightImageURL)!)
+            rightImageView.yy_setImageWithURL(NSURL(string: rightImageURL), placeholder: nil)
         } else {
             rightImageView.image = nil
         }

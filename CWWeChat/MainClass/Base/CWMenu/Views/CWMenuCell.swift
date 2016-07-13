@@ -99,7 +99,7 @@ class CWMenuCell: UITableViewCell {
                 make.width.equalTo(self.rightImageView.snp_width)
             })
             let url = NSURL(string: rightIconURL)!
-            self.rightImageView.af_setImageWithURL(url)
+            self.rightImageView.yy_setImageWithURL(url, placeholder: nil)
         
         } else {
         

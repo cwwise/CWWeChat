@@ -21,8 +21,6 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Alamofire (3.4.1)
-  - AlamofireImage (2.4.0):
-    - Alamofire (~> 3.3)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
@@ -83,10 +81,16 @@ PODS:
   - SnapKit (0.21.0)
   - SQLite.swift (0.10.1)
   - SwiftyJSON (2.3.2)
+  - YYCache (1.0.3)
+  - YYImage (1.0.2):
+    - YYImage/Core (= 1.0.2)
+  - YYImage/Core (1.0.2)
+  - YYWebImage (1.0.3):
+    - YYCache
+    - YYImage
 
 DEPENDENCIES:
   - Alamofire
-  - AlamofireImage
   - ChameleonFramework/Swift
   - CocoaAsyncSocket
   - CocoaLumberjack/Swift
@@ -96,11 +100,11 @@ DEPENDENCIES:
   - SnapKit
   - SQLite.swift
   - SwiftyJSON
+  - YYWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  AlamofireImage: 87408b652e0f5ae5fe364035f15aea8b9b24c77e
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
@@ -111,7 +115,10 @@ SPEC CHECKSUMS:
   SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
   SQLite.swift: 6a6e4b034efc317ce4e203b6af2d3024fee2b570
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  YYCache: 282f35b5b0990833d0b7a06d864a87141a021da2
+  YYImage: 2cc79ed49b9549b71c6715cefe7b0f5ab3d33abf
+  YYWebImage: 8da75a611fd0d2e0f58a273f9ca0bc731614cb0d
 
-PODFILE CHECKSUM: e488f5c2426a60f03db4a673530a56318121908d
+PODFILE CHECKSUM: d73b44bed445d45474f91f28592bf2481a1faf85
 
 COCOAPODS: 1.0.1

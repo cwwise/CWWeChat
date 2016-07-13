@@ -120,7 +120,7 @@ class CWConversationCell: UITableViewCell {
         let userModel = CWContactManager.findContact(conversationModel.partnerID)
         
         if let userModel = userModel {
-            self.headerImageView.af_setImageWithURL(NSURL(string: userModel.avatarURL!)!, placeholderImage: defaultHeadeImage)
+            self.headerImageView.yy_setImageWithURL(NSURL(string: userModel.avatarURL!)!, placeholder: defaultHeadeImage)
             self.usernameLabel.text = userModel.nikeName
         }
         
