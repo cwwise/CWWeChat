@@ -136,8 +136,6 @@ class CWChatViewController: CWBaseMessageViewController {
     }
     
     func rightBarItemDown(barItem: UIBarButtonItem) {
-        self.voiceIndicatorView.hidden = false
-        return
         let chatDetailVC = CWChatDetailViewController()
         chatDetailVC.contactModel = friendUser
         self.navigationController?.pushViewController(chatDetailVC, animated: true)
