@@ -15,11 +15,14 @@ import UIKit
  */
 class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
 
+    /// 上传图片的状态
     var imageUploadState:CWMessageUploadState = .None
+    /// 上传图片的类
     let manager = CWResourceUploadManager()
     
+    
     override func sendMessage() {
-        
+        /// 如果图片上传成功，则发送信息到对方，否则进行图片上传
         if imageUploadState == .Success {
             sendContentMessage()
         } else {
@@ -34,7 +37,7 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
             return
         }
         //上传照片
-        manager.uploadImage(chatMessage.content!) { (progress, result) in
+        manager.uploadResource(chatMessage.content!) { (progress, result) in
             
             if let progressBlock = self.progressBlock {
                 progressBlock(progress, result)
@@ -64,6 +67,7 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
         let messageId = chatMessage.messageID
         let content = chatMessage.content!
         
+        /// 图片大小通过消息拓展发送给对方，其实也可以在消息收到后，先对图片链接进行请求 获取到图片的大小信息和链接。
         let messageContent = chatMessage.messageContent as! CWImageMessageContent
         let expand = NSStringFromCGSize(messageContent.imageSize)
         let sendResult = messageTransmitter.sendMessage(content,

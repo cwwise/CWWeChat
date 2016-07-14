@@ -13,7 +13,7 @@ protocol CWMessageHandleProtocol:NSObjectProtocol {
     func handleResult(handle: CWBaseMessageHandle, message: CWMessageModel, isDelay: Bool)
 }
 
-///消息处理的基类
+///消息处理的基类,待改善
 class CWBaseMessageHandle: NSObject {
 
     //代理

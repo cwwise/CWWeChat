@@ -41,7 +41,6 @@ let Screen_NavigationHeight:CGFloat = 64
 
 
 // stolen from Kingfisher: https://github.com/onevcat/Kingfisher/blob/master/Sources/ThreadHelper.swift
-
 func dispatch_async_safely_to_main_queue(block: ()->()) {
     dispatch_async_safely_to_queue(dispatch_get_main_queue(), block)
 }

@@ -9,7 +9,6 @@
 import UIKit
 import MMXXMPPFramework
 
-
 ///发送消息等待时间
 let sendMessageTimeoutInterval: NSTimeInterval = 30
 
@@ -18,7 +17,6 @@ let sendMessageTimeoutInterval: NSTimeInterval = 30
  
  * 生成各种消息的XML
  * 发送消息
- 
  */
 class CWMessageTransmitter: NSObject {
 
@@ -81,7 +79,6 @@ class CWMessageTransmitter: NSObject {
         
         //第二种根据消息不同在消息body添加前缀,在CWMessageDispatchOperation发送中添加。
 //        message.addBody(body)
-        
         CWLogDebug(message.description)
         return XMPPMessage(fromElement: message)
     }

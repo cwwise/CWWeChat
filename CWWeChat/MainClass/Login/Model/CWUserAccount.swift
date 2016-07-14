@@ -28,11 +28,13 @@ class CWUserAccount: NSObject {
         }
     }
     
-    ///
-    init(chatuser: CWContactUser = CWContactUser()) {
+    //
+    init(chatuser: CWContactUser) {
         self.chatuser = chatuser
+        super.init()
     }
     
+    // TODO: 将这个单独用类来管理
     func pathUserChatImage(imageName: String) -> String {
         let documentPath = NSHomeDirectory().stringByAppendingString("/Documents")
         let userId = self.userID

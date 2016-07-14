@@ -11,7 +11,7 @@ import UIKit
 /// 消息发送的结果
 protocol CWMessageDispatchQueueDelegate: class {
     //发送消息的结果
-    func chatmessageSendState(message:CWMessageModel ,sendState state: Bool)
+    func chatmessageSendState(message:CWMessageModel, sendState state: Bool)
     //上传数据进度的回调
     func uploadDataProgress(message:CWMessageModel, progress:CGFloat, result:Bool)
 }
@@ -95,7 +95,7 @@ class CWMessageDispatchQueue: NSObject {
     }
     
     deinit {
-        print("ChatMessageTransmitter销毁")
+        CWLogDebug("ChatMessageTransmitter销毁")
     }
     
 }

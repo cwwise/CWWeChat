@@ -10,6 +10,7 @@ import UIKit
 
 class CWSearchController: UISearchController {
 
+    ///fix bug 必须添加这行 否则会崩溃
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -43,6 +44,7 @@ class CWSearchController: UISearchController {
         self.searchBar.layer.borderColor = UIColor.searchBarBorderColor().CGColor
         self.searchBar.sizeToFit()
         
+        //通过KVO修改特性
         let searchField = self.searchBar.valueForKey("_searchField")
         searchField?.layer.masksToBounds = true
         searchField?.layer.borderWidth = 0.5

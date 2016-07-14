@@ -21,11 +21,11 @@ class CWTextMessageDispatchOperation: CWMessageDispatchOperation {
             return
         }
         
-        let toId = chatMessage.messageTargetId
+        let toId = chatMessage.messageTargetId!
         let messageId = chatMessage.messageID
         let content = chatMessage.content
 
-        let sendResult = messageTransmitter.sendMessage(content!, toId: toId!, messageId: messageId)
+        let sendResult = messageTransmitter.sendMessage(content!, toId: toId, messageId: messageId)
         messageSendCallback(sendResult)
     }
     

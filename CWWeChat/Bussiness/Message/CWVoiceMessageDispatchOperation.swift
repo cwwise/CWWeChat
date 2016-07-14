@@ -8,28 +8,29 @@
 
 import UIKit
 
+/// 类似发送图片类，可能有些不同，使用两个不同的类来处理
 class CWVoiceMessageDispatchOperation: CWMessageDispatchOperation {
 
-    var imageUploadState:CWMessageUploadState = .None
+    var voiceUploadState:CWMessageUploadState = .None
     let manager = CWResourceUploadManager()
     
     override func sendMessage() {
         
-        if imageUploadState == .Success {
+        if voiceUploadState == .Success {
             sendContentMessage()
         } else {
-            uploadImage()
+            uploadVoice()
         }
         
     }
     
-    func uploadImage() {
+    func uploadVoice() {
         
         guard let chatMessage = self.chatMessage else {
             return
         }
         //上传照片
-        manager.uploadImage(chatMessage.content!) { (progress, result) in
+        manager.uploadResource(chatMessage.content!) { (progress, result) in
             
             if let progressBlock = self.progressBlock {
                 progressBlock(progress, result)
@@ -37,15 +38,15 @@ class CWVoiceMessageDispatchOperation: CWMessageDispatchOperation {
             
             if result == true && progress == 1.0 {
                 CWLogDebug("上传成功..")
-                self.imageUploadState = .Success
+                self.voiceUploadState = .Success
                 self.sendContentMessage()
             }
             else if result == false && progress == 0.0 {
                 CWLogDebug("上传失败..")
-                self.imageUploadState = .Fail
+                self.voiceUploadState = .Fail
             }
             else {
-                self.imageUploadState = .Loading
+                self.voiceUploadState = .Loading
             }
         }
     }
@@ -59,7 +60,7 @@ class CWVoiceMessageDispatchOperation: CWMessageDispatchOperation {
         let messageId = chatMessage.messageID
         let content = chatMessage.content!
         
-        let messageContent = chatMessage.messageContent as! CWVoiceMessageContent
+//        let messageContent = chatMessage.messageContent as! CWVoiceMessageContent
 //        let expand = NSStringFromCGSize(messageContent.imageSize)
         let sendResult = messageTransmitter.sendMessage(content,
                                                         toId: toId!,

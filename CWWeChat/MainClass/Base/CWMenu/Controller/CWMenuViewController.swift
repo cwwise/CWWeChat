@@ -13,7 +13,6 @@ class CWMenuViewController: UITableViewController {
     var dataSource = [[CWMenuItem]]()
     
     override func loadView() {
-        
         self.view = UIView(frame: CGRect(x: 0, y: 0, width: Screen_Width, height: Screen_Height))
         
         self.tableView = UITableView(frame: self.view.bounds, style: .Grouped)
@@ -74,8 +73,6 @@ extension CWMenuViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-
     }
 }
 

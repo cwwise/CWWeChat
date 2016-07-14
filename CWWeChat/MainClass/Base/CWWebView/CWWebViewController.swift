@@ -9,11 +9,14 @@
 import UIKit
 import WebKit
 
-var webViewContentKey = "webViewContentKey"
-var webViewBackgroundColorKey = "webViewBackgroundColorKey"
+private var webViewContentKey = "webViewContentKey"
+private var webViewBackgroundColorKey = "webViewBackgroundColorKey"
 
-let webView_Items_Fixed_Space:CGFloat =  9
+private let webView_Items_Fixed_Space:CGFloat =  9
 
+/**
+ 展示网页信息
+ */
 class CWWebViewController: UIViewController {
     
     ///是否使用网页标题作为nav标题，默认YES
@@ -81,6 +84,7 @@ class CWWebViewController: UIViewController {
         webView.navigationDelegate = self
         webView.scrollView.backgroundColor = UIColor.clearColor()
         
+        //遍历设置背景颜色
         for subView in webView.scrollView.subviews {
             if "\(subView.classForCoder)" == "WKContentView" {
                 subView.backgroundColor = UIColor.whiteColor()
@@ -150,19 +154,16 @@ class CWWebViewController: UIViewController {
     }
     
     deinit {
-        
         //直接初始化之后 销毁的话，会出现问题，观察者没有添加 就销魂 会崩溃。待解决
         if urlString != "" {
             self.webView.removeObserver(self, forKeyPath: "estimatedProgress")
             self.webView.scrollView.removeObserver(self, forKeyPath: "backgroundColor")
         }
-      
     }
 }
 
-
+// MARK: - WKNavigationDelegate
 extension CWWebViewController: WKNavigationDelegate {
-    
     //完成
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         if usepageTitleAsTitle {
@@ -172,7 +173,6 @@ extension CWWebViewController: WKNavigationDelegate {
             self.authLabel.height = size.height
         }
    
-        
     }
     
 }

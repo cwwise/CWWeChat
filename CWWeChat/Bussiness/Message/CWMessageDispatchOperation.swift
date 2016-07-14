@@ -16,6 +16,7 @@ class CWMessageDispatchOperation: NSOperation {
     
     /// 消息实体
     weak var chatMessage: CWMessageModel?
+   
     /**
       进度回调的block
      

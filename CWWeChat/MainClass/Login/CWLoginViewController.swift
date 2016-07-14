@@ -9,6 +9,7 @@
 import UIKit
 import MBProgressHUD
 
+/// 登录界面
 class CWLoginViewController: UIViewController, CWToastShowProtocol {
     
     lazy var userNameTextField: UITextField = {
@@ -100,7 +101,7 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
 
         //登录按钮
         self.view.addSubview(loginButton)
-        loginButton.addTarget(self, action: #selector(CWLoginViewController.loginButtonAction), forControlEvents: .TouchUpInside)
+        loginButton.addTarget(self, action: #selector(loginButtonAction), forControlEvents: .TouchUpInside)
         loginButton.enabled = false
         loginButton.snp_makeConstraints { (make) in
             make.left.equalTo(margin)
@@ -126,6 +127,7 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    // 模拟的 待添加逻辑
     func loginButtonAction() {
         
         self.view.endEditing(true)

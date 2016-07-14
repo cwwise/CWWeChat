@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+ 好友详情界面基类
+ */
 class CWInformationViewController: UITableViewController {
 
     var dataSource = [[CWInformationModel]]()
@@ -15,7 +18,6 @@ class CWInformationViewController: UITableViewController {
     override func loadView() {
         
         self.view = UIView(frame: CGRect(x: 0, y: 0, width: Screen_Width, height: Screen_Height))
-        
         self.tableView = UITableView(frame: self.view.bounds, style: .Grouped)
         self.tableView.backgroundColor = UIColor.tableViewBackgroundColor()
         
@@ -108,8 +110,6 @@ extension CWInformationViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        
     }
 }
 

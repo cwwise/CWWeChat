@@ -16,14 +16,13 @@ enum CWInformationType {
     case Other
 }
 
-
 class CWInformationModel: NSObject {
 
-    ///主标题
+    /// 主标题
     var title: String
-    ///副标题
+    /// 副标题
     var subTitle: String?
-    
+    /// 类型
     var type: CWInformationType
 
     
@@ -40,3 +39,5 @@ class CWInformationModel: NSObject {
     }
     
 }
+
+

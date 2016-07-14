@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// 消息存储的类
 class CWChatDBDataManager: NSObject {
     
     // TODO: 单例有些不好，想想怎么去解决。

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ChameleonFramework
 
 class CWChatNavigationController: UINavigationController {
 
@@ -17,9 +16,8 @@ class CWChatNavigationController: UINavigationController {
         //#Bug 需要解决，如果设置为false，则在好友搜索部分时，遇到问题
         //self.navigationBar.translucent = false
         
-        let color = UIColor(hexString: "#141414")
         self.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationBar.barTintColor = color
+        self.navigationBar.barTintColor = UIColor.navigationBarCocor()
         self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         
         // Do any additional setup after loading the view.
@@ -28,7 +26,6 @@ class CWChatNavigationController: UINavigationController {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

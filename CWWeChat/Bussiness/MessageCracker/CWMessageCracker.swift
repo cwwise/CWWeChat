@@ -42,6 +42,7 @@ class CWMessageCracker: XMPPModule {
     }
 }
 
+// MARK: - XMPPStreamDelegate
 extension CWMessageCracker: XMPPStreamDelegate {
     
     /**

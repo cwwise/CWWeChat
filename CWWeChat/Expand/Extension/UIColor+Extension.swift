@@ -8,11 +8,16 @@
 
 import Foundation
 import UIKit
+import ChameleonFramework
 
 extension UIColor {
     
     class func chatSystemColor() -> UIColor {
         return UIColor(hexString: "#09BB07")
+    }
+    
+    class func navigationBarCocor() -> UIColor {
+        return UIColor(hexString: "#141414")
     }
     
     //tableView背景色

@@ -8,10 +8,12 @@
 
 import UIKit
 import Alamofire
+//主要是需要使用
 import MMXXMPPFramework
 
 public typealias XMPPStatusListener = (CWXMPPStatus -> Void)
 
+/// 管理xmpp的类
 class CWXMPPManager: NSObject {
     ///单例
     static let shareXMPPManager = CWXMPPManager()
@@ -220,7 +222,7 @@ extension CWXMPPManager: XMPPStreamDelegate {
         goOnline()
     }
     
-    ///收到状态信息
+    ///收到状态信息 TODO: 好友上下线的逻辑
     func xmppStream(sender: XMPPStream!, didReceivePresence presence: XMPPPresence!) {
         
         let myUser = sender.myJID.user

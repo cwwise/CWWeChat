@@ -18,6 +18,7 @@ protocol CWChatDBRecordStoreDelegate:class {
     func needUpdateRecordList(record: CWConversationModel, isAdd: Bool)
 }
 
+/// 会话列表保存的类
 class CWChatDBRecordStore: NSObject {
     
     ///用户id
