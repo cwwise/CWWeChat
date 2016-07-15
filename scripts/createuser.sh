@@ -11,7 +11,7 @@ host="chatimswift.com"
 # 密码
 password="123456"
 # 用户名
-userList=("Abbott" "Abraham" "Barry" "Carter")
+userList=("abbott" "abraham" "chenwei" "baobei" "barry" "hinson" "carter" "jerry" "tom" "trista")
 
 for username in ${userList[*]}; do
 	ejabberdctl register $username $host $password

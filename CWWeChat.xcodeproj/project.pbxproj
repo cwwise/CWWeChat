@@ -1705,7 +1705,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.cwwechat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0c752fed-fa22-4068-8291-db1f50c2de4b";
+				PROVISIONING_PROFILE = "f28188c5-f366-4ef3-845c-710f49ca258c";
 			};
 			name = Debug;
 		};
