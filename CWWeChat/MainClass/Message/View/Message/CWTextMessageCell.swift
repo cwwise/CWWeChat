@@ -34,7 +34,7 @@ class CWTextMessageCell: CWBaseMessageCell {
         super.updateMessage(message)
         
         let textMessage = message.messageContent as! CWTextMessageContent
-        messageLabel.text = textMessage.content
+        messageLabel.attributedText = CWChatTextParser.parseText(textMessage.content, font: UIFont.fontTextMessageText())
         
         if message.messageOwnerType == .Myself {
             
