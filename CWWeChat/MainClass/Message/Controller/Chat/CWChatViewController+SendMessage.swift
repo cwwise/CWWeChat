@@ -74,9 +74,9 @@ extension CWChatViewController: CWMessageDispatchQueueDelegate {
             var messageCount = 0
             //如果消息条数达到上限，或者消息时间间隔大于30秒就显示时间
             for message in array {
-                if (messageCount+1 > MAX_SHOWTIME_MESSAGE_COUNT ||
+                if (messageCount+1 > Max_Showtime_Message_Count ||
                     tempTime == 0 ||
-                    message.messageSendDate.timeIntervalSince1970 - tempTime > MAX_SHOWTIME_MESSAGE_SECOND) {
+                    message.messageSendDate.timeIntervalSince1970 - tempTime > Max_Showtime_Message_Second) {
                     
                     tempTime = message.messageSendDate.timeIntervalSince1970
                     messageCount = 0

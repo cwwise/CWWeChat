@@ -36,8 +36,8 @@ class CWConversationsViewController: CWBaseMessageViewController {
         setupXMPP()
         
         self.dbRecordStore.delegate = self
-        
         conversationList = dbRecordStore.allMessageRecordByUid(userID)
+        
         self.tableView.reloadData()
         // Do any additional setup after loading the view.
     }
@@ -61,7 +61,6 @@ class CWConversationsViewController: CWBaseMessageViewController {
     }
     
     func setupUI() {
-        
         self.title = "微信"
         self.view.addSubview(self.tableView)
         self.tabBarItem.badgeValue = self.dbRecordStore.allUnreadMessage()

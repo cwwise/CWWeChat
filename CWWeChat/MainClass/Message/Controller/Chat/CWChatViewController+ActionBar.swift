@@ -95,9 +95,9 @@ extension CWChatViewController: CWInputToolBarDelegate {
         messageAccumulate += 1
         let messageInterval = date.timeIntervalSince1970 - lastDateInterval
         //消息间隔
-        if messageAccumulate > MAX_SHOWTIME_MESSAGE_COUNT ||
+        if messageAccumulate > Max_Showtime_Message_Count ||
             lastDateInterval == 0 ||
-            messageInterval > MAX_SHOWTIME_MESSAGE_SECOND{
+            messageInterval > Max_Showtime_Message_Second{
             lastDateInterval = date.timeIntervalSince1970
             messageAccumulate = 0
             return true

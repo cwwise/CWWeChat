@@ -308,7 +308,6 @@ extension CWChatDBMessageStore {
         
         let filter = messageTable.filter(messageid == message.messageID)
         do {
-            
             //更新消息状态4中状态
             //消息发送状态
             //消息读取状态

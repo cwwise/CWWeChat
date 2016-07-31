@@ -134,6 +134,6 @@ public enum CWMessageUploadState: Int {
 }
 
 
-let  MAX_SHOWTIME_MESSAGE_COUNT:Int  =     10
-let  MAX_SHOWTIME_MESSAGE_SECOND:Double =     30
+let  Max_Showtime_Message_Count:Int     =     10
+let  Max_Showtime_Message_Second:Double =     60
 
