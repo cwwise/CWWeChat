@@ -55,7 +55,7 @@ class CWWebViewController: UIViewController {
     }()
     
     private lazy var backButtonItem: UIBarButtonItem = {
-        let backButtonItem = UIBarButtonItem(title: "返回", style: .Plain, target: self, action: #selector(navigationBackButtonDown))
+        let backButtonItem = UIBarButtonItem(backTitle: "返回", target: self, action: #selector(navigationBackButtonDown))
         return backButtonItem
     }()
     
@@ -91,8 +91,7 @@ class CWWebViewController: UIViewController {
             }
         }
         
-        let spaceItem = UIBarButtonItem.fixBarItemSpaceWidth(webView_Items_Fixed_Space)
-        self.navigationItem.leftBarButtonItems = [spaceItem,backButtonItem]
+        self.navigationItem.leftBarButtonItems = [backButtonItem]
         
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .New, context: &webViewContentKey)
         webView.scrollView.addObserver(self, forKeyPath: "backgroundColor", options: .New, context: &webViewBackgroundColorKey)
