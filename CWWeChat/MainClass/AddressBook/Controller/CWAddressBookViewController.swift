@@ -144,6 +144,9 @@ extension CWAddressBookViewController: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         if indexPath.section == 0 {
+            let tagVC = CWLabelViewController()
+            tagVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(tagVC, animated: true)
             return
         }
         
