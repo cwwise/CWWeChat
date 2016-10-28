@@ -51,7 +51,7 @@ class CWPhotoCollectionViewCell: UICollectionViewCell {
     
     func photoFill() {
         
-        let url = NSURL(string: photoURL)
+        let url = URL(string: photoURL)
         scrollView.imageView.yy_setImageWithURL(url, placeholder: nil)
 
     }
@@ -63,7 +63,7 @@ class CWPhotoCollectionViewCell: UICollectionViewCell {
     }
     
     ///移除进度
-    func dismissHUD(animation: Bool){
+    func dismissHUD(_ animation: Bool){
         
     }
     

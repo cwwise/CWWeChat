@@ -20,26 +20,26 @@ class CWMineUserCell: UITableViewCell {
     }
     
     //
-    private lazy var avatarImageView:UIImageView = {
+    fileprivate lazy var avatarImageView:UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.clipsToBounds = true
         avatarImageView.layer.cornerRadius = 5
         return avatarImageView
     }()
     
-    private lazy var nikenameLabel:UILabel = {
+    fileprivate lazy var nikenameLabel:UILabel = {
         let nikenameLabel = UILabel()
-        nikenameLabel.font = UIFont.systemFontOfSize(17)
+        nikenameLabel.font = UIFont.systemFont(ofSize: 17)
         return nikenameLabel
     }()
     
-    private lazy var usernameLabel:UILabel = {
+    fileprivate lazy var usernameLabel:UILabel = {
         let usernameLabel = UILabel()
-        usernameLabel.font = UIFont.systemFontOfSize(14)
+        usernameLabel.font = UIFont.systemFont(ofSize: 14)
         return usernameLabel
     }()
     
-    private lazy var QRImageView:UIImageView = {
+    fileprivate lazy var QRImageView:UIImageView = {
         let QRImageView = UIImageView()
         QRImageView.image = CWAsset.Mine_cell_myQR.image
         return QRImageView
@@ -48,7 +48,7 @@ class CWMineUserCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.accessoryType = .DisclosureIndicator
+        self.accessoryType = .disclosureIndicator
         self.contentView.addSubview(avatarImageView)
         self.contentView.addSubview(nikenameLabel)
         self.contentView.addSubview(usernameLabel)
@@ -94,7 +94,7 @@ class CWMineUserCell: UITableViewCell {
             return
         }
     
-        let url = NSURL(string: userModel.avatarURL!)
+        let url = URL(string: userModel.avatarURL!)
         self.avatarImageView.yy_setImageWithURL(url, placeholder: defaultHeadeImage)
 
         nikenameLabel.text = userModel.nikeName
@@ -114,7 +114,7 @@ class CWMineUserCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

@@ -8,6 +8,26 @@
 
 import UIKit
 import MBProgressHUD
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
 
 /// 登录界面
 class CWLoginViewController: UIViewController, CWToastShowProtocol {
@@ -15,12 +35,12 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
     lazy var userNameTextField: UITextField = {
         let userNameTextField = UITextField()
         
-        userNameTextField.font = UIFont.systemFontOfSize(14)
+        userNameTextField.font = UIFont.systemFont(ofSize: 14)
         userNameTextField.placeholder = "微信号/邮箱地址/QQ号"
-        userNameTextField.leftViewMode = .Always
-        userNameTextField.addTarget(self, action: #selector(textValueChanged(_:)), forControlEvents: .EditingChanged)
-        userNameTextField.keyboardType = .ASCIICapable
-        userNameTextField.spellCheckingType = .No
+        userNameTextField.leftViewMode = .always
+        userNameTextField.addTarget(self, action: #selector(textValueChanged(_:)), for: .editingChanged)
+        userNameTextField.keyboardType = .asciiCapable
+        userNameTextField.spellCheckingType = .no
         userNameTextField.delegate = self
         userNameTextField.leftView = self.leftView("帐号")
         return userNameTextField
@@ -29,12 +49,12 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
     lazy var passwordTextField: UITextField = {
         let passwordTextField = UITextField()
         
-        passwordTextField.font = UIFont.systemFontOfSize(14)
+        passwordTextField.font = UIFont.systemFont(ofSize: 14)
         passwordTextField.placeholder = "请填写密码"
-        passwordTextField.leftViewMode = .Always
-        passwordTextField.secureTextEntry = true
+        passwordTextField.leftViewMode = .always
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.delegate = self
-        passwordTextField.addTarget(self, action: #selector(textValueChanged(_:)), forControlEvents: .EditingChanged)
+        passwordTextField.addTarget(self, action: #selector(textValueChanged(_:)), for: .editingChanged)
         passwordTextField.leftView = self.leftView("密码")
         return passwordTextField
     }()
@@ -42,7 +62,7 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
     /// 登录按钮
     var loginButton: UIButton = {
         let loginButton = UIButton()
-        loginButton.setTitle("登录", forState: .Normal)
+        loginButton.setTitle("登录", for: UIControlState())
         loginButton.commitStyle()
         return loginButton
     }()
@@ -50,28 +70,28 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         setupUI()
         // Do any additional setup after loading the view.
     }
 
     func setupUI() {
         
-        let backItem = UIBarButtonItem(title: "取消", style: .Plain, target: self, action: #selector(cancelBarItemAction))
-        let dict = [NSFontAttributeName: UIFont.systemFontOfSize(14),
+        let backItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(cancelBarItemAction))
+        let dict = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),
                     NSForegroundColorAttributeName: UIColor.chatSystemColor()]
-        backItem.setTitleTextAttributes(dict, forState: .Normal)
+        backItem.setTitleTextAttributes(dict, for: UIControlState())
         self.navigationItem.leftBarButtonItem = backItem
         
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 
         //顶部文字
         let label = UILabel()
         label.text = "使用账号和密码登录"
-        label.textColor = UIColor.blackColor()
-        label.textAlignment = .Center
-        label.font = UIFont.systemFontOfSize(19)
+        label.textColor = UIColor.black
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 19)
         self.view.addSubview(label)
         let margin: CGFloat = 20
         label.snp_makeConstraints { (make) in
@@ -101,8 +121,8 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
 
         //登录按钮
         self.view.addSubview(loginButton)
-        loginButton.addTarget(self, action: #selector(loginButtonAction), forControlEvents: .TouchUpInside)
-        loginButton.enabled = false
+        loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
+        loginButton.isEnabled = false
         loginButton.snp_makeConstraints { (make) in
             make.left.equalTo(margin)
             make.right.equalTo(-margin)
@@ -111,12 +131,12 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
         }
     }
     
-    func leftView(text: String) -> UIView {
+    func leftView(_ text: String) -> UIView {
         let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
         let textLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         textLabel.text = text
-        textLabel.font = UIFont.systemFontOfSize(14)
-        textLabel.textColor = UIColor.blackColor()
+        textLabel.font = UIFont.systemFont(ofSize: 14)
+        textLabel.textColor = UIColor.black
         leftView.addSubview(textLabel)
         return leftView
     }
@@ -124,7 +144,7 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
     
     // MARK: 点击事件
     func cancelBarItemAction() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     // 模拟的 待添加逻辑
@@ -143,24 +163,24 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.mode = .Indeterminate
         hud.labelText = "Loading..."
-        dispatch_async(dispatch_get_global_queue(0, 0)) { 
+        DispatchQueue.global(priority: 0).async { 
             sleep(3)
             dispatch_async_safely_to_main_queue({ 
                 hud.hide(true)
-                let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appdelegate = UIApplication.shared.delegate as! AppDelegate
                 appdelegate.loginSuccess()
             })
           
         }
     }
     
-    func textValueChanged(textField: UITextField) {
+    func textValueChanged(_ textField: UITextField) {
         let first = judgeTextFieldIsAvailable(userNameTextField)
         let seconde = judgeTextFieldIsAvailable(passwordTextField)
-        self.loginButton.enabled = first && seconde
+        self.loginButton.isEnabled = first && seconde
     }
     
-    func judgeTextFieldIsAvailable(textField: UITextField) -> Bool {
+    func judgeTextFieldIsAvailable(_ textField: UITextField) -> Bool {
         return textField.text?.characters.count >= 6
     }
     
@@ -184,11 +204,11 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
 
 extension CWLoginViewController: UITextFieldDelegate {
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return true
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if string == "" {
             return true

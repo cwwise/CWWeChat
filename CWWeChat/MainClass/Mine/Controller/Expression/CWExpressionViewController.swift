@@ -14,19 +14,19 @@ class CWExpressionViewController: UIViewController {
         let segmentedControl = UISegmentedControl(items: ["精选表情", "投稿表情"])
         segmentedControl.width = Screen_Width * 0.55
         segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.addTarget(self, action: #selector(CWExpressionViewController.segmentedControlChanged(_:)), forControlEvents: .EditingChanged)
+        segmentedControl.addTarget(self, action: #selector(CWExpressionViewController.segmentedControlChanged(_:)), for: .editingChanged)
         return segmentedControl
     }()
         
     lazy var rightBarButtonItem: UIBarButtonItem = {
-        let rightBarButtonItem = UIBarButtonItem(image: CWAsset.Nav_setting.image, style: .Plain,target: self, action: #selector(CWExpressionViewController.rightBarButtonDown))
+        let rightBarButtonItem = UIBarButtonItem(image: CWAsset.Nav_setting.image, style: .plain,target: self, action: #selector(CWExpressionViewController.rightBarButtonDown))
     return rightBarButtonItem
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         self.setupUI()
 
         // Do any additional setup after loading the view.
@@ -38,13 +38,13 @@ class CWExpressionViewController: UIViewController {
 
         //模态视图需要添加取消
         if self.navigationController?.viewControllers.first == self {
-            let cancleItem = UIBarButtonItem(title: "取消", style: .Plain, target: self, action: #selector(CWExpressionViewController.cancelBarButtonDown))
+            let cancleItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(CWExpressionViewController.cancelBarButtonDown))
             self.navigationItem.leftBarButtonItem = cancleItem
         }
     }
     
     func cancelBarButtonDown() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func rightBarButtonDown() {
@@ -52,7 +52,7 @@ class CWExpressionViewController: UIViewController {
         self.navigationController?.pushViewController(myExpression, animated: true)
     }
     
-    func segmentedControlChanged(segmentedControl: UISegmentedControl)  {
+    func segmentedControlChanged(_ segmentedControl: UISegmentedControl)  {
         
     }
 

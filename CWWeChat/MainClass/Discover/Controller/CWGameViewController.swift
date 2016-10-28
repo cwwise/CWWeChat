@@ -15,14 +15,14 @@ class CWGameViewController: CWWebViewController {
 
         self.urlString = "http://m.zhuanzhuan.com"
         let rightBarButton = UIBarButtonItem(image: CWAsset.Nav_setting.image,
-                                             style: .Plain,
+                                             style: .plain,
                                              target: self,
                                              action: #selector(rightBarButtonAction(_:)))
         self.navigationItem.rightBarButtonItem = rightBarButton
         // Do any additional setup after loading the view.
     }
     
-    func rightBarButtonAction(sender: UIBarButtonItem) {
+    func rightBarButtonAction(_ sender: UIBarButtonItem) {
         
     }
 

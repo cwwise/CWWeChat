@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class CWMessageTextView: UITextView {
     
@@ -16,9 +36,9 @@ class CWMessageTextView: UITextView {
         didSet {
             let maxChars = CWMessageTextView.maxCharactersPerLine()
             if placeHolder?.characters.count > maxChars {
-                let index = placeHolder!.startIndex.advancedBy(-8)
-                placeHolder = placeHolder?.substringToIndex(index)
-                placeHolder = placeHolder!.trimWhitespace().stringByAppendingString("...")
+                let index = placeHolder!.characters.index(placeHolder!.startIndex, offsetBy: -8)
+                placeHolder = placeHolder?.substring(to: index)
+                placeHolder = placeHolder!.trimWhitespace() + "..."
             }
             self.setNeedsDisplay()
         }
@@ -60,7 +80,7 @@ class CWMessageTextView: UITextView {
         }
     }
     
-    override func insertText(text: String) {
+    override func insertText(_ text: String) {
         super.insertText(text)
         self.setNeedsDisplay()
     }
@@ -76,46 +96,46 @@ class CWMessageTextView: UITextView {
     
     
     func setup() {
-        placeHolderTextColor = UIColor.lightGrayColor()
+        placeHolderTextColor = UIColor.lightGray
         
-        self.autoresizingMask = .FlexibleWidth;
+        self.autoresizingMask = .flexibleWidth;
         self.scrollIndicatorInsets = UIEdgeInsetsMake(10.0, 0.0, 10.0, 8.0)
-        self.contentInset = UIEdgeInsetsZero;
-        self.scrollEnabled = true;
+        self.contentInset = UIEdgeInsets.zero;
+        self.isScrollEnabled = true;
         self.scrollsToTop = false;
-        self.userInteractionEnabled = true;
+        self.isUserInteractionEnabled = true;
         self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.grayColor().CGColor
+        self.layer.borderColor = UIColor.gray.cgColor
         self.layer.cornerRadius = 4
         self.clipsToBounds = true
-        self.font = UIFont.systemFontOfSize(16.0)
-        self.textColor = UIColor.blackColor()
-        self.backgroundColor = UIColor.whiteColor()
-        self.keyboardAppearance = .Default;
-        self.keyboardType = .Default;
-        self.returnKeyType = .Send;
-        self.textAlignment = .Left;
+        self.font = UIFont.systemFont(ofSize: 16.0)
+        self.textColor = UIColor.black
+        self.backgroundColor = UIColor.white
+        self.keyboardAppearance = .default;
+        self.keyboardType = .default;
+        self.returnKeyType = .send;
+        self.textAlignment = .left;
     }
     
     
     deinit {
         placeHolder = nil
         placeHolderTextColor = nil
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     //MARK: Drawing
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         
         if self.text.characters.count == 0 && (placeHolder != nil) {
-            let placeHolderRect = CGRectMake(10.0,
-                                             7.0,
-                                             rect.size.width,
-                                             rect.size.height);
+            let placeHolderRect = CGRect(x: 10.0,
+                                             y: 7.0,
+                                             width: rect.size.width,
+                                             height: rect.size.height);
             self.placeHolderTextColor?.set()
             let string = self.placeHolder! as NSString
-            string.drawInRect(placeHolderRect, withAttributes: [NSFontAttributeName:self.font!])
+            string.draw(in: placeHolderRect, withAttributes: [NSFontAttributeName:self.font!])
         }
         
     }
@@ -129,7 +149,7 @@ class CWMessageTextView: UITextView {
         return 33
     }
     
-    class func numberOfLinesForMessage(text:String) -> Int {
+    class func numberOfLinesForMessage(_ text:String) -> Int {
         return text.characters.count / CWMessageTextView.maxCharactersPerLine() + 1
     }
     

@@ -10,15 +10,15 @@ import UIKit
 
 class CWChatDetailHelper: NSObject {
 
-    class func chatDetailDataByUserInfo(userInfo: CWContactUser?) -> [CWSettingGroup] {
+    class func chatDetailDataByUserInfo(_ userInfo: CWContactUser?) -> [CWSettingGroup] {
         
         var dataArray = [CWSettingGroup]()
         
-        let users = CWSettingItem(title: "users", type: .Other)
+        let users = CWSettingItem(title: "users", type: .other)
         let group1 = CWSettingGroup(items: [users])
         
-        let top = CWSettingItem(title: "置顶聊天", type: .Switch)
-        let screen = CWSettingItem(title: "消息免打扰", type: .Switch)
+        let top = CWSettingItem(title: "置顶聊天", type: .switch)
+        let screen = CWSettingItem(title: "消息免打扰", type: .switch)
         let group2 = CWSettingGroup(items: [top,screen])
 
         
@@ -36,7 +36,7 @@ class CWChatDetailHelper: NSObject {
         let report = CWSettingItem(title: "举报")
         let group6 = CWSettingGroup(items: [report])
         
-        dataArray.appendContentsOf([group1,group2,group3,group4,group5,group6])
+        dataArray.append(contentsOf: [group1,group2,group3,group4,group5,group6])
         
         return dataArray
     }

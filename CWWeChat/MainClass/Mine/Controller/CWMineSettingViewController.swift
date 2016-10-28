@@ -55,15 +55,15 @@ class CWMineSettingViewController: CWSettingViewController {
 }
 
 extension CWMineSettingViewController {
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        super.tableView(tableView, didSelectRowAt: indexPath)
         
-        if indexPath.section == 3 {
+        if (indexPath as NSIndexPath).section == 3 {
             
             return
         }
         
-        let viewController = viewControllerArray[indexPath.section][indexPath.row]
+        let viewController = viewControllerArray[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
         self.navigationController?.pushViewController(viewController, animated: true)
         
         

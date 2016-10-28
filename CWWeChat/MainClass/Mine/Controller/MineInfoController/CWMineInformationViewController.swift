@@ -22,7 +22,7 @@ class CWMineInformationViewController: CWSettingViewController {
     
     override func registerCell() {
         super.registerCell()
-        self.tableView.registerClass(CWMineInformationAvatarCell.self, forCellReuseIdentifier: CWMineInformationAvatarCell.reuseIdentifier)
+        self.tableView.register(CWMineInformationAvatarCell.self, forCellReuseIdentifier: CWMineInformationAvatarCell.reuseIdentifier)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,24 +45,24 @@ class CWMineInformationViewController: CWSettingViewController {
 
 extension CWMineInformationViewController {
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let item = self.settingDataSource[indexPath.section][indexPath.row]
+        let item = self.settingDataSource[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
         if item?.title == "头像" {
-            let cell = tableView.dequeueReusableCellWithIdentifier(CWMineInformationAvatarCell.reuseIdentifier) as! CWMineInformationAvatarCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: CWMineInformationAvatarCell.reuseIdentifier) as! CWMineInformationAvatarCell
             cell.settingItem = item
             return cell
         }
         
-        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        return super.tableView(tableView, cellForRowAt: indexPath)
     }
     
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0 && indexPath.row == 0 {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == 0 {
             return 85.0
         }
-        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
 }

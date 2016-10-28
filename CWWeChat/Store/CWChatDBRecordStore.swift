@@ -13,9 +13,9 @@ import SQLite
 /// 用来更新会话界面的逻辑。
 protocol CWChatDBRecordStoreDelegate:class {
     /// 用来更新未读数量
-    func updateUnReadCount(record: CWConversationModel)
+    func updateUnReadCount(_ record: CWConversationModel)
     /// 当收到消息 刷新会话界面
-    func needUpdateRecordList(record: CWConversationModel, isAdd: Bool)
+    func needUpdateRecordList(_ record: CWConversationModel, isAdd: Bool)
 }
 
 /// 会话列表保存的类
@@ -60,12 +60,12 @@ class CWChatDBRecordStore: NSObject {
     }()
     
     lazy var path: String = {
-        let documentPath = NSHomeDirectory().stringByAppendingString("/Documents")
+        let documentPath = NSHomeDirectory() + "/Documents"
         let path = "\(documentPath)/User/\(self.current_userId)/Chat/DB/"
-        if !NSFileManager.defaultManager().fileExistsAtPath(path) {
-            try! NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
+        if !FileManager.default.fileExists(atPath: path) {
+            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         }
-        return path.stringByAppendingString("chatrecord.sqlite3")
+        return path + "chatrecord.sqlite3"
     }()
     
     init(userId: String) {
@@ -102,7 +102,7 @@ class CWChatDBRecordStore: NSObject {
      
      - returns: 添加消息的结果
      */
-    func addRecordByMessage(message: CWMessageModel, needUnread unread:Bool = false) -> Bool {
+    func addRecordByMessage(_ message: CWMessageModel, needUnread unread:Bool = false) -> Bool {
         let dataString = "\(message.messageSendDate.timeIntervalSince1970)"
         var unreadCount = unreadMessageByUid(message.messageSendId!, fid: message.messageTargetId!)
         if unread {
@@ -139,7 +139,7 @@ class CWChatDBRecordStore: NSObject {
     }
     
     // MARK: 更新消息
-    func updateRecord(message:CWMessageModel, unread_count count:Int = 0) -> Bool {
+    func updateRecord(_ message:CWMessageModel, unread_count count:Int = 0) -> Bool {
         
         let query = recordTable.filter(userId==message.messageSendId! && friendId == message.messageTargetId!)
         do {
@@ -171,7 +171,7 @@ class CWChatDBRecordStore: NSObject {
      
      - returns: 返回unreadCount
      */
-    func unreadMessageByUid(uid:String, fid:String) -> Int {
+    func unreadMessageByUid(_ uid:String, fid:String) -> Int {
         let query = recordTable.filter(userId==uid && friendId==fid)
         var unreadCount:Int = 0
         do {
@@ -186,7 +186,7 @@ class CWChatDBRecordStore: NSObject {
     }
     
     
-    func updateUnReadCountToZeroWithUserId(uid:String, fid:String) {
+    func updateUnReadCountToZeroWithUserId(_ uid:String, fid:String) {
         let query = recordTable.filter(userId==uid && friendId==fid)
         do {
             try recordDB.run(query.update(unread_count <- 0))
@@ -219,7 +219,7 @@ class CWChatDBRecordStore: NSObject {
      
      - parameter uid: 根据id
      */
-    func allMessageRecordByUid(uid:String) -> [CWConversationModel] {
+    func allMessageRecordByUid(_ uid:String) -> [CWConversationModel] {
         
         do {
             var recordList = [CWConversationModel]()
@@ -239,9 +239,9 @@ class CWChatDBRecordStore: NSObject {
     }
     
     //根据消息
-    func createDBRecordByFMResult(row:Row,uid: String) -> CWConversationModel  {
+    func createDBRecordByFMResult(_ row:Row,uid: String) -> CWConversationModel  {
         let record = CWConversationModel()
-        record.conversationDate = NSDate(timeIntervalSince1970: Double(row[date])!)
+        record.conversationDate = Date(timeIntervalSince1970: Double(row[date])!)
         record.unreadCount = row[unread_count]
         record.partnerID = row[friendId]
         record.conversationType = CWChatType(rawValue: row[record_type])!
@@ -255,7 +255,7 @@ class CWChatDBRecordStore: NSObject {
         return record
     }
     
-    func lastUpdateRecordById(uid: String,fid:String) -> CWConversationModel? {
+    func lastUpdateRecordById(_ uid: String,fid:String) -> CWConversationModel? {
         do {
             let query = recordTable.filter(uid == uid && fid == friendId)
            
@@ -288,7 +288,7 @@ class CWChatDBRecordStore: NSObject {
      
      - returns: 删除结果
      */
-    func deleteMessageRecordByUid(uid:String, fid:String, deletemessage delete:Bool=false) -> Bool{
+    func deleteMessageRecordByUid(_ uid:String, fid:String, deletemessage delete:Bool=false) -> Bool{
         do {
             let query = recordTable.filter(userId==uid && friendId==fid)
             let rowid = try recordDB.run(query.delete())
@@ -311,7 +311,7 @@ class CWChatDBRecordStore: NSObject {
      
      - returns: 删除结果
      */
-    func deleteAllMessageRecordByUid(uid:String, deletemessage delete:Bool=false) -> Bool{
+    func deleteAllMessageRecordByUid(_ uid:String, deletemessage delete:Bool=false) -> Bool{
         do {
             let query = recordTable.filter(userId==uid)
             let _ = try recordDB.run(query.delete())

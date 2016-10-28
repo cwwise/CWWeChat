@@ -19,6 +19,6 @@ protocol ChatKeyboardDelegate: NSObjectProtocol {
 
 protocol CWMoreKeyboardDelegate:NSObjectProtocol {
     
-    func moreKeyboard(keyboard: CWMoreKeyboard, didSelectedFunctionItem item:AnyObject)
+    func moreKeyboard(_ keyboard: CWMoreKeyboard, didSelectedFunctionItem item:AnyObject)
     
 }

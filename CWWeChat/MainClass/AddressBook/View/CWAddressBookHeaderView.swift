@@ -13,8 +13,8 @@ class CWAddressBookHeaderView: UITableViewHeaderFooterView {
     //title
     internal lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
-        titleLabel.textColor = UIColor.grayColor()
-        titleLabel.font = UIFont.systemFontOfSize(14)
+        titleLabel.textColor = UIColor.gray
+        titleLabel.font = UIFont.systemFont(ofSize: 14)
         titleLabel.numberOfLines = 0
         return titleLabel
     }()

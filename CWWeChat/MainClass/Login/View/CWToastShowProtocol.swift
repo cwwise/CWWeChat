@@ -9,12 +9,12 @@
 import UIKit
 
 protocol CWToastShowProtocol: class {
-    func showToast(style: CWToastViewStyle, text: String)
+    func showToast(_ style: CWToastViewStyle, text: String)
 }
 
 extension CWToastShowProtocol where Self: UIViewController {
     
-    func showToast(style: CWToastViewStyle, text: String) {
+    func showToast(_ style: CWToastViewStyle, text: String) {
         let toastView = CWToastView(style: style)
         toastView.center = self.view.center
         toastView.text = text

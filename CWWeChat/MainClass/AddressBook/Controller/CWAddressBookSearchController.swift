@@ -14,16 +14,16 @@ let Height_FriendsCell: CGFloat = 54
 class CWAddressBookSearchController: UIViewController {
 
     internal var friendsData:[CWContactUser]?
-    private  var searchFriendData = [CWContactUser]()
+    fileprivate  var searchFriendData = [CWContactUser]()
     
     lazy var tableView:UITableView = {
         let frame = CGRect(x: 0, y: 64, width: Screen_Width, height: Screen_Height-Screen_NavigationHeight)
-        let tableView = UITableView(frame: frame, style: .Grouped)
-        tableView.backgroundColor = UIColor.whiteColor()
+        let tableView = UITableView(frame: frame, style: .grouped)
+        tableView.backgroundColor = UIColor.white
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.registerClass(CWChatFriendCell.self, forCellReuseIdentifier: "ChatFriendCell")
+        tableView.register(CWChatFriendCell.self, forCellReuseIdentifier: "ChatFriendCell")
         return tableView
     }()
     
@@ -45,21 +45,21 @@ class CWAddressBookSearchController: UIViewController {
 extension CWAddressBookSearchController: UITableViewDataSource {
     
     // MARK: - Table view data source
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.searchFriendData.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ChatFriendCell") as! CWChatFriendCell
-        cell.userModel = self.searchFriendData[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatFriendCell") as! CWChatFriendCell
+        cell.userModel = self.searchFriendData[(indexPath as NSIndexPath).row]
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Height_FriendsCell
     }
     
@@ -68,8 +68,8 @@ extension CWAddressBookSearchController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension CWAddressBookSearchController: UITableViewDelegate {
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
@@ -77,7 +77,7 @@ extension CWAddressBookSearchController: UITableViewDelegate {
 // MARK: - UISearchResultsUpdating
 extension CWAddressBookSearchController: UISearchResultsUpdating {
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         
         let text = searchController.searchBar.text
         searchFriendData.removeAll()
@@ -87,9 +87,9 @@ extension CWAddressBookSearchController: UISearchResultsUpdating {
         }
         
         for user in friendsData {
-            if user.pinying.containsString(searchText) ||
-               user.userName!.containsString(searchText) ||
-               user.nikeName!.containsString(searchText){
+            if user.pinying.contains(searchText) ||
+               user.userName!.contains(searchText) ||
+               user.nikeName!.contains(searchText){
                 
                 searchFriendData.append(user)
             }

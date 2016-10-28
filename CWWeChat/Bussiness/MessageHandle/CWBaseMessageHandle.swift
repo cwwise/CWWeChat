@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import MMXXMPPFramework
+import XMPPFramework
 
 protocol CWMessageHandleProtocol:NSObjectProtocol {
-    func handleResult(handle: CWBaseMessageHandle, message: CWMessageModel, isDelay: Bool)
+    func handleResult(_ handle: CWBaseMessageHandle, message: CWMessageModel, isDelay: Bool)
 }
 
 ///消息处理的基类,待改善
@@ -23,12 +23,12 @@ class CWBaseMessageHandle: NSObject {
         super.init()
     }
     
-    func handleMessage(message: XMPPMessage) {
+    func handleMessage(_ message: XMPPMessage) {
         
     }
     
     //解析到消息后，应该先下载。还需要优化。
-    func analyMessageContent(message: XMPPMessage) -> (String, CWMessageType) {
+    func analyMessageContent(_ message: XMPPMessage) -> (String, CWMessageType) {
         let body = message.elementForName("body")
         let type = body.attributeForName("type")
         if type == nil {
@@ -46,29 +46,29 @@ class CWBaseMessageHandle: NSObject {
      
      - returns: 返回消息的类型和消息体
      */
-    func analyMessageBody(body: String) -> (String, CWMessageType) {
+    func analyMessageBody(_ body: String) -> (String, CWMessageType) {
         //解析message中的body
         do {
-            let regex = try NSRegularExpression(pattern: "^\\):\\)1[0-3].{32}", options: [.CaseInsensitive,.DotMatchesLineSeparators])
-            let result = regex.numberOfMatchesInString(body, options: .ReportProgress, range: NSRange(location: 0, length: body.characters.count))
+            let regex = try NSRegularExpression(pattern: "^\\):\\)1[0-3].{32}", options: [.caseInsensitive,.dotMatchesLineSeparators])
+            let result = regex.numberOfMatches(in: body, options: .reportProgress, range: NSRange(location: 0, length: body.characters.count))
             if result > 0 {
-                let index = body.startIndex.advancedBy(4)
-                let content = body.substringFromIndex(index.advancedBy(1))
+                let index = body.characters.index(body.startIndex, offsetBy: 4)
+                let content = body.substring(from: <#T##String.CharacterView corresponding to `index`##String.CharacterView#>.index(index, offsetBy: 1))
                 switch body[index] {
                 case "0":
-                    return (content, .Image)
+                    return (content, .image)
                 case "1":
-                    return (content, .Voice)
+                    return (content, .voice)
                 default:
-                    return (content, .Text)
+                    return (content, .text)
                 }
             } else {
-                return (body, .Text)
+                return (body, .text)
             }
             
         } catch let error as NSError {
             CWLogError(error.description)
-            return (body, .Text)
+            return (body, .text)
         }
         
     }

@@ -9,17 +9,17 @@
 import Foundation
 import UIKit
 
-extension NSFileManager {
+extension FileManager {
     
-    class func saveContentImage(image: UIImage?,imagePath path:String) {
-        guard let image = image where NSFileManager.defaultManager().fileExistsAtPath(path) == false else {
+    class func saveContentImage(_ image: UIImage?,imagePath path:String) {
+        guard let image = image , FileManager.default.fileExists(atPath: path) == false else {
             return
         }
         var data = UIImageJPEGRepresentation(image, 1)
         if data == nil {
             data = UIImagePNGRepresentation(image)
         }
-        if NSFileManager.defaultManager().createFileAtPath(path, contents: data, attributes: nil) {
+        if FileManager.default.createFile(atPath: path, contents: data, attributes: nil) {
             print("保存图片成功----")
         }
     }

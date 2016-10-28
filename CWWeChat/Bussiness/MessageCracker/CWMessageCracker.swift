@@ -7,13 +7,13 @@
 //
 
 import Foundation
-import MMXXMPPFramework
+import XMPPFramework
 
 /**
  *  收到新的消息
  */
 protocol CWMessageCrackerDelegate: NSObjectProtocol {
-    func receiveNewMessage(message: CWMessageModel)
+    func receiveNewMessage(_ message: CWMessageModel)
 }
 
 /**
@@ -33,7 +33,7 @@ class CWMessageCracker: XMPPModule {
         return messagehandle
     }()
     
-    override init!(dispatchQueue queue: dispatch_queue_t!) {
+    override init!(dispatchQueue queue: DispatchQueue!) {
         super.init(dispatchQueue: queue)
     }
     
@@ -54,7 +54,7 @@ extension CWMessageCracker: XMPPStreamDelegate {
     /**
      收到消息 并处理
      */
-    func xmppStream(sender: XMPPStream!, didReceiveMessage message: XMPPMessage!) {
+    func xmppStream(_ sender: XMPPStream!, didReceiveMessage message: XMPPMessage!) {
         //如果是聊天消息
         if message.isChatMessage() {
             
@@ -70,7 +70,7 @@ extension CWMessageCracker: XMPPStreamDelegate {
     }
     
     ///收到错误消息
-    func xmppStream(sender: XMPPStream!, didReceiveError error: DDXMLElement!) {
+    func xmppStream(_ sender: XMPPStream!, didReceiveError error: DDXMLElement!) {
         
         
         
@@ -81,7 +81,7 @@ extension CWMessageCracker: XMPPStreamDelegate {
 extension CWMessageCracker: CWMessageHandleProtocol {
     
     ///消息处理结果
-    func handleResult(handle: CWBaseMessageHandle, message: CWMessageModel, isDelay: Bool) {
+    func handleResult(_ handle: CWBaseMessageHandle, message: CWMessageModel, isDelay: Bool) {
        
         let dbMessageStore = CWChatDBDataManager.sharedInstance.dbMessageStore
         dbMessageStore.appendMessage(message) { (bool) in
@@ -102,13 +102,13 @@ extension CWMessageCracker: CWMessageHandleProtocol {
         ///遍历出所有的delegate
         let delegateEnumerator = multicastDelegate.delegateEnumerator()
         var delegate: AnyObject?
-        var queue: dispatch_queue_t?
+        var queue: DispatchQueue?
         
         while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) {
             //执行Delegate的方法
             if let delegate = delegate as? CWBaseMessageViewController {
 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     delegate.receiveNewMessage(message)
                 })
                 
@@ -134,7 +134,7 @@ extension CWMessageCracker: CWMessageHandleProtocol {
         //遍历出所有的delegate，查看
         let delegateEnumerator = multicastDelegate.delegateEnumerator()
         var delegate: AnyObject?
-        var queue: dispatch_queue_t?
+        var queue: DispatchQueue?
         //通过GCDMulticastDelegate类 来检查。
         return delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue, ofClass: CWChatViewController.self)
     }

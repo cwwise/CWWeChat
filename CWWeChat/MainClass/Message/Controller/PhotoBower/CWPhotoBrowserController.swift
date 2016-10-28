@@ -10,13 +10,13 @@ import UIKit
 
 class CWPhotoBrowserController: UIViewController {
 
-    lazy private var collectionView:UICollectionView = {
-        let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: CWPhotoLayout())
-        collectionView.pagingEnabled = true
+    lazy fileprivate var collectionView:UICollectionView = {
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: CWPhotoLayout())
+        collectionView.isPagingEnabled = true
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.registerClass(CWPhotoCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(CWPhotoCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         return collectionView
     }()
 
@@ -40,10 +40,10 @@ class CWPhotoBrowserController: UIViewController {
     func setupUI() {
         
         self.title = "图片浏览"
-        self.edgesForExtendedLayout = .All
+        self.edgesForExtendedLayout = .all
         self.automaticallyAdjustsScrollViewInsets = false
         self.extendedLayoutIncludesOpaqueBars = true
-        self.view.backgroundColor = UIColor.blackColor()
+        self.view.backgroundColor = UIColor.black
         
         self.view.addSubview(self.collectionView)
         collectionView.snp_makeConstraints { (make) in
@@ -55,7 +55,7 @@ class CWPhotoBrowserController: UIViewController {
     }
     
     func test() {
-        let state = self.navigationController?.navigationBarHidden
+        let state = self.navigationController?.isNavigationBarHidden
         self.navigationController?.setNavigationBarHidden(!state!, animated: true)
     }
 
@@ -68,7 +68,7 @@ class CWPhotoBrowserController: UIViewController {
 
 extension CWPhotoBrowserController:UICollectionViewDelegate {
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
@@ -76,13 +76,13 @@ extension CWPhotoBrowserController:UICollectionViewDelegate {
 
 extension CWPhotoBrowserController:UICollectionViewDataSource {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoList.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CWPhotoCollectionViewCell
-        cell.photoURL = photoList[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CWPhotoCollectionViewCell
+        cell.photoURL = photoList[(indexPath as NSIndexPath).row]
         return cell
     }
     

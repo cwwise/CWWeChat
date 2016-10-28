@@ -21,9 +21,9 @@ class CWChatViewController: CWBaseMessageViewController {
     }
     
     /// 显示消息时间相关的
-    var lastDateInterval:NSTimeInterval = 0
+    var lastDateInterval:TimeInterval = 0
     var messageAccumulate:Int = 0
-    var currentDate:NSDate = NSDate()
+    var currentDate:Date = Date()
     
     /// 消息发送主要的类
     var messageDispatchQueue:CWMessageDispatchQueue = {
@@ -45,12 +45,12 @@ class CWChatViewController: CWBaseMessageViewController {
     lazy var tableView: UITableView = {
         let frame = CGRect(x: 0, y: 0,
                            width: Screen_Width, height: Screen_Height-45)
-        let tableView = UITableView(frame: frame, style: .Plain)
-        tableView.autoresizingMask = [.FlexibleHeight,.FlexibleWidth]
+        let tableView = UITableView(frame: frame, style: .plain)
+        tableView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
         tableView.backgroundColor = UIColor(hexString: "#EBEBEB")
         tableView.tableFooterView = UIView()
         tableView.delegate = self
-        tableView.separatorStyle = .None
+        tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 50
         tableView.dataSource = self
         return tableView
@@ -71,7 +71,7 @@ class CWChatViewController: CWBaseMessageViewController {
      */
     lazy var voiceIndicatorView: CWVoiceIndicatorView = {
         let voiceIndicatorView = CWVoiceIndicatorView()
-        voiceIndicatorView.hidden = true
+        voiceIndicatorView.isHidden = true
         self.view.addSubview(voiceIndicatorView)
         voiceIndicatorView.snp_makeConstraints(closure: { (make) in
             make.centerX.equalTo(self.view)
@@ -83,14 +83,14 @@ class CWChatViewController: CWBaseMessageViewController {
 
     
     lazy var rightBarItem: UIBarButtonItem = {
-        let rightBarItem = UIBarButtonItem(image: CWAsset.Nav_chat_single.image, style: .Plain, target: self, action: #selector(rightBarItemDown(_:)))
+        let rightBarItem = UIBarButtonItem(image: CWAsset.Nav_chat_single.image, style: .plain, target: self, action: #selector(rightBarItemDown(_:)))
         return rightBarItem
     }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
         setupUI()
         registerCell()
@@ -109,8 +109,8 @@ class CWChatViewController: CWBaseMessageViewController {
      设置UI布局
      */
     func setupUI() {
-        self.edgesForExtendedLayout = .None
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.edgesForExtendedLayout = UIRectEdge()
+        self.view.backgroundColor = UIColor.white
         self.view.addSubview(self.tableView)
         self.view.addSubview(self.chatToolBar)
         
@@ -127,22 +127,22 @@ class CWChatViewController: CWBaseMessageViewController {
      */
     func registerCell() {
         
-        tableView.registerClass(CWBaseMessageCell.self, forCellReuseIdentifier: CWMessageType.None.reuseIdentifier())
-        tableView.registerClass(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.Text.reuseIdentifier())
-        tableView.registerClass(CWImageMessageCell.self, forCellReuseIdentifier: CWMessageType.Image.reuseIdentifier())
-        tableView.registerClass(CWVoiceMessageCell.self, forCellReuseIdentifier: CWMessageType.Voice.reuseIdentifier())
-        tableView.registerClass(CWTimeMessageCell.self, forCellReuseIdentifier: CWMessageType.Time.reuseIdentifier())
+        tableView.register(CWBaseMessageCell.self, forCellReuseIdentifier: CWMessageType.none.reuseIdentifier())
+        tableView.register(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.text.reuseIdentifier())
+        tableView.register(CWImageMessageCell.self, forCellReuseIdentifier: CWMessageType.image.reuseIdentifier())
+        tableView.register(CWVoiceMessageCell.self, forCellReuseIdentifier: CWMessageType.voice.reuseIdentifier())
+        tableView.register(CWTimeMessageCell.self, forCellReuseIdentifier: CWMessageType.time.reuseIdentifier())
 
     }
     
-    func rightBarItemDown(barItem: UIBarButtonItem) {
+    func rightBarItemDown(_ barItem: UIBarButtonItem) {
         let chatDetailVC = CWChatDetailViewController()
         chatDetailVC.contactModel = friendUser
         self.navigationController?.pushViewController(chatDetailVC, animated: true)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -154,11 +154,11 @@ class CWChatViewController: CWBaseMessageViewController {
 
 // MARK: - UITableViewDelegate
 extension CWChatViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
     }
 }
@@ -166,28 +166,28 @@ extension CWChatViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension CWChatViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messageList.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let message = messageList[indexPath.row]
-        if message.messageType == .Time {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let message = messageList[(indexPath as NSIndexPath).row]
+        if message.messageType == .time {
             return 25
         }
         return message.messageFrame.heightOfCell
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let message = messageList[indexPath.row] 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let message = messageList[(indexPath as NSIndexPath).row] 
         
-        if message.messageType == .Time {
-            let timeMessageCell = tableView.dequeueReusableCellWithIdentifier(message.messageType.reuseIdentifier(), forIndexPath: indexPath) as! CWTimeMessageCell
+        if message.messageType == .time {
+            let timeMessageCell = tableView.dequeueReusableCell(withIdentifier: message.messageType.reuseIdentifier(), for: indexPath) as! CWTimeMessageCell
             timeMessageCell.updateMessage(message)
             return timeMessageCell
         }
         
-        let chatMessageCell = tableView.dequeueReusableCellWithIdentifier(message.messageType.reuseIdentifier(), forIndexPath: indexPath) as! CWBaseMessageCell
+        let chatMessageCell = tableView.dequeueReusableCell(withIdentifier: message.messageType.reuseIdentifier(), for: indexPath) as! CWBaseMessageCell
         chatMessageCell.delegate = self
         chatMessageCell.updateMessage(message)
         return chatMessageCell
@@ -197,7 +197,7 @@ extension CWChatViewController: UITableViewDataSource {
 // MARK: - ChatMessageCellDelegate
 extension CWChatViewController: ChatMessageCellDelegate {
     
-    func messageCellUserAvatarDidClick(userId: String) {
+    func messageCellUserAvatarDidClick(_ userId: String) {
        
         let chatVC = CWDetailContactViewController()
         chatVC.contactID = userId
@@ -207,20 +207,20 @@ extension CWChatViewController: ChatMessageCellDelegate {
     }
     
     
-    func messageCellDidSelect(cell: CWBaseMessageCell) {
+    func messageCellDidSelect(_ cell: CWBaseMessageCell) {
         
         guard let message = cell.message else {
             return
         }
         
-        if message.messageType == .Image {
+        if message.messageType == .image {
             let _ = message.messageContent as! CWImageMessageContent
             let browserVC = CWPhotoBrowserController()
             //                browserVC.imageArray = [NSFileManager.pathUserChatImage(imageMessage.imagePath!)]
             self.navigationController?.pushViewController(browserVC, animated: true)
         }
         
-        else if message.messageType == .Voice {
+        else if message.messageType == .voice {
             //FIX: 必须用成员变量 否则会释放，导致无法播放
             //播放之后 状态修改为已经播放保存到数据库
 //            let voiceMessage = message.messageContent as! CWVoiceMessageContent
@@ -233,13 +233,13 @@ extension CWChatViewController: ChatMessageCellDelegate {
     }
     
     
-    func messageCellDoubleClick(cell: CWBaseMessageCell) {
+    func messageCellDoubleClick(_ cell: CWBaseMessageCell) {
         
         guard let message = cell.message else {
             return
         }
         
-        if message.messageType == .Text {
+        if message.messageType == .text {
             let textMessage = message.messageContent as! CWTextMessageContent
             let displayView = CWChatTextDisplayView()
             displayView.showInView(self.navigationController!.view, attrText: textMessage.attributeText)

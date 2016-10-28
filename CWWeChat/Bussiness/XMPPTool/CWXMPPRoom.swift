@@ -7,6 +7,6 @@
 //
 
 import UIKit
-import MMXXMPPFramework
+import XMPPFramework
 
 

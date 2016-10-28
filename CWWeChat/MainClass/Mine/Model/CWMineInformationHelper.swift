@@ -18,7 +18,7 @@ class CWMineInformationHelper: NSObject {
         self.mineInfoDataByUserInformation(self.userInfo)
     }
     
-    func mineInfoDataByUserInformation(userInfo: CWContactUser) {
+    func mineInfoDataByUserInformation(_ userInfo: CWContactUser) {
         
         let avatarItem = CWSettingItem(title: "头像")
         avatarItem.rightImageURL = self.userInfo.avatarURL

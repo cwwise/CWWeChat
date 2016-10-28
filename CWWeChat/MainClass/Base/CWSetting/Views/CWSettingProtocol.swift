@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol CWSettingSwitchCellDelegate: class {
-    func settingSwitchCellForItem(item: CWSettingItem, didChangeStatus status: Bool)
+    func settingSwitchCellForItem(_ item: CWSettingItem, didChangeStatus status: Bool)
 }
 
 protocol CWSettingDataProtocol: class {

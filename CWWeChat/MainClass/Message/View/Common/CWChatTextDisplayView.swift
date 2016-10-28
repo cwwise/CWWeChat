@@ -15,11 +15,11 @@ class CWChatTextDisplayView: UIView {
     var attrString:NSAttributedString? {
         didSet {
             let mutableAttrString = NSMutableAttributedString(attributedString: attrString!)
-            mutableAttrString.addAttributes([NSFontAttributeName:UIFont.systemFontOfSize(25)],
+            mutableAttrString.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 25)],
                                             range: NSMakeRange(0, attrString!.length))
             
             self.textView.attributedText = mutableAttrString
-            var size = self.textView.sizeThatFits(CGSizeMake(width_textView,CGFloat(MAXFLOAT)))
+            var size = self.textView.sizeThatFits(CGSize(width: width_textView,height: CGFloat(MAXFLOAT)))
             size.height = size.height > Screen_Height ? Screen_Height : size.height;
             
             textView.snp_updateConstraints { (make) in
@@ -28,21 +28,21 @@ class CWChatTextDisplayView: UIView {
         }
     }
     
-    private var textView:UITextView = {
+    fileprivate var textView:UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = UIColor.clearColor()
-        textView.textAlignment = .Center
-        textView.editable = false
+        textView.backgroundColor = UIColor.clear
+        textView.textAlignment = .center
+        textView.isEditable = false
         return textView
     }()
     
     convenience init() {
-        self.init(frame:UIScreen.mainScreen().bounds)
+        self.init(frame:UIScreen.main.bounds)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white
         self.addSubview(textView)
         textView.snp_makeConstraints { (make) in
             make.center.equalTo(self)
@@ -56,25 +56,25 @@ class CWChatTextDisplayView: UIView {
     }
     
 
-    func showInView(view:UIView = UIApplication.sharedApplication().keyWindow!,attrText:NSAttributedString,animation:Bool = true) {
+    func showInView(_ view:UIView = UIApplication.shared.keyWindow!,attrText:NSAttributedString,animation:Bool = true) {
         view.addSubview(self)
         self.frame = view.bounds
         self.attrString = attrText
         self.alpha = 0
-        UIView.animateWithDuration(0.15, animations: {
+        UIView.animate(withDuration: 0.15, animations: {
             self.alpha = 1
-        }) { (bool) in
-            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
-        }
+        }, completion: { (bool) in
+            UIApplication.shared.setStatusBarHidden(true, with: .fade)
+        }) 
         
     }
     
     func dismiss() {
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade)
-        UIView.animateWithDuration(0.2, animations: {
+        UIApplication.shared.setStatusBarHidden(false, with: .fade)
+        UIView.animate(withDuration: 0.2, animations: {
             self.alpha = 0
-        }) { (bool) in
+        }, completion: { (bool) in
             self.removeFromSuperview()
-        }
+        }) 
     }
 }

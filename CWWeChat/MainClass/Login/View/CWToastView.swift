@@ -20,21 +20,21 @@ import UIKit
  - ShowMessage: 显示消息
  */
 public enum CWToastViewStyle {
-    case Loading
-    case ShowMessage
+    case loading
+    case showMessage
 }
 
 let ToastView_Width: CGFloat = 120
 let ToastView_Height: CGFloat = 120
 
-public class CWToastView: UIView {
+open class CWToastView: UIView {
     
     /**
      Swift closures can't be directly associated with objects via the
      Objective-C runtime, so the (ugly) solution is to wrap them in a
      class that can be used with associated objects.
      */
-    private class ToastCompletionWrapper {
+    fileprivate class ToastCompletionWrapper {
         var completion: ((Bool) -> Void)?
         
         init(_ completion: ((Bool) -> Void)?) {
@@ -50,25 +50,25 @@ public class CWToastView: UIView {
     /// 样式
     var style: CWToastViewStyle
     /// loading动画
-    private let spinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    fileprivate let spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
-    private let textLabel: UILabel = {
+    fileprivate let textLabel: UILabel = {
         let textLabel = UILabel()
-        textLabel.font = UIFont.systemFontOfSize(14)
+        textLabel.font = UIFont.systemFont(ofSize: 14)
         textLabel.frame = CGRect(x: 0, y: 0, width: ToastView_Width, height: 20)
-        textLabel.textColor = UIColor.whiteColor()
-        textLabel.textAlignment = .Center
+        textLabel.textColor = UIColor.white
+        textLabel.textAlignment = .center
         return textLabel
     }()
     
-    private let imageView: UIImageView = {
+    fileprivate let imageView: UIImageView = {
        let imageView = UIImageView(image: UIImage(named: "show_success"))
         imageView.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
-        imageView.contentMode = .ScaleAspectFit
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
-    internal init(style: CWToastViewStyle = .Loading, text: String = "") {
+    internal init(style: CWToastViewStyle = .loading, text: String = "") {
         self.style = style
         let frame = CGRect(x: 0, y: 0, width: ToastView_Width, height: ToastView_Height)
         super.init(frame: frame)
@@ -79,7 +79,7 @@ public class CWToastView: UIView {
         self.layer.cornerRadius = 5
         self.alpha = 0.7
         
-        if style == .Loading {
+        if style == .loading {
             spinner.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
             self.addSubview(spinner)
             spinner.startAnimating()
@@ -90,11 +90,11 @@ public class CWToastView: UIView {
         self.addSubview(textLabel)
     }
     
-    override public func intrinsicContentSize() -> CGSize {
+    override open var intrinsicContentSize : CGSize {
         return CGSize(width: 120, height: 120)
     }
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         spinner.center = CGPoint(x: ToastView_Width/2, y: ToastView_Height/2-10)
         imageView.center = CGPoint(x: ToastView_Width/2, y: ToastView_Height/2-10)
@@ -116,11 +116,11 @@ public class CWToastView: UIView {
      @param position The toast's position
      @param style The style. The shared style will be used when nil
      */
-    public func makeToast(message: String, duration: NSTimeInterval, style: CWToastViewStyle) {
+    open func makeToast(_ message: String, duration: TimeInterval, style: CWToastViewStyle) {
         self.makeToast(message, duration: duration, style: style, completion: nil)
     }
     
-    public func makeToast(message: String?, duration: NSTimeInterval, style: CWToastViewStyle = .Loading, completion: ((didTap: Bool) -> Void)?) {
+    open func makeToast(_ message: String?, duration: TimeInterval, style: CWToastViewStyle = .loading, completion: ((_ didTap: Bool) -> Void)?) {
  
     
     }
@@ -130,9 +130,9 @@ public class CWToastView: UIView {
 
 
 
-public class CWToastManager {
+open class CWToastManager {
     
-    public static let shared = CWToastManager()
+    open static let shared = CWToastManager()
 
     
     

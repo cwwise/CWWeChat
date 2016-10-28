@@ -10,17 +10,17 @@ import Foundation
 
 extension CWContactManager {
     
-    func contactDetailArrayByUserID(userId: String) -> [[CWInformationModel]] {
+    func contactDetailArrayByUserID(_ userId: String) -> [[CWInformationModel]] {
         let user = CWContactManager.findContact(userId)
         return self.contactDetailArrayByUserInfo(user!)
     }
     
-    func contactDetailArrayByUserInfo(user: CWContactUser) -> [[CWInformationModel]] {
+    func contactDetailArrayByUserInfo(_ user: CWContactUser) -> [[CWInformationModel]] {
         
         var contactDetailArray = [[CWInformationModel]]()
         
         // 首行
-        let userInfo = CWInformationModel(title: "个人", type: .Other)
+        let userInfo = CWInformationModel(title: "个人", type: .other)
         contactDetailArray.append([userInfo])
         
         let telephone = CWInformationModel(title: "电话号码", subTitle: "18810109052")
@@ -37,13 +37,13 @@ extension CWContactManager {
         
         // 第三部分
         let location = CWInformationModel(title: "地区", subTitle: "广东")
-        let album = CWInformationModel(title: "个人相册", type: .Other)
+        let album = CWInformationModel(title: "个人相册", type: .other)
         let more = CWInformationModel(title: "更多")
         contactDetailArray.append([location, album, more])
         
         //按钮部分
-        let sendMessage = CWInformationModel(title: "发消息", type: .Button)
-        let videoMessage = CWInformationModel(title: "视频聊天", type: .Button)
+        let sendMessage = CWInformationModel(title: "发消息", type: .button)
+        let videoMessage = CWInformationModel(title: "视频聊天", type: .button)
 
         contactDetailArray.append([sendMessage, videoMessage])
         

@@ -16,7 +16,7 @@ class CWLabelViewController: CWTableViewController {
         
         self.title = "标签"
         
-        self.tableView.registerClass(CWLabelTableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.register(CWLabelTableViewCell.self, forCellReuseIdentifier: "cell")
         // Do any additional setup after loading the view.
     }
     
@@ -42,19 +42,19 @@ class CWLabelViewController: CWTableViewController {
 
 extension CWLabelViewController {
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! CWLabelTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CWLabelTableViewCell
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 55.0
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     

@@ -18,7 +18,7 @@ class CWMineViewController: CWMenuViewController {
         let mineHelper = CWMineHelper()
         self.dataSource = mineHelper.mineMenuData
         
-        self.tableView.registerClass(CWMineUserCell.self, forCellReuseIdentifier: "usercell")
+        self.tableView.register(CWMineUserCell.self, forCellReuseIdentifier: "usercell")
         // Do any additional setup after loading the view.
     }
 
@@ -30,19 +30,19 @@ class CWMineViewController: CWMenuViewController {
 }
 
 extension CWMineViewController {
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             return 87
         }
         
-        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("usercell", forIndexPath: indexPath) as! CWMineUserCell
+        if (indexPath as NSIndexPath).section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "usercell", for: indexPath) as! CWMineUserCell
             let model = CWContactUser()
             model.userId = "chenwei@chenweiim.com"
             model.nikeName = "陈威"
@@ -52,13 +52,13 @@ extension CWMineViewController {
             cell.userModel = model
             return cell
         }
-        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        return super.tableView(tableView, cellForRowAt: indexPath)
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        super.tableView(tableView, didSelectRowAt: indexPath)
         
-        if indexPath.section == 2 {
+        if (indexPath as NSIndexPath).section == 2 {
             let expressionVC = CWExpressionViewController()
             expressionVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(expressionVC, animated: true)
@@ -66,7 +66,7 @@ extension CWMineViewController {
             return
         }
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             let mineInformationVC = CWMineInformationViewController()
             mineInformationVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(mineInformationVC, animated: true)

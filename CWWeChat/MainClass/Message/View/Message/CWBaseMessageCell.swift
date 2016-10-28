@@ -18,21 +18,21 @@ protocol ChatMessageCellDelegate:NSObjectProtocol {
      
      - parameter userId: 用户唯一id
      */
-    func messageCellUserAvatarDidClick(userId: String)
+    func messageCellUserAvatarDidClick(_ userId: String)
     
     /**
      消息cell点击事件
      
      - parameter cell: 点击的cell
      */
-    func messageCellDidSelect(cell: CWBaseMessageCell)
+    func messageCellDidSelect(_ cell: CWBaseMessageCell)
     
     /**
      消息cell 双击的点击事件(争对文本)
      
      - parameter cell: 点击的cell
      */
-    func messageCellDoubleClick(cell: CWBaseMessageCell)
+    func messageCellDoubleClick(_ cell: CWBaseMessageCell)
 
     //MARK: UIMenuController消息
 //    func messageDelete(cell: CWBaseMessageCell)
@@ -68,28 +68,28 @@ class CWBaseMessageCell: UITableViewCell {
     ///用户名称
     var usernameLabel:UILabel = {
         let usernameLabel = UILabel()
-        usernameLabel.backgroundColor = UIColor.clearColor()
-        usernameLabel.font = UIFont.systemFontOfSize(12)
+        usernameLabel.backgroundColor = UIColor.clear
+        usernameLabel.font = UIFont.systemFont(ofSize: 12)
         return usernameLabel
     }()
     
     ///头像
     lazy var avatarButton:UIButton = {
-        let avatarButton = UIButton(type: .Custom)
+        let avatarButton = UIButton(type: .custom)
         avatarButton.frame.size = CGSize(width: kAvaterWidth, height: kAvaterWidth)
         avatarButton.addTarget(self,
                                action: #selector(avatarButtonClickDown(_:)),
-                               forControlEvents: UIControlEvents.TouchUpInside)
+                               for: UIControlEvents.touchUpInside)
         return avatarButton
     }()
     
-    private(set) lazy var doubletapGesture: UITapGestureRecognizer = {
+    fileprivate(set) lazy var doubletapGesture: UITapGestureRecognizer = {
         let doubletapGesture = UITapGestureRecognizer(target: self, action: #selector(bubbleDoubleTapped(_:)))
         doubletapGesture.numberOfTapsRequired = 2
         return doubletapGesture
     }()
     
-    private (set) lazy var longPressGestureRecognizer: UILongPressGestureRecognizer = {
+    fileprivate (set) lazy var longPressGestureRecognizer: UILongPressGestureRecognizer = {
         let longpressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(bubbleLongPressed(_:)))
         longpressGestureRecognizer.delegate = self
         return longpressGestureRecognizer
@@ -98,7 +98,7 @@ class CWBaseMessageCell: UITableViewCell {
     ///消息的背景图片
     lazy var messageBackgroundView:UIImageView = {
         let messageBackgroundView = UIImageView()
-        messageBackgroundView.userInteractionEnabled = true
+        messageBackgroundView.isUserInteractionEnabled = true
         
         messageBackgroundView.addGestureRecognizer(self.longPressGestureRecognizer)
         messageBackgroundView.addGestureRecognizer(self.doubletapGesture)
@@ -107,20 +107,20 @@ class CWBaseMessageCell: UITableViewCell {
     }()
     
     //引导
-    var activityView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    var activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     lazy var errorButton:UIButton = {
-        let errorButton = UIButton(type: .Custom)
-        errorButton.setImage(UIImage(named:"message_sendfaild"), forState: .Normal)
+        let errorButton = UIButton(type: .custom)
+        errorButton.setImage(UIImage(named:"message_sendfaild"), for: UIControlState())
         errorButton.sizeToFit()
-        errorButton.hidden = true
+        errorButton.isHidden = true
         return errorButton
     }()
     
     // MARK: 初始化
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = UIColor.clearColor()
-        self.selectionStyle = .None
+        self.backgroundColor = UIColor.clear
+        self.selectionStyle = .none
         
         self.contentView.addSubview(self.usernameLabel)
         self.contentView.addSubview(self.avatarButton)
@@ -156,17 +156,17 @@ class CWBaseMessageCell: UITableViewCell {
     }
     
     ///赋值
-    func updateMessage(message: CWMessageModel) {
+    func updateMessage(_ message: CWMessageModel) {
         
         if self.message?.messageOwnerType != message.messageOwnerType {
             
         }
         
-        if message.messageOwnerType == .Myself {
+        if message.messageOwnerType == .myself {
 
             let string = CWUserAccount.sharedUserAccount().chatuser.avatarURL!
             
-            self.avatarButton.yy_setBackgroundImageWithURL(NSURL(string:string), forState: .Normal, placeholder: defaultHeadeImage)
+            self.avatarButton.yy_setBackgroundImageWithURL(URL(string:string), forState: .Normal, placeholder: defaultHeadeImage)
             self.avatarButton.left = Screen_Width - kChatAvatarMarginLeft - kAvaterWidth
             
             self.avatarButton.snp_remakeConstraints(closure: { (make) in
@@ -180,7 +180,7 @@ class CWBaseMessageCell: UITableViewCell {
             let userModel = CWContactManager.findContact(message.messageTargetId!)
             let string = userModel!.avatarURL!
             
-            self.avatarButton.yy_setBackgroundImageWithURL(NSURL(string:string), forState: .Normal, placeholder: defaultHeadeImage)
+            self.avatarButton.yy_setBackgroundImageWithURL(URL(string:string), forState: .Normal, placeholder: defaultHeadeImage)
             
             self.avatarButton.snp_remakeConstraints(closure: { (make) in
                 make.width.height.equalTo(kAvaterWidth);
@@ -213,13 +213,13 @@ class CWBaseMessageCell: UITableViewCell {
     
     // MARK: cell中的事件处理
     ///头像点击
-    func avatarButtonClickDown(button:UIButton) {
+    func avatarButtonClickDown(_ button:UIButton) {
         
         guard let delegate = self.delegate,let message = self.message  else {
             return
         }
         
-        if message.messageOwnerType == .Myself {
+        if message.messageOwnerType == .myself {
             delegate.messageCellUserAvatarDidClick(message.messageSendId!)
         } else {
             delegate.messageCellUserAvatarDidClick(message.messageTargetId!)
@@ -228,7 +228,7 @@ class CWBaseMessageCell: UITableViewCell {
     }
     
     // MARK: 手势事件
-    func bubbleTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+    func bubbleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
         guard let delegate = self.delegate else {
             return
         }
@@ -236,7 +236,7 @@ class CWBaseMessageCell: UITableViewCell {
 
     }
     
-    func bubbleDoubleTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+    func bubbleDoubleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
         guard let delegate = self.delegate else {
             return
         }
@@ -245,31 +245,31 @@ class CWBaseMessageCell: UITableViewCell {
     
     
     
-    func bubbleLongPressed(longPressGestureRecognizer: UILongPressGestureRecognizer) {
-        if longPressGestureRecognizer.state == .Began {
+    func bubbleLongPressed(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        if longPressGestureRecognizer.state == .began {
 
         }
     }
     
     //MARK: 更新状态
     //上传消息进度（图片和视频）
-    func updateProgressView(progress:CGFloat, result: CWMessageUploadState) {
+    func updateProgressView(_ progress:CGFloat, result: CWMessageUploadState) {
         
     }
     
     //更新消息状态
     func updateMessageCellState() {
-        if self.message?.messageSendState == .Sending {
+        if self.message?.messageSendState == .sending {
             activityView.startAnimating()
-            errorButton.hidden = true
+            errorButton.isHidden = true
         }
             //如果失败就显示重发按钮
-        else if self.message?.messageSendState == .Fail {
+        else if self.message?.messageSendState == .fail {
             activityView.stopAnimating()
-            errorButton.hidden = false
+            errorButton.isHidden = false
         } else {
             activityView.stopAnimating()
-            errorButton.hidden = true
+            errorButton.isHidden = true
         }
     }
     

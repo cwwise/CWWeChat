@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import MMXXMPPFramework
+import XMPPFramework
 
 ///发送消息等待时间
-let sendMessageTimeoutInterval: NSTimeInterval = 30
+let sendMessageTimeoutInterval: TimeInterval = 30
 
 /**
  消息发送的类
@@ -20,7 +20,7 @@ let sendMessageTimeoutInterval: NSTimeInterval = 30
  */
 class CWMessageTransmitter: NSObject {
 
-    private var xmppStream: XMPPStream {
+    fileprivate var xmppStream: XMPPStream {
         return CWXMPPManager.shareXMPPManager.xmppStream
     }
     
@@ -38,7 +38,7 @@ class CWMessageTransmitter: NSObject {
      
      - returns: 发送消息的结果
      */
-    func sendMessage(content:String, toId:String, messageId:String, type:Int = 1, expand: String? = nil) -> Bool {
+    func sendMessage(_ content:String, toId:String, messageId:String, type:Int = 1, expand: String? = nil) -> Bool {
         
         let messageElement = self.messageElement(content, to: toId, messageId: messageId, type: type, expand: expand)
         
@@ -61,7 +61,7 @@ class CWMessageTransmitter: NSObject {
      
      - returns: 消息XMPPMessage的实体
      */
-    func messageElement(body: String, to: String, messageId: String, type:Int = 1, expand: String? = nil) -> XMPPMessage {
+    func messageElement(_ body: String, to: String, messageId: String, type:Int = 1, expand: String? = nil) -> XMPPMessage {
         //消息内容
         let message = XMPPMessage(type: "chat", elementID: messageId)
         message.addAttributeWithName("to", stringValue: chatJidString(to))
@@ -85,7 +85,7 @@ class CWMessageTransmitter: NSObject {
     
     
     //统一通过方法转换获取JID
-    func chatJidString(name: String) -> String {
+    func chatJidString(_ name: String) -> String {
         return name + "@" + CWXMPPConfigure.shareXMPPConfigure().xmppDomain
     }
     

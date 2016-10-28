@@ -16,13 +16,13 @@ class CWVoiceMessageCell: CWBaseMessageCell {
     /// voice图标的imageView
     lazy var contentImageView:UIImageView = {
         let contentImageView = UIImageView()
-        contentImageView.contentMode = .ScaleAspectFit
-        contentImageView.userInteractionEnabled = true
+        contentImageView.contentMode = .scaleAspectFit
+        contentImageView.isUserInteractionEnabled = true
         return contentImageView
     }()
     
     ///手势操作
-    private(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+    fileprivate(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bubbleTapped(_:)))
         return tapGestureRecognizer
     }()
@@ -48,13 +48,13 @@ class CWVoiceMessageCell: CWBaseMessageCell {
     }
     
     ///重写setMessage方法
-    override func updateMessage(message: CWMessageModel) {
+    override func updateMessage(_ message: CWMessageModel) {
         super.updateMessage(message)
         
         let size = message.messageFrame.contentSize
         
         //如果是自己发送，在右边
-        if message.messageOwnerType == .Myself {
+        if message.messageOwnerType == .myself {
             
             setUpVoicePlayIndicatorImageView(true)
             
@@ -88,7 +88,7 @@ class CWVoiceMessageCell: CWBaseMessageCell {
      
      - parameter send: 消息的发送方
      */
-    func setUpVoicePlayIndicatorImageView(send: Bool) {
+    func setUpVoicePlayIndicatorImageView(_ send: Bool) {
         var images = NSArray()
         if send {
             images = NSArray(objects: UIImage(named: "SenderVoiceNodePlaying001")!, UIImage(named: "SenderVoiceNodePlaying002")!, UIImage(named: "SenderVoiceNodePlaying003")!)
@@ -124,7 +124,7 @@ class CWVoiceMessageCell: CWBaseMessageCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

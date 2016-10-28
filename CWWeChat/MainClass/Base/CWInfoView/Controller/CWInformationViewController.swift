@@ -18,7 +18,7 @@ class CWInformationViewController: UITableViewController {
     override func loadView() {
         
         self.view = UIView(frame: CGRect(x: 0, y: 0, width: Screen_Width, height: Screen_Height))
-        self.tableView = UITableView(frame: self.view.bounds, style: .Grouped)
+        self.tableView = UITableView(frame: self.view.bounds, style: .grouped)
         self.tableView.backgroundColor = UIColor.tableViewBackgroundColor()
         
         self.tableView.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
@@ -35,9 +35,9 @@ class CWInformationViewController: UITableViewController {
     }
     
     func registerCell() {
-        self.tableView.registerClass(CWInformationCell.self, forCellReuseIdentifier: CWInformationCell.reuseIdentifier)
-        self.tableView.registerClass(CWInformationButtonCell.self, forCellReuseIdentifier: CWInformationButtonCell.reuseIdentifier)
-        self.tableView.registerClass(CWInformationHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: CWInformationHeaderFooterView.reuseIdentifier)
+        self.tableView.register(CWInformationCell.self, forCellReuseIdentifier: CWInformationCell.reuseIdentifier)
+        self.tableView.register(CWInformationButtonCell.self, forCellReuseIdentifier: CWInformationButtonCell.reuseIdentifier)
+        self.tableView.register(CWInformationHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: CWInformationHeaderFooterView.reuseIdentifier)
     }
     
 
@@ -56,66 +56,66 @@ class CWInformationViewController: UITableViewController {
 // MARK: - UITableViewDataSource
 extension CWInformationViewController {
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let menuItem = dataSource[indexPath.section][indexPath.row]
-        if menuItem.type == .Button {
-            let cell = tableView.dequeueReusableCellWithIdentifier(CWInformationButtonCell.reuseIdentifier) as! CWInformationButtonCell
+        let menuItem = dataSource[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
+        if menuItem.type == .button {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CWInformationButtonCell.reuseIdentifier) as! CWInformationButtonCell
             cell.informationModel = menuItem
             cell.delegate = self
             return cell
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(CWInformationCell.reuseIdentifier, forIndexPath: indexPath) as! CWInformationCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CWInformationCell.reuseIdentifier, for: indexPath) as! CWInformationCell
         cell.informationModel = menuItem
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource[section].count
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return dataSource.count
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let menuItem = dataSource[indexPath.section][indexPath.row]
-        if menuItem.type == .Button {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let menuItem = dataSource[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
+        if menuItem.type == .button {
             return 55
         }
         return 44.0
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 15
     }
     
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 5
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWInformationHeaderFooterView.reuseIdentifier)
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableView.dequeueReusableHeaderFooterView(withIdentifier: CWInformationHeaderFooterView.reuseIdentifier)
     }
     
-    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWInformationHeaderFooterView.reuseIdentifier)
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return tableView.dequeueReusableHeaderFooterView(withIdentifier: CWInformationHeaderFooterView.reuseIdentifier)
     }
 }
 
 // MARK: - UITableViewDelegate
 extension CWInformationViewController {
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 extension CWInformationViewController: CWInformationButtonCellDelegate {
     
-    func informationButtonCellClicked(info: CWInformationModel) {
+    func informationButtonCellClicked(_ info: CWInformationModel) {
         
     }
 }

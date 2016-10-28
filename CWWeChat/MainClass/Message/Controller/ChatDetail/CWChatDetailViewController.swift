@@ -24,7 +24,7 @@ class CWChatDetailViewController: CWSettingViewController {
     override func registerCell() {
         super.registerCell()
         
-        self.tableView.registerClass(CWUserGroupCell.self, forCellReuseIdentifier: CWUserGroupCell.reuseIdentifier)
+        self.tableView.register(CWUserGroupCell.self, forCellReuseIdentifier: CWUserGroupCell.reuseIdentifier)
         
     }
 
@@ -34,15 +34,15 @@ class CWChatDetailViewController: CWSettingViewController {
     }
     
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 && indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(CWUserGroupCell.reuseIdentifier) as! CWUserGroupCell
+        if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CWUserGroupCell.reuseIdentifier) as! CWUserGroupCell
             
             return cell
         }
         
-        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        return super.tableView(tableView, cellForRowAt: indexPath)
     }
 
 }

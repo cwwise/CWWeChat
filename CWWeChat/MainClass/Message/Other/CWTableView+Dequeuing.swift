@@ -13,32 +13,32 @@ protocol Reusable: class {
 }
 
 extension Reusable  {
-    static var reuseIdentifier: String { return String(Self) }
+    static var reuseIdentifier: String { return String(describing: Self) }
 }
 
 extension UITableView {
 
-    func registerReusableCell<T: UITableViewCell where T: Reusable>(_: T.Type) {
-        registerClass(T.self, forCellReuseIdentifier: T.reuseIdentifier)
+    func registerReusableCell<T: UITableViewCell>(_: T.Type) where T: Reusable {
+        register(T.self, forCellReuseIdentifier: T.reuseIdentifier)
     }
     
-    func registerHeaderFooterReusableCell<T: UITableViewHeaderFooterView where T: Reusable>(_: T.Type) {
-        registerClass(T.self, forHeaderFooterViewReuseIdentifier: T.reuseIdentifier)
+    func registerHeaderFooterReusableCell<T: UITableViewHeaderFooterView>(_: T.Type) where T: Reusable {
+        register(T.self, forHeaderFooterViewReuseIdentifier: T.reuseIdentifier)
     }
     
-    func dequeueReusableCell<T: UITableViewCell where T: Reusable>(indexPath indexPath: NSIndexPath) -> T {
-        return dequeueReusableCellWithIdentifier(T.reuseIdentifier, forIndexPath: indexPath) as! T
+    func dequeueReusableCell<T: UITableViewCell>(indexPath: IndexPath) -> T where T: Reusable {
+        return self.dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as! T
     }
     
-    func insertRowsAtBottom(rows: [NSIndexPath]) {
+    func insertRowsAtBottom(_ rows: [IndexPath]) {
         //保证 insert row 不闪屏
         UIView.setAnimationsEnabled(false)
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         self.beginUpdates()
-        self.insertRowsAtIndexPaths(rows, withRowAnimation: .None)
+        self.insertRows(at: rows, with: .none)
         self.endUpdates()
-        self.scrollToRowAtIndexPath(rows[0], atScrollPosition: .Bottom, animated: false)
+        self.scrollToRow(at: rows[0], at: .bottom, animated: false)
         CATransaction.commit()
         UIView.setAnimationsEnabled(true)
     }

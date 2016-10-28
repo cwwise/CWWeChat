@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 
 let ITEM_COUNT_PAGE:Int = 8
@@ -21,7 +41,7 @@ class CWMoreKeyboard: UIView {
     
     lazy var collectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .Horizontal
+        layout.scrollDirection = .horizontal
         let height = self.height_collectionView / 2 * 0.93
         let spaceX = (Screen_Width-self.width_collection_cell*4)/5
         let spaceY = self.height_collectionView - 2*height
@@ -32,9 +52,9 @@ class CWMoreKeyboard: UIView {
         layout.headerReferenceSize = CGSize(width: spaceX, height: self.height_collectionView)
         layout.footerReferenceSize = CGSize(width: spaceX, height: self.height_collectionView)
         
-        let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-        collectionView.backgroundColor = UIColor.clearColor()
-        collectionView.pagingEnabled = true
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.clear
+        collectionView.isPagingEnabled = true
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
@@ -48,23 +68,23 @@ class CWMoreKeyboard: UIView {
     var chatMoreKeyboardData:[CWMoreKeyboardItem]?
     
     init() {
-        super.init(frame:CGRectZero)
+        super.init(frame:CGRect.zero)
         backgroundColor = UIColor(hexString: "#F4F4F6")
         addSubview(self.collectionView)
     }
     
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetLineWidth(context, 0.5)
-        CGContextSetStrokeColorWithColor(context, UIColor.grayColor().CGColor)
+        context?.setLineWidth(0.5)
+        context?.setStrokeColor(UIColor.gray.cgColor)
         
-        CGContextBeginPath(context)
-        CGContextMoveToPoint(context, 0, 0)
-        CGContextAddLineToPoint(context, Screen_Width, 0)
-        CGContextClosePath(context)
-        CGContextStrokePath(context)
+        context?.beginPath()
+        context?.move(to: CGPoint(x: 0, y: 0))
+        context.addLine(to: CGPoint(x: Screen_Width, y: 0))
+        context?.closePath()
+        context?.strokePath()
     }
     
     func addsnap() {
@@ -82,7 +102,7 @@ class CWMoreKeyboard: UIView {
     
     
     func registerCellClass()  {
-        self.collectionView.registerClass(CWMoreKeyboardCell.self, forCellWithReuseIdentifier: "cell")
+        self.collectionView.register(CWMoreKeyboardCell.self, forCellWithReuseIdentifier: "cell")
     }
     
 
@@ -97,7 +117,7 @@ extension CWMoreKeyboard: UICollectionViewDelegate {
 ///UICollectionViewDataSource
 extension CWMoreKeyboard: UICollectionViewDataSource {
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         if let data = self.chatMoreKeyboardData {
             return data.count / ITEM_COUNT_PAGE + ((data.count%ITEM_COUNT_PAGE == 0) ? 0 : 1)
         } else {
@@ -105,15 +125,15 @@ extension CWMoreKeyboard: UICollectionViewDataSource {
         }
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ITEM_COUNT_PAGE
     }
     
     
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CWMoreKeyboardCell
-        let index = indexPath.row + indexPath.section * ITEM_COUNT_PAGE
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CWMoreKeyboardCell
+        let index = (indexPath as NSIndexPath).row + (indexPath as NSIndexPath).section * ITEM_COUNT_PAGE
         let temp_index = transformIndex(index)
         
         if temp_index > self.chatMoreKeyboardData?.count {
@@ -125,7 +145,7 @@ extension CWMoreKeyboard: UICollectionViewDataSource {
         return cell
     }
     
-    func transformIndex(index: Int) -> Int {
+    func transformIndex(_ index: Int) -> Int {
         let page = index/ITEM_COUNT_PAGE
         let currentIndex = index % ITEM_COUNT_PAGE
         let x = currentIndex / 2

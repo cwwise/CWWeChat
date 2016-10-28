@@ -11,33 +11,33 @@ import UIKit
 ///MARK: 会话记录
 ///会话提示类型
 public enum CWConversationClueType: Int {
-    case None
-    case Point
-    case PointWithNumber
+    case none
+    case point
+    case pointWithNumber
 }
 
 //MARK: 消息
 ///消息聊天类型
 public enum CWChatType: Int {
-    case None
-    case Personal
-    case Group
+    case none
+    case personal
+    case group
 }
 
 ///消息所属类型
 public enum CWMessageOwnerType : Int {
-    case None  //未知
-    case System   //系统消息
-    case Myself   //自己发送的
-    case Other    //接受到朋友发送的
+    case none  //未知
+    case system   //系统消息
+    case myself   //自己发送的
+    case other    //接受到朋友发送的
     
     //获取cell的reuseIdentifier
-    func reuseIdentifier(messageType: CWMessageType) -> String {
+    func reuseIdentifier(_ messageType: CWMessageType) -> String {
         let typeIdentifier = messageType.reuseIdentifier()
         switch self {
-        case Myself:
+        case .myself:
             return typeIdentifier+"_send"
-        case Other:
+        case .other:
             return typeIdentifier+"_receive"
         default:
             return typeIdentifier+"_none"
@@ -48,30 +48,30 @@ public enum CWMessageOwnerType : Int {
 
 ///消息类型
 public enum CWMessageType : Int {
-    case None  = -1          //未知
-    case Time  = 0         //时间
+    case none  = -1          //未知
+    case time  = 0         //时间
     
-    case Text               //文字
-    case Image              //图片
-    case Voice              //声音
-    case Video              //视频
-    case Expression         //表情
+    case text               //文字
+    case image              //图片
+    case voice              //声音
+    case video              //视频
+    case expression         //表情
     
     //获取cell的reuseIdentifier
     func reuseIdentifier() -> String {
         switch self {
-        case .Text:
+        case .text:
             return "ChatMessageTextCell"
-        case .Image:
+        case .image:
             return "ChatMessageImageCell"
-        case .Voice:
+        case .voice:
             return "ChatMessageVoiceCell"
-        case .Video:
+        case .video:
             return "ChatMessageVideoCell"
-        case .Expression:
+        case .expression:
             return "ChatMessageExpressionCell"
             
-        case .Time:
+        case .time:
             return "ChatMessageTimeCell"
         default:
             return "ChatMessageCell"
@@ -81,38 +81,38 @@ public enum CWMessageType : Int {
 
 ///消息发送的状态
 public enum CWMessageSendState : Int {
-    case None               //默认消息状态
-    case Sending            //消息发送中
-    case Fail              //消息发送失败
-    case Success           //消息发送成功
+    case none               //默认消息状态
+    case sending            //消息发送中
+    case fail              //消息发送失败
+    case success           //消息发送成功
     
     init(state: Bool) {
         if state {
-            self = .Success
+            self = .success
         } else {
-            self = .Fail
+            self = .fail
         }
     }
 }
 
 ///消息读取的状态
 public enum CWMessageReadState : Int {
-    case Readed               //消息已读
-    case Unread               //消息未读
+    case readed               //消息已读
+    case unread               //消息未读
 }
 
 ///消息播放状态(声音和视频)
 public enum CWMessagePlayState : Int {
-    case None    = 0             //无播放（自己发送的默认是无播放）
-    case UnPlay  = -1              //未播放 (接收的语言消息默认是未播放)
-    case Playing = 1              //播放中
-    case Played  = 2             //已经播放过
+    case none    = 0             //无播放（自己发送的默认是无播放）
+    case unPlay  = -1              //未播放 (接收的语言消息默认是未播放)
+    case playing = 1              //播放中
+    case played  = 2             //已经播放过
     
     init (state: Bool) {
         if state {
-            self = .Played
+            self = .played
         } else {
-            self = .UnPlay
+            self = .unPlay
         }
     }
     
@@ -127,10 +127,10 @@ public enum CWMessagePlayState : Int {
  - Fail:    上传失败
  */
 public enum CWMessageUploadState: Int {
-    case None = -1
-    case Loading
-    case Success
-    case Fail
+    case none = -1
+    case loading
+    case success
+    case fail
 }
 
 

@@ -29,7 +29,7 @@ class CWDiscoverViewController: CWMenuViewController {
 
 extension CWDiscoverViewController {
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let gameViewController = CWGameViewController()
         gameViewController.hidesBottomBarWhenPushed = true

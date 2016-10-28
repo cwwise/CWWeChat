@@ -23,7 +23,7 @@ class CWCommonSettingHelper: NSObject {
         let group2 = CWSettingGroup(items: [item2,item3,item4,item5])
         
         
-        let item6 = CWSettingItem(title: "听筒模式", type: .Switch)
+        let item6 = CWSettingItem(title: "听筒模式", type: .switch)
         let group3 = CWSettingGroup(items: [item6])
         
         let item7 = CWSettingItem(title: "功能")
@@ -33,7 +33,7 @@ class CWCommonSettingHelper: NSObject {
         let item9 = CWSettingItem(title: "清理微信存储空间")
         let group5 = CWSettingGroup(items: [item8,item9])
         
-        let item10 = CWSettingItem(title: "清空聊天记录", type: .TitleButton)
+        let item10 = CWSettingItem(title: "清空聊天记录", type: .titleButton)
         let group6 = CWSettingGroup(items: [item10])
         
         commonSettingData.append(group1)

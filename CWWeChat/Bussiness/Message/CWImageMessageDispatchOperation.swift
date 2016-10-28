@@ -16,14 +16,14 @@ import UIKit
 class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
 
     /// 上传图片的状态
-    var imageUploadState:CWMessageUploadState = .None
+    var imageUploadState:CWMessageUploadState = .none
     /// 上传图片的类
     let manager = CWResourceUploadManager()
     
     
     override func sendMessage() {
         /// 如果图片上传成功，则发送信息到对方，否则进行图片上传
-        if imageUploadState == .Success {
+        if imageUploadState == .success {
             sendContentMessage()
         } else {
             uploadImage()
@@ -45,15 +45,15 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
             
             if result == true && progress == 1.0 {
                 CWLogDebug("上传成功..")
-                self.imageUploadState = .Success
+                self.imageUploadState = .success
                 self.sendContentMessage()
             }
             else if result == false && progress == 0.0 {
                 CWLogDebug("上传失败..")
-                self.imageUploadState = .Fail
+                self.imageUploadState = .fail
             }
             else {
-                self.imageUploadState = .Loading
+                self.imageUploadState = .loading
             }
         }
     }

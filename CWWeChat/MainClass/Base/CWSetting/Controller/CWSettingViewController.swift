@@ -20,7 +20,7 @@ class CWSettingViewController: UITableViewController {
         
         self.view = UIView(frame: CGRect(x: 0, y: 0, width: Screen_Width, height: Screen_Height))
         
-        self.tableView = UITableView(frame: self.view.bounds, style: .Grouped)
+        self.tableView = UITableView(frame: self.view.bounds, style: .grouped)
         self.tableView.backgroundColor = UIColor.tableViewBackgroundColor()
         
         self.tableView.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
@@ -39,14 +39,14 @@ class CWSettingViewController: UITableViewController {
     
     func registerCell() {
         
-        self.tableView.registerClass(CWSettingFooterTitleView.self,
+        self.tableView.register(CWSettingFooterTitleView.self,
                                      forHeaderFooterViewReuseIdentifier: CWSettingFooterTitleView.reuseIdentifier)
-        self.tableView.registerClass(CWSettingHeaderTitleView.self,
+        self.tableView.register(CWSettingHeaderTitleView.self,
                                      forHeaderFooterViewReuseIdentifier: CWSettingHeaderTitleView.reuseIdentifier)
 
-        self.tableView.registerClass(CWSettingCell.self, forCellReuseIdentifier: CWSettingCell.reuseIdentifier)
-        self.tableView.registerClass(CWSettingButtonCell.self, forCellReuseIdentifier: CWSettingButtonCell.reuseIdentifier)
-        self.tableView.registerClass(CWSettingSwitchCell.self, forCellReuseIdentifier: CWSettingSwitchCell.reuseIdentifier)
+        self.tableView.register(CWSettingCell.self, forCellReuseIdentifier: CWSettingCell.reuseIdentifier)
+        self.tableView.register(CWSettingButtonCell.self, forCellReuseIdentifier: CWSettingButtonCell.reuseIdentifier)
+        self.tableView.register(CWSettingSwitchCell.self, forCellReuseIdentifier: CWSettingSwitchCell.reuseIdentifier)
 
     }
 
@@ -57,19 +57,19 @@ class CWSettingViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return settingDataSource.count
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingDataSource[section].count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let item = settingDataSource[indexPath.section][indexPath.row]
-        let cell = tableView.dequeueReusableCellWithIdentifier(item!.type.reuseIdentifier(), forIndexPath: indexPath)
+        let item = settingDataSource[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: item!.type.reuseIdentifier(), for: indexPath)
         // Configure the cell...
         if let cell = cell as? CWSettingDataProtocol {
             cell.settingItem = item
@@ -81,50 +81,50 @@ class CWSettingViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let group = settingDataSource[section]
         if group.headerTitle == nil {
             return nil
         }
         
-        let settingHeaderTitleView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWSettingHeaderTitleView.reuseIdentifier) as! CWSettingHeaderTitleView
+        let settingHeaderTitleView = tableView.dequeueReusableHeaderFooterView(withIdentifier: CWSettingHeaderTitleView.reuseIdentifier) as! CWSettingHeaderTitleView
         settingHeaderTitleView.text = group.headerTitle
         return settingHeaderTitleView
     }
     
-    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let group = settingDataSource[section]
         if group.footerTitle == nil {
             return nil
         }
-        let settingfooterTitleView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWSettingFooterTitleView.reuseIdentifier) as! CWSettingFooterTitleView
+        let settingfooterTitleView = tableView.dequeueReusableHeaderFooterView(withIdentifier: CWSettingFooterTitleView.reuseIdentifier) as! CWSettingFooterTitleView
         settingfooterTitleView.text = group.footerTitle
         return settingfooterTitleView
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return height_Setting_Cell
     }
     
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         let group = settingDataSource[section]
         return group.footerHeight
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let group = settingDataSource[section]
         return group.headerHeight
 
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
  
 }
 
 extension CWSettingViewController: CWSettingSwitchCellDelegate {
-    func settingSwitchCellForItem(item: CWSettingItem, didChangeStatus status: Bool) {
+    func settingSwitchCellForItem(_ item: CWSettingItem, didChangeStatus status: Bool) {
         
     }
 }

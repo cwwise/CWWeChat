@@ -11,13 +11,13 @@ import AudioToolbox
 
 class CWPlayMessageAudio: NSObject {
 
-    class func playSoundEffect(fileName: String) {
-        let audioFile = NSBundle.mainBundle().pathForResource(fileName, ofType: nil)
-        let fileUrl = NSURL.fileURLWithPath(audioFile!)
+    class func playSoundEffect(_ fileName: String) {
+        let audioFile = Bundle.main.path(forResource: fileName, ofType: nil)
+        let fileUrl = URL(fileURLWithPath: audioFile!)
         
         var soundID: SystemSoundID = 0
         
-        AudioServicesCreateSystemSoundID(fileUrl, &soundID)
+        AudioServicesCreateSystemSoundID(fileUrl as CFURL, &soundID)
         AudioServicesPlaySystemSound(soundID)
     }
     

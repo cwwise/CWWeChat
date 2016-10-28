@@ -12,7 +12,7 @@ import Foundation
 let Max_RepeatCount:Int = 5
 
 /// 发送消息的基类
-class CWMessageDispatchOperation: NSOperation {
+class CWMessageDispatchOperation: Operation {
     
     /// 消息实体
     weak var chatMessage: CWMessageModel?
@@ -25,63 +25,63 @@ class CWMessageDispatchOperation: NSOperation {
     var progressBlock: ((Float,Bool)-> Void)?
     
     /// 控制并发的变量
-    override var executing: Bool {
+    override var isExecuting: Bool {
         return local_executing
     }
     
-    override var finished: Bool {
+    override var isFinished: Bool {
         return local_finished
     }
     
-    override var cancelled: Bool {
+    override var isCancelled: Bool {
         return local_cancelled
     }
     
-    override var ready: Bool {
+    override var isReady: Bool {
         return local_ready
     }
     
     /// 实现并发需要设置为YES
-    override var concurrent: Bool {
+    override var isConcurrent: Bool {
         return true
     }
     
-    override var asynchronous: Bool {
+    override var isAsynchronous: Bool {
         return true
     }
     
     ///控制并发任务的变量
-    private var local_executing:Bool = false {
+    fileprivate var local_executing:Bool = false {
         willSet {
-            self.willChangeValueForKey("isExecuting")
+            self.willChangeValue(forKey: "isExecuting")
         }
         didSet {
-            self.didChangeValueForKey("isExecuting")
+            self.didChangeValue(forKey: "isExecuting")
         }
     }
-    private var local_finished:Bool = false {
+    fileprivate var local_finished:Bool = false {
         willSet {
-            self.willChangeValueForKey("isFinished")
+            self.willChangeValue(forKey: "isFinished")
         }
         didSet {
-            self.didChangeValueForKey("isFinished")
+            self.didChangeValue(forKey: "isFinished")
         }
     }
-    private var local_cancelled:Bool = false {
+    fileprivate var local_cancelled:Bool = false {
         willSet {
-            self.willChangeValueForKey("isCancelled")
+            self.willChangeValue(forKey: "isCancelled")
         }
         didSet {
-            self.didChangeValueForKey("isCancelled")
+            self.didChangeValue(forKey: "isCancelled")
         }
     }
     
     internal var local_ready:Bool = false {
         willSet {
-            self.willChangeValueForKey("isReady")
+            self.willChangeValue(forKey: "isReady")
         }
         didSet {
-            self.didChangeValueForKey("isReady")
+            self.didChangeValue(forKey: "isReady")
         }
     }
     
@@ -104,15 +104,15 @@ class CWMessageDispatchOperation: NSOperation {
      
      - returns: 返回对应的消息Operation
      */
-    class func dispatchOperationWithMessage(message:CWMessageModel) -> CWMessageDispatchOperation {
+    class func dispatchOperationWithMessage(_ message:CWMessageModel) -> CWMessageDispatchOperation {
         
-        if message.messageType == .Text {
+        if message.messageType == .text {
             return CWTextMessageDispatchOperation(message:message)
         }
-        else if message.messageType == .Image {
+        else if message.messageType == .image {
             return CWImageMessageDispatchOperation(message:message)
         }
-        else if message.messageType == .Voice {
+        else if message.messageType == .voice {
             return CWVoiceMessageDispatchOperation(message:message)
         }
         else {
@@ -131,16 +131,16 @@ class CWMessageDispatchOperation: NSOperation {
     ///函数入口
     override func start() {
         //疑问
-        if NSThread.isMainThread() {
+        if Thread.isMainThread {
             
         }
         
-        if self.finished || self.cancelled {
+        if self.isFinished || self.isCancelled {
             self.endOperation()
             return
         }
         self.local_executing = true
-        self.performSelectorInBackground(#selector(CWMessageDispatchOperation.main), withObject: nil)
+        self.performSelector(inBackground: #selector(CWMessageDispatchOperation.main), with: nil)
     }
     
     /// 取消线程发送
@@ -153,7 +153,7 @@ class CWMessageDispatchOperation: NSOperation {
     /// 主要执行的过程
     override func main() {
     
-        if self.finished || self.cancelled {
+        if self.isFinished || self.isCancelled {
             self.endOperation()
             return
         }
@@ -172,7 +172,7 @@ class CWMessageDispatchOperation: NSOperation {
     }
     
     ///消息状态
-    func noticationWithOperationState(state:Bool = false) {
+    func noticationWithOperationState(_ state:Bool = false) {
         self.messageSendResult = state
         endOperation()
     }
@@ -194,7 +194,7 @@ class CWMessageDispatchOperation: NSOperation {
 // MARK: - 消息结果反馈
 extension CWMessageDispatchOperation {
    
-    func messageSendCallback(result:Bool) {
+    func messageSendCallback(_ result:Bool) {
         if result == false {
             repeatCount += 1
             if repeatCount > Max_RepeatCount {

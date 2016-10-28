@@ -12,11 +12,11 @@ extension UIFont {
     
     ///MessageCell中label的字体大小
     public class func fontTextMessageText() -> UIFont {
-        return UIFont.systemFontOfSize(16)
+        return UIFont.systemFont(ofSize: 16)
     }
     
     public class func fontFriendsUsername() -> UIFont {
-        return UIFont.systemFontOfSize(17)
+        return UIFont.systemFont(ofSize: 17)
     }
     
     

@@ -11,19 +11,19 @@ import UIKit
 extension UIApplication {
     
     var appBundleName: String {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as! String
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
     }
     
     var appBundleID: String {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleIdentifier") as! String
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as! String
     }
     
     var appVersion: String {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
     
     var appBuildVersion: String {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as! String
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
     }
     
 }

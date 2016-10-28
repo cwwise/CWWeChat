@@ -15,14 +15,14 @@ class CWBadgeView: UIView {
     let textSideMargin: CGFloat = 8.0
     let badgeViewHeight: CGFloat = 16.0
     
-    var badgeTextColor: UIColor = UIColor.whiteColor()
+    var badgeTextColor: UIColor = UIColor.white
     var badgeStrokeWidth: CGFloat = 0
-    var badgeStrokeColor: UIColor = UIColor.whiteColor()
+    var badgeStrokeColor: UIColor = UIColor.white
     
     var cornerRadius: CGFloat = 10.0
     
-    var badgeBackgroundColor: UIColor = UIColor.redColor()
-    var badgeTextFont: UIFont = UIFont.systemFontOfSize(15)
+    var badgeBackgroundColor: UIColor = UIColor.red
+    var badgeTextFont: UIFont = UIFont.systemFont(ofSize: 15)
     
     var badgeValue:Int = 0 {
         didSet {
@@ -34,7 +34,7 @@ class CWBadgeView: UIView {
         let text = "\(badgeValue)" as NSString
         let size = CGSize(width: 100, height: 20)
         let attributes = [NSFontAttributeName: self.badgeTextFont]
-        let textSize = text.boundingRectWithSize(size, options: [.UsesLineFragmentOrigin], attributes: attributes, context: nil).size
+        let textSize = text.boundingRect(with: size, options: [.usesLineFragmentOrigin], attributes: attributes, context: nil).size
         return textSize
     }
     
@@ -63,18 +63,18 @@ class CWBadgeView: UIView {
         
         newFrame.origin.x = superviewWidth - (viewWidth / 2.0);
         newFrame.origin.y = -viewHeight / 2.0;
-        let x = ceil(CGRectGetMidX(newFrame))
-        let y = ceil(CGRectGetMidY(newFrame))
+        let x = ceil(newFrame.midX)
+        let y = ceil(newFrame.midY)
         
-        self.bounds = CGRectIntegral(CGRectMake(0, 0, CGRectGetWidth(newFrame), CGRectGetHeight(newFrame)));
-        self.center = CGPointMake(x, y);
+        self.bounds = CGRect(x: 0, y: 0, width: newFrame.width, height: newFrame.height).integral;
+        self.center = CGPoint(x: x, y: y);
         
         self.setNeedsDisplay()
     }
     
     
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         
         guard self.badgeValue > 0 else {
             return
@@ -83,28 +83,28 @@ class CWBadgeView: UIView {
         let context = UIGraphicsGetCurrentContext()
         
         
-        let rectToDraw = CGRectInset(rect, marginToDrawInside, marginToDrawInside);
-        let borderPath = UIBezierPath(roundedRect: rectToDraw, byRoundingCorners: .AllCorners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+        let rectToDraw = rect.insetBy(dx: marginToDrawInside, dy: marginToDrawInside);
+        let borderPath = UIBezierPath(roundedRect: rectToDraw, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
         
         /* Background and shadow */
-        CGContextSaveGState(context)
-        CGContextAddPath(context, borderPath.CGPath);
-        CGContextSetFillColorWithColor(context, self.badgeBackgroundColor.CGColor);
-        CGContextDrawPath(context, .Fill);
-        CGContextRestoreGState(context)
+        context?.saveGState()
+        context?.addPath(borderPath.cgPath);
+        context?.setFillColor(self.badgeBackgroundColor.cgColor);
+        context?.drawPath(using: .fill);
+        context?.restoreGState()
         
         
         /* Stroke */
-        CGContextSaveGState(context);
-        CGContextAddPath(context, borderPath.CGPath);
-        CGContextSetLineWidth(context, self.badgeStrokeWidth);
-        CGContextSetStrokeColorWithColor(context, self.badgeStrokeColor.CGColor);
-        CGContextDrawPath(context, .Stroke);
-        CGContextRestoreGState(context);
+        context?.saveGState();
+        context?.addPath(borderPath.cgPath);
+        context?.setLineWidth(self.badgeStrokeWidth);
+        context?.setStrokeColor(self.badgeStrokeColor.cgColor);
+        context?.drawPath(using: .stroke);
+        context?.restoreGState();
         
         
         /* Text */
-        CGContextSaveGState(context)
+        context?.saveGState()
         
         var textFrame = rectToDraw;
         let textSize = self.sizeOfTextForCurrentSettings;
@@ -118,13 +118,13 @@ class CWBadgeView: UIView {
         }
         
         let style = NSMutableParagraphStyle()
-        style.alignment = .Center
+        style.alignment = .center
         let attributes = [NSFontAttributeName: self.badgeTextFont,
                           NSForegroundColorAttributeName: self.badgeTextColor,
-                          NSParagraphStyleAttributeName: style]
-        text.drawInRect(textFrame, withAttributes: attributes)
+                          NSParagraphStyleAttributeName: style] as [String : Any]
+        text.draw(in: textFrame, withAttributes: attributes)
         
-        CGContextRestoreGState(context)
+        context?.restoreGState()
         
         
     }

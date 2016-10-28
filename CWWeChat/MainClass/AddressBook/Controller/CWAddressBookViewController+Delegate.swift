@@ -10,27 +10,27 @@ import UIKit
 
 extension CWAddressBookViewController: UISearchBarDelegate {
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
-        self.tabBarController?.tabBar.hidden = true
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        UIApplication.shared.setStatusBarStyle(.default, animated: true)
+        self.tabBarController?.tabBar.isHidden = true
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
-        self.tabBarController?.tabBar.hidden = false
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        UIApplication.shared.setStatusBarStyle(.lightContent, animated: true)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
-    func searchBarBookmarkButtonClicked(searchBar: UISearchBar) {
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         let message = "语言搜索"
-        let alertController = UIAlertController(title: "提示", message: message, preferredStyle: .Alert)
-        let alertAtion = UIAlertAction(title: "确定", style: .Default) { (action) in
+        let alertController = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
+        let alertAtion = UIAlertAction(title: "确定", style: .default) { (action) in
             
         }
         alertController.addAction(alertAtion)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
 }

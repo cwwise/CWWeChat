@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CWInformationButtonCellDelegate: NSObjectProtocol {
-    func informationButtonCellClicked(info: CWInformationModel)
+    func informationButtonCellClicked(_ info: CWInformationModel)
 }
 
 class CWInformationButtonCell: UITableViewCell {
@@ -23,9 +23,9 @@ class CWInformationButtonCell: UITableViewCell {
     }
     
     lazy var button: UIButton = {
-       let button = UIButton(type: .Custom)
+       let button = UIButton(type: .custom)
         button.commitStyle()
-        button.addTarget(self, action: #selector(CWInformationButtonCell.cellButtonDown(_:)), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(CWInformationButtonCell.cellButtonDown(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -53,12 +53,12 @@ class CWInformationButtonCell: UITableViewCell {
             return
         }
         
-        self.button.setTitle(informationModel.title, forState: .Normal)
-        self.accessoryType = .None
-        self.selectionStyle = .None
+        self.button.setTitle(informationModel.title, for: UIControlState())
+        self.accessoryType = .none
+        self.selectionStyle = .none
     }
     
-    func cellButtonDown(button: UIButton) {
+    func cellButtonDown(_ button: UIButton) {
         if let delegate = self.delegate {
             delegate.informationButtonCellClicked(self.informationModel!)
         }
@@ -68,7 +68,7 @@ class CWInformationButtonCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

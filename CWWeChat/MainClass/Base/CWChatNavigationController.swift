@@ -16,15 +16,15 @@ class CWChatNavigationController: UINavigationController {
         //#Bug 需要解决，如果设置为false，则在好友搜索部分时，遇到问题
         //self.navigationBar.translucent = false
         
-        self.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationBar.tintColor = UIColor.white
         self.navigationBar.barTintColor = UIColor.navigationBarCocor()
-        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         
         // Do any additional setup after loading the view.
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
 
     override func didReceiveMemoryWarning() {

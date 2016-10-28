@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import ChameleonFramework
+import UIColor_Hex_Swift
 
 extension UIColor {
     

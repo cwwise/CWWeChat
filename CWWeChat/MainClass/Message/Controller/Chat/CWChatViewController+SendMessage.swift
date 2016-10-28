@@ -12,15 +12,15 @@ import UIKit
 // MARK: - 发送消息部分
 extension CWChatViewController: CWMessageDispatchQueueDelegate {
     
-    func chatmessageSendState(message: CWMessageModel, sendState state: Bool) {
+    func chatmessageSendState(_ message: CWMessageModel, sendState state: Bool) {
         
     }
     
-    func uploadDataProgress(message: CWMessageModel, progress: CGFloat, result: Bool) {
+    func uploadDataProgress(_ message: CWMessageModel, progress: CGFloat, result: Bool) {
         
         CWLogDebug("上传进度: \(progress)")
         //找到消息 修改消息状态 保存数据库
-        let index = self.messageList.indexOf({$0.messageID == message.messageID})
+        let index = self.messageList.index(where: {$0.messageID == message.messageID})
 //        message.messageUploadState = CWMessageUploadState(rawValue:Int(result))!
 //        self.dbMessageStore.updateMessageStateByMessage(message)
         
@@ -28,12 +28,12 @@ extension CWChatViewController: CWMessageDispatchQueueDelegate {
             return
         }
         //防止cell 不在显示区域崩溃的问题
-        let indexPath = NSIndexPath(forRow: localIndex, inSection: 0)
-        guard let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? CWBaseMessageCell else {
+        let indexPath = IndexPath(row: localIndex, section: 0)
+        guard let cell = self.tableView.cellForRow(at: indexPath) as? CWBaseMessageCell else {
             return
         }
         
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             cell.updateProgressView(CGFloat(progress), result: CWMessageUploadState(rawValue:Int(result))!)
         })
         
@@ -43,11 +43,11 @@ extension CWChatViewController: CWMessageDispatchQueueDelegate {
 
     
     ///收到消息
-    override func receiveNewMessage(message: CWMessageModel) {
+    override func receiveNewMessage(_ message: CWMessageModel) {
         
         messageList.append(message)
 //        self.tableView.reloadData()
-        let indexPath = NSIndexPath(forRow: messageList.count-1, inSection: 0)
+        let indexPath = IndexPath(row: messageList.count-1, section: 0)
         self.tableView.insertRowsAtBottom([indexPath])
 //        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
 //        updateMessageAndScrollBottom(false)
@@ -58,13 +58,13 @@ extension CWChatViewController: CWMessageDispatchQueueDelegate {
     /**
      加载本地消息
      */
-    func refreshLocalMessage(action:CWCompleteAction)  {
+    func refreshLocalMessage(_ action:@escaping CWCompleteAction)  {
         
         let userid = CWUserAccount.sharedUserAccount().userID
         //先将此条对话的未读条数设置0
         dbRecordStore.updateUnReadCountToZeroWithUserId(userid, fid: friendUser!.userId)
         //获取数据
-        dbMessageStore.messagesByUserID(userid, partnerID: friendUser!.userId, fromDate: currentDate, count: 15) { (array:[CWMessageModel], date:NSDate,needMore:Bool) in
+        dbMessageStore.messagesByUserID(userid, partnerID: friendUser!.userId, fromDate: currentDate, count: 15) { (array:[CWMessageModel], date:Date,needMore:Bool) in
             
             guard array.count > 0 else {
                 return
@@ -83,7 +83,7 @@ extension CWChatViewController: CWMessageDispatchQueueDelegate {
                     
                 }
             }
-            self.messageList.insertContentsOf(array, at: 0)
+            self.messageList.insert(contentsOf: array, at: 0)
             action()
         }
     }

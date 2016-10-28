@@ -19,7 +19,7 @@ class CWMessageInformSettingHelper: NSObject {
         let group1 = CWSettingGroup(footerTitle:item1FooterTitle, items: [item1])
         group1.footerTitle = item1FooterTitle
         
-        let item2 = CWSettingItem(title: "通知显示消息详情", type: .Switch)
+        let item2 = CWSettingItem(title: "通知显示消息详情", type: .switch)
         let item2FooterTitle = "关闭后，当收到微信消息时，通知提示将不显示发信人和内容摘要。"
         let group2 = CWSettingGroup(footerTitle:item2FooterTitle, items: [item2])
         
@@ -28,13 +28,13 @@ class CWMessageInformSettingHelper: NSObject {
         let item3FooterTitle = "设置系统功能消息提示声音和振动时段。"
         let group3 = CWSettingGroup(footerTitle:item3FooterTitle, items: [item3])
         
-        let item4 = CWSettingItem(title: "声音", type: .Switch)
-        let item5 = CWSettingItem(title: "通用", type: .Switch)
+        let item4 = CWSettingItem(title: "声音", type: .switch)
+        let item5 = CWSettingItem(title: "通用", type: .switch)
         let item4FooterTitle = "当微信在运行时，你可以设置是否需要声音或者振动。"
         let group4 = CWSettingGroup(footerTitle:item4FooterTitle, items: [item4,item5])
         
         
-        let item6 = CWSettingItem(title: "朋友圈照片更新", type: .Switch)
+        let item6 = CWSettingItem(title: "朋友圈照片更新", type: .switch)
         let item5FooterTitle = "关闭后，有朋友更新照片时，界面下面的“发现”切换按钮上不再出现红点提示。"
         let group5 = CWSettingGroup(footerTitle:item5FooterTitle,items: [item6])
         

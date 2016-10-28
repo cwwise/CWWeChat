@@ -9,11 +9,11 @@
 import UIKit
 
 enum CWInformationType {
-    case Default
-    case OnlyTitle
-    case Images
-    case Button
-    case Other
+    case `default`
+    case onlyTitle
+    case images
+    case button
+    case other
 }
 
 class CWInformationModel: NSObject {
@@ -31,7 +31,7 @@ class CWInformationModel: NSObject {
     ///禁止高亮（默认NO）
     var disableHighlight: Bool = false
     
-    init(title: String, subTitle: String? = nil, type: CWInformationType = .Default) {
+    init(title: String, subTitle: String? = nil, type: CWInformationType = .default) {
         self.title = title
         self.subTitle = subTitle
         self.type = type

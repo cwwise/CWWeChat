@@ -14,7 +14,7 @@ final class CWChatMessageDataSource: NSObject, UITableViewDataSource {
         didSet { tableView.reloadData() }
     }
     
-    private unowned var tableView: UITableView
+    fileprivate unowned var tableView: UITableView
     
     init(tableView: UITableView) {
         self.tableView = tableView
@@ -22,13 +22,13 @@ final class CWChatMessageDataSource: NSObject, UITableViewDataSource {
         tableView.registerReusableCell(CWTextMessageCell)
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let message = dataSource[indexPath.row]
-        let chatMessageCell = tableView.dequeueReusableCellWithIdentifier(message.messageType.reuseIdentifier(), forIndexPath: indexPath) as! CWBaseMessageCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let message = dataSource[(indexPath as NSIndexPath).row]
+        let chatMessageCell = tableView.dequeueReusableCell(withIdentifier: message.messageType.reuseIdentifier(), for: indexPath) as! CWBaseMessageCell
         chatMessageCell.updateMessage(message)
         return chatMessageCell
     }

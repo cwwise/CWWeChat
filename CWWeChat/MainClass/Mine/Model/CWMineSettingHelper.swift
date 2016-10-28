@@ -28,7 +28,7 @@ class CWMineSettingHelper: NSObject {
         let item7 = CWSettingItem(title: "关于微信")
         let group3 = CWSettingGroup(items: [item6,item7])
         
-        let item8 = CWSettingItem(title: "退出登录", type: .TitleButton)
+        let item8 = CWSettingItem(title: "退出登录", type: .titleButton)
         
         let group4 = CWSettingGroup(items: [item8])
         

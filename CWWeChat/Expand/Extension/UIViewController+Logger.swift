@@ -9,9 +9,9 @@
 import UIKit
 
 extension UIViewController {
-    public override class func initialize() {
+    open override class func initialize() {
         struct Static {
-            static var token: dispatch_once_t = 0
+            static var token: Int = 0
         }
         
         // make sure this isn't a subclass
@@ -32,7 +32,7 @@ extension UIViewController {
         }
     }
     
-    private class func swizzledMethod(originalSelector: Selector, swizzledSelector: Selector) {
+    fileprivate class func swizzledMethod(_ originalSelector: Selector, swizzledSelector: Selector) {
         let originalMethod = class_getInstanceMethod(self, originalSelector)
         let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)
         
@@ -47,7 +47,7 @@ extension UIViewController {
     
     // MARK: - Method Swizzling
     
-    func cw_viewWillAppear(animated: Bool) {
+    func cw_viewWillAppear(_ animated: Bool) {
         self.cw_viewWillAppear(animated)
         if let _ = self.classForKeyedArchiver {
 //            print("viewWillAppear: \(name)")
@@ -60,7 +60,7 @@ extension UIViewController {
         }
     }
     
-    func cw_viewWillDisappear(animated: Bool) {
+    func cw_viewWillDisappear(_ animated: Bool) {
         self.cw_viewWillDisappear(animated)
         if let _ = self.classForKeyedArchiver {
 //            print("viewWillDisAppear: \(name)")

@@ -14,7 +14,7 @@ class CWEmojiGroup: NSObject {
         
         didSet {
             switch type! {
-            case .Emoji:
+            case .emoji:
                 rowNumber = 3
                 colNumber = 7
             default:
@@ -48,7 +48,7 @@ class CWEmojiGroup: NSObject {
         return emojiData.count
     }
     
-    func objectAtIndex(index:Int) -> CWChatEmoji {
+    func objectAtIndex(_ index:Int) -> CWChatEmoji {
         return self.emojiData[index]
     }
 }

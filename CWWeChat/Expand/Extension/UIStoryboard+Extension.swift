@@ -11,12 +11,12 @@ import UIKit
 extension UIStoryboard {
     
     class func mainStoryboard() -> UIStoryboard {
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         return storyboard
     }
     
     class func guideViewController() -> UIViewController {
-        let guideViewController = self.mainStoryboard().instantiateViewControllerWithIdentifier("CWGuideViewController")
+        let guideViewController = self.mainStoryboard().instantiateViewController(withIdentifier: "CWGuideViewController")
         return guideViewController
     }
     

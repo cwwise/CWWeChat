@@ -11,12 +11,12 @@ import UIKit
 /// 类似发送图片类，可能有些不同，使用两个不同的类来处理
 class CWVoiceMessageDispatchOperation: CWMessageDispatchOperation {
 
-    var voiceUploadState:CWMessageUploadState = .None
+    var voiceUploadState:CWMessageUploadState = .none
     let manager = CWResourceUploadManager()
     
     override func sendMessage() {
         
-        if voiceUploadState == .Success {
+        if voiceUploadState == .success {
             sendContentMessage()
         } else {
             uploadVoice()
@@ -38,15 +38,15 @@ class CWVoiceMessageDispatchOperation: CWMessageDispatchOperation {
             
             if result == true && progress == 1.0 {
                 CWLogDebug("上传成功..")
-                self.voiceUploadState = .Success
+                self.voiceUploadState = .success
                 self.sendContentMessage()
             }
             else if result == false && progress == 0.0 {
                 CWLogDebug("上传失败..")
-                self.voiceUploadState = .Fail
+                self.voiceUploadState = .fail
             }
             else {
-                self.voiceUploadState = .Loading
+                self.voiceUploadState = .loading
             }
         }
     }

@@ -23,10 +23,10 @@ class CWMyExpressionCell: UITableViewCell {
     var delegate: CWMyExpressionCellDelegate?
     
     var deleteButton: UIButton = {
-        let deleteButton = UIButton(type: .Custom)
+        let deleteButton = UIButton(type: .custom)
         deleteButton.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
-        deleteButton.setTitle("移除", forState: .Normal)
-        deleteButton.titleLabel?.font = UIFont.systemFontOfSize(13)
+        deleteButton.setTitle("移除", for: UIControlState())
+        deleteButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         return deleteButton
     }()
     
@@ -53,7 +53,7 @@ class CWMyExpressionCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

@@ -11,16 +11,16 @@ import UIKit
 extension String {
     
     public static func UUIDString() -> String {
-        let uuid = NSUUID().UUIDString
+        let uuid = UUID().uuidString
         return uuid
     }
     
     public func trimWhitespace() -> String {
-        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
     
     public func numberOfLines() -> Int {
-        return self.componentsSeparatedByString("\n").count+1
+        return self.components(separatedBy: "\n").count+1
     }
     
     
@@ -34,8 +34,8 @@ extension String {
         
         let regex_emoji = "\\[[a-zA-Z0-9\\/\\u4e00-\\u9fa5]+\\]"
         do {
-            let re = try NSRegularExpression(pattern: regex_emoji, options: .CaseInsensitive)
-            let resultArray = re.matchesInString(self, options: .ReportProgress, range: NSMakeRange(0, self.characters.count))
+            let re = try NSRegularExpression(pattern: regex_emoji, options: .caseInsensitive)
+            let resultArray = re.matches(in: self, options: .reportProgress, range: NSMakeRange(0, self.characters.count))
             //3、获取所有的表情以及位置
             //用来存放字典，字典中存储的是图片和图片对应的位置
             var imageArray = Array<[String:AnyObject]>()
@@ -44,10 +44,10 @@ extension String {
             for match in resultArray {
                 //获取数组元素中得到range
                 let range = match.range
-                let stringRange = Range(self.startIndex.advancedBy(range.location)..<self.startIndex.advancedBy(range.location+range.length))
+                let stringRange = Range(self.characters.index(self.startIndex, offsetBy: range.location)..<self.characters.index(self.startIndex, offsetBy: range.location+range.length))
                 
                 //获取原字符串中对应的值
-                let subStr = self.substringWithRange(stringRange)
+                let subStr = self.substring(with: stringRange)
                 
                 let group = CWEmojiGroup()
                 for emoji in group.emojiData {
@@ -57,7 +57,7 @@ extension String {
                         let textAttachment = NSTextAttachment()
                         textAttachment.image = UIImage(named: emoji.title!)
                         //调整一下图片的位置,如果你的图片偏上或者偏下，调整一下bounds的y值即可
-                        textAttachment.bounds = CGRectMake(0, -4, 20, 20)
+                        textAttachment.bounds = CGRect(x: 0, y: -4, width: 20, height: 20)
                         //把附件转换成可变字符串，用于替换掉源字符串中的表情文字
                         let imageStr = NSAttributedString(attachment: textAttachment)
                         //把图片和图片对应的位置存入字典中
@@ -70,9 +70,9 @@ extension String {
                 }
             }
             
-            for imageDict in imageArray.reverse() {
+            for imageDict in imageArray.reversed() {
                 let range = imageDict["range"]?.rangeValue
-                attributeString.replaceCharactersInRange(range!, withAttributedString: imageDict["image"] as! NSAttributedString)
+                attributeString.replaceCharacters(in: range!, with: imageDict["image"] as! NSAttributedString)
             }
             
             

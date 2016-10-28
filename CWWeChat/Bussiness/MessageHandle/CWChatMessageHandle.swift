@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import MMXXMPPFramework
+import XMPPFramework
 
 class CWChatMessageHandle: CWBaseMessageHandle {
 
-    override func handleMessage(message: XMPPMessage) {
+    override func handleMessage(_ message: XMPPMessage) {
 
         if message.type() == CWXMPPMessageChatType {
             

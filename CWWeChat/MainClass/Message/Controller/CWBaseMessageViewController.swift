@@ -38,7 +38,7 @@ class CWBaseMessageViewController: UIViewController {
     
     ///设置消息接收
     func setupMessageCracker() {
-        let xmppQueue = dispatch_get_main_queue()
+        let xmppQueue = DispatchQueue.main
         messageCracker.addDelegate(self, delegateQueue: xmppQueue)
     }
 
@@ -56,7 +56,7 @@ class CWBaseMessageViewController: UIViewController {
 // MARK: - CWMessageCrackerDelegate
 extension CWBaseMessageViewController: CWMessageCrackerDelegate {
     //获取到消息
-    func receiveNewMessage(message: CWMessageModel) {
+    func receiveNewMessage(_ message: CWMessageModel) {
         
     }
 }

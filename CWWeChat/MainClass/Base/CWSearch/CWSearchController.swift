@@ -11,7 +11,7 @@ import UIKit
 class CWSearchController: UISearchController {
 
     ///fix bug 必须添加这行 否则会崩溃
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -20,8 +20,8 @@ class CWSearchController: UISearchController {
         didSet {
             if showVoiceButton {
                 self.searchBar.showsBookmarkButton = true
-                self.searchBar.setImage(CWAsset.SearchBar_voice.image, forSearchBarIcon: .Bookmark, state: .Normal)
-                self.searchBar.setImage(CWAsset.SearchBar_voice_HL.image, forSearchBarIcon: .Bookmark, state: .Highlighted)
+                self.searchBar.setImage(CWAsset.SearchBar_voice.image, for: .bookmark, state: UIControlState())
+                self.searchBar.setImage(CWAsset.SearchBar_voice_HL.image, for: .bookmark, state: .highlighted)
 
             } else {
                 self.searchBar.showsBookmarkButton = false
@@ -41,15 +41,15 @@ class CWSearchController: UISearchController {
         self.searchBar.barTintColor = UIColor.searchBarTintColor()
         self.searchBar.tintColor = UIColor.chatSystemColor()
         self.searchBar.layer.borderWidth = 0.5
-        self.searchBar.layer.borderColor = UIColor.searchBarBorderColor().CGColor
+        self.searchBar.layer.borderColor = UIColor.searchBarBorderColor().cgColor
         self.searchBar.sizeToFit()
         
         //通过KVO修改特性
-        let searchField = self.searchBar.valueForKey("_searchField")
-        searchField?.layer.masksToBounds = true
-        searchField?.layer.borderWidth = 0.5
-        searchField?.layer.borderColor = UIColor.tableViewCellLineColor().CGColor
-        searchField?.layer.cornerRadius = 5.0
+        let searchField = self.searchBar.value(forKey: "_searchField")
+        (searchField as AnyObject).layer.masksToBounds = true
+        (searchField as AnyObject).layer.borderWidth = 0.5
+        (searchField as AnyObject).layer.borderColor = UIColor.tableViewCellLineColor().cgColor
+        (searchField as AnyObject).layer.cornerRadius = 5.0
     }
     
     required init?(coder aDecoder: NSCoder) {

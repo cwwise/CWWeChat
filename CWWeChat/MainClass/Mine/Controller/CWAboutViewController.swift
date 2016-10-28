@@ -13,9 +13,9 @@ class CWAboutViewController: CWSettingViewController {
     var lienseLabel: UILabel = {
         let lienseLabel = UILabel()
         lienseLabel.text = "高仿微信 仅供学习\nhttps://github.com/wei18810109052/CWWeChat"
-        lienseLabel.textAlignment = .Center
-        lienseLabel.textColor = UIColor.grayColor()
-        lienseLabel.font = UIFont.systemFontOfSize(12)
+        lienseLabel.textAlignment = .center
+        lienseLabel.textColor = UIColor.gray
+        lienseLabel.font = UIFont.systemFont(ofSize: 12)
         lienseLabel.numberOfLines = 2
         return lienseLabel
     }()
@@ -28,7 +28,7 @@ class CWAboutViewController: CWSettingViewController {
         let helper = CWAboutSettingHelper()
         self.settingDataSource = helper.aboutSettingData
         
-        self.tableView.registerClass(CWAboutHeaderView.self, forHeaderFooterViewReuseIdentifier: CWAboutHeaderView.reuseIdentifier)
+        self.tableView.register(CWAboutHeaderView.self, forHeaderFooterViewReuseIdentifier: CWAboutHeaderView.reuseIdentifier)
         
         self.tableView.tableFooterView?.addSubview(self.lienseLabel)
         
@@ -45,7 +45,7 @@ class CWAboutViewController: CWSettingViewController {
         
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         let height: CGFloat = Screen_Height - self.tableView.contentSize.height - Screen_NavigationHeight - 15;
@@ -62,14 +62,14 @@ class CWAboutViewController: CWSettingViewController {
 
 extension CWAboutViewController {
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWAboutHeaderView.reuseIdentifier) as! CWAboutHeaderView
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: CWAboutHeaderView.reuseIdentifier) as! CWAboutHeaderView
         headerView.iconPath = "Applogo"
-        headerView.title = "微信 CWWeChat \(UIApplication.sharedApplication().appVersion)"
+        headerView.title = "微信 CWWeChat \(UIApplication.shared.appVersion)"
         return headerView
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 100
         }

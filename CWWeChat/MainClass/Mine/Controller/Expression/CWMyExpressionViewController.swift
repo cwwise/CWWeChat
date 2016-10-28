@@ -12,7 +12,7 @@ import UIKit
 class CWMyExpressionViewController: CWSettingViewController {
 
     lazy var rightBarButtonItem: UIBarButtonItem = {
-        let rightBarButtonItem = UIBarButtonItem(title: "排序", style: .Plain,target: self, action: #selector(rightBarButtonDown))
+        let rightBarButtonItem = UIBarButtonItem(title: "排序", style: .plain,target: self, action: #selector(rightBarButtonDown))
         return rightBarButtonItem
     }()
     
@@ -33,14 +33,14 @@ class CWMyExpressionViewController: CWSettingViewController {
         
         //模态视图需要添加取消
         if self.navigationController?.viewControllers.first == self {
-            let cancleItem = UIBarButtonItem(title: "取消", style: .Plain, target: self, action: #selector(CWExpressionViewController.cancelBarButtonDown))
+            let cancleItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(CWExpressionViewController.cancelBarButtonDown))
             self.navigationItem.leftBarButtonItem = cancleItem
         }
-        self.tableView.registerClass(CWMyExpressionCell.self, forCellReuseIdentifier: CWMyExpressionCell.reuseIdentifier)
+        self.tableView.register(CWMyExpressionCell.self, forCellReuseIdentifier: CWMyExpressionCell.reuseIdentifier)
     }
     
     func cancelBarButtonDown() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func rightBarButtonDown() {
@@ -55,16 +55,16 @@ class CWMyExpressionViewController: CWSettingViewController {
 }
 
 extension CWMyExpressionViewController {
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let group = self.settingDataSource[indexPath.section];
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let group = self.settingDataSource[(indexPath as NSIndexPath).section];
         if let _ = group.headerTitle {
-            let emojiGroup = group.itemObjectAtIndex(indexPath.row) as! CWEmojiGroup
-            let cell = tableView.dequeueReusableCellWithIdentifier(CWMyExpressionCell.reuseIdentifier) as! CWMyExpressionCell
+            let emojiGroup = group.itemObjectAtIndex((indexPath as NSIndexPath).row) as! CWEmojiGroup
+            let cell = tableView.dequeueReusableCell(withIdentifier: CWMyExpressionCell.reuseIdentifier) as! CWMyExpressionCell
             cell.group = emojiGroup
             return cell
         }
         
         
-        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        return super.tableView(tableView, cellForRowAt: indexPath)
     }
 }

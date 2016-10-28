@@ -59,9 +59,9 @@ class CWVoiceIndicatorView: UIView {
     //提示的 label
     lazy var noteLabel: UILabel = {
        let noteLabel = UILabel()
-        noteLabel.textAlignment = .Center
+        noteLabel.textAlignment = .center
         noteLabel.text = "手指上滑，取消发送"
-        noteLabel.font = UIFont.systemFontOfSize(14)
+        noteLabel.font = UIFont.systemFont(ofSize: 14)
         noteLabel.textColor = UIColor(hexString: "81BAFE")
         noteLabel.layer.cornerRadius = 2.0
         noteLabel.layer.masksToBounds = true
@@ -83,7 +83,7 @@ class CWVoiceIndicatorView: UIView {
     }
     
     func initContent() {
-        self.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        self.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         
         self.addSubview(self.tooShotPromptImageView)
         self.addSubview(self.cancelImageView)
@@ -115,51 +115,51 @@ class CWVoiceIndicatorView: UIView {
 extension CWVoiceIndicatorView {
     //正在录音
     func recording() {
-        self.hidden = false
-        self.cancelImageView.hidden = true
-        self.tooShotPromptImageView.hidden = true
-        self.recordingView.hidden = false
-        self.noteLabel.backgroundColor = UIColor.clearColor()
+        self.isHidden = false
+        self.cancelImageView.isHidden = true
+        self.tooShotPromptImageView.isHidden = true
+        self.recordingView.isHidden = false
+        self.noteLabel.backgroundColor = UIColor.clear
         self.noteLabel.text = "手指上滑，取消发送"
     }
     
     //录音过程中音量的变化
-    func signalValueChanged(value: CGFloat) {
+    func signalValueChanged(_ value: CGFloat) {
         
     }
     
     //滑动取消
     func slideToCancelRecord() {
-        self.hidden = false
-        self.cancelImageView.hidden = false
-        self.tooShotPromptImageView.hidden = true
-        self.recordingView.hidden = true
+        self.isHidden = false
+        self.cancelImageView.isHidden = false
+        self.tooShotPromptImageView.isHidden = true
+        self.recordingView.isHidden = true
         self.noteLabel.backgroundColor = UIColor(hexString: "#9C3638")
         self.noteLabel.text = "松开手指，取消发送"
     }
     
     //录音时间太短的提示
     func messageTooShort() {
-        self.hidden = false
-        self.cancelImageView.hidden = true
-        self.tooShotPromptImageView.hidden = false
-        self.recordingView.hidden = true
-        self.noteLabel.backgroundColor = UIColor.clearColor()
+        self.isHidden = false
+        self.cancelImageView.isHidden = true
+        self.tooShotPromptImageView.isHidden = false
+        self.recordingView.isHidden = true
+        self.noteLabel.backgroundColor = UIColor.clear
         self.noteLabel.text = "说话时间太短"
         //0.5秒后消失
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        let delayTime = DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
             self.endRecord()
         }
     }
     
     //录音结束
     func endRecord() {
-        self.hidden = true
+        self.isHidden = true
     }
     
     //更新麦克风的音量大小
-    func updateMetersValue(value: Float) {
+    func updateMetersValue(_ value: Float) {
         var index = Int(round(value))
         index = index > 7 ? 7 : index
         index = index < 0 ? 0 : index

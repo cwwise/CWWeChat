@@ -10,14 +10,14 @@ import UIKit
 
 class CWUIUtility: NSObject {
     
-    class func textHeightOfText(text: NSString?, width: CGFloat, attributes:[String:AnyObject] ) -> CGFloat {
+    class func textHeightOfText(_ text: NSString?, width: CGFloat, attributes:[String:AnyObject] ) -> CGFloat {
         
         guard let text = text else {
             return 0
         }
         
-        let size = CGSize(width: width, height: CGFloat.max)
-        let contentSize = text.boundingRectWithSize(size, options: .UsesLineFragmentOrigin, attributes: attributes, context: nil).size
+        let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let contentSize = text.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil).size
         return contentSize.height
     }
     

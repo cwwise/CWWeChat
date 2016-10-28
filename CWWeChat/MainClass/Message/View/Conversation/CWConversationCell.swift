@@ -20,45 +20,45 @@ class CWConversationCell: UITableViewCell {
     }
     
     ///头像
-    private var headerImageView:UIImageView = {
+    fileprivate var headerImageView:UIImageView = {
         let headerImageView = UIImageView()
         return headerImageView
     }()
 
     ///用户名
-    private var usernameLabel:UILabel = {
+    fileprivate var usernameLabel:UILabel = {
         let usernameLabel = UILabel()
-        usernameLabel.font = UIFont.systemFontOfSize(17)
+        usernameLabel.font = UIFont.systemFont(ofSize: 17)
         return usernameLabel
     }()
     
     ///时间
-    private var timeLabel:UILabel = {
+    fileprivate var timeLabel:UILabel = {
         let timeLabel = UILabel()
-        timeLabel.font = UIFont.systemFontOfSize(12)
-        timeLabel.textColor = UIColor.darkGrayColor()
+        timeLabel.font = UIFont.systemFont(ofSize: 12)
+        timeLabel.textColor = UIColor.darkGray
         return timeLabel
     }()
     
     ///详细信息
-    private var detailInfoLabel:UILabel = {
+    fileprivate var detailInfoLabel:UILabel = {
         let detailInfoLabel = UILabel()
-        detailInfoLabel.font = UIFont.systemFontOfSize(14)
-        detailInfoLabel.textColor = UIColor.grayColor()
+        detailInfoLabel.font = UIFont.systemFont(ofSize: 14)
+        detailInfoLabel.textColor = UIColor.gray
         return detailInfoLabel
     }()
     
     ///badgeView
-    private var badgeView:CWBadgeView = {
+    fileprivate var badgeView:CWBadgeView = {
         let badgeView = CWBadgeView()
-        badgeView.backgroundColor = UIColor.clearColor()
+        badgeView.backgroundColor = UIColor.clear
         return badgeView
     }()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.selectionStyle = UITableViewCellSelectionStyle.Default
+        self.selectionStyle = UITableViewCellSelectionStyle.default
         
         self.contentView.addSubview(self.headerImageView)
         self.contentView.addSubview(self.usernameLabel)
@@ -120,7 +120,7 @@ class CWConversationCell: UITableViewCell {
         let userModel = CWContactManager.findContact(conversationModel.partnerID)
         
         if let userModel = userModel {
-            self.headerImageView.yy_setImageWithURL(NSURL(string: userModel.avatarURL!)!, placeholder: defaultHeadeImage)
+            self.headerImageView.yy_setImageWithURL(URL(string: userModel.avatarURL!)!, placeholder: defaultHeadeImage)
             self.usernameLabel.text = userModel.nikeName
         }
         
@@ -142,7 +142,7 @@ class CWConversationCell: UITableViewCell {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state

@@ -15,14 +15,14 @@ class CWImageMessageCell: CWBaseMessageCell {
 
     /// 自定义ImageView
     lazy var messageImageView:CWChatImageView = {
-        let messageImageView = CWChatImageView(frame:CGRectZero)
-        messageImageView.userInteractionEnabled = true
+        let messageImageView = CWChatImageView(frame:CGRect.zero)
+        messageImageView.isUserInteractionEnabled = true
         messageImageView.addGestureRecognizer(self.tapGestureRecognizer)
         return messageImageView
     }()
     
     ///手势操作
-    private(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+    fileprivate(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bubbleTapped(_:)))
         return tapGestureRecognizer
     }()
@@ -33,11 +33,11 @@ class CWImageMessageCell: CWBaseMessageCell {
     }
     
     ///重写setMessage方法
-    override func updateMessage(message: CWMessageModel) {
+    override func updateMessage(_ message: CWMessageModel) {
         super.updateMessage(message)
         
         //如果是自己发送，在右边
-        if message.messageOwnerType == .Myself {
+        if message.messageOwnerType == .myself {
             let sendImage = CWAsset.Message_sender_bg.image.resizableImage()
             messageImageView.backgroundImage = sendImage
             
@@ -78,7 +78,7 @@ class CWImageMessageCell: CWBaseMessageCell {
     }
     
     /// 更新cell状态
-    override func updateProgressView(progress:CGFloat, result: CWMessageUploadState) {
+    override func updateProgressView(_ progress:CGFloat, result: CWMessageUploadState) {
         messageImageView.updateProgressView(progress, result: result)
     }
     

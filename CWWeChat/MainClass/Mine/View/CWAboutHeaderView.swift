@@ -23,15 +23,15 @@ class CWAboutHeaderView: UITableViewHeaderFooterView {
         }
     }
     
-    private lazy var titleLabel:UILabel = {
+    fileprivate lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFontOfSize(17)
-        titleLabel.textAlignment = .Center
-        titleLabel.textColor = UIColor.grayColor()
+        titleLabel.font = UIFont.systemFont(ofSize: 17)
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = UIColor.gray
         return titleLabel
     }()
     
-    private lazy var imageView:UIImageView = {
+    fileprivate lazy var imageView:UIImageView = {
         let imageView = UIImageView()
         return imageView
     }()

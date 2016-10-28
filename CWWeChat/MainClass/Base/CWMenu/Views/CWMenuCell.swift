@@ -19,24 +19,24 @@ class CWMenuCell: UITableViewCell {
     }
     
     //
-    private lazy var iconImageView:UIImageView = {
+    fileprivate lazy var iconImageView:UIImageView = {
        let iconImageView = UIImageView()
         return iconImageView
     }()
     
-    private lazy var titleLabel:UILabel = {
+    fileprivate lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
         return titleLabel
     }()
     
-    private lazy var rightImageView:UIImageView = {
+    fileprivate lazy var rightImageView:UIImageView = {
         let rightImageView = UIImageView()
         return rightImageView
     }()
     
-    private lazy var redPointView:UIView = {
+    fileprivate lazy var redPointView:UIView = {
         let redPointView = UIView()
-        redPointView.backgroundColor = UIColor.redColor()
+        redPointView.backgroundColor = UIColor.red
         redPointView.layer.masksToBounds = true
         redPointView.layer.cornerRadius = redPoint_Width/2
         return redPointView
@@ -45,7 +45,7 @@ class CWMenuCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
        
-        self.accessoryType = .DisclosureIndicator
+        self.accessoryType = .disclosureIndicator
         self.contentView.addSubview(iconImageView)
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(rightImageView)
@@ -98,7 +98,7 @@ class CWMenuCell: UITableViewCell {
             self.rightImageView.snp_updateConstraints(closure: { (make) in
                 make.width.equalTo(self.rightImageView.snp_width)
             })
-            let url = NSURL(string: rightIconURL)!
+            let url = URL(string: rightIconURL)!
             self.rightImageView.yy_setImageWithURL(url, placeholder: nil)
         
         } else {
@@ -108,7 +108,7 @@ class CWMenuCell: UITableViewCell {
             })
         }
         
-        self.redPointView.hidden = !menuItem.showRightRedPoint
+        self.redPointView.isHidden = !menuItem.showRightRedPoint
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -120,7 +120,7 @@ class CWMenuCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

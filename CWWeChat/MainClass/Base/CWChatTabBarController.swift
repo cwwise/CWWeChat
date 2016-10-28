@@ -42,15 +42,15 @@ class CWChatTabBarController: UITabBarController {
         ]
         
         let selectAttributes = [NSForegroundColorAttributeName : UIColor.chatSystemColor()]
-        let normalAttributes = [NSForegroundColorAttributeName : UIColor.lightGrayColor()]
+        let normalAttributes = [NSForegroundColorAttributeName : UIColor.lightGray]
         
         var navigationVCArray = [CWChatNavigationController]()
-        for (index, controller) in viewControllerArray.enumerate() {
+        for (index, controller) in viewControllerArray.enumerated() {
             controller.tabBarItem.title = titleArray[index]
-            controller.tabBarItem.image = normalImagesArray[index].imageWithRenderingMode(.AlwaysOriginal)
-            controller.tabBarItem.selectedImage = selectedImagesArray[index].imageWithRenderingMode(.AlwaysOriginal)
-            controller.tabBarItem.setTitleTextAttributes(normalAttributes, forState: .Normal)
-            controller.tabBarItem.setTitleTextAttributes(selectAttributes, forState: .Selected)
+            controller.tabBarItem.image = normalImagesArray[index].withRenderingMode(.alwaysOriginal)
+            controller.tabBarItem.selectedImage = selectedImagesArray[index].withRenderingMode(.alwaysOriginal)
+            controller.tabBarItem.setTitleTextAttributes(normalAttributes, for: UIControlState())
+            controller.tabBarItem.setTitleTextAttributes(selectAttributes, for: .selected)
             let navigationController = CWChatNavigationController(rootViewController: controller)
             navigationVCArray.append(navigationController)
         }

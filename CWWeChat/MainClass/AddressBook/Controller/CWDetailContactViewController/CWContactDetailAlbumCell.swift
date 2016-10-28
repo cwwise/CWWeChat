@@ -20,8 +20,8 @@ class CWContactDetailAlbumCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.accessoryType = .DisclosureIndicator
-        self.textLabel?.font = UIFont.systemFontOfSize(15)
+        self.accessoryType = .disclosureIndicator
+        self.textLabel?.font = UIFont.systemFont(ofSize: 15)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,7 +60,7 @@ class CWContactDetailAlbumCell: UITableViewCell {
                 imageView = imageViewsArray[i]
             }
             
-            let imageURL = NSURL(string: imageString)!
+            let imageURL = URL(string: imageString)!
             imageView?.yy_setImageWithURL(imageURL, placeholder: nil)
             
             imageView?.snp_makeConstraints(closure: { (make) in
@@ -83,7 +83,7 @@ class CWContactDetailAlbumCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

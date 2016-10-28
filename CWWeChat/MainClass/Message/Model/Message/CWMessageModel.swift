@@ -23,7 +23,7 @@ class CWMessageModel: NSObject {
     ///消息所属者
     var messageOwnerType: CWMessageOwnerType
     ///消息发送时间
-    var messageSendDate: NSDate
+    var messageSendDate: Date
 //    var messageReceivedDate: NSDate
 
     ///消息状态
@@ -43,11 +43,11 @@ class CWMessageModel: NSObject {
     /// 在会话界面显示
     var conversationContent:String? {
         switch messageType {
-        case .Text:
+        case .text:
             return self.content
-        case .Image:
+        case .image:
             return "[图片]"
-        case .Voice:
+        case .voice:
             return "[声音]"
         default:
             return self.content
@@ -56,29 +56,29 @@ class CWMessageModel: NSObject {
     
     override init() {
         messageID = String.UUIDString()
-        messageType = .None
-        messageOwnerType = .None
-        chatType = .Personal
-        messageSendDate = NSDate()
-        messageSendState = .None
-        messageUploadState = .None
+        messageType = .none
+        messageOwnerType = .none
+        chatType = .personal
+        messageSendDate = Date()
+        messageSendState = .none
+        messageUploadState = .none
         super.init()
     }
     
-    convenience init(targetId: String, messageID: String = String.UUIDString(), ownerType: CWMessageOwnerType = .Myself, content: CWMessageContent) {
+    convenience init(targetId: String, messageID: String = String.UUIDString(), ownerType: CWMessageOwnerType = .myself, content: CWMessageContent) {
         self.init()
         self.messageTargetId = targetId
         self.messageOwnerType = ownerType
         self.messageContent = content
         self.messageID = messageID
         
-        if content.isKindOfClass(CWTextMessageContent.self) {
-            self.messageType = .Text
+        if content.isKind(of: CWTextMessageContent.self) {
+            self.messageType = .text
             let contentString = (content as! CWTextMessageContent).content
-            let size = CGSize(width: kChatTextMaxWidth, height: CGFloat.max)
-            let attributes = [NSForegroundColorAttributeName:UIColor.whiteColor(),
-                              NSFontAttributeName: UIFont.systemFontOfSize(16)]
-            var contentSize = contentString.boundingRectWithSize(size, options: .UsesLineFragmentOrigin, attributes: attributes, context: nil).size
+            let size = CGSize(width: kChatTextMaxWidth, height: CGFloat.greatestFiniteMagnitude)
+            let attributes = [NSForegroundColorAttributeName:UIColor.white,
+                              NSFontAttributeName: UIFont.systemFont(ofSize: 16)]
+            var contentSize = contentString.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil).size
             
             contentSize = CGSize(width: ceil(contentSize.width), height: ceil(contentSize.height)+1)
             let heightOfCell = contentSize.height + 40
@@ -86,26 +86,26 @@ class CWMessageModel: NSObject {
             self.messageFrame = CWMessageFrame(heightOfCell: heightOfCell, contentSize: contentSize)
         }
         
-        else if content.isKindOfClass(CWImageMessageContent.self) {
-            self.messageType = .Image
+        else if content.isKind(of: CWImageMessageContent.self) {
+            self.messageType = .image
 
-            var contentSize: CGSize = CGSizeZero
+            var contentSize: CGSize = CGSize.zero
             let imageMessage = content as! CWImageMessageContent
             
             if let imagePath = imageMessage.imagePath  {
                 let local_imagePath = CWUserAccount.sharedUserAccount().pathUserChatImage(imagePath)
-                let isExist = NSFileManager.defaultManager().fileExistsAtPath(local_imagePath)
+                let isExist = FileManager.default.fileExists(atPath: local_imagePath)
                 
                 if isExist {
                     let imageSize = imageMessage.imageSize
                     //根据图片的比例大小计算图片的frame
                     if imageSize.width > imageSize.height {
                         var height = kChatImageMaxWidth * imageSize.height / imageSize.width
-                        height = [kChatImageMinWidth,height].maxElement()!
+                        height = [kChatImageMinWidth,height].max()!
                         contentSize = CGSize(width: ceil(kChatImageMaxWidth), height: ceil(height))
                     } else {
                         var width = kChatImageMaxWidth * imageSize.width / imageSize.height
-                        width = [kChatImageMinWidth,width].maxElement()!
+                        width = [kChatImageMinWidth,width].max()!
                         contentSize = CGSize(width: ceil(width), height: ceil(kChatImageMaxWidth))
                     }
                 } else {
@@ -116,11 +116,11 @@ class CWMessageModel: NSObject {
                 //根据图片的比例大小计算图片的frame
                 if imageSize.width > imageSize.height {
                     var height = kChatImageMaxWidth * imageSize.height / imageSize.width
-                    height = [kChatImageMinWidth,height].maxElement()!
+                    height = [kChatImageMinWidth,height].max()!
                     contentSize = CGSize(width: ceil(kChatImageMaxWidth), height: ceil(height))
                 } else {
                     var width = kChatImageMaxWidth * imageSize.width / imageSize.height
-                    width = [kChatImageMinWidth,width].maxElement()!
+                    width = [kChatImageMinWidth,width].max()!
                     contentSize = CGSize(width: ceil(width), height: ceil(kChatImageMaxWidth))
                 }
             }
@@ -130,12 +130,12 @@ class CWMessageModel: NSObject {
             
         }
         
-        else if content.isKindOfClass(CWVoiceMessageContent.self) {
+        else if content.isKind(of: CWVoiceMessageContent.self) {
 
-            self.messageType = .Voice
+            self.messageType = .voice
             let voiceMessage = content as! CWVoiceMessageContent
             
-            var contentSize: CGSize = CGSizeZero
+            var contentSize: CGSize = CGSize.zero
             let heightOfCell: CGFloat = 60
             
             if let voiceLength = voiceMessage.voiceLength {

@@ -32,10 +32,10 @@ class CWGuideViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func buttonAction(sender: UIButton) {
+    @IBAction func buttonAction(_ sender: UIButton) {
         let loginVC = CWLoginViewController()
         let nav = UINavigationController(rootViewController: loginVC)
-        self.presentViewController(nav, animated: true, completion: nil)
+        self.present(nav, animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation

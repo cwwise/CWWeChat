@@ -19,19 +19,19 @@ class CWSettingCell: UITableViewCell, CWSettingDataProtocol {
         }
     }
     
-    private lazy var titleLabel:UILabel = {
+    fileprivate lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
         return titleLabel
     }()
     
-    private lazy var rightLabel:UILabel = {
+    fileprivate lazy var rightLabel:UILabel = {
         let rightLabel = UILabel()
-        rightLabel.textColor = UIColor.grayColor()
-        rightLabel.font = UIFont.systemFontOfSize(15)
+        rightLabel.textColor = UIColor.gray
+        rightLabel.font = UIFont.systemFont(ofSize: 15)
         return rightLabel
     }()
     
-    private lazy var rightImageView:UIImageView = {
+    fileprivate lazy var rightImageView:UIImageView = {
         let rightImageView = UIImageView()
         return rightImageView
     }()
@@ -76,27 +76,27 @@ class CWSettingCell: UITableViewCell, CWSettingDataProtocol {
         if let rightImagePath = settingItem.rightImagePath {
             rightImageView.image = UIImage(named: rightImagePath)
         } else if let rightImageURL = settingItem.rightImageURL  {
-            rightImageView.yy_setImageWithURL(NSURL(string: rightImageURL), placeholder: nil)
+            rightImageView.yy_setImageWithURL(URL(string: rightImageURL), placeholder: nil)
         } else {
             rightImageView.image = nil
         }
         
         if settingItem.showDisclosureIndicator == false {
-            self.accessoryType = .None
+            self.accessoryType = .none
             self.rightLabel.snp_updateConstraints(closure: { (make) in
                 make.right.equalTo(self.contentView).offset(-15)
             })
         } else {
-            self.accessoryType = .DisclosureIndicator
+            self.accessoryType = .disclosureIndicator
             self.rightLabel.snp_updateConstraints(closure: { (make) in
                 make.right.equalTo(self.contentView)
             })
         }
         
         if settingItem.disableHighlight {
-            self.selectionStyle = .None
+            self.selectionStyle = .none
         } else {
-            self.selectionStyle = .Default
+            self.selectionStyle = .default
         }
         
     }
@@ -111,7 +111,7 @@ class CWSettingCell: UITableViewCell, CWSettingDataProtocol {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

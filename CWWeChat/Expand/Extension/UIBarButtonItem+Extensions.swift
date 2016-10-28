@@ -10,16 +10,16 @@ import UIKit
 
 extension UIBarButtonItem {
     
-    class func fixBarItemSpaceWidth(spaceWidth: CGFloat) -> UIBarButtonItem {
-        let fixspaceItem =  UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+    class func fixBarItemSpaceWidth(_ spaceWidth: CGFloat) -> UIBarButtonItem {
+        let fixspaceItem =  UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         fixspaceItem.width = spaceWidth
         return fixspaceItem
     }
     
     convenience init(backTitle: String, target: AnyObject, action: Selector) {
-        let view = UIButton(type: .Custom)
-        view.addTarget(target, action: action, forControlEvents: .TouchUpInside)
-        view.backgroundColor = UIColor.clearColor()
+        let view = UIButton(type: .custom)
+        view.addTarget(target, action: action, for: .touchUpInside)
+        view.backgroundColor = UIColor.clear
         //添加返回按钮
         let imageView = UIImageView(image: CWAsset.Nav_back.image)
         imageView.frame = CGRect(x: 0, y: 0, width: 17, height: 34)
@@ -28,7 +28,7 @@ extension UIBarButtonItem {
         //返回
         let label = UILabel()
         label.text = backTitle
-        label.textColor = UIColor.whiteColor()
+        label.textColor = UIColor.white
         let size = label.sizeThatFits(CGSize(width: CGFloat(MAXFLOAT), height: CGFloat(MAXFLOAT)))
         label.frame = CGRect(x: 17, y: 0, width: ceil(size.width)+1, height: 34)
         view.addSubview(label)

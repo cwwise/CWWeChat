@@ -11,9 +11,9 @@ import UIKit
 /// 消息发送的结果
 protocol CWMessageDispatchQueueDelegate: class {
     //发送消息的结果
-    func chatmessageSendState(message:CWMessageModel, sendState state: Bool)
+    func chatmessageSendState(_ message:CWMessageModel, sendState state: Bool)
     //上传数据进度的回调
-    func uploadDataProgress(message:CWMessageModel, progress:CGFloat, result:Bool)
+    func uploadDataProgress(_ message:CWMessageModel, progress:CGFloat, result:Bool)
 }
 
 /**
@@ -28,13 +28,13 @@ class CWMessageDispatchQueue: NSObject {
     weak var delegate: CWMessageDispatchQueueDelegate?
     
     /// 线程队列
-    var messageQueue:NSOperationQueue
+    var messageQueue:OperationQueue
     
     override init() {
-        messageQueue = NSOperationQueue()
+        messageQueue = OperationQueue()
         messageQueue.name = "发送消息"
         messageQueue.maxConcurrentOperationCount = 5
-        messageQueue.suspended = false
+        messageQueue.isSuspended = false
         super.init()
         monitorNetworkStatus()
     }
@@ -44,7 +44,7 @@ class CWMessageDispatchQueue: NSObject {
         
     }
     
-    func sendMessage(message: CWMessageModel, replaceMessage replace:Bool=false) {
+    func sendMessage(_ message: CWMessageModel, replaceMessage replace:Bool=false) {
         //线程锁
         objc_sync_enter(self)
         //先遍历线程中的。如果存在，则替换

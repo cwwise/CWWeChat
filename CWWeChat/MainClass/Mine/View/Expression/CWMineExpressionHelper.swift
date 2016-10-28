@@ -17,12 +17,12 @@ class CWMineExpressionHelper: NSObject {
         expressionData = [CWSettingGroup]()
         
         let tusijiGroup = CWEmojiGroup();
-        tusijiGroup.type = .Image
+        tusijiGroup.type = .image
         tusijiGroup.groupName = "兔斯基"
         tusijiGroup.groupIconPath = "emojiKB_group_tusiji"
         
         let laosijiGroup = CWEmojiGroup();
-        laosijiGroup.type = .Image
+        laosijiGroup.type = .image
         laosijiGroup.groupName = "老司机"
         laosijiGroup.groupIconPath = "emojiKB_group_tusiji"
 

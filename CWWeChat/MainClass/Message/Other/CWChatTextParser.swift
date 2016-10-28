@@ -13,7 +13,7 @@ public let kChatTextKeyURL = "URL"
 
 class CWChatTextParser: NSObject {
     
-    class func parseText(text: String, font: UIFont) -> NSMutableAttributedString? {
+    class func parseText(_ text: String, font: UIFont) -> NSMutableAttributedString? {
 
         if text.characters.count == 0 {
             return nil
@@ -21,7 +21,7 @@ class CWChatTextParser: NSObject {
         let length = text.characters.count
         let attributedText: NSMutableAttributedString = NSMutableAttributedString(string: text)
         attributedText.addAttributes([NSFontAttributeName: font,
-                            NSForegroundColorAttributeName: UIColor.blackColor()],
+                            NSForegroundColorAttributeName: UIColor.black],
                                      range: NSRange(location: 0, length: length))
         
         //匹配电话
@@ -36,11 +36,11 @@ class CWChatTextParser: NSObject {
     }
     
     
-    private class func enumeratePhoneParser(attributedText: NSMutableAttributedString) {
+    fileprivate class func enumeratePhoneParser(_ attributedText: NSMutableAttributedString) {
         
-        let phonesResults = CWChatTextParseHelper.regexPhoneNumber.matchesInString(
-            attributedText.string,
-            options: [.ReportProgress],
+        let phonesResults = CWChatTextParseHelper.regexPhoneNumber.matches(
+            in: attributedText.string,
+            options: [.reportProgress],
             range: attributedText.rangeOfAll()
         )
         
@@ -55,11 +55,11 @@ class CWChatTextParser: NSObject {
     }
     
     
-    private class func enumerateURLParser(attributedText: NSMutableAttributedString) {
+    fileprivate class func enumerateURLParser(_ attributedText: NSMutableAttributedString) {
 
-        let URLsResults = CWChatTextParseHelper.regexURLs.matchesInString(
-            attributedText.string,
-            options: [.ReportProgress],
+        let URLsResults = CWChatTextParseHelper.regexURLs.matches(
+            in: attributedText.string,
+            options: [.reportProgress],
             range: attributedText.rangeOfAll()
         )
         
@@ -73,7 +73,7 @@ class CWChatTextParser: NSObject {
         
     }
     
-    private class func enumerateEmotionParser(attributedText: NSMutableAttributedString, fontSize: CGFloat) {
+    fileprivate class func enumerateEmotionParser(_ attributedText: NSMutableAttributedString, fontSize: CGFloat) {
 
         
     }
@@ -91,7 +91,7 @@ class CWChatTextParseHelper {
      */
     class var regexEmotions: NSRegularExpression {
         get {
-            let regularExpression = try! NSRegularExpression(pattern: "\\[[^\\[\\]]+?\\]", options: [.CaseInsensitive])
+            let regularExpression = try! NSRegularExpression(pattern: "\\[[^\\[\\]]+?\\]", options: [.caseInsensitive])
             return regularExpression
         }
     }
@@ -104,7 +104,7 @@ class CWChatTextParseHelper {
     class var regexURLs: NSRegularExpression {
         get {
             let regex: String = "((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|^[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)+([-A-Z0-9a-z_\\$\\.\\+!\\*\\(\\)/,:;@&=\\?~#%]*)*"
-            let regularExpression = try! NSRegularExpression(pattern: regex, options: [.CaseInsensitive])
+            let regularExpression = try! NSRegularExpression(pattern: regex, options: [.caseInsensitive])
             return regularExpression
         }
     }
@@ -115,7 +115,7 @@ class CWChatTextParseHelper {
     class var regexPhoneNumber: NSRegularExpression {
         get {
             let regex = "([\\d]{7,25}(?!\\d))|((\\d{3,4})-(\\d{7,8}))|((\\d{3,4})-(\\d{7,8})-(\\d{1,4}))"
-            let regularExpression = try! NSRegularExpression(pattern: regex, options: [.CaseInsensitive])
+            let regularExpression = try! NSRegularExpression(pattern: regex, options: [.caseInsensitive])
             return regularExpression
         }
     }
@@ -132,14 +132,14 @@ private extension NSAttributedString {
 
 private extension String {
     
-    func NSRangeFromRange(range : Range<String.Index>) -> NSRange {
+    func NSRangeFromRange(_ range : Range<String.Index>) -> NSRange {
         let utf16view = self.utf16
-        let from = String.UTF16View.Index(range.startIndex, within: utf16view)
-        let to = String.UTF16View.Index(range.endIndex, within: utf16view)
+        let from = String.UTF16View.Index(range.lowerBound, within: utf16view)
+        let to = String.UTF16View.Index(range.upperBound, within: utf16view)
         return NSMakeRange(utf16view.startIndex.distanceTo(from), from.distanceTo(to))
     }
     
-    func RangeFromNSRange(nsRange : NSRange) -> Range<String.Index>? {
+    func RangeFromNSRange(_ nsRange : NSRange) -> Range<String.Index>? {
         let from16 = utf16.startIndex.advancedBy(nsRange.location, limit: utf16.endIndex)
         let to16 = from16.advancedBy(nsRange.length, limit: utf16.endIndex)
         if let from = String.Index(from16, within: self),

@@ -15,13 +15,13 @@ class CWChatDBDataManager: NSObject {
     static let sharedInstance = CWChatDBDataManager()
     
     //用户id
-    private(set) var userID:String
+    fileprivate(set) var userID:String
     //消息会话记录
-    private(set) var dbRecordStore:CWChatDBRecordStore
+    fileprivate(set) var dbRecordStore:CWChatDBRecordStore
     //消息记录
-    private(set) var dbMessageStore:CWChatDBMessageStore
+    fileprivate(set) var dbMessageStore:CWChatDBMessageStore
 
-    private override init() {
+    fileprivate override init() {
         self.userID = CWUserAccount.sharedUserAccount().userID
         dbRecordStore = CWChatDBRecordStore(userId: self.userID)
         dbMessageStore = CWChatDBMessageStore(userId: self.userID)

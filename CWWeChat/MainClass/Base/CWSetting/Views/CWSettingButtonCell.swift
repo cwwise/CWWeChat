@@ -18,7 +18,7 @@ class CWSettingButtonCell: UITableViewCell,CWSettingDataProtocol {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.textLabel?.textAlignment = .Center
+        self.textLabel?.textAlignment = .center
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -34,7 +34,7 @@ class CWSettingButtonCell: UITableViewCell,CWSettingDataProtocol {
         self.textLabel?.text = settingItem.title
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

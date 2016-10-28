@@ -20,13 +20,13 @@ class CWSettingSwitchCell: UITableViewCell, CWSettingDataProtocol {
         }
     }
     
-    private lazy var cellSwitch:UISwitch = {
+    fileprivate lazy var cellSwitch:UISwitch = {
         let cellSwitch = UISwitch()
-        cellSwitch.addTarget(self, action: #selector(switchChangeStatus(_:)), forControlEvents: .ValueChanged)
+        cellSwitch.addTarget(self, action: #selector(switchChangeStatus(_:)), for: .valueChanged)
         return cellSwitch
     }()
     
-    private lazy var titleLabel:UILabel = {
+    fileprivate lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
         return titleLabel
     }()
@@ -41,7 +41,7 @@ class CWSettingSwitchCell: UITableViewCell, CWSettingDataProtocol {
         
         self.contentView.addSubview(titleLabel)
         self.accessoryView = cellSwitch
-        self.selectionStyle = .None
+        self.selectionStyle = .none
         p_addSnap()
     }
     
@@ -64,14 +64,14 @@ class CWSettingSwitchCell: UITableViewCell, CWSettingDataProtocol {
         self.titleLabel.text = settingItem.title
     }
     
-    func switchChangeStatus(cellSwitch: UISwitch) {
+    func switchChangeStatus(_ cellSwitch: UISwitch) {
         if let delegate = self.delegate {
-            delegate.settingSwitchCellForItem(settingItem,didChangeStatus: cellSwitch.on)
+            delegate.settingSwitchCellForItem(settingItem,didChangeStatus: cellSwitch.isOn)
         }
     }
     
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

@@ -20,7 +20,7 @@ class CWContactDetailUserCell: UITableViewCell {
     }
     
     //
-    private lazy var avatarImageView:UIImageView = {
+    fileprivate lazy var avatarImageView:UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.clipsToBounds = true
         avatarImageView.layer.cornerRadius = 5
@@ -28,25 +28,25 @@ class CWContactDetailUserCell: UITableViewCell {
     }()
     
     /// 用户名
-    private lazy var usernameLabel:UILabel = {
+    fileprivate lazy var usernameLabel:UILabel = {
         let usernameLabel = UILabel()
-        usernameLabel.font = UIFont.systemFontOfSize(17)
+        usernameLabel.font = UIFont.systemFont(ofSize: 17)
         return usernameLabel
     }()
     
     /// 微信号
-    private lazy var wxnameLabel:UILabel = {
+    fileprivate lazy var wxnameLabel:UILabel = {
         let wxnameLabel = UILabel()
-        wxnameLabel.font = UIFont.systemFontOfSize(14)
-        wxnameLabel.textColor = UIColor.grayColor()
+        wxnameLabel.font = UIFont.systemFont(ofSize: 14)
+        wxnameLabel.textColor = UIColor.gray
         return wxnameLabel
     }()
     
     /// 昵称
-    private lazy var nikenameLabel:UILabel = {
+    fileprivate lazy var nikenameLabel:UILabel = {
         let nikenameLabel = UILabel()
-        nikenameLabel.font = UIFont.systemFontOfSize(14)
-        nikenameLabel.textColor = UIColor.grayColor()
+        nikenameLabel.font = UIFont.systemFont(ofSize: 14)
+        nikenameLabel.textColor = UIColor.gray
         return nikenameLabel
     }()
     
@@ -56,8 +56,8 @@ class CWContactDetailUserCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.accessoryType = .None
-        self.selectionStyle = .None
+        self.accessoryType = .none
+        self.selectionStyle = .none
         
         self.contentView.addSubview(avatarImageView)
         self.contentView.addSubview(usernameLabel)
@@ -101,7 +101,7 @@ class CWContactDetailUserCell: UITableViewCell {
             return
         }
         
-        let url = NSURL(string: userModel.avatarURL!)!
+        let url = URL(string: userModel.avatarURL!)!
         self.avatarImageView.yy_setImageWithURL(url, placeholder: nil)
         
         usernameLabel.text = userModel.userName
@@ -128,7 +128,7 @@ class CWContactDetailUserCell: UITableViewCell {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state

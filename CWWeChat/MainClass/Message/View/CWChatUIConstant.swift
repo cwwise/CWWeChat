@@ -31,33 +31,33 @@ let kChatVoiceMinWidth = Screen_Width * 0.25
 let kChatVoiceMaxWidth = Screen_Width * 0.60
 
 public enum CWEmojiType: Int {
-    case Emoji
-    case Favorite
-    case Face
-    case Image
+    case emoji
+    case favorite
+    case face
+    case image
 }
 
 public enum CWChatBarStatus: Int {
     case Init
-    case Voice
-    case More
-    case Emoji
-    case Keyboard
+    case voice
+    case more
+    case emoji
+    case keyboard
 }
 
 
 ///键盘相关的枚举
 public enum CWMoreKeyboardItemType: Int {
-    case Image
-    case Camera
-    case Video
-    case VideoCall
-    case Wallet
-    case Transfer
-    case Position
-    case Favorite
-    case BusinessCard
-    case Voice
-    case Cards
+    case image
+    case camera
+    case video
+    case videoCall
+    case wallet
+    case transfer
+    case position
+    case favorite
+    case businessCard
+    case voice
+    case cards
 }
 

@@ -16,13 +16,13 @@ class CWMineInformationAvatarCell: UITableViewCell {
         }
     }
     
-    private lazy var titleLabel:UILabel = {
+    fileprivate lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
         return titleLabel
     }()
     
     
-    private lazy var headerImageView:UIImageView = {
+    fileprivate lazy var headerImageView:UIImageView = {
         let headerImageView = UIImageView()
         return headerImageView
     }()
@@ -30,7 +30,7 @@ class CWMineInformationAvatarCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.accessoryType = .DisclosureIndicator
+        self.accessoryType = .disclosureIndicator
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(headerImageView)
         
@@ -67,7 +67,7 @@ class CWMineInformationAvatarCell: UITableViewCell {
         if let rightImagePath = settingItem.rightImagePath {
             headerImageView.image = UIImage(named: rightImagePath)
         } else if let rightImageURL = settingItem.rightImageURL  {
-            headerImageView.yy_setImageWithURL(NSURL(string: rightImageURL), placeholder: defaultHeadeImage)
+            headerImageView.yy_setImageWithURL(URL(string: rightImageURL), placeholder: defaultHeadeImage)
         } else {
             headerImageView.image = nil
         }
@@ -78,7 +78,7 @@ class CWMineInformationAvatarCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

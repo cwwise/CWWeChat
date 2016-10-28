@@ -16,8 +16,8 @@ class CWConversationsViewController: CWBaseMessageViewController {
     var userID: String = CWUserAccount.sharedUserAccount().userID
 
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: self.view.bounds, style: .Plain)
-        tableView.backgroundColor = UIColor.whiteColor()
+        let tableView = UITableView(frame: self.view.bounds, style: .plain)
+        tableView.backgroundColor = UIColor.white
         tableView.rowHeight = 64.0
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
@@ -67,7 +67,7 @@ class CWConversationsViewController: CWBaseMessageViewController {
     }
     
     func registerCellClass() {
-        self.tableView.registerClass(CWConversationCell.self, forCellReuseIdentifier: CWConversationCell.reuseIdentifier)
+        self.tableView.register(CWConversationCell.self, forCellReuseIdentifier: CWConversationCell.reuseIdentifier)
     }
     
     func setupFriends() {
@@ -84,33 +84,33 @@ class CWConversationsViewController: CWBaseMessageViewController {
 //MARK: UITableViewDelegate
 extension CWConversationsViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let deleteTitle = "删除"
-        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: deleteTitle) { (action:UITableViewRowAction, indexPath) in
+        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: deleteTitle) { (action:UITableViewRowAction, indexPath) in
             
             //获取当前model
-            let conversation = self.conversationList[indexPath.row]
+            let conversation = self.conversationList[(indexPath as NSIndexPath).row]
             //数组中删除
-            self.conversationList.removeAtIndex(indexPath.row)
+            self.conversationList.remove(at: (indexPath as NSIndexPath).row)
             //从数据库中删除
             self.dbRecordStore.deleteMessageRecordByUid(self.userID, fid: conversation.partnerID, deletemessage: true)
             //删除
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
         }
         
         let actionTitle = "标记已读"
-        let moreAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: actionTitle) { (action:UITableViewRowAction, indexPath) in
+        let moreAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: actionTitle) { (action:UITableViewRowAction, indexPath) in
             
             tableView.setEditing(false, animated: true)
         }
         return [deleteAction,moreAction]
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let chatVC = CWChatViewController()
-        chatVC.contactId = self.conversationList[indexPath.row].partnerID
+        chatVC.contactId = self.conversationList[(indexPath as NSIndexPath).row].partnerID
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
@@ -120,13 +120,13 @@ extension CWConversationsViewController: UITableViewDelegate {
 //MARK: UITableViewDataSource
 extension CWConversationsViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.conversationList.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CWConversationCell.reuseIdentifier, forIndexPath: indexPath) as! CWConversationCell
-        cell.conversationModel = self.conversationList[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CWConversationCell.reuseIdentifier, for: indexPath) as! CWConversationCell
+        cell.conversationModel = self.conversationList[(indexPath as NSIndexPath).row]
         return cell
     }
 }
@@ -134,23 +134,23 @@ extension CWConversationsViewController: UITableViewDataSource {
 
 extension CWConversationsViewController: CWChatDBRecordStoreDelegate {
     
-    func needUpdateRecordList(record: CWConversationModel, isAdd: Bool) {
+    func needUpdateRecordList(_ record: CWConversationModel, isAdd: Bool) {
         
         self.tabBarItem.badgeValue = self.dbRecordStore.allUnreadMessage()
         if isAdd {
-            self.conversationList.insert(record, atIndex: 0)
-            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+            self.conversationList.insert(record, at: 0)
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.insertRows(at: [indexPath], with: .none)
         } else {
             self.conversationList = self.conversationList.filter({$0.partnerID != record.partnerID})
-            self.conversationList.insert(record, atIndex: 0)
+            self.conversationList.insert(record, at: 0)
             self.tableView.reloadData()
 //            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
 //            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
         }
     }
     
-    func updateUnReadCount(record: CWConversationModel) {
+    func updateUnReadCount(_ record: CWConversationModel) {
         
         //只是更新unReadCount
         for conversation in conversationList {

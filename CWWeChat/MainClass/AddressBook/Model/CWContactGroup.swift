@@ -30,7 +30,7 @@ class CWContactGroup: NSObject {
      
      - parameter model: 联系人实例
      */
-    func append(model: CWContactUser) {
+    func append(_ model: CWContactUser) {
         userList.append(model)
     }
     

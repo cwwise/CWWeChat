@@ -33,9 +33,9 @@ class CWAddressBookViewController: UIViewController {
     lazy var footerLabel: UILabel = {
         let frame = CGRect(x: 0, y: 0, width: Screen_Width, height: 50)
        let footerLabel = UILabel(frame: frame)
-        footerLabel.textAlignment = .Center
-        footerLabel.font = UIFont.systemFontOfSize(17)
-        footerLabel.textColor = UIColor.grayColor()
+        footerLabel.textAlignment = .center
+        footerLabel.font = UIFont.systemFont(ofSize: 17)
+        footerLabel.textColor = UIColor.gray
         return footerLabel
     }()
     
@@ -46,16 +46,16 @@ class CWAddressBookViewController: UIViewController {
     }()
     
     lazy var tableView:UITableView = {
-        let tableView = UITableView(frame: self.view.bounds, style: .Plain)
+        let tableView = UITableView(frame: self.view.bounds, style: .plain)
         tableView.backgroundColor = UIColor.tableViewBackgroundColor()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.sectionIndexBackgroundColor = UIColor.clearColor()
-        tableView.sectionIndexColor = UIColor.grayColor()
+        tableView.sectionIndexBackgroundColor = UIColor.clear
+        tableView.sectionIndexColor = UIColor.gray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         
-        tableView.registerClass(CWChatFriendCell.self, forCellReuseIdentifier: "cell")
-        tableView.registerClass(CWAddressBookHeaderView.self, forHeaderFooterViewReuseIdentifier: CWAddressBookHeaderView.reuseIdentifier)
+        tableView.register(CWChatFriendCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(CWAddressBookHeaderView.self, forHeaderFooterViewReuseIdentifier: CWAddressBookHeaderView.reuseIdentifier)
         tableView.tableHeaderView = self.searchController.searchBar
         tableView.tableFooterView = self.footerLabel
 
@@ -89,29 +89,29 @@ class CWAddressBookViewController: UIViewController {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
 extension CWAddressBookViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let group = groupList[section];
         return group.contactCount
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return groupList.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! CWChatFriendCell
-        let group = groupList[indexPath.section];
-        cell.userModel = group[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CWChatFriendCell
+        let group = groupList[(indexPath as NSIndexPath).section];
+        cell.userModel = group[(indexPath as NSIndexPath).row]
         return cell
     }
     
-    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return self.sectionHeaders
     }
     
@@ -122,28 +122,28 @@ private let height_header:CGFloat        =   22.0
 
 extension CWAddressBookViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return heightOfFriendcell
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 0
         }
         return height_header
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(CWAddressBookHeaderView.reuseIdentifier) as! CWAddressBookHeaderView
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: CWAddressBookHeaderView.reuseIdentifier) as! CWAddressBookHeaderView
         let group = groupList[section];
         headerView.text = group.groupName
         return headerView
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             let tagVC = CWLabelViewController()
             tagVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(tagVC, animated: true)
@@ -151,13 +151,13 @@ extension CWAddressBookViewController: UITableViewDelegate {
         }
         
         let chatVC = CWDetailContactViewController()
-        let userModel = groupList[indexPath.section][indexPath.row]
+        let userModel = groupList[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
         chatVC.contactModel = userModel
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
-    func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         
         if index == 0 {
             tableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: tableView.width, height: tableView.height), animated: false)

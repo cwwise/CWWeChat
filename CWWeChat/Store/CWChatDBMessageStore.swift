@@ -19,7 +19,7 @@ import SQLite
  */
 class CWChatDBMessageStore: NSObject {
 
-    typealias ChatHistoryMessagesHandle = ([CWMessageModel], NSDate,Bool) -> ()
+    typealias ChatHistoryMessagesHandle = ([CWMessageModel], Date,Bool) -> ()
     typealias InsertMessageAction = (Bool) -> ()
 
     // TODO: 修改名称避免过程中的问题,需要修改一些变量名称
@@ -81,13 +81,13 @@ class CWChatDBMessageStore: NSObject {
     
     /// 数据库路径
     lazy var path: String = {
-        let documentPath = NSHomeDirectory().stringByAppendingString("/Documents")
+        let documentPath = NSHomeDirectory() + "/Documents"
         let path = "\(documentPath)/User/\(self.current_userId)/Chat/DB/"
-        if !NSFileManager.defaultManager().fileExistsAtPath(path) {
-            try! NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
+        if !FileManager.default.fileExists(atPath: path) {
+            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         }
         CWLogDebug(path)
-        return path.stringByAppendingString("chatmessage.sqlite3")
+        return path + "chatmessage.sqlite3"
     }()
     
     //MARK: 初始化
@@ -141,7 +141,7 @@ class CWChatDBMessageStore: NSObject {
      
      - returns: 添加消息的结果
      */
-    func appendMessage(message: CWMessageModel, complete: InsertMessageAction) {
+    func appendMessage(_ message: CWMessageModel, complete: @escaping InsertMessageAction) {
         
         guard let userID = message.messageSendId, let friendID = message.messageTargetId else {
             CWLogError("插入消息失败: 消息体缺少参数, \(message.messageID)")
@@ -154,7 +154,7 @@ class CWChatDBMessageStore: NSObject {
         let dataString = "\(message.messageSendDate.timeIntervalSince1970)"
         do {
             var extString = ""
-            if message.messageType == .Image {
+            if message.messageType == .image {
                 let imageContent = message.messageContent as! CWImageMessageContent
                 extString = NSStringFromCGSize(imageContent.imageSize)
             }
@@ -176,7 +176,7 @@ class CWChatDBMessageStore: NSObject {
             
             try messageDB.run(sql)
             CWLogDebug("插入消息成功: \(message.messageID)")
-            recordDBStore.addRecordByMessage(message, needUnread: message.messageOwnerType != .Myself)
+            recordDBStore.addRecordByMessage(message, needUnread: message.messageOwnerType != .myself)
         } catch {
             CWLogDebug("插入消息失败: \(error), \(message.messageID)")
             dispatch_async_safely_to_main_queue({
@@ -202,7 +202,7 @@ extension CWChatDBMessageStore {
      - parameter count:     开始条数
      - parameter handle:    消息查询结果
      */
-    func messagesByUserID(userID:String, partnerID:String, fromDate:NSDate, count:Int = 30 ,handle:ChatHistoryMessagesHandle) {
+    func messagesByUserID(_ userID:String, partnerID:String, fromDate:Date, count:Int = 30 ,handle:ChatHistoryMessagesHandle) {
         
         let dateInterval = "\(fromDate.timeIntervalSince1970)"
         let query = messageTable.filter(uId == userID && friendId==partnerID && date < dateInterval).order(date.desc).limit(count)
@@ -232,7 +232,7 @@ extension CWChatDBMessageStore {
      
      - returns: 最后一个消息对象
      */
-    func lastMessageByUserID(userID:String, partnerID:String) -> CWMessageModel? {
+    func lastMessageByUserID(_ userID:String, partnerID:String) -> CWMessageModel? {
         let query = messageTable.filter(uId == userID && friendId==partnerID).order(date.desc).limit(1)
         if let row = messageDB.pluck(query) {
             let message = createDBMessageByFMResult(row)
@@ -249,7 +249,7 @@ extension CWChatDBMessageStore {
      
      - returns: 消息的数组
      */
-    func createDBMessageByFMResult(row:Row) -> CWMessageModel {
+    func createDBMessageByFMResult(_ row:Row) -> CWMessageModel {
         
         let ownerType = CWMessageOwnerType(rawValue: row[own_type])!
 //        message.messageReadState = ChatMessageReadState(rawValue: row[received_status])!
@@ -283,7 +283,7 @@ extension CWChatDBMessageStore {
                                      ownerType: ownerType, content: messageContent)
         
         message.content = string
-        message.messageSendDate = NSDate(timeIntervalSince1970: Double(row[date])!)
+        message.messageSendDate = Date(timeIntervalSince1970: Double(row[date])!)
         message.chatType = CWChatType(rawValue: row[chat_type])!
         message.messageSendId = row[uId]
         message.messageSendState = CWMessageSendState(rawValue: row[send_status])!
@@ -300,7 +300,7 @@ extension CWChatDBMessageStore {
      
      - returns: 返回修改结果
      */
-    func updateMessageStateByMessage(message: CWMessageModel?) -> Bool {
+    func updateMessageStateByMessage(_ message: CWMessageModel?) -> Bool {
         
         guard let message = message else {
             return false
@@ -336,7 +336,7 @@ extension CWChatDBMessageStore {
      
      - parameter messageID: 消息唯一的id messageID
      */
-    func deleteMessageByMessageID(messageID:String) -> Bool {
+    func deleteMessageByMessageID(_ messageID:String) -> Bool {
         let query = messageTable.filter(messageID == messageid)
         do {
             let rowid = try messageDB.run(query.delete())
@@ -356,7 +356,7 @@ extension CWChatDBMessageStore {
      
      - returns: 删除消息的结果
      */
-    func deleteMessageByUid(uid:String, fid:String) -> Bool {
+    func deleteMessageByUid(_ uid:String, fid:String) -> Bool {
         let query = messageTable.filter(uId == uid && friendId == fid)
         do {
             let rowid = try messageDB.run(query.delete())

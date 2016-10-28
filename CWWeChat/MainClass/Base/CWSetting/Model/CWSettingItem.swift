@@ -9,18 +9,18 @@
 import UIKit
 
 enum CWSettingItemType {
-    case Default
-    case TitleButton
-    case Switch
-    case Other
+    case `default`
+    case titleButton
+    case `switch`
+    case other
     
     func reuseIdentifier() -> String {
         switch self {
-        case .Default:
+        case .default:
             return CWSettingCell.reuseIdentifier
-        case .TitleButton:
+        case .titleButton:
             return CWSettingButtonCell.reuseIdentifier
-        case .Switch:
+        case .switch:
             return CWSettingSwitchCell.reuseIdentifier
         default:
             return CWSettingCell.reuseIdentifier
@@ -45,7 +45,7 @@ class CWSettingItem: NSObject {
     ///禁止高亮（默认NO）
     var disableHighlight: Bool
     
-    init(title: String,subTitle: String? = nil, type: CWSettingItemType = .Default) {
+    init(title: String,subTitle: String? = nil, type: CWSettingItemType = .default) {
         self.title = title
         self.subTitle = subTitle
         self.type = type

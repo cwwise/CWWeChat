@@ -16,11 +16,11 @@ class CWPhotoBrowserScrollView: UIScrollView {
         super.init(frame: frame)
         
         self.clipsToBounds = true
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.black
         self.showsVerticalScrollIndicator = false
         self.showsHorizontalScrollIndicator = false
         self.delegate = self
-        self.autoresizingMask = [.FlexibleHeight,.FlexibleWidth]
+        self.autoresizingMask = [.flexibleHeight,.flexibleWidth]
         self.minimumZoomScale = 1.0
         self.maximumZoomScale = 2.0
         setupUI()
@@ -29,7 +29,7 @@ class CWPhotoBrowserScrollView: UIScrollView {
     ///配置
     func setupUI() {
         imageView = UIImageView()
-        imageView.contentMode = .ScaleAspectFit
+        imageView.contentMode = .scaleAspectFit
         self.addSubview(imageView)
     }
     

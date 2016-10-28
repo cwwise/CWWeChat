@@ -132,6 +132,8 @@
 		1FEBDA311D23D5FE008EFFB0 /* CWChatViewController+SendMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBDA301D23D5FE008EFFB0 /* CWChatViewController+SendMessage.swift */; };
 		1FEBDA331D23D642008EFFB0 /* CWChatViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBDA321D23D642008EFFB0 /* CWChatViewController+Keyboard.swift */; };
 		47A602EC777BF8B3F63924D8 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECE23B265D75A03FB5C6A9 /* Pods_CWWeChat.framework */; };
+		7388FDE9448C1BAD693E4300 /* Pods_CWWeChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40651309C8329F5B7A9811EE /* Pods_CWWeChatUITests.framework */; };
+		8CDC37D09EE0AA3F16C11650 /* Pods_CWWeChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9084382C72A0B530B907A4 /* Pods_CWWeChatTests.framework */; };
 		ED46AD8B1D2BF5780015FCB0 /* CWMessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46AD8A1D2BF5780015FCB0 /* CWMessageContent.swift */; };
 		ED46AD8D1D2BF7F40015FCB0 /* CWTextMessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46AD8C1D2BF7F40015FCB0 /* CWTextMessageContent.swift */; };
 		ED46AD8F1D2BF8580015FCB0 /* CWImageMessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46AD8E1D2BF8580015FCB0 /* CWImageMessageContent.swift */; };
@@ -190,6 +192,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		144F61C51F408478C658862D /* Pods-CWWeChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1F1E22FE1D313EBB00318614 /* CWChatTextDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatTextDisplayView.swift; sourceTree = "<group>"; };
 		1F1E23001D313FCE00318614 /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		1F1E23031D31412200318614 /* CWChatEmoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatEmoji.swift; sourceTree = "<group>"; };
@@ -321,8 +324,13 @@
 		1FEBDA301D23D5FE008EFFB0 /* CWChatViewController+SendMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CWChatViewController+SendMessage.swift"; sourceTree = "<group>"; };
 		1FEBDA321D23D642008EFFB0 /* CWChatViewController+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CWChatViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		1FECE23B265D75A03FB5C6A9 /* Pods_CWWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D9084382C72A0B530B907A4 /* Pods_CWWeChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40651309C8329F5B7A9811EE /* Pods_CWWeChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E6F8F41CBA137291D180E0E /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
 		80C4EC6CB95B1523B42971BD /* Pods-CWWeChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.debug.xcconfig"; sourceTree = "<group>"; };
+		911D353251D6BD438C3CF058 /* Pods-CWWeChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatUITests/Pods-CWWeChatUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9A7C0A5AEDD35B8570648EAF /* Pods-CWWeChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatUITests/Pods-CWWeChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A382C0967FE3A0184F1D5275 /* Pods-CWWeChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED46AD8A1D2BF5780015FCB0 /* CWMessageContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageContent.swift; sourceTree = "<group>"; };
 		ED46AD8C1D2BF7F40015FCB0 /* CWTextMessageContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTextMessageContent.swift; sourceTree = "<group>"; };
 		ED46AD8E1D2BF8580015FCB0 /* CWImageMessageContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWImageMessageContent.swift; sourceTree = "<group>"; };
@@ -368,6 +376,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7388FDE9448C1BAD693E4300 /* Pods_CWWeChatUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +392,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CDC37D09EE0AA3F16C11650 /* Pods_CWWeChatTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1088,6 +1098,10 @@
 			children = (
 				80C4EC6CB95B1523B42971BD /* Pods-CWWeChat.debug.xcconfig */,
 				5E6F8F41CBA137291D180E0E /* Pods-CWWeChat.release.xcconfig */,
+				144F61C51F408478C658862D /* Pods-CWWeChatTests.debug.xcconfig */,
+				A382C0967FE3A0184F1D5275 /* Pods-CWWeChatTests.release.xcconfig */,
+				9A7C0A5AEDD35B8570648EAF /* Pods-CWWeChatUITests.debug.xcconfig */,
+				911D353251D6BD438C3CF058 /* Pods-CWWeChatUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1096,6 +1110,8 @@
 			isa = PBXGroup;
 			children = (
 				1FECE23B265D75A03FB5C6A9 /* Pods_CWWeChat.framework */,
+				3D9084382C72A0B530B907A4 /* Pods_CWWeChatTests.framework */,
+				40651309C8329F5B7A9811EE /* Pods_CWWeChatUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1271,9 +1287,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F651BE91D1CDF400080C203 /* Build configuration list for PBXNativeTarget "CWWeChatUITests" */;
 			buildPhases = (
+				0F60EC555C8DCE5BC0E1CE4C /* [CP] Check Pods Manifest.lock */,
 				1F651BDC1D1CDF400080C203 /* Sources */,
 				1F651BDD1D1CDF400080C203 /* Frameworks */,
 				1F651BDE1D1CDF400080C203 /* Resources */,
+				C2AFD1D53E056FAB78DCCAFA /* [CP] Embed Pods Frameworks */,
+				7EE3919D6F5A75EFA79555FD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1309,9 +1328,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FD3EDE41D1CC180004FBA63 /* Build configuration list for PBXNativeTarget "CWWeChatTests" */;
 			buildPhases = (
+				9923628F5ECDB014C17F64C8 /* [CP] Check Pods Manifest.lock */,
 				1FD3EDD71D1CC180004FBA63 /* Sources */,
 				1FD3EDD81D1CC180004FBA63 /* Frameworks */,
 				1FD3EDD91D1CC180004FBA63 /* Resources */,
+				1333FF38BA15EE0D60C527B4 /* [CP] Embed Pods Frameworks */,
+				77CC2AB22D92C8AB26ED4562 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1331,18 +1353,21 @@
 			attributes = {
 				CLASSPREFIX = CW;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = chenwei;
 				TargetAttributes = {
 					1F651BDF1D1CDF400080C203 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 1FD3EAF91D1ABBF8004FBA63;
 					};
 					1FD3EAF91D1ABBF8004FBA63 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					1FD3EDDA1D1CC180004FBA63 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 1FD3EAF91D1ABBF8004FBA63;
 					};
 				};
@@ -1400,6 +1425,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0F60EC555C8DCE5BC0E1CE4C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		1333FF38BA15EE0D60C527B4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1CAE93809D46AFB91A198BF7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1430,6 +1485,66 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		77CC2AB22D92C8AB26ED4562 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7EE3919D6F5A75EFA79555FD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChatUITests/Pods-CWWeChatUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9923628F5ECDB014C17F64C8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C2AFD1D53E056FAB78DCCAFA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChatUITests/Pods-CWWeChatUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CD6CBB98DF66AB8B7F04BFF9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1442,7 +1557,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1652,22 +1767,26 @@
 /* Begin XCBuildConfiguration section */
 		1F651BE71D1CDF400080C203 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A7C0A5AEDD35B8570648EAF /* Pods-CWWeChatUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = CWWeChatUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWWeChatUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = CWWeChat;
 			};
 			name = Debug;
 		};
 		1F651BE81D1CDF400080C203 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 911D353251D6BD438C3CF058 /* Pods-CWWeChatUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = CWWeChatUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWWeChatUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = CWWeChat;
 			};
 			name = Release;
@@ -1686,8 +1805,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1731,8 +1852,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1751,6 +1874,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1759,17 +1883,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 80C4EC6CB95B1523B42971BD /* Pods-CWWeChat.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: wei chen (4CJGE4SRV4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: wei chen (4CJGE4SRV4)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = "$(SRCROOT)/CWWeChat/Application/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.cwwechat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f28188c5-f366-4ef3-845c-710f49ca258c";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1777,36 +1903,42 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5E6F8F41CBA137291D180E0E /* Pods-CWWeChat.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = "$(SRCROOT)/CWWeChat/Application/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.cwwechat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		1FD3EDE21D1CC180004FBA63 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 144F61C51F408478C658862D /* Pods-CWWeChatTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = CWWeChatTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWWeChatTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CWWeChat.app/CWWeChat";
 			};
 			name = Debug;
 		};
 		1FD3EDE31D1CC180004FBA63 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A382C0967FE3A0184F1D5275 /* Pods-CWWeChatTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = CWWeChatTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWWeChatTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CWWeChat.app/CWWeChat";
 			};
 			name = Release;

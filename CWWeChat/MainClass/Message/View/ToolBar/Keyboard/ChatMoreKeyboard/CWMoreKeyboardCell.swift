@@ -17,16 +17,16 @@ class CWMoreKeyboardCell: UICollectionViewCell {
         }
     }
     
-    lazy private var iconButton:UIButton = {
-        let iconButton = UIButton(type: .Custom)
+    lazy fileprivate var iconButton:UIButton = {
+        let iconButton = UIButton(type: .custom)
         iconButton.doCircleRadius(5)
         return iconButton
     }()
     
-    lazy private var titleLabel:UILabel = {
+    lazy fileprivate var titleLabel:UILabel = {
        let titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFontOfSize(12)
-        titleLabel.textColor = UIColor.grayColor()
+        titleLabel.font = UIFont.systemFont(ofSize: 12)
+        titleLabel.textColor = UIColor.gray
         return titleLabel
     }()
     
@@ -54,17 +54,17 @@ class CWMoreKeyboardCell: UICollectionViewCell {
     
     func updateInfo() {
         guard let cellitem = item else {
-            iconButton.hidden = true
-            titleLabel.hidden = true
-            userInteractionEnabled = false
+            iconButton.isHidden = true
+            titleLabel.isHidden = true
+            isUserInteractionEnabled = false
             return
         }
         
-        iconButton.hidden = false
-        titleLabel.hidden = false
-        userInteractionEnabled = true
+        iconButton.isHidden = false
+        titleLabel.isHidden = false
+        isUserInteractionEnabled = true
         titleLabel.text = cellitem.title
-        iconButton.setImage(UIImage(named: cellitem.imagePath), forState: .Normal)
+        iconButton.setImage(UIImage(named: cellitem.imagePath), for: UIControlState())
     }
     
     required init?(coder aDecoder: NSCoder) {

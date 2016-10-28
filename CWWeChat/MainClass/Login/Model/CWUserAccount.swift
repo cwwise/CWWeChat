@@ -12,7 +12,7 @@ import UIKit
 class CWUserAccount: NSObject {
    
     class func sharedUserAccount() -> CWUserAccount {
-        let applegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let applegate = UIApplication.shared.delegate as! AppDelegate
         return applegate.userModel!
     }
    
@@ -35,24 +35,24 @@ class CWUserAccount: NSObject {
     }
     
     // TODO: 将这个单独用类来管理
-    func pathUserChatImage(imageName: String) -> String {
-        let documentPath = NSHomeDirectory().stringByAppendingString("/Documents")
+    func pathUserChatImage(_ imageName: String) -> String {
+        let documentPath = NSHomeDirectory() + "/Documents"
         let userId = self.userID
         let path = "\(documentPath)/User/\(userId)/Chat/Images/"
-        if !NSFileManager.defaultManager().fileExistsAtPath(path) {
-            try! NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
+        if !FileManager.default.fileExists(atPath: path) {
+            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         }
-        return path.stringByAppendingString(imageName)
+        return path + imageName
     }
     
-    func pathUserChatVoice(imageName: String) -> String {
-        let documentPath = NSHomeDirectory().stringByAppendingString("/Documents")
+    func pathUserChatVoice(_ imageName: String) -> String {
+        let documentPath = NSHomeDirectory() + "/Documents"
         let userId = self.userID
         let path = "\(documentPath)/User/\(userId)/Chat/Voices/"
-        if !NSFileManager.defaultManager().fileExistsAtPath(path) {
-            try! NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
+        if !FileManager.default.fileExists(atPath: path) {
+            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         }
-        return path.stringByAppendingString(imageName)
+        return path + imageName
     }
     
 }

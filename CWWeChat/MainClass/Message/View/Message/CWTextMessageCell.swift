@@ -16,7 +16,7 @@ let  MSG_SPACE_RIGHT:CGFloat     =   22
 class CWTextMessageCell: CWBaseMessageCell {
 
     //TODO: 将字体大小用类来管理
-    private var messageLabel: UILabel = {
+    fileprivate var messageLabel: UILabel = {
         let messageLabel = UILabel()
         messageLabel.font = UIFont.fontTextMessageText()
         messageLabel.numberOfLines = 0
@@ -30,13 +30,13 @@ class CWTextMessageCell: CWBaseMessageCell {
     }
     
     ///赋值
-    override func updateMessage(message: CWMessageModel) {
+    override func updateMessage(_ message: CWMessageModel) {
         super.updateMessage(message)
         
         let textMessage = message.messageContent as! CWTextMessageContent
         messageLabel.attributedText = CWChatTextParser.parseText(textMessage.content, font: UIFont.fontTextMessageText())
         
-        if message.messageOwnerType == .Myself {
+        if message.messageOwnerType == .myself {
             
             let sendImage = CWAsset.Message_sender_bg.image.resizableImage()
             let sendImageHL = CWAsset.Message_sender_bgHL.image.resizableImage()
@@ -54,7 +54,7 @@ class CWTextMessageCell: CWBaseMessageCell {
                 make.bottom.equalTo(self.messageLabel).offset(MSG_SPACE_BTM);
             })
             
-        } else if message.messageOwnerType == .Other {
+        } else if message.messageOwnerType == .other {
             
             let sendImage = CWAsset.Message_receiver_bg.image.resizableImage()
             let sendImageHL = CWAsset.Message_receiver_bgHL.image.resizableImage()

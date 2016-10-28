@@ -20,7 +20,7 @@ class CWContactManager: NSObject {
     static let shareContactManager = CWContactManager()
 
     ///默认的分组
-    private var defaultGroup: CWContactGroup!
+    fileprivate var defaultGroup: CWContactGroup!
     ///联系人 最原始的数据
     var contactsData = [CWContactUser]()
     
@@ -39,10 +39,10 @@ class CWContactManager: NSObject {
         initTestData()
     }
     
-    class func findContact(userId:String) -> CWContactUser? {
-        let name = userId.componentsSeparatedByString("@").first
+    class func findContact(_ userId:String) -> CWContactUser? {
+        let name = userId.components(separatedBy: "@").first
         for user in CWContactManager.shareContactManager.contactsData {
-            if (user.userId.containsString(name!)) {
+            if (user.userId.contains(name!)) {
                 return user
             }
         }
@@ -52,12 +52,12 @@ class CWContactManager: NSObject {
     ///初始化测试数据
     func initTestData() {
         ///读取数据
-        let path = NSBundle.mainBundle().pathForResource("ContactList", ofType: "json")
+        let path = Bundle.main.path(forResource: "ContactList", ofType: "json")
         guard let filepath = path else {
             CWLogError("不存在 ContactList.json 文件。")
             return
         }
-        let contantData = NSData(contentsOfFile: filepath)
+        let contantData = try? Data(contentsOf: URL(fileURLWithPath: filepath))
         let contactList = JSON(data: contantData!)
         
         for (_,subJson):(String, JSON) in contactList {
@@ -70,7 +70,7 @@ class CWContactManager: NSObject {
             user.avatarURL = subJson["avatarURL"].string
             contactsData.append(user)
         }
-        dispatch_async(dispatch_get_global_queue(0, 0)) { 
+        DispatchQueue.global(priority: 0).async { 
             self.sortContactData()
         }
     }
@@ -79,7 +79,7 @@ class CWContactManager: NSObject {
     func sortContactData() {
         
         //先根据拼音的首字母排序
-        contactsData.sortInPlace { (leftUser, rightUser) -> Bool in
+        contactsData.sort { (leftUser, rightUser) -> Bool in
             let pingYingA = leftUser.pinying
             let pingYingB = rightUser.pinying
             return pingYingA < pingYingB
@@ -134,13 +134,13 @@ class CWContactManager: NSObject {
         }
 
         sortContactsData.removeAll()
-        sortContactsData.appendContentsOf(analyzeGroupData)
+        sortContactsData.append(contentsOf: analyzeGroupData)
         
         sortSectionHeaders.removeAll()
-        sortSectionHeaders.appendContentsOf(sectionHeaders)
+        sortSectionHeaders.append(contentsOf: sectionHeaders)
         
         if self.dataChangeBlock != nil {
-            dispatch_async(dispatch_get_main_queue(), { 
+            DispatchQueue.main.async(execute: { 
                 CWLogDebug(self.sortSectionHeaders.description)
                 self.dataChangeBlock!(self.sortContactsData,self.sortSectionHeaders,self.contactsData.count)
             })

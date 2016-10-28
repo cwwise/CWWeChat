@@ -13,8 +13,8 @@ class CWSettingGroup: NSObject {
     var headerTitle: String? {
         didSet {
             let width = Screen_Width - 2*15
-            let attributes = [NSForegroundColorAttributeName:UIColor.whiteColor(),
-                              NSFontAttributeName: UIFont.systemFontOfSize(14)]
+            let attributes = [NSForegroundColorAttributeName:UIColor.white,
+                              NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
             headerHeight = CWUIUtility.textHeightOfText(headerTitle, width: width, attributes: attributes) + 0.5 + 5.0
         }
     }
@@ -22,14 +22,14 @@ class CWSettingGroup: NSObject {
     var footerTitle: String? {
         didSet {
             let width = Screen_Width - 2*15
-            let attributes = [NSForegroundColorAttributeName:UIColor.whiteColor(),
-                              NSFontAttributeName: UIFont.systemFontOfSize(14)]
+            let attributes = [NSForegroundColorAttributeName:UIColor.white,
+                              NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
             footerHeight = CWUIUtility.textHeightOfText(footerTitle, width: width, attributes: attributes) + 15 + 5.0
         }
     }
     
-    private(set) var headerHeight: CGFloat = 0.5
-    private(set) var footerHeight: CGFloat = 20
+    fileprivate(set) var headerHeight: CGFloat = 0.5
+    fileprivate(set) var footerHeight: CGFloat = 20
     
     var count: Int {
         return sectionItems.count
@@ -57,7 +57,7 @@ class CWSettingGroup: NSObject {
     }
 
     
-    func itemObjectAtIndex(index: Int) -> AnyObject {
+    func itemObjectAtIndex(_ index: Int) -> AnyObject {
         return sectionItems[index]
     }
     

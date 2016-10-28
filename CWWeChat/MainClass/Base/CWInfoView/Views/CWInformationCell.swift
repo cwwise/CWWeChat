@@ -18,9 +18,9 @@ class CWInformationCell: UITableViewCell {
         }
     }
     
-    private lazy var subTitleLabel:UILabel = {
+    fileprivate lazy var subTitleLabel:UILabel = {
         let subTitleLabel = UILabel()
-        subTitleLabel.font = UIFont.systemFontOfSize(15)
+        subTitleLabel.font = UIFont.systemFont(ofSize: 15)
         return subTitleLabel
     }()
     
@@ -28,7 +28,7 @@ class CWInformationCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.textLabel?.font = UIFont.systemFontOfSize(15)
+        self.textLabel?.font = UIFont.systemFont(ofSize: 15)
         self.contentView.addSubview(subTitleLabel)
         
         p_addSnap()
@@ -50,8 +50,8 @@ class CWInformationCell: UITableViewCell {
         self.textLabel?.text = informationModel.title
         self.subTitleLabel.text = informationModel.subTitle
         
-        self.accessoryType = informationModel.showDisclosureIndicator ? .DisclosureIndicator : .None
-        self.selectionStyle = informationModel.disableHighlight ? .None : .Default
+        self.accessoryType = informationModel.showDisclosureIndicator ? .disclosureIndicator : .none
+        self.selectionStyle = informationModel.disableHighlight ? .none : .default
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -63,7 +63,7 @@ class CWInformationCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

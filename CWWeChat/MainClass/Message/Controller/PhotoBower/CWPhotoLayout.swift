@@ -24,13 +24,13 @@ class CWPhotoLayout: UICollectionViewFlowLayout {
     /**  配置  */
     func layoutSetting(){
         
-        let size = UIScreen.mainScreen().bounds.size
+        let size = UIScreen.main.bounds.size
         self.itemSize = CGSize(width: size.width+photoPadding, height: size.height)
         
         self.minimumInteritemSpacing = 0
         self.minimumLineSpacing = 0
-        self.sectionInset = UIEdgeInsetsZero
-        self.scrollDirection = UICollectionViewScrollDirection.Horizontal
+        self.sectionInset = UIEdgeInsets.zero
+        self.scrollDirection = UICollectionViewScrollDirection.horizontal
     }
     
 }

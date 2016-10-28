@@ -9,30 +9,30 @@
 import UIKit
 import Alamofire
 //主要是需要使用
-import MMXXMPPFramework
+import XMPPFramework
 
-public typealias XMPPStatusListener = (CWXMPPStatus -> Void)
+public typealias XMPPStatusListener = ((CWXMPPStatus) -> Void)
 
 /// 管理xmpp的类
 class CWXMPPManager: NSObject {
     ///单例
     static let shareXMPPManager = CWXMPPManager()
     
-    private var xmppQueue: dispatch_queue_t
+    fileprivate var xmppQueue: DispatchQueue
     ///xmpp流
     var xmppStream: XMPPStream
     ///xmpp重新连接
-    private var xmppReconnect: XMPPReconnect
+    fileprivate var xmppReconnect: XMPPReconnect
     
     ///消息发送
-    private(set) var messageTransmitter: CWMessageTransmitter
-    private(set) var messageDispatchQueue: CWMessageDispatchQueue
+    fileprivate(set) var messageTransmitter: CWMessageTransmitter
+    fileprivate(set) var messageDispatchQueue: CWMessageDispatchQueue
     ///消息解析
-    private(set) var messageCracker: CWMessageCracker
+    fileprivate(set) var messageCracker: CWMessageCracker
     ///消息回执(XEP-0184)
 //    private var deliveryReceipts: XMPPMessageDeliveryReceipts
     ///获取好友请求
-    private var xmppRoster: XMPPRoster
+    fileprivate var xmppRoster: XMPPRoster
     
     /// XMPP状态
     var statusListener: XMPPStatusListener?
@@ -56,8 +56,8 @@ class CWXMPPManager: NSObject {
     
     
     ///初始化方法
-    private override init() {
-        xmppQueue = dispatch_queue_create("com.cwxmppchat.cwcoder", DISPATCH_QUEUE_CONCURRENT)
+    fileprivate override init() {
+        xmppQueue = DispatchQueue(label: "com.cwxmppchat.cwcoder", attributes: DispatchQueue.Attributes.concurrent)
         
         xmppStream = XMPPStream()
         xmppReconnect = XMPPReconnect()
@@ -111,7 +111,7 @@ class CWXMPPManager: NSObject {
         }
         
         //可以添加是哪个端
-        let timeoutInterval:NSTimeInterval = 10
+        let timeoutInterval:TimeInterval = 10
         let xmppDomain = CWXMPPConfigure.shareXMPPConfigure().xmppDomain
         let userName = CWUserAccount.sharedUserAccount().userID
         let resource = CWUserAccount.sharedUserAccount().resource
@@ -127,8 +127,8 @@ class CWXMPPManager: NSObject {
     
     ///注册观察者
     func registerApplicationNotification() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(applicationWillEnterForeground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(applicationWillResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground(_:)), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive(_:)), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
     }
     
     func setupNetworkReachable() {
@@ -141,11 +141,11 @@ class CWXMPPManager: NSObject {
         reachable?.listener = listener
     }
     
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         
     }
     
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         
     }
     
@@ -162,7 +162,7 @@ class CWXMPPManager: NSObject {
     }
     
     // MARK: 监听
-    func xmppStatusChange(status:CWXMPPStatus) {
+    func xmppStatusChange(_ status:CWXMPPStatus) {
         if let listenrer = self.statusListener {
             listenrer(status)
         }
@@ -178,7 +178,7 @@ class CWXMPPManager: NSObject {
         
         reachable?.stopListening()
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -186,19 +186,19 @@ class CWXMPPManager: NSObject {
 extension CWXMPPManager: XMPPStreamDelegate {
     
     ///
-    func xmppStreamWillConnect(sender: XMPPStream!) {
+    func xmppStreamWillConnect(_ sender: XMPPStream!) {
         CWLogDebug("开始连接")
         xmppStatusChange(.Connecting)
     }
     
     ///连接失败
-    func xmppStreamDidDisconnect(sender: XMPPStream!, withError error: NSError!) {
+    func xmppStreamDidDisconnect(_ sender: XMPPStream!, withError error: NSError!) {
         CWLogDebug("断开连接")
         xmppStatusChange(.Disconnected)
     }
     
     ///已经连接，就输入密码
-    func xmppStreamDidConnect(sender: XMPPStream!) {
+    func xmppStreamDidConnect(_ sender: XMPPStream!) {
         CWLogDebug("连接成功")
         do {
             let password = CWUserAccount.sharedUserAccount().password
@@ -209,13 +209,13 @@ extension CWXMPPManager: XMPPStreamDelegate {
     }
     
     ///验证失败
-    func xmppStream(sender: XMPPStream!, didNotAuthenticate error: DDXMLElement!) {
+    func xmppStream(_ sender: XMPPStream!, didNotAuthenticate error: DDXMLElement!) {
         CWLogDebug("认证失败")
         xmppStatusChange(.Error)
     }
     
     ///验证成功
-    func xmppStreamDidAuthenticate(sender: XMPPStream!) {
+    func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
         CWLogDebug("认证成功")
         xmppStatusChange(.Connected)
         //上线
@@ -223,7 +223,7 @@ extension CWXMPPManager: XMPPStreamDelegate {
     }
     
     ///收到状态信息 TODO: 好友上下线的逻辑
-    func xmppStream(sender: XMPPStream!, didReceivePresence presence: XMPPPresence!) {
+    func xmppStream(_ sender: XMPPStream!, didReceivePresence presence: XMPPPresence!) {
         
         let myUser = sender.myJID.user
         
@@ -253,7 +253,7 @@ extension CWXMPPManager: XMPPStreamDelegate {
         
     }
     
-    func xmppStream(sender: XMPPStream!, didReceiveIQ iq: XMPPIQ!) -> Bool {
+    func xmppStream(_ sender: XMPPStream!, didReceiveIQ iq: XMPPIQ!) -> Bool {
         return true
     }
     
@@ -263,7 +263,7 @@ extension CWXMPPManager: XMPPStreamDelegate {
 extension CWXMPPManager: XMPPRosterDelegate {
     
     ///收到好友列表
-    func xmppRosterDidEndPopulating(sender: XMPPRoster!) {
+    func xmppRosterDidEndPopulating(_ sender: XMPPRoster!) {
         CWLogDebug("获取好友信息界面")
         let story = sender.xmppRosterStorage as! XMPPRosterMemoryStorage
         let userArray = story.sortedUsersByName() as! [XMPPUser]
@@ -278,8 +278,8 @@ extension CWXMPPManager: XMPPRosterDelegate {
             
         }
         
-        dispatch_async(dispatch_get_main_queue()) { 
-            NSNotificationCenter.defaultCenter().postNotificationName(CWFriendsNeedReloadNotification, object: nil)
+        DispatchQueue.main.async { 
+            NotificationCenter.default.post(name: Notification.Name(rawValue: CWFriendsNeedReloadNotification), object: nil)
         }
         //需要刷新好友列表
         

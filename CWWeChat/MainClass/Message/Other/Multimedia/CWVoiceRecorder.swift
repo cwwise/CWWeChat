@@ -14,7 +14,7 @@ protocol CWVoiceRecorderDelegate {
     /**
      更新进度 , 0.0 - 9.0, 浮点数
      */
-    func audioRecordUpdateMetra(metra: Float)
+    func audioRecordUpdateMetra(_ metra: Float)
     
     /**
      录音太短
@@ -38,7 +38,7 @@ protocol CWVoiceRecorderDelegate {
      - parameter recordTime:        录音时长
      - parameter uploadAmrData:     上传的 amr Data
      */
-    func audioRecordFinish(filename: String, recordTime: Float)
+    func audioRecordFinish(_ filename: String, recordTime: Float)
 }
 
 class CWVoiceRecorder: NSObject {
@@ -47,19 +47,19 @@ class CWVoiceRecorder: NSObject {
     /// 最大录音时间
     let maxRecordTime: CGFloat = 60
     
-    var operationQueue: NSOperationQueue
+    var operationQueue: OperationQueue
     
-    private var startTime: CFTimeInterval! //录音开始时间
-    private var endTimer: CFTimeInterval! //录音结束时间
-    private var audioTimeInterval: NSNumber!
-    private var isFinishRecord: Bool = true
-    private var isCancelRecord: Bool = false
+    fileprivate var startTime: CFTimeInterval! //录音开始时间
+    fileprivate var endTimer: CFTimeInterval! //录音结束时间
+    fileprivate var audioTimeInterval: NSNumber!
+    fileprivate var isFinishRecord: Bool = true
+    fileprivate var isCancelRecord: Bool = false
     
-    private let recordSettings = [AVSampleRateKey : NSNumber(float: Float(44100.0)),//声音采样率
-                                  AVFormatIDKey : NSNumber(int: Int32(kAudioFormatLinearPCM)),//编码格式
-                                  AVNumberOfChannelsKey : NSNumber(int: 1),//采集音轨
-                                  AVEncoderAudioQualityKey : NSNumber(int: Int32(AVAudioQuality.Medium.rawValue))]//音频质量
-    private var audioRecorder:AVAudioRecorder!
+    fileprivate let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),//声音采样率
+                                  AVFormatIDKey : NSNumber(value: Int32(kAudioFormatLinearPCM) as Int32),//编码格式
+                                  AVNumberOfChannelsKey : NSNumber(value: 1 as Int32),//采集音轨
+                                  AVEncoderAudioQualityKey : NSNumber(value: Int32(AVAudioQuality.medium.rawValue) as Int32)]//音频质量
+    fileprivate var audioRecorder:AVAudioRecorder!
     
     var voiceName: String = {
         let random = arc4random() % 1000
@@ -67,14 +67,14 @@ class CWVoiceRecorder: NSObject {
         return voiceName
     }()
     
-    lazy private var directoryURL:NSURL = {
+    lazy fileprivate var directoryURL:URL = {
         let filePath = CWUserAccount.sharedUserAccount().pathUserChatVoice(self.voiceName)
-        return NSURL(fileURLWithPath: filePath)
+        return URL(fileURLWithPath: filePath)
     }()
     
     
     override init() {
-        self.operationQueue = NSOperationQueue()
+        self.operationQueue = OperationQueue()
         super.init()
 
         let audioSession = AVAudioSession.sharedInstance()
@@ -82,7 +82,7 @@ class CWVoiceRecorder: NSObject {
             if result {
                 do {
                     try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-                    try self.audioRecorder = AVAudioRecorder(URL: self.directoryURL,
+                    try self.audioRecorder = AVAudioRecorder(url: self.directoryURL,
                         settings: self.recordSettings)//初始化实例
                     self.audioRecorder.delegate = self
                     self.audioRecorder.prepareToRecord()//准备录音
@@ -101,13 +101,13 @@ class CWVoiceRecorder: NSObject {
         guard let audioRecorder = audioRecorder else {
             return
         }
-        if audioRecorder.recording == false {
+        if audioRecorder.isRecording == false {
             let audioSession = AVAudioSession.sharedInstance()
             do {
                 try audioSession.setActive(true)
                 audioRecorder.record()
                 
-                let operation = NSBlockOperation()
+                let operation = BlockOperation()
                 operation.addExecutionBlock(updateMeters)
                 self.operationQueue.addOperation(operation)
                 
@@ -134,7 +134,7 @@ class CWVoiceRecorder: NSObject {
         self.endTimer = CACurrentMediaTime()
         audioRecorder?.stop()
         
-        self.audioTimeInterval = NSNumber(int: NSNumber(double: self.audioRecorder.currentTime).intValue)
+        self.audioTimeInterval = NSNumber(value: NSNumber(value: self.audioRecorder.currentTime as Double).int32Value as Int32)
         
         let audioSession = AVAudioSession.sharedInstance()
         do {
@@ -152,26 +152,26 @@ class CWVoiceRecorder: NSObject {
         guard let recorder = self.audioRecorder else { return }
         repeat {
             recorder.updateMeters()
-            self.audioTimeInterval = NSNumber(float: NSNumber(double: recorder.currentTime).floatValue)
-            let averagePower = recorder.averagePowerForChannel(0)
+            self.audioTimeInterval = NSNumber(value: NSNumber(value: recorder.currentTime as Double).floatValue as Float)
+            let averagePower = recorder.averagePower(forChannel: 0)
             let lowPassResults = pow(10, (0.05 * averagePower)) * 10
             dispatch_async_safely_to_main_queue({ () -> () in
                 self.delegate?.audioRecordUpdateMetra(lowPassResults)
             })
             //如果大于 60 ,停止录音
-            if self.audioTimeInterval.intValue > 60 {
+            if self.audioTimeInterval.int32Value > 60 {
                 self.stopRecord()
             }
             
-            NSThread.sleepForTimeInterval(0.05)
-        } while(recorder.recording)
+            Thread.sleep(forTimeInterval: 0.05)
+        } while(recorder.isRecording)
     }
     
 }
 
 extension CWVoiceRecorder: AVAudioRecorderDelegate {
     
-    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         CWLogDebug("录音路径--\(self.voiceName) \(flag)")
         if flag && self.isFinishRecord {
             if let delegate = self.delegate {

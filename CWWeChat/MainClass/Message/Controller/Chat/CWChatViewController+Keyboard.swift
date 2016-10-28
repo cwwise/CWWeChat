@@ -19,16 +19,16 @@ extension CWChatViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CWChatViewController.hideKeyboard))
         self.tableView.addGestureRecognizer(tapGesture)
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.addObserver(self,
                                                          selector: #selector(CWChatViewController.handleWillHideKeyboard(_:)),
-                                                         name: UIKeyboardWillHideNotification, object: nil)
+                                                         name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.addObserver(self,
                                                          selector: #selector(CWChatViewController.handleWillShowKeyboard(_:)),
-                                                         name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self,
                                                          selector: #selector(CWChatViewController.handleWillShowKeyboard(_:)),
-                                                         name: UIKeyboardWillChangeFrameNotification, object: nil)
+                                                         name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
     }
     
@@ -39,27 +39,27 @@ extension CWChatViewController {
     
     
     ///键盘将要隐藏
-    func handleWillHideKeyboard(notification: NSNotification)  {
+    func handleWillHideKeyboard(_ notification: Notification)  {
         keyboardWillShowHide(notification, hideKeyBoard:true)
     }
     
-    func keyboardWillChangeFrame(notification: NSNotification) {
+    func keyboardWillChangeFrame(_ notification: Notification) {
         
     }
     
-    func handleWillShowKeyboard(notification: NSNotification)  {
+    func handleWillShowKeyboard(_ notification: Notification)  {
         keyboardWillShowHide(notification)
     }
     
-    func keyboardWillShowHide(notification:NSNotification, hideKeyBoard: Bool = false) {
+    func keyboardWillShowHide(_ notification:Notification, hideKeyBoard: Bool = false) {
         
-        let keyboardFrameValue = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-        let keyboardFrame = keyboardFrameValue.CGRectValue()
-        let curve = (notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).integerValue
-        let duration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        let keyboardFrameValue = (notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardFrame = keyboardFrameValue.cgRectValue
+        let curve = ((notification as NSNotification).userInfo![UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue
+        let duration = ((notification as NSNotification).userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         let curveNumber = UIViewAnimationCurve(rawValue:curve)
         
-        UIView.animateWithDuration(duration,
+        UIView.animate(withDuration: duration,
                                    delay: 0,
                                    options: self.animationOptionsForCurve(curveNumber!),
                                    animations: {
@@ -79,17 +79,17 @@ extension CWChatViewController {
     }
     
     
-    func animationOptionsForCurve(curve:UIViewAnimationCurve) -> UIViewAnimationOptions {
+    func animationOptionsForCurve(_ curve:UIViewAnimationCurve) -> UIViewAnimationOptions {
         
         switch curve {
-        case .EaseInOut:
-            return UIViewAnimationOptions.CurveEaseInOut
-        case .EaseIn:
-            return UIViewAnimationOptions.CurveEaseIn
-        case .EaseOut:
-            return UIViewAnimationOptions.CurveEaseOut
-        case .Linear:
-            return UIViewAnimationOptions.CurveLinear
+        case .easeInOut:
+            return UIViewAnimationOptions()
+        case .easeIn:
+            return UIViewAnimationOptions.curveEaseIn
+        case .easeOut:
+            return UIViewAnimationOptions.curveEaseOut
+        case .linear:
+            return UIViewAnimationOptions.curveLinear
         }
         
     }
