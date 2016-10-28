@@ -1,34 +1,44 @@
-# Uncomment this line to define a global platform for your project
-platform :ios, '8.0'
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
 
 target 'CWWeChat' do
-  # Comment this line if you're not using Swift and don't want to use dynamic frameworks
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  
-  #工具
-  pod 'ChameleonFramework/Swift'
-  pod 'SwiftyJSON'
 
+  # Pods for CWWeChat
+  #工具
+  pod 'UIColor_Hex_Swift'
+  pod 'SwiftyJSON'
+  
   #布局
   pod 'SnapKit'
   
   #网络请求
   pod 'Alamofire'
-#  pod 'AlamofireImage'
-
+  
   pod 'YYWebImage'
   #数据库
   pod 'SQLite.swift'
   
   #log日志
-  pod 'CocoaLumberjack/Swift'
-
-  #聊天
-  pod 'CocoaAsyncSocket'
+  #swift3.0完成后
+  #pod 'CocoaLumberjack/Swift'
   
-  pod 'MMXXMPPFramework'
-
+  #聊天
+  pod 'XMPPFramework', :git => "https://github.com/robbiehanson/XMPPFramework.git", :branch => 'master'
+  
   pod 'Qiniu'
   pod 'MBProgressHUD'
+  
+
+  target 'CWWeChatTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'CWWeChatUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
 
 end
