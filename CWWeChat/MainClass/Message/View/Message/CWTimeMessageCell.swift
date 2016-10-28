@@ -32,7 +32,7 @@ class CWTimeMessageCell: UITableViewCell {
         self.contentView.addSubview(self.timeLabel)
         self.backgroundColor = UIColor.clear
 //        self.selectionStyle = .None
-        self.timeLabel.snp_makeConstraints { (make) in
+        self.timeLabel.snp.makeConstraints { (make) in
             make.height.equalTo(20)
             make.centerX.equalTo(self.contentView)
             make.top.equalTo(self.contentView).offset(kChatTimeLabelMarginTop)

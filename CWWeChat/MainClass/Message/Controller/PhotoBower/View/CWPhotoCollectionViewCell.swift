@@ -39,7 +39,7 @@ class CWPhotoCollectionViewCell: UICollectionViewCell {
     
     func setupUI() {
         self.contentView.addSubview(scrollView)
-        scrollView.snp_makeConstraints { (make) in
+        scrollView.snp.makeConstraints { (make) in
             make.edges.equalTo(self.contentView).inset(UIEdgeInsetsMake(0, 0, 0, photoPadding))
         }
     }

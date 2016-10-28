@@ -94,7 +94,7 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
         label.font = UIFont.systemFont(ofSize: 19)
         self.view.addSubview(label)
         let margin: CGFloat = 20
-        label.snp_makeConstraints { (make) in
+        label.snp.makeConstraints { (make) in
             make.left.equalTo(margin)
             make.right.equalTo(-margin)
             make.height.equalTo(30)
@@ -103,31 +103,31 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
         
         //账号和密码
         self.view.addSubview(userNameTextField)
-        userNameTextField.snp_makeConstraints { (make) in
+        userNameTextField.snp.makeConstraints { (make) in
             make.left.equalTo(margin)
             make.right.equalTo(-margin)
             make.height.equalTo(45)
-            make.top.equalTo(label.snp_bottom).offset(20)
+            make.top.equalTo(label.snp.bottom).offset(20)
         }
         
         
         self.view.addSubview(passwordTextField)
-        passwordTextField.snp_makeConstraints { (make) in
+        passwordTextField.snp.makeConstraints { (make) in
             make.left.equalTo(margin)
             make.right.equalTo(-margin)
             make.height.equalTo(45)
-            make.top.equalTo(userNameTextField.snp_bottom).offset(4)
+            make.top.equalTo(userNameTextField.snp.bottom).offset(4)
         }
 
         //登录按钮
         self.view.addSubview(loginButton)
         loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
         loginButton.isEnabled = false
-        loginButton.snp_makeConstraints { (make) in
+        loginButton.snp.makeConstraints { (make) in
             make.left.equalTo(margin)
             make.right.equalTo(-margin)
             make.height.equalTo(44)
-            make.top.equalTo(passwordTextField.snp_bottom).offset(30)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(30)
         }
     }
     

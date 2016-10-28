@@ -63,15 +63,15 @@ class CWContactDetailAlbumCell: UITableViewCell {
             let imageURL = URL(string: imageString)!
             imageView?.yy_setImageWithURL(imageURL, placeholder: nil)
             
-            imageView?.snp_makeConstraints(closure: { (make) in
+            imageView?.snp.makeConstraints(closure: { (make) in
                 make.top.equalTo(self.contentView).offset(spaceY);
                 make.bottom.equalTo(self.contentView).offset(-spaceY);
-                make.width.equalTo(imageView!.snp_height);
+                make.width.equalTo(imageView!.snp.height);
                 if (i == 0) {
                     make.left.equalTo(left_infocell_subTitle_space);
                 }
                 else {
-                    make.left.equalTo(self.imageViewsArray[i-1].snp_right).offset(spaceX)
+                    make.left.equalTo(self.imageViewsArray[i-1].snp.right).offset(spaceX)
                 }
             })
             

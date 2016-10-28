@@ -22,7 +22,7 @@ class CWChatTextDisplayView: UIView {
             var size = self.textView.sizeThatFits(CGSize(width: width_textView,height: CGFloat(MAXFLOAT)))
             size.height = size.height > Screen_Height ? Screen_Height : size.height;
             
-            textView.snp_updateConstraints { (make) in
+            textView.snp.updateConstraints { (make) in
                 make.size.equalTo(size)
             }
         }
@@ -44,7 +44,7 @@ class CWChatTextDisplayView: UIView {
         super.init(frame: frame)
         self.backgroundColor = UIColor.white
         self.addSubview(textView)
-        textView.snp_makeConstraints { (make) in
+        textView.snp.makeConstraints { (make) in
             make.center.equalTo(self)
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CWChatTextDisplayView.dismiss))

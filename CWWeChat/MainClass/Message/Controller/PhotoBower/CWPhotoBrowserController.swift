@@ -46,7 +46,7 @@ class CWPhotoBrowserController: UIViewController {
         self.view.backgroundColor = UIColor.black
         
         self.view.addSubview(self.collectionView)
-        collectionView.snp_makeConstraints { (make) in
+        collectionView.snp.makeConstraints { (make) in
             make.edges.equalTo(self.view).inset(UIEdgeInsetsMake(0, 0, 0, -photoPadding))
         }
 

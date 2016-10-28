@@ -76,7 +76,7 @@ class CWVoiceMessageCell: CWBaseMessageCell {
             
         }
         print(size)
-        self.messageBackgroundView.snp_updateConstraints(closure: { (make) in
+        self.messageBackgroundView.snp.updateConstraints({ (make) in
             make.size.equalTo(size)
         })
 

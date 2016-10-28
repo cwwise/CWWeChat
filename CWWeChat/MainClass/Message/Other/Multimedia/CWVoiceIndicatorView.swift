@@ -93,7 +93,7 @@ class CWVoiceIndicatorView: UIView {
         self.recordingView.addSubview(self.voiceSignalImageView)
         self.recordingView.addSubview(self.signalValueImageView)
         
-        noteLabel.snp_makeConstraints { (make) in
+        noteLabel.snp.makeConstraints { (make) in
             make.left.equalTo(8)
             make.right.equalTo(-8)
             make.height.equalTo(20)

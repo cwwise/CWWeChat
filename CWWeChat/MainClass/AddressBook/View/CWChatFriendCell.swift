@@ -52,15 +52,15 @@ class CWChatFriendCell: UITableViewCell {
     }
     
     func addSnap() {
-        avatarImageView.snp_makeConstraints { (make) in
+        avatarImageView.snp.makeConstraints { (make) in
             make.left.equalTo(FRIENDS_SPACE_X)
             make.top.equalTo(FRIENDS_SPACE_Y)
             make.bottom.equalTo(-FRIENDS_SPACE_Y-0.5)
-            make.width.equalTo(avatarImageView.snp_height);
+            make.width.equalTo(avatarImageView.snp.height);
         }
         
-        usernameLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(avatarImageView.snp_right).offset(FRIENDS_SPACE_X)
+        usernameLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(avatarImageView.snp.right).offset(FRIENDS_SPACE_X)
             make.centerY.equalTo(avatarImageView)
             make.right.equalTo(self.contentView).offset(FRIENDS_SPACE_X).offset(-20)
         }

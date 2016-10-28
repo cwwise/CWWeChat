@@ -39,14 +39,14 @@ class CWMoreKeyboardCell: UICollectionViewCell {
     }
     
     func addsnap()  {
-        iconButton.snp_makeConstraints { (make) in
+        iconButton.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView)
             make.centerX.equalTo(self.contentView)
             make.width.equalTo(self.contentView)
-            make.height.equalTo(iconButton.snp_width)
+            make.height.equalTo(iconButton.snp.width)
         }
         
-        titleLabel.snp_makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.contentView)
             make.bottom.equalTo(self.contentView)
         }

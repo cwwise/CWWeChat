@@ -60,28 +60,28 @@ class CWMenuCell: UITableViewCell {
         let leftOffset: CGFloat = 15
         let iconImageView_Width: CGFloat = 25
 
-        self.iconImageView.snp_makeConstraints { (make) in
+        self.iconImageView.snp.makeConstraints { (make) in
             make.left.equalTo(self.contentView).offset(leftOffset)
             make.centerY.equalTo(self.contentView)
             make.width.height.equalTo(iconImageView_Width)
         }
         
-        self.titleLabel.snp_makeConstraints { (make) in
+        self.titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.iconImageView)
-            make.left.equalTo(self.iconImageView.snp_right).offset(leftOffset)
+            make.left.equalTo(self.iconImageView.snp.right).offset(leftOffset)
             make.right.lessThanOrEqualTo(self.contentView).offset(leftOffset)
         }
         
-        self.rightImageView.snp_makeConstraints { (make) in
+        self.rightImageView.snp.makeConstraints { (make) in
             make.right.equalTo(self.contentView).offset(1)
             make.centerY.equalTo(self.iconImageView)
             make.width.height.equalTo(31)
         }
 
         //红点
-        self.redPointView.snp_makeConstraints { (make) in
-            make.centerX.equalTo(self.rightImageView.snp_right).offset(1)
-            make.centerY.equalTo(self.rightImageView.snp_top).offset(1)
+        self.redPointView.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.rightImageView.snp.right).offset(1)
+            make.centerY.equalTo(self.rightImageView.snp.top).offset(1)
             make.width.height.equalTo(redPoint_Width)
         }
     }
@@ -95,15 +95,15 @@ class CWMenuCell: UITableViewCell {
         
         if let rightIconURL = menuItem.rightIconURL {
             
-            self.rightImageView.snp_updateConstraints(closure: { (make) in
-                make.width.equalTo(self.rightImageView.snp_width)
+            self.rightImageView.snp.updateConstraints(closure: { (make) in
+                make.width.equalTo(self.rightImageView.snp.width)
             })
             let url = URL(string: rightIconURL)!
             self.rightImageView.yy_setImageWithURL(url, placeholder: nil)
         
         } else {
         
-            self.rightImageView.snp_updateConstraints(closure: { (make) in
+            self.rightImageView.snp.updateConstraints(closure: { (make) in
                 make.width.equalTo(0)
             })
         }

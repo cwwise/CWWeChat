@@ -10,7 +10,7 @@ import UIKit
 
 class CWUIUtility: NSObject {
     
-    class func textHeightOfText(_ text: NSString?, width: CGFloat, attributes:[String:AnyObject] ) -> CGFloat {
+    class func textHeightOfText(_ text: String?, width: CGFloat, attributes:[String:AnyObject] ) -> CGFloat {
         
         guard let text = text else {
             return 0

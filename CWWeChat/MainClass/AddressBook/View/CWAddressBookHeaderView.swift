@@ -33,7 +33,7 @@ class CWAddressBookHeaderView: UITableViewHeaderFooterView {
     }
     
     func p_addSnap() {
-        self.titleLabel.snp_makeConstraints { (make) in
+        self.titleLabel.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 10, 0, 10))
         }
     }

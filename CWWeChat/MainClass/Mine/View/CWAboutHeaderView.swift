@@ -50,7 +50,7 @@ class CWAboutHeaderView: UITableViewHeaderFooterView {
         imageView.snp_makeConstraints { (make) in
             make.top.equalTo(self.contentView).offset(4)
             make.centerX.equalTo(self.contentView)
-            make.bottom.equalTo(self.titleLabel.snp_top).offset(1)
+            make.bottom.equalTo(self.titleLabel.snp.top).offset(1)
             make.width.equalTo(self.imageView.snp_height).multipliedBy(1)
         }
         

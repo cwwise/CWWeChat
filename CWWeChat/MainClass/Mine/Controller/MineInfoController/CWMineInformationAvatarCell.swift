@@ -45,17 +45,17 @@ class CWMineInformationAvatarCell: UITableViewCell {
     //MARK: 添加约束
     func p_addSnap() {
         
-        self.titleLabel.snp_makeConstraints { (make) in
+        self.titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView)
             make.left.equalTo(self.contentView).offset(settingCellLeftMargin)
         }
         
         
-        self.headerImageView.snp_makeConstraints { (make) in
+        self.headerImageView.snp.makeConstraints { (make) in
             make.right.equalTo(self.contentView)
             make.top.equalTo(self.contentView).offset(8)
             make.bottom.equalTo(self.contentView).offset(-8)
-            make.width.equalTo(self.headerImageView.snp_height)
+            make.width.equalTo(self.headerImageView.snp.height)
 
         }
         

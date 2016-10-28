@@ -74,36 +74,36 @@ class CWConversationCell: UITableViewCell {
     ///计算frame
     func setupViewFrame() {
         
-        headerImageView.snp_makeConstraints { (make) in
+        headerImageView.snp.makeConstraints { (make) in
             make.left.equalTo(ChatConversationCellUI.headerImageViewLeftPadding)
             make.top.equalTo(ChatConversationCellUI.headerImageViewTopPadding)
             make.bottom.equalTo(-ChatConversationCellUI.headerImageViewTopPadding)
-            make.width.equalTo(self.headerImageView.snp_height);
+            make.width.equalTo(self.headerImageView.snp.height);
         }
         
         //用户名
-        usernameLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(self.headerImageView.snp_right).offset(10)
+        usernameLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(self.headerImageView.snp.right).offset(10)
             make.top.equalTo(self.headerImageView).offset(2.0)
-            make.right.equalTo(self.timeLabel.snp_left).offset(-5)
+            make.right.equalTo(self.timeLabel.snp.left).offset(-5)
         }
         
         //时间
-        timeLabel.snp_makeConstraints { (make) in
+        timeLabel.snp.makeConstraints { (make) in
             make.top.equalTo(usernameLabel)
             make.right.equalTo(self.contentView).offset(-ChatConversationCellUI.headerImageViewLeftPadding)
         }
         
         //详细label
-        detailInfoLabel.snp_makeConstraints { (make) in
+        detailInfoLabel.snp.makeConstraints { (make) in
             make.left.equalTo(usernameLabel)
-            make.bottom.equalTo(headerImageView.snp_bottom).offset(-2.0)
+            make.bottom.equalTo(headerImageView.snp.bottom).offset(-2.0)
             make.right.equalTo(self.contentView).offset(-ChatConversationCellUI.headerImageViewLeftPadding)
         }
         
-        badgeView.snp_makeConstraints { (make) in
-            make.centerX.equalTo(self.headerImageView.snp_right)
-            make.centerY.equalTo(self.headerImageView.snp_top)
+        badgeView.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.headerImageView.snp.right)
+            make.centerY.equalTo(self.headerImageView.snp.top)
             make.width.greaterThanOrEqualTo(BadgeViewWidth)
         }
     }

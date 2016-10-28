@@ -50,20 +50,20 @@ class CWSettingCell: UITableViewCell, CWSettingDataProtocol {
     //MARK: 添加约束
     func p_addSnap() {
     
-        self.titleLabel.snp_makeConstraints { (make) in
+        self.titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView)
             make.left.equalTo(self.contentView).offset(settingCellLeftMargin)
         }
         
-        self.rightLabel.snp_makeConstraints { (make) in
+        self.rightLabel.snp.makeConstraints { (make) in
             make.right.equalTo(self.contentView)
             make.centerY.equalTo(self.contentView)
-            make.left.greaterThanOrEqualTo(self.titleLabel.snp_right).offset(20)
+            make.left.greaterThanOrEqualTo(self.titleLabel.snp.right).offset(20)
         }
         
-        self.rightImageView.snp_makeConstraints { (make) in
+        self.rightImageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView)
-            make.right.equalTo(self.rightLabel.snp_left).offset(-2)
+            make.right.equalTo(self.rightLabel.snp.left).offset(-2)
         }
         
     }
@@ -83,12 +83,12 @@ class CWSettingCell: UITableViewCell, CWSettingDataProtocol {
         
         if settingItem.showDisclosureIndicator == false {
             self.accessoryType = .none
-            self.rightLabel.snp_updateConstraints(closure: { (make) in
+            self.rightLabel.snp.updateConstraints(closure: { (make) in
                 make.right.equalTo(self.contentView).offset(-15)
             })
         } else {
             self.accessoryType = .disclosureIndicator
-            self.rightLabel.snp_updateConstraints(closure: { (make) in
+            self.rightLabel.snp.updateConstraints(closure: { (make) in
                 make.right.equalTo(self.contentView)
             })
         }

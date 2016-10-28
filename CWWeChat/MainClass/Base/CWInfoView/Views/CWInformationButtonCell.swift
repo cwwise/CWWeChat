@@ -41,7 +41,7 @@ class CWInformationButtonCell: UITableViewCell {
     }
     
     func p_addSnap() {
-        self.button.snp_makeConstraints { (make) in
+        self.button.snp.makeConstraints { (make) in
             make.centerX.top.equalTo(self.contentView)
             make.width.equalTo(self.contentView).multipliedBy(0.92)
             make.height.equalTo(self.contentView).multipliedBy(0.78)

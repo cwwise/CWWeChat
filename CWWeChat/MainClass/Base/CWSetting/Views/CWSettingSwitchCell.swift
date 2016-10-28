@@ -52,7 +52,7 @@ class CWSettingSwitchCell: UITableViewCell, CWSettingDataProtocol {
     //MARK: 添加约束
     func p_addSnap() {
         
-        self.titleLabel.snp_makeConstraints { (make) in
+        self.titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView)
             make.left.equalTo(self.contentView).offset(settingCellLeftMargin)
             make.right.lessThanOrEqualTo(self.contentView).offset(-settingCellLeftMargin)

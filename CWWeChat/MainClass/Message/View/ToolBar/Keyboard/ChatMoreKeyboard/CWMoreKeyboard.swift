@@ -88,7 +88,7 @@ class CWMoreKeyboard: UIView {
     }
     
     func addsnap() {
-        collectionView.snp_makeConstraints { (make) in
+        collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(height_top_margin)
             make.left.right.equalTo(self)
             make.height.equalTo(height_collectionView)

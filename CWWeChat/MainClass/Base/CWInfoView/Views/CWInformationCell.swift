@@ -35,7 +35,7 @@ class CWInformationCell: UITableViewCell {
     }
     
     func p_addSnap() {
-        self.subTitleLabel.snp_makeConstraints { (make) in
+        self.subTitleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView)
             make.right.equalTo(self.contentView)
             make.left.equalTo(self.contentView).offset(left_infocell_subTitle_space)

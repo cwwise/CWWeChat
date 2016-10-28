@@ -13,7 +13,7 @@ class CWSettingFooterTitleView: CWSettingHeaderTitleView {
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.titleLabel.snp_updateConstraints { (make) in
+        self.titleLabel.snp.updateConstraints { (make) in
             make.top.equalTo(self.contentView).offset(5)
         }
    

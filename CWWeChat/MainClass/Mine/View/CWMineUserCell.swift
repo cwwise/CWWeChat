@@ -60,27 +60,27 @@ class CWMineUserCell: UITableViewCell {
     //MARK: 添加约束
     func p_addSnap() {
         //头像
-        avatarImageView.snp_makeConstraints { (make) in
+        avatarImageView.snp.makeConstraints { (make) in
             make.left.equalTo(mine_space_x)
             make.top.equalTo(mine_space_y)
-            make.width.equalTo(self.avatarImageView.snp_height)
+            make.width.equalTo(self.avatarImageView.snp.height)
             make.centerY.equalTo(self.contentView)
         }
         
         //昵称
-        nikenameLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(self.avatarImageView.snp_right).offset(mine_space_x)
-            make.bottom.equalTo(self.avatarImageView.snp_centerY).offset(-3.5)
+        nikenameLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(self.avatarImageView.snp.right).offset(mine_space_x)
+            make.bottom.equalTo(self.avatarImageView.snp.centerY).offset(-3.5)
         }
         
         //用户名
-        usernameLabel.snp_makeConstraints { (make) in
+        usernameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.nikenameLabel)
-            make.top.equalTo(self.avatarImageView.snp_centerY).offset(5.0)
+            make.top.equalTo(self.avatarImageView.snp.centerY).offset(5.0)
         }
         
         //二维码
-        QRImageView.snp_makeConstraints { (make) in
+        QRImageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView)
             make.width.height.equalTo(18)
             make.right.equalTo(self.contentView)

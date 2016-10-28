@@ -73,7 +73,7 @@ class CWChatViewController: CWBaseMessageViewController {
         let voiceIndicatorView = CWVoiceIndicatorView()
         voiceIndicatorView.isHidden = true
         self.view.addSubview(voiceIndicatorView)
-        voiceIndicatorView.snp_makeConstraints(closure: { (make) in
+        voiceIndicatorView.snp.makeConstraints(closure: { (make) in
             make.centerX.equalTo(self.view)
             make.centerY.equalTo(self.view).offset(-20)
             make.size.equalTo(CGSize(width: 150, height: 150))

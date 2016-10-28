@@ -29,13 +29,14 @@ class CWBaseMessageHandle: NSObject {
     
     //解析到消息后，应该先下载。还需要优化。
     func analyMessageContent(_ message: XMPPMessage) -> (String, CWMessageType) {
-        let body = message.elementForName("body")
-        let type = body.attributeForName("type")
-        if type == nil {
-            return (body.stringValue(), CWMessageType(rawValue: 1)!)
+        let body = message.forName("body")!
+        let type = body.attribute(forName: "type")
+        
+        if type == nil  {
+            return (body.stringValue!, CWMessageType(rawValue: 1)!)
         }
-        let typeValue = Int(type.stringValue())!
-        return (body.stringValue(), CWMessageType(rawValue: typeValue)!)
+        let typeValue = Int((type?.stringValue)!)!
+        return (body.stringValue!, CWMessageType(rawValue: typeValue)!)
     }
     
     //这是争对第二种方式获取消息的类型
@@ -52,8 +53,9 @@ class CWBaseMessageHandle: NSObject {
             let regex = try NSRegularExpression(pattern: "^\\):\\)1[0-3].{32}", options: [.caseInsensitive,.dotMatchesLineSeparators])
             let result = regex.numberOfMatches(in: body, options: .reportProgress, range: NSRange(location: 0, length: body.characters.count))
             if result > 0 {
-                let index = body.characters.index(body.startIndex, offsetBy: 4)
-                let content = body.substring(from: <#T##String.CharacterView corresponding to `index`##String.CharacterView#>.index(index, offsetBy: 1))
+                
+                let index = body.index(body.startIndex, offsetBy: 4)
+                let content = body.substring(from: index)
                 switch body[index] {
                 case "0":
                     return (content, .image)
@@ -67,7 +69,7 @@ class CWBaseMessageHandle: NSObject {
             }
             
         } catch let error as NSError {
-            CWLogError(error.description)
+            CWLogError(error.description as AnyObject)
             return (body, .text)
         }
         

@@ -69,29 +69,29 @@ class CWContactDetailUserCell: UITableViewCell {
     //MARK: 添加约束
     func p_addSnap() {
         //头像
-        avatarImageView.snp_makeConstraints { (make) in
+        avatarImageView.snp.makeConstraints { (make) in
             make.left.equalTo(mine_space_x)
             make.top.equalTo(mine_space_y)
-            make.width.equalTo(self.avatarImageView.snp_height)
+            make.width.equalTo(self.avatarImageView.snp.height)
             make.centerY.equalTo(self.contentView)
         }
         
         //用户名
-        usernameLabel.snp_makeConstraints { (make) in
-            make.top.equalTo(self.avatarImageView.snp_top).offset(3.0)
-            make.left.equalTo(self.avatarImageView.snp_right).offset(mine_space_y)
+        usernameLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.avatarImageView.snp.top).offset(3.0)
+            make.left.equalTo(self.avatarImageView.snp.right).offset(mine_space_y)
         }
         
         //用户名
-        wxnameLabel.snp_makeConstraints { (make) in
+        wxnameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.usernameLabel)
-            make.top.equalTo(self.usernameLabel.snp_bottom).offset(5.0)
+            make.top.equalTo(self.usernameLabel.snp.bottom).offset(5.0)
         }
         
         //昵称
-        nikenameLabel.snp_makeConstraints { (make) in
+        nikenameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.usernameLabel)
-            make.top.equalTo(self.wxnameLabel.snp_bottom).offset(3.0)
+            make.top.equalTo(self.wxnameLabel.snp.bottom).offset(3.0)
         }
     }
     
