@@ -41,7 +41,7 @@ class CWImageMessageCell: CWBaseMessageCell {
             let sendImage = CWAsset.Message_sender_bg.image.resizableImage()
             messageImageView.backgroundImage = sendImage
             
-            messageImageView.snp.remakeConstraints(closure: { (make) in
+            messageImageView.snp.remakeConstraints({ (make) in
                 make.top.equalTo(self.messageBackgroundView)
                 make.right.equalTo(self.messageBackgroundView)
             })
@@ -51,7 +51,7 @@ class CWImageMessageCell: CWBaseMessageCell {
             let receiveImage = CWAsset.Message_receiver_bg.image.resizableImage()
             messageImageView.backgroundImage = receiveImage
             
-            messageImageView.snp.remakeConstraints(closure: { (make) in
+            messageImageView.snp.remakeConstraints({ (make) in
                 make.top.equalTo(self.messageBackgroundView)
                 make.left.equalTo(self.messageBackgroundView)
             })

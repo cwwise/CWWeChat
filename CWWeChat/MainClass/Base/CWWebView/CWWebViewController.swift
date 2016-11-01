@@ -95,7 +95,6 @@ class CWWebViewController: UIViewController {
         
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &webViewContentKey)
         webView.scrollView.addObserver(self, forKeyPath: "backgroundColor", options: .new, context: &webViewBackgroundColorKey)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,9 +105,11 @@ class CWWebViewController: UIViewController {
         self.webView.load(request)
     }
     
+    
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-        if context == &webViewContentKey && object === self.webView {
+        if context == &webViewContentKey {
             self.progressView.alpha = 1
             self.progressView.setProgress(Float(webView.estimatedProgress), animated: true)
             
@@ -123,9 +124,10 @@ class CWWebViewController: UIViewController {
             }
         }
         
-        else if context == &webViewBackgroundColorKey && object === self.webView.scrollView {
-            let color = change!["new"] as! UIColor
-            if !CGColorEqualToColor(color.cgColor, UIColor.clear.cgColor) {
+        else if context == &webViewBackgroundColorKey {
+            
+            let color = change![NSKeyValueChangeKey.newKey] as! UIColor
+            if color.cgColor != UIColor.clear.cgColor {
                 self.webView.scrollView.backgroundColor = UIColor.clear
             }
         }

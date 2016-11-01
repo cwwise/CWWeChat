@@ -18,8 +18,8 @@ final class CWChatMessageDataSource: NSObject, UITableViewDataSource {
     
     init(tableView: UITableView) {
         self.tableView = tableView
-        tableView.registerReusableCell(CWBaseMessageCell)
-        tableView.registerReusableCell(CWTextMessageCell)
+        tableView.registerReusableCell(CWBaseMessageCell.self)
+        tableView.registerReusableCell(CWTextMessageCell.self)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

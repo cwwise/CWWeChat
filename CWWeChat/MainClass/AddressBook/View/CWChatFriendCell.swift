@@ -77,7 +77,7 @@ class CWChatFriendCell: UITableViewCell {
         if let avatarPath = userModel.avatarPath {
             self.avatarImageView.image = UIImage(named: avatarPath)
         } else {
-            self.avatarImageView.yy_setImageWithURL(URL(string: userModel.avatarURL!), placeholder: defaultHeadeImage)
+            self.avatarImageView.yy_setImage(with: URL(string: userModel.avatarURL!), placeholder: defaultHeadeImage)
         }
         self.usernameLabel.text = userModel.nikeName;
     }

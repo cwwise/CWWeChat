@@ -107,7 +107,8 @@ class CWChatDBMessageStore: NSObject {
             
             try messageDB.run(messageTable.create(ifNotExists: true) { t in
                 
-                t.column(id, primaryKey: .Autoincrement)
+                t.column(id, primaryKey: .autoincrement)
+
                 t.column(messageid, unique: true)
                 t.column(uId)
                 t.column(friendId)
@@ -174,7 +175,7 @@ class CWChatDBMessageStore: NSObject {
                 //                upload_status <- message.messageUploadState.rawValue,
                 ext1 <- extString)
             
-            try messageDB.run(sql)
+            let _ = try messageDB.run(sql)
             CWLogDebug("插入消息成功: \(message.messageID)")
             recordDBStore.addRecordByMessage(message, needUnread: message.messageOwnerType != .myself)
         } catch {
@@ -207,12 +208,12 @@ extension CWChatDBMessageStore {
         let dateInterval = "\(fromDate.timeIntervalSince1970)"
         let query = messageTable.filter(uId == userID && friendId==partnerID && date < dateInterval).order(date.desc).limit(count)
         do {
-            let count = messageDB.scalar(messageTable.filter(uId == userID && friendId==partnerID).count)
+            let count = try messageDB.scalar(messageTable.filter(uId == userID && friendId==partnerID).count)
             let result = try messageDB.prepare(query)
             
             var listData = [CWMessageModel]()
             //需要反转，得到正确的顺序
-            for row in result.reverse() {
+            for row in result.reversed() {
                 let message = createDBMessageByFMResult(row)
                 listData.append(message)
             }
@@ -234,7 +235,8 @@ extension CWChatDBMessageStore {
      */
     func lastMessageByUserID(_ userID:String, partnerID:String) -> CWMessageModel? {
         let query = messageTable.filter(uId == userID && friendId==partnerID).order(date.desc).limit(1)
-        if let row = messageDB.pluck(query) {
+        //待修改
+        if let row = try! messageDB.pluck(query) {
             let message = createDBMessageByFMResult(row)
             return message
         } else {
@@ -264,14 +266,14 @@ extension CWChatDBMessageStore {
         var messageContent = CWMessageContent()
         let messageType = CWMessageType(rawValue: row[msg_type])!
         switch messageType {
-        case .Text:
+        case .text:
             messageContent = CWTextMessageContent(content: string)
-        case .Image:
+        case .image:
             messageContent = CWImageMessageContent(imagePath: string) as CWImageMessageContent
             let sizeString = row[ext1]
             let imageMessageContent = messageContent as! CWImageMessageContent
             imageMessageContent.imageSize = CGSizeFromString(sizeString)
-        case .Voice:
+        case .voice:
             messageContent = CWVoiceMessageContent(voicePath: string) as CWVoiceMessageContent
             
         default:
@@ -313,7 +315,7 @@ extension CWChatDBMessageStore {
             //消息读取状态
             //消息播放状态
             //消息上传状态
-            try messageDB.run(filter.update(send_status <- message.messageSendState.rawValue,
+           _ = try messageDB.run(filter.update(send_status <- message.messageSendState.rawValue,
 //                received_status <- message.messageReadState.rawValue,
 //                play_status <- (message.messagePlayState.rawValue>=1),
                 upload_status <- message.messageUploadState.rawValue))
@@ -373,7 +375,7 @@ extension CWChatDBMessageStore {
      */
     func deleteAllMessage() {
         do {
-            try messageDB.run(messageTable.delete())
+            _ = try messageDB.run(messageTable.delete())
         } catch {
             print(error)
         }

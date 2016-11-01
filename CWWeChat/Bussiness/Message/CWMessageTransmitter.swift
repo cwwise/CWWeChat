@@ -44,7 +44,7 @@ class CWMessageTransmitter: NSObject {
         
         var receipte: XMPPElementReceipt?
         CWPlayMessageAudio.playSoundEffect("sendmsg.caf")
-        self.xmppStream.sendElement(messageElement, andGetReceipt: &receipte)
+        self.xmppStream.send(messageElement, andGet: &receipte)
         guard let elementReceipte = receipte else {
             return false
         }
@@ -64,23 +64,23 @@ class CWMessageTransmitter: NSObject {
     func messageElement(_ body: String, to: String, messageId: String, type:Int = 1, expand: String? = nil) -> XMPPMessage {
         //消息内容
         let message = XMPPMessage(type: "chat", elementID: messageId)
-        message.addAttributeWithName("to", stringValue: chatJidString(to))
+        message?.addAttribute(withName: "to", stringValue: chatJidString(to))
 //        message.addReceiptRequest()
         
         //有两种方式添加消息类型
         //第一种是在消息body中添加type的属性。
-        let bodyElement = DDXMLElement.elementWithName("body", stringValue: body) as! DDXMLElement
-        bodyElement.addAttributeWithName("type", integerValue: type)
+        let bodyElement = DDXMLElement.element(withName: "body", stringValue: body) as! DDXMLElement
+        bodyElement.addAttribute(withName: "type", integerValue: type)
         if let expand = expand {
-            bodyElement.addAttributeWithName("expand", stringValue: expand)
+            bodyElement.addAttribute(withName: "expand", stringValue: expand)
         }
         
-        message.addChild(bodyElement)
+        message?.addChild(bodyElement)
         
         //第二种根据消息不同在消息body添加前缀,在CWMessageDispatchOperation发送中添加。
 //        message.addBody(body)
-        CWLogDebug(message.description)
-        return XMPPMessage(fromElement: message)
+        CWLogDebug((message?.description)!)
+        return XMPPMessage(from: message)
     }
     
     

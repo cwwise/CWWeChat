@@ -134,20 +134,20 @@ class CWBaseMessageCell: UITableViewCell {
     func p_addSnap() {
         
         //头像
-        self.avatarButton.snp_makeConstraints { (make) in
+        self.avatarButton.snp.makeConstraints { (make) in
             make.right.equalTo(self.contentView).offset(-kAvaterSpaceX)
             make.top.equalTo(self.contentView).offset(kAvaterSpaceY)
             make.width.height.equalTo(kAvaterWidth);
         }
         
-        self.usernameLabel.snp_makeConstraints { (make) in
+        self.usernameLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.avatarButton).offset(-kNamelabelSpaceY)
-            make.right.equalTo(self.avatarButton.snp_left).offset(-kNameLabelSpaceX)
+            make.right.equalTo(self.avatarButton.snp.left).offset(-kNameLabelSpaceX)
         }
     
-        self.messageBackgroundView.snp_makeConstraints { (make) in
-            make.right.equalTo(self.avatarButton.snp_left).offset(-kMessagebgSpaceX);
-            make.top.equalTo(self.usernameLabel.snp_bottom).offset(-kMessagebgSpaceY);
+        self.messageBackgroundView.snp.makeConstraints { (make) in
+            make.right.equalTo(self.avatarButton.snp.left).offset(-kMessagebgSpaceX);
+            make.top.equalTo(self.usernameLabel.snp.bottom).offset(-kMessagebgSpaceY);
         }
     }
     
@@ -166,10 +166,10 @@ class CWBaseMessageCell: UITableViewCell {
 
             let string = CWUserAccount.sharedUserAccount().chatuser.avatarURL!
             
-            self.avatarButton.yy_setBackgroundImageWithURL(URL(string:string), forState: .Normal, placeholder: defaultHeadeImage)
+            self.avatarButton.yy_setBackgroundImage(with: URL(string:string), for: .normal, placeholder: defaultHeadeImage)
             self.avatarButton.left = Screen_Width - kChatAvatarMarginLeft - kAvaterWidth
             
-            self.avatarButton.snp_remakeConstraints(closure: { (make) in
+            self.avatarButton.snp.remakeConstraints({ (make) in
                 make.width.height.equalTo(kAvaterWidth);
                 make.top.equalTo(self.contentView).offset(kAvaterSpaceY)
                 make.right.equalTo(self.contentView).offset(-kAvaterSpaceX)
@@ -180,9 +180,9 @@ class CWBaseMessageCell: UITableViewCell {
             let userModel = CWContactManager.findContact(message.messageTargetId!)
             let string = userModel!.avatarURL!
             
-            self.avatarButton.yy_setBackgroundImageWithURL(URL(string:string), forState: .Normal, placeholder: defaultHeadeImage)
+            self.avatarButton.yy_setBackgroundImage(with: URL(string:string), for: .normal, placeholder: defaultHeadeImage)
             
-            self.avatarButton.snp_remakeConstraints(closure: { (make) in
+            self.avatarButton.snp.remakeConstraints({ (make) in
                 make.width.height.equalTo(kAvaterWidth);
                 make.top.equalTo(self.contentView).offset(kAvaterSpaceY)
                 make.left.equalTo(self.contentView).offset(kAvaterSpaceX)
@@ -190,20 +190,20 @@ class CWBaseMessageCell: UITableViewCell {
             
         }
         
-        self.usernameLabel.snp_updateConstraints { (make) in
+        self.usernameLabel.snp.updateConstraints { (make) in
             make.height.equalTo(0)
         }
         
         if self.message?.messageOwnerType != message.messageOwnerType {
             
-            self.messageBackgroundView.snp_remakeConstraints(closure: { (make) in
+            self.messageBackgroundView.snp.remakeConstraints({ (make) in
                 
-                if message.messageOwnerType == .Myself {
-                    make.right.equalTo(self.avatarButton.snp_left).offset(-kMessagebgSpaceX)
+                if message.messageOwnerType == .myself {
+                    make.right.equalTo(self.avatarButton.snp.left).offset(-kMessagebgSpaceX)
                 } else {
-                    make.left.equalTo(self.avatarButton.snp_right).offset(kMessagebgSpaceX)
+                    make.left.equalTo(self.avatarButton.snp.right).offset(kMessagebgSpaceX)
                 }
-                make.top.equalTo(self.usernameLabel.snp_bottom).offset(-kMessagebgSpaceY);
+                make.top.equalTo(self.usernameLabel.snp.bottom).offset(-kMessagebgSpaceY);
                 
             })
         }

@@ -47,14 +47,14 @@ class CWAboutHeaderView: UITableViewHeaderFooterView {
     
     func p_addSnap() {
         
-        imageView.snp_makeConstraints { (make) in
+        imageView.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView).offset(4)
             make.centerX.equalTo(self.contentView)
             make.bottom.equalTo(self.titleLabel.snp.top).offset(1)
-            make.width.equalTo(self.imageView.snp_height).multipliedBy(1)
+            make.width.equalTo(self.imageView.snp.height).multipliedBy(1)
         }
         
-        titleLabel.snp_makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             make.height.equalTo(25)
             make.bottom.equalTo(self.contentView).offset(-10)
             make.left.right.equalTo(self.contentView)

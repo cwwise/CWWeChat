@@ -13,7 +13,7 @@ protocol Reusable: class {
 }
 
 extension Reusable  {
-    static var reuseIdentifier: String { return String(describing: Self) }
+    static var reuseIdentifier: String { return String(describing: self) }
 }
 
 extension UITableView {

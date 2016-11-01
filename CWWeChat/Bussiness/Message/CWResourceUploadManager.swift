@@ -32,7 +32,7 @@ class CWResourceUploadManager: NSObject {
     func uploadResource(_ fileName: String, fileType: CWMessageType = .image, handle: @escaping UploadImageHandle) {
         
         //
-        let progressHandler = { (string: String!, progess: Float!) in
+        let progressHandler = { (string: String?, progess: Float!) in
             handle(progess,false)
         }
         

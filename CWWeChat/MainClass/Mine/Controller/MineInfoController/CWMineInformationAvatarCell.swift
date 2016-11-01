@@ -67,7 +67,7 @@ class CWMineInformationAvatarCell: UITableViewCell {
         if let rightImagePath = settingItem.rightImagePath {
             headerImageView.image = UIImage(named: rightImagePath)
         } else if let rightImageURL = settingItem.rightImageURL  {
-            headerImageView.yy_setImageWithURL(URL(string: rightImageURL), placeholder: defaultHeadeImage)
+            headerImageView.yy_setImage(with: URL(string: rightImageURL), placeholder: defaultHeadeImage)
         } else {
             headerImageView.image = nil
         }

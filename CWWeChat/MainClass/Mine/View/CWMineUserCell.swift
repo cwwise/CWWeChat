@@ -95,7 +95,7 @@ class CWMineUserCell: UITableViewCell {
         }
     
         let url = URL(string: userModel.avatarURL!)
-        self.avatarImageView.yy_setImageWithURL(url, placeholder: defaultHeadeImage)
+        self.avatarImageView.yy_setImage(with: url, placeholder: defaultHeadeImage)
 
         nikenameLabel.text = userModel.nikeName
         if let userName = userModel.userName {

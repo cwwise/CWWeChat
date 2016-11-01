@@ -160,13 +160,13 @@ class CWLoginViewController: UIViewController, CWToastShowProtocol {
             
         }
         
-        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.mode = .Indeterminate
-        hud.labelText = "Loading..."
-        DispatchQueue.global(priority: 0).async { 
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.mode = .indeterminate
+        hud.label.text = "Loading..."
+        DispatchQueue.global().async {
             sleep(3)
             dispatch_async_safely_to_main_queue({ 
-                hud.hide(true)
+                hud.hide(animated: true)
                 let appdelegate = UIApplication.shared.delegate as! AppDelegate
                 appdelegate.loginSuccess()
             })

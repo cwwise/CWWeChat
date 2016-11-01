@@ -44,12 +44,12 @@ class CWTextMessageCell: CWBaseMessageCell {
             self.messageBackgroundView.image = sendImage
             self.messageBackgroundView.highlightedImage = sendImageHL
             
-            self.messageLabel.snp.remakeConstraints(closure: { (make) in
+            self.messageLabel.snp.remakeConstraints({ (make) in
                 make.right.equalTo(self.messageBackgroundView).offset(-MSG_SPACE_RIGHT);
                 make.top.equalTo(self.messageBackgroundView).offset(MSG_SPACE_TOP);
             })
             
-            self.messageBackgroundView.snp.updateConstraints(closure: { (make) in
+            self.messageBackgroundView.snp.updateConstraints({ (make) in
                 make.left.equalTo(self.messageLabel).offset(-MSG_SPACE_LEFT);
                 make.bottom.equalTo(self.messageLabel).offset(MSG_SPACE_BTM);
             })
@@ -62,12 +62,12 @@ class CWTextMessageCell: CWBaseMessageCell {
             self.messageBackgroundView.image = sendImage
             self.messageBackgroundView.highlightedImage = sendImageHL
             
-            self.messageLabel.snp.remakeConstraints(closure: { (make) in
+            self.messageLabel.snp.remakeConstraints({ (make) in
                 make.left.equalTo(self.messageBackgroundView).offset(MSG_SPACE_LEFT);
                 make.top.equalTo(self.messageBackgroundView).offset(MSG_SPACE_TOP);
             })
             
-            self.messageBackgroundView.snp.updateConstraints(closure: { (make) in
+            self.messageBackgroundView.snp.updateConstraints({ (make) in
                 make.right.equalTo(self.messageLabel).offset(MSG_SPACE_RIGHT);
                 make.bottom.equalTo(self.messageLabel).offset(MSG_SPACE_BTM);
             })

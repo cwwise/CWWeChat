@@ -9,8 +9,8 @@
 import UIKit
 import Alamofire
 
-class CWHTTPSessionManager: Manager {
-
-    
-    
-}
+//class CWHTTPSessionManager: Alamofire. {
+//
+//    
+//    
+//}

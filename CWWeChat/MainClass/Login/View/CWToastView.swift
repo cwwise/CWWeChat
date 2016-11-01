@@ -74,7 +74,7 @@ open class CWToastView: UIView {
         super.init(frame: frame)
         
         //背景颜色
-        self.backgroundColor = UIColor(hexString: "#111111")
+        self.backgroundColor = UIColor("#111111")
         self.clipsToBounds = true
         self.layer.cornerRadius = 5
         self.alpha = 0.7

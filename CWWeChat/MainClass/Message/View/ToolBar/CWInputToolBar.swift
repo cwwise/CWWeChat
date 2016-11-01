@@ -73,9 +73,9 @@ class CWInputToolBar: UIView {
         let recordButton = UIButton(type: .custom)
         recordButton.setTitle("按住     说话", for: UIControlState())
         recordButton.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
-        recordButton.setBackgroundImage(UIImage.imageWithColor(UIColor(hexString: "#F6F6F6")), for: .Normal)
+        recordButton.setBackgroundImage(UIImage.imageWithColor(UIColor("#F6F6F6")), for: .normal)
         recordButton.setTitleColor(UIColor.black, for: UIControlState())
-        recordButton.layer.borderColor = UIColor(hexString: "#DADADA").CGColor
+        recordButton.layer.borderColor = UIColor("#DADADA").cgColor
         recordButton.layer.borderWidth = 1
         recordButton.layer.cornerRadius = 5.0
         recordButton.layer.masksToBounds = true
@@ -140,7 +140,7 @@ class CWInputToolBar: UIView {
         
         context?.beginPath()
         context?.move(to: CGPoint(x: 0, y: 0))
-        context.addLine(to: CGPoint(x: Screen_Width, y: 0))
+        context?.addLine(to: CGPoint(x: Screen_Width, y: 0))
         context?.closePath()
         context?.strokePath()
     }

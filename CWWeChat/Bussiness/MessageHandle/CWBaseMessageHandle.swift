@@ -69,7 +69,7 @@ class CWBaseMessageHandle: NSObject {
             }
             
         } catch let error as NSError {
-            CWLogError(error.description as AnyObject)
+            CWLogError((error.description as AnyObject) as! String)
             return (body, .text)
         }
         

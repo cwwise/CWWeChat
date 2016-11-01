@@ -54,7 +54,7 @@ extension CWMessageCracker: XMPPStreamDelegate {
     /**
      收到消息 并处理
      */
-    func xmppStream(_ sender: XMPPStream!, didReceiveMessage message: XMPPMessage!) {
+    func xmppStream(_ sender: XMPPStream!, didReceive message: XMPPMessage!) {
         //如果是聊天消息
         if message.isChatMessage() {
             
@@ -95,7 +95,7 @@ extension CWMessageCracker: CWMessageHandleProtocol {
         }
         
         //检查delegate 是否存在，存在就执行方法
-        guard let multicastDelegate = self.valueForKey("multicastDelegate") as? GCDMulticastDelegate else {
+        guard let multicastDelegate = self.value(forKey: "multicastDelegate") as? GCDMulticastDelegate else {
             return
         }
         
@@ -104,7 +104,7 @@ extension CWMessageCracker: CWMessageHandleProtocol {
         var delegate: AnyObject?
         var queue: DispatchQueue?
         
-        while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) {
+        while delegateEnumerator?.getNextDelegate(&delegate, delegateQueue: &queue) != nil {
             //执行Delegate的方法
             if let delegate = delegate as? CWBaseMessageViewController {
 
@@ -127,7 +127,7 @@ extension CWMessageCracker: CWMessageHandleProtocol {
     func inspectChatViewControllerFront() -> Bool {
         
         //检查delegate 是否存在，存在就执行方法
-        guard let multicastDelegate = self.valueForKey("multicastDelegate") as? GCDMulticastDelegate else {
+        guard let multicastDelegate = self.value(forKey: "multicastDelegate") as? GCDMulticastDelegate else {
             return false
         }
         
@@ -136,6 +136,6 @@ extension CWMessageCracker: CWMessageHandleProtocol {
         var delegate: AnyObject?
         var queue: DispatchQueue?
         //通过GCDMulticastDelegate类 来检查。
-        return delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue, ofClass: CWChatViewController.self)
+        return delegateEnumerator!.getNextDelegate(&delegate, delegateQueue: &queue, of: CWChatViewController.self)
     }
 }

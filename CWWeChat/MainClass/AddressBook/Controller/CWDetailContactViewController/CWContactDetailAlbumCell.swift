@@ -61,9 +61,9 @@ class CWContactDetailAlbumCell: UITableViewCell {
             }
             
             let imageURL = URL(string: imageString)!
-            imageView?.yy_setImageWithURL(imageURL, placeholder: nil)
+            imageView?.yy_setImage(with: imageURL, placeholder: nil)
             
-            imageView?.snp.makeConstraints(closure: { (make) in
+            imageView?.snp.makeConstraints({ (make) in
                 make.top.equalTo(self.contentView).offset(spaceY);
                 make.bottom.equalTo(self.contentView).offset(-spaceY);
                 make.width.equalTo(imageView!.snp.height);

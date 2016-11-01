@@ -11,8 +11,11 @@ import UIKit
 extension CWAddressBookViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        UIApplication.shared.setStatusBarStyle(.default, animated: true)
         self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -20,7 +23,6 @@ extension CWAddressBookViewController: UISearchBarDelegate {
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        UIApplication.shared.setStatusBarStyle(.lightContent, animated: true)
         self.tabBarController?.tabBar.isHidden = false
     }
     

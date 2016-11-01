@@ -19,7 +19,7 @@ extension UIViewController {
             return
         }
         
-        dispatch_once(&Static.token) {
+        let justAOneTimeThing: () = {
             let originalSelector = #selector(UIViewController.viewWillAppear(_:))
             let swizzledSelector = #selector(UIViewController.cw_viewWillAppear(_:))
             swizzledMethod(originalSelector, swizzledSelector: swizzledSelector)
@@ -28,8 +28,9 @@ extension UIViewController {
             let originalDisSelector = #selector(UIViewController.viewWillDisappear(_:))
             let swizzledDisSelector = #selector(UIViewController.cw_viewWillDisappear(_:))
             swizzledMethod(originalDisSelector, swizzledSelector: swizzledDisSelector)
-
-        }
+        }()
+        
+        justAOneTimeThing
     }
     
     fileprivate class func swizzledMethod(_ originalSelector: Selector, swizzledSelector: Selector) {

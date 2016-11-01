@@ -52,7 +52,7 @@ class CWPhotoCollectionViewCell: UICollectionViewCell {
     func photoFill() {
         
         let url = URL(string: photoURL)
-        scrollView.imageView.yy_setImageWithURL(url, placeholder: nil)
+        scrollView.imageView.yy_setImage(with: url, placeholder: nil)
 
     }
     

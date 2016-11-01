@@ -69,22 +69,25 @@ class CWMoreKeyboard: UIView {
     
     init() {
         super.init(frame:CGRect.zero)
-        backgroundColor = UIColor(hexString: "#F4F4F6")
+        backgroundColor = UIColor("#F4F4F6")
         addSubview(self.collectionView)
     }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        let context = UIGraphicsGetCurrentContext()
-        context?.setLineWidth(0.5)
-        context?.setStrokeColor(UIColor.gray.cgColor)
+        let ctx = UIGraphicsGetCurrentContext()
+        guard let context = ctx else {
+            return
+        }
+        context.setLineWidth(0.5)
+        context.setStrokeColor(UIColor.gray.cgColor)
         
-        context?.beginPath()
-        context?.move(to: CGPoint(x: 0, y: 0))
+        context.beginPath()
+        context.move(to: CGPoint(x: 0, y: 0))
         context.addLine(to: CGPoint(x: Screen_Width, y: 0))
-        context?.closePath()
-        context?.strokePath()
+        context.closePath()
+        context.strokePath()
     }
     
     func addsnap() {

@@ -70,7 +70,7 @@ class CWContactManager: NSObject {
             user.avatarURL = subJson["avatarURL"].string
             contactsData.append(user)
         }
-        DispatchQueue.global(priority: 0).async { 
+        DispatchQueue.global().async {
             self.sortContactData()
         }
     }

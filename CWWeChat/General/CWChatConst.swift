@@ -18,24 +18,24 @@ let Screen_NavigationHeight:CGFloat = 64
 
 //class CWLogger {
 
-    func CWLogInfo(_ object: AnyObject) {
-        DDLogInfo(object.description)
+    func CWLogInfo(_ object: String) {
+//        DDLogInfo(object.description)
     }
     
-    func CWLogWarn(_ object: AnyObject) {
-        DDLogWarn(object.description)
+    func CWLogWarn(_ object: String) {
+//        DDLogWarn(object.description)
     }
     
-    func CWLogError(_ object: AnyObject) {
-        DDLogError(object.description)
+    func CWLogError(_ object: String) {
+//        DDLogError(object.description)
     }
     
-    func CWLogVerbose(_ object: AnyObject) {
-        DDLogVerbose(object.description)
+    func CWLogVerbose(_ object: String) {
+//        DDLogVerbose(object.description)
     }
     
-    func CWLogDebug(_ object: AnyObject) {
-        DDLogDebug(object.description)
+    func CWLogDebug(_ object: String) {
+//        DDLogDebug(object.description)
     }
 //}
 

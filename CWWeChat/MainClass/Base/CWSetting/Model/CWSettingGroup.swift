@@ -28,8 +28,8 @@ class CWSettingGroup: NSObject {
         }
     }
     
-    fileprivate(set) var headerHeight: CGFloat = 0.5
-    fileprivate(set) var footerHeight: CGFloat = 20
+    private(set) var headerHeight: CGFloat = 0.5
+    private(set) var footerHeight: CGFloat = 20
     
     var count: Int {
         return sectionItems.count

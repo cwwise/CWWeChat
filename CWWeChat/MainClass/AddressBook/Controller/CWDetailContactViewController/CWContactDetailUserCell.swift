@@ -102,7 +102,7 @@ class CWContactDetailUserCell: UITableViewCell {
         }
         
         let url = URL(string: userModel.avatarURL!)!
-        self.avatarImageView.yy_setImageWithURL(url, placeholder: nil)
+        self.avatarImageView.yy_setImage(with: url, placeholder: nil)
         
         usernameLabel.text = userModel.userName
         if let userName = userModel.userName {

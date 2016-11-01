@@ -34,7 +34,14 @@ extension CWChatViewController: CWMessageDispatchQueueDelegate {
         }
         
         DispatchQueue.main.async(execute: {
-            cell.updateProgressView(CGFloat(progress), result: CWMessageUploadState(rawValue:Int(result))!)
+            
+            var isSuccess = 0
+            if result {
+                isSuccess = 1
+            }
+            
+            let type = CWMessageUploadState(rawValue: isSuccess)!
+            cell.updateProgressView(CGFloat(progress), result: type)
         })
         
         

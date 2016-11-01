@@ -140,7 +140,7 @@ class CWVoiceRecorder: NSObject {
         do {
             try audioSession.setActive(false)
         } catch let error as NSError {
-            CWLogError(error)
+            CWLogError(error.description)
         }
         self.operationQueue.cancelAllOperations()
     }

@@ -18,7 +18,7 @@ class ChatTimeTool: NSObject {
     
     var formatter:DateFormatter = {
        let formatter = DateFormatter()
-        formatter.timeZone = TimeZone()
+        formatter.timeZone = TimeZone.current
         return formatter
     }()
     

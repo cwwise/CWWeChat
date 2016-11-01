@@ -23,7 +23,7 @@ class CWChatImageView: UIView {
     
     let indicatorbackgroundView:UIView = {
         let indicatorbackgroundView = UIView()
-        indicatorbackgroundView.backgroundColor = UIColor(white: "#808080", alpha: 0.8)
+        indicatorbackgroundView.backgroundColor = UIColor("#80808008")
         return indicatorbackgroundView
     }()
     
@@ -97,15 +97,15 @@ class CWChatImageView: UIView {
         
         let httpHost = "http://7xsmd8.com1.z0.glb.clouddn.com/"
         let url = URL(string: httpHost+imageURL)
-        contentImageView.yy_setImageWithURL(url, placeholder: nil, options: [.ShowNetworkActivity, .IgnoreDiskCache]) { (image, url, type, stage, error) in
+        contentImageView.yy_setImage(with: url, placeholder: nil, options: [.showNetworkActivity, .ignoreDiskCache]) { (image, url, type, stage, error) in
             
             if let image = image {
                 self.contentImageView.image = image
                 let path = CWUserAccount.sharedUserAccount().pathUserChatImage(imageURL)
-                NSFileManager.saveContentImage(image, imagePath: path)
-                self.updateProgressView(1, result: .Success)
+                FileManager.saveContentImage(image, imagePath: path)
+                self.updateProgressView(1, result: .success)
             } else {
-                self.updateProgressView(0, result: .Fail)
+                self.updateProgressView(0, result: .fail)
             }            
         }
 

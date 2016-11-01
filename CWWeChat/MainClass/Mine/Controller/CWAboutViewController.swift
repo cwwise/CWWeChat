@@ -38,7 +38,7 @@ class CWAboutViewController: CWSettingViewController {
     
     func p_addSnap() {
         
-        self.lienseLabel.snp_makeConstraints { (make) in
+        self.lienseLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(self.tableView.tableFooterView!)
             make.bottom.equalTo(self.tableView.tableFooterView!).offset(-1)
         }

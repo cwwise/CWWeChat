@@ -116,10 +116,11 @@ class CWXMPPManager: NSObject {
         let userName = CWUserAccount.sharedUserAccount().userID
         let resource = CWUserAccount.sharedUserAccount().resource
 
-        xmppStream.myJID = XMPPJID.jidWithUser(userName, domain: xmppDomain, resource: resource)
+        
+        xmppStream.myJID = XMPPJID(user: userName, domain: xmppDomain, resource: resource)
     
         do {
-            try xmppStream.connectWithTimeout(timeoutInterval)
+            try xmppStream.connect(withTimeout: timeoutInterval)
         } catch let error as NSError {
             CWLogError(error.description)
         }
@@ -153,12 +154,12 @@ class CWXMPPManager: NSObject {
     //发送在线信息
     func goOnline() {
         let presence = XMPPPresence(type: CWUserStatus.Online.rawValue)
-        xmppStream.sendElement(presence)
+        xmppStream.send(presence)
     }
     
     func goOffline() {
         let offline = XMPPPresence(type: CWUserStatus.Offline.rawValue)
-        xmppStream.sendElement(offline)
+        xmppStream.send(offline)
     }
     
     // MARK: 监听
@@ -192,7 +193,7 @@ extension CWXMPPManager: XMPPStreamDelegate {
     }
     
     ///连接失败
-    func xmppStreamDidDisconnect(_ sender: XMPPStream!, withError error: NSError!) {
+    func xmppStreamDidDisconnect(_ sender: XMPPStream!, withError error: Error!) {
         CWLogDebug("断开连接")
         xmppStatusChange(.Disconnected)
     }
@@ -202,7 +203,7 @@ extension CWXMPPManager: XMPPStreamDelegate {
         CWLogDebug("连接成功")
         do {
             let password = CWUserAccount.sharedUserAccount().password
-            try xmppStream.authenticateWithPassword(password)
+            try xmppStream.authenticate(withPassword: password)
         } catch let error as NSError {
             CWLogError(error.description)
         }
@@ -223,7 +224,7 @@ extension CWXMPPManager: XMPPStreamDelegate {
     }
     
     ///收到状态信息 TODO: 好友上下线的逻辑
-    func xmppStream(_ sender: XMPPStream!, didReceivePresence presence: XMPPPresence!) {
+    func xmppStream(_ sender: XMPPStream!, didReceive presence: XMPPPresence!) {
         
         let myUser = sender.myJID.user
         
@@ -231,7 +232,7 @@ extension CWXMPPManager: XMPPStreamDelegate {
         let user = presence.from().user
     
         //用户所在的域
-        let domain = presence.from().domain
+        let _ = presence.from().domain
         
         //状态
         let type = presence.type()
@@ -253,7 +254,7 @@ extension CWXMPPManager: XMPPStreamDelegate {
         
     }
     
-    func xmppStream(_ sender: XMPPStream!, didReceiveIQ iq: XMPPIQ!) -> Bool {
+    func xmppStream(_ sender: XMPPStream!, didReceive iq: XMPPIQ!) -> Bool {
         return true
     }
     

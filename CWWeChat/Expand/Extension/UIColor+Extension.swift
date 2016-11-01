@@ -55,4 +55,10 @@ extension UIColor {
         return UIColor(hexString: "#BCBCBC")
     }
     
+    convenience init(hexString: String) {
+        self.
+        self = UIColor(hexString)
+        return self
+    }
+    
 }

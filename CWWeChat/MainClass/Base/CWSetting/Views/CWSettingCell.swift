@@ -76,19 +76,19 @@ class CWSettingCell: UITableViewCell, CWSettingDataProtocol {
         if let rightImagePath = settingItem.rightImagePath {
             rightImageView.image = UIImage(named: rightImagePath)
         } else if let rightImageURL = settingItem.rightImageURL  {
-            rightImageView.yy_setImageWithURL(URL(string: rightImageURL), placeholder: nil)
+            rightImageView.yy_setImage(with: URL(string: rightImageURL), placeholder: nil)
         } else {
             rightImageView.image = nil
         }
         
         if settingItem.showDisclosureIndicator == false {
             self.accessoryType = .none
-            self.rightLabel.snp.updateConstraints(closure: { (make) in
+            self.rightLabel.snp.updateConstraints({ (make) in
                 make.right.equalTo(self.contentView).offset(-15)
             })
         } else {
             self.accessoryType = .disclosureIndicator
-            self.rightLabel.snp.updateConstraints(closure: { (make) in
+            self.rightLabel.snp.updateConstraints({ (make) in
                 make.right.equalTo(self.contentView)
             })
         }
