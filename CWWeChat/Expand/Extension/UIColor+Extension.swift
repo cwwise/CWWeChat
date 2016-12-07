@@ -13,16 +13,16 @@ import UIColor_Hex_Swift
 extension UIColor {
     
     class func chatSystemColor() -> UIColor {
-        return UIColor(hexString: "#09BB07")
+        return UIColor( "#09BB07")
     }
     
     class func navigationBarCocor() -> UIColor {
-        return UIColor(hexString: "#141414")
+        return UIColor( "#141414")
     }
     
     //tableView背景色
     class func tableViewBackgroundColor() -> UIColor {
-        return UIColor(hexString: "#EFEFF4")
+        return UIColor( "#EFEFF4")
     }
     
     //tableView分割线颜色
@@ -32,33 +32,27 @@ extension UIColor {
     
     //searchBar Color
     class func searchBarTintColor() -> UIColor {
-        return UIColor(hexString: "#EEEEF3")
+        return UIColor( "#EEEEF3")
     }
     
     class func defaultBlackColor() -> UIColor {
-        return UIColor(hexString: "#2e3132")
+        return UIColor( "#2e3132")
     }
     
     class func searchBarBorderColor() -> UIColor {
-        return UIColor(hexString: "#EEEEF3")
+        return UIColor( "#EEEEF3")
     }
     
     class func redTipColor() -> UIColor {
-        return UIColor(hexString: "#D84042")
+        return UIColor( "#D84042")
     }
     
     class func chatBoxColor() -> UIColor {
-        return UIColor(hexString: "#F4F4F6")
+        return UIColor( "#F4F4F6")
     }
     
     class func chatBoxLineColor() -> UIColor {
-        return UIColor(hexString: "#BCBCBC")
-    }
-    
-    convenience init(hexString: String) {
-        self.
-        self = UIColor(hexString)
-        return self
+        return UIColor("#BCBCBC")
     }
     
 }

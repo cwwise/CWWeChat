@@ -190,9 +190,9 @@ class CWBaseMessageCell: UITableViewCell {
             
         }
         
-        self.usernameLabel.snp.updateConstraints { (make) in
-            make.height.equalTo(0)
-        }
+//        self.usernameLabel.snp.updateConstraints { (make) in
+//            make.height.equalTo(0)
+//        }
         
         if self.message?.messageOwnerType != message.messageOwnerType {
             

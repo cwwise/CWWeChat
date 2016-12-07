@@ -62,7 +62,7 @@ class CWVoiceIndicatorView: UIView {
         noteLabel.textAlignment = .center
         noteLabel.text = "手指上滑，取消发送"
         noteLabel.font = UIFont.systemFont(ofSize: 14)
-        noteLabel.textColor = UIColor(hexString: "81BAFE")
+        noteLabel.textColor = UIColor("81BAFE")
         noteLabel.layer.cornerRadius = 2.0
         noteLabel.layer.masksToBounds = true
         return noteLabel
@@ -134,7 +134,7 @@ extension CWVoiceIndicatorView {
         self.cancelImageView.isHidden = false
         self.tooShotPromptImageView.isHidden = true
         self.recordingView.isHidden = true
-        self.noteLabel.backgroundColor = UIColor(hexString: "#9C3638")
+        self.noteLabel.backgroundColor = UIColor("#9C3638")
         self.noteLabel.text = "松开手指，取消发送"
     }
     

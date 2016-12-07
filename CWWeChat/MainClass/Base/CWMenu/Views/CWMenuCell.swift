@@ -94,10 +94,7 @@ class CWMenuCell: UITableViewCell {
         self.titleLabel.text = menuItem.title
         
         if let rightIconURL = menuItem.rightIconURL {
-            
-            self.rightImageView.snp.updateConstraints({ (make) in
-                make.width.equalTo(self.rightImageView.snp.width)
-            })
+        
             let url = URL(string: rightIconURL)!
             self.rightImageView.yy_setImage(with: url, placeholder: nil)
         

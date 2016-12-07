@@ -47,7 +47,7 @@ class CWChatViewController: CWBaseMessageViewController {
                            width: Screen_Width, height: Screen_Height-45)
         let tableView = UITableView(frame: frame, style: .plain)
         tableView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
-        tableView.backgroundColor = UIColor(hexString: "#EBEBEB")
+        tableView.backgroundColor = UIColor("#EBEBEB")
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.separatorStyle = .none

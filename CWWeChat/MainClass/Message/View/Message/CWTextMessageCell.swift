@@ -49,7 +49,7 @@ class CWTextMessageCell: CWBaseMessageCell {
                 make.top.equalTo(self.messageBackgroundView).offset(MSG_SPACE_TOP);
             })
             
-            self.messageBackgroundView.snp.updateConstraints({ (make) in
+            self.messageBackgroundView.snp.remakeConstraints({ (make) in
                 make.left.equalTo(self.messageLabel).offset(-MSG_SPACE_LEFT);
                 make.bottom.equalTo(self.messageLabel).offset(MSG_SPACE_BTM);
             })
