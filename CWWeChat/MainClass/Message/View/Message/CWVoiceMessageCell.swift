@@ -75,8 +75,7 @@ class CWVoiceMessageCell: CWBaseMessageCell {
             self.messageBackgroundView.highlightedImage = sendImageHL
             
         }
-        print(size)
-        self.messageBackgroundView.snp.updateConstraints({ (make) in
+        self.messageBackgroundView.snp.makeConstraints({ (make) in
             make.size.equalTo(size)
         })
 

@@ -11,7 +11,7 @@ import Foundation
 class CWContactUser: NSObject {
 
     //用户id
-    var userId: String!
+    var userId: String
     
     //用户名
     var userName: String?
@@ -46,7 +46,13 @@ class CWContactUser: NSObject {
     var pinyingInitial: String = ""
     
     override init() {
+        userId = ""
         super.init()
+    }
+    
+    convenience init(userId: String) {
+        self.init()
+        self.userId = userId
     }
     
     override var hashValue: Int {

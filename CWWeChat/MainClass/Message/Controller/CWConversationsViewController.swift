@@ -94,7 +94,7 @@ extension CWConversationsViewController: UITableViewDelegate {
             //数组中删除
             self.conversationList.remove(at: (indexPath as NSIndexPath).row)
             //从数据库中删除
-            self.dbRecordStore.deleteMessageRecordByUid(self.userID, fid: conversation.partnerID, deletemessage: true)
+            _ = self.dbRecordStore.deleteMessageRecordByUid(self.userID, fid: conversation.partnerID, deletemessage: true)
             //删除
             self.tableView.deleteRows(at: [indexPath], with: .fade)
         }

@@ -138,7 +138,7 @@ class CWWebViewController: UIViewController {
     //MARK: 方法
     ///关闭
     func navigationCloseButtonDown() {
-        self.navigationController?.popViewController(animated: true)
+       _ = self.navigationController?.popViewController(animated: true)
     }
     
     func navigationBackButtonDown() {
@@ -149,7 +149,7 @@ class CWWebViewController: UIViewController {
             self.navigationItem.leftBarButtonItems = [backButtonItem,spaceItem,closeButtonItem]
             
         } else {
-            self.navigationController?.popViewController(animated: true)
+           _ = self.navigationController?.popViewController(animated: true)
         }
         
     }

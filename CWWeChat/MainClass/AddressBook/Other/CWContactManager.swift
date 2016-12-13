@@ -63,7 +63,7 @@ class CWContactManager: NSObject {
         for (_,subJson):(String, JSON) in contactList {
     
             let user = CWContactUser()
-            user.userId = subJson["userID"].string
+            user.userId = subJson["userID"].string!
             user.userName = subJson["username"].string
             user.remarkName = subJson["remarkName"].string
             user.nikeName = subJson["nikeName"].string

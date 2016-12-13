@@ -207,7 +207,7 @@ class CWInputToolBar: UIView {
         
         if self.status == .voice {
             
-            if let delegate = self.delegate {
+            if let _ = self.delegate {
 //                delegate.chatInputView(self, changeChatBarStatus: self.status, toStatus: .Keyboard)
             }
             
@@ -220,7 +220,7 @@ class CWInputToolBar: UIView {
             
         } else {
             
-            if let delegate = self.delegate {
+            if let _ = self.delegate {
                 //            delegate.chatInputView(self, changeChatBarStatus: self.status, toStatus: .Voice)
             }
             

@@ -15,6 +15,7 @@ let  MSG_SPACE_RIGHT:CGFloat     =   22
 
 class CWTextMessageCell: CWBaseMessageCell {
 
+    
     //TODO: 将字体大小用类来管理
     fileprivate var messageLabel: UILabel = {
         let messageLabel = UILabel()
@@ -47,9 +48,10 @@ class CWTextMessageCell: CWBaseMessageCell {
             self.messageLabel.snp.remakeConstraints({ (make) in
                 make.right.equalTo(self.messageBackgroundView).offset(-MSG_SPACE_RIGHT);
                 make.top.equalTo(self.messageBackgroundView).offset(MSG_SPACE_TOP);
+                make.size.equalTo(message.messageFrame.contentSize)
             })
             
-            self.messageBackgroundView.snp.remakeConstraints({ (make) in
+            self.messageBackgroundView.snp.makeConstraints({ (make) in
                 make.left.equalTo(self.messageLabel).offset(-MSG_SPACE_LEFT);
                 make.bottom.equalTo(self.messageLabel).offset(MSG_SPACE_BTM);
             })
@@ -63,20 +65,18 @@ class CWTextMessageCell: CWBaseMessageCell {
             self.messageBackgroundView.highlightedImage = sendImageHL
             
             self.messageLabel.snp.remakeConstraints({ (make) in
+                make.size.equalTo(message.messageFrame.contentSize)
                 make.left.equalTo(self.messageBackgroundView).offset(MSG_SPACE_LEFT);
                 make.top.equalTo(self.messageBackgroundView).offset(MSG_SPACE_TOP);
             })
             
-            self.messageBackgroundView.snp.updateConstraints({ (make) in
+            self.messageBackgroundView.snp.makeConstraints ({ (make) in
                 make.right.equalTo(self.messageLabel).offset(MSG_SPACE_RIGHT);
                 make.bottom.equalTo(self.messageLabel).offset(MSG_SPACE_BTM);
             })
             
         }
-        
-        self.messageLabel.snp.updateConstraints { (make) in
-            make.size.equalTo(message.messageFrame.contentSize)
-        }
+    
     }
     
     required init?(coder aDecoder: NSCoder) {

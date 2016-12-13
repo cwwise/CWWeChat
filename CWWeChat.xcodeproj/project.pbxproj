@@ -1350,7 +1350,7 @@
 			attributes = {
 				CLASSPREFIX = CW;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = chenwei;
 				TargetAttributes = {
 					1F651BDF1D1CDF400080C203 = {

@@ -44,6 +44,7 @@ class CWImageMessageCell: CWBaseMessageCell {
             messageImageView.snp.remakeConstraints({ (make) in
                 make.top.equalTo(self.messageBackgroundView)
                 make.right.equalTo(self.messageBackgroundView)
+                make.size.equalTo(message.messageFrame.contentSize)
             })
             
         } else {
@@ -54,12 +55,9 @@ class CWImageMessageCell: CWBaseMessageCell {
             messageImageView.snp.remakeConstraints({ (make) in
                 make.top.equalTo(self.messageBackgroundView)
                 make.left.equalTo(self.messageBackgroundView)
+                make.size.equalTo(message.messageFrame.contentSize)
+
             })
-        }
-        
-        //设置size
-        self.messageImageView.snp.updateConstraints { (make) in
-            make.size.equalTo(message.messageFrame.contentSize)
         }
         
         //根据图片的类型，加载不同的路径，存在问题(如何让本地和远端统一)
