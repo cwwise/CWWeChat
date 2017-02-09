@@ -31,7 +31,7 @@ class CWAddressBookViewController: UIViewController {
     }()
     
     lazy var footerLabel: UILabel = {
-        let frame = CGRect(x: 0, y: 0, width: Screen_Width, height: 50)
+        let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 50)
        let footerLabel = UILabel(frame: frame)
         footerLabel.textAlignment = .center
         footerLabel.font = UIFont.systemFont(ofSize: 17)

@@ -12,7 +12,7 @@ class CWTimeMessageCell: UITableViewCell {
 
     var message:CWMessageModel?
     
-    fileprivate let kChatTimeLabelMaxWdith : CGFloat = Screen_Width - 30*2
+    fileprivate let kChatTimeLabelMaxWdith : CGFloat = kScreenWidth - 30*2
     fileprivate let kChatTimeLabelMarginTop: CGFloat = 2   //顶部 10 px
     
     lazy var timeLabel: UILabel = {

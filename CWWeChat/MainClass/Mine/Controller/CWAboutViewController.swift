@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import YYText
 
 class CWAboutViewController: CWSettingViewController {
     
+    //github链接
     var lienseLabel: UILabel = {
         let lienseLabel = UILabel()
+        
+        
+        
         lienseLabel.text = "高仿微信 仅供学习\nhttps://github.com/wei18810109052/CWWeChat"
         lienseLabel.textAlignment = .center
         lienseLabel.textColor = UIColor.gray
@@ -48,7 +53,8 @@ class CWAboutViewController: CWSettingViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let height: CGFloat = Screen_Height - self.tableView.contentSize.height - Screen_NavigationHeight - 15;
+        //
+        let height: CGFloat = kScreenHeight - self.tableView.contentSize.height - Screen_NavigationHeight - 15;
         self.tableView.tableFooterView?.height = height
     }
     

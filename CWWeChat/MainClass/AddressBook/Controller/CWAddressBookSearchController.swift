@@ -17,7 +17,7 @@ class CWAddressBookSearchController: UIViewController {
     fileprivate  var searchFriendData = [CWContactUser]()
     
     lazy var tableView:UITableView = {
-        let frame = CGRect(x: 0, y: 64, width: Screen_Width, height: Screen_Height-Screen_NavigationHeight)
+        let frame = CGRect(x: 0, y: 64, width: kScreenWidth, height: kScreenHeight-Screen_NavigationHeight)
         let tableView = UITableView(frame: frame, style: .grouped)
         tableView.backgroundColor = UIColor.white
         tableView.tableFooterView = UIView()

@@ -40,14 +40,14 @@ class CWWebViewController: UIViewController {
     
     fileprivate lazy var webView: WKWebView = {
         let configure = WKWebViewConfiguration()
-        let frame = CGRect(x: 0, y: Screen_NavigationHeight, width: Screen_Width, height: Screen_Height-Screen_NavigationHeight)
+        let frame = CGRect(x: 0, y: Screen_NavigationHeight, width: kScreenWidth, height: kScreenHeight-Screen_NavigationHeight)
         let webView = WKWebView(frame: frame, configuration: configure)
         webView.allowsBackForwardNavigationGestures = true
         return webView
     }()
     
     fileprivate lazy var progressView: UIProgressView = {
-        let frame = CGRect(x: 0, y: Screen_NavigationHeight, width: Screen_Width, height: 10)
+        let frame = CGRect(x: 0, y: Screen_NavigationHeight, width: kScreenWidth, height: 10)
         let progressView = UIProgressView(frame: frame)
         progressView.progressTintColor = UIColor.chatSystemColor()
         progressView.trackTintColor = UIColor.clear
@@ -65,7 +65,7 @@ class CWWebViewController: UIViewController {
     }()
     
     fileprivate var authLabel: UILabel = {
-        let frame = CGRect(x: 20, y: Screen_NavigationHeight+13, width: Screen_Width-2*20, height: 0)
+        let frame = CGRect(x: 20, y: Screen_NavigationHeight+13, width: kScreenWidth-2*20, height: 0)
         let authLabel = UILabel(frame: frame)
         authLabel.font = UIFont.systemFont(ofSize: 12)
         authLabel.textAlignment = .center

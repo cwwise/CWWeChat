@@ -12,7 +12,7 @@ class CWSettingGroup: NSObject {
 
     var headerTitle: String? {
         didSet {
-            let width = Screen_Width - 2*15
+            let width = kScreenWidth - 2*15
             let attributes = [NSForegroundColorAttributeName:UIColor.white,
                               NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
             headerHeight = CWUIUtility.textHeightOfText(headerTitle, width: width, attributes: attributes) + 0.5 + 5.0
@@ -21,7 +21,7 @@ class CWSettingGroup: NSObject {
     
     var footerTitle: String? {
         didSet {
-            let width = Screen_Width - 2*15
+            let width = kScreenWidth - 2*15
             let attributes = [NSForegroundColorAttributeName:UIColor.white,
                               NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
             footerHeight = CWUIUtility.textHeightOfText(footerTitle, width: width, attributes: attributes) + 15 + 5.0

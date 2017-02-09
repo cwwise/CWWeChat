@@ -8,7 +8,7 @@
 
 import UIKit
 
-let left_infocell_subTitle_space = Screen_Width * 0.28
+let left_infocell_subTitle_space = kScreenWidth * 0.28
 
 class CWInformationCell: UITableViewCell {
 

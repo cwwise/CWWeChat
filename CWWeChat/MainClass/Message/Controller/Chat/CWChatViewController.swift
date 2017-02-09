@@ -44,7 +44,7 @@ class CWChatViewController: CWBaseMessageViewController {
     /// TableView
     lazy var tableView: UITableView = {
         let frame = CGRect(x: 0, y: 0,
-                           width: Screen_Width, height: Screen_Height-45)
+                           width: kScreenWidth, height: kScreenHeight-45)
         let tableView = UITableView(frame: frame, style: .plain)
         tableView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
         tableView.backgroundColor = UIColor("#EBEBEB")
@@ -58,8 +58,8 @@ class CWChatViewController: CWBaseMessageViewController {
     
     /// 下面的toolBar
     lazy var chatToolBar:CWInputToolBar = {
-        let frame = CGRect(x: 0, y: Screen_Height-45,
-                           width: Screen_Width, height: 45)
+        let frame = CGRect(x: 0, y: kScreenHeight-45,
+                           width: kScreenWidth, height: 45)
         let chatToolBar = CWInputToolBar(frame:frame)
         chatToolBar.delegate = self
         chatToolBar.voiceIndicatorView = self.voiceIndicatorView

@@ -43,7 +43,7 @@ class CWMoreKeyboard: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let height = self.height_collectionView / 2 * 0.93
-        let spaceX = (Screen_Width-self.width_collection_cell*4)/5
+        let spaceX = (kScreenWidth-self.width_collection_cell*4)/5
         let spaceY = self.height_collectionView - 2*height
         layout.itemSize = CGSize(width: self.width_collection_cell, height: height)
         layout.minimumLineSpacing = spaceX
@@ -85,7 +85,7 @@ class CWMoreKeyboard: UIView {
         
         context.beginPath()
         context.move(to: CGPoint(x: 0, y: 0))
-        context.addLine(to: CGPoint(x: Screen_Width, y: 0))
+        context.addLine(to: CGPoint(x: kScreenWidth, y: 0))
         context.closePath()
         context.strokePath()
     }

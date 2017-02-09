@@ -140,7 +140,7 @@ class CWInputToolBar: UIView {
         
         context?.beginPath()
         context?.move(to: CGPoint(x: 0, y: 0))
-        context?.addLine(to: CGPoint(x: Screen_Width, y: 0))
+        context?.addLine(to: CGPoint(x: kScreenWidth, y: 0))
         context?.closePath()
         context?.strokePath()
     }
@@ -168,7 +168,7 @@ class CWInputToolBar: UIView {
         
         
         //更多
-        buttonFrame.origin = CGPoint(x: Screen_Width-horizontalPadding-buttonFrame.width,
+        buttonFrame.origin = CGPoint(x: kScreenWidth-horizontalPadding-buttonFrame.width,
                                      y: verticalPadding)
         moreButton.frame = buttonFrame
         allButtonWidth += buttonFrame.width + 2.5*horizontalPadding

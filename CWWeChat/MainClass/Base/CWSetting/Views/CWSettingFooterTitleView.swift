@@ -13,10 +13,13 @@ class CWSettingFooterTitleView: CWSettingHeaderTitleView {
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.titleLabel.snp.updateConstraints { (make) in
+    
+        titleLabel.snp.remakeConstraints { (make) in
+            make.left.equalTo(self.contentView).offset(15)
+            make.right.equalTo(self.contentView).offset(-15)
             make.top.equalTo(self.contentView).offset(5)
         }
-   
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

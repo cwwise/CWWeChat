@@ -10,7 +10,7 @@ import UIKit
 
 class CWChatTextDisplayView: UIView {
 
-    let width_textView: CGFloat = Screen_Width * 0.94
+    let width_textView: CGFloat = kScreenWidth * 0.94
     
     var attrString:NSAttributedString? {
         didSet {
@@ -20,7 +20,7 @@ class CWChatTextDisplayView: UIView {
             
             self.textView.attributedText = mutableAttrString
             var size = self.textView.sizeThatFits(CGSize(width: width_textView,height: CGFloat(MAXFLOAT)))
-            size.height = size.height > Screen_Height ? Screen_Height : size.height;
+            size.height = size.height > kScreenHeight ? kScreenHeight : size.height;
             
             textView.snp.updateConstraints { (make) in
                 make.size.equalTo(size)

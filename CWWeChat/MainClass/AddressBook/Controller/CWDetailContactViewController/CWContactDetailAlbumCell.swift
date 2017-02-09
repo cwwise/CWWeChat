@@ -42,10 +42,10 @@ class CWContactDetailAlbumCell: UITableViewCell {
             ]
         
         let spaceY: CGFloat = 12
-        var count = Int((Screen_Width - left_infocell_subTitle_space - 28) / (80 - spaceY * 2 + 3))
+        var count = Int((kScreenWidth - left_infocell_subTitle_space - 28) / (80 - spaceY * 2 + 3))
         count = array.count <= count ? array.count : count
        
-        var spaceX = (Screen_Width - left_infocell_subTitle_space - 28 - CGFloat(count) * (80 - spaceY * 2)) / CGFloat(count)
+        var spaceX = (kScreenWidth - left_infocell_subTitle_space - 28 - CGFloat(count) * (80 - spaceY * 2)) / CGFloat(count)
         spaceX = spaceX > 7 ? 7 : spaceX
 
         for i in 0..<count {

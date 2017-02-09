@@ -167,7 +167,7 @@ class CWBaseMessageCell: UITableViewCell {
             let string = CWUserAccount.sharedUserAccount().chatuser.avatarURL!
             
             self.avatarButton.yy_setBackgroundImage(with: URL(string:string), for: .normal, placeholder: defaultHeadeImage)
-            self.avatarButton.left = Screen_Width - kChatAvatarMarginLeft - kAvaterWidth
+            self.avatarButton.left = kScreenWidth - kChatAvatarMarginLeft - kAvaterWidth
             
             self.avatarButton.snp.remakeConstraints({ (make) in
                 make.width.height.equalTo(kAvaterWidth);

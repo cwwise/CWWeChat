@@ -11,8 +11,8 @@ import UIKit
 import CocoaLumberjack
 
 let Screen_Size = UIScreen.main.bounds.size
-let Screen_Width = UIScreen.main.bounds.size.width
-let Screen_Height = UIScreen.main.bounds.size.height
+let kScreenWidth = UIScreen.main.bounds.size.width
+let kScreenHeight = UIScreen.main.bounds.size.height
 
 let Screen_NavigationHeight:CGFloat = 64
 

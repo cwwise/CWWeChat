@@ -18,7 +18,7 @@ class CWSettingViewController: UITableViewController {
     
     override func loadView() {
         
-        self.view = UIView(frame: CGRect(x: 0, y: 0, width: Screen_Width, height: Screen_Height))
+        self.view = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight))
         
         self.tableView = UITableView(frame: self.view.bounds, style: .grouped)
         self.tableView.backgroundColor = UIColor.tableViewBackgroundColor()
@@ -27,8 +27,8 @@ class CWSettingViewController: UITableViewController {
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         self.tableView.separatorColor = UIColor.tableViewCellLineColor()
         
-        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: Screen_Width, height: height_Setting_Top_Space))
-        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: Screen_Width, height: height_Setting_Bottom_Space))
+        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: height_Setting_Top_Space))
+        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: height_Setting_Bottom_Space))
     }
     
     override func viewDidLoad() {

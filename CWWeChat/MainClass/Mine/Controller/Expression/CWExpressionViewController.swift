@@ -12,7 +12,7 @@ class CWExpressionViewController: UIViewController {
 
     lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["精选表情", "投稿表情"])
-        segmentedControl.width = Screen_Width * 0.55
+        segmentedControl.width = kScreenWidth * 0.55
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector(CWExpressionViewController.segmentedControlChanged(_:)), for: .editingChanged)
         return segmentedControl
