@@ -44,11 +44,11 @@ extension UIColor {
     }
     
     class func redTipColor() -> UIColor {
-        return UIColor( "#D84042")
+        return UIColor("#D84042")
     }
     
     class func chatBoxColor() -> UIColor {
-        return UIColor( "#F4F4F6")
+        return UIColor("#F4F4F6")
     }
     
     class func chatBoxLineColor() -> UIColor {

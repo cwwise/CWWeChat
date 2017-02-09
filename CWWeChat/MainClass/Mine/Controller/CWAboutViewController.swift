@@ -12,13 +12,32 @@ import YYText
 class CWAboutViewController: CWSettingViewController {
     
     //github链接
-    var lienseLabel: UILabel = {
-        let lienseLabel = UILabel()
+    var lienseLabel: YYLabel = {
+        let lienseLabel = YYLabel()
+        
+        let textAttri = NSMutableAttributedString()
+        
+        let githubLink: NSString = "https://github.com/wei18810109052/CWWeChat"
+        let content: NSString = "高仿微信 仅供学习\nhttps://github.com/wei18810109052/CWWeChat"
+        
+        textAttri.append(NSAttributedString(string: content as String))
+        textAttri.yy_lineSpacing = 4.0
+        textAttri.yy_alignment = .center
+        
+        let highlight = YYTextHighlight()
+        highlight.setColor(UIColor.chatSystemColor())
+        highlight.tapAction = ({containerView, text, range, rect in
+            
+            let url = URL(string: githubLink as String)!
+            UIApplication.shared.openURL(url)
+            
+        })
+        
+        let range = content.range(of: githubLink as String)
+        textAttri.yy_setTextHighlight(highlight, range: range)
         
         
-        
-        lienseLabel.text = "高仿微信 仅供学习\nhttps://github.com/wei18810109052/CWWeChat"
-        lienseLabel.textAlignment = .center
+        lienseLabel.attributedText = textAttri
         lienseLabel.textColor = UIColor.gray
         lienseLabel.font = UIFont.systemFont(ofSize: 12)
         lienseLabel.numberOfLines = 2

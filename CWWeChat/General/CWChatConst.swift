@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CocoaLumberjack
 
-let Screen_Size = UIScreen.main.bounds.size
+let kScreenSize = UIScreen.main.bounds.size
 let kScreenWidth = UIScreen.main.bounds.size.width
 let kScreenHeight = UIScreen.main.bounds.size.height
 

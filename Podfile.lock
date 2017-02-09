@@ -14,10 +14,10 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - Alamofire (4.0.1)
-  - CocoaAsyncSocket (7.5.0):
-    - CocoaAsyncSocket/GCD (= 7.5.0)
-  - CocoaAsyncSocket/GCD (7.5.0)
+  - Alamofire (4.3.0)
+  - CocoaAsyncSocket (7.5.1):
+    - CocoaAsyncSocket/GCD (= 7.5.1)
+  - CocoaAsyncSocket/GCD (7.5.1)
   - CocoaLumberjack (2.4.0):
     - CocoaLumberjack/Default (= 2.4.0)
     - CocoaLumberjack/Extensions (= 2.4.0)
@@ -31,14 +31,14 @@ PODS:
     - KissXML/Core (= 5.1.2)
   - KissXML/Core (5.1.2)
   - MBProgressHUD (1.0.0)
-  - Qiniu (7.1.2):
+  - Qiniu (7.1.5):
     - AFNetworking (~> 3)
     - HappyDNS (~> 0.3)
-  - SnapKit (3.0.2)
-  - SQLite.swift (0.11.0):
-    - SQLite.swift/standard (= 0.11.0)
-  - SQLite.swift/standard (0.11.0)
-  - SwiftyJSON (3.1.1)
+  - SnapKit (3.1.2)
+  - SQLite.swift (0.11.2):
+    - SQLite.swift/standard (= 0.11.2)
+  - SQLite.swift/standard (0.11.2)
+  - SwiftyJSON (3.1.4)
   - UIColor_Hex_Swift (3.0.2)
   - XMPPFramework (3.7.0):
     - XMPPFramework/All (= 3.7.0)
@@ -205,6 +205,7 @@ PODS:
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
   - YYImage/Core (1.0.4)
+  - YYText (1.0.7)
   - YYWebImage (1.0.5):
     - YYCache
     - YYImage
@@ -218,6 +219,7 @@ DEPENDENCIES:
   - SwiftyJSON
   - UIColor_Hex_Swift
   - XMPPFramework (from `https://github.com/robbiehanson/XMPPFramework.git`, branch `master`)
+  - YYText
   - YYWebImage
 
 EXTERNAL SOURCES:
@@ -227,27 +229,28 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   XMPPFramework:
-    :commit: 917a5b40da013f3c9a6fe80662448d87d67f3341
+    :commit: e4ed5468af70b0f13fcd9b417914797ad93c3788
     :git: https://github.com/robbiehanson/XMPPFramework.git
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
-  CocoaAsyncSocket: 3baeb1ddd969f81cf9fca81053ae49ef2d1cbbfa
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
   CocoaLumberjack: aa9dcab71bdf9eaf2a63bbd9ddc87863efe45457
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   KissXML: 246c842586bb77110e04fb88e19376d96245c856
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  Qiniu: d57cb922b5c31f0d1cfe2c8fea3cf83997cdcf62
-  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
-  SQLite.swift: 9a26273607d3077a2e5a8d33486e9989f8404c7d
-  SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
+  Qiniu: 77a3dba411556a383d72d17e842345a9d4c83252
+  SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
+  SQLite.swift: 670c3e9e0a806bbfd56a3de5d530768dc0e6fe7c
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   UIColor_Hex_Swift: 95f718452092a3efc8a827dffd2c04d3237be02d
   XMPPFramework: 977eef5d00c20fe9fb19c30d84a89c2d5564252d
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 31fe15296dfb6d1383c446ff6ee0475e91a5efa1
+PODFILE CHECKSUM: cc29f0425aa528db5c1877e09a2ed5d7f337744c
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0
