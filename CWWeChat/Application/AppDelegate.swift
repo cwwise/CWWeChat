@@ -74,14 +74,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     ///设置Log日志
     func setupLogger() {
-        DDLog.add(DDTTYLogger.sharedInstance()) // TTY = Xcode console
-        DDLog.add(DDASLLogger.sharedInstance()) // ASL = Apple System Logs
         let fileLogger: DDFileLogger = DDFileLogger() // File Logger
         fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
         fileLogger.logFileManager.maximumNumberOfLogFiles = 7
         DDLog.add(fileLogger)
-        
-//        defaultDebugLevel = .Debug
+        DDLog.add(DDTTYLogger.sharedInstance(), with: .debug)
     }
     
     func registerRemoteNotification() {
@@ -92,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        CWLogDebug(deviceToken.description)
+        DDLogDebug(deviceToken.description)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

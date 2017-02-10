@@ -18,14 +18,13 @@ PODS:
   - CocoaAsyncSocket (7.5.1):
     - CocoaAsyncSocket/GCD (= 7.5.1)
   - CocoaAsyncSocket/GCD (7.5.1)
-  - CocoaLumberjack (2.4.0):
-    - CocoaLumberjack/Default (= 2.4.0)
-    - CocoaLumberjack/Extensions (= 2.4.0)
-  - CocoaLumberjack/Core (2.4.0)
-  - CocoaLumberjack/Default (2.4.0):
+  - CocoaLumberjack/Core (3.0.0)
+  - CocoaLumberjack/Default (3.0.0):
     - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.4.0):
+  - CocoaLumberjack/Extensions (3.0.0):
     - CocoaLumberjack/Default
+  - CocoaLumberjack/Swift (3.0.0):
+    - CocoaLumberjack/Extensions
   - HappyDNS (0.3.10)
   - KissXML (5.1.2):
     - KissXML/Core (= 5.1.2)
@@ -95,7 +94,7 @@ PODS:
     - XMPPFramework/Core
   - XMPPFramework/Core (3.7.0):
     - CocoaAsyncSocket (~> 7.5.0)
-    - CocoaLumberjack (~> 2.0)
+    - CocoaLumberjack/Swift
     - KissXML (~> 5.1.2)
   - XMPPFramework/CoreDataStorage (3.7.0):
     - XMPPFramework/Core
@@ -218,25 +217,25 @@ DEPENDENCIES:
   - SQLite.swift
   - SwiftyJSON
   - UIColor_Hex_Swift
-  - XMPPFramework (from `https://github.com/robbiehanson/XMPPFramework.git`, branch `master`)
+  - XMPPFramework (from `https://github.com/wei18810109052/XMPPFramework.git`, branch `master`)
   - YYText
   - YYWebImage
 
 EXTERNAL SOURCES:
   XMPPFramework:
     :branch: master
-    :git: https://github.com/robbiehanson/XMPPFramework.git
+    :git: https://github.com/wei18810109052/XMPPFramework.git
 
 CHECKOUT OPTIONS:
   XMPPFramework:
-    :commit: e4ed5468af70b0f13fcd9b417914797ad93c3788
-    :git: https://github.com/robbiehanson/XMPPFramework.git
+    :commit: 052adad4f4414effa2a84a536735feb8c71f53f5
+    :git: https://github.com/wei18810109052/XMPPFramework.git
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
   CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
-  CocoaLumberjack: aa9dcab71bdf9eaf2a63bbd9ddc87863efe45457
+  CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   KissXML: 246c842586bb77110e04fb88e19376d96245c856
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
@@ -245,12 +244,12 @@ SPEC CHECKSUMS:
   SQLite.swift: 670c3e9e0a806bbfd56a3de5d530768dc0e6fe7c
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   UIColor_Hex_Swift: 95f718452092a3efc8a827dffd2c04d3237be02d
-  XMPPFramework: 977eef5d00c20fe9fb19c30d84a89c2d5564252d
+  XMPPFramework: 3e5f30f04a0d977ad32e5e5d7b0914800065f8da
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: cc29f0425aa528db5c1877e09a2ed5d7f337744c
+PODFILE CHECKSUM: 6f6f4e1c6fc392aa10c3d577b5e7503e2e59f91a
 
 COCOAPODS: 1.2.0

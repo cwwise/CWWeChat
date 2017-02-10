@@ -26,7 +26,7 @@ target 'CWWeChat' do
   #pod 'CocoaLumberjack/Swift'
   
   #聊天
-  pod 'XMPPFramework', :git => "https://github.com/robbiehanson/XMPPFramework.git", :branch => 'master'
+  pod 'XMPPFramework', :git => "https://github.com/wei18810109052/XMPPFramework.git", :branch => 'master'
   
   pod 'Qiniu'
   pod 'MBProgressHUD'
