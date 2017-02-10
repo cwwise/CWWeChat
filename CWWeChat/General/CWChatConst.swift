@@ -14,28 +14,28 @@ let kScreenSize = UIScreen.main.bounds.size
 let kScreenWidth = UIScreen.main.bounds.size.width
 let kScreenHeight = UIScreen.main.bounds.size.height
 
-let Screen_NavigationHeight:CGFloat = 64
+let kNavigationBarHeight:CGFloat = 64
 
 //class CWLogger {
 
     func CWLogInfo(_ object: String) {
-//        DDLogInfo(object.description)
+        DDLogInfo(object)
     }
     
     func CWLogWarn(_ object: String) {
-//        DDLogWarn(object.description)
+        DDLogWarn(object)
     }
     
     func CWLogError(_ object: String) {
-//        DDLogError(object.description)
+        DDLogError(object)
     }
     
     func CWLogVerbose(_ object: String) {
-//        DDLogVerbose(object.description)
+        DDLogVerbose(object)
     }
     
     func CWLogDebug(_ object: String) {
-//        DDLogDebug(object.description)
+        DDLogDebug(object)
     }
 //}
 

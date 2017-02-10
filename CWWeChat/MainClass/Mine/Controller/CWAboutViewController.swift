@@ -73,7 +73,7 @@ class CWAboutViewController: CWSettingViewController {
         super.viewWillAppear(animated)
         
         //
-        let height: CGFloat = kScreenHeight - self.tableView.contentSize.height - Screen_NavigationHeight - 15;
+        let height: CGFloat = kScreenHeight - self.tableView.contentSize.height - kNavigationBarHeight - 15;
         self.tableView.tableFooterView?.height = height
     }
     
