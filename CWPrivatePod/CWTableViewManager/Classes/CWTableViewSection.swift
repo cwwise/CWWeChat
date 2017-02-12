@@ -10,26 +10,45 @@ import UIKit
 
 
 ///  Table view section.
-class CWTableViewSection: NSObject {
+public class CWTableViewSection: NSObject {
 
     /// 主要内容 (rows)
-    var items: [CWTableViewItem]
+    public var items: [CWTableViewItem] = [CWTableViewItem]()
     
-    var headerTitle: String?
-    var footerTitle: String?
+    public var headerTitle: String = ""
+    public var footerTitle: String = ""
     
-    var headerHeight: Float?
-    var footerHeight: Float?
+    public var headerHeight: CGFloat = 0.01
+    public var footerHeight: CGFloat = 20.0
 
     override init() {
-        self.items = [CWTableViewItem]()
-        
         super.init()
     }
     
+    convenience init(headerTitle: String = "",
+                     footerTitle: String = "",
+                     items: [CWTableViewItem] = [CWTableViewItem]()) {
+        self.init()
+        
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+        self.items = items
+    }
     
-    func addItem(item: CWTableViewItem) {
+    
+    
+    // 添加
+    public func addItem(item: CWTableViewItem) {
         self.items.append(item)
+    }
+    
+    public func addItem(contentsOf items: [CWTableViewItem]) {
+        self.items.append(contentsOf: items)
+    }
+    
+    // 待添加验证index
+    public subscript(index: Int) -> CWTableViewItem {
+        return items[index]
     }
     
     

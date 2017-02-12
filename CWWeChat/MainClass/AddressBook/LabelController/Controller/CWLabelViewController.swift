@@ -9,7 +9,7 @@
 import UIKit
 
 /// 标签界面
-class CWLabelViewController: CWTableViewController {
+class CWLabelViewController: CWBaseTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

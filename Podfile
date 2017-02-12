@@ -29,7 +29,7 @@ target 'CWWeChat' do
   pod 'MBProgressHUD'
   
   # 本地pod
-  pod 'CWTableViewManager', :path => './CWPrivatePod/CWTableViewManager'
+#  pod 'CWTableViewManager', :path => './CWPrivatePod/CWTableViewManager'
 
 
 

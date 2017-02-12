@@ -8,15 +8,19 @@
 
 import UIKit
 
+@objc public protocol CWTableViewManagerDelegate: UITableViewDelegate {
+    
+}
+
 /// table 管理的
 //  主要用来 创建统一的设置界面
 //  参考 https://github.com/romaonthego/RETableViewManager 根据自己的项目进行简化
-class CWTableViewManager: NSObject {
+public class CWTableViewManager: NSObject {
 
-    var tableView: UITableView
+    public weak var tableView: UITableView?
+    public weak var delegate: CWTableViewManagerDelegate?
     
     var sections: [CWTableViewSection]
-    
     
     /// 初始化方法
     ///
@@ -28,54 +32,92 @@ class CWTableViewManager: NSObject {
 
         super.init()
         
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
+        self.tableView?.dataSource = self
+        self.tableView?.delegate = self
         
+        registerCellClass()
     }
     
     
-    func registerCell() {
-        
-        tableView.register(CWTableViewCell.self, forCellReuseIdentifier: "cell")
-        
+    func registerCellClass() {
+        self.register(cellClass: CWTableViewCell.self, forCellReuseIdentifier: CWTableViewItem.self)
+    }
+    
+    func register(cellClass: Swift.AnyClass, forCellReuseIdentifier itemClass: Swift.AnyClass) {
+        self.tableView?.register(cellClass, forCellReuseIdentifier: String(describing: itemClass))
+    }
+    
+    func identifierForCell(at indexPath: IndexPath) -> String {
+        let item = sections[indexPath.section][indexPath.row]
+        return String(describing: item.classForCoder)
     }
     
     
+    // 操作section
+    public func addSection(section: CWTableViewSection) {
+        sections.append(section)
+    }
     
+    public func addSection(contentsOf sections: [CWTableViewSection]) {
+        self.sections.append(contentsOf: sections)
+    }
+
 }
 
 
 // MARK: UITableViewDataSource
 extension CWTableViewManager: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "")!
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let identifier = identifierForCell(at: indexPath)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! CWTableViewCell
+        cell.item = sections[indexPath.section][indexPath.row]
+        
+        cell.cellWillAppear()
+        
         return cell;
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].items.count
     }
-    
-    
 
 }
 
 // MARK: UITableViewDelegate
 extension CWTableViewManager: UITableViewDelegate {
     
-
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //默认取消选中
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let item = sections[indexPath.section][indexPath.row]
+        if let selectionAction = item.selectionAction {
+            selectionAction(item)
+        }
+        
+        // 可选直接使用？ 不需要
+        self.delegate?.tableView?(tableView, didSelectRowAt: indexPath)
     }
     
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let item = sections[indexPath.section][indexPath.row]
+        return CGFloat(item.cellHeight)
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return sections[section].footerHeight
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return sections[section].headerHeight
+    }
     
 }
 
