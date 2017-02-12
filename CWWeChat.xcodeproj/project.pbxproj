@@ -134,12 +134,6 @@
 		7388FDE9448C1BAD693E4300 /* Pods_CWWeChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40651309C8329F5B7A9811EE /* Pods_CWWeChatUITests.framework */; };
 		8CDC37D09EE0AA3F16C11650 /* Pods_CWWeChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9084382C72A0B530B907A4 /* Pods_CWWeChatTests.framework */; };
 		8CF3FBED1E4F485E0088FBD3 /* CWTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3FBEC1E4F485E0088FBD3 /* CWTableViewController.swift */; };
-		8CF3FBEF1E4F48720088FBD3 /* CWTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3FBEE1E4F48720088FBD3 /* CWTableViewManager.swift */; };
-		8CF3FBF11E4F49680088FBD3 /* CWTableViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3FBF01E4F49680088FBD3 /* CWTableViewItem.swift */; };
-		8CF3FBF31E4F499C0088FBD3 /* CWTableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3FBF21E4F499C0088FBD3 /* CWTableViewSection.swift */; };
-		8CF3FBF91E4F4BC50088FBD3 /* CWTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3FBF81E4F4BC50088FBD3 /* CWTableViewCell.swift */; };
-		8CF3FBFB1E4F4F930088FBD3 /* CWTableViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3FBFA1E4F4F930088FBD3 /* CWTableViewStyle.swift */; };
-		8CF3FBFD1E4F4FF40088FBD3 /* CWTableViewBoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3FBFC1E4F4FF40088FBD3 /* CWTableViewBoolCell.swift */; };
 		ED46AD8B1D2BF5780015FCB0 /* CWMessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46AD8A1D2BF5780015FCB0 /* CWMessageContent.swift */; };
 		ED46AD8D1D2BF7F40015FCB0 /* CWTextMessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46AD8C1D2BF7F40015FCB0 /* CWTextMessageContent.swift */; };
 		ED46AD8F1D2BF8580015FCB0 /* CWImageMessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46AD8E1D2BF8580015FCB0 /* CWImageMessageContent.swift */; };
@@ -333,12 +327,6 @@
 		5E6F8F41CBA137291D180E0E /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
 		80C4EC6CB95B1523B42971BD /* Pods-CWWeChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.debug.xcconfig"; sourceTree = "<group>"; };
 		8CF3FBEC1E4F485E0088FBD3 /* CWTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewController.swift; sourceTree = "<group>"; };
-		8CF3FBEE1E4F48720088FBD3 /* CWTableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewManager.swift; sourceTree = "<group>"; };
-		8CF3FBF01E4F49680088FBD3 /* CWTableViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewItem.swift; sourceTree = "<group>"; };
-		8CF3FBF21E4F499C0088FBD3 /* CWTableViewSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewSection.swift; sourceTree = "<group>"; };
-		8CF3FBF81E4F4BC50088FBD3 /* CWTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewCell.swift; sourceTree = "<group>"; };
-		8CF3FBFA1E4F4F930088FBD3 /* CWTableViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewStyle.swift; sourceTree = "<group>"; };
-		8CF3FBFC1E4F4FF40088FBD3 /* CWTableViewBoolCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewBoolCell.swift; sourceTree = "<group>"; };
 		911D353251D6BD438C3CF058 /* Pods-CWWeChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatUITests/Pods-CWWeChatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9A7C0A5AEDD35B8570648EAF /* Pods-CWWeChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatUITests/Pods-CWWeChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A382C0967FE3A0184F1D5275 /* Pods-CWWeChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -702,7 +690,6 @@
 			isa = PBXGroup;
 			children = (
 				8CF3FBEB1E4F485E0088FBD3 /* CWTableViewController */,
-				8CCA27701E4E0B7900312138 /* CWTableViewManager */,
 				EDC6A0AF1D22B4CB002C2AEE /* CWInfoView */,
 				1FD3ED951D1C2DCE004FBA63 /* CWWebView */,
 				1FD3EB881D1AE3DE004FBA63 /* CWSearch */,
@@ -1116,41 +1103,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		8CCA27701E4E0B7900312138 /* CWTableViewManager */ = {
-			isa = PBXGroup;
-			children = (
-				8CF3FBEE1E4F48720088FBD3 /* CWTableViewManager.swift */,
-				8CF3FBF01E4F49680088FBD3 /* CWTableViewItem.swift */,
-				8CF3FBF21E4F499C0088FBD3 /* CWTableViewSection.swift */,
-				8CF3FBF81E4F4BC50088FBD3 /* CWTableViewCell.swift */,
-				8CF3FBFA1E4F4F930088FBD3 /* CWTableViewStyle.swift */,
-				8CF3FBF41E4F4A800088FBD3 /* Cells */,
-				8CF3FBF51E4F4A800088FBD3 /* Items */,
-			);
-			path = CWTableViewManager;
-			sourceTree = "<group>";
-		};
 		8CF3FBEB1E4F485E0088FBD3 /* CWTableViewController */ = {
 			isa = PBXGroup;
 			children = (
 				8CF3FBEC1E4F485E0088FBD3 /* CWTableViewController.swift */,
 			);
 			path = CWTableViewController;
-			sourceTree = "<group>";
-		};
-		8CF3FBF41E4F4A800088FBD3 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				8CF3FBFC1E4F4FF40088FBD3 /* CWTableViewBoolCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		8CF3FBF51E4F4A800088FBD3 /* Items */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Items;
 			sourceTree = "<group>";
 		};
 		D4D82FF81D0D0B3BE50DD4EE /* Frameworks */ = {
@@ -1644,14 +1602,12 @@
 				1F1E23101D31472B00318614 /* CWPhotoLayout.swift in Sources */,
 				1FD3ED921D1C2D73004FBA63 /* CWPrivacySettingViewController.swift in Sources */,
 				1FD3EDC61D1C4802004FBA63 /* CWMessageModel.swift in Sources */,
-				8CF3FBFD1E4F4FF40088FBD3 /* CWTableViewBoolCell.swift in Sources */,
 				1F651C391D1F9D840080C203 /* CWBadgeView.swift in Sources */,
 				1FD3EB691D1ADB17004FBA63 /* CWSettingHeaderTitleView.swift in Sources */,
 				1FD3ED9F1D1C302C004FBA63 /* CWAboutViewController.swift in Sources */,
 				1FD3EB6A1D1ADB17004FBA63 /* CWSettingFooterTitleView.swift in Sources */,
 				1FD3ED7D1D1BBE6F004FBA63 /* NSString+PinYin.swift in Sources */,
 				1FD3ED761D1BAA05004FBA63 /* CWContactManager.swift in Sources */,
-				8CF3FBF91E4F4BC50088FBD3 /* CWTableViewCell.swift in Sources */,
 				1FBF98191D28AACC00BBDBEB /* CWImageMessageCell.swift in Sources */,
 				1FD3EDAC1D1C45E5004FBA63 /* CWXMPPManager.swift in Sources */,
 				EDAF73401D33F04000B68983 /* CWMyExpressionViewController.swift in Sources */,
@@ -1692,7 +1648,6 @@
 				ED46AD8B1D2BF5780015FCB0 /* CWMessageContent.swift in Sources */,
 				1FD3EB4E1D1ADA18004FBA63 /* CWChatNavigationController.swift in Sources */,
 				ED8FD8F11D2D69CD00915622 /* CWMoreKeyboardItem.swift in Sources */,
-				8CF3FBF11E4F49680088FBD3 /* CWTableViewItem.swift in Sources */,
 				1FD3ED801D1C1320004FBA63 /* CWLoginViewController.swift in Sources */,
 				1F2E5C9A1D210DEC00CCE130 /* CWChatDBDataManager.swift in Sources */,
 				1FD3ED841D1C2BA4004FBA63 /* CWMineSettingHelper.swift in Sources */,
@@ -1717,7 +1672,6 @@
 				1FBF981B1D28AB0400BBDBEB /* CWChatImageView.swift in Sources */,
 				1FD3EB851D1AE310004FBA63 /* CWAddressBookViewController+Delegate.swift in Sources */,
 				1FA4DDA11D2CA7640052CB91 /* CWContactManager+Detail.swift in Sources */,
-				8CF3FBF31E4F499C0088FBD3 /* CWTableViewSection.swift in Sources */,
 				1FD3EB9D1D1AEC15004FBA63 /* CWChatUIConstant.swift in Sources */,
 				1F1E23011D313FCE00318614 /* UIFont+Extension.swift in Sources */,
 				1FD3EB961D1AEB6D004FBA63 /* CWMessageProtocol.swift in Sources */,
@@ -1733,7 +1687,6 @@
 				1FD3EDBC1D1C4642004FBA63 /* CWMessageDispatchQueue.swift in Sources */,
 				1FD3EB671D1ADB17004FBA63 /* CWSettingButtonCell.swift in Sources */,
 				1FD3EB8A1D1AE3E3004FBA63 /* CWSearchController.swift in Sources */,
-				8CF3FBEF1E4F48720088FBD3 /* CWTableViewManager.swift in Sources */,
 				1FD3EB4F1D1ADA18004FBA63 /* CWChatTabBarController.swift in Sources */,
 				1FEBDA2D1D23D4A7008EFFB0 /* CWChatViewController.swift in Sources */,
 				1FD3EB4D1D1ADA18004FBA63 /* CWAddressBookViewController.swift in Sources */,
@@ -1742,7 +1695,6 @@
 				EDC6A0AE1D22B434002C2AEE /* CWDetailContactViewController.swift in Sources */,
 				1FD3EB6E1D1ADDBC004FBA63 /* CWUIUtility.swift in Sources */,
 				1FD3EB511D1ADA18004FBA63 /* CWConversationsViewController.swift in Sources */,
-				8CF3FBFB1E4F4F930088FBD3 /* CWTableViewStyle.swift in Sources */,
 				EDC6A0B81D22BE96002C2AEE /* CWInformationButtonCell.swift in Sources */,
 				1FEBDA331D23D642008EFFB0 /* CWChatViewController+Keyboard.swift in Sources */,
 				1F2E5CA01D22185F00CCE130 /* CWGuideViewController.swift in Sources */,
