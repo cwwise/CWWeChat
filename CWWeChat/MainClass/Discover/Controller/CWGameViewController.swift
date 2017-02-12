@@ -13,7 +13,6 @@ class CWGameViewController: CWWebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.urlString = "http://m.zhuanzhuan.com"
         let rightBarButton = UIBarButtonItem(image: CWAsset.Nav_setting.image,
                                              style: .plain,
                                              target: self,

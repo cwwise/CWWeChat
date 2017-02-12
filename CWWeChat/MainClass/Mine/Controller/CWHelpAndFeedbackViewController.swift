@@ -13,7 +13,6 @@ class CWHelpAndFeedbackViewController: CWWebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.urlString = "http://kf.qq.com/touch/product/wechat_app.html"
         // Do any additional setup after loading the view.
     }
 

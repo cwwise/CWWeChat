@@ -32,21 +32,14 @@ class CWWebViewController: UIViewController {
     ///是否禁止历史记录，默认NO
     var disableBackButton: Bool = false
     
-    var urlString: String = "" {
-        didSet {
-            
-        }
-    }
+    /// url
+    var url = URL(string: "")
     
-    fileprivate lazy var webView: WKWebView = {
-        let configure = WKWebViewConfiguration()
-        let frame = CGRect(x: 0, y: kNavigationBarHeight, width: kScreenWidth, height: kScreenHeight-kNavigationBarHeight)
-        let webView = WKWebView(frame: frame, configuration: configure)
-        webView.allowsBackForwardNavigationGestures = true
-        return webView
-    }()
+    /// WKWebView
+    private var webView: WKWebView?
     
-    fileprivate lazy var progressView: UIProgressView = {
+    /// 展示进度
+    private lazy var progressView: UIProgressView = {
         let frame = CGRect(x: 0, y: kNavigationBarHeight, width: kScreenWidth, height: 10)
         let progressView = UIProgressView(frame: frame)
         progressView.progressTintColor = UIColor.chatSystemColor()
@@ -54,12 +47,12 @@ class CWWebViewController: UIViewController {
         return progressView
     }()
     
-    fileprivate lazy var backButtonItem: UIBarButtonItem = {
+    private lazy var backButtonItem: UIBarButtonItem = {
         let backButtonItem = UIBarButtonItem(backTitle: "返回", target: self, action: #selector(navigationBackButtonDown))
         return backButtonItem
     }()
     
-    fileprivate lazy var closeButtonItem: UIBarButtonItem = {
+    private lazy var closeButtonItem: UIBarButtonItem = {
         let closeButtonItem = UIBarButtonItem(title: "关闭", style: .plain, target: self, action: #selector(navigationCloseButtonDown))
         return closeButtonItem
     }()
@@ -74,18 +67,37 @@ class CWWebViewController: UIViewController {
         return authLabel
     }()
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    required convenience init(url: URL) {
+        self.init()
+        self.url = url
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let configure = WKWebViewConfiguration()
+        let frame = CGRect(x: 0, y: kNavigationBarHeight, width: kScreenWidth, height: kScreenHeight-kNavigationBarHeight)
+        webView = WKWebView(frame: frame, configuration: configure)
+        webView?.allowsBackForwardNavigationGestures = true
+        
         self.view.backgroundColor = UIColor.defaultBlackColor()
         self.view.addSubview(authLabel)
-        self.view.addSubview(webView)
+        self.view.addSubview(webView!)
         self.view.addSubview(progressView)
         
-        webView.navigationDelegate = self
-        webView.scrollView.backgroundColor = UIColor.clear
+        webView?.navigationDelegate = self
+        webView?.scrollView.backgroundColor = UIColor.clear
         
         //遍历设置背景颜色
-        for subView in webView.scrollView.subviews {
+        for subView in webView!.scrollView.subviews {
             if "\(subView.classForCoder)" == "WKContentView" {
                 subView.backgroundColor = UIColor.white
             }
@@ -93,27 +105,27 @@ class CWWebViewController: UIViewController {
         
         self.navigationItem.leftBarButtonItems = [backButtonItem]
         
-        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &webViewContentKey)
-        webView.scrollView.addObserver(self, forKeyPath: "backgroundColor", options: .new, context: &webViewBackgroundColorKey)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        webView?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &webViewContentKey)
+        webView?.scrollView.addObserver(self, forKeyPath: "backgroundColor", options: .new, context: &webViewBackgroundColorKey)
         
         self.progressView.progress = 0
-        let request = URLRequest(url: URL(string: self.urlString)!)
-        self.webView.load(request)
+        
+        guard let url = self.url else {
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        self.webView!.load(request)
     }
     
-    
-    
+
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         if context == &webViewContentKey {
             self.progressView.alpha = 1
-            self.progressView.setProgress(Float(webView.estimatedProgress), animated: true)
+            self.progressView.setProgress(Float(webView!.estimatedProgress), animated: true)
             
-            if self.webView.estimatedProgress >= 1.0 {
+            if self.webView!.estimatedProgress >= 1.0 {
                 
                 UIView.animate(withDuration: 0.3, delay: 0.25, options: UIViewAnimationOptions(), animations: { 
                     self.progressView.alpha = 0
@@ -128,7 +140,7 @@ class CWWebViewController: UIViewController {
             
             let color = change![NSKeyValueChangeKey.newKey] as! UIColor
             if color.cgColor != UIColor.clear.cgColor {
-                self.webView.scrollView.backgroundColor = UIColor.clear
+                self.webView!.scrollView.backgroundColor = UIColor.clear
             }
         }
         
@@ -143,8 +155,8 @@ class CWWebViewController: UIViewController {
     
     func navigationBackButtonDown() {
         
-        if self.webView.canGoBack {
-            self.webView.goBack()
+        if self.webView!.canGoBack {
+            self.webView!.goBack()
             let spaceItem = UIBarButtonItem.fixBarItemSpaceWidth(webView_Items_Fixed_Space)
             self.navigationItem.leftBarButtonItems = [backButtonItem,spaceItem,closeButtonItem]
             
@@ -155,11 +167,8 @@ class CWWebViewController: UIViewController {
     }
     
     deinit {
-        //直接初始化之后 销毁的话，会出现问题，观察者没有添加 就销魂 会崩溃。待解决
-        if urlString != "" {
-            self.webView.removeObserver(self, forKeyPath: "estimatedProgress")
-            self.webView.scrollView.removeObserver(self, forKeyPath: "backgroundColor")
-        }
+        self.webView?.removeObserver(self, forKeyPath: "estimatedProgress")
+        self.webView?.scrollView.removeObserver(self, forKeyPath: "backgroundColor")
     }
 }
 

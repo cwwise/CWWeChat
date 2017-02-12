@@ -27,11 +27,12 @@ class CWAccountSafetyViewController: CWBaseTableViewController, CWTableViewManag
         tableViewManager = CWTableViewManager(tableView: self.tableView)
         tableViewManager.delegate = self;
         
-        let weixinName: Optional = "测试"
+        var weixinName: String?
+        weixinName = "chenwei"
         
         var weixinItem: CWTableViewItem
         if weixinName != nil {
-            weixinItem = CWTableViewItem(title: weixinName!)
+            weixinItem = CWTableViewItem(title: "微信号", subTitle: weixinName)
             weixinItem.showDisclosureIndicator = false
         } else {
             weixinItem = CWTableViewItem(title: "")
@@ -52,6 +53,12 @@ class CWAccountSafetyViewController: CWBaseTableViewController, CWTableViewManag
         let passwordItem = CWTableViewItem(title: "微信密码")
         let safetyItem = CWTableViewItem(title: "账户保护")
         let weixinSaftItem = CWTableViewItem(title: "微信安全中心")
+        weixinItem.selectionAction = { (item: CWTableViewItem) in
+            let url = URL(string: "https://weixin110.qq.com")!
+            let webViewController = CWWebViewController(url: url)
+            self.navigationController?.pushViewController(webViewController, animated: true)
+        }
+        
         let section3 = CWTableViewSection(items: [soundItem, passwordItem, safetyItem, weixinSaftItem])
         tableViewManager.addSection(section: section3)
     }

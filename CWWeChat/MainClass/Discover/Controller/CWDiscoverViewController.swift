@@ -30,8 +30,8 @@ class CWDiscoverViewController: CWMenuViewController {
 extension CWDiscoverViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let gameViewController = CWGameViewController()
+        let url = URL(string: "http://m.zhuanzhuan.com")!
+        let gameViewController = CWGameViewController(url: url)
         gameViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(gameViewController, animated: true)
         
