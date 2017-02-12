@@ -214,6 +214,7 @@
 		1F2E5CA31D223D5000CCE130 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		1F2E5CA51D225DA600CCE130 /* CWToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWToastView.swift; sourceTree = "<group>"; };
 		1F2E5CA71D226FBF00CCE130 /* CWToastShowProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWToastShowProtocol.swift; sourceTree = "<group>"; };
+		1F4186771E4FFBC000F8ECC1 /* CWTableViewManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWTableViewManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F651BE01D1CDF400080C203 /* CWWeChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWWeChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F651BE21D1CDF400080C203 /* CWWeChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWWeChatUITests.swift; sourceTree = "<group>"; };
 		1F651BE41D1CDF400080C203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -370,6 +371,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1F4186741E4FFBC000F8ECC1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1F651BDD1D1CDF400080C203 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -544,6 +552,7 @@
 				1FD3EAFA1D1ABBF8004FBA63 /* CWWeChat.app */,
 				1FD3EDDB1D1CC180004FBA63 /* CWWeChatTests.xctest */,
 				1F651BE01D1CDF400080C203 /* CWWeChatUITests.xctest */,
+				1F4186771E4FFBC000F8ECC1 /* CWTableViewManager.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -689,7 +698,6 @@
 		1FD3EB381D1ADA18004FBA63 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				8CCA27701E4E0B7900312138 /* CWTableViewManager */,
 				ED58D2CB1D4F9710006C932D /* CWTableView */,
 				EDC6A0AF1D22B4CB002C2AEE /* CWInfoView */,
 				1FD3ED951D1C2DCE004FBA63 /* CWWebView */,
@@ -1104,13 +1112,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		8CCA27701E4E0B7900312138 /* CWTableViewManager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CWTableViewManager;
-			sourceTree = "<group>";
-		};
 		D4D82FF81D0D0B3BE50DD4EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1288,6 +1289,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1F4186761E4FFBC000F8ECC1 /* CWTableViewManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F4186881E4FFBC000F8ECC1 /* Build configuration list for PBXNativeTarget "CWTableViewManager" */;
+			buildPhases = (
+				1F4186731E4FFBC000F8ECC1 /* Sources */,
+				1F4186741E4FFBC000F8ECC1 /* Frameworks */,
+				1F4186751E4FFBC000F8ECC1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CWTableViewManager;
+			productName = CWTableViewManager;
+			productReference = 1F4186771E4FFBC000F8ECC1 /* CWTableViewManager.app */;
+			productType = "com.apple.product-type.application";
+		};
 		1F651BDF1D1CDF400080C203 /* CWWeChatUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F651BE91D1CDF400080C203 /* Build configuration list for PBXNativeTarget "CWWeChatUITests" */;
@@ -1357,10 +1375,14 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CW;
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = chenwei;
 				TargetAttributes = {
+					1F4186761E4FFBC000F8ECC1 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
 					1F651BDF1D1CDF400080C203 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0810;
@@ -1393,11 +1415,19 @@
 				1FD3EAF91D1ABBF8004FBA63 /* CWWeChat */,
 				1FD3EDDA1D1CC180004FBA63 /* CWWeChatTests */,
 				1F651BDF1D1CDF400080C203 /* CWWeChatUITests */,
+				1F4186761E4FFBC000F8ECC1 /* CWTableViewManager */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1F4186751E4FFBC000F8ECC1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1F651BDE1D1CDF400080C203 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1568,6 +1598,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1F4186731E4FFBC000F8ECC1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1F651BDC1D1CDF400080C203 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1769,6 +1806,35 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1F4186861E4FFBC000F8ECC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				INFOPLIST_FILE = CWTableViewManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWTableViewManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		1F4186871E4FFBC000F8ECC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				INFOPLIST_FILE = CWTableViewManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWTableViewManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		1F651BE71D1CDF400080C203 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9A7C0A5AEDD35B8570648EAF /* Pods-CWWeChatUITests.debug.xcconfig */;
@@ -1950,6 +2016,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1F4186881E4FFBC000F8ECC1 /* Build configuration list for PBXNativeTarget "CWTableViewManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F4186861E4FFBC000F8ECC1 /* Debug */,
+				1F4186871E4FFBC000F8ECC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		1F651BE91D1CDF400080C203 /* Build configuration list for PBXNativeTarget "CWWeChatUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

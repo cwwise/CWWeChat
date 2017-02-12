@@ -25,6 +25,7 @@ PODS:
     - CocoaLumberjack/Default
   - CocoaLumberjack/Swift (3.0.0):
     - CocoaLumberjack/Extensions
+  - CWTableViewManager (0.0.1)
   - HappyDNS (0.3.10)
   - KissXML (5.1.2):
     - KissXML/Core (= 5.1.2)
@@ -211,6 +212,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - CWTableViewManager (from `./CWPrivatePod/CWTableViewManager`)
   - MBProgressHUD
   - Qiniu
   - SnapKit
@@ -222,6 +224,8 @@ DEPENDENCIES:
   - YYWebImage
 
 EXTERNAL SOURCES:
+  CWTableViewManager:
+    :path: "./CWPrivatePod/CWTableViewManager"
   XMPPFramework:
     :branch: master
     :git: https://github.com/wei18810109052/XMPPFramework.git
@@ -236,6 +240,7 @@ SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
   CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
   CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
+  CWTableViewManager: 9fc8a03b6ff589c6193f3c04e2e29ba17de02c5f
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   KissXML: 246c842586bb77110e04fb88e19376d96245c856
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
@@ -250,6 +255,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 6f6f4e1c6fc392aa10c3d577b5e7503e2e59f91a
+PODFILE CHECKSUM: 786ff6dfe0038f332d0d27ed2f9c09bcb957cde2
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.0.rc.1
