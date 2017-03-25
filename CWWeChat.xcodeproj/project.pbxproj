@@ -143,10 +143,10 @@
 		1FEBDA331D23D642008EFFB0 /* CWChatViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBDA321D23D642008EFFB0 /* CWChatViewController+Keyboard.swift */; };
 		47A602EC777BF8B3F63924D8 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECE23B265D75A03FB5C6A9 /* Pods_CWWeChat.framework */; };
 		7388FDE9448C1BAD693E4300 /* Pods_CWWeChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40651309C8329F5B7A9811EE /* Pods_CWWeChatUITests.framework */; };
+		8CBA6A501E6DAD310010BB23 /* CWChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA6A4F1E6DAD310010BB23 /* CWChatMessage.swift */; };
 		8CDC37D09EE0AA3F16C11650 /* Pods_CWWeChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9084382C72A0B530B907A4 /* Pods_CWWeChatTests.framework */; };
 		8CF3FBED1E4F485E0088FBD3 /* CWBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3FBEC1E4F485E0088FBD3 /* CWBaseTableViewController.swift */; };
 		8CF3FBFF1E5340780088FBD3 /* CWChatClientOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3FBFE1E5340780088FBD3 /* CWChatClientOptions.swift */; };
-		8CF3FC011E5345BB0088FBD3 /* CWMessageHandleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3FC001E5345BB0088FBD3 /* CWMessageHandleProtocol.swift */; };
 		ED46AD8B1D2BF5780015FCB0 /* CWMessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46AD8A1D2BF5780015FCB0 /* CWMessageContent.swift */; };
 		ED46AD8D1D2BF7F40015FCB0 /* CWTextMessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46AD8C1D2BF7F40015FCB0 /* CWTextMessageContent.swift */; };
 		ED46AD8F1D2BF8580015FCB0 /* CWImageMessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46AD8E1D2BF8580015FCB0 /* CWImageMessageContent.swift */; };
@@ -350,9 +350,9 @@
 		40651309C8329F5B7A9811EE /* Pods_CWWeChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E6F8F41CBA137291D180E0E /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
 		80C4EC6CB95B1523B42971BD /* Pods-CWWeChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.debug.xcconfig"; sourceTree = "<group>"; };
+		8CBA6A4F1E6DAD310010BB23 /* CWChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatMessage.swift; sourceTree = "<group>"; };
 		8CF3FBEC1E4F485E0088FBD3 /* CWBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWBaseTableViewController.swift; sourceTree = "<group>"; };
 		8CF3FBFE1E5340780088FBD3 /* CWChatClientOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatClientOptions.swift; sourceTree = "<group>"; };
-		8CF3FC001E5345BB0088FBD3 /* CWMessageHandleProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CWMessageHandleProtocol.swift; path = CWWeChat/CommonModule/CWChatClient/XMPP/CWMessageHandleProtocol.swift; sourceTree = SOURCE_ROOT; };
 		911D353251D6BD438C3CF058 /* Pods-CWWeChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatUITests/Pods-CWWeChatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9A7C0A5AEDD35B8570648EAF /* Pods-CWWeChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatUITests/Pods-CWWeChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A382C0967FE3A0184F1D5275 /* Pods-CWWeChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -574,7 +574,6 @@
 		1F5D10B21E50ACA5005D9E09 /* MessageHandle */ = {
 			isa = PBXGroup;
 			children = (
-				8CF3FC001E5345BB0088FBD3 /* CWMessageHandleProtocol.swift */,
 			);
 			path = MessageHandle;
 			sourceTree = "<group>";
@@ -582,6 +581,7 @@
 		1F5D10B31E50ACA5005D9E09 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8CBA6A4F1E6DAD310010BB23 /* CWChatMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1776,7 +1776,6 @@
 				1F7895751D24EC2200713D57 /* CWXMPPConfigure.swift in Sources */,
 				1F908D801D2F63F700B276E3 /* CWMineInformationViewController.swift in Sources */,
 				1FD3EB7B1D1AE061004FBA63 /* CWMenuCell.swift in Sources */,
-				8CF3FC011E5345BB0088FBD3 /* CWMessageHandleProtocol.swift in Sources */,
 				1FD3ED861D1C2BF8004FBA63 /* CWAccountSafetyHelper.swift in Sources */,
 				1FD3ED881D1C2C4F004FBA63 /* CWMessageInformSettingHelper.swift in Sources */,
 				1FD3EDC21D1C4642004FBA63 /* CWHTTPSessionManager.swift in Sources */,
@@ -1837,6 +1836,7 @@
 				ED46AD8D1D2BF7F40015FCB0 /* CWTextMessageContent.swift in Sources */,
 				1F651C351D1F91F00080C203 /* UIButton+Extensions.swift in Sources */,
 				1FD3EDC01D1C4642004FBA63 /* CWBaseMessageHandle.swift in Sources */,
+				8CBA6A501E6DAD310010BB23 /* CWChatMessage.swift in Sources */,
 				ED8FD8EA1D2D581600915622 /* CWTimeMessageCell.swift in Sources */,
 				1FD3EDA31D1C335D004FBA63 /* CWAboutSettingHelper.swift in Sources */,
 				1FD3EB681D1ADB17004FBA63 /* CWSettingSwitchCell.swift in Sources */,

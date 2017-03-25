@@ -95,11 +95,6 @@ public enum CWMessageSendState : Int {
     }
 }
 
-///消息读取的状态
-public enum CWMessageReadState : Int {
-    case readed               //消息已读
-    case unread               //消息未读
-}
 
 ///消息播放状态(声音和视频)
 public enum CWMessagePlayState : Int {

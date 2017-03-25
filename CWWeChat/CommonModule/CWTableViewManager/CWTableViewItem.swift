@@ -19,9 +19,9 @@ public class CWTableViewItem: NSObject {
     
     /// cell高度 默认49
     public var cellHeight: CGFloat = 0.0
-    //  是否显示
+    ///  是否显示
     public var showDisclosureIndicator: Bool = true
-    //  是否不高亮
+    ///  是否不高亮
     public var disableHighlight: Bool = false
     
     public var selectionAction: CWSelectionHandler?

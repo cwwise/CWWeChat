@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 //主要是需要使用
 import XMPPFramework
 

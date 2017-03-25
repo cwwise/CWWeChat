@@ -17,7 +17,6 @@ class CWChatClient: NSObject {
     private override init() {
         super.init()
         
-        _ = FileManager.default
         
     }
     

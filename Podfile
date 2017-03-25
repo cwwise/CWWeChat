@@ -22,16 +22,11 @@ target 'CWWeChat' do
   pod 'SQLite.swift'
   
   #聊天
-  pod 'XMPPFramework', :git => "https://github.com/wei18810109052/XMPPFramework.git", :branch => 'master'
-  
+  pod 'XMPPFramework', '~> 3.7.0'
   
   pod 'Qiniu'
   pod 'MBProgressHUD'
   
-  # 本地pod
-#  pod 'CWTableViewManager', :path => './CWPrivatePod/CWTableViewManager'
-
-
 
   target 'CWWeChatTests' do
     inherit! :search_paths
