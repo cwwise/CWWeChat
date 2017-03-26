@@ -22,17 +22,19 @@ target 'CWWeChat' do
   #数据库
   pod 'SQLite.swift'
   
+  pod 'SwiftyBeaver'
+
   #聊天
   pod 'XMPPFramework', '~> 3.7.0'
   
   pod 'MBProgressHUD'
   
+  pod 'KVOController'
+  
   pod 'Moya/RxSwift'
   
   pod 'IGListKit'
   
-  # 图片管理
-
   target 'CWWeChatTests' do
     inherit! :search_paths
     # Pods for testing

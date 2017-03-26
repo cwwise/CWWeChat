@@ -7,8 +7,10 @@
 //
 
 import UIKit
-import CocoaLumberjack
+import SwiftyBeaver
 import UserNotifications
+
+let log = SwiftyBeaver.self
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -37,11 +39,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     ///设置Log日志
     func setupLogger() {
-        let fileLogger: DDFileLogger = DDFileLogger() // File Logger
-        fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
-        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
-        DDLog.add(fileLogger)
-        DDLog.add(DDTTYLogger.sharedInstance, with: .debug)
+  
+        // add log destinations. at least one is needed!
+        let console = ConsoleDestination()  // log to Xcode Console
+        let file = FileDestination()  // log to default swiftybeaver.log file
+        log.addDestination(console)
+        log.addDestination(file)
+        
     }
     
     /// 注册通知

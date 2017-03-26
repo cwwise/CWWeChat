@@ -11,7 +11,7 @@ import UIKit
 
 extension String {
     func pinYingString(_ allFirst:Bool=false) -> String{
-        var py=""
+        let py=""
         let string = self
         if string == "" {
             return py

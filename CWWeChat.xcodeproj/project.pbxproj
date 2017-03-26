@@ -69,6 +69,9 @@
 		1F3492661E87B3F500B36641 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3492611E87B3D500B36641 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F3492671E87B3F500B36641 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3492621E87B3D500B36641 /* RealmSwift.framework */; };
 		1F3492681E87B3F500B36641 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3492621E87B3D500B36641 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F34926C1E87B84100B36641 /* CWWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F34926B1E87B84100B36641 /* CWWebViewController.swift */; };
+		1F34926E1E87BE4200B36641 /* CWChatConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F34926D1E87BE4200B36641 /* CWChatConst.swift */; };
+		1F3492711E87C06300B36641 /* CWBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492701E87C06300B36641 /* CWBaseTableViewController.swift */; };
 		4E3C0C0A9AC7AC251E75415B /* Pods_CWWeChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 392080DF2A871FED246A48AD /* Pods_CWWeChatTests.framework */; };
 		732B7F111A2AF06C5FB003A1 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5C5938ABFC0D0537A59353 /* Pods_CWWeChat.framework */; };
 /* End PBXBuildFile section */
@@ -173,6 +176,9 @@
 		1F3492581E8792AC00B36641 /* CWConversationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWConversationController.swift; sourceTree = "<group>"; };
 		1F3492611E87B3D500B36641 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		1F3492621E87B3D500B36641 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		1F34926B1E87B84100B36641 /* CWWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWWebViewController.swift; sourceTree = "<group>"; };
+		1F34926D1E87BE4200B36641 /* CWChatConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatConst.swift; sourceTree = "<group>"; };
+		1F3492701E87C06300B36641 /* CWBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWBaseTableViewController.swift; sourceTree = "<group>"; };
 		2D5C5938ABFC0D0537A59353 /* Pods_CWWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		31E51D349FC87AA2896572C6 /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
 		392080DF2A871FED246A48AD /* Pods_CWWeChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -472,6 +478,7 @@
 		1F3491E61E878AD500B36641 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				1F34926D1E87BE4200B36641 /* CWChatConst.swift */,
 				1F3491E71E878AD500B36641 /* ChatTimeTool.swift */,
 				1F3491E81E878AD500B36641 /* CWUIUtility.swift */,
 			);
@@ -507,6 +514,8 @@
 			children = (
 				1F34923A1E87918C00B36641 /* CWChatNavigationController.swift */,
 				1F34923B1E87918C00B36641 /* CWChatTabBarController.swift */,
+				1F34926F1E87C06300B36641 /* CWTableViewController */,
+				1F34926A1E87B84100B36641 /* CWWebView */,
 				1F3491EC1E878AD500B36641 /* CWTableViewManager */,
 			);
 			path = Base;
@@ -515,12 +524,12 @@
 		1F3491EC1E878AD500B36641 /* CWTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
-				1F3491ED1E878AD500B36641 /* Cells */,
-				1F3491EF1E878AD500B36641 /* CWTableViewCell.swift */,
-				1F3491F01E878AD500B36641 /* CWTableViewItem.swift */,
+				1F3491F31E878AD500B36641 /* CWTableViewStyle.swift */,
 				1F3491F11E878AD500B36641 /* CWTableViewManager.swift */,
 				1F3491F21E878AD500B36641 /* CWTableViewSection.swift */,
-				1F3491F31E878AD500B36641 /* CWTableViewStyle.swift */,
+				1F3491F01E878AD500B36641 /* CWTableViewItem.swift */,
+				1F3491EF1E878AD500B36641 /* CWTableViewCell.swift */,
+				1F3491ED1E878AD500B36641 /* Cells */,
 				1F3491F41E878AD500B36641 /* Items */,
 			);
 			path = CWTableViewManager;
@@ -800,6 +809,22 @@
 				1F3492621E87B3D500B36641 /* RealmSwift.framework */,
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		1F34926A1E87B84100B36641 /* CWWebView */ = {
+			isa = PBXGroup;
+			children = (
+				1F34926B1E87B84100B36641 /* CWWebViewController.swift */,
+			);
+			path = CWWebView;
+			sourceTree = "<group>";
+		};
+		1F34926F1E87C06300B36641 /* CWTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1F3492701E87C06300B36641 /* CWBaseTableViewController.swift */,
+			);
+			path = CWTableViewController;
 			sourceTree = "<group>";
 		};
 		FD435830FB8A0BDDBF411282 /* Frameworks */ = {
@@ -1114,6 +1139,7 @@
 				1F34920F1E878AD500B36641 /* CWChatMessageCell.swift in Sources */,
 				1F3492591E8792AC00B36641 /* CWConversationController.swift in Sources */,
 				1F34920C1E878AD500B36641 /* CWChatXMPPManager.swift in Sources */,
+				1F34926C1E87B84100B36641 /* CWWebViewController.swift in Sources */,
 				1F3492061E878AD500B36641 /* CWChatSession.swift in Sources */,
 				1F3492221E878AD500B36641 /* CWTableViewManager.swift in Sources */,
 				1F3492111E878AD500B36641 /* NSString+Chat.swift in Sources */,
@@ -1144,7 +1170,9 @@
 				1F34920A1E878AD500B36641 /* CWChatContactManager.swift in Sources */,
 				1F3492081E878AD500B36641 /* CWTextMessageObject.swift in Sources */,
 				1F3492571E87929500B36641 /* CWMineController.swift in Sources */,
+				1F34926E1E87BE4200B36641 /* CWChatConst.swift in Sources */,
 				1F34920B1E878AD500B36641 /* CWChatMessageManager.swift in Sources */,
+				1F3492711E87C06300B36641 /* CWBaseTableViewController.swift in Sources */,
 				1F3492161E878AD500B36641 /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
