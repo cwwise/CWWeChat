@@ -1,19 +1,4 @@
 PODS:
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
-  - AFNetworking/NSURLSession (3.1.0):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.1.0)
-  - AFNetworking/Security (3.1.0)
-  - AFNetworking/Serialization (3.1.0)
-  - AFNetworking/UIKit (3.1.0):
-    - AFNetworking/NSURLSession
   - Alamofire (4.3.0)
   - CocoaAsyncSocket (7.6.0)
   - CocoaLumberjack (3.1.0):
@@ -22,12 +7,8 @@ PODS:
   - CocoaLumberjack/Default (3.1.0)
   - CocoaLumberjack/Extensions (3.1.0):
     - CocoaLumberjack/Default
-  - HappyDNS (0.3.10)
   - KissXML (5.2.0)
   - MBProgressHUD (1.0.0)
-  - Qiniu (7.1.5):
-    - AFNetworking (~> 3)
-    - HappyDNS (~> 0.3)
   - SnapKit (3.1.2)
   - SQLite.swift (0.11.2):
     - SQLite.swift/standard (= 0.11.2)
@@ -50,7 +31,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - MBProgressHUD
-  - Qiniu
   - SnapKit
   - SQLite.swift
   - SwiftyJSON
@@ -60,14 +40,11 @@ DEPENDENCIES:
   - YYWebImage
 
 SPEC CHECKSUMS:
-  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
   CocoaAsyncSocket: b9d5589f07baf9de8f34cc25abd4fcba28f13805
   CocoaLumberjack: 8311463ddf9ee86a06ef92a071dd656c89244500
-  HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   KissXML: 1c1eeeb6b94e4522cd2f2373e5d0d03c9227738f
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  Qiniu: 77a3dba411556a383d72d17e842345a9d4c83252
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
   SQLite.swift: 670c3e9e0a806bbfd56a3de5d530768dc0e6fe7c
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
@@ -78,6 +55,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 8b5a8b1337071d502b8bc68a0a71ba6d4c57111d
+PODFILE CHECKSUM: e161e109bdadbdab5165f96c171b00c3f9a39523
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.0.rc.1

@@ -18,15 +18,14 @@ target 'CWWeChat' do
   
   pod 'YYText'
   pod 'YYWebImage'
+  
   #数据库
   pod 'SQLite.swift'
   
   #聊天
   pod 'XMPPFramework', '~> 3.7.0'
   
-  pod 'Qiniu'
   pod 'MBProgressHUD'
-  
 
   target 'CWWeChatTests' do
     inherit! :search_paths
