@@ -15,7 +15,7 @@ import UIKit
 /// - single: 单聊
 /// - group: 群聊
 /// - chatRoom: 组聊
-public enum CWConversationType : Int {
+public enum CWSessionType : Int {
     case single
     case group
     case chatroom
@@ -75,7 +75,7 @@ public enum CWMessageType: Int {
 class CWChatMessage: NSObject {
 
     /// 会话类型
-    var conversationType: CWConversationType = .single
+    var sessionType: CWSessionType = .single
     
     /// 消息类型
     var messageType: CWMessageType {
@@ -106,7 +106,6 @@ class CWChatMessage: NSObject {
     /// 消息发送时间
     var timestamp: TimeInterval
 
-    
     
     init(targetId: String,
          messageID: String = String.UUIDString(),

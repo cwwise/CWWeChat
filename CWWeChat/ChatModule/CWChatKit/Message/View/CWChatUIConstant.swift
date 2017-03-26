@@ -9,7 +9,7 @@
 import UIKit
 
 //MARK: UI相关
-public struct ChatConversationCellUI {
+public struct ChatSessionCellUI {
     static let headerImageViewLeftPadding:CGFloat = 10.0
     static let headerImageViewTopPadding:CGFloat = 10.0
 }

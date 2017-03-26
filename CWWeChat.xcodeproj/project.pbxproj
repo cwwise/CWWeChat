@@ -80,6 +80,10 @@
 		1F3492831E87DDD300B36641 /* CWMineUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492821E87DDD300B36641 /* CWMineUserCell.swift */; };
 		1F3492851E87DF8F00B36641 /* CWContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492841E87DF8F00B36641 /* CWContactModel.swift */; };
 		1F3492871E87E27D00B36641 /* CWGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492861E87E27D00B36641 /* CWGameController.swift */; };
+		1F3492891E88145D00B36641 /* CWChatSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492881E88145D00B36641 /* CWChatSessionModel.swift */; };
+		1F34928B1E88149000B36641 /* CWChatSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F34928A1E88149000B36641 /* CWChatSessionController.swift */; };
+		1F34928D1E88152D00B36641 /* CWChatSessionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F34928C1E88152D00B36641 /* CWChatSessionCell.swift */; };
+		1F34928F1E8815AB00B36641 /* CWBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F34928E1E8815AB00B36641 /* CWBadgeView.swift */; };
 		4E3C0C0A9AC7AC251E75415B /* Pods_CWWeChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 392080DF2A871FED246A48AD /* Pods_CWWeChatTests.framework */; };
 		732B7F111A2AF06C5FB003A1 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5C5938ABFC0D0537A59353 /* Pods_CWWeChat.framework */; };
 /* End PBXBuildFile section */
@@ -195,6 +199,10 @@
 		1F3492821E87DDD300B36641 /* CWMineUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMineUserCell.swift; sourceTree = "<group>"; };
 		1F3492841E87DF8F00B36641 /* CWContactModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWContactModel.swift; sourceTree = "<group>"; };
 		1F3492861E87E27D00B36641 /* CWGameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWGameController.swift; sourceTree = "<group>"; };
+		1F3492881E88145D00B36641 /* CWChatSessionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatSessionModel.swift; sourceTree = "<group>"; };
+		1F34928A1E88149000B36641 /* CWChatSessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatSessionController.swift; sourceTree = "<group>"; };
+		1F34928C1E88152D00B36641 /* CWChatSessionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatSessionCell.swift; sourceTree = "<group>"; };
+		1F34928E1E8815AB00B36641 /* CWBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWBadgeView.swift; sourceTree = "<group>"; };
 		2D5C5938ABFC0D0537A59353 /* Pods_CWWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		31E51D349FC87AA2896572C6 /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
 		392080DF2A871FED246A48AD /* Pods_CWWeChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -444,6 +452,7 @@
 		1F3491D41E878AD500B36641 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1F34928A1E88149000B36641 /* CWChatSessionController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -451,6 +460,7 @@
 		1F3491D51E878AD500B36641 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1F3492881E88145D00B36641 /* CWChatSessionModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -458,6 +468,8 @@
 		1F3491D61E878AD500B36641 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F34928C1E88152D00B36641 /* CWChatSessionCell.swift */,
+				1F34928E1E8815AB00B36641 /* CWBadgeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1181,12 +1193,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F34928B1E88149000B36641 /* CWChatSessionController.swift in Sources */,
 				1F34921F1E878AD500B36641 /* CWTableViewBoolCell.swift in Sources */,
 				1F3492211E878AD500B36641 /* CWTableViewItem.swift in Sources */,
 				1F3492531E87926600B36641 /* CWAddressBookController.swift in Sources */,
 				1F3492231E878AD500B36641 /* CWTableViewSection.swift in Sources */,
+				1F3492891E88145D00B36641 /* CWChatSessionModel.swift in Sources */,
 				1F3492251E878AD500B36641 /* CWBoolItem.swift in Sources */,
 				1F34921E1E878AD500B36641 /* CWUIUtility.swift in Sources */,
+				1F34928D1E88152D00B36641 /* CWChatSessionCell.swift in Sources */,
 				1F3492171E878AD500B36641 /* UIFont+Extension.swift in Sources */,
 				1F3492151E878AD500B36641 /* UIButton+Extensions.swift in Sources */,
 				1F34921C1E878AD500B36641 /* UIViewController+Logger.swift in Sources */,
@@ -1213,6 +1228,7 @@
 				1F3492551E87927D00B36641 /* CWDiscoverController.swift in Sources */,
 				1F34923D1E87918C00B36641 /* CWChatTabBarController.swift in Sources */,
 				1F3492191E878AD500B36641 /* UIImage+Extension.swift in Sources */,
+				1F34928F1E8815AB00B36641 /* CWBadgeView.swift in Sources */,
 				1F3492871E87E27D00B36641 /* CWGameController.swift in Sources */,
 				1F34920D1E878AD500B36641 /* CWChatMessageFrame.swift in Sources */,
 				1F3491B51E87897F00B36641 /* AppDelegate.swift in Sources */,
