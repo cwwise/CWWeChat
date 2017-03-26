@@ -26,6 +26,12 @@ target 'CWWeChat' do
   pod 'XMPPFramework', '~> 3.7.0'
   
   pod 'MBProgressHUD'
+  
+  pod 'Moya/RxSwift'
+  
+  pod 'IGListKit'
+  
+  # 图片管理
 
   target 'CWWeChatTests' do
     inherit! :search_paths
