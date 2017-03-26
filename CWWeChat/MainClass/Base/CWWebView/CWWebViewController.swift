@@ -106,25 +106,31 @@ class CWWebViewController: UIViewController {
             }
         }
 
+        weak var weak_self = self
         kvoController.observe(webView, keyPath: "estimatedProgress", options: .new) { (viewController, webView, change) in
             
-            self.progressView.alpha = 1
-            self.progressView.setProgress(Float(self.webView.estimatedProgress), animated: true)
+            guard let strong_self = weak_self else { return }
             
-            if self.webView.estimatedProgress >= 1.0 {
+            strong_self.progressView.alpha = 1
+            strong_self.progressView.setProgress(Float(strong_self.webView.estimatedProgress), animated: true)
+            
+            if strong_self.webView.estimatedProgress >= 1.0 {
                 UIView.animate(withDuration: 0.3, delay: 0.25, options: UIViewAnimationOptions(), animations: {
-                    self.progressView.alpha = 0
+                    strong_self.progressView.alpha = 0
                 }, completion: { (finished) in
-                    self.progressView.setProgress(0, animated: false)
+                    strong_self.progressView.setProgress(0, animated: false)
                 })
             }
             
         }
         
         kvoController.observe(webView.scrollView, keyPath: "backgroundColor", options: .new) { (viewController, scrollView, change) in
+            
+            guard let strong_self = weak_self else { return }
+
             let color = change[NSKeyValueChangeKey.newKey.rawValue] as! UIColor
             if color.cgColor != UIColor.clear.cgColor {
-                self.webView.scrollView.backgroundColor = UIColor.clear
+                strong_self.webView.scrollView.backgroundColor = UIColor.clear
             }
         }
         
@@ -158,7 +164,7 @@ class CWWebViewController: UIViewController {
     }
     
     deinit {
-        log.debug("CWWebViewController 销毁")
+        log.debug("\(self.classForCoder) 销毁")
     }
     
 }

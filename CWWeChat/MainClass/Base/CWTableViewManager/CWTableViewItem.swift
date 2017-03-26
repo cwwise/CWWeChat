@@ -14,9 +14,8 @@ public class CWTableViewItem: NSObject {
     public typealias CWSelectionHandler = (CWTableViewItem) -> ()
     /// 文本
     public var title: String
-    ///
+    /// 副标题
     public var subTitle: String?
-    
     /// cell高度 默认49
     public var cellHeight: CGFloat = 0.0
     ///  是否显示

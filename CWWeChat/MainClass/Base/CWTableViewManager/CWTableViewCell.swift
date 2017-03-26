@@ -18,20 +18,20 @@ public class CWTableViewCell: UITableViewCell {
     
     public var item: CWTableViewItem!
     
-    private lazy var titleLabel:UILabel = {
+    lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
         titleLabel.font = kCWItemTitleFont
         return titleLabel
     }()
     
-    private lazy var rightLabel:UILabel = {
+    lazy var rightLabel:UILabel = {
         let rightLabel = UILabel()
         rightLabel.textColor = UIColor.gray
         rightLabel.font = kCWItemsubTitleFont
         return rightLabel
     }()
     
-    private lazy var rightImageView:UIImageView = {
+    lazy var rightImageView:UIImageView = {
         let rightImageView = UIImageView()
         return rightImageView
     }()
@@ -61,7 +61,7 @@ public class CWTableViewCell: UITableViewCell {
         self.rightLabel.snp.makeConstraints { (make) in
             make.right.equalTo(self.contentView)
             make.centerY.equalTo(self.contentView)
-            make.left.greaterThanOrEqualTo(self.titleLabel.snp.right).offset(20)
+            make.left.equalTo(self.titleLabel.snp.right).offset(20)
         }
         
         self.rightImageView.snp.makeConstraints { (make) in

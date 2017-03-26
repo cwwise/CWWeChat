@@ -27,7 +27,7 @@ extension UIColor {
     
     //tableView分割线颜色
     class func tableViewCellLineColor() -> UIColor {
-        return UIColor(white: 0.5, alpha: 0.3)
+        return UIColor("#D9D9D9")
     }
     
     //searchBar Color

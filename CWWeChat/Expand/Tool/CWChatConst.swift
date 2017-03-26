@@ -17,8 +17,6 @@ let kScreenHeight = UIScreen.main.bounds.size.height
 let kNavigationBarHeight:CGFloat = 64
 
 
-
-
 // stolen from Kingfisher: https://github.com/onevcat/Kingfisher/blob/master/Sources/ThreadHelper.swift
 func dispatch_async_safely_to_main_queue(_ block: @escaping ()->()) {
     dispatch_async_safely_to_queue(DispatchQueue.main, block)
