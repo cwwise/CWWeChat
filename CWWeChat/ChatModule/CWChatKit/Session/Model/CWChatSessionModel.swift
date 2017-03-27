@@ -18,6 +18,17 @@ class CWChatSessionModel: NSObject {
         return chatSession.unreadCount
     }
     
+    /// 最后消息时间
+    var lastMessageTime: String {
+        
+        guard let message = chatSession.lastMessage else {
+            return ""
+        }
+        
+        let date = Date(timeIntervalSince1970: message.timestamp)
+        return ChatTimeTool.timeStringFromSinceDate(date)
+    }
+    
     var content: String {
         
         if (self.chatSession.draft != nil) {
@@ -30,7 +41,8 @@ class CWChatSessionModel: NSObject {
         
         switch message.messageType {
         case .text:
-            return message.text ?? ""
+            let messageBody = message.messageBody as! CWTextMessageBody
+            return messageBody.text
         case .image:
             return "[图片]"
         case .voice:

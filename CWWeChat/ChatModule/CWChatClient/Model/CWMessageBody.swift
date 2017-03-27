@@ -1,5 +1,5 @@
 //
-//  CWMessageContent.swift
+//  CWMessageBody.swift
 //  CWWeChat
 //
 //  Created by chenwei on 2017/3/25.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CWMessageObject {
+protocol CWMessageBody {
     
     /// 聊天消息
     weak var message: CWChatMessage? { get set }

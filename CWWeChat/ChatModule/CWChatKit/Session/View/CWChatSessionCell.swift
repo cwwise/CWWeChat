@@ -10,49 +10,6 @@ import UIKit
 
 class CWChatSessionCell: UITableViewCell {
 
-    //MARK: 属性
-    var sessionModel: CWChatSessionModel? {
-        didSet {
-            self.setupUI()
-        }
-    }
-    
-    ///头像
-    fileprivate var headerImageView:UIImageView = {
-        let headerImageView = UIImageView()
-        return headerImageView
-    }()
-    
-    ///用户名
-    fileprivate var usernameLabel:UILabel = {
-        let usernameLabel = UILabel()
-        usernameLabel.font = UIFont.systemFont(ofSize: 17)
-        return usernameLabel
-    }()
-    
-    ///时间
-    fileprivate var timeLabel:UILabel = {
-        let timeLabel = UILabel()
-        timeLabel.font = UIFont.systemFont(ofSize: 12)
-        timeLabel.textColor = UIColor.darkGray
-        return timeLabel
-    }()
-    
-    ///详细信息
-    fileprivate var detailInfoLabel:UILabel = {
-        let detailInfoLabel = UILabel()
-        detailInfoLabel.font = UIFont.systemFont(ofSize: 14)
-        detailInfoLabel.textColor = UIColor.gray
-        return detailInfoLabel
-    }()
-    
-    ///badgeView
-    fileprivate var badgeView:CWBadgeView = {
-        let badgeView = CWBadgeView()
-        badgeView.backgroundColor = UIColor.clear
-        return badgeView
-    }()
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -109,11 +66,10 @@ class CWChatSessionCell: UITableViewCell {
         }
     }
     
-    //MARK:最核心：设置数据
-    ///设置数据
+    /// 设置数据
     func setupUI()  {
         
-        ///
+        //
         guard let sessionModel = self.sessionModel else {
             
             
@@ -127,12 +83,10 @@ class CWChatSessionCell: UITableViewCell {
 //            self.usernameLabel.text = userModel.nikeName
 //        }
         
-//        self.timeLabel.text = ChatTimeTool.timeStringFromSinceDate(conversationModel.conversationDate)
-        
+        self.timeLabel.text = sessionModel.lastMessageTime
         self.detailInfoLabel.text = sessionModel.content
         
         self.badgeView.badgeValue = sessionModel.unreadCount
-        self.badgeView.sizeToFit()
     }
     
     
@@ -146,5 +100,48 @@ class CWChatSessionCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    //MARK: 属性
+    var sessionModel: CWChatSessionModel? {
+        didSet {
+            self.setupUI()
+        }
+    }
+    
+    ///头像
+    fileprivate var headerImageView:UIImageView = {
+        let headerImageView = UIImageView()
+        return headerImageView
+    }()
+    
+    ///用户名
+    fileprivate var usernameLabel:UILabel = {
+        let usernameLabel = UILabel()
+        usernameLabel.font = UIFont.systemFont(ofSize: 17)
+        return usernameLabel
+    }()
+    
+    ///时间
+    fileprivate var timeLabel:UILabel = {
+        let timeLabel = UILabel()
+        timeLabel.font = UIFont.systemFont(ofSize: 12)
+        timeLabel.textColor = UIColor.darkGray
+        return timeLabel
+    }()
+    
+    ///详细信息
+    fileprivate var detailInfoLabel:UILabel = {
+        let detailInfoLabel = UILabel()
+        detailInfoLabel.font = UIFont.systemFont(ofSize: 14)
+        detailInfoLabel.textColor = UIColor.gray
+        return detailInfoLabel
+    }()
+    
+    ///badgeView
+    fileprivate var badgeView:CWBadgeView = {
+        let badgeView = CWBadgeView()
+        badgeView.backgroundColor = UIColor.clear
+        return badgeView
+    }()
 
 }

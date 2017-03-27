@@ -15,7 +15,7 @@ import UIKit
 /// - single: 单聊
 /// - group: 群聊
 /// - chatRoom: 组聊
-public enum CWSessionType : Int {
+public enum CWChatType : Int {
     case single
     case group
     case chatroom
@@ -58,10 +58,6 @@ public enum CWMessageReadState : Int {
 
 /// 消息类型
 public enum CWMessageType: Int {
-    
-    case none               //未知
-    case time               //时间
-    
     case text               //文字
     case image              //图片
     case voice              //声音
@@ -75,11 +71,11 @@ public enum CWMessageType: Int {
 class CWChatMessage: NSObject {
 
     /// 会话类型
-    var sessionType: CWSessionType = .single
+    var chatType: CWChatType = .single
     
     /// 消息类型
     var messageType: CWMessageType {
-        return self.messageObject.type
+        return self.messageBody.type
     }
     
     /// 消息唯一id
@@ -101,7 +97,7 @@ class CWChatMessage: NSObject {
     var text: String?
     
     /// 消息体
-    var messageObject: CWMessageObject
+    var messageBody: CWMessageBody
     
     /// 消息发送时间
     var timestamp: TimeInterval
@@ -111,16 +107,14 @@ class CWChatMessage: NSObject {
          messageID: String = String.UUIDString(),
          direction: CWMessageDirection = .unknown,
          timestamp: TimeInterval = NSDate().timeIntervalSince1970,
-         messageObject: CWMessageObject) {
+         messageBody: CWMessageBody) {
 
-        self.messageObject = messageObject
+        self.messageBody = messageBody
         self.timestamp = timestamp
         self.direction = direction
         
         self.targetId = targetId
         self.messageId = messageID
-        
-        
     }
     
     

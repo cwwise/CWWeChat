@@ -22,6 +22,7 @@ target 'CWWeChat' do
   #数据库
   pod 'SQLite.swift'
   
+  #log日志
   pod 'SwiftyBeaver'
 
   #聊天

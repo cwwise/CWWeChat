@@ -15,8 +15,18 @@ class CWChatSessionController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let textObject = CWTextMessageBody(text: "1234")
+        let message = CWChatMessage(targetId: "123", messageBody: textObject)
+        let session = CWChatSession(targetId: "", type: .single)
+        session.lastMessage = message
+        
+        sessionList.append(CWChatSessionModel(session: session))
+        
         setupUI()
         registerCellClass()
+        
+
         // Do any additional setup after loading the view.
     }
     
@@ -33,6 +43,9 @@ class CWChatSessionController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // MARK: 属性Getter
+    /// TableView
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: self.view.bounds, style: .plain)
         tableView.backgroundColor = UIColor.white
@@ -42,8 +55,6 @@ class CWChatSessionController: UIViewController {
         tableView.delegate = self
         return tableView
     }()
-
-
 }
 
 //MARK: UITableViewDelegate

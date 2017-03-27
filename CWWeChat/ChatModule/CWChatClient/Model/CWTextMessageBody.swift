@@ -8,16 +8,16 @@
 
 import UIKit
 
-class CWTextMessageObject: NSObject {
+class CWTextMessageBody: NSObject, CWMessageBody {
 
     weak var message: CWChatMessage?
-    
-    var text: String = ""
-    
+    /// 文本内容
+    var text: String
+    /// 消息体类型
     var type: CWMessageType = .text
     
-    init(message: CWChatMessage) {
-        self.message = message
+    init(text: String, message: CWChatMessage? = nil) {
+        self.text = text
     }
     
     
