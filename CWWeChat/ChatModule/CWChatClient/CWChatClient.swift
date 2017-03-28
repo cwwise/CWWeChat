@@ -18,10 +18,10 @@ class CWChatClient: NSObject {
     private(set) var version: String
     
     /// 聊天配置信息
-    private(set) var options: CWChatClientOptions!
+    private(set) var options = CWChatClientOptions()
     
     /// XMPP实例
-    private var xmppManager: CWChatXMPPManager!
+    private var xmppManager = CWChatXMPPManager.share
     
     
     private override init() {
@@ -34,7 +34,6 @@ class CWChatClient: NSObject {
     /// - Parameter options: 配置项
     func initializeChatClient(options: CWChatClientOptions) {
         self.options = options
-        
     }
     
     
