@@ -70,10 +70,20 @@ extension CWDiscoverController: UIViewControllerPreviewingDelegate {
 extension CWDiscoverController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let url = URL(string: "https://m.weibo.cn")!
-        let gameViewController = CWGameController(url: url)
-        gameViewController.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(gameViewController, animated: true)
+        
+        if indexPath.row == 0 {
+            
+            let controller = CWShareController()
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
+            
+        } else {
+            let url = URL(string: "https://m.weibo.cn")!
+            let gameViewController = CWGameController(url: url)
+            gameViewController.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(gameViewController, animated: true)
+        }
+    
         
     }
     
