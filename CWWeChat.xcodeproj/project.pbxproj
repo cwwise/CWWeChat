@@ -1451,7 +1451,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/CWWeChat/Vendor/swift-3.0.1",
 					"$(PROJECT_DIR)/CWWeChat/Vendor/Realm",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/CWWeChat/Application/Info.plist";
@@ -1471,7 +1470,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/CWWeChat/Vendor/swift-3.0.1",
 					"$(PROJECT_DIR)/CWWeChat/Vendor/Realm",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/CWWeChat/Application/Info.plist";
