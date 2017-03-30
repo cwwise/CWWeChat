@@ -15,6 +15,7 @@ let sendMessageTimeoutInterval: TimeInterval = 30
 /// 发送消息
 class CWMessageTransmitter: NSObject {
     
+    /// xmpp实例
     private var xmppStream: XMPPStream {
         return CWChatXMPPManager.share.xmppStream
     }
@@ -33,9 +34,12 @@ class CWMessageTransmitter: NSObject {
         return result
     }
     
+    
     func messageElement(body: String, to: String, messageId: String, type:Int = 1, expand: String? = nil) -> XMPPMessage? {
 
-        let message = XMPPMessage(type: "chat", to: chatJidString(to), elementID: messageId)
+        let message = XMPPMessage(type: "chat", elementID: messageId)
+        message?.addAttribute(withName: "to", stringValue: chatJidString(to))
+        
         let bodyElement = DDXMLElement.element(withName: "body", stringValue: body) as! DDXMLElement
         message?.addChild(bodyElement)
 
@@ -43,8 +47,9 @@ class CWMessageTransmitter: NSObject {
     }
 
     
-    func chatJidString(_ name: String) -> XMPPJID {
-        return XMPPJID(string: name)
+    func chatJidString(_ name: String) -> String {
+        let domain = CWChatXMPPManager.share.options.chatDomain
+        return name + "@" + domain
     }
 
     

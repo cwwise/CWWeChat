@@ -117,5 +117,18 @@ class CWChatMessage: NSObject {
         self.messageId = messageID
     }
     
-    
 }
+
+extension CWChatMessage {
+    override var description: String {
+        switch messageType {
+        case .text:
+            let textBody = self.messageBody as! CWTextMessageBody
+            return "文本消息:"+textBody.text
+        default:
+            return "消息类型\(messageType)"
+        }
+    }
+}
+
+

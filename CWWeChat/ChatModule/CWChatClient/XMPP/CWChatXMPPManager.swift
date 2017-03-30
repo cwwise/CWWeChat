@@ -18,15 +18,17 @@ class CWChatXMPPManager: NSObject {
     /// xmpp流
     private(set) var xmppStream: XMPPStream
     /// xmpp重新连接
-    fileprivate var xmppReconnect: XMPPReconnect
+    private var xmppReconnect: XMPPReconnect
     /// xmpp队列
-    fileprivate var xmppQueue: DispatchQueue
+    private var xmppQueue: DispatchQueue
 
     /// 发送消息
-    fileprivate(set) var messageTransmitter: CWMessageTransmitter
+    private(set) var messageTransmitter: CWMessageTransmitter
     /// 消息发送队列
-    fileprivate(set) var messageDispatchQueue: CWMessageDispatchQueue
-
+    private(set) var messageDispatchQueue: CWMessageDispatchQueue
+    
+    private(set) var messageParse: CWChatMessageParse
+    
     var options: CWChatClientOptions!
     
     /// 网络状态监听
@@ -45,6 +47,8 @@ class CWChatXMPPManager: NSObject {
         //实际发送消息者
         messageTransmitter = CWMessageTransmitter()
         messageDispatchQueue = CWMessageDispatchQueue()
+        // 消息解析
+        messageParse = CWChatMessageParse()
         
         super.init()
         

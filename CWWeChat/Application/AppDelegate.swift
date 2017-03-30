@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let xmppManager = CWChatXMPPManager.share
         xmppManager.options = options
         
-        xmppManager.loginServer(with: "chenwei", password: "1234567")
+        xmppManager.loginServer(with: "haohao", password: "1234567")
         
     }
     

@@ -13,7 +13,17 @@ class CWConversationController: CWChatSessionController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(sendMessage))
+        self.navigationItem.rightBarButtonItem = barButtonItem
+                
         // Do any additional setup after loading the view.
+    }
+    
+    func sendMessage() {
+        
+        let messageId = String.UUIDString()
+        let result = CWChatXMPPManager.share.messageTransmitter.sendMessage(content: "Hello", targetId: "chenwei", messageId: messageId)
+        log.debug(result)
     }
 
     override func didReceiveMemoryWarning() {
