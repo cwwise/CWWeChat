@@ -26,10 +26,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         
+        loginXMPP()
         //注册推送信息
         registerRemoteNotification()
         
         return true
+    }
+    
+    func loginXMPP() {
+        
+        let options = CWChatClientOptions(chatServer: "hosted.im", chatDomain: "hellochatim.p1.im")
+        
+        let xmppManager = CWChatXMPPManager.share
+        xmppManager.options = options
+        
+        xmppManager.loginServer(with: "chenwei", password: "1234567")
+        
     }
     
     func loginSuccess() {

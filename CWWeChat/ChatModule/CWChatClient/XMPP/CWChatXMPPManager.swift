@@ -13,8 +13,10 @@ import Alamofire
 // xmpp管理实例
 class CWChatXMPPManager: NSObject {
     
+    public static let share = CWChatXMPPManager()
+
     /// xmpp流
-    fileprivate var xmppStream: XMPPStream
+    private(set) var xmppStream: XMPPStream
     /// xmpp重新连接
     fileprivate var xmppReconnect: XMPPReconnect
     /// xmpp队列
@@ -29,10 +31,12 @@ class CWChatXMPPManager: NSObject {
     
     /// 网络状态监听
     var reachable: NetworkReachabilityManager?
+    
+    var isLogin: Bool = true
 
     
     /// 初始化方法
-    fileprivate override init() {
+    private override init() {
         xmppQueue = DispatchQueue(label: "com.cwxmppchat.cwcoder", attributes: DispatchQueue.Attributes.concurrent)
         
         xmppStream = XMPPStream()
@@ -69,7 +73,7 @@ class CWChatXMPPManager: NSObject {
         reachable = NetworkReachabilityManager(host: "https://www.baidu.com")
         reachable?.startListening()
         let listener = { (status: NetworkReachabilityManager.NetworkReachabilityStatus) in
-//            DDLogDebug("网络状态:\(self.reachable?.isReachable)")
+            
         }
         reachable?.listener = listener
     }
@@ -79,6 +83,30 @@ class CWChatXMPPManager: NSObject {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
+        
+    }
+    
+    func loginServer(with userName: String, password: String) {
+        
+        //判断xmpp状态
+        guard xmppStream.isConnecting() || !xmppStream.isAuthenticated() else {
+            return
+        }
+        
+        let timeoutInterval:TimeInterval = 30
+        
+        let resource = options.chatResource
+        let domain = options.chatDomain
+        
+        xmppStream.hostName = options.chatServer
+        xmppStream.hostPort = options.chatPort
+        xmppStream.myJID = XMPPJID(user: userName, domain: domain, resource: resource)
+        
+        do {
+            try xmppStream.connect(withTimeout: timeoutInterval)
+        } catch {
+            log.error(error)
+        }
         
     }
     
@@ -102,6 +130,9 @@ class CWChatXMPPManager: NSObject {
     
     // MARK: 销毁
     deinit {
+        
+        goOffline()
+        
         xmppReconnect.removeDelegate(self, delegateQueue: xmppQueue)
         xmppReconnect.deactivate()
         
@@ -113,5 +144,43 @@ class CWChatXMPPManager: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
     
+}
+
+// MARK: - XMPPStreamDelegate
+extension CWChatXMPPManager: XMPPStreamDelegate {
+
+    /// 开始连接
+    func xmppStreamWillConnect(_ sender: XMPPStream!) {
+        log.verbose("xmpp开始连接...")
+    }
     
+    /// 连接失败
+    func xmppStreamDidDisconnect(_ sender: XMPPStream!, withError error: Error!) {
+        log.error("xmpp连接断开...\(error)")
+    }
+    
+    /// 已经连接，就输入密码
+    func xmppStreamDidConnect(_ sender: XMPPStream!) {
+        log.verbose("xmpp连接成功,开始认证...")
+        do {
+            let password = "1234567"
+            try xmppStream.authenticate(withPassword: password)
+        } catch {
+            log.error(error)
+        }
+    }
+    
+    // 验证失败
+    func xmppStream(_ sender: XMPPStream!, didNotAuthenticate error: DDXMLElement!) {
+        log.error("xmpp验证失败...\(error)")
+    }
+    
+    // 验证成功
+    func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
+        log.debug("xmpp连接成功")
+        
+        goOnline()
+    }
+    
+
 }

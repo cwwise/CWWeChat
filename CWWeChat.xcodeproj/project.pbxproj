@@ -37,7 +37,6 @@
 		1F3492191E878AD500B36641 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491E21E878AD500B36641 /* UIImage+Extension.swift */; };
 		1F34921A1E878AD500B36641 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491E31E878AD500B36641 /* UIStoryboard+Extension.swift */; };
 		1F34921B1E878AD500B36641 /* UIView+Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491E41E878AD500B36641 /* UIView+Frame.swift */; };
-		1F34921C1E878AD500B36641 /* UIViewController+Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491E51E878AD500B36641 /* UIViewController+Logger.swift */; };
 		1F34921D1E878AD500B36641 /* ChatTimeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491E71E878AD500B36641 /* ChatTimeTool.swift */; };
 		1F34921E1E878AD500B36641 /* CWUIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491E81E878AD500B36641 /* CWUIUtility.swift */; };
 		1F34921F1E878AD500B36641 /* CWTableViewBoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491EE1E878AD500B36641 /* CWTableViewBoolCell.swift */; };
@@ -65,10 +64,6 @@
 		1F3492551E87927D00B36641 /* CWDiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492541E87927D00B36641 /* CWDiscoverController.swift */; };
 		1F3492571E87929500B36641 /* CWMineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492561E87929500B36641 /* CWMineController.swift */; };
 		1F3492591E8792AC00B36641 /* CWConversationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492581E8792AC00B36641 /* CWConversationController.swift */; };
-		1F3492651E87B3F500B36641 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3492611E87B3D500B36641 /* Realm.framework */; };
-		1F3492661E87B3F500B36641 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3492611E87B3D500B36641 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1F3492671E87B3F500B36641 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3492621E87B3D500B36641 /* RealmSwift.framework */; };
-		1F3492681E87B3F500B36641 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3492621E87B3D500B36641 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F34926C1E87B84100B36641 /* CWWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F34926B1E87B84100B36641 /* CWWebViewController.swift */; };
 		1F34926E1E87BE4200B36641 /* CWChatConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F34926D1E87BE4200B36641 /* CWChatConst.swift */; };
 		1F3492711E87C06300B36641 /* CWBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492701E87C06300B36641 /* CWBaseTableViewController.swift */; };
@@ -88,6 +83,11 @@
 		1F3492931E88244B00B36641 /* CWChatMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492921E88244B00B36641 /* CWChatMessageController.swift */; };
 		4E3C0C0A9AC7AC251E75415B /* Pods_CWWeChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 392080DF2A871FED246A48AD /* Pods_CWWeChatTests.framework */; };
 		732B7F111A2AF06C5FB003A1 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5C5938ABFC0D0537A59353 /* Pods_CWWeChat.framework */; };
+		8C84B9471E8C04780020D508 /* CWShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B9461E8C04780020D508 /* CWShareModel.swift */; };
+		8C84B9491E8C1B8F0020D508 /* CWShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B9481E8C1B8F0020D508 /* CWShareController.swift */; };
+		8C84B94B1E8C1BB70020D508 /* CWShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B94A1E8C1BB70020D508 /* CWShareCell.swift */; };
+		8C84B94D1E8C1CE10020D508 /* CWShareLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B94C1E8C1CE10020D508 /* CWShareLayout.swift */; };
+		8C84B94F1E8C1D020020D508 /* CWShareReplyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B94E1E8C1D020020D508 /* CWShareReplyModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,8 +114,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1F3492681E87B3F500B36641 /* RealmSwift.framework in Embed Frameworks */,
-				1F3492661E87B3F500B36641 /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,7 +158,6 @@
 		1F3491E21E878AD500B36641 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		1F3491E31E878AD500B36641 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		1F3491E41E878AD500B36641 /* UIView+Frame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Frame.swift"; sourceTree = "<group>"; };
-		1F3491E51E878AD500B36641 /* UIViewController+Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Logger.swift"; sourceTree = "<group>"; };
 		1F3491E71E878AD500B36641 /* ChatTimeTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTimeTool.swift; sourceTree = "<group>"; };
 		1F3491E81E878AD500B36641 /* CWUIUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWUIUtility.swift; sourceTree = "<group>"; };
 		1F3491EE1E878AD500B36641 /* CWTableViewBoolCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewBoolCell.swift; sourceTree = "<group>"; };
@@ -188,8 +185,6 @@
 		1F3492541E87927D00B36641 /* CWDiscoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWDiscoverController.swift; sourceTree = "<group>"; };
 		1F3492561E87929500B36641 /* CWMineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMineController.swift; sourceTree = "<group>"; };
 		1F3492581E8792AC00B36641 /* CWConversationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWConversationController.swift; sourceTree = "<group>"; };
-		1F3492611E87B3D500B36641 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
-		1F3492621E87B3D500B36641 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		1F34926B1E87B84100B36641 /* CWWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWWebViewController.swift; sourceTree = "<group>"; };
 		1F34926D1E87BE4200B36641 /* CWChatConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatConst.swift; sourceTree = "<group>"; };
 		1F3492701E87C06300B36641 /* CWBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWBaseTableViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +207,11 @@
 		392080DF2A871FED246A48AD /* Pods_CWWeChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1BE500AB700B1551027606 /* Pods_CWWeChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60C33E8BDAA53BEF72AC658D /* Pods-CWWeChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatUITests/Pods-CWWeChatUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8C84B9461E8C04780020D508 /* CWShareModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWShareModel.swift; sourceTree = "<group>"; };
+		8C84B9481E8C1B8F0020D508 /* CWShareController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWShareController.swift; sourceTree = "<group>"; };
+		8C84B94A1E8C1BB70020D508 /* CWShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWShareCell.swift; sourceTree = "<group>"; };
+		8C84B94C1E8C1CE10020D508 /* CWShareLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWShareLayout.swift; sourceTree = "<group>"; };
+		8C84B94E1E8C1D020020D508 /* CWShareReplyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWShareReplyModel.swift; sourceTree = "<group>"; };
 		CC9054EAE42E392A75546C97 /* Pods-CWWeChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.debug.xcconfig"; sourceTree = "<group>"; };
 		E4A293988EBEF7146C1E79EF /* Pods-CWWeChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -221,9 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F3492651E87B3F500B36641 /* Realm.framework in Frameworks */,
 				732B7F111A2AF06C5FB003A1 /* Pods_CWWeChat.framework in Frameworks */,
-				1F3492671E87B3F500B36641 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,7 +501,6 @@
 				1F3491E21E878AD500B36641 /* UIImage+Extension.swift */,
 				1F3491E31E878AD500B36641 /* UIStoryboard+Extension.swift */,
 				1F3491E41E878AD500B36641 /* UIView+Frame.swift */,
-				1F3491E51E878AD500B36641 /* UIViewController+Logger.swift */,
 				1F3492901E88227100B36641 /* UITableViewCell+Reusable.swift */,
 			);
 			path = Extension;
@@ -522,6 +519,7 @@
 		1F3491E91E878AD500B36641 /* MainClass */ = {
 			isa = PBXGroup;
 			children = (
+				8C84B9411E8C033D0020D508 /* ShareModule */,
 				1F3491EB1E878AD500B36641 /* Base */,
 				1F3491F71E878AD500B36641 /* Login */,
 				1F3491F81E878AD500B36641 /* Message */,
@@ -837,18 +835,8 @@
 		1F34925A1E87B3A400B36641 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				1F3492601E87B3D500B36641 /* Realm */,
 			);
 			path = Vendor;
-			sourceTree = "<group>";
-		};
-		1F3492601E87B3D500B36641 /* Realm */ = {
-			isa = PBXGroup;
-			children = (
-				1F3492611E87B3D500B36641 /* Realm.framework */,
-				1F3492621E87B3D500B36641 /* RealmSwift.framework */,
-			);
-			path = Realm;
 			sourceTree = "<group>";
 		};
 		1F34926A1E87B84100B36641 /* CWWebView */ = {
@@ -899,6 +887,50 @@
 				1F34927A1E87DAC400B36641 /* CWMenuCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8C84B9411E8C033D0020D508 /* ShareModule */ = {
+			isa = PBXGroup;
+			children = (
+				8C84B9481E8C1B8F0020D508 /* CWShareController.swift */,
+				8C84B9421E8C038E0020D508 /* DataService */,
+				8C84B9431E8C038E0020D508 /* Layout */,
+				8C84B9441E8C038E0020D508 /* Model */,
+				8C84B9451E8C038E0020D508 /* View */,
+			);
+			path = ShareModule;
+			sourceTree = "<group>";
+		};
+		8C84B9421E8C038E0020D508 /* DataService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataService;
+			sourceTree = "<group>";
+		};
+		8C84B9431E8C038E0020D508 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				8C84B94C1E8C1CE10020D508 /* CWShareLayout.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		8C84B9441E8C038E0020D508 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8C84B9461E8C04780020D508 /* CWShareModel.swift */,
+				8C84B94E1E8C1D020020D508 /* CWShareReplyModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8C84B9451E8C038E0020D508 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8C84B94A1E8C1BB70020D508 /* CWShareCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		FD435830FB8A0BDDBF411282 /* Frameworks */ = {
@@ -1200,6 +1232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F34928B1E88149000B36641 /* CWChatSessionController.swift in Sources */,
+				8C84B94B1E8C1BB70020D508 /* CWShareCell.swift in Sources */,
 				1F34921F1E878AD500B36641 /* CWTableViewBoolCell.swift in Sources */,
 				1F3492911E88227100B36641 /* UITableViewCell+Reusable.swift in Sources */,
 				1F3492211E878AD500B36641 /* CWTableViewItem.swift in Sources */,
@@ -1211,11 +1244,11 @@
 				1F34928D1E88152D00B36641 /* CWChatSessionCell.swift in Sources */,
 				1F3492171E878AD500B36641 /* UIFont+Extension.swift in Sources */,
 				1F3492151E878AD500B36641 /* UIButton+Extensions.swift in Sources */,
-				1F34921C1E878AD500B36641 /* UIViewController+Logger.swift in Sources */,
 				1F34921D1E878AD500B36641 /* ChatTimeTool.swift in Sources */,
 				1F3492141E878AD500B36641 /* UIBarButtonItem+Extensions.swift in Sources */,
 				1F34927B1E87DAC400B36641 /* CWMenuViewController.swift in Sources */,
 				1F34920F1E878AD500B36641 /* CWChatMessageCell.swift in Sources */,
+				8C84B9471E8C04780020D508 /* CWShareModel.swift in Sources */,
 				1F3492591E8792AC00B36641 /* CWConversationController.swift in Sources */,
 				1F34920C1E878AD500B36641 /* CWChatXMPPManager.swift in Sources */,
 				1F34926C1E87B84100B36641 /* CWWebViewController.swift in Sources */,
@@ -1229,11 +1262,13 @@
 				1F3492201E878AD500B36641 /* CWTableViewCell.swift in Sources */,
 				1F3492351E878F1400B36641 /* CWEmoji.swift in Sources */,
 				1F3492041E878AD500B36641 /* CWChatClient.swift in Sources */,
+				8C84B94F1E8C1D020020D508 /* CWShareReplyModel.swift in Sources */,
 				1F34920E1E878AD500B36641 /* CWChatMessageModel.swift in Sources */,
 				1F3492241E878AD500B36641 /* CWTableViewStyle.swift in Sources */,
 				1F3492371E878FD700B36641 /* CWChatUIConstant.swift in Sources */,
 				1F3492551E87927D00B36641 /* CWDiscoverController.swift in Sources */,
 				1F34923D1E87918C00B36641 /* CWChatTabBarController.swift in Sources */,
+				8C84B9491E8C1B8F0020D508 /* CWShareController.swift in Sources */,
 				1F3492191E878AD500B36641 /* UIImage+Extension.swift in Sources */,
 				1F34928F1E8815AB00B36641 /* CWBadgeView.swift in Sources */,
 				1F3492871E87E27D00B36641 /* CWGameController.swift in Sources */,
@@ -1248,6 +1283,7 @@
 				1F3492181E878AD500B36641 /* UIImage+CWChat.swift in Sources */,
 				1F34921B1E878AD500B36641 /* UIView+Frame.swift in Sources */,
 				1F34927F1E87DD0B00B36641 /* CWDiscoverHelper.swift in Sources */,
+				8C84B94D1E8C1CE10020D508 /* CWShareLayout.swift in Sources */,
 				1F3492121E878AD500B36641 /* NSString+PinYin.swift in Sources */,
 				1F3492051E878AD500B36641 /* CWChatMessage.swift in Sources */,
 				1F3492131E878AD500B36641 /* UIApplication+CWChat.swift in Sources */,
@@ -1415,7 +1451,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/CWWeChat/Vendor/swift-3.0.1",
 					"$(PROJECT_DIR)/CWWeChat/Vendor/Realm",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/CWWeChat/Application/Info.plist";
@@ -1435,7 +1470,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/CWWeChat/Vendor/swift-3.0.1",
 					"$(PROJECT_DIR)/CWWeChat/Vendor/Realm",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/CWWeChat/Application/Info.plist";

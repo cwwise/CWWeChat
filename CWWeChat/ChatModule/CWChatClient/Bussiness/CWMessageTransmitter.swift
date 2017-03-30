@@ -7,7 +7,45 @@
 //
 
 import UIKit
+import XMPPFramework
 
+///发送消息等待时间
+let sendMessageTimeoutInterval: TimeInterval = 30
+
+/// 发送消息
 class CWMessageTransmitter: NSObject {
+    
+    private var xmppStream: XMPPStream {
+        return CWChatXMPPManager.share.xmppStream
+    }
+    
+    func sendMessage(content: String, targetId: String, messageId: String) -> Bool {
+        // 生成消息
+        let messageElement = self.messageElement(body: content, to: targetId, messageId: messageId)
+        // 发送消息
+        var receipte: XMPPElementReceipt?
+        self.xmppStream.send(messageElement, andGet: &receipte)
+        guard let elementReceipte = receipte else {
+            return false
+        }
+        // 返回结果
+        let result = elementReceipte.wait(sendMessageTimeoutInterval)
+        return result
+    }
+    
+    func messageElement(body: String, to: String, messageId: String, type:Int = 1, expand: String? = nil) -> XMPPMessage? {
 
+        let message = XMPPMessage(type: "chat", to: chatJidString(to), elementID: messageId)
+        let bodyElement = DDXMLElement.element(withName: "body", stringValue: body) as! DDXMLElement
+        message?.addChild(bodyElement)
+
+        return message
+    }
+
+    
+    func chatJidString(_ name: String) -> XMPPJID {
+        return XMPPJID(string: name)
+    }
+
+    
 }
