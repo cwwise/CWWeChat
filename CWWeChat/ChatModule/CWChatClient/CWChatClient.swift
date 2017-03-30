@@ -23,6 +23,8 @@ class CWChatClient: NSObject {
     /// XMPP实例
     private var xmppManager = CWChatXMPPManager.share
     
+    /// 聊天模块
+    private(set) var chatManager: CWChatManager = CWChatService()
     
     private override init() {
         version = "0.0.1"

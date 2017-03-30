@@ -89,7 +89,8 @@ class CWMessageDispatchOperation: Operation {
     /// 重复执行的次数
     var repeatCount: Int = 0
     
-    class func dispatchOperationWithMessage(_ message: CWChatMessage) -> CWMessageDispatchOperation {
+    
+    class func operationWithMessage(_ message: CWChatMessage) -> CWMessageDispatchOperation {
         return CWTextMessageDispatchOperation(message: message)
     }
     
@@ -153,7 +154,8 @@ class CWMessageDispatchOperation: Operation {
     }
     
     deinit {
-        log.debug("operation销毁 message---\(message.description)")
+        
+        log.debug("messageoperation销毁 ---\(message.description)")
     }
     
     

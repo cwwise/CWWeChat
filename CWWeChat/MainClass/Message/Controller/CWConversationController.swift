@@ -21,9 +21,21 @@ class CWConversationController: CWChatSessionController {
     
     func sendMessage() {
         
-        let messageId = String.UUIDString()
-        let result = CWChatXMPPManager.share.messageTransmitter.sendMessage(content: "Hello", targetId: "chenwei", messageId: messageId)
-        log.debug(result)
+        let textObject = CWTextMessageBody(text: "1234")
+        let message = CWChatMessage(targetId: "chenwei", messageBody: textObject)
+        
+        let chatManager = CWChatClient.share.chatManager
+        
+        chatManager.sendMessage(message: message, progress: { (progress) in
+            
+            
+            
+        }) { (message, error) in
+           
+            
+        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

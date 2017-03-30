@@ -25,7 +25,7 @@ class CWChatXMPPManager: NSObject {
     /// 发送消息
     private(set) var messageTransmitter: CWMessageTransmitter
     /// 消息发送队列
-    private(set) var messageDispatchQueue: CWMessageDispatchQueue
+    private(set) var dispatchManager: CWMessageDispatchManager
     
     private(set) var messageParse: CWChatMessageParse
     
@@ -46,7 +46,7 @@ class CWChatXMPPManager: NSObject {
 
         //实际发送消息者
         messageTransmitter = CWMessageTransmitter()
-        messageDispatchQueue = CWMessageDispatchQueue()
+        dispatchManager = CWMessageDispatchManager()
         // 消息解析
         messageParse = CWChatMessageParse()
         
@@ -97,7 +97,7 @@ class CWChatXMPPManager: NSObject {
             return
         }
         
-        let timeoutInterval:TimeInterval = 30
+        let timeoutInterval:TimeInterval = 60
         
         let resource = options.chatResource
         let domain = options.chatDomain
