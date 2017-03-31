@@ -23,4 +23,7 @@ struct CWChatMessageFrame {
     }
     
     
+    
+    
+    
 }

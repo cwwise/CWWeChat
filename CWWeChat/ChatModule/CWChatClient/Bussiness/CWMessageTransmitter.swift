@@ -20,7 +20,7 @@ class CWMessageTransmitter: NSObject {
         return CWChatXMPPManager.share.xmppStream
     }
     
-    func sendMessage(content: String, targetId: String, messageId: String) -> Bool {
+    func sendMessage(content: String, targetId: String, messageId: String ,type: Int = 0) -> Bool {
         // 生成消息
         let messageElement = self.messageElement(body: content, to: targetId, messageId: messageId)
         // 发送消息
@@ -41,6 +41,8 @@ class CWMessageTransmitter: NSObject {
         message?.addAttribute(withName: "to", stringValue: chatJidString(to))
         
         let bodyElement = DDXMLElement.element(withName: "body", stringValue: body) as! DDXMLElement
+        bodyElement.addAttribute(withName: "type", integerValue: type)
+
         message?.addChild(bodyElement)
 
         return message

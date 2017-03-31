@@ -13,7 +13,7 @@ import UIKit
 class CWMessageDispatchManager: NSObject {
     
     /// 队列
-    var messageQueue:OperationQueue
+    var messageQueue: OperationQueue
     
     override init() {
         messageQueue = OperationQueue()

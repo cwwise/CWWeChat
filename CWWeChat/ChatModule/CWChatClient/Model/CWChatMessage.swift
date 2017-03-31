@@ -37,12 +37,12 @@ public enum CWMessageDirection : Int {
 /// 消息发送状态
 ///
 /// - pending: 发送未开始
-/// - delivering: 正在发送
+/// - sending: 正在发送
 /// - successed: 发送成功
 /// - failed: 发送失败
 public enum CWMessageSendStatus : Int {
     case pending
-    case delivering
+    case sending
     case successed
     case failed
 }
@@ -58,12 +58,31 @@ public enum CWMessageReadState : Int {
 
 /// 消息类型
 public enum CWMessageType: Int {
+    case none               //未知消息
     case text               //文字
     case image              //图片
     case voice              //声音
     case video              //视频
     case location           //位置
     case expression         //表情
+    
+    //获取cell的reuseIdentifier
+    func identifier() -> String {
+        switch self {
+        case .text:
+            return "ChatMessageTextCell"
+        case .image:
+            return "ChatMessageImageCell"
+        case .voice:
+            return "ChatMessageVoiceCell"
+        case .video:
+            return "ChatMessageVideoCell"
+        case .expression:
+            return "ChatMessageExpressionCell"
+        default:
+            return "ChatMessageCell"
+        }
+    }
 }
 
 
@@ -115,6 +134,8 @@ class CWChatMessage: NSObject {
         
         self.targetId = targetId
         self.messageId = messageID
+        super.init()
+        self.messageBody.message = self
     }
     
 }

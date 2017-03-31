@@ -28,7 +28,6 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
         } else {
             uploadImage()
         }
-        
     }
     
     func uploadImage() {

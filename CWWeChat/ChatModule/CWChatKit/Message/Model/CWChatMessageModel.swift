@@ -16,10 +16,13 @@ class CWChatMessageModel: NSObject {
     
     /// 是否显示时间
     var showTime: Bool = false
-
+    /// 消息
     var messageFrame: CWChatMessageFrame!
-
-
+    /// 文本消息
+    var text: NSAttributedString = {
+        
+        return NSAttributedString()
+    }()
     
     init(message: CWChatMessage) {
         self.message = message;

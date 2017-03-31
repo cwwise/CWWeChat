@@ -91,7 +91,16 @@ class CWMessageDispatchOperation: Operation {
     
     
     class func operationWithMessage(_ message: CWChatMessage) -> CWMessageDispatchOperation {
-        return CWTextMessageDispatchOperation(message: message)
+        
+        switch message.messageType {
+        case .text:
+            return CWTextMessageDispatchOperation(message: message)
+        case .image:
+            return CWImageMessageDispatchOperation(message: message)
+        default:
+            return CWMessageDispatchOperation(message: message)
+        }
+        
     }
     
     init(message: CWChatMessage) {
@@ -128,7 +137,7 @@ class CWMessageDispatchOperation: Operation {
             self.endOperation()
             return
         }
-        
+            
         //发送消息的任务
         sendMessage()
     }
@@ -154,8 +163,8 @@ class CWMessageDispatchOperation: Operation {
     }
     
     deinit {
-        
-        log.debug("messageoperation销毁 ---\(message.description)")
+        let result = self.messageSendResult == true ? "成功" : "失败"
+        log.debug("messageoperation销毁 ---\(message.description) \(result)")
     }
     
     
