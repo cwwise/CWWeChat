@@ -16,8 +16,20 @@ class CWChatMessageController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // 消息
+        let textObject = CWTextMessageBody(text: "1234")
+        let message = CWChatMessage(targetId: "chenwei", messageBody: textObject)
+        
+        let messageModel = CWChatMessageModel(message: message)
+        messageList.append(messageModel)
+        
         self.view.backgroundColor = UIColor.white
-        // Do any additional setup after loading the view.
+        setupUI()
+        registerCell()
+    }
+    
+    func setupUI() {
+        self.view.addSubview(tableView)
     }
     
     /**
@@ -26,7 +38,7 @@ class CWChatMessageController: UIViewController {
     func registerCell() {
         
         tableView.register(CWChatMessageCell.self, forCellReuseIdentifier: CWMessageType.none.identifier())
-        tableView.register(CWChatMessageCell.self, forCellReuseIdentifier: CWMessageType.text.identifier())
+        tableView.register(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.text.identifier())
 
     }
 
@@ -75,15 +87,20 @@ extension CWChatMessageController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let message = messageList[indexPath.row]
-        let identifier = ""
-        
+        let messageModel = messageList[indexPath.row]
+        let identifier = messageModel.message.messageType.identifier()
+    
         // 时间和tip消息 是例外的种类 以后判断
-        
         let messageCell = self.tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CWChatMessageCell
-        messageCell.messageModel = message
+        
+        messageCell.updateMessage(messageModel)
         
         return messageCell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let messageModel = messageList[indexPath.row]
+        return messageModel.messageFrame.heightOfCell
     }
     
 }

@@ -14,7 +14,7 @@ protocol CWMessageCellDelegate:NSObjectProtocol {
 }
 
 ///头像
-let kAvaterWidth:  CGFloat      = 38.0
+let kAvaterWidth:  CGFloat      = 40.0
 
 /// 名称
 let kNameLabelHeight: CGFloat =   14.0
@@ -50,6 +50,7 @@ class CWChatMessageCell: UITableViewCell {
     ///头像
     lazy var avatarButton:UIButton = {
         let avatarButton = UIButton(type: .custom)
+        avatarButton.backgroundColor = UIColor.darkGray
         avatarButton.size = CGSize(width: kAvaterWidth, height: kAvaterWidth)
         avatarButton.addTarget(self,
                                action: #selector(avatarButtonClickDown(_:)),
@@ -61,7 +62,7 @@ class CWChatMessageCell: UITableViewCell {
     lazy var messageBackgroundView:UIImageView = {
         let messageBackgroundView = UIImageView()
         messageBackgroundView.isUserInteractionEnabled = true
-        
+        messageBackgroundView.backgroundColor = UIColor.cyan
         return messageBackgroundView
     }()
     
@@ -97,52 +98,30 @@ class CWChatMessageCell: UITableViewCell {
         let origin = CGPoint(x: kScreenWidth - kMessageCellMargin - kAvaterWidth,
                              y: kMessageCellTopMargin)
         self.avatarButton.origin = origin
-        
-//        self.usernameLabel.snp.makeConstraints { (make) in
-//            make.top.equalTo(self.avatarButton).offset(-kNamelabelSpaceY)
-//            make.right.equalTo(self.avatarButton.snp.left).offset(-kNameLabelSpaceX)
-//        }
-        
-        self.messageBackgroundView.snp.makeConstraints { (make) in
-            make.right.equalTo(self.avatarButton.snp.left).offset(-kMessageBackgroundSpaceX);
-            make.top.equalTo(self.usernameLabel.snp.bottom).offset(-kMessageBackgroundSpaceY);
-        }
-        
-        
+
         
     }
     
     /// 
     func updateMessage(_ messageModel: CWChatMessageModel) {
         self.messageModel = messageModel
-
         // 消息实体
         let message = messageModel.message
-        
-        let contentSize = messageModel.messageFrame.contentSize
         
         // 是自己的
         if message.direction == .send {
             
-            var origin = CGPoint(x: kScreenWidth - kMessageCellMargin - kAvaterWidth,
+            let origin = CGPoint(x: kScreenWidth - kMessageCellMargin - kAvaterWidth,
                                  y: kMessageCellTopMargin)
             self.avatarButton.origin = origin
 
-            let edge = ChatCellUI.right_cap_insets
-            let size = CGSize(width: contentSize.width + edge.left + edge.right,
-                              height: contentSize.height + edge.top + edge.bottom)
-            let backgroundOrigin = CGPoint(x: origin.x, y: kMessageBackgroundSpaceY)
-
-            
+   
             
         } else {
             
             let origin = CGPoint(x: kMessageCellMargin,
                                  y: kMessageCellTopMargin)
             self.avatarButton.origin = origin
-            
-            
-            
         }
         
         

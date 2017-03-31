@@ -17,7 +17,7 @@ struct CWChatMessageFrame {
     /// 内容大小
     var contentSize: CGSize
     
-    init(heightOfCell: CGFloat, contentSize: CGSize) {
+    init(heightOfCell: CGFloat = 0, contentSize: CGSize = CGSize.zero) {
         self.heightOfCell = heightOfCell
         self.contentSize = contentSize
     }
