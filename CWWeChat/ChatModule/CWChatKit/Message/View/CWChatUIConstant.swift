@@ -24,13 +24,13 @@ let kChatVoiceMinWidth = kScreenWidth * 0.25
 let kChatVoiceMaxWidth = kScreenWidth * 0.60
 
 public struct ChatCellUI {
-    static let left_cap_insets = UIEdgeInsets(top: 30, left: 16, bottom: 16, right: 24)
+    static let left_cap_insets = UIEdgeInsets(top: 13, left: 28, bottom: 13, right: 28)
     /// 左边气泡背景区域 间距
-    static let left_edge_insets = UIEdgeInsets(top: 10, left: 19, bottom: 10, right: 22)
+    static let left_edge_insets = UIEdgeInsets(top: 10, left: 17, bottom: 10, right: 17)
     
-    static let right_cap_insets = UIEdgeInsets(top: 30, left: 16, bottom: 16, right: 24)
+    static let right_cap_insets = UIEdgeInsets(top: 13, left: 28, bottom: 13, right: 28)
     /// 右边气泡背景区域 间距
-    static let right_edge_insets = UIEdgeInsets(top: 10, left: 19, bottom: 10, right: 22)
+    static let right_edge_insets = UIEdgeInsets(top: 10, left: 17, bottom: 10, right: 17)
 }
 
 

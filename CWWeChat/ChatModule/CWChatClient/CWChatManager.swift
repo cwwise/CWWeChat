@@ -13,11 +13,11 @@ protocol CWChatManagerDelegate: NSObjectProtocol {
     
 }
 
+typealias CWMessageCompletionBlock = (_ message: CWChatMessage, _ error: Error?) -> Void
+typealias CWMessageProgressBlock = (_ progress: Int) -> Void
 
 /// 聊天相关操作
 protocol CWChatManager: NSObjectProtocol {
-    
-    typealias CWMessageCompletion = (_ message: CWChatMessage, _ error: Error?) -> Void
     
     /// 添加聊天代理
     ///
@@ -35,17 +35,12 @@ protocol CWChatManager: NSObjectProtocol {
     ///
     /// - Parameter message: 回执消息
     func sendMessageReadAck(message: CWChatMessage,
-                            completion: CWMessageCompletion)
+                            completion: CWMessageCompletionBlock)
     
     /// 发送消息
     ///
     /// - Parameter message: 消息实体
-    func sendMessage(message: CWChatMessage,
-                     progress: ((_ progress: Int) -> Void),
-                     completion: CWMessageCompletion)
-    
-    
-    
-    
-    
+    func sendMessage(_ message: CWChatMessage,
+                     progress: @escaping CWMessageProgressBlock,
+                     completion: @escaping CWMessageCompletionBlock)
 }

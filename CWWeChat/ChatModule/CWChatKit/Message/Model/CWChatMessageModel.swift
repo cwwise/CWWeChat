@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YYText.YYTextUtilities
 
 public let textAttributes = [NSForegroundColorAttributeName:UIColor.white,
                       NSFontAttributeName: UIFont.fontTextMessageText()]
@@ -32,15 +33,20 @@ class CWChatMessageModel: NSObject {
         case .text:
             
             let content = (message.messageBody as! CWTextMessageBody).text
-            let size = CGSize(width: 100, height: CGFloat.greatestFiniteMagnitude)
+            let size = CGSize(width: 200, height: CGFloat.greatestFiniteMagnitude)
 
-   
+            var edge: UIEdgeInsets
+            if message.direction == .send {
+                edge = ChatCellUI.right_edge_insets
+            } else {
+                edge = ChatCellUI.left_edge_insets
+            }
+            
             var contentSize = content.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: textAttributes, context: nil).size
             
-            contentSize = CGSize(width: ceil(contentSize.width),
-                                 height: ceil(contentSize.height)+1)
-
-            let heightOfCell = contentSize.height + 40
+            contentSize = CGSize(width: ceil(contentSize.width)+edge.left+edge.right,
+                                 height: ceil(contentSize.height)+edge.top+edge.bottom)
+            let heightOfCell = contentSize.height + kMessageCellBottomMargin + kMessageCellTopMargin
 
             messageFrame = CWChatMessageFrame(heightOfCell: heightOfCell,
                                               contentSize: contentSize)

@@ -8,10 +8,8 @@
 
 import UIKit
 
-
 /// 消息发送管理队列
 class CWMessageDispatchManager: NSObject {
-    
     /// 队列
     var messageQueue: OperationQueue
     
@@ -30,17 +28,16 @@ class CWMessageDispatchManager: NSObject {
     }
     
     
-    func sendMessage(_ message: CWChatMessage, _ replace: Bool = false) {
-
-        // 是否替换消息
+    func sendMessage(_ message: CWChatMessage,
+                     progress: CWMessageProgressBlock? = nil,
+                     completion: CWMessageCompletionBlock? = nil) {        
         
         // 生成Operation
-        let operation = CWMessageDispatchOperation.operationWithMessage(message)
+        let operation = CWMessageDispatchOperation.operationWithMessage(message,
+                                                                        progress: progress,
+                                                                        completion: completion)
         operation.local_ready = true
         messageQueue.addOperation(operation)
-        
-        // 添加回调
-        
     }
     
     /**

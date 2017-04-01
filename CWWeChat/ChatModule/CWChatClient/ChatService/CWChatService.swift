@@ -10,6 +10,13 @@ import Foundation
 
 class CWChatService: NSObject {
     
+    /// 消息发送队列
+    fileprivate var dispatchManager: CWMessageDispatchManager 
+    
+    override init() {
+        dispatchManager = CWMessageDispatchManager()
+        super.init()
+    }
     
 }
 
@@ -30,7 +37,7 @@ extension CWChatService: CWChatManager {
     }
     
     /// 发送回执消息
-    func sendMessageReadAck(message: CWChatMessage, completion: (CWChatMessage, Error?) -> Void) {
+    func sendMessageReadAck(message: CWChatMessage, completion: CWMessageCompletionBlock) {
         
     }
     
@@ -40,15 +47,23 @@ extension CWChatService: CWChatManager {
     ///   - message: 消息实体
     ///   - progress: 进度 当消息是资源类型时
     ///   - completion: 发送消息结果
-    func sendMessage(message: CWChatMessage, progress: ((Int) -> Void), completion: (CWChatMessage, Error?) -> Void) {
+    func sendMessage(_ message: CWChatMessage,
+                     progress: @escaping CWMessageProgressBlock, 
+                     completion: @escaping CWMessageCompletionBlock) {
         
         // 发送消息 先保存到数据库
         
+        // 切换到主线程来处理
+        let _progress: CWMessageProgressBlock = { (progressValue) in
+            DispatchQueue.main.async(execute: { 
+                progress(progressValue)
+            })
+        }
+        
         // 先插入到消息列表
-        
-        CWChatXMPPManager.share.dispatchManager.sendMessage(message)
-        
+        dispatchManager.sendMessage(message, progress: _progress, completion: completion)
     }
  
     
 }
+

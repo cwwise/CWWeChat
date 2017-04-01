@@ -24,8 +24,7 @@ class CWChatXMPPManager: NSObject {
 
     /// 发送消息
     private(set) var messageTransmitter: CWMessageTransmitter
-    /// 消息发送队列
-    private(set) var dispatchManager: CWMessageDispatchManager
+
     
     private(set) var messageParse: CWChatMessageParse
     
@@ -46,7 +45,6 @@ class CWChatXMPPManager: NSObject {
 
         //实际发送消息者
         messageTransmitter = CWMessageTransmitter()
-        dispatchManager = CWMessageDispatchManager()
         // 消息解析
         messageParse = CWChatMessageParse()
         

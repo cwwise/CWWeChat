@@ -21,27 +21,7 @@ class CWConversationController: CWChatSessionController {
     
     func sendMessage() {
         
-        let textObject = CWTextMessageBody(text: "1234")
-        let message = CWChatMessage(targetId: "chenwei", messageBody: textObject)
-        
-        let chatManager = CWChatClient.share.chatManager
-        
-        chatManager.sendMessage(message: message, progress: { (progress) in
-            
-            
-            
-        }) { (message, error) in
-           
-            
-        }
-        
-        let imageBody = CWImageMessageBody(path: "https://ohtmnqk8a.qnssl.com/chatmessage_001.jpg")
-        let message2 = CWChatMessage(targetId: "chenwei", messageBody: imageBody)
-        chatManager.sendMessage(message: message2, progress: { (progress) in
-            
-        }) { (message, error) in
-            
-        }
+
         
         
     }

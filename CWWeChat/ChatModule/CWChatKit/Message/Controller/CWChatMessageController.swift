@@ -30,19 +30,17 @@ class CWChatMessageController: UIViewController {
     
     func setupUI() {
         self.view.addSubview(tableView)
+        self.view.addSubview(chatToolBar)
+
     }
     
     /**
      注册cell class
      */
     func registerCell() {
-        
         tableView.register(CWChatMessageCell.self, forCellReuseIdentifier: CWMessageType.none.identifier())
         tableView.register(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.text.identifier())
-
     }
-
-    
     
     //MARK: UI属性
     /// TableView
@@ -58,6 +56,14 @@ class CWChatMessageController: UIViewController {
         tableView.estimatedRowHeight = 50
         tableView.dataSource = self
         return tableView
+    }()
+    
+    lazy var chatToolBar: CWInputToolBar = {
+        let frame = CGRect(x: 0, y: kScreenHeight-45,
+                           width: kScreenWidth, height: 45)
+        let chatToolBar = CWInputToolBar(frame:frame)
+        chatToolBar.delegate = self
+        return chatToolBar
     }()
     
     override func didReceiveMemoryWarning() {
@@ -104,3 +110,40 @@ extension CWChatMessageController: UITableViewDataSource {
     }
     
 }
+
+extension CWChatMessageController: CWInputToolBarDelegate {
+    //
+    func chatInputView(_ inputView: CWInputToolBar, sendText text: String) {
+        
+        let textObject = CWTextMessageBody(text: "1234")
+        let message = CWChatMessage(targetId: "chenwei", messageBody: textObject)
+        
+     
+        self.sendMessage(message)
+    
+    }
+    
+    func chatInputView(_ inputView: CWInputToolBar, imageName: String, extentInfo: Dictionary<String, String>) {
+        
+    }
+    
+    func sendMessage(_ message: CWChatMessage) {
+        
+        let chatManager = CWChatClient.share.chatManager
+        chatManager.sendMessage(message, progress: { (progress) in
+            
+        }) { (message, error) in
+            
+            // 发送消息失败
+            if error != nil {
+                
+            } else {
+                
+            }
+            
+        }
+        
+    }
+    
+}
+

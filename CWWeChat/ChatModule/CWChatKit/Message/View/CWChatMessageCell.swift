@@ -13,23 +13,27 @@ protocol CWMessageCellDelegate:NSObjectProtocol {
     
 }
 
-///头像
-let kAvaterWidth:  CGFloat      = 40.0
-
-/// 名称
-let kNameLabelHeight: CGFloat =   14.0
-let kNameLabelSpaceX: CGFloat =   12.0
-let kNamelabelSpaceY: CGFloat =   1.0
-/// 背景
-let kMessageBackgroundSpaceY: CGFloat  =  1.0
-let kMessageBackgroundSpaceX: CGFloat  =  5.0
-
-
 // cell布局中的间距
 let kMessageCellMargin: CGFloat =  10.0
 // 上下留白
 let kMessageCellTopMargin: CGFloat =  2.0
 let kMessageCellBottomMargin: CGFloat =  12.0
+
+///头像
+let kAvaterImageViewWidth:  CGFloat      = 40.0
+let kAvaterImageViewMargin:  CGFloat      = 10.0
+
+/// 名称
+let kNameLabelHeight: CGFloat =   14.0
+let kNameLabelSpaceX: CGFloat =   12.0
+let kNamelabelSpaceY: CGFloat =   1.0
+
+
+let kAvatarToMessageContent: CGFloat = 5.0
+let kMessageCellEdgeOffset: CGFloat = 6.0
+
+
+
 
 
 
@@ -39,66 +43,33 @@ class CWChatMessageCell: UITableViewCell {
 
     var messageModel: CWChatMessageModel!
     
-    ///用户名称
-    var usernameLabel:UILabel = {
-        let usernameLabel = UILabel()
-        usernameLabel.backgroundColor = UIColor.clear
-        usernameLabel.font = UIFont.systemFont(ofSize: 12)
-        return usernameLabel
-    }()
-    
-    ///头像
-    lazy var avatarButton:UIButton = {
-        let avatarButton = UIButton(type: .custom)
-        avatarButton.backgroundColor = UIColor.darkGray
-        avatarButton.size = CGSize(width: kAvaterWidth, height: kAvaterWidth)
-        avatarButton.addTarget(self,
-                               action: #selector(avatarButtonClickDown(_:)),
-                               for: UIControlEvents.touchUpInside)
-        return avatarButton
-    }()
-    
-    ///消息的背景图片
-    lazy var messageBackgroundView:UIImageView = {
-        let messageBackgroundView = UIImageView()
-        messageBackgroundView.isUserInteractionEnabled = true
-        messageBackgroundView.backgroundColor = UIColor.cyan
-        return messageBackgroundView
-    }()
-    
-    //引导
-    var activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-    
-    lazy var errorButton:UIButton = {
-        let errorButton = UIButton(type: .custom)
-        errorButton.setImage(UIImage(named:"message_sendfaild"), for: UIControlState())
-        errorButton.sizeToFit()
-        errorButton.isHidden = true
-        return errorButton
-    }()
-    
-    
     // MARK: 初始化
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setup()
+    }
+    
+    func setup() {
         self.backgroundColor = UIColor.clear
         self.selectionStyle = .none
-        
-        self.contentView.addSubview(self.usernameLabel)
-        self.contentView.addSubview(self.avatarButton)
-        self.contentView.addSubview(self.messageBackgroundView)
-        self.contentView.addSubview(self.activityView)
-        self.contentView.addSubview(self.errorButton)
-        
-        p_addSnap()
     }
 
-    func p_addSnap() {
+    func addGeneralView() {
+        self.contentView.addSubview(self.avatarImageView)
+        self.contentView.addSubview(self.usernameLabel)
+        self.contentView.addSubview(self.messageContentView)
+        self.contentView.addSubview(self.activityView)
+        self.contentView.addSubview(self.errorButton)
+    }
+    
+    /// 设置数据
+    func configureCell(message messageModel: CWChatMessageModel) {
         
-        let origin = CGPoint(x: kScreenWidth - kMessageCellMargin - kAvaterWidth,
-                             y: kMessageCellTopMargin)
-        self.avatarButton.origin = origin
-
+        // 设置数据
+        
+        
+        // 更新UI
+        
         
     }
     
@@ -111,20 +82,68 @@ class CWChatMessageCell: UITableViewCell {
         // 是自己的
         if message.direction == .send {
             
-            let origin = CGPoint(x: kScreenWidth - kMessageCellMargin - kAvaterWidth,
-                                 y: kMessageCellTopMargin)
-            self.avatarButton.origin = origin
-
-   
+            // 头像
+            avatarImageView.snp.remakeConstraints({ (make) in
+                make.width.height.equalTo(kAvaterImageViewWidth)
+                make.left.equalTo(-kAvaterImageViewMargin)
+                make.top.equalTo(kMessageCellTopMargin)
+            })
+            
+            usernameLabel.snp.remakeConstraints({ (make) in
+                make.top.equalTo(avatarImageView.snp.top);
+                make.right.equalTo(avatarImageView.snp.left).offset(-kMessageCellEdgeOffset)
+                make.width.lessThanOrEqualTo(120)
+                make.height.equalTo(0)
+            })
+            
+            
+            // 内容
+            messageContentView.snp.remakeConstraints({ (make) in
+                make.right.equalTo(avatarImageView.snp.left).offset(-kAvatarToMessageContent)
+                make.top.equalTo(usernameLabel.snp.bottom)
+                
+                make.size.equalTo(messageModel.messageFrame.contentSize)
+            })
+            
+            let image = #imageLiteral(resourceName: "bubble-default-sended")
+            let cap = ChatCellUI.right_cap_insets
+            messageContentView.image = image.resizableImage(withCapInsets: cap)
             
         } else {
             
-            let origin = CGPoint(x: kMessageCellMargin,
-                                 y: kMessageCellTopMargin)
-            self.avatarButton.origin = origin
+            avatarImageView.snp.remakeConstraints({ (make) in
+                make.width.height.equalTo(kAvaterImageViewWidth)
+                make.left.equalTo(kAvaterImageViewMargin)
+                make.top.equalTo(kMessageCellTopMargin)
+            })
+            
+            usernameLabel.snp.remakeConstraints({ (make) in
+                make.top.equalTo(avatarImageView.snp.top);
+                make.left.equalTo(avatarImageView.snp.right).offset(kMessageCellEdgeOffset)
+                make.width.lessThanOrEqualTo(120)
+                make.height.equalTo(0)
+            })
+            
+            // 内容
+            messageContentView.snp.remakeConstraints({ (make) in
+                make.left.equalTo(avatarImageView.snp.right).offset(kAvatarToMessageContent)
+                make.top.equalTo(usernameLabel.snp.bottom).offset(0)
+                make.size.equalTo(messageModel.messageFrame.contentSize)
+            })
+
+            
+            
+
+            let image = #imageLiteral(resourceName: "bubble-default-received")
+            let cap = ChatCellUI.left_cap_insets
+            messageContentView.image = image.resizableImage(withCapInsets: cap)
+            
         }
         
+        avatarImageView.yy_setImage(with: nil, placeholder: defaultHeadeImage)
         
+        
+
     }
     
     
@@ -161,6 +180,43 @@ class CWChatMessageCell: UITableViewCell {
         
         
     }
+    
+    // MARK: 属性
+    ///用户名称
+    var usernameLabel:UILabel = {
+        let usernameLabel = UILabel()
+        usernameLabel.backgroundColor = UIColor.clear
+        usernameLabel.font = UIFont.systemFont(ofSize: 12)
+        usernameLabel.text = "nickname"
+        return usernameLabel
+    }()
+    
+    ///头像
+    lazy var avatarImageView:UIImageView = {
+        let avatarImageView = UIImageView()
+        avatarImageView.contentMode = .scaleAspectFit
+        avatarImageView.clipsToBounds = true
+        avatarImageView.backgroundColor = UIColor.cyan
+        return avatarImageView
+    }()
+    
+    ///消息的背景图片
+    lazy var messageContentView:UIImageView = {
+        let messageContentView = UIImageView()
+        messageContentView.isUserInteractionEnabled = true
+        return messageContentView
+    }()
+    
+    //引导
+    var activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    
+    lazy var errorButton:UIButton = {
+        let errorButton = UIButton(type: .custom)
+        errorButton.setImage(UIImage(named:"message_sendfaild"), for: UIControlState())
+        errorButton.sizeToFit()
+        errorButton.isHidden = true
+        return errorButton
+    }()
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

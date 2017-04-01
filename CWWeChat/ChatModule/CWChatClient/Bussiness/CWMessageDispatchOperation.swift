@@ -11,6 +11,7 @@ import UIKit
 ///重复发送次数
 private let kMax_RepeatCount:Int = 5
 
+
 /// 发送消息线程
 class CWMessageDispatchOperation: Operation {
     
@@ -20,7 +21,9 @@ class CWMessageDispatchOperation: Operation {
     /// 消息实体
     var message: CWChatMessage
     /// 进度回调的block
-    var progressBlock: ((Float,Bool)-> Void)?
+    var progress: CWMessageProgressBlock?
+    /// 完成结果
+    var completion: CWMessageCompletionBlock?
     
     /// 控制并发的变量
     override var isExecuting: Bool {
@@ -48,7 +51,7 @@ class CWMessageDispatchOperation: Operation {
         return true
     }
     
-    ///控制并发任务的变量
+    /// 控制并发任务的变量
     fileprivate var local_executing:Bool = false {
         willSet {
             self.willChangeValue(forKey: "isExecuting")
@@ -84,38 +87,42 @@ class CWMessageDispatchOperation: Operation {
     }
     
     /// 消息发送结果
-    var messageSendResult:Bool
-    
+    var messageSendResult: Bool
     /// 重复执行的次数
     var repeatCount: Int = 0
     
-    
-    class func operationWithMessage(_ message: CWChatMessage) -> CWMessageDispatchOperation {
+    class func operationWithMessage(_ message: CWChatMessage,
+                                    progress: CWMessageProgressBlock? = nil,
+                                    completion: CWMessageCompletionBlock? = nil) -> CWMessageDispatchOperation {
         
         switch message.messageType {
         case .text:
-            return CWTextMessageDispatchOperation(message: message)
+            return CWTextMessageDispatchOperation(message, progress: progress, completion: completion)
         case .image:
-            return CWImageMessageDispatchOperation(message: message)
+            return CWImageMessageDispatchOperation(message, progress: progress, completion: completion)
         default:
-            return CWMessageDispatchOperation(message: message)
+            return CWMessageDispatchOperation(message, progress: progress, completion: completion)
         }
         
     }
     
-    init(message: CWChatMessage) {
+    init(_ message: CWChatMessage,
+         progress: CWMessageProgressBlock? = nil, 
+         completion: CWMessageCompletionBlock? = nil) {
+        
         self.message = message
-        repeatCount = 1
-        messageSendResult = false
+        self.repeatCount = 1
+        self.messageSendResult = false
+        self.progress = progress
+        self.completion = completion
         super.init()
+        
     }
     
+
     ///函数入口
     override func start() {
-        //疑问
-        if Thread.isMainThread {
-            
-        }
+
         if self.isFinished || self.isCancelled {
             self.endOperation()
             return
@@ -124,25 +131,20 @@ class CWMessageDispatchOperation: Operation {
         self.performSelector(inBackground: #selector(CWMessageDispatchOperation.main), with: nil)
     }
     
+    /// 主要执行的过程
+    override func main() {
+
+        //发送消息的任务
+        sendMessage()
+    }
+    
+    
     /// 取消线程发送
     override func cancel() {
         self.local_cancelled = true
         super.cancel()
     }
     
-    /// 主要执行的过程
-    override func main() {
-        
-        if self.isFinished || self.isCancelled {
-            self.endOperation()
-            return
-        }
-            
-        //发送消息的任务
-        sendMessage()
-    }
-    
-
     /// 发送消息
     func sendMessage() {
 
