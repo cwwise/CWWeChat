@@ -67,9 +67,7 @@ extension CWChatMessageParse: CWMessageHandleDelegate {
     func handMessageComplete(message: CWChatMessage) {
         // 先保存消息
         let chatService = CWChatClient.share.chatManager as! CWChatService
-        chatService.saveMessage(message)
-        
-        
+        chatService.receiveMessage(message)
         
 
         

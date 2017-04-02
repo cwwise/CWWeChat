@@ -11,8 +11,8 @@ import XMPPFramework
 
 class CWChatService: XMPPModule {
     // 消息存储
-    private(set) var messageStore: CWChatMessageStore
-    private(set) var conversationStore: CWChatConversationStore
+    private(set) var messageStore: CWChatMessageStore!
+    private(set) var conversationStore: CWChatConversationStore!
     
     /// 发送
     private(set) var messageTransmitter: CWMessageTransmitter
@@ -21,10 +21,8 @@ class CWChatService: XMPPModule {
     /// 消息接收解析
     private(set) var messageParse: CWChatMessageParse
 
+    // TODO: 待修改
     override init() {
-        messageStore = CWChatMessageStore(userId: CWChatClient.share.userId)
-        conversationStore = CWChatConversationStore(userId: CWChatClient.share.userId)
-        
         // 消息发送和解析
         messageTransmitter = CWMessageTransmitter()
         dispatchManager = CWMessageDispatchManager()
@@ -48,10 +46,24 @@ class CWChatService: XMPPModule {
     }
     
 
+    public func receiveMessage(_ message: CWChatMessage) {
+        
+        executeMessagesDidReceive(message)
+        
+        updateConversation(with: message)
+        // 保存消息
+        messageStore.appendMessage(message)
+    }
     
     public func saveMessage(_ message: CWChatMessage)  {
         
-        executeMessagesDidReceive(message)
+        updateConversation(with: message)
+        // 保存消息
+        messageStore.appendMessage(message)
+    }
+    
+    public func updateConversation(with message: CWChatMessage) {
+    
         // 更新会话
         var exist: Bool = false
         let conversation = conversationStore.fecthConversation(message.chatType,
@@ -66,9 +78,7 @@ class CWChatService: XMPPModule {
         } else {
             
         }
-        
-        // 保存消息
-        messageStore.appendMessage(message)
+    
     }
     
     private func executeMessagesDidReceive(_ message :CWChatMessage) {
