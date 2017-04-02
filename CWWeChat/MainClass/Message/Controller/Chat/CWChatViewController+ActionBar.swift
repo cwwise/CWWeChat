@@ -46,12 +46,8 @@ extension CWChatViewController: CWInputToolBarDelegate {
      - parameter message: 消息体
      */
     func sendMessage(_ message: CWMessageModel)  {
-        let rand = arc4random() % 2
-        if rand == 0 {
-            message.messageOwnerType = .other
-        } else {
-            message.messageOwnerType = .myself
-        }
+
+        message.messageOwnerType = .myself
         message.messageSendId = CWUserAccount.sharedUserAccount().userID
         message.showTime = messageNeedShowTime(message.messageSendDate as Date)
         if message.showTime {

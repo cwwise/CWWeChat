@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         user.userId = "tom"
         user.userName = "Tom"
         user.nikeName = "汤姆"
-        user.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/tom@chenweiim.com"
+        user.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/tom.jpg"
         
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
         
