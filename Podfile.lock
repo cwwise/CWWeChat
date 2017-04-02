@@ -21,6 +21,11 @@ PODS:
   - Moya/RxSwift (8.0.3):
     - Moya/Core
     - RxSwift (~> 3.0)
+  - Nimble (6.1.0)
+  - OHHTTPStubs/Core (5.2.3)
+  - OHHTTPStubs/Swift (5.2.3):
+    - OHHTTPStubs/Core
+  - Quick (1.1.0)
   - Result (3.2.1)
   - RxSwift (3.3.1)
   - SnapKit (3.1.2)
@@ -49,6 +54,9 @@ DEPENDENCIES:
   - KVOController
   - MBProgressHUD
   - Moya/RxSwift
+  - Nimble
+  - OHHTTPStubs/Swift
+  - Quick
   - SnapKit
   - SQLite.swift
   - SwiftyBeaver
@@ -67,6 +75,9 @@ SPEC CHECKSUMS:
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Moya: d3721622e3cc0cc2f038d69a258686f0b66e7252
+  Nimble: c53e6903fee94041b90ded74f135820437d8bf59
+  OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
+  Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
   Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
   RxSwift: 8fc9f2de6275a9101d518444e00bf32f1a42caac
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
@@ -80,6 +91,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: ea5dfc910d6c87eb5b8b3484eb9dcae23f328004
+PODFILE CHECKSUM: 1c1870c192becf9645d0b5c0713d27fc94b18a4c
 
-COCOAPODS: 1.2.0.rc.1
+COCOAPODS: 1.2.0

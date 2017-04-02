@@ -115,10 +115,8 @@ extension CWChatMessageController: CWInputToolBarDelegate {
     //
     func chatInputView(_ inputView: CWInputToolBar, sendText text: String) {
         
-        let textObject = CWTextMessageBody(text: "1234")
+        let textObject = CWTextMessageBody(text: text)
         let message = CWChatMessage(targetId: "chenwei", messageBody: textObject)
-        
-     
         self.sendMessage(message)
     
     }
@@ -129,11 +127,17 @@ extension CWChatMessageController: CWInputToolBarDelegate {
     
     func sendMessage(_ message: CWChatMessage) {
         
+        let messageModel = CWChatMessageModel(message: message)
+        self.messageList.append(messageModel)
+        
+        let indexPath = IndexPath(row: messageList.count-1, section: 0)
+        self.tableView.insertRows(at: [indexPath], with: .none)
+        
         let chatManager = CWChatClient.share.chatManager
         chatManager.sendMessage(message, progress: { (progress) in
             
         }) { (message, error) in
-            
+    
             // 发送消息失败
             if error != nil {
                 

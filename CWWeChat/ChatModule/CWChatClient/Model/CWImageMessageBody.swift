@@ -35,5 +35,14 @@ class CWImageMessageBody: NSObject, CWMessageBody {
     init(path: String) {
         self.originalLocalPath = path
     }
+}
+
+extension CWImageMessageBody: CWMessageCoding {
+    var messageEncode: String {
+        return ""
+    }
     
+    func messageDecode(string: String) {
+        
+    }
 }

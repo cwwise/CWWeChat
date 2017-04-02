@@ -13,43 +13,35 @@ import SQLite
  消息管理类
  
  使用SQLite.swift
- 
- 可以[查看sql](https://github.com/stephencelis/SQLite.swift/issues/399)
- 
  */
 class CWChatMessageStore: NSObject {
     
-    let message: CWChatMessage! = nil
-    
     /// 当前用户的唯一id，创建数据库名称
-    var userId: String
-
+    private(set) var userId: String
     
     //MARK: 数据库属性
-    let messageTable = Table("message")
+    fileprivate let messageTable = Table("message")
     //消息唯一id
-    let id = Expression<Int64>("id")
+    fileprivate let id = Expression<Int64>("id")
     // 消息id
-    let messageid = Expression<String>("msgid")
+    fileprivate let messageId = Expression<String>("msgid")
     //用户唯一id
-    let senderId = Expression<String>("sid")
-    let targetId = Expression<String>("tid")
+    fileprivate let senderId = Expression<String>("sid")
+    fileprivate let targetId = Expression<String>("tid")
     // 消息时间
-    let date = Expression<String>("date")
+    fileprivate let date = Expression<Double>("date")
     /// type
-    let chat_type = Expression<Int>("partner_type")
+    fileprivate let chatType = Expression<Int>("chat_type")
     /// 发送方
-    let direction = Expression<Int>("direction")
+    fileprivate let direction = Expression<Int>("direction")
     /// 消息类型 文本 图片
-    let msg_type = Expression<Int>("msg_type")
+    fileprivate let messageType = Expression<Int>("msg_type")
     /// 内容
-    let content = Expression<String?>("content")
+    fileprivate let content = Expression<String?>("content")
     /// 接收状态
-    let send_status = Expression<Int>("send_status")
-
+    fileprivate let sendStatus = Expression<Int>("send_status")
     /// 拓展字端
-    let ext1 = Expression<String>("ext1")
-    
+    fileprivate let ext1 = Expression<String>("ext1")
     
     lazy var messageDB:Connection = {
         //数据
@@ -71,8 +63,8 @@ class CWChatMessageStore: NSObject {
     
     /// 数据库路径
     lazy var path: String = {
-        let documentPath = NSHomeDirectory() + "/Documents"
-        let path = "\(documentPath)/User/\(self.userId)/Chat/DB/"
+        let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let path = "\(documentPath)/cwchat/\(self.userId)/chat/"
         if !FileManager.default.fileExists(atPath: path) {
             try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         }
@@ -90,21 +82,22 @@ class CWChatMessageStore: NSObject {
     /// 创建message数据表
     func createMessageTable() {
         do {
-            try messageDB.run(messageTable.create(ifNotExists: true) { t in
+            let create = messageTable.create(ifNotExists: true) { t in
                 t.column(id, primaryKey: .autoincrement)
-                t.column(messageid, unique: true)
+                t.column(messageId, unique: true)
                 t.column(senderId)
                 t.column(targetId)
                 t.column(date)
-                t.column(chat_type, defaultValue: 0)
+                t.column(chatType, defaultValue: 0)
                 t.column(direction, defaultValue: 0)
-                t.column(msg_type, defaultValue: 0)
+                t.column(messageType, defaultValue: 0)
                 t.column(content, defaultValue: "")
-                t.column(send_status, defaultValue: 0)
-                t.column(ext1, defaultValue: "")
-            })
-            
-        } catch let error as NSError {
+                t.column(sendStatus, defaultValue: 0)
+                t.column(ext1, defaultValue: "")}
+            log.info(create.asSQL())
+            _ = messageTable.createIndex([messageId])
+            try messageDB.run(create)
+        } catch {
             log.error(error)
         }
     }
@@ -115,18 +108,63 @@ class CWChatMessageStore: NSObject {
 // MARK: - 新增
 extension CWChatMessageStore {
 
-    func appendMessage(message: CWChatMessage) {
+    func appendMessage(_ message: CWChatMessage) {
 
-        var content = ""
-        
-        
-        
-        
+        guard let sendId = message.senderId else {
+            log.error("插入消息失败,缺少消息sendId.")
+            return
+        }
+        let body = message.messageBody.messageEncode
+        let insert = messageTable.insert(messageId <- message.messageId,
+                                         targetId <- message.targetId,
+                                         senderId <- sendId,
+                                         date <- message.timestamp,
+                                         chatType <- message.chatType.rawValue,
+                                         direction <- message.direction.rawValue,
+                                         messageType <- message.messageType.rawValue,
+                                         content <- body,
+                                         sendStatus <- message.sendStatus.rawValue)
+        log.info(insert.asSQL())
+        do {
+            try messageDB.run(insert)
+        } catch {
+            log.error(error)
+        }
     }
-    
+}
+
+// MARK: 查找
+extension CWChatMessageStore {
+
     
 }
 
+// MARK: - 修改
+extension CWChatMessageStore {
+    
+    func updateMessageStatus(_ message: CWChatMessage) {
+        let filter = messageTable.filter(messageId == message.messageId)
+        let update = filter.update(sendStatus <- message.sendStatus.rawValue)
+        log.info(update.asSQL())
+        do {
+            try messageDB.run(update)
+        } catch {
+            log.error(error)
+        }
+    }
+    
+    func updateMessageDate(_ message: CWChatMessage) {
+        let filter = messageTable.filter(messageId == message.messageId)
+        let update = filter.update(date <- message.timestamp)
+        log.info(update.asSQL())
+        do {
+            try messageDB.run(update)
+        } catch {
+            log.error(error)
+        }
+    }
+    
+}
 
 // MARK: - 删除
 extension CWChatMessageStore {
@@ -137,7 +175,7 @@ extension CWChatMessageStore {
      - parameter messageID: 消息唯一的id messageID
      */
     func deleteMessage(by messageID:String) -> Bool {
-        let query = messageTable.filter(messageID == messageid)
+        let query = messageTable.filter(messageID == messageId)
         do {
             let rowid = try messageDB.run(query.delete())
             log.debug("删除消息成功: \(rowid), \(messageID)")

@@ -174,7 +174,7 @@ class CWChatMessageCell: UITableViewCell {
     ///头像点击
     func avatarButtonClickDown(_ button:UIButton) {
         
-        guard let delegate = self.delegate, let message = self.messageModel  else {
+        guard let _ = self.delegate, let message = self.messageModel  else {
             return
         }
         

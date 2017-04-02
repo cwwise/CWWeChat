@@ -11,7 +11,6 @@ import UIKit
 ///重复发送次数
 private let kMax_RepeatCount:Int = 5
 
-
 /// 发送消息线程
 class CWMessageDispatchOperation: Operation {
     
@@ -52,6 +51,7 @@ class CWMessageDispatchOperation: Operation {
     }
     
     /// 控制并发任务的变量
+    // 执行中
     fileprivate var local_executing:Bool = false {
         willSet {
             self.willChangeValue(forKey: "isExecuting")
@@ -60,6 +60,7 @@ class CWMessageDispatchOperation: Operation {
             self.didChangeValue(forKey: "isExecuting")
         }
     }
+    
     fileprivate var local_finished:Bool = false {
         willSet {
             self.willChangeValue(forKey: "isFinished")
@@ -68,6 +69,7 @@ class CWMessageDispatchOperation: Operation {
             self.didChangeValue(forKey: "isFinished")
         }
     }
+    
     fileprivate var local_cancelled:Bool = false {
         willSet {
             self.willChangeValue(forKey: "isCancelled")
@@ -123,25 +125,21 @@ class CWMessageDispatchOperation: Operation {
     ///函数入口
     override func start() {
 
-        if self.isFinished || self.isCancelled {
-            self.endOperation()
+        if self.isCancelled {
+            self._endOperation()
             return
         }
+        
         self.local_executing = true
-        self.performSelector(inBackground: #selector(CWMessageDispatchOperation.main), with: nil)
+        self.performSelector(inBackground: #selector(CWMessageDispatchOperation._startOperation), with: nil)
     }
-    
-    /// 主要执行的过程
-    override func main() {
-
-        //发送消息的任务
-        sendMessage()
-    }
-    
     
     /// 取消线程发送
     override func cancel() {
-        self.local_cancelled = true
+        if local_cancelled == false {
+            local_cancelled = true
+            local_executing = false
+        }
         super.cancel()
     }
     
@@ -150,30 +148,33 @@ class CWMessageDispatchOperation: Operation {
 
     }
     
-    /// 消息状态
-    func noticationWithOperationState(_ state:Bool = false) {
-        self.messageSendResult = state
-        endOperation()
+    func _startOperation() {
+        //发送消息的任务
+        sendMessage()
     }
     
     /**
      结束线程
      */
-    func endOperation() {
+    func _endOperation() {
         self.local_executing = false
         self.local_finished = true
     }
     
-    deinit {
-        let result = self.messageSendResult == true ? "成功" : "失败"
-        log.debug("messageoperation销毁 ---\(message.description) \(result)")
+    /// 消息状态
+    func noticationWithOperationState(_ state:Bool = false) {
+        self.messageSendResult = state
+        _endOperation()
+        if let completion = self.completion {
+            let error = NSError(domain: "cwchatxmpp", code: 0, userInfo: ["message":"失败"])
+            if state {
+                completion(message, error)
+            } else {
+                completion(message, nil)
+            }
+            
+        }
     }
-    
-    
-}
-
-// MARK: - 消息结果反馈
-extension CWMessageDispatchOperation {
     
     func messageSendCallback(_ result:Bool) {
         if result == false {
@@ -187,6 +188,21 @@ extension CWMessageDispatchOperation {
             noticationWithOperationState(true)
         }
     }
+ 
+    override var description: String {
+        var string = "<\(self.classForCoder) id:\(self.message.messageId) "
+        string += " executing:" + (self.local_executing ?"YES":"NO")
+        string += " finished:" + (self.local_finished ?"YES":"NO")
+        string += " cancelled:" + (self.local_cancelled ?"YES":"NO")
+        string += " sendResult:" + (self.messageSendResult ?"YES":"NO")
+        string += " >"
+        return string
+    }
+    
+    deinit {
+        log.debug("销毁:"+self.description)
+    }
+    
+    
 }
-
 

@@ -23,6 +23,7 @@ class CWMessageTransmitter: NSObject {
     func sendMessage(content: String, targetId: String, messageId: String ,type: Int = 0) -> Bool {
         // 生成消息
         let messageElement = self.messageElement(body: content, to: targetId, messageId: messageId)
+
         // 发送消息
         var receipte: XMPPElementReceipt?
         self.xmppStream.send(messageElement, andGet: &receipte)
@@ -44,7 +45,7 @@ class CWMessageTransmitter: NSObject {
         bodyElement.addAttribute(withName: "type", integerValue: type)
 
         message?.addChild(bodyElement)
-
+        message?.addReceiptRequest()
         return message
     }
 

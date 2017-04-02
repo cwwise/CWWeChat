@@ -11,9 +11,26 @@ import Foundation
 /// 聊天相关回调
 protocol CWChatManagerDelegate: NSObjectProtocol {
     
+    // MARK: 会话
+    
+    func chatsessionDidUpdate(_ session: CWChatConversation)
+    
+    // MARK: Message
+    /// 消息状态发生变化
+    ///
+    /// - Parameter message: 状态发生变化的消息
+    /// - Parameter error: 错误信息
+    func messageStatusDidChange(_ message: CWChatMessage, error: NSError?)
+    
+    
+    /// 收到消息
+    ///
+    /// - Parameter message: 消息实体
+    func messagesDidReceive(_ message: CWChatMessage)
+    
 }
 
-typealias CWMessageCompletionBlock = (_ message: CWChatMessage, _ error: Error?) -> Void
+typealias CWMessageCompletionBlock = (_ message: CWChatMessage, _ error: NSError?) -> Void
 typealias CWMessageProgressBlock = (_ progress: Int) -> Void
 
 /// 聊天相关操作
@@ -25,22 +42,40 @@ protocol CWChatManager: NSObjectProtocol {
     func addDelegate(_ delegate: CWChatManagerDelegate)
     
     func addDelegate(_ delegate: CWChatManagerDelegate, delegateQueue: DispatchQueue)
-
+    /// 删除聊天代理
+    ///
+    /// - Parameter delegate: 代理
     func removeDelegate(_ delegate: CWChatManagerDelegate)
     
-    
+
     // MARK: 发送消息相关
     
     /// 发送回执消息
     ///
-    /// - Parameter message: 回执消息
+    /// - Parameters:
+    ///   - message: 回执消息
+    ///   - completion: 发送完成回调block
     func sendMessageReadAck(message: CWChatMessage,
-                            completion: CWMessageCompletionBlock)
+                            completion: @escaping CWMessageCompletionBlock)
     
     /// 发送消息
     ///
-    /// - Parameter message: 消息实体
+    /// - Parameters:
+    ///   - message: 消息
+    ///   - progress: 附件上传进度回调block
+    ///   - completion: 发送完成回调block
     func sendMessage(_ message: CWChatMessage,
                      progress: @escaping CWMessageProgressBlock,
                      completion: @escaping CWMessageCompletionBlock)
+    
+    /// 重新发送消息
+    ///
+    /// - Parameters:
+    ///   - message: 消息
+    ///   - progress: 附件上传进度回调block
+    ///   - completion: 发送完成回调block
+    func resendMessage(_ message: CWChatMessage,
+                     progress: @escaping CWMessageProgressBlock,
+                     completion: @escaping CWMessageCompletionBlock)
+    
 }

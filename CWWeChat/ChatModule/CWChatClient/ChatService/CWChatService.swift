@@ -9,13 +9,24 @@
 import Foundation
 
 class CWChatService: NSObject {
-    
-    /// 消息发送队列
-    fileprivate var dispatchManager: CWMessageDispatchManager 
-    
+    fileprivate var messageStore: CWChatMessageStore
+    /// 消息发送管理
+    fileprivate var dispatchManager: CWMessageDispatchManager
+    // TODO: 待修改 修改成自己的属性
+    /// 消息接收解析
+    fileprivate var messageParse: CWChatMessageParse {
+        return CWChatXMPPManager.share.messageParse
+    }
+
     override init() {
+        messageStore = CWChatMessageStore(userId: CWChatClient.share.userId)
         dispatchManager = CWMessageDispatchManager()
         super.init()
+    }
+    
+    public func saveMessage(_ message: CWChatMessage)  {
+        // 更新会话
+        messageStore.appendMessage(message)
     }
     
 }
@@ -25,33 +36,40 @@ class CWChatService: NSObject {
 extension CWChatService: CWChatManager {
     
     func addDelegate(_ delegate: CWChatManagerDelegate) {
-        
+        messageParse.addDelegate(self, delegateQueue: DispatchQueue.main)
     }
     
     func addDelegate(_ delegate: CWChatManagerDelegate, delegateQueue: DispatchQueue) {
-        
+        messageParse.addDelegate(self, delegateQueue: delegateQueue)
     }
     
     func removeDelegate(_ delegate: CWChatManagerDelegate) {
-        
+        messageParse.removeDelegate(delegate)
     }
     
-    /// 发送回执消息
-    func sendMessageReadAck(message: CWChatMessage, completion: CWMessageCompletionBlock) {
+    /// 发送回执消息(不保存消息)
+    func sendMessageReadAck(message: CWChatMessage, completion: @escaping CWMessageCompletionBlock) {
         
+        dispatchManager.sendMessage(message, completion: completion)
     }
     
     /// 发送消息
     ///
     /// - Parameters:
     ///   - message: 消息实体
-    ///   - progress: 进度 当消息是资源类型时
+    ///   - progress: 附件上传进度回调block
     ///   - completion: 发送消息结果
     func sendMessage(_ message: CWChatMessage,
                      progress: @escaping CWMessageProgressBlock, 
                      completion: @escaping CWMessageCompletionBlock) {
         
-        // 发送消息 先保存到数据库
+        
+        // 添加信息
+        if message.senderId == nil {
+            message.senderId = CWChatClient.share.userId
+        }
+        // 保存消息
+        saveMessage(message)
         
         // 切换到主线程来处理
         let _progress: CWMessageProgressBlock = { (progressValue) in
@@ -59,11 +77,27 @@ extension CWChatService: CWChatManager {
                 progress(progressValue)
             })
         }
-        
         // 先插入到消息列表
         dispatchManager.sendMessage(message, progress: _progress, completion: completion)
     }
- 
     
+    
+    
+    
+    /// 重新发送消息
+    ///
+    /// - Parameters:
+    ///   - message: 消息
+    ///   - progress: 附件上传进度回调block
+    ///   - completion: 发送完成回调block
+    func resendMessage(_ message: CWChatMessage,
+                       progress: @escaping CWMessageProgressBlock,
+                       completion: @escaping CWMessageCompletionBlock) {
+        
+        
+        
+    }
 }
+
+
 

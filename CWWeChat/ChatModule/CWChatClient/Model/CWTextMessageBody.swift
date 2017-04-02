@@ -20,3 +20,15 @@ class CWTextMessageBody: NSObject, CWMessageBody {
         self.text = text
     }
 }
+
+extension CWTextMessageBody: CWMessageCoding {
+    
+    var messageEncode: String {
+        return text
+    }
+    
+    func messageDecode(string: String) {
+        
+    }
+    
+}
