@@ -35,12 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func loginXMPP() {
         
+//        let options = CWChatClientOptions(chatServer: "localhost", chatDomain: "localhost")
         let options = CWChatClientOptions(chatServer: "hosted.im", chatDomain: "hellochatim.p1.im")
+        let chatClient = CWChatClient.share
+        chatClient.initialize(with: options)
         
-        let xmppManager = CWChatXMPPManager.share
-        xmppManager.options = options
-        
-        xmppManager.loginServer(with: "chenwei", password: "1234567")
+        chatClient.login(username: "haohao", password: "1234567") { (username, error) in
+            
+        }
         
     }
     
@@ -54,6 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
         // add log destinations. at least one is needed!
         let console = ConsoleDestination()  // log to Xcode Console
+        console.minLevel = .debug // just log .info, .warning & .error
+
         let file = FileDestination()  // log to default swiftybeaver.log file
         log.addDestination(console)
         log.addDestination(file)

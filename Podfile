@@ -36,9 +36,14 @@ target 'CWWeChat' do
   
   pod 'IGListKit'
   
+  #🔗 https://github.com/AliSoftware/OHHTTPStubs
+  pod 'OHHTTPStubs/Swift'
+  
   target 'CWWeChatTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Quick'
+    pod 'Nimble'
   end
 
   target 'CWWeChatUITests' do

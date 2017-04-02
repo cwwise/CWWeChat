@@ -11,15 +11,24 @@ import UIKit
 class CWTextMessageBody: NSObject, CWMessageBody {
 
     weak var message: CWChatMessage?
-    /// 文本内容
-    var text: String
     /// 消息体类型
     var type: CWMessageType = .text
+    /// 文本内容
+    var text: String
     
-    init(text: String, message: CWChatMessage? = nil) {
+    init(text: String) {
         self.text = text
     }
+}
+
+extension CWTextMessageBody: CWMessageCoding {
     
+    var messageEncode: String {
+        return text
+    }
     
+    func messageDecode(string: String) {
+        
+    }
     
 }

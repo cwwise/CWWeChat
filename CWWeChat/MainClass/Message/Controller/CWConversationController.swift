@@ -8,12 +8,22 @@
 
 import UIKit
 
-class CWConversationController: CWChatSessionController {
+class CWConversationController: CWChatConversationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(sendMessage))
+        self.navigationItem.rightBarButtonItem = barButtonItem
+                
         // Do any additional setup after loading the view.
+    }
+    
+    func sendMessage() {
+        
+
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

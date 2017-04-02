@@ -16,19 +16,24 @@ public struct ChatSessionCellUI {
 
 let defaultHeadeImage = CWAsset.Default_head.image
 
-//消息在左边的时候， 文字距离屏幕左边的距离
-let kChatTextLeftPadding: CGFloat = 72
-//消息在左边的时候， 文字距离屏幕左边的距离
-let kChatTextRightPadding: CGFloat = 82
-//消息在右边， 70：文本离屏幕左的距离，  82：文本离屏幕右的距
-let kChatTextMaxWidth: CGFloat = kScreenWidth - kChatTextLeftPadding - kChatTextRightPadding
-
 //图片
 let kChatImageMaxWidth = kScreenWidth * 0.45
 let kChatImageMinWidth = kScreenWidth * 0.25
 
 let kChatVoiceMinWidth = kScreenWidth * 0.25
 let kChatVoiceMaxWidth = kScreenWidth * 0.60
+
+public struct ChatCellUI {
+    static let left_cap_insets = UIEdgeInsets(top: 13, left: 28, bottom: 13, right: 28)
+    /// 左边气泡背景区域 间距
+    static let left_edge_insets = UIEdgeInsets(top: 10, left: 17, bottom: 10, right: 17)
+    
+    static let right_cap_insets = UIEdgeInsets(top: 13, left: 28, bottom: 13, right: 28)
+    /// 右边气泡背景区域 间距
+    static let right_edge_insets = UIEdgeInsets(top: 10, left: 17, bottom: 10, right: 17)
+}
+
+
 
 public enum CWEmojiType: Int {
     case emoji

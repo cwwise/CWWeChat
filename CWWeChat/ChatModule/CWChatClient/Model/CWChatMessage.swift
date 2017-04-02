@@ -21,6 +21,14 @@ public enum CWChatType : Int {
     case chatroom
 }
 
+/// 消息搜索方向
+///
+/// - up: 向上搜索
+/// - down: 向下搜索
+public enum CWMessageSearchDirection: Int {
+    case up
+    case down
+}
 
 /// 消息方向
 ///
@@ -37,12 +45,12 @@ public enum CWMessageDirection : Int {
 /// 消息发送状态
 ///
 /// - pending: 发送未开始
-/// - delivering: 正在发送
+/// - sending: 正在发送
 /// - successed: 发送成功
 /// - failed: 发送失败
 public enum CWMessageSendStatus : Int {
     case pending
-    case delivering
+    case sending
     case successed
     case failed
 }
@@ -58,54 +66,64 @@ public enum CWMessageReadState : Int {
 
 /// 消息类型
 public enum CWMessageType: Int {
+    case none               //未知消息
     case text               //文字
     case image              //图片
     case voice              //声音
     case video              //视频
     case location           //位置
     case expression         //表情
+    
+    //获取cell的reuseIdentifier
+    func identifier() -> String {
+        switch self {
+        case .text:
+            return "ChatMessageTextCell"
+        case .image:
+            return "ChatMessageImageCell"
+        case .voice:
+            return "ChatMessageVoiceCell"
+        case .video:
+            return "ChatMessageVideoCell"
+        case .expression:
+            return "ChatMessageExpressionCell"
+        default:
+            return "ChatMessageCell"
+        }
+    }
 }
 
 
 /// 聊天消息
-class CWChatMessage: NSObject {
+public class CWChatMessage: NSObject {
 
     /// 会话类型
     var chatType: CWChatType = .single
-    
     /// 消息类型
     var messageType: CWMessageType {
         return self.messageBody.type
     }
-    
     /// 消息唯一id
     var messageId: String
-    
     /// 消息发送方
     var direction: CWMessageDirection = .unknown
-    
     /// 发送状态
     var sendStatus: CWMessageSendStatus = .pending
-    
-    /// 发送方id
-    var senderId: String!
-    
+    /// 发送方id (自己的id)
+    var senderId: String?
     /// 接收方id
     var targetId: String
-    
-    /// 消息文本
-    var text: String?
-    
     /// 消息体
     var messageBody: CWMessageBody
-    
     /// 消息发送时间
     var timestamp: TimeInterval
-
+    /// 消息扩展
+    var ext: Dictionary<String, Any>?
+    
     
     init(targetId: String,
          messageID: String = String.UUIDString(),
-         direction: CWMessageDirection = .unknown,
+         direction: CWMessageDirection = .send,
          timestamp: TimeInterval = NSDate().timeIntervalSince1970,
          messageBody: CWMessageBody) {
 
@@ -115,7 +133,22 @@ class CWChatMessage: NSObject {
         
         self.targetId = targetId
         self.messageId = messageID
+        super.init()
+        self.messageBody.message = self
     }
     
-    
 }
+
+extension CWChatMessage {
+    override public var description: String {
+        switch messageType {
+        case .text:
+            let textBody = self.messageBody as! CWTextMessageBody
+            return "文本消息:"+textBody.text
+        default:
+            return "消息类型\(messageType)"
+        }
+    }
+}
+
+

@@ -18,22 +18,16 @@ class CWChatXMPPManager: NSObject {
     /// xmpp流
     private(set) var xmppStream: XMPPStream
     /// xmpp重新连接
-    fileprivate var xmppReconnect: XMPPReconnect
+    private var xmppReconnect: XMPPReconnect
     /// xmpp队列
-    fileprivate var xmppQueue: DispatchQueue
+    private var xmppQueue: DispatchQueue
 
-    /// 发送消息
-    fileprivate(set) var messageTransmitter: CWMessageTransmitter
-    /// 消息发送队列
-    fileprivate(set) var messageDispatchQueue: CWMessageDispatchQueue
-
-    var options: CWChatClientOptions!
     
+    var options: CWChatClientOptions!
     /// 网络状态监听
     var reachable: NetworkReachabilityManager?
     
     var isLogin: Bool = true
-
     
     /// 初始化方法
     private override init() {
@@ -41,10 +35,6 @@ class CWChatXMPPManager: NSObject {
         
         xmppStream = XMPPStream()
         xmppReconnect = XMPPReconnect()
-
-        //实际发送消息者
-        messageTransmitter = CWMessageTransmitter()
-        messageDispatchQueue = CWMessageDispatchQueue()
         
         super.init()
         
@@ -93,8 +83,7 @@ class CWChatXMPPManager: NSObject {
             return
         }
         
-        let timeoutInterval:TimeInterval = 30
-        
+        let timeoutInterval: TimeInterval = 60
         let resource = options.chatResource
         let domain = options.chatDomain
         
@@ -118,7 +107,7 @@ class CWChatXMPPManager: NSObject {
     }
     
     func goOffline() {
-        let offline = XMPPPresence()
+        let offline = XMPPPresence(name: "unavailable")
         xmppStream.send(offline)
     }
     
@@ -127,6 +116,8 @@ class CWChatXMPPManager: NSObject {
      
         
     }
+    
+    
     
     // MARK: 销毁
     deinit {
@@ -178,7 +169,6 @@ extension CWChatXMPPManager: XMPPStreamDelegate {
     // 验证成功
     func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
         log.debug("xmpp连接成功")
-        
         goOnline()
     }
     

@@ -15,13 +15,16 @@ let sendMessageTimeoutInterval: TimeInterval = 30
 /// 发送消息
 class CWMessageTransmitter: NSObject {
     
+    static let share = CWMessageTransmitter()
+    /// xmpp实例
     private var xmppStream: XMPPStream {
         return CWChatXMPPManager.share.xmppStream
     }
     
-    func sendMessage(content: String, targetId: String, messageId: String) -> Bool {
+    func sendMessage(content: String, targetId: String, messageId: String ,type: Int = 0) -> Bool {
         // 生成消息
         let messageElement = self.messageElement(body: content, to: targetId, messageId: messageId)
+
         // 发送消息
         var receipte: XMPPElementReceipt?
         self.xmppStream.send(messageElement, andGet: &receipte)
@@ -33,18 +36,24 @@ class CWMessageTransmitter: NSObject {
         return result
     }
     
+    
     func messageElement(body: String, to: String, messageId: String, type:Int = 1, expand: String? = nil) -> XMPPMessage? {
 
-        let message = XMPPMessage(type: "chat", to: chatJidString(to), elementID: messageId)
+        let message = XMPPMessage(type: "chat", elementID: messageId)
+        message?.addAttribute(withName: "to", stringValue: chatJidString(to))
+        
         let bodyElement = DDXMLElement.element(withName: "body", stringValue: body) as! DDXMLElement
-        message?.addChild(bodyElement)
+        bodyElement.addAttribute(withName: "type", integerValue: type)
 
+        message?.addChild(bodyElement)
+        message?.addReceiptRequest()
         return message
     }
 
     
-    func chatJidString(_ name: String) -> XMPPJID {
-        return XMPPJID(string: name)
+    func chatJidString(_ name: String) -> String {
+        let domain = CWChatXMPPManager.share.options.chatDomain
+        return name + "@" + domain
     }
 
     
