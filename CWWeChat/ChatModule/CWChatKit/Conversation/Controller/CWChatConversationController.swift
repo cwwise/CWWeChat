@@ -11,22 +11,20 @@ import UIKit
 /// 会话
 class CWChatConversationController: UIViewController {
 
-    var sessionList = [CWChatConversationModel]()
+    var conversationList = [CWChatConversationModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.white
         
-        let textObject = CWTextMessageBody(text: "1234")
-        let message = CWChatMessage(targetId: "123", messageBody: textObject)
-        let conversation = CWChatConversation(targetId: "", type: .single)
-        conversation.lastMessage = message
-        
-        sessionList.append(CWChatConversationModel(conversation))
+        let chatManager = CWChatClient.share.chatManager
+        let result = chatManager.fetchAllConversations()
+        for conversation in result {
+            conversationList.append(CWChatConversationModel(conversation))
+        }
         
         setupUI()
         registerCellClass()
-        
-
         // Do any additional setup after loading the view.
     }
     
@@ -66,9 +64,9 @@ extension CWChatConversationController: UITableViewDelegate {
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: deleteTitle) { (action:UITableViewRowAction, indexPath) in
             
             //获取当前model
-            let _ = self.sessionList[indexPath.row]
+            let _ = self.conversationList[indexPath.row]
             //数组中删除
-            self.sessionList.remove(at: indexPath.row)
+            self.conversationList.remove(at: indexPath.row)
             //从数据库中删除
             
             //删除
@@ -97,12 +95,12 @@ extension CWChatConversationController: UITableViewDelegate {
 extension CWChatConversationController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.sessionList.count
+        return self.conversationList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CWChatConversationCell.identifier, for: indexPath) as! CWChatConversationCell
-        cell.conversationModel = self.sessionList[(indexPath as NSIndexPath).row]
+        cell.conversationModel = conversationList[indexPath.row]
         return cell
     }
 }

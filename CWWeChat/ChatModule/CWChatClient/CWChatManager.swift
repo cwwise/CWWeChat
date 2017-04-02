@@ -12,7 +12,6 @@ import Foundation
 protocol CWChatManagerDelegate: NSObjectProtocol {
     
     // MARK: 会话
-    
     func chatsessionDidUpdate(_ session: CWChatConversation)
     
     // MARK: Message
@@ -21,7 +20,6 @@ protocol CWChatManagerDelegate: NSObjectProtocol {
     /// - Parameter message: 状态发生变化的消息
     /// - Parameter error: 错误信息
     func messageStatusDidChange(_ message: CWChatMessage, error: NSError?)
-    
     
     /// 收到消息
     ///
@@ -41,13 +39,26 @@ protocol CWChatManager: NSObjectProtocol {
     /// - Parameter delegate: 代理
     func addDelegate(_ delegate: CWChatManagerDelegate)
     
+    /// 添加聊天代理
+    ///
+    /// - Parameter delegate: 代理
+    /// - Parameter delegateQueue: 代理执行线程
     func addDelegate(_ delegate: CWChatManagerDelegate, delegateQueue: DispatchQueue)
+    
     /// 删除聊天代理
     ///
     /// - Parameter delegate: 代理
     func removeDelegate(_ delegate: CWChatManagerDelegate)
-    
 
+    // MARK: 获取会话
+    func fetchAllConversations() -> [CWChatConversation]
+    
+    func fecthConversation(chatType: CWChatType, targetId: String) -> CWChatConversation
+    
+    // MARK: 获取消息
+    
+    
+    
     // MARK: 发送消息相关
     
     /// 发送回执消息

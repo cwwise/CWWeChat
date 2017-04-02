@@ -27,7 +27,7 @@ class CWChatMessageStore: NSObject {
     fileprivate let messageId = Expression<String>("msgid")
     //用户唯一id
     fileprivate let senderId = Expression<String>("sid")
-    fileprivate let targetId = Expression<String>("tid")
+    fileprivate let target_Id = Expression<String>("tid")
     // 消息时间
     fileprivate let date = Expression<Double>("date")
     /// type
@@ -37,7 +37,7 @@ class CWChatMessageStore: NSObject {
     /// 消息类型 文本 图片
     fileprivate let messageType = Expression<Int>("msg_type")
     /// 内容
-    fileprivate let content = Expression<String?>("content")
+    fileprivate let content = Expression<String>("content")
     /// 接收状态
     fileprivate let sendStatus = Expression<Int>("send_status")
     /// 拓展字端
@@ -68,7 +68,7 @@ class CWChatMessageStore: NSObject {
         if !FileManager.default.fileExists(atPath: path) {
             try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         }
-        log.debug(path)
+        log.verbose(path)
         return path + "chatmessage.sqlite3"
     }()
     
@@ -86,7 +86,7 @@ class CWChatMessageStore: NSObject {
                 t.column(id, primaryKey: .autoincrement)
                 t.column(messageId, unique: true)
                 t.column(senderId)
-                t.column(targetId)
+                t.column(target_Id)
                 t.column(date)
                 t.column(chatType, defaultValue: 0)
                 t.column(direction, defaultValue: 0)
@@ -94,9 +94,9 @@ class CWChatMessageStore: NSObject {
                 t.column(content, defaultValue: "")
                 t.column(sendStatus, defaultValue: 0)
                 t.column(ext1, defaultValue: "")}
-            log.info(create.asSQL())
-            _ = messageTable.createIndex([messageId])
+            log.verbose(create.asSQL())
             try messageDB.run(create)
+            _ = messageTable.createIndex([messageId])
         } catch {
             log.error(error)
         }
@@ -116,7 +116,7 @@ extension CWChatMessageStore {
         }
         let body = message.messageBody.messageEncode
         let insert = messageTable.insert(messageId <- message.messageId,
-                                         targetId <- message.targetId,
+                                         target_Id <- message.targetId,
                                          senderId <- sendId,
                                          date <- message.timestamp,
                                          chatType <- message.chatType.rawValue,
@@ -124,7 +124,7 @@ extension CWChatMessageStore {
                                          messageType <- message.messageType.rawValue,
                                          content <- body,
                                          sendStatus <- message.sendStatus.rawValue)
-        log.info(insert.asSQL())
+        log.verbose(insert.asSQL())
         do {
             try messageDB.run(insert)
         } catch {
@@ -136,7 +136,35 @@ extension CWChatMessageStore {
 // MARK: 查找
 extension CWChatMessageStore {
 
+    func lastMessage(by targetId: String) -> CWChatMessage? {
+        
+        let query = messageTable.filter(target_Id == targetId).order(date.desc)
+        do {
+            let raw = try messageDB.pluck(query)
+            return createMessageByRow(raw)
+        } catch {
+            log.error(error)
+            return nil
+        }
+    }
     
+    func createMessageByRow(_ row: Row?) -> CWChatMessage? {
+        
+        guard let row = row else {
+            return nil
+        }
+        
+        let body = CWTextMessageBody(text: row[content])
+        let _direction = CWMessageDirection(rawValue: row[direction]) ?? .unknown
+        let message = CWChatMessage(targetId: row[target_Id],
+                                    messageID: row[messageId],
+                                    direction: _direction,
+                                    timestamp: row[date],
+                                    messageBody: body)
+        message.sendStatus = CWMessageSendStatus(rawValue: row[sendStatus]) ?? .pending
+        message.senderId = row[senderId]
+        return message
+    }
 }
 
 // MARK: - 修改
@@ -145,7 +173,7 @@ extension CWChatMessageStore {
     func updateMessageStatus(_ message: CWChatMessage) {
         let filter = messageTable.filter(messageId == message.messageId)
         let update = filter.update(sendStatus <- message.sendStatus.rawValue)
-        log.info(update.asSQL())
+        log.verbose(update.asSQL())
         do {
             try messageDB.run(update)
         } catch {
@@ -156,7 +184,7 @@ extension CWChatMessageStore {
     func updateMessageDate(_ message: CWChatMessage) {
         let filter = messageTable.filter(messageId == message.messageId)
         let update = filter.update(date <- message.timestamp)
-        log.info(update.asSQL())
+        log.verbose(update.asSQL())
         do {
             try messageDB.run(update)
         } catch {
@@ -201,7 +229,6 @@ extension CWChatMessageStore {
             return false
         }
     }
-    
     
     /**
      删除所有聊天记录

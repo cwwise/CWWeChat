@@ -26,12 +26,14 @@ class CWChatMessageController: UIViewController {
         self.view.backgroundColor = UIColor.white
         setupUI()
         registerCell()
+        
+        let chatManager = CWChatClient.share.chatManager
+        chatManager.addDelegate(self, delegateQueue: DispatchQueue.main)
     }
     
     func setupUI() {
         self.view.addSubview(tableView)
         self.view.addSubview(chatToolBar)
-
     }
     
     /**
@@ -65,6 +67,10 @@ class CWChatMessageController: UIViewController {
         chatToolBar.delegate = self
         return chatToolBar
     }()
+    
+    deinit {
+        log.debug(self)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -111,12 +117,36 @@ extension CWChatMessageController: UITableViewDataSource {
     
 }
 
+
+// MARK: - CWChatManagerDelegate
+extension CWChatMessageController: CWChatManagerDelegate {
+    
+    func chatsessionDidUpdate(_ session: CWChatConversation) {
+        
+    }
+    
+    func messageStatusDidChange(_ message: CWChatMessage, error: NSError?) {
+        
+    }
+    
+    func messagesDidReceive(_ message: CWChatMessage) {
+        let messageModel = CWChatMessageModel(message: message)
+        messageList.append(messageModel)
+        
+        let indexPath = IndexPath(row: messageList.count-1, section: 0)
+        self.tableView.insertRows(at: [indexPath], with: .none)
+    }
+}
+
+// MARK: - CWInputToolBarDelegate
 extension CWChatMessageController: CWInputToolBarDelegate {
     //
     func chatInputView(_ inputView: CWInputToolBar, sendText text: String) {
         
         let textObject = CWTextMessageBody(text: text)
-        let message = CWChatMessage(targetId: "chenwei", messageBody: textObject)
+        let message = CWChatMessage(targetId: "chenwei",
+                                    direction: .send,
+                                    messageBody: textObject)
         self.sendMessage(message)
     
     }

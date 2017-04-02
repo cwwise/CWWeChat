@@ -21,6 +21,14 @@ public enum CWChatType : Int {
     case chatroom
 }
 
+/// 消息搜索方向
+///
+/// - up: 向上搜索
+/// - down: 向下搜索
+public enum CWMessageSearchDirection: Int {
+    case up
+    case down
+}
 
 /// 消息方向
 ///
@@ -115,7 +123,7 @@ class CWChatMessage: NSObject {
     
     init(targetId: String,
          messageID: String = String.UUIDString(),
-         direction: CWMessageDirection = .unknown,
+         direction: CWMessageDirection = .send,
          timestamp: TimeInterval = NSDate().timeIntervalSince1970,
          messageBody: CWMessageBody) {
 

@@ -56,6 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
         // add log destinations. at least one is needed!
         let console = ConsoleDestination()  // log to Xcode Console
+        console.minLevel = .debug // just log .info, .warning & .error
+
         let file = FileDestination()  // log to default swiftybeaver.log file
         log.addDestination(console)
         log.addDestination(file)

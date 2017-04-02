@@ -85,7 +85,7 @@ class CWChatMessageCell: UITableViewCell {
             // 头像
             avatarImageView.snp.remakeConstraints({ (make) in
                 make.width.height.equalTo(kAvaterImageViewWidth)
-                make.left.equalTo(-kAvaterImageViewMargin)
+                make.right.equalTo(self.contentView).offset(-kAvaterImageViewMargin)
                 make.top.equalTo(kMessageCellTopMargin)
             })
             
@@ -96,12 +96,10 @@ class CWChatMessageCell: UITableViewCell {
                 make.height.equalTo(0)
             })
             
-            
             // 内容
             messageContentView.snp.remakeConstraints({ (make) in
                 make.right.equalTo(avatarImageView.snp.left).offset(-kAvatarToMessageContent)
                 make.top.equalTo(usernameLabel.snp.bottom)
-                
                 make.size.equalTo(messageModel.messageFrame.contentSize)
             })
             

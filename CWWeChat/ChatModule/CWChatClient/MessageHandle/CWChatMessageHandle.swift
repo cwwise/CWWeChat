@@ -16,7 +16,7 @@ class CWChatMessageHandle: CWMessageHandle {
         if message.isChatMessageWithBody() {
             // 内容 来源 目标人 消息id
             guard let body = message.body(),
-//                let from = message.from().user,
+                let from = message.from().user,
                 let to = message.to().user,
                 let messageId = message.elementID() else {
                 return false
@@ -28,7 +28,8 @@ class CWChatMessageHandle: CWMessageHandle {
             }
             
             let messageBody = CWTextMessageBody(text: body)
-            let chatMessage = CWChatMessage(targetId: to, messageID: messageId, direction: .receive, timestamp: messageDate.timeIntervalSince1970, messageBody: messageBody)
+            let chatMessage = CWChatMessage(targetId: from, messageID: messageId, direction: .receive, timestamp: messageDate.timeIntervalSince1970, messageBody: messageBody)
+            chatMessage.senderId = to
             
             self.delegate?.handMessageComplete(message: chatMessage)
             

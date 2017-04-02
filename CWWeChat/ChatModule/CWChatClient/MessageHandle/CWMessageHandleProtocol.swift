@@ -17,5 +17,5 @@ protocol CWMessageHandleProtocol: NSObjectProtocol {
     /// 处理消息
     ///
     /// - Parameter message: XMPPMessage消息
-    func handleMessage(message: XMPPMessage) -> Bool
+    @discardableResult func handleMessage(message: XMPPMessage) -> Bool
 }

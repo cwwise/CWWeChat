@@ -10,6 +10,8 @@ import Foundation
 
 class CWChatService: NSObject {
     fileprivate var messageStore: CWChatMessageStore
+    fileprivate var conversationStore: CWChatConversationStore
+    
     /// 消息发送管理
     fileprivate var dispatchManager: CWMessageDispatchManager
     // TODO: 待修改 修改成自己的属性
@@ -20,12 +22,26 @@ class CWChatService: NSObject {
 
     override init() {
         messageStore = CWChatMessageStore(userId: CWChatClient.share.userId)
+        conversationStore = CWChatConversationStore(userId: CWChatClient.share.userId)
+        
         dispatchManager = CWMessageDispatchManager()
         super.init()
     }
     
     public func saveMessage(_ message: CWChatMessage)  {
         // 更新会话
+        var exist: Bool = false
+        let conversation = conversationStore.fecthConversation(message.chatType,
+                                                               targetId: message.targetId,
+                                                               isExist: &exist)
+        conversation.appendMessage(message)
+        if exist == false {
+            conversationStore.addConversation(conversation: conversation)
+        } else {
+            
+        }
+        
+        // 保存消息
         messageStore.appendMessage(message)
     }
     
@@ -36,15 +52,31 @@ class CWChatService: NSObject {
 extension CWChatService: CWChatManager {
     
     func addDelegate(_ delegate: CWChatManagerDelegate) {
-        messageParse.addDelegate(self, delegateQueue: DispatchQueue.main)
+        messageParse.addDelegate(delegate, delegateQueue: DispatchQueue.main)
     }
     
     func addDelegate(_ delegate: CWChatManagerDelegate, delegateQueue: DispatchQueue) {
-        messageParse.addDelegate(self, delegateQueue: delegateQueue)
+        messageParse.addDelegate(delegate, delegateQueue: delegateQueue)
     }
     
     func removeDelegate(_ delegate: CWChatManagerDelegate) {
         messageParse.removeDelegate(delegate)
+    }
+    
+    // MARK: 会话
+    func fetchAllConversations() -> [CWChatConversation] {
+        let list = conversationStore.fecthAllConversations()
+        for conversation in list {
+            let lastMessage = messageStore.lastMessage(by: conversation.targetId)
+            conversation.appendMessage(lastMessage)
+        }
+        return list
+    }
+    
+    func fecthConversation(chatType: CWChatType, targetId: String) -> CWChatConversation {
+        let conversation = conversationStore.fecthConversation(chatType,
+                                                               targetId: targetId)
+        return conversation
     }
     
     /// 发送回执消息(不保存消息)
@@ -62,8 +94,7 @@ extension CWChatService: CWChatManager {
     func sendMessage(_ message: CWChatMessage,
                      progress: @escaping CWMessageProgressBlock, 
                      completion: @escaping CWMessageCompletionBlock) {
-        
-        
+
         // 添加信息
         if message.senderId == nil {
             message.senderId = CWChatClient.share.userId

@@ -19,10 +19,9 @@ class CWMessageHandle: NSObject, CWMessageHandleProtocol {
     
     weak var nextMessageHandle: CWMessageHandleProtocol?
 
-    func handleMessage(message: XMPPMessage) -> Bool {
+    @discardableResult func handleMessage(message: XMPPMessage) -> Bool {
         // 如果下一个响应者存在 并且消息不是错误消息
-        guard message.isErrorMessage(),
-            let handle = self.nextMessageHandle else {
+        guard let handle = self.nextMessageHandle else {
             return false
         }
         return handle.handleMessage(message: message)
