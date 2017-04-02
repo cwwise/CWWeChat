@@ -9,10 +9,10 @@
 import Foundation
 
 /// 聊天相关回调
-protocol CWChatManagerDelegate: NSObjectProtocol {
+public protocol CWChatManagerDelegate: NSObjectProtocol {
     
     // MARK: 会话
-    func chatsessionDidUpdate(_ session: CWChatConversation)
+    func conversationDidUpdate(_ conversation: CWChatConversation)
     
     // MARK: Message
     /// 消息状态发生变化
@@ -28,6 +28,14 @@ protocol CWChatManagerDelegate: NSObjectProtocol {
     
 }
 
+// 让协议变成可选
+extension CWChatManagerDelegate {
+    func conversationDidUpdate(_ conversation: CWChatConversation) {}
+    func messagesDidReceive(_ message: CWChatMessage) {}
+    func messageStatusDidChange(_ message: CWChatMessage, error: NSError?) {}
+}
+
+
 typealias CWMessageCompletionBlock = (_ message: CWChatMessage, _ error: NSError?) -> Void
 typealias CWMessageProgressBlock = (_ progress: Int) -> Void
 
@@ -37,18 +45,13 @@ protocol CWChatManager: NSObjectProtocol {
     /// 添加聊天代理
     ///
     /// - Parameter delegate: 代理
-    func addDelegate(_ delegate: CWChatManagerDelegate)
-    
-    /// 添加聊天代理
-    ///
-    /// - Parameter delegate: 代理
     /// - Parameter delegateQueue: 代理执行线程
-    func addDelegate(_ delegate: CWChatManagerDelegate, delegateQueue: DispatchQueue)
+    func addChatDelegate(_ delegate: CWChatManagerDelegate, delegateQueue: DispatchQueue)
     
     /// 删除聊天代理
     ///
     /// - Parameter delegate: 代理
-    func removeDelegate(_ delegate: CWChatManagerDelegate)
+    func removeChatDelegate(_ delegate: CWChatManagerDelegate)
 
     // MARK: 获取会话
     func fetchAllConversations() -> [CWChatConversation]

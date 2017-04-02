@@ -20,8 +20,11 @@ class CWChatConversationController: UIViewController {
         let chatManager = CWChatClient.share.chatManager
         let result = chatManager.fetchAllConversations()
         for conversation in result {
-            conversationList.append(CWChatConversationModel(conversation))
+            conversationList.append(CWChatConversationModel(conversation: conversation))
         }
+        
+        chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
+        
         
         setupUI()
         registerCellClass()
@@ -102,6 +105,32 @@ extension CWChatConversationController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CWChatConversationCell.identifier, for: indexPath) as! CWChatConversationCell
         cell.conversationModel = conversationList[indexPath.row]
         return cell
+    }
+}
+
+
+extension CWChatConversationController: CWChatManagerDelegate {
+    
+    func conversationDidUpdate(_ conversation: CWChatConversation) {
+        var isLocal = false
+        for i in 0..<conversationList.count {
+            let model = conversationList[i].conversation
+            if model == conversation {
+                isLocal = true
+                model.appendMessage(conversation.lastMessage)
+                let indexPath = IndexPath(row: i, section: 0)
+                tableView.reloadRows(at: [indexPath], with: .none)
+            }
+        }
+        
+        if isLocal == false {
+            let model = CWChatConversationModel(conversation: conversation)
+            conversationList.insert(model, at: 0)
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.insertRows(at: [indexPath], with: .none)
+        }
+        
+        
     }
 }
 

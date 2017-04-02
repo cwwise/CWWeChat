@@ -28,7 +28,7 @@ class CWChatMessageController: UIViewController {
         registerCell()
         
         let chatManager = CWChatClient.share.chatManager
-        chatManager.addDelegate(self, delegateQueue: DispatchQueue.main)
+        chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
     }
     
     func setupUI() {
@@ -120,10 +120,6 @@ extension CWChatMessageController: UITableViewDataSource {
 
 // MARK: - CWChatManagerDelegate
 extension CWChatMessageController: CWChatManagerDelegate {
-    
-    func chatsessionDidUpdate(_ session: CWChatConversation) {
-        
-    }
     
     func messageStatusDidChange(_ message: CWChatMessage, error: NSError?) {
         

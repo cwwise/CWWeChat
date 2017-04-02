@@ -9,7 +9,7 @@
 import UIKit
 
 /// 消息会话
-class CWChatConversation: NSObject {
+public class CWChatConversation: NSObject {
     /// 目标
     private(set) var targetId: String
     /// 类型
@@ -23,13 +23,10 @@ class CWChatConversation: NSObject {
     /// 未读
     var unreadCount: Int = 0
     
-    
     init(targetId: String, type: CWChatType) {
         self.targetId = targetId
         self.type = type
     }
-    
-    
     
     // MARK: 操作消息
     /// 将消息设置为已读
@@ -56,7 +53,10 @@ class CWChatConversation: NSObject {
     
         return nil
     }
-    
+}
+
+public func ==(lhs: CWChatConversation, rhs: CWChatConversation) -> Bool {
+    return lhs.targetId == rhs.targetId
 }
 
 typealias CWConversationResultCompletion = (_ messages: [CWChatMessage], _ error: NSError?) -> Void

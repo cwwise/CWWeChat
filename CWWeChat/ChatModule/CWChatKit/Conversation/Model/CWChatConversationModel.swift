@@ -12,7 +12,7 @@ import UIKit
 class CWChatConversationModel: NSObject {
 
     /// 会话
-    var conversation: CWChatConversation
+    private(set) var conversation: CWChatConversation
     /// 未读消息
     var unreadCount: Int {
         return conversation.unreadCount
@@ -58,7 +58,7 @@ class CWChatConversationModel: NSObject {
         
     }
     
-    init(_ conversation: CWChatConversation) {
+    init(conversation: CWChatConversation) {
         self.conversation = conversation
         
         

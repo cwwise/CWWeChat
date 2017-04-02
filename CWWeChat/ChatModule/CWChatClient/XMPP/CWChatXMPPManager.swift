@@ -22,17 +22,12 @@ class CWChatXMPPManager: NSObject {
     /// xmpp队列
     private var xmppQueue: DispatchQueue
 
-    /// 发送消息
-    private(set) var messageTransmitter: CWMessageTransmitter
-    /// 消息解析
-    private(set) var messageParse: CWChatMessageParse
     
     var options: CWChatClientOptions!
     /// 网络状态监听
     var reachable: NetworkReachabilityManager?
     
     var isLogin: Bool = true
-
     
     /// 初始化方法
     private override init() {
@@ -40,11 +35,6 @@ class CWChatXMPPManager: NSObject {
         
         xmppStream = XMPPStream()
         xmppReconnect = XMPPReconnect()
-
-        // 实际发送消息者
-        messageTransmitter = CWMessageTransmitter()
-        // 消息解析
-        messageParse = CWChatMessageParse()
         
         super.init()
         
@@ -52,14 +42,11 @@ class CWChatXMPPManager: NSObject {
         xmppStream.enableBackgroundingOnSocket = true
         xmppStream.addDelegate(self, delegateQueue: xmppQueue)
         
-        
         ///配置xmpp重新连接的服务
         xmppReconnect.reconnectDelay = 3.0
         xmppReconnect.reconnectTimerInterval = DEFAULT_XMPP_RECONNECT_TIMER_INTERVAL
         xmppReconnect.activate(xmppStream)
         xmppReconnect.addDelegate(self, delegateQueue: xmppQueue)
-        
-        messageParse.activate(xmppStream)
         
         setupNetworkReachable()
         registerApplicationNotification()

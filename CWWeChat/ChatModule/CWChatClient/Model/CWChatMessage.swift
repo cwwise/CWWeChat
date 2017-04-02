@@ -95,7 +95,7 @@ public enum CWMessageType: Int {
 
 
 /// 聊天消息
-class CWChatMessage: NSObject {
+public class CWChatMessage: NSObject {
 
     /// 会话类型
     var chatType: CWChatType = .single
@@ -140,7 +140,7 @@ class CWChatMessage: NSObject {
 }
 
 extension CWChatMessage {
-    override var description: String {
+    override public var description: String {
         switch messageType {
         case .text:
             let textBody = self.messageBody as! CWTextMessageBody

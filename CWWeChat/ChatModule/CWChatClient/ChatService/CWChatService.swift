@@ -7,34 +7,60 @@
 //
 
 import Foundation
+import XMPPFramework
 
-class CWChatService: NSObject {
-    fileprivate var messageStore: CWChatMessageStore
-    fileprivate var conversationStore: CWChatConversationStore
+class CWChatService: XMPPModule {
+    // 消息存储
+    private(set) var messageStore: CWChatMessageStore
+    private(set) var conversationStore: CWChatConversationStore
     
+    /// 发送
+    private(set) var messageTransmitter: CWMessageTransmitter
     /// 消息发送管理
     fileprivate var dispatchManager: CWMessageDispatchManager
-    // TODO: 待修改 修改成自己的属性
     /// 消息接收解析
-    fileprivate var messageParse: CWChatMessageParse {
-        return CWChatXMPPManager.share.messageParse
-    }
+    private(set) var messageParse: CWChatMessageParse
 
     override init() {
         messageStore = CWChatMessageStore(userId: CWChatClient.share.userId)
         conversationStore = CWChatConversationStore(userId: CWChatClient.share.userId)
         
+        // 消息发送和解析
+        messageTransmitter = CWMessageTransmitter()
         dispatchManager = CWMessageDispatchManager()
+        messageParse = CWChatMessageParse()
         super.init()
+        messageParse.activate(CWChatXMPPManager.share.xmppStream)
     }
     
+    override init!(dispatchQueue queue: DispatchQueue!) {
+        
+        messageStore = CWChatMessageStore(userId: CWChatClient.share.userId)
+        conversationStore = CWChatConversationStore(userId: CWChatClient.share.userId)
+        
+        // 消息发送和解析
+        messageTransmitter = CWMessageTransmitter()
+        dispatchManager = CWMessageDispatchManager()
+        messageParse = CWChatMessageParse()
+        
+        super.init(dispatchQueue: queue)
+        messageParse.activate(CWChatXMPPManager.share.xmppStream)
+    }
+    
+
+    
     public func saveMessage(_ message: CWChatMessage)  {
+        
+        executeMessagesDidReceive(message)
         // 更新会话
         var exist: Bool = false
         let conversation = conversationStore.fecthConversation(message.chatType,
                                                                targetId: message.targetId,
                                                                isExist: &exist)
         conversation.appendMessage(message)
+        
+        // 执行代理方法
+        executeConversationUpdate(conversation)
         if exist == false {
             conversationStore.addConversation(conversation: conversation)
         } else {
@@ -45,22 +71,63 @@ class CWChatService: NSObject {
         messageStore.appendMessage(message)
     }
     
+    private func executeMessagesDidReceive(_ message :CWChatMessage) {
+        // 处理事件
+        // 检查delegate 是否存在，存在就执行方法
+        guard let multicastDelegate = self.value(forKey: "multicastDelegate") as? GCDMulticastDelegate else {
+            return
+        }
+        
+        ///遍历出所有的delegate
+        let delegateEnumerator = multicastDelegate.delegateEnumerator()
+        var delegate: AnyObject?
+        var queue: DispatchQueue?
+        
+        while delegateEnumerator?.getNextDelegate(&delegate, delegateQueue: &queue) == true {
+            //执行Delegate的方法
+            if let delegate = delegate as? CWChatManagerDelegate {
+                queue?.async(execute: {
+                    delegate.messagesDidReceive(message)
+                })
+            }
+        }
+    }
+    
+    private func executeConversationUpdate(_ conversation :CWChatConversation) {
+        // 处理事件
+        // 检查delegate 是否存在，存在就执行方法
+        guard let multicastDelegate = self.value(forKey: "multicastDelegate") as? GCDMulticastDelegate else {
+            return
+        }
+        
+        ///遍历出所有的delegate
+        let delegateEnumerator = multicastDelegate.delegateEnumerator()
+        var delegate: AnyObject?
+        var queue: DispatchQueue?
+        
+        while delegateEnumerator?.getNextDelegate(&delegate, delegateQueue: &queue) == true {
+            //执行Delegate的方法
+            if let delegate = delegate as? CWChatManagerDelegate {
+                queue?.async(execute: {
+                    delegate.conversationDidUpdate(conversation)
+                })
+            }
+        }
+    }
+    
+    
 }
 
 
 // MARK: - CWChatManager
 extension CWChatService: CWChatManager {
-    
-    func addDelegate(_ delegate: CWChatManagerDelegate) {
-        messageParse.addDelegate(delegate, delegateQueue: DispatchQueue.main)
+ 
+    func addChatDelegate(_ delegate: CWChatManagerDelegate, delegateQueue: DispatchQueue) {
+        self.addDelegate(delegate, delegateQueue: delegateQueue)
     }
     
-    func addDelegate(_ delegate: CWChatManagerDelegate, delegateQueue: DispatchQueue) {
-        messageParse.addDelegate(delegate, delegateQueue: delegateQueue)
-    }
-    
-    func removeDelegate(_ delegate: CWChatManagerDelegate) {
-        messageParse.removeDelegate(delegate)
+    func removeChatDelegate(_ delegate: CWChatManagerDelegate) {
+        self.removeDelegate(delegate)
     }
     
     // MARK: 会话
@@ -111,9 +178,6 @@ extension CWChatService: CWChatManager {
         // 先插入到消息列表
         dispatchManager.sendMessage(message, progress: _progress, completion: completion)
     }
-    
-    
-    
     
     /// 重新发送消息
     ///

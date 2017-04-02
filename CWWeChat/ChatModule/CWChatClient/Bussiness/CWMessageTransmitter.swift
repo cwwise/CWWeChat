@@ -15,6 +15,7 @@ let sendMessageTimeoutInterval: TimeInterval = 30
 /// 发送消息
 class CWMessageTransmitter: NSObject {
     
+    static let share = CWMessageTransmitter()
     /// xmpp实例
     private var xmppStream: XMPPStream {
         return CWChatXMPPManager.share.xmppStream
