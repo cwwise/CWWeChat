@@ -5,7 +5,7 @@
 
 
 * 仿做一个微信，将持续更新直至完成。swift3.1版本，集成XMPP聊天。
-* **最近用新的方式在重写，修改一下README**
+* **最近用新的方式在重写，修改一下README 旧版本可以查看标签[Tag3.0版本](https://github.com/wei18810109052/CWWeChat/tree/swift3.0%E6%97%A7%E7%89%88)**
 
 
 
