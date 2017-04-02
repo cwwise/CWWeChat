@@ -7,15 +7,16 @@
 //
 
 import UIKit
-import CocoaLumberjack
+import SwiftyBeaver
 import UserNotifications
+
+let log = SwiftyBeaver.self
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var userModel: CWUserAccount?
+    
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         //设置logger
@@ -25,59 +26,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         
+        loginXMPP()
         //注册推送信息
         registerRemoteNotification()
         
         return true
     }
     
-    
-    func showGuideViewController() {
-        let guideVC = UIStoryboard.guideViewController()
-        self.window?.rootViewController = guideVC
-    }
-    
-    func showLoginViewController() {
-        let guideVC = UIStoryboard.guideViewController()
-        self.window?.rootViewController = guideVC
+    func loginXMPP() {
+        
+        //        let options = CWChatClientOptions(chatServer: "localhost", chatDomain: "localhost")
+        let options = CWChatClientOptions(chatServer: "hosted.im", chatDomain: "hellochatim.p1.im")
+        let chatClient = CWChatClient.share
+        chatClient.initialize(with: options)
+        
+        chatClient.login(username: "haohao", password: "1234567") { (username, error) in
+            
+        }
+        
     }
     
     func loginSuccess() {
-        
-        //初始化当前用户模型
-        let user = CWContactUser()
-        user.userId = "tom"
-        user.userName = "Tom"
-        user.nikeName = "汤姆"
-        user.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/tom.jpg"
-        
-        let appdelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        let account = CWUserAccount(chatuser: user)
-        appdelegate.userModel = account
-        
-        let tabbarVC = CWChatTabBarController()
-        self.window?.rootViewController = tabbarVC
-        
-        loadDB()
-    }
-    
-    //初始化数据库
-    func loadDB() {
-        DispatchQueue.global().async {
-            let _ = CWChatDBDataManager.sharedInstance
-        }
+        let tabBarController = CWChatTabBarController()
+        self.window?.rootViewController = tabBarController
     }
     
     ///设置Log日志
     func setupLogger() {
-        let fileLogger: DDFileLogger = DDFileLogger() // File Logger
-        fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
-        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
-        DDLog.add(fileLogger)
-        DDLog.add(DDTTYLogger.sharedInstance(), with: .debug)
+        
+        // add log destinations. at least one is needed!
+        let console = ConsoleDestination()  // log to Xcode Console
+        console.minLevel = .debug // just log .info, .warning & .error
+        let file = FileDestination()  // log to default swiftybeaver.log file
+        log.addDestination(console)
+        log.addDestination(file)
+        
     }
     
+    /// 注册通知
     func registerRemoteNotification() {
         
         UIApplication.shared.registerForRemoteNotifications()
@@ -90,14 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIApplication.shared.registerUserNotificationSettings(userSetting)
         }
     }
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        DDLogDebug(deviceToken.description)
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    }
 }
+
 

@@ -8,11 +8,12 @@
 
 import UIKit
 import WebKit
+import KVOController
 
 private var webViewContentKey = "webViewContentKey"
 private var webViewBackgroundColorKey = "webViewBackgroundColorKey"
 
-private let webView_Items_Fixed_Space:CGFloat =  9
+private let webView_Items_Fixed_Space: CGFloat =  9
 
 /**
  展示网页信息
@@ -33,10 +34,18 @@ class CWWebViewController: UIViewController {
     var disableBackButton: Bool = false
     
     /// url
-    var url = URL(string: "")
+    var url: URL?
     
     /// WKWebView
-    private var webView: WKWebView?
+    private lazy var webView:WKWebView = {
+        let configure = WKWebViewConfiguration()
+        let frame = CGRect(x: 0, y: kNavigationBarHeight, width: kScreenWidth, height: kScreenHeight-kNavigationBarHeight)
+        let webView = WKWebView(frame: frame, configuration: configure)
+        webView.allowsBackForwardNavigationGestures = true
+        webView.navigationDelegate = self
+        webView.scrollView.backgroundColor = UIColor.clear
+        return webView
+    }()
     
     /// 展示进度
     private lazy var progressView: UIProgressView = {
@@ -83,30 +92,47 @@ class CWWebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let configure = WKWebViewConfiguration()
-        let frame = CGRect(x: 0, y: kNavigationBarHeight, width: kScreenWidth, height: kScreenHeight-kNavigationBarHeight)
-        webView = WKWebView(frame: frame, configuration: configure)
-        webView?.allowsBackForwardNavigationGestures = true
-        
         self.view.backgroundColor = UIColor.defaultBlackColor()
         self.view.addSubview(authLabel)
-        self.view.addSubview(webView!)
+        self.view.addSubview(webView)
         self.view.addSubview(progressView)
         
-        webView?.navigationDelegate = self
-        webView?.scrollView.backgroundColor = UIColor.clear
+        self.navigationItem.leftBarButtonItems = [backButtonItem]
         
         //遍历设置背景颜色
-        for subView in webView!.scrollView.subviews {
+        for subView in webView.scrollView.subviews {
             if "\(subView.classForCoder)" == "WKContentView" {
                 subView.backgroundColor = UIColor.white
             }
         }
+
+        weak var weak_self = self
+        kvoController.observe(webView, keyPath: "estimatedProgress", options: .new) { (viewController, webView, change) in
+            
+            guard let strong_self = weak_self else { return }
+            
+            strong_self.progressView.alpha = 1
+            strong_self.progressView.setProgress(Float(strong_self.webView.estimatedProgress), animated: true)
+            
+            if strong_self.webView.estimatedProgress >= 1.0 {
+                UIView.animate(withDuration: 0.3, delay: 0.25, options: UIViewAnimationOptions(), animations: {
+                    strong_self.progressView.alpha = 0
+                }, completion: { (finished) in
+                    strong_self.progressView.setProgress(0, animated: false)
+                })
+            }
+            
+        }
         
-        self.navigationItem.leftBarButtonItems = [backButtonItem]
-        
-        webView?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &webViewContentKey)
-        webView?.scrollView.addObserver(self, forKeyPath: "backgroundColor", options: .new, context: &webViewBackgroundColorKey)
+        kvoController.observe(webView.scrollView, keyPath: "backgroundColor", options: .new) { (viewController, scrollView, change) in
+            
+            guard let strong_self = weak_self else { return }
+
+            let color = change[NSKeyValueChangeKey.newKey.rawValue] as! UIColor
+            if color.cgColor != UIColor.clear.cgColor {
+                strong_self.webView.scrollView.backgroundColor = UIColor.clear
+            }
+        }
         
         self.progressView.progress = 0
         
@@ -115,37 +141,8 @@ class CWWebViewController: UIViewController {
         }
         
         let request = URLRequest(url: url)
-        self.webView!.load(request)
+        webView.load(request)
     }
-    
-
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        if context == &webViewContentKey {
-            self.progressView.alpha = 1
-            self.progressView.setProgress(Float(webView!.estimatedProgress), animated: true)
-            
-            if self.webView!.estimatedProgress >= 1.0 {
-                
-                UIView.animate(withDuration: 0.3, delay: 0.25, options: UIViewAnimationOptions(), animations: { 
-                    self.progressView.alpha = 0
-                    }, completion: { (finished) in
-                    self.progressView.setProgress(0, animated: false)
-                })
-                
-            }
-        }
-        
-        else if context == &webViewBackgroundColorKey {
-            
-            let color = change![NSKeyValueChangeKey.newKey] as! UIColor
-            if color.cgColor != UIColor.clear.cgColor {
-                self.webView!.scrollView.backgroundColor = UIColor.clear
-            }
-        }
-        
-    }
-    
     
     //MARK: 方法
     ///关闭
@@ -155,8 +152,8 @@ class CWWebViewController: UIViewController {
     
     func navigationBackButtonDown() {
         
-        if self.webView!.canGoBack {
-            self.webView!.goBack()
+        if self.webView.canGoBack {
+            self.webView.goBack()
             let spaceItem = UIBarButtonItem.fixBarItemSpaceWidth(webView_Items_Fixed_Space)
             self.navigationItem.leftBarButtonItems = [backButtonItem,spaceItem,closeButtonItem]
             
@@ -167,9 +164,9 @@ class CWWebViewController: UIViewController {
     }
     
     deinit {
-        self.webView?.removeObserver(self, forKeyPath: "estimatedProgress")
-        self.webView?.scrollView.removeObserver(self, forKeyPath: "backgroundColor")
+        log.debug("\(self.classForCoder) 销毁")
     }
+    
 }
 
 // MARK: - WKNavigationDelegate

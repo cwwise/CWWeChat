@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YYWebImage
 
 let redPoint_Width:CGFloat = 8.0
 

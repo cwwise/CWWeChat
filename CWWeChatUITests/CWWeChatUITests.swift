@@ -2,8 +2,8 @@
 //  CWWeChatUITests.swift
 //  CWWeChatUITests
 //
-//  Created by chenwei on 16/6/24.
-//  Copyright © 2016年 chenwei. All rights reserved.
+//  Created by chenwei on 2017/3/26.
+//  Copyright © 2017年 cwcoder. All rights reserved.
 //
 
 import XCTest
@@ -18,10 +18,8 @@ class CWWeChatUITests: XCTestCase {
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
+        XCUIApplication().launch()
 
-        let app = XCUIApplication()
-        app.launch()
-        
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
     
@@ -31,34 +29,8 @@ class CWWeChatUITests: XCTestCase {
     }
     
     func testExample() {
-        snapshot("Message")
-        
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testTabbarContact() {
-        let tabBarsQuery = XCUIApplication().tabBars
-        tabBarsQuery.buttons["通讯录"].tap()
-        
-        snapshot("Contact")
-    }
-    
-    func testTabbarDiscover() {
-        let tabBarsQuery = XCUIApplication().tabBars
-        tabBarsQuery.buttons["发现"].tap()
-        
-        snapshot("Discover")
-    }
-    
-    func testTabbarMine() {
-        let tabBarsQuery = XCUIApplication().tabBars
-        tabBarsQuery.buttons["我"].tap()
-        snapshot("Mine")
-    }
-    
-    func snapshot(_ string: String) {
-        
     }
     
 }

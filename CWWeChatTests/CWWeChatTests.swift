@@ -2,11 +2,12 @@
 //  CWWeChatTests.swift
 //  CWWeChatTests
 //
-//  Created by chenwei on 16/6/24.
-//  Copyright © 2016年 chenwei. All rights reserved.
+//  Created by chenwei on 2017/3/26.
+//  Copyright © 2017年 cwcoder. All rights reserved.
 //
 
 import XCTest
+@testable import CWWeChat
 
 class CWWeChatTests: XCTestCase {
     
@@ -27,7 +28,9 @@ class CWWeChatTests: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-      
+        self.measure {
+            // Put the code you want to measure the time of here.
+        }
     }
     
 }

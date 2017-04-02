@@ -18,24 +18,32 @@ target 'CWWeChat' do
   
   pod 'YYText'
   pod 'YYWebImage'
+  
   #数据库
   pod 'SQLite.swift'
   
+  #log日志
+  pod 'SwiftyBeaver'
+
   #聊天
-  pod 'XMPPFramework', :git => "https://github.com/wei18810109052/XMPPFramework.git", :branch => 'master'
+  pod 'XMPPFramework', '~> 3.7.0'
   
-  
-  pod 'Qiniu'
   pod 'MBProgressHUD'
   
-  # 本地pod
-#  pod 'CWTableViewManager', :path => './CWPrivatePod/CWTableViewManager'
-
-
-
+  pod 'KVOController'
+  
+  pod 'Moya/RxSwift'
+  
+  pod 'IGListKit'
+  
+  #🔗 https://github.com/AliSoftware/OHHTTPStubs
+  pod 'OHHTTPStubs/Swift'
+  
   target 'CWWeChatTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Quick'
+    pod 'Nimble'
   end
 
   target 'CWWeChatUITests' do

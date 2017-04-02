@@ -13,7 +13,7 @@ class CWMineUserCell: UITableViewCell {
     let mine_space_x: CGFloat  =  14.0
     let mine_space_y: CGFloat  =  12.0
     
-    var userModel: CWContactUser? {
+    var userModel: CWContactModel! {
         didSet {
             self.setupUserInfomation()
         }
@@ -94,12 +94,12 @@ class CWMineUserCell: UITableViewCell {
             return
         }
     
-        let url = URL(string: userModel.avatarURL!)
+        let url = URL(string: userModel.avatarURL)
         self.avatarImageView.yy_setImage(with: url, placeholder: defaultHeadeImage)
 
         nikenameLabel.text = userModel.nikeName
-        if let userName = userModel.userName {
-            usernameLabel.text = "微信号:"+userName
+        if userModel.userName.utf8.count > 0 {
+            usernameLabel.text = "微信号:" + userModel.userName
         } else {
             usernameLabel.text = ""
         }

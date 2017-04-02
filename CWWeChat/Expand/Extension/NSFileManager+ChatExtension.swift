@@ -20,7 +20,7 @@ extension FileManager {
             data = UIImagePNGRepresentation(image)
         }
         if FileManager.default.createFile(atPath: path, contents: data, attributes: nil) {
-            print("保存图片成功----")
+
         }
     }
 }

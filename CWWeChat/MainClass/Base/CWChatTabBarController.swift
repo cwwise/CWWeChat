@@ -35,10 +35,10 @@ class CWChatTabBarController: UITabBarController {
             ]
         
         let viewControllerArray = [
-            CWConversationsViewController(),
-            CWAddressBookViewController(),
-            CWDiscoverViewController(),
-            CWMineViewController()
+            CWConversationController(),
+            CWAddressBookController(),
+            CWDiscoverController(),
+            CWMineController()
         ]
         
         let selectAttributes = [NSForegroundColorAttributeName : UIColor.chatSystemColor()]
@@ -46,7 +46,7 @@ class CWChatTabBarController: UITabBarController {
         
         var navigationVCArray = [CWChatNavigationController]()
         for (index, controller) in viewControllerArray.enumerated() {
-            controller.tabBarItem.title = titleArray[index]
+            controller.title = titleArray[index]
             controller.tabBarItem.image = normalImagesArray[index].withRenderingMode(.alwaysOriginal)
             controller.tabBarItem.selectedImage = selectedImagesArray[index].withRenderingMode(.alwaysOriginal)
             controller.tabBarItem.setTitleTextAttributes(normalAttributes, for: UIControlState())

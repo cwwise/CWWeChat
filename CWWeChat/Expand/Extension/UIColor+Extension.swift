@@ -13,30 +13,30 @@ import UIColor_Hex_Swift
 extension UIColor {
     
     class func chatSystemColor() -> UIColor {
-        return UIColor( "#09BB07")
+        return UIColor("#09BB07")
     }
     
     class func navigationBarCocor() -> UIColor {
-        return UIColor( "#141414")
+        return UIColor("#141414")
     }
     
     //tableView背景色
     class func tableViewBackgroundColor() -> UIColor {
-        return UIColor( "#EFEFF4")
+        return UIColor("#EFEFF4")
     }
     
     //tableView分割线颜色
     class func tableViewCellLineColor() -> UIColor {
-        return UIColor(white: 0.5, alpha: 0.3)
+        return UIColor("#D9D9D9")
     }
     
     //searchBar Color
     class func searchBarTintColor() -> UIColor {
-        return UIColor( "#EEEEF3")
+        return UIColor("#EEEEF3")
     }
     
     class func defaultBlackColor() -> UIColor {
-        return UIColor( "#2e3132")
+        return UIColor("#2e3132")
     }
     
     class func searchBarBorderColor() -> UIColor {
