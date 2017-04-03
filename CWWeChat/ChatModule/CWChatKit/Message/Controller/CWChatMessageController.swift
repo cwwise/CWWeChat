@@ -198,7 +198,6 @@ extension CWChatMessageController: CWChatManagerDelegate {
         
         let indexPath = IndexPath(row: messageList.count-1, section: 0)
         self.tableView.insertRows(at: [indexPath], with: .none)
-        updateMessageAndScrollBottom()
     }
 }
 

@@ -180,12 +180,15 @@ extension CWChatConversationController: CWChatManagerDelegate {
         }
         
         // 不是第一个
-        if index != 0 {
+        if index == -1 {
+            let model = CWChatConversationModel(conversation: conversation)
+            conversationList.insert(model, at: 0)
+        } else if (index != 0) {
             conversationList.remove(at: index)
             let model = CWChatConversationModel(conversation: conversation)
             conversationList.insert(model, at: 0)
         }
-        
+        // 如果是第一个 直接刷新
         tableView.reloadData()
         if unread == 0 {
             self.tabBarItem.badgeValue = nil
