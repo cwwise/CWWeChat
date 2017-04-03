@@ -72,13 +72,9 @@ class CWChatConversationCell: UITableViewCell {
         let targetId = conversationModel.conversation.targetId
         CWChatKit.share.userInfoDataSource?.loadUserInfo(userId: targetId, completion: { user in
             if let userModel = user,
-                targetId == userModel.userId,
                 let url = URL(string: userModel.avatarURL!) {
                 self.headerImageView.yy_setImage(with: url, placeholder: defaultHeadeImage)
                 self.usernameLabel.text = userModel.nickname
-            } else {
-                self.headerImageView.image = defaultHeadeImage
-                self.usernameLabel.text = ""
             }
         })
 

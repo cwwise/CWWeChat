@@ -137,7 +137,6 @@ extension CWChatMessageStore {
 extension CWChatMessageStore {
 
     func lastMessage(by targetId: String) -> CWChatMessage? {
-        
         let query = messageTable.filter(target_Id == targetId).order(date.desc)
         do {
             let raw = try messageDB.pluck(query)
@@ -148,12 +147,36 @@ extension CWChatMessageStore {
         }
     }
     
-    func createMessageByRow(_ row: Row?) -> CWChatMessage? {
+    func fecthMessages(targetId: String,
+                       timestamp: Double? = nil,
+                       count: Int = 20) -> [CWChatMessage]{
         
+        var messages = [CWChatMessage]()
+        
+        var query = messageTable.filter(targetId == target_Id)
+        if timestamp != nil {
+            query = query.filter(date < timestamp!)
+        }
+        query = query.order(date.desc).limit(count)
+        
+        do {
+            let result = try messageDB.prepare(query)
+            for row in result.reversed() {
+                let message = createMessageByRow(row)!
+                messages.append(message)
+            }
+            
+        } catch {
+            log.error(error)
+        }
+        
+        return messages
+    }
+    
+    func createMessageByRow(_ row: Row?) -> CWChatMessage? {
         guard let row = row else {
             return nil
         }
-        
         let body = CWTextMessageBody(text: row[content])
         let _direction = CWMessageDirection(rawValue: row[direction]) ?? .unknown
         let message = CWChatMessage(targetId: row[target_Id],

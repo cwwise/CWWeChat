@@ -9,20 +9,13 @@
 import UIKit
 
 class CWChatMessageController: UIViewController {
-    // 目标id
-    public var targetId: String!
+    // 目标会话
+    public var conversation: CWChatConversation!
     /// 消息数据数组
     public var messageList = Array<CWChatMessageModel>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // 消息
-        let textObject = CWTextMessageBody(text: "1234")
-        let message = CWChatMessage(targetId: "chenwei", messageBody: textObject)
-        
-        let messageModel = CWChatMessageModel(message: message)
-        messageList.append(messageModel)
         
         self.view.backgroundColor = UIColor.white
         setupUI()
@@ -30,6 +23,16 @@ class CWChatMessageController: UIViewController {
         
         let chatManager = CWChatClient.share.chatManager
         chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
+        
+        self.conversation.fetchMessagesStart { (list, error) in
+            if error == nil {
+                for message in list {
+                    let messageModel = CWChatMessageModel(message: message)
+                    self.messageList.append(messageModel)
+                }
+                self.tableView.reloadData()
+            }
+        }
     }
     
     func setupUI() {
@@ -122,7 +125,7 @@ extension CWChatMessageController: UITableViewDataSource {
 // MARK: - CWChatManagerDelegate
 extension CWChatMessageController: CWChatManagerDelegate {
     
-    func messageStatusDidChange(_ message: CWChatMessage, error: NSError?) {
+    func messageStatusDidChange(_ message: CWChatMessage, error: CWChatError?) {
         
     }
     
@@ -141,7 +144,7 @@ extension CWChatMessageController: CWInputToolBarDelegate {
     func chatInputView(_ inputView: CWInputToolBar, sendText text: String) {
         
         let textObject = CWTextMessageBody(text: text)
-        let message = CWChatMessage(targetId: "chenwei",
+        let message = CWChatMessage(targetId: conversation.targetId,
                                     direction: .send,
                                     messageBody: textObject)
         self.sendMessage(message)

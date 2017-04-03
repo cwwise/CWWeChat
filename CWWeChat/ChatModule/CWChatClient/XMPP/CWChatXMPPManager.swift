@@ -28,6 +28,8 @@ class CWChatXMPPManager: NSObject {
     var reachable: NetworkReachabilityManager?
     
     var isLogin: Bool = true
+    var password: String!
+    var completion: CWClientCompletion?
     
     /// 初始化方法
     private override init() {
@@ -76,12 +78,20 @@ class CWChatXMPPManager: NSObject {
         
     }
     
-    func loginServer(with userName: String, password: String) {
-        
+    func loginServer(with userName: String,
+                     password: String,
+                     isLogin: Bool = true,
+                     completion: CWClientCompletion?) {
         //判断xmpp状态
-        guard xmppStream.isConnecting() || !xmppStream.isAuthenticated() else {
-            return
+        if xmppStream.isConnected() || xmppStream.isConnecting() {
+            xmppStream.disconnect()
         }
+        
+        // 保存变量
+        self.isLogin = isLogin
+        self.password = password
+        self.completion = completion
+        
         
         let timeoutInterval: TimeInterval = 60
         let resource = options.chatResource
@@ -94,9 +104,10 @@ class CWChatXMPPManager: NSObject {
         do {
             try xmppStream.connect(withTimeout: timeoutInterval)
         } catch {
+            let error = CWChatError(errorCode: .serverTimeout)
+            self.completion?(nil, error)
             log.error(error)
         }
-        
     }
     
     
@@ -116,8 +127,6 @@ class CWChatXMPPManager: NSObject {
      
         
     }
-    
-    
     
     // MARK: 销毁
     deinit {
@@ -148,14 +157,25 @@ extension CWChatXMPPManager: XMPPStreamDelegate {
     /// 连接失败
     func xmppStreamDidDisconnect(_ sender: XMPPStream!, withError error: Error!) {
         log.error("xmpp连接断开...\(error)")
+        if self.completion != nil {
+            log.error("xmppblock存在")
+        } else {
+            log.error("xmppblock不存在")
+        }
+        self.completion?(nil, CWChatError(errorCode: .customer, error: "连接服务器失败"))
     }
     
     /// 已经连接，就输入密码
     func xmppStreamDidConnect(_ sender: XMPPStream!) {
         log.verbose("xmpp连接成功,开始认证...")
         do {
-            let password = "1234567"
-            try xmppStream.authenticate(withPassword: password)
+            if isLogin {
+                try xmppStream.authenticate(withPassword: password)
+            } else {
+                let result = xmppStream.supportsInBandRegistration()
+                log.debug("注册支持\(result)")
+                try xmppStream.register(withPassword: password)
+            }
         } catch {
             log.error(error)
         }
@@ -164,13 +184,41 @@ extension CWChatXMPPManager: XMPPStreamDelegate {
     // 验证失败
     func xmppStream(_ sender: XMPPStream!, didNotAuthenticate error: DDXMLElement!) {
         log.error("xmpp验证失败...\(error)")
+        self.completion?(nil, CWChatError(errorCode: .authenticationFailed))
     }
     
     // 验证成功
     func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
-        log.debug("xmpp连接成功")
+        log.debug("xmpp认证成功")
         goOnline()
+        self.completion?(xmppStream.myJID.user, nil)
     }
     
+    func xmppStreamDidRegister(_ sender: XMPPStream!) {
+        log.debug("xmpp注册成功")
+        self.completion?(xmppStream.myJID.user, nil)
+    }
+    
+    func xmppStream(_ sender: XMPPStream!, didNotRegister error: DDXMLElement!) {
+        self.completion?(nil, CWChatError(errorCode: .customer, error: "注册失败"))
+        log.debug("xmpp注册失败")
+    }
+    
+    // 收到错误信息
+    func xmppStream(_ sender: XMPPStream!, didReceiveError error: DDXMLElement!) {
+        
+        /**
+         <stream:error xmlns:stream="http://etherx.jabber.org/streams">
+         <conflict xmlns="urn:ietf:params:xml:ns:xmpp-streams"/>
+         <text xmlns="urn:ietf:params:xml:ns:xmpp-streams" lang="">
+         Replaced by new connection
+         </text>
+         </stream:error>
+         */
+        let errormessage = error.elements(forName: "conflict")
+        if errormessage.count > 0 {
+            log.error("异常登录")
+        }
+    }
 
 }

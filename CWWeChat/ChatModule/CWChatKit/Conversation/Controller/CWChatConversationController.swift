@@ -61,13 +61,10 @@ class CWChatConversationController: UIViewController {
 // MARK: - CWChatUserInfoDataSource
 extension CWChatConversationController: CWChatUserInfoDataSource {
     func loadUserInfo(userId: String, completion: @escaping ((CWChatUser?) -> Void)) {
-        
-        DispatchQueueDelay(1.5) { 
-            let model = CWChatUserModel(userId: "chenwei")
-            model.nickname = "陈威"
-            model.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/chenwei.jpg"
-            completion(model)
-        }
+        let model = CWChatUserModel(userId: "chenwei")
+        model.nickname = userId
+        model.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/\(userId).jpg"
+        completion(model)
     }
 }
 
@@ -102,8 +99,8 @@ extension CWChatConversationController: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
         let chatVC = CWChatMessageController()
-        let targetId = conversationList[indexPath.row].conversation.targetId
-        chatVC.targetId = targetId
+        let conversation = conversationList[indexPath.row].conversation
+        chatVC.conversation = conversation
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
@@ -128,28 +125,25 @@ extension CWChatConversationController: UITableViewDataSource {
 extension CWChatConversationController: CWChatManagerDelegate {
     // 收到会话变化
     func conversationDidUpdate(_ conversation: CWChatConversation) {
-        var isLocal = false
+
         for i in 0..<conversationList.count {
             let model = conversationList[i].conversation
             if model == conversation {
-                isLocal = true
+
                 model.appendMessage(conversation.lastMessage)
-                
-                self.tableView.beginUpdates()
-                let indexPath = IndexPath(row: i, section: 0)
-                tableView.reloadRows(at: [indexPath], with: .none)
-                self.tableView.endUpdates()
+//                let indexPath = IndexPath(row: i, section: 0)
+                conversationList.remove(at: i)
+//                tableView.deleteRows(at: [indexPath], with: .none)
                 
                 break
             }
         }
         
-        if isLocal == false {
-            let model = CWChatConversationModel(conversation: conversation)
-            conversationList.insert(model, at: 0)
-            let indexPath = IndexPath(row: 0, section: 0)
-            tableView.insertRows(at: [indexPath], with: .none)
-        }
+        let model = CWChatConversationModel(conversation: conversation)
+        conversationList.insert(model, at: 0)
+//        let indexPath = IndexPath(row: 0, section: 0)
+//        tableView.insertRows(at: [indexPath], with: .none)
+        tableView.reloadData()
         
         
     }

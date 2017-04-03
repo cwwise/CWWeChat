@@ -13,7 +13,7 @@ public protocol CWContactManagerDelegate {
     
 }
 
-public typealias CWContactCompletion = (_ contacts: [CWChatUser], _ error: NSError?) -> Void
+public typealias CWContactCompletion = (_ contacts: [CWChatUser], _ error: CWChatError?) -> Void
 
 
 public protocol CWContactManager {

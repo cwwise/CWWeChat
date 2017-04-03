@@ -166,15 +166,12 @@ class CWMessageDispatchOperation: Operation {
     func noticationWithOperationState(_ state:Bool = false) {
         self.messageSendResult = state
         _endOperation()
-        if let completion = self.completion {
-            let error = NSError(domain: "cwchatxmpp", code: 0, userInfo: ["message":"失败"])
-            if state {
-                completion(message, error)
-            } else {
-                completion(message, nil)
-            }
-            
+        if state {
+            completion?(message, CWChatError(errorCode: .customer, error: "发送失败"))
+        } else {
+            completion?(message, nil)
         }
+        
     }
     
     func messageSendCallback(_ result:Bool) {

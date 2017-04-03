@@ -13,14 +13,12 @@ class CWChatService: XMPPModule {
     // 消息存储
     private(set) var messageStore: CWChatMessageStore!
     private(set) var conversationStore: CWChatConversationStore!
-    
     /// 发送
     private(set) var messageTransmitter: CWMessageTransmitter
     /// 消息发送管理
     fileprivate var dispatchManager: CWMessageDispatchManager
     /// 消息接收解析
     private(set) var messageParse: CWChatMessageParse
-
     
     override init!(dispatchQueue queue: DispatchQueue!) {
         
@@ -56,7 +54,6 @@ class CWChatService: XMPPModule {
     }
     
     public func updateConversation(with message: CWChatMessage) {
-    
         // 更新会话
         var exist: Bool = false
         let conversation = conversationStore.fecthConversation(message.chatType,

@@ -19,7 +19,7 @@ public protocol CWChatManagerDelegate: NSObjectProtocol {
     ///
     /// - Parameter message: 状态发生变化的消息
     /// - Parameter error: 错误信息
-    func messageStatusDidChange(_ message: CWChatMessage, error: NSError?)
+    func messageStatusDidChange(_ message: CWChatMessage, error: CWChatError?)
     
     /// 收到消息
     ///
@@ -32,11 +32,11 @@ public protocol CWChatManagerDelegate: NSObjectProtocol {
 public extension CWChatManagerDelegate {
     func conversationDidUpdate(_ conversation: CWChatConversation) {}
     func messagesDidReceive(_ message: CWChatMessage) {}
-    func messageStatusDidChange(_ message: CWChatMessage, error: NSError?) {}
+    func messageStatusDidChange(_ message: CWChatMessage, error: CWChatError?) {}
 }
 
 
-public typealias CWMessageCompletionBlock = (_ message: CWChatMessage, _ error: NSError?) -> Void
+public typealias CWMessageCompletionBlock = (_ message: CWChatMessage, _ error: CWChatError?) -> Void
 public typealias CWMessageProgressBlock = (_ progress: Int) -> Void
 
 /// 聊天相关操作

@@ -59,7 +59,7 @@ public func ==(lhs: CWChatConversation, rhs: CWChatConversation) -> Bool {
     return lhs.targetId == rhs.targetId
 }
 
-public typealias CWConversationResultCompletion = (_ messages: [CWChatMessage], _ error: NSError?) -> Void
+public typealias CWConversationResultCompletion = (_ messages: [CWChatMessage], _ error: CWChatError?) -> Void
 
 // MARK: 查询消息
 public extension CWChatConversation {
@@ -76,9 +76,17 @@ public extension CWChatConversation {
                             searchDirection: CWMessageSearchDirection = .down,
                             completion: CWConversationResultCompletion) {
         
+        guard let service = CWChatClient.share.chatManager as? CWChatService,
+              let chatmessageStore = service.messageStore else {
+            completion([], nil)
+            return
+        }
         
         
+        let result = chatmessageStore.fecthMessages(targetId: self.targetId,
+                                                     count: count)
         
+        completion(result, nil)
     }
     
     
