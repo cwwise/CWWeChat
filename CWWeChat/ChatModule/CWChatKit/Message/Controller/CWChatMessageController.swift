@@ -15,12 +15,11 @@ class CWChatMessageController: UIViewController {
     // 目标会话
     public var conversation: CWChatConversation!
     /// 消息数据数组
-    public var messageList = Array<CWChatMessageModel>()
+    public var messageList = Array<AnyObject>()
     
     /// 显示消息时间相关的
-    var lastDateInterval:TimeInterval = 0
+    var messageTimeIntervalTag: Double = -1
     var messageAccumulate:Int = 0
-    var currentDate:Date = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +32,8 @@ class CWChatMessageController: UIViewController {
         
         self.conversation.fetchMessagesStart { (list, error) in
             if error == nil {
-                for message in list {
-                    let messageModel = CWChatMessageModel(message: message)
-                    self.messageList.append(messageModel)
-                }
+                let messageList = self.formatMessages(list)
+                self.messageList.append(contentsOf: messageList)
                 self.tableView.reloadData()
             }
         }
@@ -57,6 +54,8 @@ class CWChatMessageController: UIViewController {
     func registerCell() {
         tableView.register(CWChatMessageCell.self, forCellReuseIdentifier: CWMessageType.none.identifier())
         tableView.register(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.text.identifier())
+        tableView.register(CWTimeMessageCell.self, forCellReuseIdentifier: CWTimeMessageCell.identifier)
+
     }
     
 
@@ -98,18 +97,34 @@ class CWChatMessageController: UIViewController {
 
 extension CWChatMessageController {
     
-    public func messageNeedShowTime(_ date:Date) -> Bool {
-        messageAccumulate += 1
-        let messageInterval = date.timeIntervalSince1970 - lastDateInterval
-        //消息间隔
-        if messageAccumulate > kMaxShowTimeMessageCount ||
-            lastDateInterval == 0 ||
-            messageInterval > kMaxShowtimeMessageInterval{
-            lastDateInterval = date.timeIntervalSince1970
-            messageAccumulate = 0
-            return true
+    func refreshLocalMessage() {
+
+        // 先将此条对话的未读条数设置0
+        conversation.markAllMessagesAsRead()
+    
+        
+    }
+    
+    func formatMessages(_ messages: [CWChatMessage]) -> [AnyObject] {
+        
+        var messageModelList = [AnyObject]()
+        for message in messages {
+            let interval = messageTimeIntervalTag - message.timestamp
+            if messageTimeIntervalTag < 0 ||
+                fabs(interval) > 60 {
+                
+                let messageDate = Date(timeIntervalSince1970: message.timestamp)
+                let timeStr = " "+ChatTimeTool.timeStringFromSinceDate(messageDate)+" "
+                
+                messageModelList.append(timeStr as AnyObject)
+                self.messageTimeIntervalTag = message.timestamp
+            }
+            
+            let messageModel = CWChatMessageModel(message: message)
+            messageModelList.append(messageModel)
+            
         }
-        return false
+        return messageModelList
     }
     
     /// 滚动到底部
@@ -140,11 +155,18 @@ extension CWChatMessageController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let messageModel = messageList[indexPath.row]
+        let message = messageList[indexPath.row]
+    
+        guard let messageModel = message as? CWChatMessageModel else {
+
+            let timeCell = tableView.dequeueReusableCell(withIdentifier: CWTimeMessageCell.identifier) as! CWTimeMessageCell
+            timeCell.timeLabel.text = message as? String
+            return timeCell
+        }
         let identifier = messageModel.message.messageType.identifier()
     
         // 时间和tip消息 是例外的种类 以后判断
-        let messageCell = self.tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CWChatMessageCell
+        let messageCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CWChatMessageCell
         
         messageCell.updateMessage(messageModel)
         
@@ -152,7 +174,11 @@ extension CWChatMessageController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let messageModel = messageList[indexPath.row]
+        let message = messageList[indexPath.row]
+        
+        guard let messageModel = message as? CWChatMessageModel else {
+            return 30.0
+        }
         return messageModel.messageFrame.heightOfCell
     }
     
@@ -200,7 +226,7 @@ extension CWChatMessageController: CWInputToolBarDelegate {
         
         let indexPath = IndexPath(row: messageList.count-1, section: 0)
         self.tableView.insertRows(at: [indexPath], with: .none)
-//        updateMessageAndScrollBottom(true)
+        updateMessageAndScrollBottom(false)
         
         let chatManager = CWChatClient.share.chatManager
         chatManager.sendMessage(message, progress: { (progress) in

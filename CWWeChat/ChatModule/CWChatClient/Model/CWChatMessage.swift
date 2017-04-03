@@ -117,6 +117,8 @@ public class CWChatMessage: NSObject {
     var messageBody: CWMessageBody
     /// 消息发送时间
     var timestamp: TimeInterval
+    /// 已读
+    var isRead: Bool = true
     /// 消息扩展
     var ext: Dictionary<String, Any>?
     
@@ -124,6 +126,7 @@ public class CWChatMessage: NSObject {
     init(targetId: String,
          messageID: String = String.UUIDString(),
          direction: CWMessageDirection = .send,
+         isRead: Bool = true,
          timestamp: TimeInterval = NSDate().timeIntervalSince1970,
          messageBody: CWMessageBody) {
 

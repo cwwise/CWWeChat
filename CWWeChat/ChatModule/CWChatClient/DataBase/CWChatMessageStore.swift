@@ -41,7 +41,7 @@ class CWChatMessageStore: NSObject {
     /// 接收状态
     fileprivate let sendStatus = Expression<Int>("send_status")
     /// 是否已读
-//    fileprivate let readed = Expression<Int>("readed")
+    fileprivate let readed = Expression<Bool>("readed")
     
     /// 拓展字端
     fileprivate let ext1 = Expression<String>("ext1")
@@ -96,6 +96,7 @@ class CWChatMessageStore: NSObject {
                 t.column(messageType, defaultValue: 0)
                 t.column(content, defaultValue: "")
                 t.column(sendStatus, defaultValue: 0)
+                t.column(readed, defaultValue: false)
                 t.column(ext1, defaultValue: "")}
             log.verbose(create.asSQL())
             try messageDB.run(create)
@@ -196,12 +197,25 @@ extension CWChatMessageStore {
 // MARK: - 修改
 extension CWChatMessageStore {
     
+    func markAllMessagesAsRead(_ targetId: String) {
+        let filter = messageTable.filter(target_Id == targetId).where(readed == false)
+        let update = filter.update(readed <- true)
+        do {
+            try messageDB.run(update)
+        } catch {
+            log.error(error)
+        }
+        
+    }
+    
     func markMessageRead(_ message: CWChatMessage) {
-        
         let filter = messageTable.filter(messageId == message.messageId)
-        let update = filter.update(sendStatus <- message.sendStatus.rawValue)
-
-        
+        let update = filter.update(readed <- message.isRead)
+        do {
+            try messageDB.run(update)
+        } catch {
+            log.error(error)
+        }
     }
     
     func updateMessageStatus(_ message: CWChatMessage) {

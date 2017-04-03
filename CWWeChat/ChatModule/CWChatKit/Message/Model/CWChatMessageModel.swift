@@ -22,9 +22,7 @@ public class CWChatMessageModel: NSObject {
     /// 消息
     var messageFrame = CWChatMessageFrame()
     /// 文本消息
-    var text: NSAttributedString = {
-        return NSAttributedString()
-    }()
+    var content: String?
     
     public init(message: CWChatMessage) {
         self.message = message;
