@@ -33,10 +33,6 @@ let kAvatarToMessageContent: CGFloat = 5.0
 let kMessageCellEdgeOffset: CGFloat = 6.0
 
 
-
-
-
-
 class CWChatMessageCell: UITableViewCell {
 
     weak var delegate: CWMessageCellDelegate?

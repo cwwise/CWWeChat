@@ -1,17 +1,18 @@
 //
-//  CWContactsController.swift
+//  CWContactDetailController.swift
 //  CWWeChat
 //
-//  Created by chenwei on 2017/3/26.
+//  Created by wei chen on 2017/4/3.
 //  Copyright © 2017年 cwcoder. All rights reserved.
 //
 
 import UIKit
 
-class CWContactsController: UIViewController {
+class CWContactDetailController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "详细资料"
 
         // Do any additional setup after loading the view.
     }
