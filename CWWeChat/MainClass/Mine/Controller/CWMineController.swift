@@ -17,7 +17,6 @@ class CWMineController: CWMenuViewController {
         self.dataSource = mineHelper.mineMenuData
         
         self.tableView.register(CWMineUserCell.self, forCellReuseIdentifier: "cell")
-
         // Do any additional setup after loading the view.
     }
 
@@ -31,7 +30,7 @@ class CWMineController: CWMenuViewController {
 extension CWMineController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if (indexPath as NSIndexPath).section == 0 {
+        if indexPath.section == 0 {
             return 87
         }
         
@@ -40,12 +39,11 @@ extension CWMineController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if (indexPath as NSIndexPath).section == 0 {
+        if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CWMineUserCell
-            let model = CWContactModel(userId: "chenwei@chenweiim.com")
-            model.nikeName = "陈威"
-            model.userName = "chenwei"
-            model.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/tom@chenweiim.com"
+            let model = CWContactModel(userId: "chenwei@chenweiim.com", username: "chenwei")
+            model.nickname = "陈威"
+            model.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/tom.jpg"
             
             cell.userModel = model
             return cell
@@ -56,17 +54,16 @@ extension CWMineController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
         
-        if (indexPath as NSIndexPath).section == 2 {
+        if indexPath.section == 2 {
         
             return
         }
         
-        if (indexPath as NSIndexPath).section == 0 {
+        if indexPath.section == 0 {
             return
         }
         
     
-        
     }
 }
 

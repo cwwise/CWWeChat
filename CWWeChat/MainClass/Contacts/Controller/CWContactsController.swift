@@ -1,5 +1,5 @@
 //
-//  CWAddressBookController.swift
+//  CWContactsController.swift
 //  CWWeChat
 //
 //  Created by chenwei on 2017/3/26.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWAddressBookController: UIViewController {
+class CWContactsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

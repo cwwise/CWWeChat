@@ -9,14 +9,28 @@
 import UIKit
 
 /// 好友相关的回调
-protocol CWContactManagerDelegate {
+public protocol CWContactManagerDelegate {
     
 }
 
+public typealias CWContactCompletion = (_ contacts: [CWChatUser], _ error: NSError?) -> Void
 
-protocol CWContactManager {
+
+public protocol CWContactManager {
     
+    /// 添加代理
+    ///
+    /// - Parameter delegate: 代理
+    /// - Parameter delegateQueue: 代理执行线程
+    func addContactDelegate(_ delegate: CWContactManagerDelegate, delegateQueue: DispatchQueue)
     
+    /// 删除代理
+    ///
+    /// - Parameter delegate: 代理
+    func removeContactDelegate(_ delegate: CWContactManagerDelegate)
+    
+    // MARK: 获取好友
+    func fetchContactsFromServer(completion: CWContactCompletion)
     
     
 }

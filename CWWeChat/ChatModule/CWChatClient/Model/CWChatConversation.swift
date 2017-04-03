@@ -59,10 +59,10 @@ public func ==(lhs: CWChatConversation, rhs: CWChatConversation) -> Bool {
     return lhs.targetId == rhs.targetId
 }
 
-typealias CWConversationResultCompletion = (_ messages: [CWChatMessage], _ error: NSError?) -> Void
+public typealias CWConversationResultCompletion = (_ messages: [CWChatMessage], _ error: NSError?) -> Void
 
 // MARK: 查询消息
-extension CWChatConversation {
+public extension CWChatConversation {
     
     ///  从数据库获取指定数量的消息，取到的消息按时间排序，并且不包含参考的消息，如果参考消息的ID为空，则从最新消息取
     ///

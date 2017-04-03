@@ -12,14 +12,15 @@ class CWContactModel: NSObject {
 
     /// 用户id
     var userId: String
-    /// 用户名
-    var userName: String = ""
-    /// 头像URL
-    var avatarURL: String = ""
     /// 昵称
-    var nikeName: String = ""
+    var nickname: String?
+    /// 用户名
+    var username: String
+    /// 头像URL
+    var avatarURL: String?
 
-    init(userId: String) {
+    init(userId: String, username: String) {
+        self.username = username
         self.userId = userId
     }
     

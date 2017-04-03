@@ -21,15 +21,6 @@ class CWChatService: XMPPModule {
     /// 消息接收解析
     private(set) var messageParse: CWChatMessageParse
 
-    // TODO: 待修改
-    override init() {
-        // 消息发送和解析
-        messageTransmitter = CWMessageTransmitter()
-        dispatchManager = CWMessageDispatchManager()
-        messageParse = CWChatMessageParse()
-        super.init()
-        messageParse.activate(CWChatXMPPManager.share.xmppStream)
-    }
     
     override init!(dispatchQueue queue: DispatchQueue!) {
         
@@ -45,11 +36,13 @@ class CWChatService: XMPPModule {
         messageParse.activate(CWChatXMPPManager.share.xmppStream)
     }
     
-
+    /// 收到消息执行
+    /// 执行 消息变化和会话变化的代理，保存消息
+    ///
+    /// - Parameter message: 接收到的消息
     public func receiveMessage(_ message: CWChatMessage) {
         
         executeMessagesDidReceive(message)
-        
         updateConversation(with: message)
         // 保存消息
         messageStore.appendMessage(message)
@@ -81,19 +74,12 @@ class CWChatService: XMPPModule {
     
     }
     
+    /// 执行代理方法
+    ///
+    /// - Parameter message: 消息实体
     private func executeMessagesDidReceive(_ message :CWChatMessage) {
-        // 处理事件
-        // 检查delegate 是否存在，存在就执行方法
-        guard let multicastDelegate = self.value(forKey: "multicastDelegate") as? GCDMulticastDelegate else {
-            return
-        }
         
-        ///遍历出所有的delegate
-        let delegateEnumerator = multicastDelegate.delegateEnumerator()
-        var delegate: AnyObject?
-        var queue: DispatchQueue?
-        
-        while delegateEnumerator?.getNextDelegate(&delegate, delegateQueue: &queue) == true {
+        executeDelegateSelector { (delegate, queue) in
             //执行Delegate的方法
             if let delegate = delegate as? CWChatManagerDelegate {
                 queue?.async(execute: {
@@ -104,18 +90,8 @@ class CWChatService: XMPPModule {
     }
     
     private func executeConversationUpdate(_ conversation :CWChatConversation) {
-        // 处理事件
-        // 检查delegate 是否存在，存在就执行方法
-        guard let multicastDelegate = self.value(forKey: "multicastDelegate") as? GCDMulticastDelegate else {
-            return
-        }
-        
-        ///遍历出所有的delegate
-        let delegateEnumerator = multicastDelegate.delegateEnumerator()
-        var delegate: AnyObject?
-        var queue: DispatchQueue?
-        
-        while delegateEnumerator?.getNextDelegate(&delegate, delegateQueue: &queue) == true {
+
+        executeDelegateSelector { (delegate, queue) in
             //执行Delegate的方法
             if let delegate = delegate as? CWChatManagerDelegate {
                 queue?.async(execute: {
@@ -124,7 +100,6 @@ class CWChatService: XMPPModule {
             }
         }
     }
-    
     
 }
 

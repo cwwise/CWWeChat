@@ -56,7 +56,7 @@ class CWChatConversationStore: NSObject {
         if !FileManager.default.fileExists(atPath: path) {
             try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         }
-        log.debug(path)
+        log.verbose(path)
         return path + "chatsession.sqlite3"
     }()
     

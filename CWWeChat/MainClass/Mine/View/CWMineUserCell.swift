@@ -90,19 +90,14 @@ class CWMineUserCell: UITableViewCell {
     
     func setupUserInfomation() {
         
-        guard let userModel = userModel else {
-            return
-        }
-    
-        let url = URL(string: userModel.avatarURL)
+        let avatarURL = userModel.avatarURL ?? ""
+        let nikename = userModel.nickname ?? ""
+
+        let url = URL(string: avatarURL)
         self.avatarImageView.yy_setImage(with: url, placeholder: defaultHeadeImage)
 
-        nikenameLabel.text = userModel.nikeName
-        if userModel.userName.utf8.count > 0 {
-            usernameLabel.text = "微信号:" + userModel.userName
-        } else {
-            usernameLabel.text = ""
-        }
+        nikenameLabel.text = nikename
+        usernameLabel.text = userModel.username
     }
     
     required init?(coder aDecoder: NSCoder) {

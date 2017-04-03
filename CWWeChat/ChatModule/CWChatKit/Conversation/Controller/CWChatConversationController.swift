@@ -25,6 +25,7 @@ class CWChatConversationController: UIViewController {
         
         chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
         
+        CWChatKit.share.userInfoDataSource = self
         
         setupUI()
         registerCellClass()
@@ -44,7 +45,6 @@ class CWChatConversationController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
     // MARK: 属性Getter
     /// TableView
     lazy var tableView: UITableView = {
@@ -57,6 +57,20 @@ class CWChatConversationController: UIViewController {
         return tableView
     }()
 }
+
+// MARK: - CWChatUserInfoDataSource
+extension CWChatConversationController: CWChatUserInfoDataSource {
+    func loadUserInfo(userId: String, completion: @escaping ((CWChatUser?) -> Void)) {
+        
+        DispatchQueueDelay(1.5) { 
+            let model = CWChatUserModel(userId: "chenwei")
+            model.nickname = "陈威"
+            model.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/chenwei.jpg"
+            completion(model)
+        }
+    }
+}
+
 
 //MARK: UITableViewDelegate
 extension CWChatConversationController: UITableViewDelegate {
@@ -88,6 +102,8 @@ extension CWChatConversationController: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
         let chatVC = CWChatMessageController()
+        let targetId = conversationList[indexPath.row].conversation.targetId
+        chatVC.targetId = targetId
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
@@ -108,9 +124,9 @@ extension CWChatConversationController: UITableViewDataSource {
     }
 }
 
-
+// MARK: - CWChatManagerDelegate
 extension CWChatConversationController: CWChatManagerDelegate {
-    
+    // 收到会话变化
     func conversationDidUpdate(_ conversation: CWChatConversation) {
         var isLocal = false
         for i in 0..<conversationList.count {
@@ -118,8 +134,13 @@ extension CWChatConversationController: CWChatManagerDelegate {
             if model == conversation {
                 isLocal = true
                 model.appendMessage(conversation.lastMessage)
+                
+                self.tableView.beginUpdates()
                 let indexPath = IndexPath(row: i, section: 0)
                 tableView.reloadRows(at: [indexPath], with: .none)
+                self.tableView.endUpdates()
+                
+                break
             }
         }
         

@@ -29,18 +29,18 @@ public protocol CWChatManagerDelegate: NSObjectProtocol {
 }
 
 // 让协议变成可选
-extension CWChatManagerDelegate {
+public extension CWChatManagerDelegate {
     func conversationDidUpdate(_ conversation: CWChatConversation) {}
     func messagesDidReceive(_ message: CWChatMessage) {}
     func messageStatusDidChange(_ message: CWChatMessage, error: NSError?) {}
 }
 
 
-typealias CWMessageCompletionBlock = (_ message: CWChatMessage, _ error: NSError?) -> Void
-typealias CWMessageProgressBlock = (_ progress: Int) -> Void
+public typealias CWMessageCompletionBlock = (_ message: CWChatMessage, _ error: NSError?) -> Void
+public typealias CWMessageProgressBlock = (_ progress: Int) -> Void
 
 /// 聊天相关操作
-protocol CWChatManager: NSObjectProtocol {
+public protocol CWChatManager: NSObjectProtocol {
     
     /// 添加聊天代理
     ///

@@ -9,7 +9,7 @@
 import Foundation
 
 // 配置信息
-class CWChatClientOptions: NSObject {
+public class CWChatClientOptions: NSObject {
     
     ///  是否自动登录
     var isAutoLogin: Bool = true

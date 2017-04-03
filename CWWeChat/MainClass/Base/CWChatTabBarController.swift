@@ -36,7 +36,7 @@ class CWChatTabBarController: UITabBarController {
         
         let viewControllerArray = [
             CWConversationController(),
-            CWAddressBookController(),
+            CWContactsController(),
             CWDiscoverController(),
             CWMineController()
         ]

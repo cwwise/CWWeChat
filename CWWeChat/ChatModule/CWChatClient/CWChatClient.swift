@@ -9,7 +9,7 @@
 import UIKit
 
 /// 聊天核心单例
-class CWChatClient: NSObject {
+public class CWChatClient: NSObject {
     /// 单例
     public static let share = CWChatClient()
     /// 版本
@@ -21,7 +21,7 @@ class CWChatClient: NSObject {
     
     private(set) var userId: String!
     /// 聊天模块
-    lazy private(set) var chatManager: CWChatManager = CWChatService()
+    lazy private(set) var chatManager: CWChatManager = CWChatService(dispatchQueue: DispatchQueue.global())
     
     private override init() {
         version = "0.0.1"

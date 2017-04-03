@@ -12,7 +12,7 @@ import YYText.YYTextUtilities
 public let textAttributes = [NSForegroundColorAttributeName:UIColor.white,
                       NSFontAttributeName: UIFont.fontTextMessageText()]
 /// 消息model
-class CWChatMessageModel: NSObject {
+public class CWChatMessageModel: NSObject {
 
     /// 聊天消息
     var message: CWChatMessage
@@ -26,7 +26,7 @@ class CWChatMessageModel: NSObject {
         return NSAttributedString()
     }()
     
-    init(message: CWChatMessage) {
+    public init(message: CWChatMessage) {
         self.message = message;
         
         switch message.messageType {

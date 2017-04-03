@@ -9,9 +9,10 @@
 import UIKit
 
 class CWChatMessageController: UIViewController {
-
+    // 目标id
+    public var targetId: String!
     /// 消息数据数组
-    var messageList = Array<CWChatMessageModel>()
+    public var messageList = Array<CWChatMessageModel>()
     
     override func viewDidLoad() {
         super.viewDidLoad()

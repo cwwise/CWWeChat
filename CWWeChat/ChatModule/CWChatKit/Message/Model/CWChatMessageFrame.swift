@@ -9,7 +9,7 @@
 import UIKit
 
 /// 消息frame
-struct CWChatMessageFrame {
+public struct CWChatMessageFrame {
     
     /// cell高度
     var heightOfCell: CGFloat

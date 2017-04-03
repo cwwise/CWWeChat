@@ -69,20 +69,19 @@ class CWChatConversationCell: UITableViewCell {
     /// 设置数据
     func setupUI()  {
         
-        //
-        guard let conversationModel = self.conversationModel else {
-            
-            
-            return
-        }
-        
-//        let userModel = CWContactManager.findContact(conversationModel.partnerID)
-//        
-//        if let userModel = userModel {
-//            self.headerImageView.yy_setImage(with: URL(string: userModel.avatarURL!)!, placeholder: defaultHeadeImage)
-//            self.usernameLabel.text = userModel.nikeName
-//        }
-        
+        let targetId = conversationModel.conversation.targetId
+        CWChatKit.share.userInfoDataSource?.loadUserInfo(userId: targetId, completion: { user in
+            if let userModel = user,
+                targetId == userModel.userId,
+                let url = URL(string: userModel.avatarURL!) {
+                self.headerImageView.yy_setImage(with: url, placeholder: defaultHeadeImage)
+                self.usernameLabel.text = userModel.nickname
+            } else {
+                self.headerImageView.image = defaultHeadeImage
+                self.usernameLabel.text = ""
+            }
+        })
+
         self.timeLabel.text = conversationModel.lastMessageTime
         self.detailInfoLabel.text = conversationModel.conversationTitle
         
@@ -102,7 +101,7 @@ class CWChatConversationCell: UITableViewCell {
     }
     
     //MARK: 属性
-    var conversationModel: CWChatConversationModel? {
+    var conversationModel: CWChatConversationModel! {
         didSet {
             self.setupUI()
         }
