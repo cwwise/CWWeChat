@@ -109,6 +109,7 @@
 		8C0BFE1C1E92196B007343F1 /* CWPlayMessageAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFE1B1E92196B007343F1 /* CWPlayMessageAudio.swift */; };
 		8C0BFE1F1E92481E007343F1 /* CWChatError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFE1E1E92481E007343F1 /* CWChatError.swift */; };
 		8C49277E1E92544900B3C482 /* CWLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C49277D1E92544900B3C482 /* CWLoginController.swift */; };
+		8C4927801E92678800B3C482 /* CWChatMessageController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C49277F1E92678800B3C482 /* CWChatMessageController+Keyboard.swift */; };
 		8C84B9471E8C04780020D508 /* CWShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B9461E8C04780020D508 /* CWShareModel.swift */; };
 		8C84B9491E8C1B8F0020D508 /* CWShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B9481E8C1B8F0020D508 /* CWShareController.swift */; };
 		8C84B94B1E8C1BB70020D508 /* CWShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B94A1E8C1BB70020D508 /* CWShareCell.swift */; };
@@ -267,6 +268,7 @@
 		8C0BFE1B1E92196B007343F1 /* CWPlayMessageAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWPlayMessageAudio.swift; sourceTree = "<group>"; };
 		8C0BFE1E1E92481E007343F1 /* CWChatError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatError.swift; sourceTree = "<group>"; };
 		8C49277D1E92544900B3C482 /* CWLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CWLoginController.swift; path = CWWeChat/ChatModule/CWChatClient/Tool/CWLoginController.swift; sourceTree = SOURCE_ROOT; };
+		8C49277F1E92678800B3C482 /* CWChatMessageController+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CWChatMessageController+Keyboard.swift"; sourceTree = "<group>"; };
 		8C84B9461E8C04780020D508 /* CWShareModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWShareModel.swift; sourceTree = "<group>"; };
 		8C84B9481E8C1B8F0020D508 /* CWShareController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWShareController.swift; sourceTree = "<group>"; };
 		8C84B94A1E8C1BB70020D508 /* CWShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWShareCell.swift; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 			isa = PBXGroup;
 			children = (
 				1F3492921E88244B00B36641 /* CWChatMessageController.swift */,
+				8C49277F1E92678800B3C482 /* CWChatMessageController+Keyboard.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1443,6 +1446,7 @@
 				8C0BFDE01E91D801007343F1 /* CWChatUserModel.swift in Sources */,
 				1F3492191E878AD500B36641 /* UIImage+Extension.swift in Sources */,
 				1F3492871E87E27D00B36641 /* CWGameController.swift in Sources */,
+				8C4927801E92678800B3C482 /* CWChatMessageController+Keyboard.swift in Sources */,
 				8C0BFE0D1E9209D8007343F1 /* CWContactsSearchController.swift in Sources */,
 				1F34920D1E878AD500B36641 /* CWChatMessageFrame.swift in Sources */,
 				1F3491B51E87897F00B36641 /* AppDelegate.swift in Sources */,

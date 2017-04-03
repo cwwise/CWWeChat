@@ -19,7 +19,6 @@ class CWChatMessageController: UIViewController {
         
         self.view.backgroundColor = UIColor.white
         setupUI()
-        registerCell()
         
         let chatManager = CWChatClient.share.chatManager
         chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
@@ -38,6 +37,10 @@ class CWChatMessageController: UIViewController {
     func setupUI() {
         self.view.addSubview(tableView)
         self.view.addSubview(chatToolBar)
+        
+        registerKeyboardNotifacation()
+        registerCell()
+
     }
     
     /**

@@ -132,8 +132,8 @@ class CWLoginController: UIViewController {
         
         self.view.endEditing(true)
         
-        let userName = userNameTextField.text!
-        let password = passwordTextField.text!
+//        let userName = userNameTextField.text!
+//        let password = passwordTextField.text!
         
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.mode = .indeterminate

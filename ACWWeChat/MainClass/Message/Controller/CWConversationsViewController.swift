@@ -148,6 +148,7 @@ extension CWConversationsViewController: CWChatDBRecordStoreDelegate {
 //            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
 //            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
         }
+        
     }
     
     func updateUnReadCount(_ record: CWConversationModel) {

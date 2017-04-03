@@ -58,12 +58,6 @@ class CWChatConversationCell: UITableViewCell {
             make.bottom.equalTo(headerImageView.snp.bottom).offset(-2.0)
             make.right.equalTo(self.contentView).offset(-ChatSessionCellUI.headerImageViewLeftPadding)
         }
-        
-        badgeView.snp.makeConstraints { (make) in
-            make.centerX.equalTo(self.headerImageView.snp.right)
-            make.centerY.equalTo(self.headerImageView.snp.top)
-            make.width.greaterThanOrEqualTo(BadgeViewWidth)
-        }
     }
     
     /// 设置数据
@@ -80,7 +74,6 @@ class CWChatConversationCell: UITableViewCell {
 
         self.timeLabel.text = conversationModel.lastMessageTime
         self.detailInfoLabel.text = conversationModel.conversationTitle
-        
         self.badgeView.badgeValue = conversationModel.unreadCount
     }
     

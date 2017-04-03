@@ -40,6 +40,9 @@ class CWChatMessageStore: NSObject {
     fileprivate let content = Expression<String>("content")
     /// 接收状态
     fileprivate let sendStatus = Expression<Int>("send_status")
+    /// 是否已读
+//    fileprivate let readed = Expression<Int>("readed")
+    
     /// 拓展字端
     fileprivate let ext1 = Expression<String>("ext1")
     
@@ -192,6 +195,14 @@ extension CWChatMessageStore {
 
 // MARK: - 修改
 extension CWChatMessageStore {
+    
+    func markMessageRead(_ message: CWChatMessage) {
+        
+        let filter = messageTable.filter(messageId == message.messageId)
+        let update = filter.update(sendStatus <- message.sendStatus.rawValue)
+
+        
+    }
     
     func updateMessageStatus(_ message: CWChatMessage) {
         let filter = messageTable.filter(messageId == message.messageId)

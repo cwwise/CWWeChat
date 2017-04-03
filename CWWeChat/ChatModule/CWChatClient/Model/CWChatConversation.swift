@@ -38,6 +38,11 @@ public class CWChatConversation: NSObject {
     
     /// 将所有未读消息设置为已读
     func markAllMessagesAsRead() {
+        guard let service = CWChatClient.share.chatManager as? CWChatService,
+            let chatmessageStore = service.messageStore else {
+                return
+        }
+        
         
     }
     

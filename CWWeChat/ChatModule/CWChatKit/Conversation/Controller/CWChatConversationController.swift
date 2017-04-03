@@ -24,7 +24,6 @@ class CWChatConversationController: UIViewController {
         }
         
         chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
-        
         CWChatKit.share.userInfoDataSource = self
         
         setupUI()
@@ -84,7 +83,7 @@ extension CWChatConversationController: UITableViewDelegate {
             //从数据库中删除
             
             //删除
-            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            self.tableView.deleteRows(at: [indexPath], with: .none)
         }
         
         let actionTitle = "标记已读"
@@ -126,26 +125,32 @@ extension CWChatConversationController: CWChatManagerDelegate {
     // 收到会话变化
     func conversationDidUpdate(_ conversation: CWChatConversation) {
 
+        var unread = 0
+        var index = -1
         for i in 0..<conversationList.count {
             let model = conversationList[i].conversation
             if model == conversation {
-
+                index = i
                 model.appendMessage(conversation.lastMessage)
-//                let indexPath = IndexPath(row: i, section: 0)
-                conversationList.remove(at: i)
-//                tableView.deleteRows(at: [indexPath], with: .none)
-                
-                break
             }
+            unread += model.unreadCount
         }
         
-        let model = CWChatConversationModel(conversation: conversation)
-        conversationList.insert(model, at: 0)
-//        let indexPath = IndexPath(row: 0, section: 0)
-//        tableView.insertRows(at: [indexPath], with: .none)
+        // 不是第一个
+        if index != 0 {
+            conversationList.remove(at: index)
+            let model = CWChatConversationModel(conversation: conversation)
+            conversationList.insert(model, at: 0)
+        }
+        
         tableView.reloadData()
-        
-        
+        if unread == 0 {
+            self.tabBarItem.badgeValue = nil
+        } else if (unread > 99) {
+            self.tabBarItem.badgeValue = "99+"
+        } else {
+            self.tabBarItem.badgeValue = "\(unread)"
+        }
     }
 }
 

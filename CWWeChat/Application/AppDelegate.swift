@@ -22,11 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //设置logger
         setupLogger()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        logoutSuccess()
+        loginSuccess()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         
-//        loginXMPP()
+        loginXMPP()
         //注册推送信息
         registerRemoteNotification()
         
@@ -40,10 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let chatClient = CWChatClient.share
         chatClient.initialize(with: options)
         
-        chatClient.login(username: "haohao", password: "1234567") { (username, error) in
-            log.debug("用户名:\(String(describing: username))")
-            log.error("错误:\(String(describing: error))")
-        }
+        chatClient.login(username: "haohao", password: "1234567")
         
     }
     

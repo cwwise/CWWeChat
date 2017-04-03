@@ -61,7 +61,7 @@ class CWBadgeView: UIView {
         newFrame.size.height = viewHeight;
         
         
-        newFrame.origin.x = superviewWidth - (viewWidth / 2.0);
+        newFrame.origin.x = superviewWidth - (viewWidth / 2.0) - 4;
         newFrame.origin.y = -viewHeight / 2.0;
         let x = ceil(newFrame.midX)
         let y = ceil(newFrame.midY)

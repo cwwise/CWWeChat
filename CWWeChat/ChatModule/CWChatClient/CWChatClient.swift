@@ -47,7 +47,6 @@ public class CWChatClient: NSObject {
     private(set) var options = CWChatClientOptions()
     /// XMPP实例
     private var xmppManager = CWChatXMPPManager.share
-    
     /// 当前登陆用户
     private(set) var userId: String!
     /// 聊天模块
@@ -73,7 +72,7 @@ public class CWChatClient: NSObject {
     
     public func login(username: String,
                       password: String,
-                      completion: CWClientCompletion?) {
+                      completion: CWClientCompletion? = nil) {
         userId = username
         xmppManager.loginServer(with: username, password: password, completion: completion)
         
@@ -81,7 +80,7 @@ public class CWChatClient: NSObject {
     
     public func register(username: String,
                          password: String,
-                         completion: CWClientCompletion?) {
+                         completion: CWClientCompletion? = nil) {
         userId = username
         xmppManager.loginServer(with: username,
                                 password: password,
