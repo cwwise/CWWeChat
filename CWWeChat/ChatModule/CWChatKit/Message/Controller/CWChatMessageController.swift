@@ -8,11 +8,19 @@
 
 import UIKit
 
+private let kMaxShowTimeMessageCount = 30
+private let kMaxShowtimeMessageInterval: Double = 3*60.0
+
 class CWChatMessageController: UIViewController {
     // 目标会话
     public var conversation: CWChatConversation!
     /// 消息数据数组
     public var messageList = Array<CWChatMessageModel>()
+    
+    /// 显示消息时间相关的
+    var lastDateInterval:TimeInterval = 0
+    var messageAccumulate:Int = 0
+    var currentDate:Date = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +59,8 @@ class CWChatMessageController: UIViewController {
         tableView.register(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.text.identifier())
     }
     
+
+    
     //MARK: UI属性
     /// TableView
     lazy var tableView: UITableView = {
@@ -86,8 +96,36 @@ class CWChatMessageController: UIViewController {
     
 }
 
-// MARK: - UITableViewDelegate
-extension CWChatMessageController: UITableViewDelegate {
+extension CWChatMessageController {
+    
+    public func messageNeedShowTime(_ date:Date) -> Bool {
+        messageAccumulate += 1
+        let messageInterval = date.timeIntervalSince1970 - lastDateInterval
+        //消息间隔
+        if messageAccumulate > kMaxShowTimeMessageCount ||
+            lastDateInterval == 0 ||
+            messageInterval > kMaxShowtimeMessageInterval{
+            lastDateInterval = date.timeIntervalSince1970
+            messageAccumulate = 0
+            return true
+        }
+        return false
+    }
+    
+    /// 滚动到底部
+    public func updateMessageAndScrollBottom(_ animated:Bool = true) {
+        if messageList.count == 0 {
+            return
+        }
+        let indexPath = IndexPath(row: messageList.count-1, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+    }
+    
+    
+}
+
+// MARK: - UITableViewDelegate && UITableViewDataSource
+extension CWChatMessageController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
@@ -95,11 +133,7 @@ extension CWChatMessageController: UITableViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
     }
-}
 
-// MARK: - UITableViewDataSource
-extension CWChatMessageController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messageList.count
     }
@@ -138,6 +172,7 @@ extension CWChatMessageController: CWChatManagerDelegate {
         
         let indexPath = IndexPath(row: messageList.count-1, section: 0)
         self.tableView.insertRows(at: [indexPath], with: .none)
+        updateMessageAndScrollBottom()
     }
 }
 
@@ -165,6 +200,7 @@ extension CWChatMessageController: CWInputToolBarDelegate {
         
         let indexPath = IndexPath(row: messageList.count-1, section: 0)
         self.tableView.insertRows(at: [indexPath], with: .none)
+//        updateMessageAndScrollBottom(true)
         
         let chatManager = CWChatClient.share.chatManager
         chatManager.sendMessage(message, progress: { (progress) in

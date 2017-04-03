@@ -1,5 +1,5 @@
 //
-//  CWContactsSearchController.swift
+//  CWSearchResultController.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/4/3.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// 搜索结果
-class CWContactsSearchController: UIViewController {
+class CWSearchResultController: UIViewController {
     // 原始数据
     public var contactList:[CWContactModel]?
     // 搜索结果
@@ -42,7 +42,7 @@ class CWContactsSearchController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension CWContactsSearchController: UITableViewDataSource, UITableViewDelegate {
+extension CWSearchResultController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - Table view data source
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -70,7 +70,7 @@ extension CWContactsSearchController: UITableViewDataSource, UITableViewDelegate
 }
 
 // MARK: - UISearchResultsUpdating
-extension CWContactsSearchController: UISearchResultsUpdating {
+extension CWSearchResultController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         let text = searchController.searchBar.text

@@ -53,10 +53,10 @@ extension CWChatMessageController {
     
     func keyboardWillShowHide(_ notification:Notification, hideKeyBoard: Bool = false) {
         
-        let keyboardFrameValue = (notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardFrameValue = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         let keyboardFrame = keyboardFrameValue.cgRectValue
-        let curve = ((notification as NSNotification).userInfo![UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue
-        let duration = ((notification as NSNotification).userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        let curve = (notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue
+        let duration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         let curveNumber = UIViewAnimationCurve(rawValue:curve)
         
         UIView.animate(withDuration: duration,
@@ -66,8 +66,10 @@ extension CWChatMessageController {
                         
                         if hideKeyBoard {
                             self.chatToolBar.bottom = self.view.height
+                            self.tableView.bottom = self.chatToolBar.top
                         } else {
                             self.chatToolBar.bottom = self.view.height-keyboardFrame.height
+                            self.tableView.bottom = self.chatToolBar.top
                         }
                         
                         

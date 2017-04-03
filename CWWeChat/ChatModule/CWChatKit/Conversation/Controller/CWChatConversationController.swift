@@ -22,10 +22,10 @@ class CWChatConversationController: UIViewController {
         for conversation in result {
             conversationList.append(CWChatConversationModel(conversation: conversation))
         }
-        
         chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
-        CWChatKit.share.userInfoDataSource = self
         
+        
+        CWChatKit.share.userInfoDataSource = self
         setupUI()
         registerCellClass()
         // Do any additional setup after loading the view.
@@ -53,8 +53,25 @@ class CWChatConversationController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.tableHeaderView = self.searchController.searchBar
         return tableView
     }()
+    
+    lazy var searchController: CWSearchController = {
+        let searchController = CWSearchController(searchResultsController: self.searchResultController)
+        searchController.searchResultsUpdater = self.searchResultController
+        searchController.searchBar.placeholder = "搜索"
+        searchController.searchBar.delegate = self
+        searchController.showVoiceButton = true
+        return searchController
+    }()
+    
+    //搜索结果
+    var searchResultController: CWSearchResultController = {
+        let searchResultController = CWSearchResultController()
+        return searchResultController
+    }()
+    
 }
 
 // MARK: - CWChatUserInfoDataSource
@@ -68,8 +85,8 @@ extension CWChatConversationController: CWChatUserInfoDataSource {
 }
 
 
-//MARK: UITableViewDelegate
-extension CWChatConversationController: UITableViewDelegate {
+//MARK: UITableViewDelegate UITableViewDataSource
+extension CWChatConversationController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
@@ -104,11 +121,6 @@ extension CWChatConversationController: UITableViewDelegate {
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
-}
-
-//MARK: UITableViewDataSource
-extension CWChatConversationController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.conversationList.count
     }
@@ -119,6 +131,37 @@ extension CWChatConversationController: UITableViewDataSource {
         return cell
     }
 }
+
+// MARK: - UISearchBarDelegate
+extension CWChatConversationController: UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        let message = "语言搜索"
+        let alertController = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
+        let alertAtion = UIAlertAction(title: "确定", style: .default) { (action) in
+            
+        }
+        alertController.addAction(alertAtion)
+        self.present(alertController, animated: true, completion: nil)
+    }
+}
+
 
 // MARK: - CWChatManagerDelegate
 extension CWChatConversationController: CWChatManagerDelegate {

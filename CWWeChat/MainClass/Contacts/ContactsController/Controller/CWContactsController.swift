@@ -62,8 +62,8 @@ class CWContactsController: UIViewController {
     }()
     
     //搜索结果
-    var searchResultController: CWContactsSearchController = {
-        let searchResultController = CWContactsSearchController()
+    var searchResultController: CWSearchResultController = {
+        let searchResultController = CWSearchResultController()
         return searchResultController
     }()
     
