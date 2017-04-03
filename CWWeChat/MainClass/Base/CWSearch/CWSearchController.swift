@@ -1,6 +1,6 @@
 //
 //  CWSearchController.swift
-//  CWXMPPChat
+//  CWWeChat
 //
 //  Created by chenwei on 16/5/29.
 //  Copyright © 2016年 chenwei. All rights reserved.
