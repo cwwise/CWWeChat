@@ -1,5 +1,5 @@
 osx_image: xcode8.3
-language: objective-c
+language: swift
 
 cache: cocoapods
 podfile: Podfile
@@ -13,15 +13,14 @@ env:
     - SCHEME="CWWeChat"
 
 before_install:
-  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
-  - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
+  - gem install cocoapods --quiet
   - pod install
 
 script:
   - set -o pipefail
-  - xcodebuild -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -configuration Debug clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -c
-  - xcodebuild -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -configuration Release clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -c
-  - pod lib lint --no-clean
+  - xcodebuild -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -configuration Debug clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+  - xcodebuild -scheme "$SCHEME" -workspace "$XCODE_WORKSPACE" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' -configuration Debug -enableCodeCoverage YES test
 
 after_success:
   - sleep 5
+  - bash <(curl -s https://codecov.io/bash)
