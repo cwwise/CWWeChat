@@ -208,9 +208,9 @@ extension CWChatMessageStore {
         
     }
     
-    func markMessageRead(_ message: CWChatMessage) {
-        let filter = messageTable.filter(messageId == message.messageId)
-        let update = filter.update(readed <- message.isRead)
+    func markMessageRead(_ _messageId: String) {
+        let filter = messageTable.filter(messageId == _messageId)
+        let update = filter.update(readed <- true)
         do {
             try messageDB.run(update)
         } catch {
@@ -266,7 +266,7 @@ extension CWChatMessageStore {
     ///
     /// - Parameter targetId: 目标用户id
     /// - Returns: 返回删除结果
-    func deleteMessage(targetId: String) -> Bool {
+    @discardableResult func deleteMessages(by targetId: String) -> Bool {
         let query = messageTable.filter(senderId == self.userId && targetId == targetId)
         do {
             let _ = try messageDB.run(query.delete())

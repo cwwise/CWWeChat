@@ -10,8 +10,11 @@ import Foundation
 
 /// 聊天相关回调
 public protocol CWChatManagerDelegate: NSObjectProtocol {
-    
     // MARK: 会话
+    
+    /// 会话状态发生变化
+    ///
+    /// - Parameter conversation: 会话
     func conversationDidUpdate(_ conversation: CWChatConversation)
     
     // MARK: Message
@@ -25,7 +28,6 @@ public protocol CWChatManagerDelegate: NSObjectProtocol {
     ///
     /// - Parameter message: 消息实体
     func messagesDidReceive(_ message: CWChatMessage)
-    
 }
 
 // 让协议变成可选
@@ -35,8 +37,9 @@ public extension CWChatManagerDelegate {
     func messageStatusDidChange(_ message: CWChatMessage, error: CWChatError?) {}
 }
 
-
+/// 消息执行结果回调
 public typealias CWMessageCompletionBlock = (_ message: CWChatMessage, _ error: CWChatError?) -> Void
+/// 消息进度
 public typealias CWMessageProgressBlock = (_ progress: Int) -> Void
 
 /// 聊天相关操作
@@ -54,15 +57,34 @@ public protocol CWChatManager: NSObjectProtocol {
     func removeChatDelegate(_ delegate: CWChatManagerDelegate)
 
     // MARK: 获取会话
+    
+    /// 获取所有会话
+    ///
+    /// - Returns: 会话列表
     func fetchAllConversations() -> [CWChatConversation]
     
     func fecthConversation(chatType: CWChatType, targetId: String) -> CWChatConversation
+    
+    /// 删除会话
+    ///
+    /// - Parameters:
+    ///   - targetId: 会话id
+    ///   - deleteMessages: 是否删除会话中的消息
+    func deleteConversation(_ targetId: String, deleteMessages: Bool)
+    func deleteConversation(_ targetId: String)
     
     // MARK: 获取消息
     
     
     
-    // MARK: 发送消息相关
+    // MARK: 消息相关
+    
+    /// 更新消息到DB
+    ///
+    /// - Parameters:
+    ///   - message: 消息
+    ///   - completion: 回调结果
+    func updateMessage(_ message: CWChatMessage, completion: @escaping CWMessageCompletionBlock)
     
     /// 发送回执消息
     ///

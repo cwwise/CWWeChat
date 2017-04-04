@@ -75,6 +75,7 @@ class CWChatMessageCell: UITableViewCell {
         // 消息实体
         let message = messageModel.message
         
+        var userId: String
         // 是自己的
         if message.direction == .send {
             
@@ -102,7 +103,8 @@ class CWChatMessageCell: UITableViewCell {
             let image = #imageLiteral(resourceName: "bubble-default-sended")
             let cap = ChatCellUI.right_cap_insets
             messageContentView.image = image.resizableImage(withCapInsets: cap)
-            
+            userId = message.senderId ?? ""
+    
         } else {
             
             avatarImageView.snp.remakeConstraints({ (make) in
@@ -125,19 +127,15 @@ class CWChatMessageCell: UITableViewCell {
                 make.size.equalTo(messageModel.messageFrame.contentSize)
             })
 
-            
-            
-
             let image = #imageLiteral(resourceName: "bubble-default-received")
             let cap = ChatCellUI.left_cap_insets
             messageContentView.image = image.resizableImage(withCapInsets: cap)
             
+            userId = message.targetId
         }
         
-        avatarImageView.yy_setImage(with: nil, placeholder: defaultHeadeImage)
-        
-        
-
+        let avatarURL = "\(kHeaderImageBaseURLString)\(userId).jpg"
+        avatarImageView.yy_setImage(with: URL(string: avatarURL), placeholder: defaultHeadeImage)
     }
     
     

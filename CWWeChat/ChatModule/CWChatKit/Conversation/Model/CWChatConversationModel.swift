@@ -13,6 +13,10 @@ class CWChatConversationModel: NSObject {
 
     /// 会话
     private(set) var conversation: CWChatConversation
+    
+    var targetId: String {
+        return conversation.targetId
+    }
     /// 未读消息
     var unreadCount: Int {
         return conversation.unreadCount

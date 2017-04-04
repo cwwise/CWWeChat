@@ -33,7 +33,10 @@ public class CWChatConversation: NSObject {
     ///
     /// - Parameter messageId: 要设置消息的ID
     func markMessageAsRead(messageId: String) {
-        
+        guard let service = CWChatClient.share.chatManager as? CWChatService else {
+            return
+        }
+        service.messageStore.markMessageRead(messageId)
     }
     
     /// 将所有未读消息设置为已读
@@ -41,8 +44,7 @@ public class CWChatConversation: NSObject {
         guard let service = CWChatClient.share.chatManager as? CWChatService else {
                 return
         }
-        
-        
+        service.messageStore.markAllMessagesAsRead(self.targetId)
     }
     
     func appendMessage(_ message: CWChatMessage?) {

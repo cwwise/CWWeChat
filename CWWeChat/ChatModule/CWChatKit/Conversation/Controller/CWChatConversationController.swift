@@ -11,32 +11,33 @@ import UIKit
 /// 会话
 class CWChatConversationController: UIViewController {
 
+    // 方便获取
+    var chatManager: CWChatManager {return CWChatClient.share.chatManager}
+    // 会话列表
     var conversationList = [CWChatConversationModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
-        let chatManager = CWChatClient.share.chatManager
         let result = chatManager.fetchAllConversations()
         for conversation in result {
             conversationList.append(CWChatConversationModel(conversation: conversation))
         }
         chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
         
-        
         CWChatKit.share.userInfoDataSource = self
         setupUI()
-        registerCellClass()
         // Do any additional setup after loading the view.
     }
     
     func setupUI() {
         self.view.addSubview(self.tableView)
+        registerCellClass()
     }
     
     func registerCellClass() {
-        self.tableView.register(CWChatConversationCell.self, forCellReuseIdentifier: CWChatConversationCell.identifier)
+        tableView.register(CWChatConversationCell.self, forCellReuseIdentifier: CWChatConversationCell.identifier)
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,9 +78,11 @@ class CWChatConversationController: UIViewController {
 // MARK: - CWChatUserInfoDataSource
 extension CWChatConversationController: CWChatUserInfoDataSource {
     func loadUserInfo(userId: String, completion: @escaping ((CWChatUser?) -> Void)) {
+       
+        //先从本地缓存获取，如果没有，则做网络请求来获取
         let model = CWChatUserModel(userId: "chenwei")
         model.nickname = userId
-        model.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/\(userId).jpg"
+        model.avatarURL = "\(kHeaderImageBaseURLString)\(userId).jpg"
         completion(model)
     }
 }
@@ -94,11 +97,11 @@ extension CWChatConversationController: UITableViewDelegate, UITableViewDataSour
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: deleteTitle) { (action:UITableViewRowAction, indexPath) in
             
             //获取当前model
-            let _ = self.conversationList[indexPath.row]
+            let conversationModel = self.conversationList[indexPath.row]
             //数组中删除
             self.conversationList.remove(at: indexPath.row)
             //从数据库中删除
-            
+            self.chatManager.deleteConversation(conversationModel.targetId, deleteMessages: true)
             //删除
             self.tableView.deleteRows(at: [indexPath], with: .none)
         }
@@ -114,8 +117,9 @@ extension CWChatConversationController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        let chatVC = CWChatMessageController()
         let conversation = conversationList[indexPath.row].conversation
+
+        let chatVC = CWChatMessageController()
         chatVC.conversation = conversation
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)

@@ -52,7 +52,8 @@ class CWChatConversationStore: NSObject {
     /// 数据库路径
     lazy var path: String = {
         let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let path = "\(documentPath)/cwchat/\(self.userId)/chat/"
+        let domain = CWChatClient.share.options.chatDomain
+        let path = "\(documentPath)/cwchat/\(domain)/\(self.userId)/chat/"
         if !FileManager.default.fileExists(atPath: path) {
             try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         }
@@ -142,7 +143,9 @@ extension CWChatConversationStore {
         return list
     }
     
-    func fecthConversation(_ type: CWChatType, targetId: String, isExist: UnsafeMutablePointer<Bool>? = nil) -> CWChatConversation {
+    func fecthConversation(_ type: CWChatType, 
+                           targetId: String, 
+                           isExist: UnsafeMutablePointer<Bool>? = nil) -> CWChatConversation {
         
         var conversation: CWChatConversation
         var create = true
@@ -183,17 +186,17 @@ extension CWChatConversationStore {
 // MARK: - 删除会话
 extension CWChatConversationStore {
     
-    func deleteConversation(targetId: String, deleteMessage delete:Bool = false) {
+    /// 删除会话
+    ///
+    /// - Parameter targetId: 会话id
+    @discardableResult func deleteConversation(_ targetId: String) -> Bool {
         do {
             let query = conversationTable.filter(targetId==target_id)
             try conversationDB.run(query.delete())
-            // 如果删除
-            if delete {
-                
-            }
-            
+            return true
         } catch {
             log.error(error)
+            return false
         }
     }
     

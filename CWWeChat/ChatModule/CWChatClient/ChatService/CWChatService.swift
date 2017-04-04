@@ -131,6 +131,23 @@ extension CWChatService: CWChatManager {
         return conversation
     }
     
+    func deleteConversation(_ targetId: String, deleteMessages: Bool) {
+        conversationStore.deleteConversation(targetId)
+        if deleteMessages {
+            messageStore.deleteMessages(by: targetId)
+        }
+        
+    }
+     
+    func deleteConversation(_ targetId: String) {
+        self.deleteConversation(targetId, deleteMessages: false)
+    }
+    
+    /// 更新消息
+    func updateMessage(_ message: CWChatMessage, completion: @escaping CWMessageCompletionBlock) {
+        messageStore.updateMessageStatus(message)
+    }
+    
     /// 发送回执消息(不保存消息)
     func sendMessageReadAck(message: CWChatMessage, completion: @escaping CWMessageCompletionBlock) {
         
