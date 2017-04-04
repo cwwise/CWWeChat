@@ -10,46 +10,33 @@ import Foundation
 import UIKit
 
 extension String {
-    func pinYingString(_ allFirst:Bool=false) -> String{
-        let py=""
-        let string = self
-        if string == "" {
-            return py
-        }
-        let str = CFStringCreateMutableCopy(nil, 0, string as CFString!)
+    // 拼音
+    var pinYingString: String {
+        let str = NSMutableString(string: self) as CFMutableString
         CFStringTransform(str, nil, kCFStringTransformToLatin, false)
-        CFStringTransform(str, nil, kCFStringTransformStripCombiningMarks, false)
+        CFStringTransform(str, nil, kCFStringTransformStripDiacritics, false)
         
-//        if allFirst {
-//            for x in (str as? String).components(separatedBy: " ") {
-//                py += x.pinYingString()
-//            }
-//        } else {
-//            py  = (str as? NSString).substringToIndex(1).uppercased()
-//        }
-        
-        return py
+        let string = str as String
+        return string.capitalized.trimWhitespace()
     }
     
+    // 首字母
+    var pinyingInitial: String {
+        let array = self.capitalized.components(separatedBy: " ")
+        var pinYing = ""
+        for temp in array {
+            if temp.characters.count == 0 {continue}
+            let index = temp.index(temp.startIndex, offsetBy: 1)
+            pinYing += temp.substring(to: index)
+        }
+        return pinYing
+        
+    }
     
-//    func getFistLetter(str: String)-> String{
-//        //转换成可变数据
-//        var mutableUserAgent = NSMutableString(string: str) as CFMutableString
-//        //let transform = kCFStringTransformMandarinLatin//NSString(string: "Any-Latin; Latin-ASCII; [:^ASCII:] Remove") as CFString
-//        //取得带音调拼音
-//        if CFStringTransform(mutableUserAgent, nil,kCFStringTransformMandarinLatin, false) == true{
-//            //取得不带音调拼音
-//            if CFStringTransform(mutableUserAgent,nil,kCFStringTransformStripDiacritics,false) == true{
-//                let str1 = mutableUserAgent as String
-//                let s = str1.capitalizedString.subString(0, endOffset: -str1.length+1)
-//                return s
-//            }else{
-//                return str
-//            }
-//        }else{
-//            return str
-//        }
-//    }
-    
+    var fistLetter: String {
+        if self.characters.count == 0 {return self}
+        let index = self.index(self.startIndex, offsetBy: 1)
+        return self.substring(to: index)
+    }
 }
 

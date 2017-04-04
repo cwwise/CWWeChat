@@ -18,7 +18,7 @@ import UIKit
  - Connecting:   连接中
  - Disconnected: 未连接
  */
-public enum CWXMPPStatus: String {
+public enum CWChatClientStatus: String {
     case none = ""
     case error = "连接错误"
     case connected = "已经连接..."
@@ -45,19 +45,24 @@ public class CWChatClient: NSObject {
     private(set) var version: String
     /// 聊天配置信息
     private(set) var options = CWChatClientOptions()
-    /// XMPP实例
-    private var xmppManager = CWChatXMPPManager.share
     /// 当前登陆用户
     private(set) var userId: String!
     /// 聊天模块
-    lazy private(set) var chatManager: CWChatManager = CWChatService(dispatchQueue: DispatchQueue.global())
+    private(set) var chatManager: CWChatManager
+    /// 好友模块
+    private(set) var contactManager: CWContactManager
     /// 是否连接服务器
     private(set) var isConnected: Bool = false
     /// 用户是否已登录
     private(set) var isLoggedIn: Bool = false
     
+    /// XMPP实例
+    private var xmppManager = CWChatXMPPManager.share
+    
     private override init() {
         version = "0.0.1"
+        chatManager = CWChatService(dispatchQueue: DispatchQueue.global()) 
+        contactManager = CWContactService(dispatchQueue: DispatchQueue.global())
         super.init()
     }
     
@@ -81,7 +86,7 @@ public class CWChatClient: NSObject {
     public func register(username: String,
                          password: String,
                          completion: CWClientCompletion? = nil) {
-        userId = username
+
         xmppManager.loginServer(with: username,
                                 password: password,
                                 isLogin: false,

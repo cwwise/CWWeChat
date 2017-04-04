@@ -38,8 +38,7 @@ public class CWChatConversation: NSObject {
     
     /// 将所有未读消息设置为已读
     func markAllMessagesAsRead() {
-        guard let service = CWChatClient.share.chatManager as? CWChatService,
-            let chatmessageStore = service.messageStore else {
+        guard let service = CWChatClient.share.chatManager as? CWChatService else {
                 return
         }
         
@@ -81,14 +80,13 @@ public extension CWChatConversation {
                             searchDirection: CWMessageSearchDirection = .down,
                             completion: CWConversationResultCompletion) {
         
-        guard let service = CWChatClient.share.chatManager as? CWChatService,
-              let chatmessageStore = service.messageStore else {
+        guard let service = CWChatClient.share.chatManager as? CWChatService else {
             completion([], nil)
             return
         }
         
         
-        let result = chatmessageStore.fecthMessages(targetId: self.targetId,
+        let result = service.messageStore.fecthMessages(targetId: self.targetId,
                                                      count: count)
         
         completion(result, nil)

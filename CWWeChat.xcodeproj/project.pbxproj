@@ -415,10 +415,10 @@
 				8C84B9501E8D60360020D508 /* CWChatManager.swift */,
 				8C0BFDD61E90FD91007343F1 /* CWContactManager.swift */,
 				8C0BFDD81E9127FD007343F1 /* CWGroupManager.swift */,
+				8C84B9521E8D62F70020D508 /* ChatService */,
 				8C4927811E928EA200B3C482 /* Request */,
 				8C0BFE1D1E92480D007343F1 /* Tool */,
 				8C0BFDDA1E91289B007343F1 /* Group */,
-				8C84B9521E8D62F70020D508 /* ChatService */,
 				1F34922E1E878BC600B36641 /* Bussiness */,
 				1F3491BD1E878AD500B36641 /* DataBase */,
 				1F3491BE1E878AD500B36641 /* MessageHandle */,
@@ -978,10 +978,10 @@
 		8C0BFDFE1E9209D8007343F1 /* ContactsController */ = {
 			isa = PBXGroup;
 			children = (
-				8C0BFE181E920F09007343F1 /* Tool */,
 				8C0BFDFF1E9209D8007343F1 /* Controller */,
 				8C0BFE031E9209D8007343F1 /* Model */,
 				8C0BFE061E9209D8007343F1 /* View */,
+				8C0BFE181E920F09007343F1 /* Tool */,
 			);
 			path = ContactsController;
 			sourceTree = "<group>";

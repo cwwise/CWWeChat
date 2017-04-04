@@ -1,20 +1,5 @@
 PODS:
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
-  - AFNetworking/NSURLSession (3.1.0):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.1.0)
-  - AFNetworking/Security (3.1.0)
-  - AFNetworking/Serialization (3.1.0)
-  - AFNetworking/UIKit (3.1.0):
-    - AFNetworking/NSURLSession
-  - Alamofire (4.3.0)
+  - Alamofire (4.4.0)
   - CocoaAsyncSocket (7.6.0)
   - CocoaLumberjack (3.1.0):
     - CocoaLumberjack/Default (= 3.1.0)
@@ -22,7 +7,6 @@ PODS:
   - CocoaLumberjack/Default (3.1.0)
   - CocoaLumberjack/Extensions (3.1.0):
     - CocoaLumberjack/Default
-  - HappyDNS (0.3.10)
   - IGListKit (2.1.0):
     - IGListKit/Default (= 2.1.0)
   - IGListKit/Default (2.1.0):
@@ -37,17 +21,14 @@ PODS:
   - Moya/RxSwift (8.0.3):
     - Moya/Core
     - RxSwift (~> 3.0)
-  - Nimble (6.1.0)
+  - Nimble (6.0.1)
   - OHHTTPStubs/Core (5.2.3)
   - OHHTTPStubs/Swift (5.2.3):
     - OHHTTPStubs/Core
-  - Qiniu (7.1.5):
-    - AFNetworking (~> 3)
-    - HappyDNS (~> 0.3)
   - Quick (1.1.0)
   - Result (3.2.1)
   - RxSwift (3.3.1)
-  - SnapKit (3.1.2)
+  - SnapKit (3.2.0)
   - SQLite.swift (0.11.2):
     - SQLite.swift/standard (= 0.11.2)
   - SQLite.swift/standard (0.11.2)
@@ -75,7 +56,6 @@ DEPENDENCIES:
   - Moya/RxSwift
   - Nimble
   - OHHTTPStubs/Swift
-  - Qiniu
   - Quick
   - SnapKit
   - SQLite.swift
@@ -87,23 +67,20 @@ DEPENDENCIES:
   - YYWebImage
 
 SPEC CHECKSUMS:
-  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   CocoaAsyncSocket: b9d5589f07baf9de8f34cc25abd4fcba28f13805
   CocoaLumberjack: 8311463ddf9ee86a06ef92a071dd656c89244500
-  HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   IGListKit: b826c68ef7a4ae1626c09d4d3e1ea7a169e6c36e
   KissXML: 1c1eeeb6b94e4522cd2f2373e5d0d03c9227738f
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Moya: d3721622e3cc0cc2f038d69a258686f0b66e7252
-  Nimble: c53e6903fee94041b90ded74f135820437d8bf59
+  Nimble: 1527fd1bd2b4cf0636251a36bc8ab37e81da8347
   OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
-  Qiniu: 77a3dba411556a383d72d17e842345a9d4c83252
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
   Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
   RxSwift: 8fc9f2de6275a9101d518444e00bf32f1a42caac
-  SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SQLite.swift: 670c3e9e0a806bbfd56a3de5d530768dc0e6fe7c
   SwiftyBeaver: 949aa1439b8fa3667f68555cfef65de46a70ccde
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
@@ -114,6 +91,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 6a5b9b5c2d4f851d9f52677c72228c5ff5a859e1
+PODFILE CHECKSUM: 4942724d107ac32534a89df2b782c4d0250763ea
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.0.rc.1

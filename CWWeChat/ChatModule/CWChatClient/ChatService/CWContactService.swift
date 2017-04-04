@@ -9,9 +9,19 @@
 import UIKit
 import XMPPFramework
 
-/// 联系人模块
+/// 联系人模块 实现
 class CWContactService: XMPPModule {
 
+    lazy var xmppRoster: XMPPRoster = {
+        let xmppRosterStorage = XMPPRosterMemoryStorage()
+        let xmppRoster = XMPPRoster(rosterStorage: xmppRosterStorage)
+        xmppRoster?.activate(CWChatXMPPManager.share.xmppStream)
+        xmppRoster?.addDelegate(self, delegateQueue: self.moduleQueue)
+        return xmppRoster!
+    }();
+
+    var completion: CWContactCompletion?
+    
     override init!(dispatchQueue queue: DispatchQueue!) {
         super.init(dispatchQueue: queue)
     }
@@ -37,11 +47,37 @@ extension CWContactService: CWContactManager {
     }
     
     // MARK: 获取好友
-    func fetchContactsFromServer(completion: CWContactCompletion) {
-        
-        
-        
+    func fetchContactsFromServer(completion: CWContactCompletion?) {
+        xmppRoster.fetch()
+        self.completion = completion
     }
     
-
+    func addContact(_ contact: CWChatUser, message: String, completion: CWAddContactCompletion?) {
+        let domain = CWChatClient.share.options.chatDomain
+        let resource = CWChatClient.share.options.chatResource
+        let jid = XMPPJID(user: contact.userId, domain: domain, resource: resource)
+        xmppRoster.addUser(jid, withNickname: contact.userId)
+    }
+    
 }
+
+extension CWContactService: XMPPRosterMemoryStorageDelegate {
+
+    func xmppRosterDidPopulate(_ sender: XMPPRosterMemoryStorage!) {
+
+        var contacts = [CWChatUserModel]()
+        let users = sender.sortedUsersByName()
+        for user in users! {
+            if let user = user as? XMPPUser {
+                let model = CWChatUserModel(userId: user.jid().user)
+                model.nickname = user.nickname() ?? user.jid().user
+                contacts.append(model)
+            }
+        }
+
+        self.completion?(contacts, nil)
+    }
+}
+
+
+

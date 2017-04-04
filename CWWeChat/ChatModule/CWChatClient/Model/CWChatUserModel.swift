@@ -15,7 +15,7 @@ public protocol CWChatUser: NSObjectProtocol {
     var nickname: String? {get set}
     // 用户头像
     var avatarURL: String? {get set}
-    
+    init(userId: String)
 }
 
 class CWChatUserModel: NSObject, CWChatUser {
@@ -24,7 +24,7 @@ class CWChatUserModel: NSObject, CWChatUser {
     var nickname: String?
     var avatarURL: String?
 
-    init(userId: String) {
+    required init(userId: String) {
         self.userId = userId
     }
 }

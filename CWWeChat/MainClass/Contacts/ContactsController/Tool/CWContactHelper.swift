@@ -76,7 +76,6 @@ class CWContactHelper: NSObject {
         
         var sectionHeaders = [UITableViewIndexSearch]
         
-        
         // 遍历数据 根据首字母 如果没有拼音字母 则添加到＃组别中
         let othergroup = CWContactGroupModel(groupName: "#")
         
@@ -86,19 +85,21 @@ class CWContactHelper: NSObject {
         for contactModel in contactsData {
 
             //首字母
-            let initial = contactModel.pinying
-            if initial.characters.count == 0 {
+            let initial = contactModel.pinyingInitial.fistLetter            
+            if matchLetter(string: initial) == false {
                 othergroup.append(contactModel)
                 continue
             }
             
-            // 添加判断 是不是字符
             //如果不相同，则说明之前没有这个首字母添加到数组，
             if initial != lastInitial {
-                if (currentGroup != nil) && currentGroup!.contactCount > 0 {
-                    analyzeGroupData.append(currentGroup!)
-                    sectionHeaders.append(currentGroup!.groupName!)
+                
+                if let currentGroup = currentGroup,
+                    currentGroup.contactCount > 0{
+                    analyzeGroupData.append(currentGroup)
+                    sectionHeaders.append(currentGroup.groupName!)
                 }
+                
                 lastInitial = initial
                 currentGroup = CWContactGroupModel(groupName: initial)
                 currentGroup?.append(contactModel)
@@ -126,8 +127,7 @@ class CWContactHelper: NSObject {
         
         sortSectionHeaders.removeAll()
         sortSectionHeaders.append(contentsOf: sectionHeaders)
-        
-        
+    
         DispatchQueue.main.async(execute: {
             self.dataChange?(self.sortContactsData,
                              self.sortSectionHeaders,
@@ -136,11 +136,19 @@ class CWContactHelper: NSObject {
         
     }
     
+    func matchLetter(string: String) -> Bool {
+        if string.characters.count == 0 {return false}
+        let index = string.index(string.startIndex, offsetBy: 1)
+        let regextest = NSPredicate(format: "SELF MATCHES %@", "^[A-Za-z]+$")
+        return regextest.evaluate(with: string.substring(to: index))
+    }
+    
     //初始化默认的组
     func setupDefaultGroup() {
         
         let titleArray = ["新的朋友","群聊", "标签", "公众号"]
-        let iconArray = ["friends_new","friends_group", "friends_tag", "friends_public"]
+        let iconArray = ["contact_new_friend","contact_group_chat",
+                         "contact_signature","contact_official_account"]
         let idArray = ["-1","-2", "-3", "-4"]
         
         var contactArray = [CWContactModel]()

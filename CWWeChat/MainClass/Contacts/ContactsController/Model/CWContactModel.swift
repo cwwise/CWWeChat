@@ -19,8 +19,8 @@ public class CWContactModel: NSObject {
         willSet {
             //不相同的时候 设置获取拼音和拼音的首字母
             if (newValue != nickname) && newValue != nil {
-                self.pinying = newValue!.pinYingString(true)
-                self.pinyingInitial = newValue!.pinYingString()
+                self.pinying = newValue!.pinYingString
+                self.pinyingInitial = self.pinying.pinyingInitial
             }
         }
         
@@ -37,7 +37,7 @@ public class CWContactModel: NSObject {
     ///拼音缩写
     var pinying: String = ""
     ///拼音首字母
-    var pinyingInitial: String?
+    var pinyingInitial: String = ""
     
     // 详情
     var detailInfo = CWContactDetailModel()

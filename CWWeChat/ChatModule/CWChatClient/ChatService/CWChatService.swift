@@ -11,8 +11,15 @@ import XMPPFramework
 
 class CWChatService: XMPPModule {
     // 消息存储
-    private(set) var messageStore: CWChatMessageStore!
-    private(set) var conversationStore: CWChatConversationStore!
+    lazy private(set) var messageStore: CWChatMessageStore = {
+        let messageStore = CWChatMessageStore(userId: CWChatClient.share.userId)
+        return messageStore
+    }()
+    
+    lazy private(set) var conversationStore: CWChatConversationStore = {
+        let conversationStore = CWChatConversationStore(userId: CWChatClient.share.userId)
+        return conversationStore
+    }()
     /// 发送
     private(set) var messageTransmitter: CWMessageTransmitter
     /// 消息发送管理
@@ -21,10 +28,6 @@ class CWChatService: XMPPModule {
     private(set) var messageParse: CWChatMessageParse
     
     override init!(dispatchQueue queue: DispatchQueue!) {
-        
-        messageStore = CWChatMessageStore(userId: CWChatClient.share.userId)
-        conversationStore = CWChatConversationStore(userId: CWChatClient.share.userId)
-        
         // 消息发送和解析
         messageTransmitter = CWMessageTransmitter()
         dispatchManager = CWMessageDispatchManager()

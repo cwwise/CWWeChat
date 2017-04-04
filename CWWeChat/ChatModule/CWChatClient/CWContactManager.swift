@@ -14,10 +14,10 @@ public protocol CWContactManagerDelegate {
 }
 
 public typealias CWContactCompletion = (_ contacts: [CWChatUser], _ error: CWChatError?) -> Void
+public typealias CWAddContactCompletion = (_ contact: CWChatUser, _ error: CWChatError?) -> Void
 
 
 public protocol CWContactManager {
-    
     /// 添加代理
     ///
     /// - Parameter delegate: 代理
@@ -30,7 +30,7 @@ public protocol CWContactManager {
     func removeContactDelegate(_ delegate: CWContactManagerDelegate)
     
     // MARK: 获取好友
-    func fetchContactsFromServer(completion: CWContactCompletion)
+    func fetchContactsFromServer(completion: CWContactCompletion?)
     
-    
+    func addContact(_ contact: CWChatUser, message: String, completion: CWAddContactCompletion?)
 }

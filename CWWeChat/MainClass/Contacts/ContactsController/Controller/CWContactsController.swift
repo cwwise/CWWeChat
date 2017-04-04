@@ -34,7 +34,14 @@ class CWContactsController: UIViewController {
         }
         contactHelper.dataChange = block
 
-    
+        let contactManager = CWChatClient.share.contactManager
+        contactManager.fetchContactsFromServer { (list, error) in
+            
+            
+            
+            
+        }
+        
     }
     
     func setupUI() {
@@ -106,6 +113,15 @@ extension CWContactsController: UITableViewDataSource, UITableViewDelegate {
         return heightOfHeader
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: CWContactHeaderView.identifier) as! CWContactHeaderView
+        
+        let group = groupList[section]
+        headerView.titleLabel.text = group.groupName
+        return headerView
+    }
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -113,7 +129,7 @@ extension CWContactsController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let group = groupList[section];
+        let group = groupList[section]
         return group.contactCount
     }
     
@@ -123,7 +139,7 @@ extension CWContactsController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CWContactCell.identifier) as! CWContactCell
-        let group = groupList[indexPath.section];
+        let group = groupList[indexPath.section]
         cell.contactModel = group[indexPath.row]
         return cell
     }

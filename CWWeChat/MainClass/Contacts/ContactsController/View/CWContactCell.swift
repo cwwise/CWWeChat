@@ -48,7 +48,12 @@ class CWContactCell: UITableViewCell {
     ///设置UI
     func setupUI() {
         let url = URL(string: contactModel.avatarURL!)
-        self.avatarImageView.yy_setImage(with: url, placeholder: defaultHeadeImage)
+        if url?.host == nil {
+            self.avatarImageView.image = UIImage(named: contactModel.avatarURL!)
+        } else {
+            self.avatarImageView.yy_setImage(with: url, placeholder: defaultHeadeImage) 
+        }
+        
         self.usernameLabel.text = contactModel.nickname;
     }
     

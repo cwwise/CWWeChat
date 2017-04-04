@@ -14,15 +14,14 @@ import Alamofire
 class CWChatXMPPManager: NSObject {
     
     public static let share = CWChatXMPPManager()
-
     /// xmpp流
     private(set) var xmppStream: XMPPStream
     /// xmpp重新连接
     private var xmppReconnect: XMPPReconnect
+    private var autoPing: XMPPAutoPing
     /// xmpp队列
     private var xmppQueue: DispatchQueue
 
-    
     var options: CWChatClientOptions!
     /// 网络状态监听
     var reachable: NetworkReachabilityManager?
@@ -37,7 +36,7 @@ class CWChatXMPPManager: NSObject {
         
         xmppStream = XMPPStream()
         xmppReconnect = XMPPReconnect()
-        
+        autoPing = XMPPAutoPing()
         super.init()
         
         ///xmpp
@@ -49,7 +48,12 @@ class CWChatXMPPManager: NSObject {
         xmppReconnect.reconnectTimerInterval = DEFAULT_XMPP_RECONNECT_TIMER_INTERVAL
         xmppReconnect.activate(xmppStream)
         xmppReconnect.addDelegate(self, delegateQueue: xmppQueue)
-        
+
+        //心跳机制
+        autoPing.activate(xmppStream)
+        autoPing.respondsToQueries = true
+        autoPing.pingInterval = 60
+
         setupNetworkReachable()
         registerApplicationNotification()
     }
@@ -157,11 +161,6 @@ extension CWChatXMPPManager: XMPPStreamDelegate {
     /// 连接失败
     func xmppStreamDidDisconnect(_ sender: XMPPStream!, withError error: Error!) {
         log.error("xmpp连接断开...\(error)")
-        if self.completion != nil {
-            log.error("xmppblock存在")
-        } else {
-            log.error("xmppblock不存在")
-        }
         self.completion?(nil, CWChatError(errorCode: .customer, error: "连接服务器失败"))
     }
     
