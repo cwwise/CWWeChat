@@ -2,6 +2,7 @@
 ## CWWeChat
 [![License](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://github.com/wei18810109052/CWWeChat/blob/master/LICENSE)
 [![Swift3.1](https://img.shields.io/badge/Swift-3.1-blue.svg?style=flat)](https://developer.apple.com/swift/)
+[![Build Status](https://www.travis-ci.org/wei18810109052/CWWeChat.svg?branch=master)](https://www.travis-ci.org/wei18810109052/CWWeChat)
 
 
 * 仿做一个微信，将持续更新直至完成。swift3.1版本，集成XMPP聊天。

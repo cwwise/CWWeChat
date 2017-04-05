@@ -9,6 +9,7 @@
 import XCTest
 @testable import CWWeChat
 
+
 class CWWeChatTests: XCTestCase {
     
     override func setUp() {
