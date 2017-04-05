@@ -51,6 +51,9 @@ public class CWChatClient: NSObject {
     private(set) var chatManager: CWChatManager
     /// 好友模块
     private(set) var contactManager: CWContactManager
+    /// 群组模块
+    private(set) var groupManager: CWGroupManager
+
     /// 是否连接服务器
     private(set) var isConnected: Bool = false
     /// 用户是否已登录
@@ -63,6 +66,7 @@ public class CWChatClient: NSObject {
         version = "0.0.1"
         chatManager = CWChatService(dispatchQueue: DispatchQueue.global()) 
         contactManager = CWContactService(dispatchQueue: DispatchQueue.global())
+        groupManager = CWGroupServic(dispatchQueue: DispatchQueue.global())
         super.init()
     }
     

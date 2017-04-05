@@ -20,12 +20,13 @@ protocol CWGroupManager {
     ///
     /// - Parameter delegate: 代理
     /// - Parameter delegateQueue: 代理执行线程
-    func addDelegate(_ delegate: CWGroupManagerDelegate, delegateQueue: DispatchQueue)
+    func addGroupDelegate(_ delegate: CWGroupManagerDelegate, delegateQueue: DispatchQueue)
     
     /// 删除代理
     ///
     /// - Parameter delegate: 代理
-    func removeDelegate(_ delegate: CWGroupManagerDelegate)
+    func removeGroupDelegate(_ delegate: CWGroupManagerDelegate)
     
+    func fetchJoinGroups()
 }
 

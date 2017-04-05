@@ -25,9 +25,7 @@ class CWConversationController: CWChatConversationController {
     }
     
     func sendMessage() {
-        
-
-        
+        CWChatClient.share.groupManager.fetchJoinGroups()
     }
 
     override func didReceiveMemoryWarning() {

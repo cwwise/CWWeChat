@@ -219,5 +219,10 @@ extension CWChatXMPPManager: XMPPStreamDelegate {
             log.error("异常登录")
         }
     }
+    
+    func xmppStream(_ sender: XMPPStream!, didReceive iq: XMPPIQ!) -> Bool {
+        log.debug(iq)
+        return true
+    }
 
 }
