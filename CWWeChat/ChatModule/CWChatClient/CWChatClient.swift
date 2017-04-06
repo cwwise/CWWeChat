@@ -53,7 +53,10 @@ public class CWChatClient: NSObject {
     private(set) var contactManager: CWContactManager
     /// 群组模块
     private(set) var groupManager: CWGroupManager
+    /// 聊天室模块
+    private(set) var chatroomManager: CWChatroomManager
 
+    
     /// 是否连接服务器
     private(set) var isConnected: Bool = false
     /// 用户是否已登录
@@ -67,6 +70,7 @@ public class CWChatClient: NSObject {
         chatManager = CWChatService(dispatchQueue: DispatchQueue.global()) 
         contactManager = CWContactService(dispatchQueue: DispatchQueue.global())
         groupManager = CWGroupServic(dispatchQueue: DispatchQueue.global())
+        chatroomManager = CWChatroomService(dispatchQueue: DispatchQueue.global())
         super.init()
     }
     
@@ -85,6 +89,15 @@ public class CWChatClient: NSObject {
         userId = username
         xmppManager.loginServer(with: username, password: password, completion: completion)
         
+        // 登陆成功之后
+        initUser()
+    }
+    
+    private func initUser() {
+        let imagePath = "\(CWChatClient.share.userFilePath)/image/"
+        if !FileManager.default.fileExists(atPath: imagePath) {
+            try! FileManager.default.createDirectory(atPath: imagePath, withIntermediateDirectories: true, attributes: nil)
+        }
     }
     
     public func register(username: String,
@@ -96,7 +109,20 @@ public class CWChatClient: NSObject {
                                 isLogin: false,
                                 completion: completion)
         
+        
+        
     }
     
     
 }
+
+public extension CWChatClient {
+    
+    var userFilePath: String {
+        let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let path = "\(documentPath)/cwchat/\(self.options.chatDomain)/\(self.userId!)"
+        return path
+    }
+    
+}
+

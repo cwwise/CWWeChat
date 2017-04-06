@@ -1,35 +1,33 @@
 //
-//  CWGroupManager.swift
+//  CWChatroomManager.swift
 //  CWWeChat
 //
-//  Created by wei chen on 2017/4/2.
+//  Created by wei chen on 2017/4/5.
 //  Copyright © 2017年 cwcoder. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-/// 代理
-public protocol CWGroupManagerDelegate {
+// 多人聊天
+protocol CWChatroomManagerDelegate {
     
 }
 
-public typealias CWGroupCompletion = (CWChatGroup?, CWChatError?) -> Void
 
-/// 群管理
-public protocol CWGroupManager {
+protocol CWChatroomManager {
     
     /// 添加代理
     ///
     /// - Parameter delegate: 代理
     /// - Parameter delegateQueue: 代理执行线程
-    func addGroupDelegate(_ delegate: CWGroupManagerDelegate, delegateQueue: DispatchQueue)
+    func addChatroomDelegate(_ delegate: CWGroupManagerDelegate, delegateQueue: DispatchQueue)
     
     /// 删除代理
     ///
     /// - Parameter delegate: 代理
-    func removeGroupDelegate(_ delegate: CWGroupManagerDelegate)
+    func removeChatroomDelegate(_ delegate: CWGroupManagerDelegate)
     
-    func fetchJoinGroups()
+    func fetchChatrooms();
     
     func createGroup(title: String,
                      invitees: [String],
@@ -37,4 +35,3 @@ public protocol CWGroupManager {
                      setting: CWChatGroupOptions,
                      completion: CWGroupCompletion)
 }
-

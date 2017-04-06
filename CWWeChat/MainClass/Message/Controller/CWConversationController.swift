@@ -25,7 +25,22 @@ class CWConversationController: CWChatConversationController {
     }
     
     func sendMessage() {
-        CWChatClient.share.groupManager.fetchJoinGroups()
+        
+        let array = ["haohao","helloios"]
+        
+//        let groupManager = CWChatClient.share.groupManager
+        let chatroomManager = CWChatClient.share.chatroomManager
+
+//        groupManager.fetchJoinGroups()
+//        chatroomManager.fetchChatrooms()
+        chatroomManager.createGroup(title: "测试数据",
+                                 invitees: array,
+                                 message: "测试1111",
+                                 setting: CWChatGroupOptions()) { (chatgroup, error) in
+            
+                                    
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

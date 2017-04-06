@@ -11,18 +11,19 @@ import XMPPFramework
 
 class CWGroupServic: XMPPModule {
     
-    lazy var mucLight: XMPPMUCLight = {
-        let mucLight = XMPPMUCLight(dispatchQueue: self.moduleQueue)
-        mucLight?.activate(CWChatXMPPManager.share.xmppStream)
-        return mucLight!
+    lazy var groupChat: XMPPMUC = {
+        let groupChat = XMPPMUC(dispatchQueue: self.moduleQueue)
+        groupChat?.activate(CWChatXMPPManager.share.xmppStream)
+        return groupChat!
     }()
     
     override init!(dispatchQueue queue: DispatchQueue!) {
         super.init(dispatchQueue: queue)
-        self.mucLight.addDelegate(self, delegateQueue: self.moduleQueue)
+        self.groupChat.addDelegate(self, delegateQueue: self.moduleQueue)
     }
     
 }
+
 
 extension CWGroupServic: CWGroupManager {
     
@@ -49,18 +50,49 @@ extension CWGroupServic: CWGroupManager {
 //        log.debug(iqElement)
 //        CWChatXMPPManager.share.xmppStream.send(iqElement)
         
-        mucLight.discoverRooms(forServiceNamed: "conference.hellochatim.p1.im")
+        groupChat.discoverRooms(forServiceNamed: "conference.localhost")
     }
     
-    
-    
-    
-    
+    func createGroup(title: String,
+                     invitees: [String],
+                     message: String,
+                     setting: CWChatGroupOptions,
+                     completion: CWGroupCompletion) {
+        let options = CWChatClient.share.options
+
+        let jid = XMPPJID(string: "chenwei@conference."+options.chatDomain)
+        guard let roomjid = jid else {
+            completion(nil, CWChatError(errorCode: .customer, error: "系统错误"))
+            return
+        }
+        let storage = XMPPRoomCoreDataStorage.sharedInstance()
+        let room = XMPPRoom(roomStorage: storage, jid: jid)!
+        room.activate(CWChatXMPPManager.share.xmppStream)
+        room.addDelegate(self, delegateQueue: self.moduleQueue)
+        room.join(usingNickname: "陈威", history: nil)
+    }
+
 }
 
-extension CWGroupServic: XMPPMUCLightDelegate {
-    func xmppMUCLight(_ sender: XMPPMUCLight, didDiscoverRooms rooms: [DDXMLElement], forServiceNamed serviceName: String) {
-        log.debug(serviceName)
+// 发现多人聊天
+extension CWGroupServic: XMPPMUCDelegate {
+    func xmppMUC(_ sender: XMPPMUC!, didDiscoverRooms rooms: [Any]!, forServiceNamed serviceName: String!) {
         log.debug(rooms)
     }
+    
+    public func xmppMUC(_ sender: XMPPMUC!, roomJID: XMPPJID!, didReceiveInvitation message: XMPPMessage!) {
+        log.debug(message)
+        
+    }
+
+}
+
+
+extension CWGroupServic: XMPPRoomDelegate {
+
+    public func xmppRoomDidCreate(_ sender: XMPPRoom!) {
+        log.debug(sender.roomJID)
+    }
+
+
 }
