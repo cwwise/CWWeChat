@@ -66,8 +66,8 @@ class CWChatMessageStore: NSObject {
     
     /// 数据库路径
     lazy var path: String = {
-        let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let path = "\(documentPath)/cwchat/\(self.userId)/chat/"
+        let userPath = CWChatClient.share.userFilePath
+        let path = "\(userPath)/chat/"
         if !FileManager.default.fileExists(atPath: path) {
             try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         }
@@ -181,7 +181,20 @@ extension CWChatMessageStore {
         guard let row = row else {
             return nil
         }
-        let body = CWTextMessageBody(text: row[content])
+        
+        let type = CWMessageType(rawValue: row[messageType]) ?? CWMessageType.none
+        var body: CWMessageBody!
+        switch type {
+        case .text:
+           body = CWTextMessageBody(text: row[content])
+        case .image:
+            body = CWImageMessageBody()
+            body.messageDecode(string: row[content])
+        default: break
+            
+        }
+        
+        
         let _direction = CWMessageDirection(rawValue: row[direction]) ?? .unknown
         let message = CWChatMessage(targetId: row[target_Id],
                                     messageID: row[messageId],

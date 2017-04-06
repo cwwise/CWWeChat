@@ -52,8 +52,8 @@ class CWChatConversationStore: NSObject {
     /// 数据库路径
     lazy var path: String = {
         let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let domain = CWChatClient.share.options.chatDomain
-        let path = "\(documentPath)/cwchat/\(domain)/\(self.userId)/chat/"
+        let userPath = CWChatClient.share.userFilePath
+        let path = "\(userPath)/chat/"
         if !FileManager.default.fileExists(atPath: path) {
             try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         }

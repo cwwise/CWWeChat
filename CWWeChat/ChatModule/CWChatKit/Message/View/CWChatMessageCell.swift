@@ -196,6 +196,7 @@ class CWChatMessageCell: UITableViewCell {
     lazy var messageContentView:UIImageView = {
         let messageContentView = UIImageView()
         messageContentView.isUserInteractionEnabled = true
+        messageContentView.clipsToBounds = true
         return messageContentView
     }()
     

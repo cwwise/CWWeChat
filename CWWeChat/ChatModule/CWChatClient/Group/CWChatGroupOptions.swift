@@ -8,14 +8,14 @@
 
 import UIKit
 
-enum CWChatGroupStyle {
+public enum CWChatGroupStyle {
     case onlyOwnerInvite
     case memberCanInvite
     case joinNeedApproval
     case publicOpenJoin
 }
 
-class CWChatGroupOptions: NSObject {
+public class CWChatGroupOptions: NSObject {
     ///  群组的类型
     var style: CWChatGroupStyle = .onlyOwnerInvite
     /// 群组的最大成员数

@@ -10,13 +10,38 @@ import UIKit
 
 class CWImageMessageCell: CWChatMessageCell {
 
+    lazy var messageImageView: UIImageView = {
+        let imageView = UIImageView()
+        return imageView
+    }()
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
-        
+    
     override func setup() {
         super.setup()
         addGeneralView()
+        self.messageContentView.addSubview(self.messageImageView)
+    }
+    
+    override func updateMessage(_ messageModel: CWChatMessageModel) {
+        super.updateMessage(messageModel)
+        
+        // 消息实体
+        let message = messageModel.message
+        
+        let body = message.messageBody as! CWImageMessageBody
+        if let url = body.originalURL {
+            messageImageView.yy_setImage(with: url, placeholder: nil)
+        } else {
+            let url = URL(fileURLWithPath: body.originalLocalPath!)
+            messageImageView.yy_imageURL = url
+        }
+        
+        messageImageView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
+        }
     }
     
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWChatGroup: NSObject {
+public class CWChatGroup: NSObject {
     // 群组ID
     var groupId: String!
     // 群组的主题

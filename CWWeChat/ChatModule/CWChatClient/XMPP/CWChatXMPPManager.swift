@@ -221,7 +221,13 @@ extension CWChatXMPPManager: XMPPStreamDelegate {
     }
     
     func xmppStream(_ sender: XMPPStream!, didReceive iq: XMPPIQ!) -> Bool {
-        log.debug(iq)
+        
+        if iq.requiresResponse() {
+            
+        } else {
+            log.debug(iq)
+        }
+        
         return true
     }
 

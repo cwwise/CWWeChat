@@ -54,6 +54,9 @@ class CWChatMessageController: UIViewController {
     func registerCell() {
         tableView.register(CWChatMessageCell.self, forCellReuseIdentifier: CWMessageType.none.identifier())
         tableView.register(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.text.identifier())
+        tableView.register(CWImageMessageCell.self, forCellReuseIdentifier: CWMessageType.image.identifier())
+
+        
         tableView.register(CWTimeMessageCell.self, forCellReuseIdentifier: CWTimeMessageCell.identifier)
 
     }
@@ -214,8 +217,20 @@ extension CWChatMessageController: CWInputToolBarDelegate {
     
     }
     
-    func chatInputView(_ inputView: CWInputToolBar, imageName: String, extentInfo: Dictionary<String, String>) {
+    func chatInputView(_ inputView: CWInputToolBar, image: UIImage) {
         
+        let imageName = String.UUIDString()
+        let path = "\(CWChatClient.share.userFilePath)/image/"+imageName
+
+        FileManager.saveContentImage(image, imagePath: path)
+        
+        let imageBody = CWImageMessageBody(path: path, size: image.size)
+        let message = CWChatMessage(targetId: conversation.targetId,
+                                    direction: .send,
+                                    messageBody: imageBody)
+
+        self.sendMessage(message)
+
     }
     
     func sendMessage(_ message: CWChatMessage) {

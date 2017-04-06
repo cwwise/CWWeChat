@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class CWImageMessageBody: NSObject, CWMessageBody {
     
@@ -30,19 +31,48 @@ class CWImageMessageBody: NSObject, CWMessageBody {
     /// 原图服务器地址
     var originalURL: URL?
     /// 原图的本地路径
-    var originalLocalPath: String
+    var originalLocalPath: String?
     
-    init(path: String) {
+    init(path: String? = nil,
+         originalURL:URL? = nil,
+         size: CGSize = CGSize.zero) {
+        self.originalURL = originalURL
         self.originalLocalPath = path
+        self.size = size
     }
+    
 }
 
 extension CWImageMessageBody: CWMessageCoding {
     var messageEncode: String {
-        return ""
+        
+        var info = ["size": NSStringFromCGSize(size)]
+        if let urlString = self.originalURL?.absoluteString {
+            info["url"] = urlString
+        }
+        
+        if let path = self.originalLocalPath {
+            info["path"] = path
+        }
+        
+        let data = try! JSONSerialization.data(withJSONObject: info, options: .prettyPrinted)
+        return String(data: data, encoding: .utf8)!
     }
     
     func messageDecode(string: String) {
+        
+        let json: JSON = JSON(parseJSON: string)
+        if let size = json["size"].string {
+            self.size = CGSizeFromString(size)
+        }
+        if let path = json["path"].string {
+            self.originalLocalPath = path
+        }
+        
+        if let urlstring = json["url"].string,
+            let url = URL(string: urlstring) {
+            self.originalURL = url
+        }
         
     }
 }

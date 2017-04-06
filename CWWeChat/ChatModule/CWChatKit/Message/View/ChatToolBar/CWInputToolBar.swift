@@ -13,10 +13,7 @@ protocol CWInputToolBarDelegate: class {
     ///发送文字
     func chatInputView(_ inputView: CWInputToolBar, sendText text: String)
     ///发送图片
-    func chatInputView(_ inputView: CWInputToolBar,
-                       imageName: String ,
-                       extentInfo: Dictionary<String,String>)
-    
+    func chatInputView(_ inputView: CWInputToolBar, image: Image)
 }
 
 class CWInputToolBar: UIView {
@@ -132,6 +129,7 @@ class CWInputToolBar: UIView {
         moreButton.tag = 102
         moreButton.autoresizingMask = [.flexibleLeftMargin]
         moreButton.setNormalImage(self.kMoreImage, highlighted:self.kMoreImageHL)
+        moreButton.addTarget(self, action: #selector(moreButtonSelector(_:)), for: .touchDown)
         return moreButton
     }()
     
@@ -148,6 +146,19 @@ class CWInputToolBar: UIView {
     
     var kKeyboardImage:UIImage = CWAsset.Chat_toolbar_keyboard.image
     var kKeyboardImageHL:UIImage = CWAsset.Chat_toolbar_keyboard_HL.image
+    
+    
+    //MARK: Action
+    func moreButtonSelector(_ button: UIButton) {
+        let pickerVC = UIImagePickerController()
+        pickerVC.sourceType = .photoLibrary
+        pickerVC.delegate = self
+        if let viewcontroller = UIApplication.shared.keyWindow?.rootViewController {
+            viewcontroller.present(pickerVC, animated: true, completion: nil)
+        }
+    }
+    
+    
     
     
     //MARK: 计算高度
@@ -197,3 +208,17 @@ extension CWInputToolBar: UITextViewDelegate {
     
 }
 
+
+// 暂时的，需要修改。
+extension CWInputToolBar:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        self.delegate?.chatInputView(self, image: image)
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+}
