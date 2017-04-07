@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let chatClient = CWChatClient.share
         chatClient.initialize(with: options)
         
-        chatClient.login(username: "haohao", password: "1234567")
+        chatClient.login(username: "hellochat", password: "1234567")
         
     }
     
