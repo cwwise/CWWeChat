@@ -178,7 +178,7 @@ extension CWChatService: CWChatManager {
             })
         }
         // 先插入到消息列表
-//        dispatchManager.sendMessage(message, progress: _progress, completion: completion)
+        dispatchManager.sendMessage(message, progress: _progress, completion: completion)
     }
     
     /// 重新发送消息
