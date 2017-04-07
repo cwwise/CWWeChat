@@ -43,8 +43,8 @@ class CWImageMessageBody: NSObject, CWMessageBody {
     
 }
 
-extension CWImageMessageBody: CWMessageCoding {
-    var messageEncode: String {
+extension CWImageMessageBody {
+    var info: [String: String] {
         
         var info = ["size": NSStringFromCGSize(size)]
         if let urlString = self.originalURL?.absoluteString {
@@ -54,9 +54,19 @@ extension CWImageMessageBody: CWMessageCoding {
         if let path = self.originalLocalPath {
             info["path"] = path
         }
+        return info
+    }
+}
+
+extension CWImageMessageBody: CWMessageCoding {
+    var messageEncode: String {
         
-        let data = try! JSONSerialization.data(withJSONObject: info, options: .prettyPrinted)
-        return String(data: data, encoding: .utf8)!
+        do {
+            let data = try JSONSerialization.data(withJSONObject: self.info, options: .prettyPrinted)
+            return String(data: data, encoding: .utf8) ?? ""
+        } catch {
+            return ""
+        }
     }
     
     func messageDecode(string: String) {

@@ -18,7 +18,9 @@ class CWChatMessageHandle: CWMessageHandle {
             guard let body = message.body(),
                 let from = message.from().user,
                 let to = message.to().user,
-                let messageId = message.elementID() else {
+                let messageId = message.elementID(),
+            let bodyType = message.attribute(forName: "msgtype")?.stringValue,
+            let bodyValue = Int(bodyType) else {
                 return false
             }
             
@@ -27,7 +29,18 @@ class CWChatMessageHandle: CWMessageHandle {
                 messageDate = message.delayedDeliveryDate()
             }
             
-            let messageBody = CWTextMessageBody(text: body)
+            let type = CWMessageType(rawValue: bodyValue) ?? CWMessageType.none
+            var messageBody: CWMessageBody!
+          
+            switch type {
+            case .text:
+                messageBody = CWTextMessageBody(text: body)
+            case .image:
+                messageBody = CWImageMessageBody()
+                messageBody.messageDecode(string: body)
+            default: break
+            }
+            
             let chatMessage = CWChatMessage(targetId: from, messageID: messageId, direction: .receive, timestamp: messageDate.timeIntervalSince1970, messageBody: messageBody)
             chatMessage.senderId = to
             
