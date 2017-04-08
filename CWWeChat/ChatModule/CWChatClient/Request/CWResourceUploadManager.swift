@@ -29,11 +29,11 @@ class CWResourceUploadManager: NSObject {
     func uploadResource(_ fileName: String, fileType: CWMessageType = .image, handle: @escaping UploadImageHandle) {
         
         //
-        let progressHandler = { (string: String?, progess: Float!) in
-            handle(progess,false)
-        }
+//        let progressHandler = { (string: String?, progess: Float!) in
+//            handle(progess,false)
+//        }
         
-        let filePath = ""
+//        let filePath = ""
         
 //        let option = QNUploadOption(mime: nil, progressHandler: progressHandler, params: nil, checkCrc: false, cancellationSignal: nil)
 //        self.manager.putFile(filePath, key: fileName, token: token_key, complete: { (response, string, info) in

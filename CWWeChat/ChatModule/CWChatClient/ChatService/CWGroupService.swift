@@ -11,6 +11,8 @@ import XMPPFramework
 
 class CWGroupServic: XMPPModule {
     
+    var room: XMPPRoom!
+    
     lazy var groupChat: XMPPMUC = {
         let groupChat = XMPPMUC(dispatchQueue: self.moduleQueue)
         groupChat?.activate(CWChatXMPPManager.share.xmppStream)
@@ -35,22 +37,10 @@ extension CWGroupServic: CWGroupManager {
     }
     
     func fetchJoinGroups() {
-        
-//        let queryElement = DDXMLElement(name: "query", xmlns: "http://jabber.org/protocol/disco#items")
-//        
-//        let iqElement = DDXMLElement(name: "iq")
-//        iqElement.addAttribute(withName: "type", stringValue: "get")
-//        let chatClient = CWChatClient.share
-//        
-//        iqElement.addAttribute(withName: "from", stringValue: "chenwei@hellochatim.p1.im")
-//        iqElement.addAttribute(withName: "to", stringValue: "conference.hellochatim.p1.im")
-//        iqElement.addAttribute(withName: "id", stringValue: "getexistroomid")
-//
-//        iqElement.addChild(queryElement!)
-//        log.debug(iqElement)
-//        CWChatXMPPManager.share.xmppStream.send(iqElement)
-        
-        groupChat.discoverRooms(forServiceNamed: "conference.localhost")
+        //serviceName 默认是conference
+        let serviceName = "conference"
+        let options = CWChatClient.share.options
+        groupChat.discoverRooms(forServiceNamed: serviceName+"."+options.chatDomain)
     }
     
     func createGroup(title: String,
@@ -78,11 +68,27 @@ extension CWGroupServic: CWGroupManager {
 extension CWGroupServic: XMPPMUCDelegate {
     func xmppMUC(_ sender: XMPPMUC!, didDiscoverRooms rooms: [Any]!, forServiceNamed serviceName: String!) {
         log.debug(rooms)
+        for item in rooms {
+            if let room = item as? DDXMLElement,
+                let jid = room.attribute(forName: "jid")?.stringValue,
+                let _ = room.attribute(forName: "name")?.stringValue {
+                
+                
+                let roomjid = XMPPJID(string: jid)
+                self.room = XMPPRoom(roomStorage: XMPPRoomCoreDataStorage.sharedInstance(), jid: roomjid)
+                self.room.addDelegate(self, delegateQueue: self.moduleQueue)
+                self.room.join(usingNickname: "helloworld", history: nil)
+            }
+        }
     }
+    
+    func xmppMUC(_ sender: XMPPMUC!, failedToDiscoverRoomsForServiceNamed serviceName: String!, withError error: Error!) {
+        log.debug(error)
+    }
+
     
     public func xmppMUC(_ sender: XMPPMUC!, roomJID: XMPPJID!, didReceiveInvitation message: XMPPMessage!) {
         log.debug(message)
-        
     }
 
 }
@@ -94,5 +100,14 @@ extension CWGroupServic: XMPPRoomDelegate {
         log.debug(sender.roomJID)
     }
 
+    func xmppRoomDidJoin(_ sender: XMPPRoom!) {
+        log.debug("xmppRoomDidJoin"+sender.description)
+    }
+    
+    func xmppRoomDidLeave(_ sender: XMPPRoom!) {
+        log.debug("xmppRoomDidLeave"+sender.description)
+
+    }
 
 }
+

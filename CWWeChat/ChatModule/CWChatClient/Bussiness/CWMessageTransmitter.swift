@@ -21,13 +21,24 @@ class CWMessageTransmitter: NSObject {
         return CWChatXMPPManager.share.xmppStream
     }
     
-    func sendMessage(content: String, targetId: String, messageId: String ,type: Int = 1) -> Bool {
+    func sendMessage(content: String,
+                     targetId: String,
+                     messageId: String,
+                     chatType:Int = 0, 
+                     type: Int = 1) -> Bool {
         // 生成消息
-        let messageElement = self.messageElement(body: content, to: targetId, messageId: messageId, type: type)
-
+        let messageElement = self.messageElement(withBody: content,
+                                                 to: targetId,
+                                                 messageId: messageId,
+                                                 type: type,
+                                                 chatType: chatType)
+        guard let message = messageElement else {
+            return false
+        }
+        log.debug(message)
         // 发送消息
         var receipte: XMPPElementReceipt?
-        self.xmppStream.send(messageElement, andGet: &receipte)
+        self.xmppStream.send(message, andGet: &receipte)
         guard let elementReceipte = receipte else {
             return false
         }
@@ -36,11 +47,20 @@ class CWMessageTransmitter: NSObject {
         return result
     }
     
-    
-    func messageElement(body: String, to: String, messageId: String, type:Int = 1, expand: String? = nil) -> XMPPMessage? {
+    func messageElement(withBody body: String, 
+                        to: String, 
+                        messageId: String,
+                        type:Int = 1, 
+                        chatType:Int = 0, 
+                        expand: String? = nil) -> XMPPMessage? {
 
-        let message = XMPPMessage(type: "chat", elementID: messageId)
-        message?.addAttribute(withName: "to", stringValue: chatJidString(to))
+        let message: XMPPMessage?
+        if chatType == 0 {
+            message = XMPPMessage(type: "chat", elementID: messageId)
+        } else {
+            message = XMPPMessage(type: "groupchat", elementID: messageId)
+        }
+        message?.addAttribute(withName: "to", stringValue: chatJidString(withType: chatType, name: to))
         message?.addAttribute(withName: "msgtype", integerValue: type)
 
         let bodyElement = DDXMLElement.element(withName: "body", stringValue: body) as! DDXMLElement
@@ -51,7 +71,10 @@ class CWMessageTransmitter: NSObject {
     }
 
     
-    func chatJidString(_ name: String) -> String {
+    func chatJidString(withType chatType:Int, name: String) -> String {
+        if chatType == 1 {
+            return name
+        }
         let domain = CWChatXMPPManager.share.options.chatDomain
         return name + "@" + domain
     }

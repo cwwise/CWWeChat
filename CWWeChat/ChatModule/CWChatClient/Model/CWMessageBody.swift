@@ -16,7 +16,7 @@ enum CWFileDownloadStatus: Int {
     case pending
 }
 
-// TODO: 先简单这么处理，想到好的方式再修改
+// TODO: 先简单这么处理，想到好的方式再修改 （方便查看保存成string）
 protocol CWMessageCoding {
     /// 保存到数据库中的字段
     var messageEncode: String { get }

@@ -220,11 +220,11 @@ extension CWChatMessageController: CWInputToolBarDelegate {
     func chatInputView(_ inputView: CWInputToolBar, image: UIImage) {
         
         let imageName = String.UUIDString()
-        let path = "\(CWChatClient.share.userFilePath)/image/"+imageName
+        let path = kChatUserImagePath+imageName
 
         FileManager.saveContentImage(image, imagePath: path)
         
-        let imageBody = CWImageMessageBody(path: path, size: image.size)
+        let imageBody = CWImageMessageBody(path: imageName, size: image.size)
         let message = CWChatMessage(targetId: conversation.targetId,
                                     direction: .send,
                                     messageBody: imageBody)
@@ -234,6 +234,8 @@ extension CWChatMessageController: CWInputToolBarDelegate {
     }
     
     func sendMessage(_ message: CWChatMessage) {
+        // 添加当前聊天类型
+        message.chatType = self.conversation.type
         
         let messageModel = CWChatMessageModel(message: message)
         self.messageList.append(messageModel)

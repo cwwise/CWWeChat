@@ -116,6 +116,19 @@ extension CWContactsController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        if indexPath.section == 0 { 
+            if indexPath.row == 0 {
+                let newFriendVC = CWNewFrinedsController()
+                newFriendVC.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(newFriendVC, animated: true)
+            } else if indexPath.row == 1 {
+                let groupchatVC = CWGroupChatController()
+                groupchatVC.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(groupchatVC, animated: true)
+            }
+        }
+        
+        
     }
     
     // MARK: UITableViewDataSource

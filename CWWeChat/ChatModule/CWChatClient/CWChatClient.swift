@@ -36,6 +36,8 @@ public extension CWChatClientDelegate {
 }
 
 public typealias CWClientCompletion = (String?, CWChatError?) -> Void
+// 路径
+public let kChatUserImagePath = "\(CWChatClient.share.userFilePath)/image/"
 
 /// 聊天核心单例
 public class CWChatClient: NSObject {
@@ -94,10 +96,8 @@ public class CWChatClient: NSObject {
     }
     
     private func initUser() {
-        let imagePath = "\(CWChatClient.share.userFilePath)/image/"
-        if !FileManager.default.fileExists(atPath: imagePath) {
-            try! FileManager.default.createDirectory(atPath: imagePath, withIntermediateDirectories: true, attributes: nil)
-        }
+
+        
     }
     
     public func register(username: String,
@@ -108,9 +108,7 @@ public class CWChatClient: NSObject {
                                 password: password,
                                 isLogin: false,
                                 completion: completion)
-        
-        
-        
+
     }
     
     

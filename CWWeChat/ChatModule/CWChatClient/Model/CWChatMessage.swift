@@ -125,6 +125,7 @@ public class CWChatMessage: NSObject {
     
     init(targetId: String,
          messageID: String = String.UUIDString(),
+         chatType: CWChatType = .single,
          direction: CWMessageDirection = .send,
          isRead: Bool = true,
          timestamp: TimeInterval = NSDate().timeIntervalSince1970,
@@ -133,6 +134,7 @@ public class CWChatMessage: NSObject {
         self.messageBody = messageBody
         self.timestamp = timestamp
         self.direction = direction
+        self.chatType = chatType
         
         self.targetId = targetId
         self.messageId = messageID

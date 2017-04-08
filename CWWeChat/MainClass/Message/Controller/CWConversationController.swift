@@ -15,7 +15,12 @@ class CWConversationController: CWChatConversationController {
 
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(sendMessage))
         self.navigationItem.rightBarButtonItem = barButtonItem
-              
+         
+        let result = self.chatManager.fetchAllConversations()
+        for conversation in result {
+            conversationList.append(CWChatConversationModel(conversation: conversation))
+        }
+        
         if #available(iOS 9.0, *) {
             self.registerForPreviewing(with: self, sourceView: self.tableView)
         } else {
@@ -25,29 +30,11 @@ class CWConversationController: CWChatConversationController {
     }
     
     func sendMessage() {
-        
-        
         let conversation = CWChatClient.share.chatManager.fecthConversation(chatType: .single, targetId: "haohao")
         let chatVC = CWChatMessageController()
         chatVC.conversation = conversation
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)
-        
-        
-//        let array = ["haohao","helloios"]
-//        let groupManager = CWChatClient.share.groupManager
-//        let chatroomManager = CWChatClient.share.chatroomManager
-
-//        groupManager.fetchJoinGroups()
-//        chatroomManager.fetchChatrooms()
-//        chatroomManager.createGroup(title: "测试数据",
-//                                 invitees: array,
-//                                 message: "测试1111",
-//                                 setting: CWChatGroupOptions()) { (chatgroup, error) in
-//            
-//                                    
-//        }
-        
     }
 
     override func didReceiveMemoryWarning() {

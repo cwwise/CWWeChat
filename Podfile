@@ -39,7 +39,7 @@ target 'CWWeChat' do
   #🔗 https://github.com/AliSoftware/OHHTTPStubs
   pod 'OHHTTPStubs/Swift'
   
-#  pod 'Qiniu'
+  #  pod 'Qiniu'
   
   target 'CWWeChatTests' do
     inherit! :search_paths

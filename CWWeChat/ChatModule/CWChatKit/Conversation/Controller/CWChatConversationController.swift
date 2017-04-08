@@ -20,12 +20,7 @@ class CWChatConversationController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
-        let result = chatManager.fetchAllConversations()
-        for conversation in result {
-            conversationList.append(CWChatConversationModel(conversation: conversation))
-        }
-        chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
-        
+        chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)        
         CWChatKit.share.userInfoDataSource = self
         setupUI()
         // Do any additional setup after loading the view.

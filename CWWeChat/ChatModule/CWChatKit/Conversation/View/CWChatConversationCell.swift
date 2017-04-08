@@ -29,7 +29,6 @@ class CWChatConversationCell: UITableViewCell {
     }
 
     // MARK: UI
-    ///计算frame
     func p_snap() {
         
         headerImageView.snp.makeConstraints { (make) in
