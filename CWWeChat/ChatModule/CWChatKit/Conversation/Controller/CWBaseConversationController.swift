@@ -1,5 +1,5 @@
 //
-//  CWChatConversationController.swift
+//  CWBaseConversationController.swift
 //  CWWeChat
 //
 //  Created by chenwei on 2017/3/26.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// 会话
-class CWChatConversationController: UIViewController {
+class CWBaseConversationController: UIViewController {
 
     // 方便获取
     var chatManager: CWChatManager {return CWChatClient.share.chatManager}
@@ -71,7 +71,7 @@ class CWChatConversationController: UIViewController {
 }
 
 // MARK: - CWChatUserInfoDataSource
-extension CWChatConversationController: CWChatUserInfoDataSource {
+extension CWBaseConversationController: CWChatUserInfoDataSource {
     func loadUserInfo(userId: String, completion: @escaping ((CWChatUser?) -> Void)) {
        
         //先从本地缓存获取，如果没有，则做网络请求来获取
@@ -84,7 +84,7 @@ extension CWChatConversationController: CWChatUserInfoDataSource {
 
 
 //MARK: UITableViewDelegate UITableViewDataSource
-extension CWChatConversationController: UITableViewDelegate, UITableViewDataSource {
+extension CWBaseConversationController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
@@ -132,7 +132,7 @@ extension CWChatConversationController: UITableViewDelegate, UITableViewDataSour
 }
 
 // MARK: - UISearchBarDelegate
-extension CWChatConversationController: UISearchBarDelegate {
+extension CWBaseConversationController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.tabBarController?.tabBar.isHidden = true
@@ -163,7 +163,7 @@ extension CWChatConversationController: UISearchBarDelegate {
 
 
 // MARK: - CWChatManagerDelegate
-extension CWChatConversationController: CWChatManagerDelegate {
+extension CWBaseConversationController: CWChatManagerDelegate {
     // 收到会话变化
     func conversationDidUpdate(_ conversation: CWChatConversation) {
 

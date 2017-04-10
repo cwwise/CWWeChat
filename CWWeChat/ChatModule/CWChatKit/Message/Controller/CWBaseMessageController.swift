@@ -1,5 +1,5 @@
 //
-//  CWChatMessageController.swift
+//  CWBaseMessageController.swift
 //  CWWeChat
 //
 //  Created by chenwei on 2017/3/27.
@@ -11,7 +11,7 @@ import UIKit
 private let kMaxShowTimeMessageCount = 30
 private let kMaxShowtimeMessageInterval: Double = 3*60.0
 
-class CWChatMessageController: UIViewController {
+class CWBaseMessageController: UIViewController {
     // 目标会话
     public var conversation: CWChatConversation!
     /// 消息数据数组
@@ -98,7 +98,7 @@ class CWChatMessageController: UIViewController {
     
 }
 
-extension CWChatMessageController {
+extension CWBaseMessageController {
     
     func refreshLocalMessage() {
 
@@ -143,7 +143,7 @@ extension CWChatMessageController {
 }
 
 // MARK: - UITableViewDelegate && UITableViewDataSource
-extension CWChatMessageController: UITableViewDelegate, UITableViewDataSource {
+extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
@@ -189,7 +189,7 @@ extension CWChatMessageController: UITableViewDelegate, UITableViewDataSource {
 
 
 // MARK: - CWChatManagerDelegate
-extension CWChatMessageController: CWChatManagerDelegate {
+extension CWBaseMessageController: CWChatManagerDelegate {
     
     func messageStatusDidChange(_ message: CWChatMessage, error: CWChatError?) {
         
@@ -205,7 +205,7 @@ extension CWChatMessageController: CWChatManagerDelegate {
 }
 
 // MARK: - CWInputToolBarDelegate
-extension CWChatMessageController: CWInputToolBarDelegate {
+extension CWBaseMessageController: CWInputToolBarDelegate {
     //
     func chatInputView(_ inputView: CWInputToolBar, sendText text: String) {
         

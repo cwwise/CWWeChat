@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWConversationController: CWChatConversationController {
+class CWConversationController: CWBaseConversationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

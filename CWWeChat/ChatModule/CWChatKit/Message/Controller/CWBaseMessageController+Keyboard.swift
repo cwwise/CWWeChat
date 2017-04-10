@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - Keyboard
 ///响应KeyBoard事件
-extension CWChatMessageController {
+extension CWBaseMessageController {
     
     /**
      注册消息观察
