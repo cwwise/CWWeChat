@@ -77,6 +77,7 @@ extension CWGroupServic: XMPPMUCDelegate {
                 let roomjid = XMPPJID(string: jid)
                 self.room = XMPPRoom(roomStorage: XMPPRoomCoreDataStorage.sharedInstance(), jid: roomjid)
                 self.room.addDelegate(self, delegateQueue: self.moduleQueue)
+                self.room.activate(CWChatXMPPManager.share.xmppStream)
                 self.room.join(usingNickname: "helloworld", history: nil)
             }
         }

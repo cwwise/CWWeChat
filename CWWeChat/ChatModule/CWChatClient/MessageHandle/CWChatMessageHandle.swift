@@ -23,7 +23,7 @@ class CWChatMessageHandle: CWMessageHandle {
             }
             
             //默认是文字
-            let bodyType = message.attribute(forName: "msgtype")?.stringValue ?? "1"
+            let bodyType = message.forName("body")?.attribute(forName: "msgtype")?.stringValue ?? "1"
             let bodyValue = Int(bodyType) ?? 1 
             
             var messageDate = Date()
