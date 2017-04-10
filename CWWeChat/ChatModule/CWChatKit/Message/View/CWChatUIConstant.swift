@@ -42,8 +42,8 @@ public enum CWEmojiType: Int {
     case image
 }
 
-public enum CWChatBarStatus: Int {
-    case Init
+public enum CWToolBarStatus: Int {
+    case initial
     case voice
     case more
     case emoji
