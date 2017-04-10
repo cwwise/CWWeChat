@@ -97,6 +97,10 @@ public class CWChatClient: NSObject {
     
     private func initUser() {
 
+        let path = kChatUserImagePath
+        if !FileManager.default.fileExists(atPath: path) {
+            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+        }
         
     }
     

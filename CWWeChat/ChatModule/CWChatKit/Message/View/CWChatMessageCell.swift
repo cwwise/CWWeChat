@@ -102,7 +102,7 @@ class CWChatMessageCell: UITableViewCell {
             
             let image = #imageLiteral(resourceName: "bubble-default-sended")
             let cap = ChatCellUI.right_cap_insets
-            messageContentView.image = image.resizableImage(withCapInsets: cap)
+            backgroundImageView.image = image.resizableImage(withCapInsets: cap)
             userId = message.senderId ?? ""
     
         } else {
@@ -129,7 +129,7 @@ class CWChatMessageCell: UITableViewCell {
 
             let image = #imageLiteral(resourceName: "bubble-default-received")
             let cap = ChatCellUI.left_cap_insets
-            messageContentView.image = image.resizableImage(withCapInsets: cap)
+            backgroundImageView.image = image.resizableImage(withCapInsets: cap)
             
             userId = message.targetId
         }
@@ -192,13 +192,19 @@ class CWChatMessageCell: UITableViewCell {
         return avatarImageView
     }()
     
-    ///消息的背景图片
-    lazy var messageContentView:UIImageView = {
-        let messageContentView = UIImageView()
-        messageContentView.isUserInteractionEnabled = true
+    ///消息的内容部分
+    lazy var messageContentView: UIView = {
+        let messageContentView = UIView()
         messageContentView.clipsToBounds = true
         return messageContentView
     }()
+    
+    lazy var backgroundImageView: UIImageView = {
+        let backgroundImageView = UIImageView()
+        backgroundImageView.clipsToBounds = true
+        return backgroundImageView
+    }()
+    
     
     //引导
     var activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)

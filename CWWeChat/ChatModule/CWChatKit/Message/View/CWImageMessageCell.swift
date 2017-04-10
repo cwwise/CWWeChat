@@ -15,6 +15,14 @@ class CWImageMessageCell: CWChatMessageCell {
         return imageView
     }()
     
+    ///用来分割
+    lazy var maskLayer: CAShapeLayer = {
+        let maskLayer = CAShapeLayer()
+        maskLayer.contentsCenter = CGRect(x: 0.5, y: 0.6, width: 0.1, height: 0.1)
+        maskLayer.contentsScale = UIScreen.main.scale
+        return maskLayer
+    }()
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -22,27 +30,35 @@ class CWImageMessageCell: CWChatMessageCell {
     override func setup() {
         super.setup()
         addGeneralView()
+        
+        self.messageContentView.layer.mask = self.maskLayer
         self.messageContentView.addSubview(self.messageImageView)
     }
     
     override func updateMessage(_ messageModel: CWChatMessageModel) {
         super.updateMessage(messageModel)
         
+        self.maskLayer.contents = self.backgroundImageView.image?.cgImage
+        self.maskLayer.frame = CGRect(origin: .zero, size: messageModel.messageFrame.contentSize)
         // 消息实体
         let message = messageModel.message
-        
+                
         let body = message.messageBody as! CWImageMessageBody
         messageImageView.image = nil
         if let url = body.originalURL {
             messageImageView.yy_setImage(with: url, placeholder: nil)
         } else if let path = body.originalLocalPath {
-            let url = URL(fileURLWithPath: path)
+            let url = URL(fileURLWithPath: kChatUserImagePath+path)
             messageImageView.yy_imageURL = url
         }
         
         messageImageView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()        
     }
     
     

@@ -17,6 +17,7 @@ class CWTextMessageCell: CWChatMessageCell {
     override func setup() {
         super.setup()
         addGeneralView()
+        self.messageContentView.addSubview(self.backgroundImageView)
         self.messageContentView.addSubview(self.messageLabel)
     }
     
@@ -30,6 +31,9 @@ class CWTextMessageCell: CWChatMessageCell {
         messageLabel.attributedText = NSAttributedString(string: content,
                                                          attributes: textAttributes)
         
+        backgroundImageView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
+        }
         // 是自己的
         if message.direction == .send {
             let edge = ChatCellUI.right_edge_insets
