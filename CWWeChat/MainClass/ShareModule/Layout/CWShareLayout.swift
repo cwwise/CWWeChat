@@ -126,9 +126,8 @@ class CWShareLayout: NSObject {
         
         praiseAttri.append(attach)
         
-        let size = CGSize(width: <#T##CGFloat#>, height: <#T##CGFloat#>)
+        let _ = CGSize(width: 10, height: 10)
 
-        
         
         
     }

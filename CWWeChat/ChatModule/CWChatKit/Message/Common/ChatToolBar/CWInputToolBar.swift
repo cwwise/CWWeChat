@@ -9,14 +9,14 @@
 import UIKit
 
 /// toolBar代理事件
-protocol CWInputToolBarDelegate: class {
+public protocol CWInputToolBarDelegate: class {
     ///发送文字
     func chatInputView(_ inputView: CWInputToolBar, sendText text: String)
     ///发送图片
     func chatInputView(_ inputView: CWInputToolBar, image: UIImage)
 }
 
-class CWInputToolBar: UIView {
+public class CWInputToolBar: UIView {
 
     weak var delegate: CWInputToolBarDelegate?
     /// 临时记录输入的textView
@@ -82,7 +82,7 @@ class CWInputToolBar: UIView {
     }
     
     
-    override func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         super.draw(rect)
         
         let context = UIGraphicsGetCurrentContext()
@@ -168,7 +168,7 @@ class CWInputToolBar: UIView {
         return 36.0
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -178,11 +178,11 @@ class CWInputToolBar: UIView {
 // MARK: - UITextViewDelegate
 extension CWInputToolBar: UITextViewDelegate {
     
-    func textViewDidEndEditing(_ textView: UITextView) {
+    public func textViewDidEndEditing(_ textView: UITextView) {
         textView.resignFirstResponder()
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
         if text == "\n" {
             sendCurrentTextViewText()
@@ -191,7 +191,7 @@ extension CWInputToolBar: UITextViewDelegate {
         return true
     }
     
-    func textViewDidChange(_ textView: UITextView) {
+    public func textViewDidChange(_ textView: UITextView) {
         
         
     }
@@ -213,11 +213,11 @@ extension CWInputToolBar: UITextViewDelegate {
 
 // 暂时的，需要修改。
 extension CWInputToolBar:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         self.delegate?.chatInputView(self, image: image)
         picker.dismiss(animated: true, completion: nil)
