@@ -29,6 +29,7 @@ target 'CWWeChat' do
   pod 'XMPPFramework', '~> 3.7.0'
   
   pod 'MBProgressHUD'
+  pod 'CHIPageControl/Aleppo'
   
   pod 'KVOController'
   

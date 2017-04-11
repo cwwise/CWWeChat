@@ -16,3 +16,7 @@
 
 
 
+
+## 感谢
+[键盘部分](https://github.com/bbbcode/KeyboardforChat)
+

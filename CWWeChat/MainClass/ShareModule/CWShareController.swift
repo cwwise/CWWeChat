@@ -8,28 +8,22 @@
 
 import UIKit
 
-class CWShareController: UIViewController {
+class CWShareController: CWBaseTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        
         self.view.backgroundColor = UIColor.white
         self.title = "分享"
         // Do any additional setup after loading the view.
     }
     
+ 
     
-    // MARK: 属性Getter
-    /// TableView
-    lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: self.view.bounds, style: .plain)
-        tableView.backgroundColor = UIColor.white
-        tableView.rowHeight = 64.0
-        tableView.tableFooterView = UIView()
-        tableView.dataSource = self
-        tableView.delegate = self
-        return tableView
-    }()
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
