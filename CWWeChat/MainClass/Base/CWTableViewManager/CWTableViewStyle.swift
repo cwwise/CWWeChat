@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+public struct CWTableViewUI {
+    
+}
+
 // 样式文件
 let kCWCellLeftMargin: CGFloat = 10
 let kCWDefaultItemCellHeight: CGFloat = 44

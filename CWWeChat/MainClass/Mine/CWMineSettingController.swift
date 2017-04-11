@@ -25,6 +25,10 @@ class CWMineSettingController: CWBaseTableViewController {
     func setupItemData() {
         
         let item1 = CWTableViewItem(title: "帐户与安全", subTitle: "已保护")
+        item1.selectionAction = {  (item: CWTableViewItem) in
+            let controller = CWAccountSafetyController()
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
         let section1 = CWTableViewSection(items: [item1])
 
         let item2 = CWTableViewItem(title: "新消息通知")
@@ -34,6 +38,10 @@ class CWMineSettingController: CWBaseTableViewController {
 
         let item5 = CWTableViewItem(title: "帮助与反馈")
         let item6 = CWTableViewItem(title: "关于微信")
+        item6.selectionAction = { (item) in
+            let aboutVC = CWAboutController()
+            self.navigationController?.pushViewController(aboutVC, animated: true)
+        }
         let section3 = CWTableViewSection(items: [item5, item6])
         
         let item7 = CWTableViewItem(title: "退出微信")
@@ -46,16 +54,4 @@ class CWMineSettingController: CWBaseTableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

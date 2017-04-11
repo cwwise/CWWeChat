@@ -62,7 +62,7 @@ public class CWTableViewCell: UITableViewCell {
         self.rightLabel.snp.makeConstraints { (make) in
             make.right.equalTo(self.contentView)
             make.centerY.equalTo(self.contentView)
-            make.left.equalTo(self.titleLabel.snp.right).offset(20)
+            make.left.greaterThanOrEqualTo(self.titleLabel.snp.right).offset(20)
         }
         
         self.rightImageView.snp.makeConstraints { (make) in

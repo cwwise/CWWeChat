@@ -13,8 +13,8 @@ class CWShareController: CWBaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+//        self.tableView.delegate = self
+//        self.tableView.dataSource = self
         
         
         self.view.backgroundColor = UIColor.white

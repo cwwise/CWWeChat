@@ -40,6 +40,11 @@ public class CWTableViewManager: NSObject {
     
     
     func registerCellClass() {
+        tableView?.register(CWTableHeaderTitleView.self,
+                                forHeaderFooterViewReuseIdentifier: CWTableHeaderTitleView.identifier)
+        tableView?.register(CWTableFooterTitleView.self,
+                                forHeaderFooterViewReuseIdentifier: CWTableFooterTitleView.identifier)
+        
         self.register(cellClass: CWTableViewCell.self, forCellReuseIdentifier: CWTableViewItem.self)
     }
     
@@ -71,7 +76,7 @@ extension CWTableViewManager: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = identifierForCell(at: indexPath)
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! CWTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CWTableViewCell
         cell.item = sections[indexPath.section][indexPath.row]
         
         cell.cellWillAppear()
@@ -101,22 +106,45 @@ extension CWTableViewManager: UITableViewDelegate {
             selectionAction(item)
         }
         
-        // 可选直接使用？ 不需要
-        self.delegate?.tableView!(tableView, didSelectRowAt: indexPath)
+        // TODO: tableView后面不加！ 会报错 加！如果没有实现协议 会崩溃
+        if let delegate = self.delegate {
+            delegate.tableView!(tableView, didSelectRowAt: indexPath)
+        }
     }
     
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let item = sections[indexPath.section][indexPath.row]
-        return CGFloat(item.cellHeight)
+        return item.cellHeight
     }
     
+    // MARK: header and footreView
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return sections[section].footerHeight
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return sections[section].headerHeight
+    }
+
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerTitle = sections[section].headerTitle  else {
+            return nil
+        }
+        
+        let headerTitleView = tableView.dequeueReusableHeaderFooterView(withIdentifier: CWTableHeaderTitleView.identifier) as! CWTableHeaderTitleView
+        headerTitleView.text = headerTitle
+        return headerTitleView
+    }
+    
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let footerTitle = sections[section].footerTitle  else {
+            return nil
+        }
+        
+        let footerTitleView = tableView.dequeueReusableHeaderFooterView(withIdentifier: CWTableFooterTitleView.identifier) as! CWTableFooterTitleView
+        footerTitleView.text = footerTitle
+        return footerTitleView
     }
     
 }
