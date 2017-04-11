@@ -36,6 +36,8 @@ target 'CWWeChat' do
   
   pod 'IGListKit'
   
+  pod 'pop'
+  
   #🔗 https://github.com/AliSoftware/OHHTTPStubs
   pod 'OHHTTPStubs/Swift'
   

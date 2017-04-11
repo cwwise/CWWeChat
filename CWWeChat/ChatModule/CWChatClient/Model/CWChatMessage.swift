@@ -98,32 +98,32 @@ public enum CWMessageType: Int {
 public class CWChatMessage: NSObject {
 
     /// 会话类型
-    var chatType: CWChatType = .single
+    public var chatType: CWChatType = .single
     /// 消息类型
-    var messageType: CWMessageType {
+    public var messageType: CWMessageType {
         return self.messageBody.type
     }
     /// 消息唯一id
-    var messageId: String
+    public var messageId: String
     /// 消息发送方
-    var direction: CWMessageDirection = .unknown
+    public var direction: CWMessageDirection = .unknown
     /// 发送状态
-    var sendStatus: CWMessageSendStatus = .pending
+    public var sendStatus: CWMessageSendStatus = .pending
     /// 发送方id (自己的id)
-    var senderId: String?
+    public var senderId: String?
     /// 接收方id
-    var targetId: String
+    public var targetId: String
     /// 消息体
-    var messageBody: CWMessageBody
+    public var messageBody: CWMessageBody
     /// 消息发送时间
-    var timestamp: TimeInterval
+    public var timestamp: TimeInterval
     /// 已读
-    var isRead: Bool = true
+    public var isRead: Bool = true
     /// 消息扩展
-    var ext: Dictionary<String, Any>?
+    public var ext: Dictionary<String, Any>?
     
     
-    init(targetId: String,
+    public init(targetId: String,
          messageID: String = String.UUIDString(),
          chatType: CWChatType = .single,
          direction: CWMessageDirection = .send,

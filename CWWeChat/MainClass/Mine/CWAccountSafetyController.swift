@@ -1,34 +1,33 @@
 //
-//  CWAccountSafetyViewController.swift
+//  CWAccountSafetyController.swift
 //  CWWeChat
 //
-//  Created by chenwei on 16/6/23.
-//  Copyright © 2016年 chenwei. All rights reserved.
+//  Created by chenwei on 2017/4/11.
+//  Copyright © 2017年 cwcoder. All rights reserved.
 //
 
 import UIKit
 
-class CWAccountSafetyViewController: CWBaseTableViewController, CWTableViewManagerDelegate {
+class CWAccountSafetyController: CWBaseTableViewController {
 
-    var tableViewManager: CWTableViewManager!
+    lazy var tableViewManager: CWTableViewManager = {
+        let tableViewManager = CWTableViewManager(tableView: self.tableView)
+        tableViewManager.delegate = self
+        return tableViewManager
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "账号与安全"
-        setupManagerData()
+        
+        setupItemData()
     }
     
-    func setupManagerData() {
+    
+    func setupItemData() {
         
-        //
-        
-        
-        tableViewManager = CWTableViewManager(tableView: self.tableView)
-        tableViewManager.delegate = self;
-        
-        var weixinName: String?
-        weixinName = "chenwei"
+        let weixinName: String? = "chenwei"
         
         var weixinItem: CWTableViewItem
         if weixinName != nil {
@@ -39,14 +38,14 @@ class CWAccountSafetyViewController: CWBaseTableViewController, CWTableViewManag
         }
         
         let section1 = CWTableViewSection(items: [weixinItem])
-        tableViewManager.addSection(section: section1)
+        tableViewManager.addSection(section1)
         
         let qqItem = CWTableViewItem(title: "QQ号", subTitle: "1035264176")
         let phoneItem = CWTableViewItem(title: "手机号", subTitle: "18810109052")
         let emailItem = CWTableViewItem(title: "邮箱地址", subTitle: "wei18810109052@163.com")
         
         let section2 = CWTableViewSection(items: [qqItem, phoneItem, emailItem])
-        tableViewManager.addSection(section: section2)
+        tableViewManager.addSection(section2)
         
         
         let soundItem = CWTableViewItem(title: "声音锁")
@@ -60,27 +59,19 @@ class CWAccountSafetyViewController: CWBaseTableViewController, CWTableViewManag
         }
         
         let section3 = CWTableViewSection(items: [soundItem, passwordItem, safetyItem, weixinSaftItem])
-        tableViewManager.addSection(section: section3)
+        tableViewManager.addSection(section3)
     }
 
-    
-    
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+}
+
+
+// MARK: - CWTableViewManagerDelegate
+extension CWAccountSafetyController: CWTableViewManagerDelegate {
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

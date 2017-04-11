@@ -17,8 +17,8 @@ class CWShareCell: UITableViewCell {
         avatarView.size = CGSize(width: 10, height: 10)
         return avatarView
     }()
-    var nameLabel: YYLabel!
     
+    var nameLabel: YYLabel!
     
     
     override func awakeFromNib() {

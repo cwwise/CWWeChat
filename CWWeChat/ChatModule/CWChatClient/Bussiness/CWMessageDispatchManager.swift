@@ -8,6 +8,10 @@
 
 import UIKit
 
+/*
+ 根据xmpp返回的消息来判断 消息是否发送成功
+ */
+
 /// 消息发送管理队列
 class CWMessageDispatchManager: NSObject {
     /// 队列

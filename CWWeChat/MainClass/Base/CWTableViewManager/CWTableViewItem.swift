@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 /// cell对应的model
 public class CWTableViewItem: NSObject {
     

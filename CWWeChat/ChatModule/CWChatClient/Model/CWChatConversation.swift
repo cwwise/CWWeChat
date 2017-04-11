@@ -11,19 +11,19 @@ import UIKit
 /// 消息会话
 public class CWChatConversation: NSObject {
     /// 目标
-    private(set) var targetId: String
+    public private(set) var targetId: String
     /// 类型
-    private(set) var type: CWChatType
+    public private(set) var type: CWChatType
     /// 最近一条消息
-    private(set) var lastMessage: CWChatMessage?
+    public private(set) var lastMessage: CWChatMessage?
     /// 是否置顶
-    var isTop: Bool = false
+    public var isTop: Bool = false
     /// 草稿
-    var draft: String?
+    public var draft: String?
     /// 未读
-    var unreadCount: Int = 0
+    public var unreadCount: Int = 0
     
-    init(targetId: String, type: CWChatType) {
+    public init(targetId: String, type: CWChatType) {
         self.targetId = targetId
         self.type = type
     }
@@ -32,7 +32,7 @@ public class CWChatConversation: NSObject {
     /// 将消息设置为已读
     ///
     /// - Parameter messageId: 要设置消息的ID
-    func markMessageAsRead(messageId: String) {
+    public func markMessageAsRead(messageId: String) {
         guard let service = CWChatClient.share.chatManager as? CWChatService else {
             return
         }
@@ -40,14 +40,14 @@ public class CWChatConversation: NSObject {
     }
     
     /// 将所有未读消息设置为已读
-    func markAllMessagesAsRead() {
+    public func markAllMessagesAsRead() {
         guard let service = CWChatClient.share.chatManager as? CWChatService else {
                 return
         }
         service.messageStore.markAllMessagesAsRead(self.targetId)
     }
     
-    func appendMessage(_ message: CWChatMessage?) {
+    public func appendMessage(_ message: CWChatMessage?) {
         lastMessage = message
     }
     
@@ -55,7 +55,7 @@ public class CWChatConversation: NSObject {
     ///
     /// - Parameter messageId: 消息ID
     /// - Returns: 对应ID的消息
-    func loadMessage(with messageId: String) -> CWChatMessage? {
+    public func loadMessage(with messageId: String) -> CWChatMessage? {
     
         return nil
     }

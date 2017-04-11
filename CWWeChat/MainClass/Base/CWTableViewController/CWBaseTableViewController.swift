@@ -8,29 +8,26 @@
 
 import UIKit
 
-class CWBaseTableViewController: UITableViewController {
-
-    override func loadView() {
+class CWBaseTableViewController: UIViewController {
+    
+    lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: self.view.bounds, style: .grouped)
+        tableView.backgroundColor = UIColor.tableViewBackgroundColor()
         
-        self.view = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight))
-        self.tableView = UITableView(frame: self.view.bounds, style: .grouped)
-        self.tableView.backgroundColor = UIColor.tableViewBackgroundColor()
+        tableView.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        tableView.separatorColor = UIColor.tableViewCellLineColor()
         
-        self.tableView.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
-        self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
-        self.tableView.separatorColor = UIColor.tableViewCellLineColor()
+        tableView.tableFooterView = UIView()
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 10))  
         
-        self.tableView.tableFooterView = UIView()
-        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 10))
-
-        
-    }
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    
-
+        
+        self.view.addSubview(self.tableView)
     }
 
     override func didReceiveMemoryWarning() {
