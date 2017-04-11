@@ -9,7 +9,7 @@
 import UIKit
 
 /// 附件下载状态
-enum CWFileDownloadStatus: Int {
+public enum CWFileDownloadStatus: Int {
     case downloading
     case successed
     case fail
@@ -17,7 +17,7 @@ enum CWFileDownloadStatus: Int {
 }
 
 // TODO: 先简单这么处理，想到好的方式再修改 （方便查看保存成string）
-protocol CWMessageCoding {
+public protocol CWMessageCoding {
     /// 保存到数据库中的字段
     var messageEncode: String { get }
     
@@ -27,7 +27,7 @@ protocol CWMessageCoding {
     func messageDecode(string: String)
 }
 
-protocol CWMessageBody: CWMessageCoding {
+public protocol CWMessageBody: CWMessageCoding {
     /// 聊天消息
     weak var message: CWChatMessage? { get set }
     /// 消息类型

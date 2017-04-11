@@ -13,12 +13,14 @@ protocol CWInputToolBarDelegate: class {
     ///发送文字
     func chatInputView(_ inputView: CWInputToolBar, sendText text: String)
     ///发送图片
-    func chatInputView(_ inputView: CWInputToolBar, image: Image)
+    func chatInputView(_ inputView: CWInputToolBar, image: UIImage)
 }
 
 class CWInputToolBar: UIView {
 
     weak var delegate: CWInputToolBarDelegate?
+    /// 临时记录输入的textView
+    var currentText: String?
     
     //MARK: 初始化
     override init(frame: CGRect) {

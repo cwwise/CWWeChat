@@ -21,7 +21,7 @@ class CWMessageTransmitter: NSObject {
         return CWChatXMPPManager.share.xmppStream
     }
     
-    func sendMessage(content: String,
+    @discardableResult func sendMessage(content: String,
                      targetId: String,
                      messageId: String,
                      chatType:Int = 0, 

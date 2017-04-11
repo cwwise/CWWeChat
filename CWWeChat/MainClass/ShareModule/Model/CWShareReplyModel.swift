@@ -16,17 +16,16 @@ enum CWShareReplyType {
 
 
 class CWShareReplyModel: NSObject {
+   
+    var shareId: String!
 
     var username: String!
     var userId: String!
-    
-    var shareId: String!
-    
+
     var receiveUserId: String?
     var receiveUserName: String?
     
     var replyDate: Date!
     
     var replyType: CWShareReplyType = .unkown
-    
 }

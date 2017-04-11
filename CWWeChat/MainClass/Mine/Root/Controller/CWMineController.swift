@@ -54,14 +54,26 @@ extension CWMineController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         super.tableView(tableView, didSelectRowAt: indexPath)
         
-        if indexPath.section == 2 {
-        
-            return
-        }
-        
         if indexPath.section == 0 {
             return
         }
+        
+        else if indexPath.section == 1 {
+            
+            return
+        }
+            
+        else if indexPath.section == 2 {
+        
+            return
+        } else {
+            
+            let settingVC = CWMineSettingController()
+            settingVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(settingVC, animated: true)
+        }
+        
+
         
     
     }

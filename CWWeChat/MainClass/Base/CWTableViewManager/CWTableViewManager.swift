@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public protocol CWTableViewManagerDelegate: UITableViewDelegate {
+public protocol CWTableViewManagerDelegate: UITableViewDelegate {
     
 }
 
@@ -54,7 +54,7 @@ public class CWTableViewManager: NSObject {
     
     
     // 操作section
-    public func addSection(section: CWTableViewSection) {
+    public func addSection(_ section: CWTableViewSection) {
         sections.append(section)
     }
     
@@ -102,7 +102,7 @@ extension CWTableViewManager: UITableViewDelegate {
         }
         
         // 可选直接使用？ 不需要
-        self.delegate?.tableView?(tableView, didSelectRowAt: indexPath)
+        self.delegate?.tableView!(tableView, didSelectRowAt: indexPath)
     }
     
     

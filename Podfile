@@ -29,12 +29,15 @@ target 'CWWeChat' do
   pod 'XMPPFramework', '~> 3.7.0'
   
   pod 'MBProgressHUD'
+  pod 'CHIPageControl/Aleppo'
   
   pod 'KVOController'
   
   pod 'Moya/RxSwift'
   
   pod 'IGListKit'
+  
+  pod 'pop'
   
   #🔗 https://github.com/AliSoftware/OHHTTPStubs
   pod 'OHHTTPStubs/Swift'

@@ -32,37 +32,3 @@ public struct ChatCellUI {
     /// 右边气泡背景区域 间距
     static let right_edge_insets = UIEdgeInsets(top: 10, left: 17, bottom: 10, right: 17)
 }
-
-
-
-public enum CWEmojiType: Int {
-    case emoji
-    case favorite
-    case face
-    case image
-}
-
-public enum CWToolBarStatus: Int {
-    case initial
-    case voice
-    case more
-    case emoji
-    case keyboard
-}
-
-
-///键盘相关的枚举
-public enum CWMoreKeyboardItemType: Int {
-    case image
-    case camera
-    case video
-    case videoCall
-    case wallet
-    case transfer
-    case position
-    case favorite
-    case businessCard
-    case voice
-    case cards
-}
-
