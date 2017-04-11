@@ -16,6 +16,7 @@ public protocol CWTableViewCellDelegate: NSObjectProtocol {
 
 public class CWTableViewCell: UITableViewCell {
     
+    public weak var delegate: CWTableViewCellDelegate?
     public var item: CWTableViewItem!
     
     lazy var titleLabel:UILabel = {
@@ -47,11 +48,11 @@ public class CWTableViewCell: UITableViewCell {
         self.contentView.addSubview(rightImageView)
         self.contentView.addSubview(rightLabel)
         
-        p_addSnap()
+        _addSnap()
     }
     
     //MARK: 添加约束
-    func p_addSnap() {
+    func _addSnap() {
         
         self.titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView)
@@ -80,7 +81,7 @@ public class CWTableViewCell: UITableViewCell {
         if item.showDisclosureIndicator == false {
             self.accessoryType = .none
             self.rightLabel.snp.updateConstraints({ (make) in
-                make.right.equalTo(self.contentView).offset(-15)
+                make.right.equalTo(self.contentView).offset(-kCWCellLeftMargin)
             })
         } else {
             self.accessoryType = .disclosureIndicator

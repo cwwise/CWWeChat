@@ -94,6 +94,9 @@
 		1FA724171E9B6EB1009B6456 /* ChatKeyboardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA724161E9B6EB1009B6456 /* ChatKeyboardDelegate.swift */; };
 		1FA724471E9C9EA9009B6456 /* CWAccountSafetyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA724461E9C9EA9009B6456 /* CWAccountSafetyController.swift */; };
 		1FA724491E9C9F84009B6456 /* CWMineSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA724481E9C9F84009B6456 /* CWMineSettingController.swift */; };
+		1FA7244B1E9CA7CB009B6456 /* CWTableViewButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7244A1E9CA7CB009B6456 /* CWTableViewButtonCell.swift */; };
+		1FA7244E1E9CA9DD009B6456 /* CWTableHeaderTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7244D1E9CA9DD009B6456 /* CWTableHeaderTitleView.swift */; };
+		1FA724501E9CAA44009B6456 /* CWTableFooterTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7244F1E9CAA44009B6456 /* CWTableFooterTitleView.swift */; };
 		4E3C0C0A9AC7AC251E75415B /* Pods_CWWeChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 392080DF2A871FED246A48AD /* Pods_CWWeChatTests.framework */; };
 		732B7F111A2AF06C5FB003A1 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5C5938ABFC0D0537A59353 /* Pods_CWWeChat.framework */; };
 		8C0BFDD21E90EF70007343F1 /* CWChatConversationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFDCC1E90EF70007343F1 /* CWChatConversationController.swift */; };
@@ -270,6 +273,9 @@
 		1FA724161E9B6EB1009B6456 /* ChatKeyboardDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatKeyboardDelegate.swift; sourceTree = "<group>"; };
 		1FA724461E9C9EA9009B6456 /* CWAccountSafetyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAccountSafetyController.swift; sourceTree = "<group>"; };
 		1FA724481E9C9F84009B6456 /* CWMineSettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMineSettingController.swift; sourceTree = "<group>"; };
+		1FA7244A1E9CA7CB009B6456 /* CWTableViewButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewButtonCell.swift; sourceTree = "<group>"; };
+		1FA7244D1E9CA9DD009B6456 /* CWTableHeaderTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableHeaderTitleView.swift; sourceTree = "<group>"; };
+		1FA7244F1E9CAA44009B6456 /* CWTableFooterTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableFooterTitleView.swift; sourceTree = "<group>"; };
 		2D5C5938ABFC0D0537A59353 /* Pods_CWWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		31E51D349FC87AA2896572C6 /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
 		392080DF2A871FED246A48AD /* Pods_CWWeChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -661,6 +667,7 @@
 				1F3491F21E878AD500B36641 /* CWTableViewSection.swift */,
 				1F3491F01E878AD500B36641 /* CWTableViewItem.swift */,
 				1F3491EF1E878AD500B36641 /* CWTableViewCell.swift */,
+				1FA7244C1E9CA9BA009B6456 /* Header */,
 				1F3491ED1E878AD500B36641 /* Cells */,
 				1F3491F41E878AD500B36641 /* Items */,
 			);
@@ -671,6 +678,7 @@
 			isa = PBXGroup;
 			children = (
 				1F3491EE1E878AD500B36641 /* CWTableViewBoolCell.swift */,
+				1FA7244A1E9CA7CB009B6456 /* CWTableViewButtonCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1038,6 +1046,15 @@
 			children = (
 			);
 			path = Voice;
+			sourceTree = "<group>";
+		};
+		1FA7244C1E9CA9BA009B6456 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				1FA7244D1E9CA9DD009B6456 /* CWTableHeaderTitleView.swift */,
+				1FA7244F1E9CAA44009B6456 /* CWTableFooterTitleView.swift */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 		8C0BFDCA1E90EF70007343F1 /* Conversation */ = {
@@ -1578,9 +1595,11 @@
 				1F6B9F1A1E8CC6F300AD7FC7 /* CWMessageHandleProtocol.swift in Sources */,
 				8C0BFE1C1E92196B007343F1 /* CWPlayMessageAudio.swift in Sources */,
 				8C0BFE101E9209D8007343F1 /* CWContactCell.swift in Sources */,
+				1FA724501E9CAA44009B6456 /* CWTableFooterTitleView.swift in Sources */,
 				1F34920C1E878AD500B36641 /* CWChatXMPPManager.swift in Sources */,
 				8C0BFDD51E90EF70007343F1 /* CWChatConversationCell.swift in Sources */,
 				1F34926C1E87B84100B36641 /* CWWebViewController.swift in Sources */,
+				1FA7244E1E9CA9DD009B6456 /* CWTableHeaderTitleView.swift in Sources */,
 				1F3492061E878AD500B36641 /* CWChatConversation.swift in Sources */,
 				1F34927C1E87DAC400B36641 /* CWMenuItem.swift in Sources */,
 				8C0BFE0C1E9209D8007343F1 /* CWContactsController.swift in Sources */,
@@ -1638,6 +1657,7 @@
 				1F3492131E878AD500B36641 /* UIApplication+CWChat.swift in Sources */,
 				1F3492301E878BE300B36641 /* CWMessageTransmitter.swift in Sources */,
 				1F34927D1E87DAC400B36641 /* CWMenuCell.swift in Sources */,
+				1FA7244B1E9CA7CB009B6456 /* CWTableViewButtonCell.swift in Sources */,
 				1FA7240B1E9B6C2D009B6456 /* CWMineHelper.swift in Sources */,
 				1F3492071E878AD500B36641 /* CWMessageBody.swift in Sources */,
 				1F34922D1E878B8500B36641 /* CWChatClientOptions.swift in Sources */,

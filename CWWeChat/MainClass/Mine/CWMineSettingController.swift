@@ -39,9 +39,7 @@ class CWMineSettingController: CWBaseTableViewController {
         let item7 = CWTableViewItem(title: "退出微信")
         let section4 = CWTableViewSection(items: [item7])
 
-        tableViewManager.addSection(contentsOf: [section1, section2, section3, section4])
-
-        
+        tableViewManager.addSection(contentsOf: [section1, section2, section3, section4])        
     }
 
     override func didReceiveMemoryWarning() {

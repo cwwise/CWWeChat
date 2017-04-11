@@ -102,7 +102,7 @@ extension CWTableViewManager: UITableViewDelegate {
         }
         
         // 可选直接使用？ 不需要
-        self.delegate?.tableView?(tableView, didSelectRowAt: indexPath)
+        self.delegate?.tableView!(tableView, didSelectRowAt: indexPath)
     }
     
     
