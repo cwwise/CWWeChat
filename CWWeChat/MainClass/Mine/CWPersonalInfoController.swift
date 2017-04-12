@@ -35,7 +35,8 @@ extension CWPersonalInfoController {
         let nikename = "武藤游戏boy"
         let nikenameItem = CWTableViewItem(title: "名字", subTitle: nikename)
         let usernameItem = CWTableViewItem(title: "微信号", subTitle: "chenwei")
-
+        usernameItem.showDisclosureIndicator = false
+        
         let qrCodeItem = CWTableViewItem(title: "我的二维码")
         let locationItem = CWTableViewItem(title: "我的地址")
 

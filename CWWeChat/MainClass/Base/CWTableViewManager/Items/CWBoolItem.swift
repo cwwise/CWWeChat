@@ -16,6 +16,7 @@ class CWBoolItem: CWTableViewItem {
     init(title: String, value: Bool = false) {
         super.init(title: title)
         self.value = value
+        self.disableHighlight = true
     }
     
 }
