@@ -12,6 +12,10 @@ public protocol CWTableViewManagerDelegate: UITableViewDelegate {
     
 }
 
+extension CWTableViewManagerDelegate {
+    
+}
+
 /// table 管理的
 //  主要用来 创建统一的设置界面
 //  参考 https://github.com/romaonthego/RETableViewManager 根据自己的项目进行简化
@@ -109,14 +113,17 @@ extension CWTableViewManager: UITableViewDelegate {
             selectionAction(item)
         }
         
-        // TODO: tableView后面不加！ 会报错 加！如果没有实现协议 会崩溃
-        if let delegate = self.delegate {
-            delegate.tableView!(tableView, didSelectRowAt: indexPath)
-        }
+        // 不明白 为什么需要添加？
+        delegate?.tableView?(tableView, didSelectRowAt: indexPath)
     }
     
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if let cellHeight = delegate?.tableView?(tableView, heightForRowAt: indexPath) {
+            return cellHeight
+        }
+        
         let item = sections[indexPath.section][indexPath.row]
         return item.cellHeight
     }

@@ -78,6 +78,9 @@
 		1F4094901E9DD64B008D959C /* CWCommonSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F40948F1E9DD64B008D959C /* CWCommonSettingController.swift */; };
 		1F4094921E9DD9B6008D959C /* CWMessageNoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4094911E9DD9B6008D959C /* CWMessageNoticeController.swift */; };
 		1F4094941E9DE5A7008D959C /* CWPrivacySettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4094931E9DE5A7008D959C /* CWPrivacySettingController.swift */; };
+		1F4094961E9DEF2D008D959C /* CWMyExpressionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4094951E9DEF2D008D959C /* CWMyExpressionCell.swift */; };
+		1F4094981E9DEFCC008D959C /* CWPersonalInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4094971E9DEFCC008D959C /* CWPersonalInfoController.swift */; };
+		1F40949A1E9DFAC8008D959C /* CWAboutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4094991E9DFAC8008D959C /* CWAboutHeaderView.swift */; };
 		1F6B9F141E8CAF4B00AD7FC7 /* CWMessageDispatchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F131E8CAF4B00AD7FC7 /* CWMessageDispatchOperation.swift */; };
 		1F6B9F161E8CB1C400AD7FC7 /* CWTextMessageDispatchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F151E8CB1C400AD7FC7 /* CWTextMessageDispatchOperation.swift */; };
 		1F6B9F181E8CC6E200AD7FC7 /* CWMessageHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F171E8CC6E200AD7FC7 /* CWMessageHandle.swift */; };
@@ -276,6 +279,9 @@
 		1F40948F1E9DD64B008D959C /* CWCommonSettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWCommonSettingController.swift; sourceTree = "<group>"; };
 		1F4094911E9DD9B6008D959C /* CWMessageNoticeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageNoticeController.swift; sourceTree = "<group>"; };
 		1F4094931E9DE5A7008D959C /* CWPrivacySettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWPrivacySettingController.swift; sourceTree = "<group>"; };
+		1F4094951E9DEF2D008D959C /* CWMyExpressionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMyExpressionCell.swift; sourceTree = "<group>"; };
+		1F4094971E9DEFCC008D959C /* CWPersonalInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWPersonalInfoController.swift; sourceTree = "<group>"; };
+		1F4094991E9DFAC8008D959C /* CWAboutHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAboutHeaderView.swift; sourceTree = "<group>"; };
 		1F6B9F131E8CAF4B00AD7FC7 /* CWMessageDispatchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageDispatchOperation.swift; sourceTree = "<group>"; };
 		1F6B9F151E8CB1C400AD7FC7 /* CWTextMessageDispatchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTextMessageDispatchOperation.swift; sourceTree = "<group>"; };
 		1F6B9F171E8CC6E200AD7FC7 /* CWMessageHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageHandle.swift; sourceTree = "<group>"; };
@@ -774,6 +780,8 @@
 				1FA724481E9C9F84009B6456 /* CWMineSettingController.swift */,
 				1F40948F1E9DD64B008D959C /* CWCommonSettingController.swift */,
 				8CA7EAF31E9D41DE00467C37 /* CWAboutController.swift */,
+				1F4094991E9DFAC8008D959C /* CWAboutHeaderView.swift */,
+				1F4094971E9DEFCC008D959C /* CWPersonalInfoController.swift */,
 				1F4094911E9DD9B6008D959C /* CWMessageNoticeController.swift */,
 				1F4094931E9DE5A7008D959C /* CWPrivacySettingController.swift */,
 			);
@@ -1067,6 +1075,7 @@
 		1FA724111E9B6D29009B6456 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F4094951E9DEF2D008D959C /* CWMyExpressionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1674,10 +1683,13 @@
 				1F34927B1E87DAC400B36641 /* CWMenuViewController.swift in Sources */,
 				8C4927831E928EB400B3C482 /* CWUploadToken.swift in Sources */,
 				8C0BFDD71E90FD91007343F1 /* CWContactManager.swift in Sources */,
+				1F4094961E9DEF2D008D959C /* CWMyExpressionCell.swift in Sources */,
 				1F34920F1E878AD500B36641 /* CWChatMessageCell.swift in Sources */,
+				1F4094981E9DEFCC008D959C /* CWPersonalInfoController.swift in Sources */,
 				8C84B9471E8C04780020D508 /* CWShareModel.swift in Sources */,
 				1F3492591E8792AC00B36641 /* CWConversationController.swift in Sources */,
 				1FA724471E9C9EA9009B6456 /* CWAccountSafetyController.swift in Sources */,
+				1F40949A1E9DFAC8008D959C /* CWAboutHeaderView.swift in Sources */,
 				8C34AFB21E9D2FA800977742 /* CWMoreKeyBoard.swift in Sources */,
 				1F6B9F1A1E8CC6F300AD7FC7 /* CWMessageHandleProtocol.swift in Sources */,
 				8C0BFE1C1E92196B007343F1 /* CWPlayMessageAudio.swift in Sources */,
@@ -1934,10 +1946,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/CWWeChat/Vendor/Realm",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/CWWeChat/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1953,10 +1962,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/CWWeChat/Vendor/Realm",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/CWWeChat/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

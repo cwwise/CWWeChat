@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CWMyExpressionCellDelegate: class{
-    func myExpressionCellDeleteButtonDown()
+    func expressionCellDeleteButtonDown()
 }
 
 class CWMyExpressionCell: UITableViewCell {

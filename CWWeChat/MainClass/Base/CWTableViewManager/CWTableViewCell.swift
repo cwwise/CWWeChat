@@ -34,6 +34,9 @@ public class CWTableViewCell: UITableViewCell {
     
     lazy var rightImageView:UIImageView = {
         let rightImageView = UIImageView()
+        rightImageView.contentMode = .scaleAspectFill
+        rightImageView.clipsToBounds = true
+        rightImageView.layer.cornerRadius = 5
         return rightImageView
     }()
     
@@ -67,6 +70,8 @@ public class CWTableViewCell: UITableViewCell {
         
         self.rightImageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView)
+            make.top.equalTo(10)
+            make.width.equalTo(self.rightImageView.snp.height)
             make.right.equalTo(self.rightLabel.snp.left).offset(-2)
         }
         
@@ -90,6 +95,7 @@ public class CWTableViewCell: UITableViewCell {
             })
         }
         
+        rightImageView.yy_setImage(with: item.rightImageURL, placeholder: nil)
         if item.disableHighlight {
             self.selectionStyle = .none
         } else {

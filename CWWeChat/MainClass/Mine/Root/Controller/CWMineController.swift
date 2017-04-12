@@ -41,9 +41,9 @@ extension CWMineController {
         
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CWMineUserCell
-            let model = CWContactModel(userId: "chenwei@chenweiim.com", username: "chenwei")
+            let model = CWContactModel(userId: "chenwei", username: "chenwei")
             model.nickname = "陈威"
-            model.avatarURL = "http://o7ve5wypa.bkt.clouddn.com/tom.jpg"
+            model.avatarURL = "\(kHeaderImageBaseURLString)\(model.userId!).jpg"
             
             cell.userModel = model
             return cell
@@ -55,27 +55,24 @@ extension CWMineController {
         super.tableView(tableView, didSelectRowAt: indexPath)
         
         if indexPath.section == 0 {
-            return
+            let personVC = CWPersonalInfoController()
+            personVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(personVC, animated: true)
         }
-        
         else if indexPath.section == 1 {
             
             return
         }
-            
         else if indexPath.section == 2 {
-        
-            return
+            let expressionVC = CWExpressionViewController()
+            expressionVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(expressionVC, animated: true)
         } else {
-            
             let settingVC = CWMineSettingController()
             settingVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(settingVC, animated: true)
         }
         
-
-        
-    
     }
 }
 

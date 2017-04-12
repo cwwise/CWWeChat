@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWAboutHeaderView: UITableViewHeaderFooterView {
+class CWAboutHeaderView: UIView {
 
     /// 文字
     var title: String? {
@@ -19,7 +19,10 @@ class CWAboutHeaderView: UITableViewHeaderFooterView {
     /// iconImage的名称
     var iconPath: String? {
         didSet {
-            self.imageView.image = UIImage(named: iconPath!)
+            guard let path = iconPath else {
+                return
+            }
+            self.imageView.image = UIImage(named: path)
         }
     }
     
@@ -36,28 +39,28 @@ class CWAboutHeaderView: UITableViewHeaderFooterView {
         return imageView
     }()
     
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        self.contentView.addSubview(self.titleLabel)
-        self.contentView.addSubview(self.imageView)
-
+        self.addSubview(self.titleLabel)
+        self.addSubview(self.imageView)
         p_addSnap()
+
     }
     
     func p_addSnap() {
         
         imageView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(4)
-            make.centerX.equalTo(self.contentView)
+            make.top.equalTo(4)
+            make.centerX.equalTo(self)
             make.bottom.equalTo(self.titleLabel.snp.top).offset(1)
             make.width.equalTo(self.imageView.snp.height).multipliedBy(1)
         }
         
         titleLabel.snp.makeConstraints { (make) in
             make.height.equalTo(25)
-            make.bottom.equalTo(self.contentView).offset(-10)
-            make.left.right.equalTo(self.contentView)
+            make.bottom.equalTo(-10)
+            make.left.right.equalTo(self)
         }
         
     }

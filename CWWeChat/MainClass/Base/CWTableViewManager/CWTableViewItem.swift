@@ -19,6 +19,9 @@ public class CWTableViewItem: NSObject {
     public var subTitle: String?
     /// cell高度 默认49
     public var cellHeight: CGFloat = 0.0
+    /// 图标的URL
+    public var rightImageURL: URL?
+    
     ///  是否显示
     public var showDisclosureIndicator: Bool = true
     ///  是否不高亮
