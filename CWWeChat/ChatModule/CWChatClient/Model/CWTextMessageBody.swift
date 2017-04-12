@@ -28,7 +28,6 @@ extension CWTextMessageBody: CWMessageCoding {
     }
     
     func messageDecode(string: String) {
-        
+        self.text = string
     }
-    
 }

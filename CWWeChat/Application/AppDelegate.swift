@@ -29,12 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         loginXMPP()
         //注册推送信息
         registerRemoteNotification()
-        
         return true
     }
     
     func loginXMPP() {
-//        let options = CWChatClientOptions(chatServer: "localhost", chatDomain: "localhost")
+//        let options = CWChatClientOptions(chatServer: "localhost", chatDomain: "cwcoder.com")
         let options = CWChatClientOptions(chatServer: "hosted.im", chatDomain: "hellochatim.p1.im")
         let chatClient = CWChatClient.share
         chatClient.initialize(with: options)
@@ -67,7 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.registerForRemoteNotifications()
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().requestAuthorization(options: [.badge,.alert,.sound]) { (result, error) in
-                
             }
         } else {
             let userSetting = UIUserNotificationSettings(types: [.sound,.alert, .badge], categories: nil)

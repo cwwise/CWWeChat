@@ -11,6 +11,7 @@ import UIKit
 ///重复发送次数
 private let kMax_RepeatCount:Int = 5
 
+/// 还需要修改
 /// 发送消息线程
 class CWMessageDispatchOperation: Operation {
     
@@ -18,6 +19,7 @@ class CWMessageDispatchOperation: Operation {
         let chatService = CWChatClient.share.chatManager as! CWChatService
         return chatService.messageTransmitter
     }
+    
     /// 消息实体
     var message: CWChatMessage
     /// 进度回调的block
@@ -119,7 +121,6 @@ class CWMessageDispatchOperation: Operation {
         self.progress = progress
         self.completion = completion
         super.init()
-        
     }
     
 

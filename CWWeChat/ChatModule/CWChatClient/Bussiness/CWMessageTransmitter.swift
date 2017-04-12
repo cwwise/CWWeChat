@@ -61,7 +61,7 @@ class CWMessageTransmitter: NSObject {
             message = XMPPMessage(type: "groupchat", elementID: messageId)
         }
         message?.addAttribute(withName: "to", stringValue: chatJidString(withType: chatType, name: to))
-
+        message?.addReceiptRequest()
         let bodyElement = DDXMLElement.element(withName: "body", stringValue: body) as! DDXMLElement
         bodyElement.addAttribute(withName: "msgtype", integerValue: type)
 

@@ -54,7 +54,6 @@ extension CWChatMessageParse: XMPPStreamDelegate {
         }
         
         log.verbose(message)
-        
         messageHandle.handleMessage(message: message)
     }
     

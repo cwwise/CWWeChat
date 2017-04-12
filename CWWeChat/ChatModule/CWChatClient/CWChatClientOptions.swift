@@ -10,9 +10,10 @@ import Foundation
 
 // 配置信息
 public class CWChatClientOptions: NSObject {
-    
     ///  是否自动登录
     var isAutoLogin: Bool = true
+    
+    
     /// 端口号
     var chatPort: UInt16 = 5222
     /// XMPP服务器 ip地址 默认为本地localhost

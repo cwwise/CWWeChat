@@ -72,11 +72,7 @@ public protocol CWChatManager: NSObjectProtocol {
     ///   - deleteMessages: 是否删除会话中的消息
     func deleteConversation(_ targetId: String, deleteMessages: Bool)
     func deleteConversation(_ targetId: String)
-    
-    // MARK: 获取消息
-    
-    
-    
+        
     // MARK: 消息相关
     
     /// 更新消息到DB

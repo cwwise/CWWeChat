@@ -22,6 +22,8 @@ class CWChatXMPPManager: NSObject {
     /// xmpp队列
     private var xmppQueue: DispatchQueue
 
+    fileprivate var streamManagement: XMPPStreamManagement
+
     var options: CWChatClientOptions!
     /// 网络状态监听
     var reachable: NetworkReachabilityManager?
@@ -34,15 +36,23 @@ class CWChatXMPPManager: NSObject {
     private override init() {
         xmppQueue = DispatchQueue(label: "com.cwxmppchat.cwcoder", attributes: DispatchQueue.Attributes.concurrent)
         
+        let memoryStorage = XMPPStreamManagementMemoryStorage()
+        streamManagement = XMPPStreamManagement(storage: memoryStorage)
         xmppStream = XMPPStream()
         xmppReconnect = XMPPReconnect()
         autoPing = XMPPAutoPing()
         super.init()
         
-        ///xmpp
+        /// xmpp
         xmppStream.enableBackgroundingOnSocket = true
         xmppStream.addDelegate(self, delegateQueue: xmppQueue)
-        
+
+        /// xmppstreamManagement
+        streamManagement.activate(xmppStream)
+        streamManagement.addDelegate(self, delegateQueue: xmppQueue)
+        streamManagement.automaticallyRequestAcks(afterStanzaCount: 5, orTimeout: 2.0)
+        streamManagement.automaticallySendAcks(afterStanzaCount: 5, orTimeout: 2.0)
+
         ///配置xmpp重新连接的服务
         xmppReconnect.reconnectDelay = 3.0
         xmppReconnect.reconnectTimerInterval = DEFAULT_XMPP_RECONNECT_TIMER_INTERVAL
@@ -52,7 +62,6 @@ class CWChatXMPPManager: NSObject {
         //心跳机制
         autoPing.activate(xmppStream)
         autoPing.respondsToQueries = true
-        autoPing.pingInterval = 60
 
         setupNetworkReachable()
         registerApplicationNotification()
@@ -190,6 +199,9 @@ extension CWChatXMPPManager: XMPPStreamDelegate {
     func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
         log.debug("xmpp认证成功")
         goOnline()
+        
+        streamManagement.autoResume = true
+        streamManagement.enable(withResumption: true, maxTimeout: 60)
         self.completion?(xmppStream.myJID.user, nil)
     }
     
@@ -226,13 +238,30 @@ extension CWChatXMPPManager: XMPPStreamDelegate {
     
     func xmppStream(_ sender: XMPPStream!, didReceive iq: XMPPIQ!) -> Bool {
         
+        log.debug(iq)
+
         if iq.requiresResponse() {
             
         } else {
-            log.debug(iq)
+            
         }
         
         return true
     }
 
 }
+
+extension CWChatXMPPManager: XMPPStreamManagementDelegate {
+    
+    func xmppStreamManagementDidRequestAck(_ sender: XMPPStreamManagement!) {}
+    
+    func xmppStreamManagement(_ sender: XMPPStreamManagement!, wasEnabled enabled: DDXMLElement!) {
+        log.info("xmppStreamManagement wasEnabled")
+    }
+    
+    func xmppStreamManagement(_ sender: XMPPStreamManagement!, didReceiveAckForStanzaIds stanzaIds: [Any]!) {
+        log.debug(stanzaIds)
+        // 收到id
+    }
+}
+

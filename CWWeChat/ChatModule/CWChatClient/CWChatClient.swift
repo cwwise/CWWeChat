@@ -89,7 +89,7 @@ public class CWChatClient: NSObject {
                       password: String,
                       completion: CWClientCompletion? = nil) {
         userId = username
-//        xmppManager.loginServer(with: username, password: password, completion: completion)
+        xmppManager.loginServer(with: username, password: password, completion: completion)
         
         // 登陆成功之后
         initUser()

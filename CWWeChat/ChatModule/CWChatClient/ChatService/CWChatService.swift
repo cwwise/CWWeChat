@@ -20,6 +20,7 @@ class CWChatService: XMPPModule {
         let conversationStore = CWChatConversationStore(userId: CWChatClient.share.userId)
         return conversationStore
     }()
+    
     /// 发送
     private(set) var messageTransmitter: CWMessageTransmitter
     /// 消息发送管理
