@@ -32,11 +32,31 @@ class CWMineSettingController: CWBaseTableViewController {
         let section1 = CWTableViewSection(items: [item1])
 
         let item2 = CWTableViewItem(title: "新消息通知")
+        item2.selectionAction = { (item) in
+            let noticeVC = CWMessageNoticeController()
+            self.navigationController?.pushViewController(noticeVC, animated: true)
+        }
+        
         let item3 = CWTableViewItem(title: "隐私")
+        item3.selectionAction = { (item) in
+            let privacyVC = CWPrivacySettingController()
+            self.navigationController?.pushViewController(privacyVC, animated: true)
+        }
+        
         let item4 = CWTableViewItem(title: "通用")
+        item4.selectionAction = { (item) in
+            let commonVC = CWCommonSettingController()
+            self.navigationController?.pushViewController(commonVC, animated: true)
+        }
         let section2 = CWTableViewSection(items: [item2, item3, item4])
 
         let item5 = CWTableViewItem(title: "帮助与反馈")
+        item5.selectionAction = { (item) in
+            let url = URL(string: "https://kf.qq.com/touch/product/wechat_app.html")
+            let feedbackVC = CWWebViewController(url: url)
+            self.navigationController?.pushViewController(feedbackVC, animated: true)
+        }
+        
         let item6 = CWTableViewItem(title: "关于微信")
         item6.selectionAction = { (item) in
             let aboutVC = CWAboutController()
@@ -44,7 +64,7 @@ class CWMineSettingController: CWBaseTableViewController {
         }
         let section3 = CWTableViewSection(items: [item5, item6])
         
-        let item7 = CWTableViewItem(title: "退出微信")
+        let item7 = CWButtonItem(title: "退出微信")
         let section4 = CWTableViewSection(items: [item7])
 
         tableViewManager.addSection(contentsOf: [section1, section2, section3, section4])        

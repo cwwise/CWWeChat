@@ -13,13 +13,10 @@ enum CWChatKeyBoardStyle {
     case comment
 }
 
-
 /// 数据源
 protocol CWChatKeyBoardDataSource {
     func chatKeyBoardMoreItems() -> [CWMoreKeyboardItem]
 }
-
-
 
 public class CWChatKeyBoard: UIView {
     

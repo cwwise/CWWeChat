@@ -9,5 +9,13 @@
 import UIKit
 
 class CWBoolItem: CWTableViewItem {
+    
+    public var value: Bool = false
+    public var switchValueChangeHandler: CWSelectionHandler?
 
+    init(title: String, value: Bool = false) {
+        super.init(title: title)
+        self.value = value
+    }
+    
 }

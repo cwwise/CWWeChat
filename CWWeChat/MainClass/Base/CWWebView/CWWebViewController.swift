@@ -84,7 +84,7 @@ class CWWebViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    required convenience init(url: URL) {
+    required convenience init(url: URL?) {
         self.init()
         self.url = url
     }

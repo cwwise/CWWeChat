@@ -8,11 +8,11 @@
 
 import UIKit
 
+public typealias CWSelectionHandler = (CWTableViewItem) -> ()
 
 /// cell对应的model
 public class CWTableViewItem: NSObject {
     
-    public typealias CWSelectionHandler = (CWTableViewItem) -> ()
     /// 文本
     public var title: String
     /// 副标题

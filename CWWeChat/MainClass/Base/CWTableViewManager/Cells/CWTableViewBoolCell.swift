@@ -11,36 +11,31 @@ import UIKit
 // switch cell
 class CWTableViewBoolCell: CWTableViewCell {
     
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.contentView.addSubview(titleLabel)
         self.accessoryView = cellSwitch
         self.selectionStyle = .none
-        p_addSnap()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-    //MARK: 添加约束
-    func p_addSnap() {
+
+    override func cellWillAppear() {
+        super.cellWillAppear()
         
-        self.titleLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.contentView)
-            make.left.equalTo(self.contentView).offset(kCWCellLeftMargin)
-            make.right.lessThanOrEqualTo(self.contentView).offset(-kCWCellLeftMargin)
+        guard let booItem = self.item as? CWBoolItem else {
+            self.cellSwitch.isOn = false
+            return
         }
         
+        self.cellSwitch.isOn = booItem.value
     }
     
     
-    
     func switchChangeStatus(_ cellSwitch: UISwitch) {
-        if let delegate = self.delegate {
+        if let _ = self.delegate {
 
         }
     }

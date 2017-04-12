@@ -53,14 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     ///设置Log日志
     func setupLogger() {
-        
         // add log destinations. at least one is needed!
         let console = ConsoleDestination()  // log to Xcode Console
-        console.minLevel = .verbose // just log .info, .warning & .error
+        console.minLevel = .debug // just log .info, .warning & .error
         let file = FileDestination()  // log to default swiftybeaver.log file
         log.addDestination(console)
         log.addDestination(file)
-        
     }
     
     /// 注册通知

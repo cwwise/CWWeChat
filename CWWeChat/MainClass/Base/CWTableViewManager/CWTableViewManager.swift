@@ -46,6 +46,9 @@ public class CWTableViewManager: NSObject {
                                 forHeaderFooterViewReuseIdentifier: CWTableFooterTitleView.identifier)
         
         self.register(cellClass: CWTableViewCell.self, forCellReuseIdentifier: CWTableViewItem.self)
+        self.register(cellClass: CWTableViewBoolCell.self, forCellReuseIdentifier: CWBoolItem.self)
+        self.register(cellClass: CWTableViewButtonCell.self, forCellReuseIdentifier: CWButtonItem.self)
+
     }
     
     func register(cellClass: Swift.AnyClass, forCellReuseIdentifier itemClass: Swift.AnyClass) {

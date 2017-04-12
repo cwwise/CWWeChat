@@ -9,7 +9,7 @@
 import UIKit
 import YYWebImage
 
-///下载展示imageView
+/// 图片发送部分进度view
 class CWChatImageView: UIImageView {
     
     //引导
