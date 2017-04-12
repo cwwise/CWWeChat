@@ -75,7 +75,4 @@ class CWAccountSafetyController: CWBaseTableViewController {
 // MARK: - CWTableViewManagerDelegate
 extension CWAccountSafetyController: CWTableViewManagerDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
 }

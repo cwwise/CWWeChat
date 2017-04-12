@@ -130,7 +130,7 @@ class CWChatMessageCell: UITableViewCell {
     /// 上传消息进度（图片和视频）
     
     //更新消息状态
-    func updateMessageCellState() {
+    func updateChatMessageCellState() {
         
         // 发送中展示
         if messageModel.message.sendStatus == .sending {

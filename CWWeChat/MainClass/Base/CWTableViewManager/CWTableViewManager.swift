@@ -12,9 +12,20 @@ public protocol CWTableViewManagerDelegate: UITableViewDelegate {
     
 }
 
+public protocol CWTableViewManagerDataSource: NSObjectProtocol {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell?
+}
+
 extension CWTableViewManagerDelegate {
     
 }
+
+extension CWTableViewManagerDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell? {
+        return nil
+    }
+}
+
 
 /// table 管理的
 //  主要用来 创建统一的设置界面
@@ -23,7 +34,8 @@ public class CWTableViewManager: NSObject {
 
     public weak var tableView: UITableView?
     public weak var delegate: CWTableViewManagerDelegate?
-    
+    public weak var dataSource: CWTableViewManagerDataSource?
+
     var sections: [CWTableViewSection]
     
     /// 初始化方法
@@ -81,13 +93,15 @@ public class CWTableViewManager: NSObject {
 extension CWTableViewManager: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = identifierForCell(at: indexPath)
         
+        if let cell = self.dataSource?.tableView(tableView, cellForRowAt: indexPath) {
+            return cell
+        }
+        
+        let identifier = identifierForCell(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CWTableViewCell
         cell.item = sections[indexPath.section][indexPath.row]
-        
         cell.cellWillAppear()
-        
         return cell;
     }
     
