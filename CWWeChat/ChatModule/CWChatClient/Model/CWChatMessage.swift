@@ -109,7 +109,7 @@ public class CWChatMessage: NSObject {
     public var direction: CWMessageDirection = .unknown
     /// 发送状态
     public var sendStatus: CWMessageSendStatus = .pending
-    /// 发送方id (自己的id)
+    /// 发送方id (自己的id) （这个地方用？可能需要修改）
     public var senderId: String?
     /// 接收方id
     public var targetId: String

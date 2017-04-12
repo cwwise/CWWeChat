@@ -32,3 +32,23 @@ public struct ChatCellUI {
     /// 右边气泡背景区域 间距
     static let right_edge_insets = UIEdgeInsets(top: 10, left: 17, bottom: 10, right: 17)
 }
+
+
+// cell布局中的间距
+let kMessageCellMargin: CGFloat =  10.0
+// 上下留白
+let kMessageCellTopMargin: CGFloat =  2.0
+let kMessageCellBottomMargin: CGFloat =  12.0
+
+///头像
+let kAvaterImageViewWidth:  CGFloat      = 40.0
+let kAvaterImageViewMargin:  CGFloat      = 10.0
+
+/// 名称
+let kNameLabelHeight: CGFloat =   14.0
+let kNameLabelSpaceX: CGFloat =   12.0
+let kNamelabelSpaceY: CGFloat =   1.0
+
+
+let kAvatarToMessageContent: CGFloat = 5.0
+let kMessageCellEdgeOffset: CGFloat = 6.0

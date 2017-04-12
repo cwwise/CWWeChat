@@ -8,34 +8,20 @@
 
 import UIKit
 
-protocol CWMessageCellDelegate:NSObjectProtocol {
-
+protocol CWChatMessageCellDelegate: NSObjectProtocol {
+    
+    /**
+     头像点击的代理方法
+     
+     - parameter userId: 用户唯一id
+     */
+    func messageCellUserAvatarDidClick(_ userId: String)
     
 }
 
-// cell布局中的间距
-let kMessageCellMargin: CGFloat =  10.0
-// 上下留白
-let kMessageCellTopMargin: CGFloat =  2.0
-let kMessageCellBottomMargin: CGFloat =  12.0
-
-///头像
-let kAvaterImageViewWidth:  CGFloat      = 40.0
-let kAvaterImageViewMargin:  CGFloat      = 10.0
-
-/// 名称
-let kNameLabelHeight: CGFloat =   14.0
-let kNameLabelSpaceX: CGFloat =   12.0
-let kNamelabelSpaceY: CGFloat =   1.0
-
-
-let kAvatarToMessageContent: CGFloat = 5.0
-let kMessageCellEdgeOffset: CGFloat = 6.0
-
-
 class CWChatMessageCell: UITableViewCell {
 
-    weak var delegate: CWMessageCellDelegate?
+    weak var delegate: CWChatMessageCellDelegate?
 
     var messageModel: CWChatMessageModel!
     
@@ -66,7 +52,7 @@ class CWChatMessageCell: UITableViewCell {
         
         // 更新UI
         
-        
+
     }
     
     /// 
@@ -103,6 +89,7 @@ class CWChatMessageCell: UITableViewCell {
             let image = #imageLiteral(resourceName: "bubble-default-sended")
             let cap = ChatCellUI.right_cap_insets
             backgroundImageView.image = image.resizableImage(withCapInsets: cap)
+            
             userId = message.senderId ?? ""
     
         } else {
@@ -161,20 +148,21 @@ class CWChatMessageCell: UITableViewCell {
     }
     
     
-    
     // MARK: cell中的事件处理
     ///头像点击
-    func avatarButtonClickDown(_ button:UIButton) {
-        
-        guard let _ = self.delegate, let message = self.messageModel  else {
+    func avatarViewDidTapDown(_ tap: UITapGestureRecognizer) {
+    
+        guard let delegate = self.delegate, let messageModel = self.messageModel, tap.state == .ended  else {
             return
         }
-        
-        
+
+        let message = messageModel.message
+        let targetId = (message.direction == .receive) ? message.targetId : (message.senderId ?? "")
+        delegate.messageCellUserAvatarDidClick(targetId)
     }
     
     // MARK: 属性
-    ///用户名称
+    /// 用户名称
     var usernameLabel:UILabel = {
         let usernameLabel = UILabel()
         usernameLabel.backgroundColor = UIColor.clear
@@ -183,16 +171,18 @@ class CWChatMessageCell: UITableViewCell {
         return usernameLabel
     }()
     
-    ///头像
+    /// 头像
     lazy var avatarImageView:UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.contentMode = .scaleAspectFit
-        avatarImageView.clipsToBounds = true
-        avatarImageView.backgroundColor = UIColor.cyan
+        avatarImageView.backgroundColor = UIColor.gray
+        avatarImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(avatarViewDidTapDown(_:)))
+        avatarImageView.addGestureRecognizer(tap)
         return avatarImageView
     }()
     
-    ///消息的内容部分
+    /// 消息的内容部分
     lazy var messageContentView: UIView = {
         let messageContentView = UIView()
         messageContentView.clipsToBounds = true
@@ -206,9 +196,9 @@ class CWChatMessageCell: UITableViewCell {
     }()
     
     
-    //引导
+    /// 指示
     var activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-    
+    /// 发送失败
     lazy var errorButton:UIButton = {
         let errorButton = UIButton(type: .custom)
         errorButton.setImage(UIImage(named:"message_sendfaild"), for: UIControlState())

@@ -170,7 +170,7 @@ extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
     
         // 时间和tip消息 是例外的种类 以后判断
         let messageCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CWChatMessageCell
-        
+        messageCell.delegate = self
         messageCell.updateMessage(messageModel)
         
         return messageCell
@@ -203,6 +203,14 @@ extension CWBaseMessageController: CWChatManagerDelegate {
         self.tableView.insertRows(at: [indexPath], with: .none)
     }
 }
+
+
+extension CWBaseMessageController: CWChatMessageCellDelegate {
+    func messageCellUserAvatarDidClick(_ userId: String) {
+        log.debug("cell头像 点击...\(userId)")
+    }
+}
+
 
 // MARK: - CWInputToolBarDelegate
 extension CWBaseMessageController: CWInputToolBarDelegate {
