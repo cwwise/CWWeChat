@@ -73,6 +73,7 @@
 		1F3492871E87E27D00B36641 /* CWGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492861E87E27D00B36641 /* CWGameController.swift */; };
 		1F3492911E88227100B36641 /* UITableViewCell+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492901E88227100B36641 /* UITableViewCell+Reusable.swift */; };
 		1F3492931E88244B00B36641 /* CWBaseMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492921E88244B00B36641 /* CWBaseMessageController.swift */; };
+		1F40948C1E9DCAEC008D959C /* CWChatImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F40948B1E9DCAEC008D959C /* CWChatImageView.swift */; };
 		1F6B9F141E8CAF4B00AD7FC7 /* CWMessageDispatchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F131E8CAF4B00AD7FC7 /* CWMessageDispatchOperation.swift */; };
 		1F6B9F161E8CB1C400AD7FC7 /* CWTextMessageDispatchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F151E8CB1C400AD7FC7 /* CWTextMessageDispatchOperation.swift */; };
 		1F6B9F181E8CC6E200AD7FC7 /* CWMessageHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F171E8CC6E200AD7FC7 /* CWMessageHandle.swift */; };
@@ -266,6 +267,7 @@
 		1F3492861E87E27D00B36641 /* CWGameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWGameController.swift; sourceTree = "<group>"; };
 		1F3492901E88227100B36641 /* UITableViewCell+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Reusable.swift"; sourceTree = "<group>"; };
 		1F3492921E88244B00B36641 /* CWBaseMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWBaseMessageController.swift; sourceTree = "<group>"; };
+		1F40948B1E9DCAEC008D959C /* CWChatImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatImageView.swift; sourceTree = "<group>"; };
 		1F6B9F131E8CAF4B00AD7FC7 /* CWMessageDispatchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageDispatchOperation.swift; sourceTree = "<group>"; };
 		1F6B9F151E8CB1C400AD7FC7 /* CWTextMessageDispatchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTextMessageDispatchOperation.swift; sourceTree = "<group>"; };
 		1F6B9F171E8CC6E200AD7FC7 /* CWMessageHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageHandle.swift; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 				1FA7245C1E9CBEBA009B6456 /* CWLocationMessageCell.swift */,
 				8C4927861E92991900B3C482 /* CWTimeMessageCell.swift */,
 				1FA724141E9B6E41009B6456 /* CWChatTextDisplayView.swift */,
+				1F40948B1E9DCAEC008D959C /* CWChatImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1735,6 +1738,7 @@
 				1F3492131E878AD500B36641 /* UIApplication+CWChat.swift in Sources */,
 				1F3492301E878BE300B36641 /* CWMessageTransmitter.swift in Sources */,
 				1F34927D1E87DAC400B36641 /* CWMenuCell.swift in Sources */,
+				1F40948C1E9DCAEC008D959C /* CWChatImageView.swift in Sources */,
 				1FA7244B1E9CA7CB009B6456 /* CWTableViewButtonCell.swift in Sources */,
 				1FA7240B1E9B6C2D009B6456 /* CWMineHelper.swift in Sources */,
 				1F3492071E878AD500B36641 /* CWMessageBody.swift in Sources */,

@@ -10,9 +10,9 @@ import UIKit
 
 class CWImageMessageCell: CWChatMessageCell {
 
-    lazy var messageImageView: UIImageView = {
-        let imageView = UIImageView()
-        return imageView
+    lazy var messageImageView: CWChatImageView = {
+        let messageImageView = CWChatImageView()
+        return messageImageView
     }()
     
     ///用来分割
@@ -23,6 +23,7 @@ class CWImageMessageCell: CWChatMessageCell {
         return maskLayer
     }()
     
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }

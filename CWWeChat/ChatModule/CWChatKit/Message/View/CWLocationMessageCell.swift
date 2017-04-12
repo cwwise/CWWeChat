@@ -34,7 +34,7 @@ class CWLocationMessageCell: CWChatMessageCell {
         // 消息实体
         let _ = messageModel.message
         
-     
+        
         
     }
     
