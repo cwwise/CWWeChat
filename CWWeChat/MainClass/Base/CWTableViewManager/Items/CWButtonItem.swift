@@ -11,6 +11,7 @@ import UIKit
 enum CWBoolCellStyle {
     case common
     case commit
+    case delete
 }
 
 

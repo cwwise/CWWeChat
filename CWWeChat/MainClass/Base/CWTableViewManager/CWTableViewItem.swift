@@ -13,6 +13,7 @@ public typealias CWSelectionHandler = (CWTableViewItem) -> ()
 /// cell对应的model
 public class CWTableViewItem: NSObject {
     
+    public weak var section: CWTableViewSection?
     /// 文本
     public var title: String
     /// 副标题
@@ -29,7 +30,9 @@ public class CWTableViewItem: NSObject {
     
     public var selectionAction: CWSelectionHandler?
     
-    public init(title: String, subTitle: String? = nil) {
+    public init(title: String, 
+                subTitle: String? = nil,
+                rightImageURL: URL? = nil) {
         self.cellHeight = kCWDefaultItemCellHeight
         self.title = title
         self.subTitle = subTitle

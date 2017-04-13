@@ -29,7 +29,6 @@ class CWTableViewBoolCell: CWTableViewCell {
             self.cellSwitch.isOn = false
             return
         }
-        
         self.cellSwitch.isOn = booItem.value
     }
     

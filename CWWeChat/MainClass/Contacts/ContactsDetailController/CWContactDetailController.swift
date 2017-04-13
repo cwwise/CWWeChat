@@ -8,29 +8,69 @@
 
 import UIKit
 
-class CWContactDetailController: UIViewController {
+class CWContactDetailController: CWBaseTableViewController {
 
+    lazy var tableViewManager: CWTableViewManager = {
+        let tableViewManager = CWTableViewManager(tableView: self.tableView)
+        tableViewManager.delegate = self
+        tableViewManager.dataSource = self
+        return tableViewManager
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "详细资料"
 
-        // Do any additional setup after loading the view.
+        self.tableView.register(CWContactInfoCell.self, forCellReuseIdentifier: CWContactInfoCell.identifier)
+        self.tableView.register(CWContactDetailAlbumCell.self, forCellReuseIdentifier: CWContactDetailAlbumCell.identifier)
+        setupData()
+    }
+    
+    func setupData() {
+        let item1 = CWTableViewItem(title: "信息")
+        item1.cellHeight = 87
+        self.tableViewManager.addSection(itemsOf: [item1])
+
+        let item2 = CWTableViewItem(title: "设置备注和标签")
+        self.tableViewManager.addSection(itemsOf: [item2])
+
+        let item3 = CWTableViewItem(title: "地区")
+        let item4 = CWTableViewItem(title: "个人相册")
+        item4.cellHeight = 87
+        
+        let item5 = CWTableViewItem(title: "更多")
+        self.tableViewManager.addSection(itemsOf: [item3, item4, item5])
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
+extension CWContactDetailController: CWTableViewManagerDataSource {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell? {
+
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CWContactInfoCell.identifier,
+                                                     for: indexPath)
+            return cell
+        } else if indexPath.section == 2 && indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CWContactDetailAlbumCell.identifier,
+                                                     for: indexPath)
+            return cell
+        } else {
+            return nil
+        }
+    }
+    
+}
+
+
+extension CWContactDetailController: CWTableViewManagerDelegate {
+    
+}
+

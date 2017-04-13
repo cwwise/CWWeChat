@@ -76,8 +76,13 @@ public class CWTableViewManager: NSObject {
         return String(describing: item.classForCoder)
     }
     
+    // MARK: 操作item
+    public func addSection(itemsOf items: [CWTableViewItem]) {
+        let section = CWTableViewSection(items: items)
+        self.addSection(section)
+    }
     
-    // 操作section
+    // MARK: 操作section
     public func addSection(_ section: CWTableViewSection) {
         sections.append(section)
     }

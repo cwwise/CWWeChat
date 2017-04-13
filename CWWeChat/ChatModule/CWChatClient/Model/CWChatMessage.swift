@@ -41,7 +41,6 @@ public enum CWMessageDirection : Int {
     case receive
 }
 
-
 /// 消息发送状态
 ///
 /// - pending: 发送未开始
@@ -121,7 +120,6 @@ public class CWChatMessage: NSObject {
     public var isRead: Bool = true
     /// 消息扩展
     public var ext: Dictionary<String, Any>?
-    
     
     public init(targetId: String,
          messageID: String = String.UUIDString(),

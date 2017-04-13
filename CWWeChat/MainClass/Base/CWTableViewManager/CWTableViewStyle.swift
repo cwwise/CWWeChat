@@ -14,7 +14,7 @@ public struct CWTableViewUI {
 }
 
 // 样式文件
-let kCWCellLeftMargin: CGFloat = 10
+let kCWCellLeftMargin: CGFloat = 20
 let kCWDefaultItemCellHeight: CGFloat = 44
 let kCWItemTitleFont = UIFont.systemFont(ofSize: 16)
 let kCWItemsubTitleFont = UIFont.systemFont(ofSize: 15)

@@ -8,55 +8,72 @@
 
 import UIKit
 
-
 ///  Table view section.
 public class CWTableViewSection: NSObject {
 
     /// 主要内容 (rows)
-    public var items: [CWTableViewItem] = [CWTableViewItem]()
+    public private(set) var items: [CWTableViewItem] = [CWTableViewItem]()
     
+    /// The title of the header of the specified section of the table view.
     public var headerTitle: String? {
         didSet {
+            
+            guard let headerTitle = self.headerTitle else {
+                return
+            }
+            
             let width = kScreenWidth - 2*kCWCellLeftMargin
             let attributes = [NSForegroundColorAttributeName:UIColor.white,
                               NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
-            headerHeight = CWUIUtility.textHeightOfText(headerTitle, width: width, attributes: attributes) + 0.5 + 5.0
+            headerHeight = CWUIUtility.textHeightOfText(headerTitle, width: width, attributes: attributes) + 7 + 15
         }
     }
+    
+    /// The title of the footer of the specified section of the table view.
     public var footerTitle: String? {
         didSet {
+            
+            guard  let footerTitle = self.footerTitle else {
+                return
+            }
+            
             let width = kScreenWidth - 2*kCWCellLeftMargin
             let attributes = [NSForegroundColorAttributeName:UIColor.white,
                               NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
-            footerHeight = CWUIUtility.textHeightOfText(footerTitle, width: width, attributes: attributes) + 15 + 5.0
+            footerHeight = CWUIUtility.textHeightOfText(footerTitle, width: width, attributes: attributes) + 7 + 5
         }
     }
     
-    public var headerHeight: CGFloat = 0.5
-    public var footerHeight: CGFloat = 20.0
-
-    override init() {
-        super.init()
-    }
+    /// The height of the header of the specified section of the table view.
+    public var headerHeight: CGFloat = 15
+    /// The height of the footer of the specified section of the table view.
+    public var footerHeight: CGFloat = 5
+    /// The width of padding between the cell title and cell detail view
+    public var cellTitlePadding: CGFloat = 20
     
-    //http://www.jianshu.com/p/bf6a8a054156
-    convenience init(headerTitle: String? = nil,
+    // see http://www.jianshu.com/p/bf6a8a054156
+    ///
+    init(headerTitle: String? = nil,
                      footerTitle: String? = nil,
                      items: [CWTableViewItem] = [CWTableViewItem]()) {
-        self.init()
-        
+        super.init()
         self.setValue(headerTitle, forKey: "headerTitle")
         self.setValue(footerTitle, forKey: "footerTitle")
-        self.items = items
+        for item in items {
+            self.addItem(item)
+        }
     }
     
     // 添加
-    public func addItem(item: CWTableViewItem) {
+    public func addItem(_ item: CWTableViewItem) {
+        item.section = self
         self.items.append(item)
     }
     
     public func addItem(contentsOf items: [CWTableViewItem]) {
-        self.items.append(contentsOf: items)
+        for item in items {
+            self.addItem(item)
+        }
     }
     
     // 待添加验证index

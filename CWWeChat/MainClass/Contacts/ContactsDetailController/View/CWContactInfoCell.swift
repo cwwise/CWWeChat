@@ -1,5 +1,5 @@
 //
-//  CWChatUserInfoCell.swift
+//  CWContactInfoCell.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/4/13.
@@ -12,7 +12,7 @@ import UIKit
 private let space_x: CGFloat  =  14.0
 private let space_y: CGFloat  =  12.0
 
-class CWChatUserInfoCell: UITableViewCell {
+class CWContactInfoCell: UITableViewCell {
 
     var userModel: CWContactModel! {
         didSet {

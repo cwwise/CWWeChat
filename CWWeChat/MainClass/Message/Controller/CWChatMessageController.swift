@@ -26,6 +26,12 @@ class CWChatMessageController: CWBaseMessageController {
         return rightBarItem
     }()
     
+    
+    override func messageCellUserAvatarDidClick(_ userId: String) {
+        let detailVC = CWContactDetailController()
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

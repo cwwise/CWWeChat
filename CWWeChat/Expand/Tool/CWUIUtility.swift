@@ -18,7 +18,7 @@ class CWUIUtility: NSObject {
         
         let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
         let contentSize = text.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil).size
-        return contentSize.height
+        return ceil(contentSize.height)
     }
     
 }

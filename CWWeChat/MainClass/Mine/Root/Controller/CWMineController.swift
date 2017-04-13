@@ -29,11 +29,9 @@ class CWMineController: CWMenuViewController {
 
 extension CWMineController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         if indexPath.section == 0 {
             return 87
         }
-        
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     

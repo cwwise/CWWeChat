@@ -24,7 +24,7 @@ public class CWTableViewCell: UITableViewCell {
         titleLabel.font = kCWItemTitleFont
         return titleLabel
     }()
-    
+        
     lazy var rightLabel:UILabel = {
         let rightLabel = UILabel()
         rightLabel.textColor = UIColor.gray
@@ -48,8 +48,9 @@ public class CWTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.contentView.addSubview(titleLabel)
-        self.contentView.addSubview(rightImageView)
+        
         self.contentView.addSubview(rightLabel)
+        self.contentView.addSubview(rightImageView)
         
         _addSnap()
     }
@@ -103,6 +104,4 @@ public class CWTableViewCell: UITableViewCell {
         }
         
     }
-    
-    
 }

@@ -36,7 +36,7 @@ class CWTableHeaderTitleView: UITableViewHeaderFooterView {
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.contentView).offset(kCWCellLeftMargin)
             make.right.equalTo(self.contentView).offset(-kCWCellLeftMargin)
-            make.bottom.equalTo(self.contentView).offset(-5)
+            make.bottom.equalTo(self.contentView).offset(-7)
         }
     }
     
