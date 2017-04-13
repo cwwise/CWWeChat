@@ -20,8 +20,6 @@ struct CWShareUI {
     /// 文字
     static let kPaddingText: CGFloat = 10
     
-
-    
     // 图片留白
     static let kCellPaddingPic: CGFloat = 5
     // 图片距离
@@ -30,6 +28,6 @@ struct CWShareUI {
 
     
     // 颜色
-    static let kGrayTextColor = UIColor("#999")
-    static let kTextHighlightBackgroundColor = UIColor("#bfdffe")
+    static let kGrayTextColor = UIColor(hex: "#999")
+    static let kTextHighlightBackgroundColor = UIColor(hex: "#bfdffe")
 }

@@ -70,7 +70,7 @@ class CWBaseMessageController: UIViewController {
                            width: kScreenWidth, height: kScreenHeight-45)
         let tableView = UITableView(frame: frame, style: .plain)
         tableView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
-        tableView.backgroundColor = UIColor("#EBEBEB")
+        tableView.backgroundColor = UIColor.tableViewBackgroundColor()
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.separatorStyle = .none

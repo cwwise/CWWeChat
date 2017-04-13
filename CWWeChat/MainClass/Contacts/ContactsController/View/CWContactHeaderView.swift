@@ -13,7 +13,7 @@ class CWContactHeaderView: UITableViewHeaderFooterView {
     //title
     lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
-        titleLabel.textColor = UIColor("#8E8E93")
+        titleLabel.textColor = UIColor(hex: "#8E8E93")
         titleLabel.font = UIFont.systemFont(ofSize: 14)
         titleLabel.numberOfLines = 0
         return titleLabel

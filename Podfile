@@ -7,7 +7,7 @@ target 'CWWeChat' do
 
   # Pods for CWWeChat
   #工具
-  pod 'UIColor_Hex_Swift'
+  pod 'Hue'
   pod 'SwiftyJSON'
   
   #布局

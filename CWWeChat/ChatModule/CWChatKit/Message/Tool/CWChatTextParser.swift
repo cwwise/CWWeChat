@@ -49,7 +49,6 @@ class CWChatTextParser: NSObject {
                 continue
             }
             
-            attributedText.addAttributes([NSForegroundColorAttributeName: UIColor("#1F79FD")], range: phone.range)
         }
         
     }
@@ -68,7 +67,7 @@ class CWChatTextParser: NSObject {
                 continue
             }
             
-            attributedText.addAttributes([NSForegroundColorAttributeName: UIColor("#1F79FD")], range: URL.range)
+
         }
         
     }

@@ -17,7 +17,7 @@ class CWChatImageView: UIImageView {
     
     let indicatorbackgroundView:UIView = {
         let indicatorbackgroundView = UIView()
-        indicatorbackgroundView.backgroundColor = UIColor("#80808008")
+        indicatorbackgroundView.backgroundColor = UIColor(hex: "#80808008")
         return indicatorbackgroundView
     }()
     

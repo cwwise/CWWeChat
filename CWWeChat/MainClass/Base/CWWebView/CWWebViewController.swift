@@ -71,7 +71,7 @@ class CWWebViewController: UIViewController {
         let authLabel = UILabel(frame: frame)
         authLabel.font = UIFont.systemFont(ofSize: 12)
         authLabel.textAlignment = .center
-        authLabel.textColor = UIColor("#6b6f71")
+        authLabel.textColor = UIColor(hex: "#6b6f71")
         authLabel.numberOfLines = 1
         return authLabel
     }()
