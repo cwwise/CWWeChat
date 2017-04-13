@@ -58,7 +58,6 @@ class CWBaseMessageController: UIViewController {
 
         
         tableView.register(CWTimeMessageCell.self, forCellReuseIdentifier: CWTimeMessageCell.identifier)
-
     }
     
 
@@ -248,8 +247,8 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
         let messageModel = CWChatMessageModel(message: message)
         self.messageList.append(messageModel)
         
-        let indexPath = IndexPath(row: messageList.count-1, section: 0)
-        self.tableView.insertRows(at: [indexPath], with: .none)
+//        let indexPath = IndexPath(row: messageList.count-1, section: 0)
+        self.tableView.reloadData()
         updateMessageAndScrollBottom(false)
         
         let chatManager = CWChatClient.share.chatManager

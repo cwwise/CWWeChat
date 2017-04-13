@@ -9,7 +9,7 @@
 import UIKit
 import YYText.YYTextUtilities
 
-public let textAttributes = [NSForegroundColorAttributeName:UIColor.white,
+public let textAttributes = [NSForegroundColorAttributeName:UIColor.black,
                       NSFontAttributeName: UIFont.fontTextMessageText()]
 /// 消息model
 public class CWChatMessageModel: NSObject {
@@ -26,28 +26,12 @@ public class CWChatMessageModel: NSObject {
     
     public init(message: CWChatMessage) {
         self.message = message;
+        super.init()
         
         switch message.messageType {
         case .text:
-            
             let content = (message.messageBody as! CWTextMessageBody).text
-            let size = CGSize(width: 200, height: CGFloat.greatestFiniteMagnitude)
-
-            var edge: UIEdgeInsets
-            if message.direction == .send {
-                edge = ChatCellUI.right_edge_insets
-            } else {
-                edge = ChatCellUI.left_edge_insets
-            }
-            
-            var contentSize = content.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: textAttributes, context: nil).size
-            
-            contentSize = CGSize(width: ceil(contentSize.width)+edge.left+edge.right,
-                                 height: ceil(contentSize.height)+edge.top+edge.bottom)
-            let heightOfCell = contentSize.height + kMessageCellBottomMargin + kMessageCellTopMargin
-
-            messageFrame = CWChatMessageFrame(heightOfCell: heightOfCell,
-                                              contentSize: contentSize)
+            self.setupText(content)
         case .image:
             
             var contentSize: CGSize = CGSize.zero
@@ -76,6 +60,38 @@ public class CWChatMessageModel: NSObject {
 
         }
         
+        
+    }
+    
+    
+    func setupText(_ content: String) {
+        
+        let size = CGSize(width: 200, height: CGFloat.greatestFiniteMagnitude)
+        
+        var edge: UIEdgeInsets
+        if message.direction == .send {
+            edge = ChatCellUI.right_edge_insets
+        } else {
+            edge = ChatCellUI.left_edge_insets
+        }
+        
+        let modifier = CWTextLinePositionModifier(font: UIFont.fontTextMessageText())
+        // YYTextContainer
+        let textContainer = YYTextContainer(size: size)
+        textContainer.linePositionModifier = modifier
+        textContainer.maximumNumberOfRows = 0
+        
+        let textAttri = NSMutableAttributedString(string: content, attributes: textAttributes)
+        let textLayout = YYTextLayout(container: textContainer, text: textAttri)!
+        
+        var contentSize = textLayout.textBoundingSize
+        contentSize = CGSize(width: ceil(contentSize.width)+edge.left+edge.right,
+                             height: ceil(contentSize.height)+edge.top+edge.bottom)
+        let heightOfCell = contentSize.height + kMessageCellBottomMargin + kMessageCellTopMargin
+        
+        messageFrame = CWChatMessageFrame(heightOfCell: heightOfCell,
+                                          contentSize: contentSize,
+                                          textLayout: textLayout)
         
     }
     

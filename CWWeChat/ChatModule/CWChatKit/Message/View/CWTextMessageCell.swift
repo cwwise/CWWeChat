@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YYText
 
 class CWTextMessageCell: CWChatMessageCell {
 
@@ -27,9 +28,7 @@ class CWTextMessageCell: CWChatMessageCell {
         // 消息实体
         let message = messageModel.message
         
-        let content = (message.messageBody as! CWTextMessageBody).text
-        messageLabel.attributedText = NSAttributedString(string: content,
-                                                         attributes: textAttributes)
+        messageLabel.textLayout = messageModel.messageFrame.textLayout
         
         backgroundImageView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
@@ -61,11 +60,10 @@ class CWTextMessageCell: CWChatMessageCell {
     }
     
     // 展示文本
-    fileprivate var messageLabel: UILabel = {
-        let messageLabel = UILabel()
+    fileprivate var messageLabel: YYLabel = {
+        let messageLabel = YYLabel()
         messageLabel.font = UIFont.fontTextMessageText()
         messageLabel.numberOfLines = 0
-        messageLabel.backgroundColor = UIColor.orange
         return messageLabel
     }()
     
