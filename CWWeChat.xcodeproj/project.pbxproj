@@ -173,6 +173,7 @@
 		8CA7EAFF1E9E7CD500467C37 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7EAFD1E9E7CD500467C37 /* MainInterface.storyboard */; };
 		8CA7EB031E9E7CD500467C37 /* CWShareWeChat.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8CA7EAF91E9E7CD500467C37 /* CWShareWeChat.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8CA7EB0B1E9E81D300467C37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7EB0A1E9E81D300467C37 /* Assets.xcassets */; };
+		8CA7EB131E9FD5C600467C37 /* chat_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7EB121E9FD5C600467C37 /* chat_background.png */; };
 		8CFCF5371E9017FB00E56C31 /* CWChatMessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFCF5361E9017FB00E56C31 /* CWChatMessageStore.swift */; };
 		8CFCF5391E90E33700E56C31 /* CWChatConversationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFCF5381E90E33700E56C31 /* CWChatConversationStore.swift */; };
 		8CFCF53B1E90E3EE00E56C31 /* CWChatBaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFCF53A1E90E3EE00E56C31 /* CWChatBaseStore.swift */; };
@@ -405,6 +406,7 @@
 		8CA7EB001E9E7CD500467C37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CA7EB081E9E80E200467C37 /* CWShareWeChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CWShareWeChat.entitlements; sourceTree = "<group>"; };
 		8CA7EB0A1E9E81D300467C37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8CA7EB121E9FD5C600467C37 /* chat_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_background.png; sourceTree = "<group>"; };
 		8CFCF5361E9017FB00E56C31 /* CWChatMessageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatMessageStore.swift; sourceTree = "<group>"; };
 		8CFCF5381E90E33700E56C31 /* CWChatConversationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatConversationStore.swift; sourceTree = "<group>"; };
 		8CFCF53A1E90E3EE00E56C31 /* CWChatBaseStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatBaseStore.swift; sourceTree = "<group>"; };
@@ -839,6 +841,7 @@
 		1F3491FA1E878AD500B36641 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8CA7EB111E9FD5BC00467C37 /* image */,
 				1F3491FB1E878AD500B36641 /* Audio */,
 				1F3492011E878AD500B36641 /* TestData */,
 			);
@@ -1418,6 +1421,14 @@
 			path = CWShareWeChat;
 			sourceTree = "<group>";
 		};
+		8CA7EB111E9FD5BC00467C37 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				8CA7EB121E9FD5C600467C37 /* chat_background.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
 		FD435830FB8A0BDDBF411282 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1576,6 +1587,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CA7EB131E9FD5C600467C37 /* chat_background.png in Resources */,
 				1F3492261E878AD500B36641 /* receivemsg.caf in Resources */,
 				1F3491B81E87897F00B36641 /* Main.storyboard in Resources */,
 				1F34922A1E878AD500B36641 /* shake_sound_male.wav in Resources */,

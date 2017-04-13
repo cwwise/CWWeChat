@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import YYImage
 
 class CWChatMessageController: CWBaseMessageController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = rightBarItem
+        //背景图
+        if let path = Bundle.main.path(forResource: "chat_background", ofType: "png") {
+            let fileURL = URL(fileURLWithPath: path)
+            let imageView = UIImageView(frame: self.view.bounds)
+            imageView.yy_imageURL = fileURL
+            self.tableView.backgroundView = imageView
+        }
+
     }
     
     func rightBarItemDown(_ barItem: UIBarButtonItem) {

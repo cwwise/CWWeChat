@@ -11,21 +11,34 @@ import UIKit
 class CWContactDetailAlbumCell: UITableViewCell {
 
     var imageViewArray = [UIImageView]()
-
+    
+    lazy var titleLabel:UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.text = "个人相册"
+        titleLabel.font = kCWItemTitleFont
+        return titleLabel
+    }()
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.accessoryType = .disclosureIndicator
-        self.textLabel?.font = UIFont.systemFont(ofSize: 15)
+        
+        self.contentView.addSubview(titleLabel)
+        self.titleLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.contentView)
+            make.left.equalTo(self.contentView).offset(kCWCellLeftMargin)
+        }
+        setupUI()
     }
     
     func setupUI() {
         
         let leftMargin: CGFloat = 90.0
-        let spaceX: CGFloat = 10.0
-        let spaceY:CGFloat = 10.0
+        let spaceX: CGFloat = 7
+        let spaceY:CGFloat = 15.0
 
-        let imageViewSize = CGSize.zero
+        let imageViewSize = CGSize(width: 57, height: 57)
         let maxCount = 4
         
         for i in 0..<maxCount {
@@ -42,21 +55,24 @@ class CWContactDetailAlbumCell: UITableViewCell {
         
     }
     
-    func setupInfomation() {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setupInformation()
+    }
+    
+    func setupInformation() {
         
         let imageURLArray = [
-            "http://a.hiphotos.baidu.com/zhidao/pic/item/3ac79f3df8dcdu10002f7c850748b4710b9122f53.jpg",
-            "http://img4.duitang.com/uploads/item/201511/17/20151117130657_j3T4s.png",
-            "http://img4.duitang.com/uploads/item/201510/16/20151016113134_TZye4.thumb.224_0.jpeg",
-            ]
+            "http://image.cwcoder.com/cwwechat008.jpg",
+            "http://image.cwcoder.com/cwwechat009.jpg",
+            "http://image.cwcoder.com/cwwechat010.jpg",]
 
         for i in 0..<imageViewArray.count {
             
             let imageView = imageViewArray[i]
-            if i > imageURLArray.count {
+            if i < imageURLArray.count {
                 let imageUri = imageURLArray[i]
-                let imageURL = URL(string: imageUri)
-                imageView.yy_setImage(with: imageURL, placeholder: nil)
+                imageView.yy_setImage(with: URL(string: imageUri), placeholder: nil)
                 imageView.isHidden = false
             } else {
                 imageView.isHidden = true

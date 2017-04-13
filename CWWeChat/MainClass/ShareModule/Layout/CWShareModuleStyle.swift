@@ -26,7 +26,6 @@ struct CWShareUI {
     static let kImageWidth: CGFloat = 80
     static let kImageMaxWidth: CGFloat = 150
 
-    
     // 颜色
     static let kGrayTextColor = UIColor(hex: "#999")
     static let kTextHighlightBackgroundColor = UIColor(hex: "#bfdffe")

@@ -11,6 +11,10 @@ import UIKit
 import Hue
 
 extension UIColor {
+    // 主要文字
+    class func normalTextColor() -> UIColor {
+        return UIColor(hex: "#353535")
+    }
     
     class func chatSystemColor() -> UIColor {
         return UIColor(hex: "#09BB07")

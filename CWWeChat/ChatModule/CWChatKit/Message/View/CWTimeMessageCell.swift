@@ -8,10 +8,9 @@
 
 import UIKit
 
+private let kChatTimeLabelMarginTop: CGFloat = 5   //顶部 10 px
+
 public class CWTimeMessageCell: UITableViewCell {
-    
-    private let kChatTimeLabelMaxWdith : CGFloat = kScreenWidth - 30*2
-    private let kChatTimeLabelMarginTop: CGFloat = 2   //顶部 10 px
     
     public lazy var timeLabel: UILabel = {
         let timeLabel = UILabel()
@@ -29,12 +28,13 @@ public class CWTimeMessageCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(self.timeLabel)
         self.backgroundColor = UIColor.clear
-
-        self.timeLabel.snp.makeConstraints { (make) in
-            make.height.equalTo(20)
-            make.centerX.equalTo(self.contentView)
-            make.top.equalTo(self.contentView).offset(kChatTimeLabelMarginTop)
-        }
+    }
+    
+    public override func layoutSubviews() {
+        timeLabel.sizeToFit()
+        timeLabel.size = CGSize(width: timeLabel.width + 2*6.0, height: 16)
+        timeLabel.centerX = kScreenWidth/2
+        timeLabel.top = kChatTimeLabelMarginTop
     }
     
     required public init?(coder aDecoder: NSCoder) {
