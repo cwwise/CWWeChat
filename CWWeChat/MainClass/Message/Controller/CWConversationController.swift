@@ -26,7 +26,8 @@ class CWConversationController: CWBaseConversationController {
         } else {
             // Fallback on earlier versions
         }
-        // Do any additional setup after loading the view.
+        
+        //把聊天界面图片缓存
     }
     
     func sendMessage() {

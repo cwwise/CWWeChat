@@ -100,11 +100,8 @@ class CWBaseMessageController: UIViewController {
 extension CWBaseMessageController {
     
     func refreshLocalMessage() {
-
         // 先将此条对话的未读条数设置0
         conversation.markAllMessagesAsRead()
-    
-        
     }
     
     func formatMessages(_ messages: [CWChatMessage]) -> [AnyObject] {
@@ -198,9 +195,9 @@ extension CWBaseMessageController: CWChatManagerDelegate {
         let messageModel = CWChatMessageModel(message: message)
         messageList.append(messageModel)
         
-        let indexPath = IndexPath(row: messageList.count-1, section: 0)
-        self.tableView.insertRows(at: [indexPath], with: .none)
+        self.tableView.reloadData()
     }
+    
 }
 
 
@@ -247,7 +244,6 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
         let messageModel = CWChatMessageModel(message: message)
         self.messageList.append(messageModel)
         
-//        let indexPath = IndexPath(row: messageList.count-1, section: 0)
         self.tableView.reloadData()
         updateMessageAndScrollBottom(false)
         

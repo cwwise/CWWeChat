@@ -16,9 +16,8 @@ class CWChatMessageController: CWBaseMessageController {
         self.navigationItem.rightBarButtonItem = rightBarItem
         //背景图
         if let path = Bundle.main.path(forResource: "chat_background", ofType: "png") {
-            let fileURL = URL(fileURLWithPath: path)
             let imageView = UIImageView(frame: self.view.bounds)
-            imageView.yy_imageURL = fileURL
+            imageView.image = UIImage(contentsOfFile: path)
             self.tableView.backgroundView = imageView
         }
 

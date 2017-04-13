@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import YYCache
 
 public protocol CWChatUserInfoDataSource: NSObjectProtocol {
     func loadUserInfo(userId: String, completion: @escaping ( (CWChatUser?) -> Void))
@@ -19,13 +19,16 @@ public class CWChatKit: NSObject {
     /// 单例
     public static let share = CWChatKit()
     
+    public var cache: YYMemoryCache = {
+        let cache = YYMemoryCache()
+        cache.name = "cache"
+        cache.shouldRemoveAllObjectsWhenEnteringBackground = false
+        return cache
+    }()
+    
     public weak var userInfoDataSource: CWChatUserInfoDataSource?
     
     private override init() {
         super.init()
     }
-    
-    
-    
-    
 }
