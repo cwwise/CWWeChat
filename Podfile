@@ -4,43 +4,42 @@ platform :ios, '9.0'
 target 'CWWeChat' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+  # ignore cocoapod warnings
+  inhibit_all_warnings!
 
-  # Pods for CWWeChat
-  #工具
-  pod 'Hue'
-  pod 'SwiftyJSON'
-  
-  #布局
+  # Pods for CWWeChat  
+  # layout
   pod 'SnapKit'
   
-  #网络请求
+  # request
   pod 'Alamofire'
-  
+  pod 'Moya/RxSwift'
+  pod 'OHHTTPStubs/Swift'
+
   pod 'YYText'
   pod 'YYWebImage'
   
-  #数据库
+  # database
   pod 'SQLite.swift'
   
-  #log日志
+  # log
   pod 'SwiftyBeaver'
 
-  #聊天
+  # chat
   pod 'XMPPFramework', '~> 3.7.0'
   
+  # UI
   pod 'MBProgressHUD'
   pod 'CHIPageControl/Aleppo'
-  
-  pod 'KVOController'
-  
-  pod 'Moya/RxSwift'
-  
   pod 'IGListKit'
   
+  # animation
   pod 'pop'
   
-  #🔗 https://github.com/AliSoftware/OHHTTPStubs
-  pod 'OHHTTPStubs/Swift'
+  # tool
+  pod 'Hue'
+  pod 'SwiftyJSON'
+  pod 'KVOController'
     
   target 'CWWeChatTests' do
     inherit! :search_paths
