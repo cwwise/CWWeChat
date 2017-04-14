@@ -85,7 +85,12 @@ class CWChatTextParser: NSObject {
                 highlight.setBackgroundBorder(highlightBorder)
                 
                 let text = attributedText.string as NSString
-                let URLString = text.substring(with: URL.range) as String
+                var URLString = text.substring(with: URL.range) as String
+                
+                
+                if !URLString.hasPrefix("http://") || !URLString.hasPrefix("https://") {
+                    URLString = "http://"+URLString
+                }
                 
                 highlight.userInfo = [kChatTextKeyURL : URLString]
                 attributedText.yy_setTextHighlight(highlight, range: URL.range)

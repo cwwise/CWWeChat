@@ -10,13 +10,30 @@ import UIKit
 
 protocol CWChatMessageCellDelegate: NSObjectProtocol {
     
-    /**
-     头像点击的代理方法
-     
-     - parameter userId: 用户唯一id
-     */
-    func messageCellUserAvatarDidClick(_ userId: String)
+    /// 点击cell文字中的URL
+    ///
+    /// - Parameters:
+    ///   - cell: cell
+    ///   - link: link
+    func messageCellDidTapLink(_ cell: CWChatMessageCell, link: URL)
     
+    /// 点击cell文字中的电话
+    ///
+    /// - Parameters:
+    ///   - cell: cell
+    ///   - phone: phone
+    func messageCellDidTapPhone(_ cell: CWChatMessageCell, phone: String)
+    
+    /// 头像点击的回调方法
+    ///
+    /// - Parameter userId: 用户id
+    func messageCellUserAvatarDidClick(_ userId: String)
+}
+
+extension CWChatMessageCellDelegate {
+    func messageCellDidTapLink(_ cell: CWChatMessageCell, link: URL) {}
+    func messageCellDidTapPhone(_ cell: CWChatMessageCell, phone: String){}
+    func messageCellUserAvatarDidClick(_ userId: String) {}
 }
 
 class CWChatMessageCell: UITableViewCell {
@@ -194,6 +211,7 @@ class CWChatMessageCell: UITableViewCell {
     
     lazy var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView()
+        backgroundImageView.isUserInteractionEnabled = true
         backgroundImageView.clipsToBounds = true
         return backgroundImageView
     }()

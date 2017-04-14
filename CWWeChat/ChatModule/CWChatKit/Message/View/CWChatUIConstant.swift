@@ -24,11 +24,11 @@ let kChatVoiceMinWidth = kScreenWidth * 0.25
 let kChatVoiceMaxWidth = kScreenWidth * 0.60
 
 public struct ChatCellUI {
-    static let left_cap_insets = UIEdgeInsets(top: 20, left: 40, bottom: 40, right: 40)
+    static let left_cap_insets   = UIEdgeInsets(top: 20, left: 40, bottom: 40, right: 40)
     /// 左边气泡背景区域 间距
-    static let left_edge_insets = UIEdgeInsets(top: 2+8, left: 17, bottom: 11+9, right: 17)
+    static let left_edge_insets  = UIEdgeInsets(top: 2+8, left: 17, bottom: 11+9, right: 17)
     
-    static let right_cap_insets = UIEdgeInsets(top: 20, left: 40, bottom: 40, right: 40)
+    static let right_cap_insets  = UIEdgeInsets(top: 20, left: 40, bottom: 40, right: 40)
     /// 右边气泡背景区域 间距
     static let right_edge_insets = UIEdgeInsets(top: 2+8, left: 17, bottom: 11+9, right: 17)
 }
@@ -36,11 +36,11 @@ public struct ChatCellUI {
 // cell布局中的间距
 let kMessageCellMargin: CGFloat =  10.0
 // 上下留白
-let kMessageCellTopMargin: CGFloat =  2.0
-let kMessageCellBottomMargin: CGFloat =  12.0
+let kMessageCellTopMargin:      CGFloat =  2.0
+let kMessageCellBottomMargin:   CGFloat =  12.0
 
 /// 头像
-let kAvaterImageViewWidth:  CGFloat      = 40.0
+let kAvaterImageViewWidth:   CGFloat      = 40.0
 let kAvaterImageViewMargin:  CGFloat      = 10.0
 
 /// 名称
@@ -49,7 +49,7 @@ let kNameLabelSpaceX: CGFloat =   12.0
 let kNamelabelSpaceY: CGFloat =   1.0
 
 
-let kAvatarToMessageContent: CGFloat = 5.0
-let kMessageCellEdgeOffset: CGFloat = 6.0
+let kAvatarToMessageContent:    CGFloat = 5.0
+let kMessageCellEdgeOffset:     CGFloat = 6.0
 
 

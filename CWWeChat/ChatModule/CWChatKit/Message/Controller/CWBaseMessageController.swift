@@ -205,6 +205,15 @@ extension CWBaseMessageController: CWChatMessageCellDelegate {
     func messageCellUserAvatarDidClick(_ userId: String) {
         log.debug("cell头像 点击...\(userId)")
     }
+    
+    func messageCellDidTapLink(_ cell: CWChatMessageCell, link: URL) {
+        let webViewController = CWWebViewController(url: link)
+        self.navigationController?.pushViewController(webViewController, animated: true)
+    }
+    
+    func messageCellDidTapPhone(_ cell: CWChatMessageCell, phone: String) {
+        log.debug("phone tap")
+    }
 }
 
 
