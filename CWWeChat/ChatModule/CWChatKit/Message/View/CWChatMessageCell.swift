@@ -51,8 +51,6 @@ class CWChatMessageCell: UITableViewCell {
         
         
         // 更新UI
-        
-
     }
     
     /// 
@@ -86,10 +84,12 @@ class CWChatMessageCell: UITableViewCell {
                 make.size.equalTo(messageModel.messageFrame.contentSize)
             })
             
-            let image = #imageLiteral(resourceName: "bubble-default-sended")
+            let image = #imageLiteral(resourceName: "sender_background_normal")
+            let highlightedImage = #imageLiteral(resourceName: "sender_background_highlight")
             let cap = ChatCellUI.right_cap_insets
             backgroundImageView.image = image.resizableImage(withCapInsets: cap)
-            
+            backgroundImageView.highlightedImage = highlightedImage.resizableImage(withCapInsets: cap)
+
             userId = message.senderId ?? ""
     
         } else {
@@ -114,10 +114,13 @@ class CWChatMessageCell: UITableViewCell {
                 make.size.equalTo(messageModel.messageFrame.contentSize)
             })
 
-            let image = #imageLiteral(resourceName: "bubble-default-received")
+            let image = #imageLiteral(resourceName: "receiver_background_normal")
+            let highlightedImage = #imageLiteral(resourceName: "receiver_background_highlight")
+
             let cap = ChatCellUI.left_cap_insets
             backgroundImageView.image = image.resizableImage(withCapInsets: cap)
-            
+            backgroundImageView.highlightedImage = highlightedImage.resizableImage(withCapInsets: cap)
+
             userId = message.targetId
         }
         

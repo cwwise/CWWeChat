@@ -7,48 +7,61 @@
 //
 
 import UIKit
+import YYText
 
 public let kChatTextKeyPhone = "phone"
 public let kChatTextKeyURL = "URL"
 
+private struct CWTextParser {
+    static let highlightBorder: YYTextBorder = {
+        let highlightBorder = YYTextBorder()
+        highlightBorder.insets = UIEdgeInsetsMake(-2, 0, -2, 0)
+        highlightBorder.fillColor = UIColor(hex: "#D4D1D1")
+        return highlightBorder
+    }()
+}
+
 class CWChatTextParser: NSObject {
     
-    class func parseText(_ text: String, font: UIFont) -> NSMutableAttributedString? {
+    class func parseText(_ text: String) -> NSMutableAttributedString? {
 
         if text.characters.count == 0 {
             return nil
         }
-        let length = text.characters.count
-        let attributedText: NSMutableAttributedString = NSMutableAttributedString(string: text)
-        attributedText.addAttributes([NSFontAttributeName: font,
-                            NSForegroundColorAttributeName: UIColor.black],
-                                     range: NSRange(location: 0, length: length))
         
+        let attributedText = NSMutableAttributedString(string: text, attributes: kChatTextAttribute)
         //匹配电话
         self.enumeratePhoneParser(attributedText)
         //匹配 URL
         self.enumerateURLParser(attributedText)
         //匹配 [表情]
-        self.enumerateEmotionParser(attributedText, fontSize: font.pointSize)
+//        self.enumerateEmotionParser(attributedText, fontSize: font.pointSize)
         
         return attributedText
-        
     }
-    
     
     fileprivate class func enumeratePhoneParser(_ attributedText: NSMutableAttributedString) {
         
-        let phonesResults = CWChatTextParseHelper.regexPhoneNumber.matches(
-            in: attributedText.string,
-            options: [.reportProgress],
-            range: attributedText.rangeOfAll()
-        )
+        let phonesResults = CWChatTextParseHelper.regexPhoneNumber.matches(in: attributedText.string,
+                                                                      options: [.reportProgress],
+                                                                        range: attributedText.yy_rangeOfAll())
         
         for phone: NSTextCheckingResult in phonesResults {
             if phone.range.location == NSNotFound && phone.range.length <= 1 {
                 continue
             }
-            
+
+            let highlightBorder = CWTextParser.highlightBorder
+            if (attributedText.yy_attribute(YYTextHighlightAttributeName, at: UInt(phone.range.location)) == nil) {
+                attributedText.yy_setColor(UIColor(hex: "#1F79FD"), range: phone.range)
+                let highlight = YYTextHighlight()
+                highlight.setBackgroundBorder(highlightBorder)
+                
+                let text = attributedText.string as NSString
+                let phoneString = text.substring(with: phone.range) as String
+                highlight.userInfo = [kChatTextKeyPhone : phoneString]
+                attributedText.yy_setTextHighlight(highlight, range: phone.range)
+            }
         }
         
     }
@@ -56,32 +69,69 @@ class CWChatTextParser: NSObject {
     
     fileprivate class func enumerateURLParser(_ attributedText: NSMutableAttributedString) {
 
-        let URLsResults = CWChatTextParseHelper.regexURLs.matches(
-            in: attributedText.string,
-            options: [.reportProgress],
-            range: attributedText.rangeOfAll()
-        )
-        
+        let URLsResults = CWChatTextParseHelper.regexURLs.matches(in: attributedText.string,
+                                                             options: [.reportProgress],
+                                                               range: attributedText.yy_rangeOfAll())
+
         for URL: NSTextCheckingResult in URLsResults {
             if URL.range.location == NSNotFound && URL.range.length <= 1 {
                 continue
             }
             
-
+            let highlightBorder = CWTextParser.highlightBorder
+            if (attributedText.yy_attribute(YYTextHighlightAttributeName, at: UInt(URL.range.location)) == nil) {
+                attributedText.yy_setColor(UIColor(hex: "#1F79FD"), range: URL.range)
+                let highlight = YYTextHighlight()
+                highlight.setBackgroundBorder(highlightBorder)
+                
+                let text = attributedText.string as NSString
+                let URLString = text.substring(with: URL.range) as String
+                
+                highlight.userInfo = [kChatTextKeyURL : URLString]
+                attributedText.yy_setTextHighlight(highlight, range: URL.range)
+            }
         }
         
     }
     
     fileprivate class func enumerateEmotionParser(_ attributedText: NSMutableAttributedString, fontSize: CGFloat) {
 
+        let emoticonResults = CWChatTextParseHelper.regexEmotions.matches(in: attributedText.string,
+                                                                          options: [.reportProgress],
+                                                                          range: attributedText.yy_rangeOfAll())
+
+        var emoClipLength: Int = 0
+        for emotion: NSTextCheckingResult in emoticonResults {
+            if emotion.range.location == NSNotFound && emotion.range.length <= 1 {
+                continue
+            }
+            var range: NSRange  = emotion.range
+            range.location -= emoClipLength
+            if (attributedText.yy_attribute(YYTextHighlightAttributeName, at: UInt(range.location)) != nil) {
+                continue
+            }
+            if (attributedText.yy_attribute(YYTextAttachmentAttributeName, at: UInt(range.location)) != nil) {
+                continue
+            }
+            
+            let dict = [String:String]()
+            
+            let text = attributedText.string as NSString
+            let imageName = text.substring(with: emotion.range) as String
+            
+            guard let theImageName = dict[imageName] else { 
+                continue
+            }
+            
+            let imageString =  "\(theImageName)"
+            let emojiText = NSMutableAttributedString.yy_attachmentString(withEmojiImage: UIImage(named: imageString)!, fontSize: fontSize + 1)
+            attributedText.replaceCharacters(in: range, with: emojiText!)
+            
+            emoClipLength += range.length - 1
+        }        
         
     }
-    
-    
 }
-
-
-
 
 class CWChatTextParseHelper {
     
@@ -118,34 +168,5 @@ class CWChatTextParseHelper {
             return regularExpression
         }
     }
-}
-
-
-private extension NSAttributedString {
-    
-    func rangeOfAll() -> NSRange {
-        return NSRange(location: 0, length: self.length)
-    }
-}
-
-
-private extension String {
-    
-//    func NSRangeFromRange(_ range : Range<String.Index>) -> NSRange {
-//        let utf16view = self.utf16
-//        let from = String.UTF16View.Index(range.lowerBound, within: utf16view)
-//        let to = String.UTF16View.Index(range.upperBound, within: utf16view)
-//        return NSMakeRange(utf16view.startIndex.distanceTo(from), from.distanceTo(to))
-//    }
-//    
-//    func RangeFromNSRange(_ nsRange : NSRange) -> Range<String.Index>? {
-//        let from16 = utf16.startIndex.advancedBy(nsRange.location, limit: utf16.endIndex)
-//        let to16 = from16.advancedBy(nsRange.length, limit: utf16.endIndex)
-//        if let from = String.Index(from16, within: self),
-//            let to = String.Index(to16, within: self) {
-//            return from ..< to
-//        }
-//        return nil
-//    }
 }
 

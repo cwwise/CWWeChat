@@ -6,12 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "message_sender_background_highlight@2x.png",
+      "filename" : "sender_background_highlight@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "message_sender_background_highlight@3x.png",
+      "filename" : "sender_background_highlight@3x.png",
       "scale" : "3x"
     }
   ],

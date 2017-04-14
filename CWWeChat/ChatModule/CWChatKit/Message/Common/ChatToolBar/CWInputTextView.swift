@@ -82,6 +82,8 @@ class CWInputTextView: UITextView {
     func setup() {
         placeHolderTextColor = UIColor.lightGray
         
+        self.enablesReturnKeyAutomatically = true
+        self.keyboardType = .default;
         self.autoresizingMask = .flexibleWidth;
         self.scrollIndicatorInsets = UIEdgeInsetsMake(10.0, 0.0, 10.0, 8.0)
         self.contentInset = UIEdgeInsets.zero;
@@ -92,11 +94,12 @@ class CWInputTextView: UITextView {
         self.layer.borderColor = UIColor.gray.cgColor
         self.layer.cornerRadius = 4
         self.clipsToBounds = true
+        self.autocorrectionType = .no
+        self.autocapitalizationType = .none
         self.font = UIFont.systemFont(ofSize: 16.0)
         self.textColor = UIColor.black
         self.backgroundColor = UIColor.white
         self.keyboardAppearance = .default;
-        self.keyboardType = .default;
         self.returnKeyType = .send;
         self.textAlignment = .left;
     }

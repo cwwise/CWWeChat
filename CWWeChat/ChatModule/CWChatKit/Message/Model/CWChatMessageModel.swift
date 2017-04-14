@@ -9,8 +9,8 @@
 import UIKit
 import YYText.YYTextUtilities
 
-public let textAttributes = [NSForegroundColorAttributeName:UIColor.black,
-                      NSFontAttributeName: UIFont.fontTextMessageText()]
+public let kChatTextAttribute = [NSForegroundColorAttributeName:UIColor.black,
+                                  NSFontAttributeName: UIFont.fontTextMessageText()]
 /// 消息model
 public class CWChatMessageModel: NSObject {
 
@@ -81,7 +81,7 @@ public class CWChatMessageModel: NSObject {
         textContainer.linePositionModifier = modifier
         textContainer.maximumNumberOfRows = 0
         
-        let textAttri = NSMutableAttributedString(string: content, attributes: textAttributes)
+        let textAttri = CWChatTextParser.parseText(content)!
         let textLayout = YYTextLayout(container: textContainer, text: textAttri)!
         
         var contentSize = textLayout.textBoundingSize

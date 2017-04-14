@@ -97,14 +97,8 @@ public class CWInputToolBar: UIView {
     }
     
     /// 输入框
-    lazy var inputTextView: UITextView = {
-        let inputTextView = UITextView(frame:CGRect.zero)
-        inputTextView.returnKeyType = .send
-        inputTextView.font = UIFont.systemFont(ofSize: 16)
-        inputTextView.layer.borderWidth = 0.5
-        inputTextView.layer.borderColor = UIColor.gray.cgColor
-        inputTextView.layer.cornerRadius = 4
-        inputTextView.enablesReturnKeyAutomatically = true
+    lazy var inputTextView: CWInputTextView = {
+        let inputTextView = CWInputTextView(frame:CGRect.zero)
         inputTextView.delegate = self
         return inputTextView
     }()

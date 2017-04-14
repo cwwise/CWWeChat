@@ -51,15 +51,13 @@ class CWAboutHeaderView: UIView {
     func p_addSnap() {
         
         imageView.snp.makeConstraints { (make) in
-            make.top.equalTo(4)
+            make.top.equalTo(8)
             make.centerX.equalTo(self)
-            make.bottom.equalTo(self.titleLabel.snp.top).offset(1)
-            make.width.equalTo(self.imageView.snp.height).multipliedBy(1)
         }
         
         titleLabel.snp.makeConstraints { (make) in
             make.height.equalTo(25)
-            make.bottom.equalTo(-10)
+            make.bottom.equalTo(-5)
             make.left.right.equalTo(self)
         }
         
