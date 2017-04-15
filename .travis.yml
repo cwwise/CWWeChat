@@ -15,6 +15,7 @@ env:
 before_install:
   - gem install xcpretty --quiet
   - gem install cocoapods --quiet
+  - pod repo update --verbose
   - pod install
 
 script:
