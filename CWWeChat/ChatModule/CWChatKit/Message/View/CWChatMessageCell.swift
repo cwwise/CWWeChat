@@ -181,6 +181,23 @@ class CWChatMessageCell: UITableViewCell {
         delegate.messageCellUserAvatarDidClick(targetId)
     }
     
+    // MARK: 手势事件
+    func bubbleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
+ 
+        
+    }
+    
+    func bubbleDoubleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
+ 
+        
+    }
+    
+    func bubbleLongPressed(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        if longPressGestureRecognizer.state == .began {
+            
+        }
+    }
+    
     // MARK: 属性
     /// 用户名称
     var usernameLabel:UILabel = {
@@ -206,6 +223,9 @@ class CWChatMessageCell: UITableViewCell {
     lazy var messageContentView: UIView = {
         let messageContentView = UIView()
         messageContentView.clipsToBounds = true
+        
+        messageContentView.addGestureRecognizer(self.longPressGestureRecognizer)
+        messageContentView.addGestureRecognizer(self.doubletapGesture)
         return messageContentView
     }()
     
@@ -226,6 +246,18 @@ class CWChatMessageCell: UITableViewCell {
         errorButton.sizeToFit()
         errorButton.isHidden = true
         return errorButton
+    }()
+    
+    fileprivate(set) lazy var doubletapGesture: UITapGestureRecognizer = {
+        let doubletapGesture = UITapGestureRecognizer(target: self, action: #selector(bubbleDoubleTapped(_:)))
+        doubletapGesture.numberOfTapsRequired = 2
+        return doubletapGesture
+    }()
+    
+    fileprivate(set) lazy var longPressGestureRecognizer: UILongPressGestureRecognizer = {
+        let longpressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(bubbleLongPressed(_:)))
+        longpressGestureRecognizer.delegate = self
+        return longpressGestureRecognizer
     }()
     
     required init?(coder aDecoder: NSCoder) {

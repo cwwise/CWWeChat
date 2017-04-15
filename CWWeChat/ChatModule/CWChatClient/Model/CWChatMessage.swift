@@ -21,6 +21,18 @@ public enum CWChatType : Int {
     case chatroom
 }
 
+
+/// 会话提示类型
+///
+/// - none: 不提示
+/// - point: 红点
+/// - pointWithNumber: 数字
+public enum CWConversationClueType: Int {
+    case none
+    case point
+    case pointWithNumber
+}
+
 /// 消息搜索方向
 ///
 /// - up: 向上搜索

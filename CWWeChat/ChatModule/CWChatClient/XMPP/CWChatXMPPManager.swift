@@ -60,8 +60,8 @@ class CWChatXMPPManager: NSObject {
         xmppReconnect.addDelegate(self, delegateQueue: xmppQueue)
 
         //心跳机制
-        autoPing.activate(xmppStream)
-        autoPing.respondsToQueries = true
+//        autoPing.activate(xmppStream)
+//        autoPing.respondsToQueries = true
 
         setupNetworkReachable()
         registerApplicationNotification()

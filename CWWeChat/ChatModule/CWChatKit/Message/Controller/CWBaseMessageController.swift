@@ -38,6 +38,16 @@ class CWBaseMessageController: UIViewController {
                 self.tableView.reloadData()
             }
         }
+        
+//        let voiceBody1 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
+//        let message1 = CWChatMessage(targetId: conversation.targetId, messageBody: voiceBody1)
+//        self.messageList.append(CWChatMessageModel(message: message1))
+//        
+//        let voiceBody2 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
+//        let message2 = CWChatMessage(targetId: conversation.targetId, direction: .receive,messageBody: voiceBody2)
+//        self.messageList.append(CWChatMessageModel(message: message2))
+//        
+//        self.tableView.reloadData()
     }
     
     func setupUI() {
@@ -55,8 +65,8 @@ class CWBaseMessageController: UIViewController {
         tableView.register(CWChatMessageCell.self, forCellReuseIdentifier: CWMessageType.none.identifier())
         tableView.register(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.text.identifier())
         tableView.register(CWImageMessageCell.self, forCellReuseIdentifier: CWMessageType.image.identifier())
+        tableView.register(CWVoiceMessageCell.self, forCellReuseIdentifier: CWMessageType.voice.identifier())
 
-        
         tableView.register(CWTimeMessageCell.self, forCellReuseIdentifier: CWTimeMessageCell.identifier)
     }
     
@@ -154,9 +164,7 @@ extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let message = messageList[indexPath.row]
-    
         guard let messageModel = message as? CWChatMessageModel else {
-
             let timeCell = tableView.dequeueReusableCell(withIdentifier: CWTimeMessageCell.identifier) as! CWTimeMessageCell
             timeCell.timeLabel.text = message as? String
             return timeCell

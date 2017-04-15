@@ -33,6 +33,8 @@ public class CWChatMessageModel: NSObject {
             setupTextMessage()
         case .image:
             setupImageMessage()
+        case .voice:
+            setupVoiceMessage()
         default:
             break
 
@@ -93,6 +95,23 @@ public class CWChatMessageModel: NSObject {
         
         let heightOfCell = contentSize.height + kMessageCellBottomMargin + kMessageCellTopMargin
         messageFrame = CWChatMessageFrame(heightOfCell: heightOfCell, contentSize: contentSize)
+    }
+    
+    
+    func setupVoiceMessage() {
+
+        let voiceMessage = message.messageBody as! CWVoiceMessageBody
+        
+        var contentSize: CGSize = CGSize.zero
+        let heightOfCell: CGFloat = 60
+        
+//        if let voiceLength = voiceMessage.voiceLength {
+//            let scale: CGFloat = CGFloat(voiceLength)/60.0
+//            contentSize = CGSize(width: ceil(scale*kChatVoiceMaxWidth)+30, height: kAvaterWidth+12)
+//        }
+        contentSize = CGSize(width: 100, height: kAvaterImageViewWidth+14)
+        messageFrame = CWChatMessageFrame(heightOfCell: heightOfCell, contentSize: contentSize)
+        
     }
     
 }

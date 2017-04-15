@@ -38,9 +38,10 @@ extension CWChatDetailViewController {
         let item2 = CWBoolItem(title: "消息免打扰", value: false)
         let section1 = CWTableViewSection(items: [item1, item2])
         
+        let item2_1 = CWTableViewItem(title: "聊天文件")
         let item3 = CWTableViewItem(title: "设置当前聊天背景")
         let item4 = CWTableViewItem(title: "查找聊天内容")
-        let section2 = CWTableViewSection(items: [item3, item4])
+        let section2 = CWTableViewSection(items: [item2_1, item3, item4])
 
         let item5 = CWTableViewItem(title: "清空聊天记录")
         let section3 = CWTableViewSection(items: [item5])
@@ -68,10 +69,11 @@ extension CWChatDetailViewController {
         let item8 = CWBoolItem(title: "显示群成员昵称", value: true)
         tableViewManager.addSection(itemsOf: [item7, item8])
 
+        let item9_1 = CWTableViewItem(title: "聊天文件")
         let item9 = CWTableViewItem(title: "设置当前聊天背景")
         let item10 = CWTableViewItem(title: "查找聊天内容")
         let item11 = CWTableViewItem(title: "投诉")
-        tableViewManager.addSection(itemsOf: [item9, item10, item11])
+        tableViewManager.addSection(itemsOf: [item9_1, item9, item10, item11])
 
         let item12 = CWTableViewItem(title: "删除聊天记录")
         item12.showDisclosureIndicator = false
