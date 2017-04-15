@@ -45,7 +45,6 @@ class CWTextMessageCell: CWChatMessageCell {
             }
         }
         messageLabel.textLayout = messageModel.messageFrame.textLayout
-
     }
     
     func didTapMessageLabelText(_ text: NSAttributedString, range: NSRange) {

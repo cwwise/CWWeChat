@@ -65,13 +65,13 @@ class CWChatTextDisplayView: UIView {
             self.alpha = 1
         }, completion: { (bool) in
             
-            UIApplication.shared.setStatusBarHidden(true, with: .fade)
-        }) 
+//            UIApplication.shared.setStatusBarHidden(true, with: .fade)
+        })
         
     }
     
     func dismiss() {
-        UIApplication.shared.setStatusBarHidden(false, with: .fade)
+//        UIApplication.shared.setStatusBarHidden(false, with: .fade)
         UIView.animate(withDuration: 0.2, animations: {
             self.alpha = 0
         }, completion: { (bool) in

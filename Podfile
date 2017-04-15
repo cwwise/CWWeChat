@@ -31,6 +31,7 @@ target 'CWWeChat' do
   pod 'MBProgressHUD'
   pod 'CHIPageControl/Aleppo'
   pod 'IGListKit'
+  pod 'LCActionSheet'
   
   # animation
   pod 'pop'

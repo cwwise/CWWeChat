@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LCActionSheet
 
 private let kMaxShowTimeMessageCount = 30
 private let kMaxShowtimeMessageInterval: Double = 3*60.0
@@ -45,7 +46,6 @@ class CWBaseMessageController: UIViewController {
         
         registerKeyboardNotifacation()
         registerCell()
-
     }
     
     /**
@@ -60,7 +60,6 @@ class CWBaseMessageController: UIViewController {
         tableView.register(CWTimeMessageCell.self, forCellReuseIdentifier: CWTimeMessageCell.identifier)
     }
     
-
     
     //MARK: UI属性
     /// TableView
@@ -201,6 +200,7 @@ extension CWBaseMessageController: CWChatManagerDelegate {
 }
 
 
+// MARK: - CWChatMessageCellDelegate
 extension CWBaseMessageController: CWChatMessageCellDelegate {
     func messageCellUserAvatarDidClick(_ userId: String) {
         log.debug("cell头像 点击...\(userId)")
@@ -212,9 +212,27 @@ extension CWBaseMessageController: CWChatMessageCellDelegate {
     }
     
     func messageCellDidTapPhone(_ cell: CWChatMessageCell, phone: String) {
-        log.debug("phone tap")
+        let title = "\(phone)可能是一个电话号码，你可以"
+        let otherButtonTitle = ["呼叫","复制号码","添加到手机通讯录"]
+        let actionSheet = LCActionSheet(title: title, delegate: nil, cancelButtonTitle: "取消", otherButtonTitleArray: otherButtonTitle)
+        
+        actionSheet.clickedHandle = { (actionSheet, index) in
+            
+            if index == 0 {
+                let phoneString = "telprompt://\(phone)"
+                guard let URL = URL(string: phoneString) else {
+                    return
+                }
+                UIApplication.shared.openURL(URL)
+            } else if index == 1 {
+                UIPasteboard.general.string = phone
+            }
+            
+        }
+        actionSheet.show()
     }
 }
+
 
 
 // MARK: - CWInputToolBarDelegate
@@ -273,4 +291,3 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
     }
     
 }
-

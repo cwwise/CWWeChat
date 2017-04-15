@@ -174,7 +174,7 @@
 		8CA7EB031E9E7CD500467C37 /* CWShareWeChat.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8CA7EAF91E9E7CD500467C37 /* CWShareWeChat.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8CA7EB0B1E9E81D300467C37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7EB0A1E9E81D300467C37 /* Assets.xcassets */; };
 		8CA7EB131E9FD5C600467C37 /* chat_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7EB121E9FD5C600467C37 /* chat_background.png */; };
-		8CA7EB161E9FE4F000467C37 /* CWTextLinePositionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7EB151E9FE4F000467C37 /* CWTextLinePositionModifier.swift */; };
+		8CA7EB1F1EA1CE8900467C37 /* CWTextLinePositionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7EB1E1EA1CE8900467C37 /* CWTextLinePositionModifier.swift */; };
 		8CFCF5371E9017FB00E56C31 /* CWChatMessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFCF5361E9017FB00E56C31 /* CWChatMessageStore.swift */; };
 		8CFCF5391E90E33700E56C31 /* CWChatConversationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFCF5381E90E33700E56C31 /* CWChatConversationStore.swift */; };
 		8CFCF53B1E90E3EE00E56C31 /* CWChatBaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFCF53A1E90E3EE00E56C31 /* CWChatBaseStore.swift */; };
@@ -408,7 +408,7 @@
 		8CA7EB081E9E80E200467C37 /* CWShareWeChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CWShareWeChat.entitlements; sourceTree = "<group>"; };
 		8CA7EB0A1E9E81D300467C37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8CA7EB121E9FD5C600467C37 /* chat_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_background.png; sourceTree = "<group>"; };
-		8CA7EB151E9FE4F000467C37 /* CWTextLinePositionModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTextLinePositionModifier.swift; sourceTree = "<group>"; };
+		8CA7EB1E1EA1CE8900467C37 /* CWTextLinePositionModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTextLinePositionModifier.swift; sourceTree = "<group>"; };
 		8CFCF5361E9017FB00E56C31 /* CWChatMessageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatMessageStore.swift; sourceTree = "<group>"; };
 		8CFCF5381E90E33700E56C31 /* CWChatConversationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatConversationStore.swift; sourceTree = "<group>"; };
 		8CFCF53A1E90E3EE00E56C31 /* CWChatBaseStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatBaseStore.swift; sourceTree = "<group>"; };
@@ -667,7 +667,6 @@
 				1F3492331E878E4000B36641 /* Emoji */,
 				1F3491CF1E878AD500B36641 /* CWChatMessageFrame.swift */,
 				1F3491D01E878AD500B36641 /* CWChatMessageModel.swift */,
-				8CA7EB151E9FE4F000467C37 /* CWTextLinePositionModifier.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1076,8 +1075,8 @@
 		1FA527D01E9381EA00D1BE54 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				8CA7EB1E1EA1CE8900467C37 /* CWTextLinePositionModifier.swift */,
 				1FA527D11E9381EE00D1BE54 /* CWChatTextParser.swift */,
-				1FA724131E9B6DE8009B6456 /* Voice */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1140,13 +1139,6 @@
 				1F4094951E9DEF2D008D959C /* CWMyExpressionCell.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		1FA724131E9B6DE8009B6456 /* Voice */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Voice;
 			sourceTree = "<group>";
 		};
 		1FA7244C1E9CA9BA009B6456 /* Header */ = {
@@ -1840,7 +1832,7 @@
 				1F3492041E878AD500B36641 /* CWChatClient.swift in Sources */,
 				8C84B9561E8D6C840020D508 /* CWImageMessageDispatchOperation.swift in Sources */,
 				8C84B94F1E8C1D020020D508 /* CWShareReplyModel.swift in Sources */,
-				8CA7EB161E9FE4F000467C37 /* CWTextLinePositionModifier.swift in Sources */,
+				8CA7EB1F1EA1CE8900467C37 /* CWTextLinePositionModifier.swift in Sources */,
 				1FA724491E9C9F84009B6456 /* CWMineSettingController.swift in Sources */,
 				1F4094921E9DD9B6008D959C /* CWMessageNoticeController.swift in Sources */,
 				1FA724151E9B6E41009B6456 /* CWChatTextDisplayView.swift in Sources */,
@@ -2098,7 +2090,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/CWWeChat/Application/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWWeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2115,7 +2107,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/CWWeChat/Application/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWWeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2189,7 +2181,7 @@
 				CODE_SIGN_ENTITLEMENTS = CWShareWeChat/CWShareWeChat.entitlements;
 				DEVELOPMENT_TEAM = UEL43GU3G3;
 				INFOPLIST_FILE = CWShareWeChat/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWWeChat.CWShareWeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2206,7 +2198,7 @@
 				CODE_SIGN_ENTITLEMENTS = CWShareWeChat/CWShareWeChat.entitlements;
 				DEVELOPMENT_TEAM = UEL43GU3G3;
 				INFOPLIST_FILE = CWShareWeChat/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.CWWeChat.CWShareWeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -30,31 +30,9 @@ public class CWChatMessageModel: NSObject {
         
         switch message.messageType {
         case .text:
-            let content = (message.messageBody as! CWTextMessageBody).text
-            self.setupText(content)
+            setupTextMessage()
         case .image:
-            
-            var contentSize: CGSize = CGSize.zero
-            let imageSize = (message.messageBody as! CWImageMessageBody).size
-            //根据图片的比例大小计算图片的frame
-            if imageSize.width > imageSize.height {
-                var height = kChatImageMaxWidth * imageSize.height / imageSize.width
-                height = [kChatImageMinWidth,height].max()!
-                contentSize = CGSize(width: ceil(kChatImageMaxWidth), height: ceil(height))
-            } else {
-                var width = kChatImageMaxWidth * imageSize.width / imageSize.height
-                width = [kChatImageMinWidth,width].max()!
-                contentSize = CGSize(width: ceil(width), height: ceil(kChatImageMaxWidth))
-            }
-  
-            let edge = UIEdgeInsets.zero
-            contentSize = CGSize(width: ceil(contentSize.width)+edge.left+edge.right,
-                                 height: ceil(contentSize.height)+edge.top+edge.bottom)
-            
-            let heightOfCell = contentSize.height + kMessageCellBottomMargin + kMessageCellTopMargin
-            self.messageFrame = CWChatMessageFrame(heightOfCell: heightOfCell, contentSize: contentSize)
-
-            
+            setupImageMessage()
         default:
             break
 
@@ -63,11 +41,10 @@ public class CWChatMessageModel: NSObject {
         
     }
     
-    
-    func setupText(_ content: String) {
+    func setupTextMessage() {
         
+        let content = (message.messageBody as! CWTextMessageBody).text
         let size = CGSize(width: 200, height: CGFloat.greatestFiniteMagnitude)
-        
         var edge: UIEdgeInsets
         if message.direction == .send {
             edge = ChatCellUI.right_edge_insets
@@ -92,8 +69,30 @@ public class CWChatMessageModel: NSObject {
         messageFrame = CWChatMessageFrame(heightOfCell: heightOfCell,
                                           contentSize: contentSize,
                                           textLayout: textLayout)
-        
     }
     
+    
+    func setupImageMessage() {
+        
+        var contentSize: CGSize = CGSize.zero
+        let imageSize = (message.messageBody as! CWImageMessageBody).size
+        //根据图片的比例大小计算图片的frame
+        if imageSize.width > imageSize.height {
+            var height = kChatImageMaxWidth * imageSize.height / imageSize.width
+            height = [kChatImageMinWidth,height].max()!
+            contentSize = CGSize(width: ceil(kChatImageMaxWidth), height: ceil(height))
+        } else {
+            var width = kChatImageMaxWidth * imageSize.width / imageSize.height
+            width = [kChatImageMinWidth,width].max()!
+            contentSize = CGSize(width: ceil(width), height: ceil(kChatImageMaxWidth))
+        }
+        
+        let edge = UIEdgeInsets.zero
+        contentSize = CGSize(width: ceil(contentSize.width)+edge.left+edge.right,
+                             height: ceil(contentSize.height)+edge.top+edge.bottom)
+        
+        let heightOfCell = contentSize.height + kMessageCellBottomMargin + kMessageCellTopMargin
+        messageFrame = CWChatMessageFrame(heightOfCell: heightOfCell, contentSize: contentSize)
+    }
     
 }
