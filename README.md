@@ -1,4 +1,4 @@
-![image](https://github.com/cwwise/CWWeChat/blob/master/source/Images/CWWeChatIcon.png)
+![image](https://github.com/cwwise/CWWeChat/blob/master/source/Images/CWWeChat.png)
 ## CWWeChat
 [![Build Status](https://www.travis-ci.org/cwwise/CWWeChat.svg?branch=master)](https://www.travis-ci.org/cwwise/CWWeChat)
 [![Swift3.1](https://img.shields.io/badge/Swift-3.1-orange.svg?style=flat)](https://developer.apple.com/swift/)
