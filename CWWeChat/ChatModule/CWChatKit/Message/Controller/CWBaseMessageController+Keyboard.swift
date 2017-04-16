@@ -34,9 +34,8 @@ extension CWBaseMessageController {
     
     
     func hideKeyboard() {
-        self.view.endEditing(true)
+        self.chatToolBar.endInputing()
     }
-    
     
     ///键盘将要隐藏
     func handleWillHideKeyboard(_ notification: Notification)  {

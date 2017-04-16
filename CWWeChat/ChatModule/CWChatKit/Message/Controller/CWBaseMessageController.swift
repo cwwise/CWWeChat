@@ -31,23 +31,23 @@ class CWBaseMessageController: UIViewController {
         let chatManager = CWChatClient.share.chatManager
         chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
         
-        self.conversation.fetchMessagesStart { (list, error) in
-            if error == nil {
-                let messageList = self.formatMessages(list)
-                self.messageList.append(contentsOf: messageList)
-                self.tableView.reloadData()
-            }
-        }
+//        self.conversation.fetchMessagesStart { (list, error) in
+//            if error == nil {
+//                let messageList = self.formatMessages(list)
+//                self.messageList.append(contentsOf: messageList)
+//                self.tableView.reloadData()
+//            }
+//        }
         
-//        let voiceBody1 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
-//        let message1 = CWChatMessage(targetId: conversation.targetId, messageBody: voiceBody1)
-//        self.messageList.append(CWChatMessageModel(message: message1))
-//        
-//        let voiceBody2 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
-//        let message2 = CWChatMessage(targetId: conversation.targetId, direction: .receive,messageBody: voiceBody2)
-//        self.messageList.append(CWChatMessageModel(message: message2))
-//        
-//        self.tableView.reloadData()
+        let voiceBody1 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
+        let message1 = CWChatMessage(targetId: conversation.targetId, messageBody: voiceBody1)
+        self.messageList.append(CWChatMessageModel(message: message1))
+        
+        let voiceBody2 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
+        let message2 = CWChatMessage(targetId: conversation.targetId, direction: .receive,messageBody: voiceBody2)
+        self.messageList.append(CWChatMessageModel(message: message2))
+        
+        self.tableView.reloadData()
     }
     
     func setupUI() {
@@ -69,7 +69,6 @@ class CWBaseMessageController: UIViewController {
 
         tableView.register(CWTimeMessageCell.self, forCellReuseIdentifier: CWTimeMessageCell.identifier)
     }
-    
     
     //MARK: UI属性
     /// TableView
@@ -169,8 +168,8 @@ extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
             timeCell.timeLabel.text = message as? String
             return timeCell
         }
+        
         let identifier = messageModel.message.messageType.identifier()
-    
         // 时间和tip消息 是例外的种类 以后判断
         let messageCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CWChatMessageCell
         messageCell.delegate = self
@@ -183,7 +182,7 @@ extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
         let message = messageList[indexPath.row]
         
         guard let messageModel = message as? CWChatMessageModel else {
-            return 30.0
+            return kTimeMessageCellHeight
         }
         return messageModel.messageFrame.heightOfCell
     }

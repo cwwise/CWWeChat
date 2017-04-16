@@ -48,6 +48,7 @@ class CWContactCell: UITableViewCell {
     ///设置UI
     func setupUI() {
         let url = URL(string: contactModel.avatarURL!)
+        // 待修改
         if url?.host == nil {
             self.avatarImageView.image = UIImage(named: contactModel.avatarURL!)
         } else {

@@ -66,8 +66,8 @@ extension CWGroupServic: CWGroupManager {
 
 // 发现多人聊天
 extension CWGroupServic: XMPPMUCDelegate {
-    func xmppMUC(_ sender: XMPPMUC!, didDiscoverRooms rooms: [Any]!, forServiceNamed serviceName: String!) {
-        log.debug(rooms)
+    func xmppMUC(_ sender: XMPPMUC!, didDiscoverRooms rooms: [Any]!, forServiceNamed serviceName: String!) {        
+        guard let rooms = rooms else { return }
         for item in rooms {
             if let room = item as? DDXMLElement,
                 let jid = room.attribute(forName: "jid")?.stringValue,

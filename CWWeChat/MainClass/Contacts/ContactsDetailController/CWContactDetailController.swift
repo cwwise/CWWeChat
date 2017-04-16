@@ -63,7 +63,7 @@ extension CWContactDetailController: CWTableViewManagerDataSource {
                                                      for: indexPath) as! CWContactInfoCell
             let model = CWContactModel(userId: "haohao", username: "haohao")
             model.nickname = "陈威"
-            model.avatarURL = "\(kHeaderImageBaseURLString)\(model.userId!).jpg"
+            model.avatarURL = "\(kHeaderImageBaseURLString)\(model.userId).jpg"
 
             cell.userModel = model
             return cell

@@ -23,6 +23,7 @@ typealias CWAsset = Asset
 #endif
 
 enum Asset: String {
+  case Applogo = "Applogo"
   case FootStep = "FootStep"
   case Bubble_Default_Received = "bubble-default-received"
   case Bubble_Default_Sended = "bubble-default-sended"
@@ -41,6 +42,7 @@ enum Asset: String {
   case Contact_new_friend = "contact_new_friend"
   case Contact_official_account = "contact_official_account"
   case Contact_signature = "contact_signature"
+  case Contacts_add_friend = "contacts_add_friend"
   case Default_head = "default_head"
   case Discover_QRcode = "discover_QRcode"
   case Discover_album = "discover_album"
@@ -49,10 +51,7 @@ enum Asset: String {
   case Discover_location = "discover_location"
   case Discover_shake = "discover_shake"
   case Discover_shopping = "discover_shopping"
-  case Message_receiver_background_highlight = "message_receiver_background_highlight"
-  case Message_receiver_background_normal = "message_receiver_background_normal"
-  case Message_sender_background_highlight = "message_sender_background_highlight"
-  case Message_sender_background_normal = "message_sender_background_normal"
+  case Discover_webView_setting = "discover_webView_setting"
   case Mine_album = "mine_album"
   case Mine_card = "mine_card"
   case Mine_cell_myQR = "mine_cell_myQR"
@@ -65,8 +64,15 @@ enum Asset: String {
   case Nav_chat_single = "nav_chat_single"
   case Nav_more = "nav_more"
   case Nav_setting = "nav_setting"
+  case Receiver_background_highlight = "receiver_background_highlight"
+  case Receiver_background_normal = "receiver_background_normal"
   case SearchBar_voice = "searchBar_voice"
   case SearchBar_voice_HL = "searchBar_voice_HL"
+  case Sender_background_highlight = "sender_background_highlight"
+  case Sender_background_normal = "sender_background_normal"
+  case Setting_lockoff = "setting_lockoff"
+  case Setting_lockon = "setting_lockon"
+  case Show_success = "show_success"
   case Tabbar_contacts = "tabbar_contacts"
   case Tabbar_contactsHL = "tabbar_contactsHL"
   case Tabbar_discover = "tabbar_discover"
@@ -75,6 +81,7 @@ enum Asset: String {
   case Tabbar_mainframeHL = "tabbar_mainframeHL"
   case Tabbar_me = "tabbar_me"
   case Tabbar_meHL = "tabbar_meHL"
+  case Tabbarbackground = "tabbarbackground"
 
   var image: Image {
     return Image(asset: self)

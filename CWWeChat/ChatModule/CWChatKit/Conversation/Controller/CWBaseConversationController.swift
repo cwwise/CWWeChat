@@ -49,6 +49,10 @@ class CWBaseConversationController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        tableView.separatorColor = UIColor.tableViewCellLineColor()
+        
         tableView.tableHeaderView = self.searchController.searchBar
         return tableView
     }()

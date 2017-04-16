@@ -6,7 +6,7 @@
 //  Copyright © 2017年 cwcoder. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public enum CWEmojiType: Int {
     case emoji
@@ -17,9 +17,9 @@ public enum CWEmojiType: Int {
 
 public enum CWToolBarStatus: Int {
     case initial
+    case emoji
     case voice
     case more
-    case emoji
     case keyboard
 }
 
@@ -38,3 +38,11 @@ public enum CWMoreKeyboardItemType: Int {
     case voice
     case cards
 }
+
+
+let kMoreKeyBoardHeight: CGFloat = 216
+let kChatToolBarHeight: CGFloat = 49
+
+let kChatKeyBoardHeight = kMoreKeyBoardHeight + kChatToolBarHeight
+
+

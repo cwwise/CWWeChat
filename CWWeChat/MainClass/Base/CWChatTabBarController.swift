@@ -13,6 +13,8 @@ class CWChatTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewContollers()
+        
+//        self.tabBar.backgroundImage = CWAsset.Tabbarbackground.image
         // Do any additional setup after loading the view.
     }
     

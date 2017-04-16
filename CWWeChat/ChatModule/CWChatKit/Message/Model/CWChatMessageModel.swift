@@ -46,7 +46,7 @@ public class CWChatMessageModel: NSObject {
     func setupTextMessage() {
         
         let content = (message.messageBody as! CWTextMessageBody).text
-        let size = CGSize(width: 200, height: CGFloat.greatestFiniteMagnitude)
+        let size = CGSize(width: kChatTextMaxWidth, height: CGFloat.greatestFiniteMagnitude)
         var edge: UIEdgeInsets
         if message.direction == .send {
             edge = ChatCellUI.right_edge_insets
@@ -106,7 +106,7 @@ public class CWChatMessageModel: NSObject {
         let heightOfCell: CGFloat = 60
         
 //        if let voiceLength = voiceMessage.voiceLength {
-//            let scale: CGFloat = CGFloat(voiceLength)/60.0
+//            let scale: CGFloat = CGFloat(voiceMessage.voiceLength)/60.0
 //            contentSize = CGSize(width: ceil(scale*kChatVoiceMaxWidth)+30, height: kAvaterWidth+12)
 //        }
         contentSize = CGSize(width: 100, height: kAvaterImageViewWidth+14)

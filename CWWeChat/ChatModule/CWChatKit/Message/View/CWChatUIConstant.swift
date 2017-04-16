@@ -16,12 +16,12 @@ public struct ChatSessionCellUI {
 
 let defaultHeadeImage = CWAsset.Default_head.image
 
+let kChatTextMaxWidth = kScreenWidth * 0.58
 //图片
 let kChatImageMaxWidth = kScreenWidth * 0.45
 let kChatImageMinWidth = kScreenWidth * 0.25
 
-let kChatVoiceMinWidth = kScreenWidth * 0.25
-let kChatVoiceMaxWidth = kScreenWidth * 0.60
+let kChatVoiceMaxWidth = kScreenWidth * 0.58
 
 public struct ChatCellUI {
     static let left_cap_insets   = UIEdgeInsets(top: 20, left: 40, bottom: 40, right: 40)
@@ -32,6 +32,9 @@ public struct ChatCellUI {
     /// 右边气泡背景区域 间距
     static let right_edge_insets = UIEdgeInsets(top: 2+8, left: 17, bottom: 11+9, right: 17)
 }
+
+
+let kTimeMessageCellHeight: CGFloat = 30.0
 
 // cell布局中的间距
 let kMessageCellMargin: CGFloat =  10.0

@@ -10,8 +10,10 @@ import UIKit
 
 extension UIButton {
     public func setNormalImage(_ image: UIImage, highlighted hlimage: UIImage) {
-        self.setImage(image, for: UIControlState())
-        self.setImage(hlimage, for: .highlighted)
+        self.setImage(image, for: .normal)
+        self.setImage(image, for: .highlighted)
+        self.setImage(hlimage, for: [.highlighted,.selected])
+        self.setImage(hlimage, for: .selected)
     }
     
     public func doCircleRadius(_ radiu: CGFloat, borderColor color:UIColor = UIColor.gray) {

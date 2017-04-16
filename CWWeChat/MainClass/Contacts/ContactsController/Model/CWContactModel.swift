@@ -11,7 +11,7 @@ import UIKit
 public class CWContactModel: NSObject {
 
     /// 用户id
-    var userId: String!
+    var userId: String
     /// 用户名
     var username: String
     /// 昵称

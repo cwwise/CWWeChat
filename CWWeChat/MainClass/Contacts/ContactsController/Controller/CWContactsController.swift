@@ -73,7 +73,8 @@ class CWContactsController: UIViewController {
         tableView.sectionIndexBackgroundColor = UIColor.clear
         tableView.sectionIndexColor = UIColor.gray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        
+        tableView.separatorColor = UIColor.tableViewCellLineColor()
+
         tableView.register(CWContactCell.self, forCellReuseIdentifier: CWContactCell.identifier)
         tableView.register(CWContactHeaderView.self, forHeaderFooterViewReuseIdentifier: CWContactHeaderView.identifier)
         tableView.tableHeaderView = self.searchController.searchBar
@@ -90,18 +91,18 @@ class CWContactsController: UIViewController {
 
 }
 
-private let heightOfContactsCell: CGFloat   =   54.0
-private let heightOfHeader: CGFloat        =   22.0
+private let kHeightOfContactsCell: CGFloat   =   54.0
+private let kHeightOfHeader: CGFloat        =   22.0
 
 extension CWContactsController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return heightOfContactsCell
+        return kHeightOfContactsCell
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 { return 0 }
-        return heightOfHeader
+        return kHeightOfHeader
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
