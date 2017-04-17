@@ -97,7 +97,7 @@ class CWChatMessageCell: UITableViewCell {
             // 内容
             messageContentView.snp.remakeConstraints({ (make) in
                 make.right.equalTo(avatarImageView.snp.left).offset(-kAvatarToMessageContent)
-                make.top.equalTo(usernameLabel.snp.bottom)
+                make.top.equalTo(usernameLabel.snp.bottom).offset(-ChatCellUI.bubbleTopMargin)
                 make.size.equalTo(messageModel.messageFrame.contentSize)
             })
             
@@ -127,7 +127,7 @@ class CWChatMessageCell: UITableViewCell {
             // 内容
             messageContentView.snp.remakeConstraints({ (make) in
                 make.left.equalTo(avatarImageView.snp.right).offset(kAvatarToMessageContent)
-                make.top.equalTo(usernameLabel.snp.bottom).offset(0)
+                make.top.equalTo(usernameLabel.snp.bottom).offset(-ChatCellUI.bubbleTopMargin)
                 make.size.equalTo(messageModel.messageFrame.contentSize)
             })
 
@@ -184,6 +184,19 @@ class CWChatMessageCell: UITableViewCell {
     // MARK: 手势事件
     func bubbleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
  
+        guard tapGestureRecognizer.state == .ended else {
+            return
+        }
+        
+        switch self.messageModel.message.messageType{
+        case .image:
+            log.debug("点击图片")
+        case .voice:
+            log.debug("点击声音")
+        default:
+            log.debug("其他类型")
+        }
+        
         
     }
     
@@ -246,6 +259,12 @@ class CWChatMessageCell: UITableViewCell {
         errorButton.sizeToFit()
         errorButton.isHidden = true
         return errorButton
+    }()
+    
+    ///手势操作
+    fileprivate(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bubbleTapped(_:)))
+        return tapGestureRecognizer
     }()
     
     fileprivate(set) lazy var doubletapGesture: UITapGestureRecognizer = {

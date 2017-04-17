@@ -34,6 +34,9 @@ class CWImageMessageCell: CWChatMessageCell {
         
         self.messageContentView.layer.mask = self.maskLayer
         self.messageContentView.addSubview(self.messageImageView)
+        
+        self.messageContentView.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.require(toFail: doubletapGesture)
     }
     
     override func updateMessage(_ messageModel: CWChatMessageModel) {

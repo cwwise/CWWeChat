@@ -103,13 +103,20 @@ public class CWChatMessageModel: NSObject {
         let voiceMessage = message.messageBody as! CWVoiceMessageBody
         
         var contentSize: CGSize = CGSize.zero
-        let heightOfCell: CGFloat = 60
+        
+        var edge: UIEdgeInsets
+        if message.direction == .send {
+            edge = ChatCellUI.right_edge_insets
+        } else {
+            edge = ChatCellUI.left_edge_insets
+        }
         
 //        if let voiceLength = voiceMessage.voiceLength {
 //            let scale: CGFloat = CGFloat(voiceLength)/60.0
 //            contentSize = CGSize(width: ceil(scale*kChatVoiceMaxWidth)+30, height: kAvaterWidth+12)
 //        }
-        contentSize = CGSize(width: 100, height: kAvaterImageViewWidth+14)
+        contentSize = CGSize(width: 100, height: kAvaterImageViewWidth+13)
+        let heightOfCell: CGFloat = contentSize.height + kMessageCellBottomMargin + kMessageCellTopMargin
         messageFrame = CWChatMessageFrame(heightOfCell: heightOfCell, contentSize: contentSize)
         
     }
