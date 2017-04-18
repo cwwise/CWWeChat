@@ -31,6 +31,7 @@ public class CWChatMessageModel: NSObject {
     var mediaPlayStutus: CWMediaPlayStutus = .none
     /// 消息
     var messageFrame = CWChatMessageFrame()
+    
     /// 文本消息
     var content: String?
     

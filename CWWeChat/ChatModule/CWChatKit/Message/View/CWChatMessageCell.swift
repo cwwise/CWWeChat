@@ -67,15 +67,6 @@ class CWChatMessageCell: UITableViewCell {
         self.contentView.addSubview(self.errorButton)
     }
     
-    /// 设置数据
-    func configureCell(message messageModel: CWChatMessageModel) {
-        
-        // 设置数据
-        
-        
-        // 更新UI
-    }
-    
     /// 
     func updateMessage(_ messageModel: CWChatMessageModel) {
         self.messageModel = messageModel
@@ -105,6 +96,11 @@ class CWChatMessageCell: UITableViewCell {
                 make.right.equalTo(avatarImageView.snp.left).offset(-kAvatarToMessageContent)
                 make.top.equalTo(usernameLabel.snp.bottom).offset(-ChatCellUI.bubbleTopMargin)
                 make.size.equalTo(messageModel.messageFrame.contentSize)
+            })
+            
+            activityView.snp.makeConstraints({ (make) in
+                make.right.equalTo(messageContentView.snp.left).offset(-3)
+                make.centerY.equalTo(messageContentView).offset(-4)
             })
             
             let image = #imageLiteral(resourceName: "sender_background_normal")
@@ -137,6 +133,11 @@ class CWChatMessageCell: UITableViewCell {
                 make.size.equalTo(messageModel.messageFrame.contentSize)
             })
 
+            activityView.snp.makeConstraints({ (make) in
+                make.left.equalTo(messageContentView.snp.right).offset(3)
+                make.centerY.equalTo(messageContentView).offset(-4)
+            })
+            
             let image = #imageLiteral(resourceName: "receiver_background_normal")
             let highlightedImage = #imageLiteral(resourceName: "receiver_background_highlight")
 
@@ -156,11 +157,11 @@ class CWChatMessageCell: UITableViewCell {
     /// 上传消息进度（图片和视频）
     
     //更新消息状态
-    func updateChatMessageCellState() {
+    func updateState() {
         
         // 发送中展示
-        if messageModel.message.sendStatus == .sending {
-            activityView.startAnimating()
+        if messageModel.message.sendStatus == .successed {
+            activityView.stopAnimating()
             errorButton.isHidden = true
         }
         // 如果失败就显示重发按钮
@@ -168,7 +169,7 @@ class CWChatMessageCell: UITableViewCell {
             activityView.stopAnimating()
             errorButton.isHidden = false
         } else {
-            activityView.stopAnimating()
+            activityView.startAnimating()
             errorButton.isHidden = true
         }
     }
@@ -181,7 +182,6 @@ class CWChatMessageCell: UITableViewCell {
         guard let delegate = self.delegate, let messageModel = self.messageModel, tap.state == .ended  else {
             return
         }
-
         let message = messageModel.message
         let targetId = (message.direction == .receive) ? message.targetId : (message.senderId ?? "")
         delegate.messageCellUserAvatarDidClick(targetId)

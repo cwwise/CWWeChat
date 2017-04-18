@@ -44,7 +44,6 @@ class CWImageMessageCell: CWChatMessageCell {
     
         self.maskLayer.contents = self.backgroundImageView.image?.cgImage
         self.maskLayer.frame = CGRect(origin: .zero, size: messageModel.messageFrame.contentSize)
-    
         messageImageView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
@@ -61,7 +60,7 @@ class CWImageMessageCell: CWChatMessageCell {
         } else {
             messageImageView.image = nil
         }
-
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
