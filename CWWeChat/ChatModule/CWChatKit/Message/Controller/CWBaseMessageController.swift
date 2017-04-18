@@ -31,23 +31,23 @@ class CWBaseMessageController: UIViewController {
         let chatManager = CWChatClient.share.chatManager
         chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
         
-        self.conversation.fetchMessagesStart { (list, error) in
-            if error == nil {
-                let messageList = self.formatMessages(list)
-                self.messageList.append(contentsOf: messageList)
-                self.tableView.reloadData()
-            }
-        }
+//        self.conversation.fetchMessagesStart { (list, error) in
+//            if error == nil {
+//                let messageList = self.formatMessages(list)
+//                self.messageList.append(contentsOf: messageList)
+//                self.tableView.reloadData()
+//            }
+//        }
         
-//        let voiceBody1 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
-//        let message1 = CWChatMessage(targetId: conversation.targetId, messageBody: voiceBody1)
-//        self.messageList.append(CWChatMessageModel(message: message1))
-//        
-//        let voiceBody2 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
-//        let message2 = CWChatMessage(targetId: conversation.targetId, direction: .receive,messageBody: voiceBody2)
-//        self.messageList.append(CWChatMessageModel(message: message2))
-//        
-//        self.tableView.reloadData()
+        let voiceBody1 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
+        let message1 = CWChatMessage(targetId: conversation.targetId, messageBody: voiceBody1)
+        self.messageList.append(CWChatMessageModel(message: message1))
+        
+        let voiceBody2 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
+        let message2 = CWChatMessage(targetId: conversation.targetId, direction: .receive,messageBody: voiceBody2)
+        self.messageList.append(CWChatMessageModel(message: message2))
+        
+        self.tableView.reloadData()
     }
     
     func setupUI() {
@@ -212,6 +212,32 @@ extension CWBaseMessageController: CWChatManagerDelegate {
 extension CWBaseMessageController: CWChatMessageCellDelegate {
     func messageCellUserAvatarDidClick(_ userId: String) {
         log.debug("cell头像 点击...\(userId)")
+    }
+    
+    func messageCellDidTap(_ cell: CWChatMessageCell) {
+        
+        switch cell.messageModel.message.messageType{
+        case .image:
+            log.debug("点击图片")
+            
+        case .voice:
+            
+            guard let voiceCell = cell as? CWVoiceMessageCell else {
+                return
+            }
+            
+            if voiceCell.messageModel.mediaPlayStutus == .playing {
+                voiceCell.stopAnimating()
+                voiceCell.messageModel.mediaPlayStutus = .played
+            } else {
+                voiceCell.messageModel.mediaPlayStutus = .playing
+                voiceCell.startAnimating()
+            }
+            
+            log.debug("点击声音")
+        default:
+            log.debug("其他类型")
+        }
     }
     
     func messageCellDidTapLink(_ cell: CWChatMessageCell, link: URL) {

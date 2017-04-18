@@ -9,6 +9,14 @@
 import UIKit
 import YYText.YYTextUtilities
 
+
+enum CWMediaPlayStutus {
+    case none
+    case playing
+    case played
+}
+
+
 public let kChatTextAttribute = [NSForegroundColorAttributeName:UIColor.black,
                                   NSFontAttributeName: UIFont.fontTextMessageText()]
 /// 消息model
@@ -19,6 +27,8 @@ public class CWChatMessageModel: NSObject {
     
     /// 是否显示时间
     var showTime: Bool = false
+    /// 音频播放状态 默认未播放
+    var mediaPlayStutus: CWMediaPlayStutus = .none
     /// 消息
     var messageFrame = CWChatMessageFrame()
     /// 文本消息

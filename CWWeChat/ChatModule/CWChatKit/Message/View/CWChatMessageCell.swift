@@ -24,6 +24,12 @@ protocol CWChatMessageCellDelegate: NSObjectProtocol {
     ///   - phone: phone
     func messageCellDidTapPhone(_ cell: CWChatMessageCell, phone: String)
     
+    
+    /// cell被点击
+    ///
+    /// - Parameter cell: cell
+    func messageCellDidTap(_ cell: CWChatMessageCell)
+    
     /// 头像点击的回调方法
     ///
     /// - Parameter userId: 用户id
@@ -188,16 +194,7 @@ class CWChatMessageCell: UITableViewCell {
             return
         }
         
-        switch self.messageModel.message.messageType{
-        case .image:
-            log.debug("点击图片")
-        case .voice:
-            log.debug("点击声音")
-        default:
-            log.debug("其他类型")
-        }
-        
-        
+        self.delegate?.messageCellDidTap(self)
     }
     
     func bubbleDoubleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {

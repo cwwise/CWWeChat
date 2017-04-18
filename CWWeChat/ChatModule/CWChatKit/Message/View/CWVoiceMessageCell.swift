@@ -77,6 +77,8 @@ class CWVoiceMessageCell: CWChatMessageCell {
                 make.right.equalTo(backgroundImageView.snp.left).offset(-kRedTipMargin)
             })
             
+            redTipImageView.isHidden = true
+            
         } else {
             
             let edge = ChatCellUI.left_edge_insets
@@ -92,7 +94,15 @@ class CWVoiceMessageCell: CWChatMessageCell {
                 make.top.equalTo(5)
                 make.left.equalTo(backgroundImageView.snp.right).offset(kRedTipMargin)
             })
+            
+            if messageModel.mediaPlayStutus == .none {
+                redTipImageView.isHidden = false
+            } else {
+                redTipImageView.isHidden = true
+            }
+            
         }
+        
     }
     
     func setUpVoicePlayIndicatorImageView(_ send: Bool) {
