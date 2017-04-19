@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         
-        loginXMPP()
+//        loginXMPP()
         //注册推送信息
         registerRemoteNotification()
         return true

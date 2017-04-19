@@ -75,12 +75,25 @@ class CWChatXMPPManager: NSObject {
     
     func setupNetworkReachable() {
         ///监视网络变化
-        reachable = NetworkReachabilityManager(host: "https://www.baidu.com")
-        reachable?.startListening()
+        reachable = Alamofire.NetworkReachabilityManager(host: "www.baidu.com")
         let listener = { (status: NetworkReachabilityManager.NetworkReachabilityStatus) in
-            
+            switch status {
+                
+            case .notReachable:
+                log.verbose("The network is not reachable")
+                
+            case .unknown :
+                log.verbose("It is unknown whether the network is reachable")
+                
+            case .reachable(.ethernetOrWiFi):
+                log.verbose("The network is reachable over the WiFi connection")
+                
+            case .reachable(.wwan):
+                log.verbose("The network is reachable over the WWAN connection")
+            }
         }
         reachable?.listener = listener
+        reachable?.startListening()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -95,16 +108,16 @@ class CWChatXMPPManager: NSObject {
                      password: String,
                      isLogin: Bool = true,
                      completion: CWClientCompletion?) {
-        //判断xmpp状态
-        if xmppStream.isConnected() || xmppStream.isConnecting() {
-            xmppStream.disconnect()
+
+        if reachable?.isReachable == false {
+            completion?(nil, CWChatError(error: "网络连接失败"))
+            return
         }
         
         // 保存变量
         self.isLogin = isLogin
         self.password = password
         self.completion = completion
-        
         
         let timeoutInterval: TimeInterval = 60
         let resource = options.chatResource
@@ -113,13 +126,11 @@ class CWChatXMPPManager: NSObject {
         xmppStream.hostName = options.chatServer
         xmppStream.hostPort = options.chatPort
         xmppStream.myJID = XMPPJID(user: userName, domain: domain, resource: resource)
-        
         do {
             try xmppStream.connect(withTimeout: timeoutInterval)
         } catch {
             let error = CWChatError(errorCode: .serverTimeout)
             self.completion?(nil, error)
-            log.error(error)
         }
     }
     
@@ -169,13 +180,11 @@ extension CWChatXMPPManager: XMPPStreamDelegate {
     
     /// 连接失败
     func xmppStreamDidDisconnect(_ sender: XMPPStream!, withError error: Error!) {
-        log.error("xmpp连接断开...\(error)")
-        self.completion?(nil, CWChatError(errorCode: .customer, error: "连接服务器失败"))
+        self.completion?(nil, CWChatError(error: "连接服务器失败"))
     }
     
     /// 已经连接，就输入密码
     func xmppStreamDidConnect(_ sender: XMPPStream!) {
-        log.verbose("xmpp连接成功,开始认证...")
         do {
             if isLogin {
                 try xmppStream.authenticate(withPassword: password)
@@ -193,16 +202,18 @@ extension CWChatXMPPManager: XMPPStreamDelegate {
     func xmppStream(_ sender: XMPPStream!, didNotAuthenticate error: DDXMLElement!) {
         log.error("xmpp验证失败...\(error)")
         self.completion?(nil, CWChatError(errorCode: .authenticationFailed))
+        //登陆失败之后 则断开连接。
+        sender.disconnect()
     }
     
     // 验证成功
     func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
-        log.debug("xmpp认证成功")
+        self.completion?(xmppStream.myJID.user, nil)
+
         goOnline()
         
         streamManagement.autoResume = true
         streamManagement.enable(withResumption: true, maxTimeout: 60)
-        self.completion?(xmppStream.myJID.user, nil)
     }
     
     func xmppStreamDidRegister(_ sender: XMPPStream!) {
@@ -211,8 +222,7 @@ extension CWChatXMPPManager: XMPPStreamDelegate {
     }
     
     func xmppStream(_ sender: XMPPStream!, didNotRegister error: DDXMLElement!) {
-        self.completion?(nil, CWChatError(errorCode: .customer, error: "注册失败"))
-        log.debug("xmpp注册失败")
+        self.completion?(nil, CWChatError(error: "注册失败"))
     }
     
     // 收到错误信息

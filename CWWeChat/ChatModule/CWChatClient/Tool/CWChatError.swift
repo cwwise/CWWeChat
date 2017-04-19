@@ -32,9 +32,8 @@ public enum CWChatErrorCode: Int, CustomStringConvertible {
             string = "连接服务器操时"
         case .serverUnknownError:
             string = "连接服务器未知错误"
-            
         default:
-            string = "其他错误"
+            string = ""
         }
         return string
     }
@@ -46,15 +45,14 @@ public class CWChatError: NSObject {
     /// 错误码
     var errorCode: CWChatErrorCode
     /// 错误描述
-    var errorDescription: String?
+    var errorDescription: String
     
-    public init(errorCode: CWChatErrorCode, error: String? = nil) {
+    public init(errorCode: CWChatErrorCode = .customer, error: String? = nil) {
         self.errorCode = errorCode
-        self.errorDescription = error
+        if let error = error {
+            errorDescription = error
+        } else {
+            errorDescription = errorCode.description
+        }
     }
-    
-    public override var description: String {
-        return "code:\(errorCode) message:\(errorCode.description)"
-    }
-    
 }

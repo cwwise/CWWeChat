@@ -15,7 +15,7 @@ class CWLoginController: UIViewController {
     lazy var userNameTextField: UITextField = {
         let userNameTextField = UITextField()
         
-        userNameTextField.font = UIFont.systemFont(ofSize: 14)
+        userNameTextField.font = UIFont.systemFont(ofSize: 15)
         userNameTextField.placeholder = "微信号/邮箱地址/QQ号"
         userNameTextField.leftViewMode = .always
         userNameTextField.addTarget(self, action: #selector(textValueChanged(_:)), for: .editingChanged)
@@ -29,7 +29,7 @@ class CWLoginController: UIViewController {
     lazy var passwordTextField: UITextField = {
         let passwordTextField = UITextField()
         
-        passwordTextField.font = UIFont.systemFont(ofSize: 14)
+        passwordTextField.font = UIFont.systemFont(ofSize: 15)
         passwordTextField.placeholder = "请填写密码"
         passwordTextField.leftViewMode = .always
         passwordTextField.isSecureTextEntry = true
@@ -50,46 +50,41 @@ class CWLoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "使用账号和密码登录"
         self.view.backgroundColor = UIColor.white
         setupUI()
+        setupNavigationBar()
         // Do any additional setup after loading the view.
+    }
+    
+    func setupNavigationBar() {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+
+        let whiteImage = UIImage.yy_image(with: UIColor.white, size: CGSize(width: 1, height: 1))
+
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(whiteImage, for: .default)
+        
+        let attributes = [NSForegroundColorAttributeName: UIColor.black,
+                          NSFontAttributeName: UIFont.systemFont(ofSize: 17.5)]
+        self.navigationController?.navigationBar.titleTextAttributes = attributes
+        
+        let backItem = UIBarButtonItem(image: UIImage(named: "backBarItemImage"), style: .done, target: self, action: #selector(cancelBarItemAction))
+        self.navigationItem.leftBarButtonItem = backItem
+
     }
     
     func setupUI() {
         
-        let backItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(cancelBarItemAction))
-        let dict = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),
-                    NSForegroundColorAttributeName: UIColor.chatSystemColor()]
-        backItem.setTitleTextAttributes(dict, for: UIControlState())
-        self.navigationItem.leftBarButtonItem = backItem
-        
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        
-        //顶部文字
-        let label = UILabel()
-        label.text = "使用账号和密码登录"
-        label.textColor = UIColor.black
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 19)
-        self.view.addSubview(label)
         let margin: CGFloat = 20
-        label.snp.makeConstraints { (make) in
-            make.left.equalTo(margin)
-            make.right.equalTo(-margin)
-            make.height.equalTo(30)
-            make.top.equalTo(80)
-        }
-        
         //账号和密码
         self.view.addSubview(userNameTextField)
         userNameTextField.snp.makeConstraints { (make) in
             make.left.equalTo(margin)
             make.right.equalTo(-margin)
             make.height.equalTo(45)
-            make.top.equalTo(label.snp.bottom).offset(20)
+            make.top.equalTo(30+64)
         }
-        
         
         self.view.addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { (make) in
@@ -109,52 +104,58 @@ class CWLoginController: UIViewController {
             make.height.equalTo(44)
             make.top.equalTo(passwordTextField.snp.bottom).offset(30)
         }
+        
+        self.userNameTextField.text = "haohao"
+        self.passwordTextField.text = "1234567"
+
     }
     
     func leftView(_ text: String) -> UIView {
-        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
         let textLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         textLabel.text = text
-        textLabel.font = UIFont.systemFont(ofSize: 14)
+        textLabel.font = UIFont.systemFont(ofSize: 15)
         textLabel.textColor = UIColor.black
         leftView.addSubview(textLabel)
         return leftView
     }
     
+
     
     // MARK: 点击事件
     func cancelBarItemAction() {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
-    // 模拟的 待添加逻辑
+    //
     func loginButtonAction() {
         
         self.view.endEditing(true)
         
-//        let userName = userNameTextField.text!
-//        let password = passwordTextField.text!
+        let userName = userNameTextField.text!
+        let password = passwordTextField.text!
         
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.mode = .indeterminate
+//        hud.contentColor = UIColor.white
+//        hud.bezelView.backgroundColor = UIColor.gray
         hud.label.text = "Loading..."
         
         let options = CWChatClientOptions(chatServer: "hosted.im", chatDomain: "hellochatim.p1.im")
         let chatClient = CWChatClient.share
         chatClient.initialize(with: options)
-        
-        chatClient.login(username: "haohao", password: "1234567") { (username, error) in
+        chatClient.login(username: userName, password: password) { (username, error) in
            
             DispatchQueue.main.async(execute: {
+                hud.mode = .text
                 if error == nil {
                     // 登陆成功
-                    
                     let appdelegate = UIApplication.shared.delegate as! AppDelegate
                     appdelegate.loginSuccess()
                     
                     hud.hide(animated: true)
                 } else {
-                    hud.label.text = error?.description
+                    hud.label.text = error?.errorDescription
                     hud.hide(animated: true, afterDelay: 1.0)
                 }
             })

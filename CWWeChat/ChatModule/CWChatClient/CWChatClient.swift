@@ -90,10 +90,14 @@ public class CWChatClient: NSObject {
                       password: String,
                       completion: CWClientCompletion? = nil) {
         userId = username
-        xmppManager.loginServer(with: username, password: password, completion: completion)
-        
-        // 登陆成功之后
-        initUser()
+        xmppManager.loginServer(with: username, password: password) { (username, error) in
+            completion?(username, error)
+            self.xmppManager.completion = nil
+            
+            // 登陆成功之后
+            self.initUser()
+        }
+      
     }
     
     public func logout() {
