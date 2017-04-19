@@ -8,6 +8,7 @@
 
 import Foundation
 //import Qiniu
+import Alamofire
 
 let token_key = "9tsvBuxK559rDYQdXGipXiLyWlru9hDyP2LzOB9S:Yd6o3LD6-qNlV94Hiv4D0dpCoq0=:eyJzY29wZSI6ImNoYXRtZXNzYWdlLWltYWdlIiwiZGVhZGxpbmUiOjE0Njc4NTcyNjh9"
 
@@ -28,6 +29,14 @@ class CWResourceUploadManager: NSObject {
     
     func uploadResource(_ fileName: String, fileType: CWMessageType = .image, handle: @escaping UploadImageHandle) {
         
+        let fileURL = Bundle.main.url(forResource: "video", withExtension: "mov")
+        
+        Alamofire.upload(fileURL!, to: "https://httpbin.org/post")
+            .uploadProgress { (progress) in
+            
+            }.responseJSON { response in
+                debugPrint(response)
+        }  
         //
 //        let progressHandler = { (string: String?, progess: Float!) in
 //            handle(progess,false)
@@ -45,6 +54,7 @@ class CWResourceUploadManager: NSObject {
 //            }
 //            
 //        }, option: option)
+        
         
     }
     

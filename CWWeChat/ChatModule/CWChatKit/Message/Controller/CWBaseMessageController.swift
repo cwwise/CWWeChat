@@ -288,7 +288,7 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
     
     func chatInputView(_ inputView: CWInputToolBar, image: UIImage) {
         
-        let imageName = String.UUIDString()
+        let imageName = String.UUIDString()+".jpg"
         let path = kChatUserImagePath+imageName
 
         FileManager.saveContentImage(image, imagePath: path)

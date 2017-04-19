@@ -14,7 +14,6 @@ class CWImageMessageBody: NSObject, CWMessageBody {
     weak var message: CWChatMessage?
     /// 消息体类型
     var type: CWMessageType = .image
-    
     /// 图片尺寸
     var size = CGSize.zero
     /// 缩略图尺寸

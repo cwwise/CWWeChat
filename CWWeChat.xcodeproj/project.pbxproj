@@ -86,6 +86,7 @@
 		1F4094981E9DEFCC008D959C /* CWPersonalInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4094971E9DEFCC008D959C /* CWPersonalInfoController.swift */; };
 		1F40949A1E9DFAC8008D959C /* CWAboutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4094991E9DFAC8008D959C /* CWAboutHeaderView.swift */; };
 		1F592A2C1EA2886B007558E9 /* CWRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F592A2B1EA2886B007558E9 /* CWRecordButton.swift */; };
+		1F592A3D1EA74884007558E9 /* CWWelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F592A3C1EA74884007558E9 /* CWWelcomeController.swift */; };
 		1F6B9F141E8CAF4B00AD7FC7 /* CWMessageDispatchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F131E8CAF4B00AD7FC7 /* CWMessageDispatchOperation.swift */; };
 		1F6B9F161E8CB1C400AD7FC7 /* CWTextMessageDispatchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F151E8CB1C400AD7FC7 /* CWTextMessageDispatchOperation.swift */; };
 		1F6B9F181E8CC6E200AD7FC7 /* CWMessageHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F171E8CC6E200AD7FC7 /* CWMessageHandle.swift */; };
@@ -318,6 +319,7 @@
 		1F4094971E9DEFCC008D959C /* CWPersonalInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWPersonalInfoController.swift; sourceTree = "<group>"; };
 		1F4094991E9DFAC8008D959C /* CWAboutHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAboutHeaderView.swift; sourceTree = "<group>"; };
 		1F592A2B1EA2886B007558E9 /* CWRecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWRecordButton.swift; sourceTree = "<group>"; };
+		1F592A3C1EA74884007558E9 /* CWWelcomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWWelcomeController.swift; sourceTree = "<group>"; };
 		1F6B9F131E8CAF4B00AD7FC7 /* CWMessageDispatchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageDispatchOperation.swift; sourceTree = "<group>"; };
 		1F6B9F151E8CB1C400AD7FC7 /* CWTextMessageDispatchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTextMessageDispatchOperation.swift; sourceTree = "<group>"; };
 		1F6B9F171E8CC6E200AD7FC7 /* CWMessageHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageHandle.swift; sourceTree = "<group>"; };
@@ -941,6 +943,7 @@
 		1F3492421E87922A00B36641 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1F592A3C1EA74884007558E9 /* CWWelcomeController.swift */,
 				8C49277D1E92544900B3C482 /* CWLoginController.swift */,
 			);
 			path = Controller;
@@ -1878,6 +1881,7 @@
 				1FA7240A1E9B6C2D009B6456 /* CWMineController.swift in Sources */,
 				1F3492391E87903E00B36641 /* CWEmojiGroup.swift in Sources */,
 				1F3492931E88244B00B36641 /* CWBaseMessageController.swift in Sources */,
+				1F592A3D1EA74884007558E9 /* CWWelcomeController.swift in Sources */,
 				1F3492101E878AD500B36641 /* NSFileManager+ChatExtension.swift in Sources */,
 				8C84B9581E8D6DBF0020D508 /* CWImageMessageBody.swift in Sources */,
 				8C84B95A1E8E9D560020D508 /* CWTextMessageCell.swift in Sources */,

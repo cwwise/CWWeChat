@@ -20,4 +20,9 @@ extension UIStoryboard {
         return guideViewController
     }
     
+    class func welcomeViewController() -> UIViewController {
+        let welcomeViewController = self.mainStoryboard().instantiateViewController(withIdentifier: "CWRootController")
+        return welcomeViewController
+    }
+    
 }

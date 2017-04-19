@@ -196,6 +196,15 @@ public class CWInputToolBar: UIView {
             moreButton.isSelected = false
             voiceButton.isSelected = false
         } else if button == moreButton {
+            
+            let pickerVC = UIImagePickerController()
+            pickerVC.sourceType = .photoLibrary
+            pickerVC.delegate = self
+            if let viewcontroller = UIApplication.shared.keyWindow?.rootViewController {
+                viewcontroller.present(pickerVC, animated: true, completion: nil)
+            }
+            
+            
             emotionButton.isSelected = false
             moreButton.isSelected = !moreButton.isSelected
             voiceButton.isSelected = false
@@ -366,7 +375,6 @@ extension CWInputToolBar: UITextViewDelegate {
         }
         
         delegate?.chatInputView(self, sendText: self.inputTextView.text)
-        
         //还有待修改
         self.inputTextView.text = ""
     }

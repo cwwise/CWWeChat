@@ -9,6 +9,20 @@
       "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 65,
+          "top" : 62,
+          "right" : 126,
+          "left" : 74
+        }
+      },
       "idiom" : "universal",
       "filename" : "button_disable@3x.png",
       "scale" : "3x"

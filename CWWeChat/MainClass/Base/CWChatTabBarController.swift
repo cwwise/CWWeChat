@@ -56,10 +56,13 @@ class CWChatTabBarController: UITabBarController {
             let navigationController = CWChatNavigationController(rootViewController: controller)
             navigationVCArray.append(navigationController)
         }
-        
         self.viewControllers = navigationVCArray
     }
 
+    deinit {
+        log.debug("CWChatTabBarController销毁")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -22,7 +22,7 @@ class CWAboutController: CWBaseTableViewController {
         let textAttri = NSMutableAttributedString()
         
         let githubLink = "https://github.com/wei18810109052/CWWeChat"
-        let content: NSString = "高仿微信 仅供学习\nhttps://github.com/wei18810109052/CWWeChat"
+        let content: NSString = "高仿微信 仅供学习\nhttps://github.com/cwwise/CWWeChat"
         
         textAttri.append(NSAttributedString(string: content as String))
         textAttri.yy_lineSpacing = 4.0

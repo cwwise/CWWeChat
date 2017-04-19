@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //设置logger
         setupLogger()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        loginSuccess()
+        logoutSuccess()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         
@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func logoutSuccess() {
-        let loginVC = CWLoginController()
+        let loginVC = UIStoryboard.welcomeViewController()
         self.window?.rootViewController = loginVC
     }
     

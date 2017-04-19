@@ -9,6 +9,20 @@
       "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 76,
+          "top" : 62,
+          "right" : 105,
+          "left" : 100
+        }
+      },
       "idiom" : "universal",
       "filename" : "button_select@3x.png",
       "scale" : "3x"

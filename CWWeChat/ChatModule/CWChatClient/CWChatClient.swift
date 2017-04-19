@@ -85,6 +85,7 @@ public class CWChatClient: NSObject {
     }
     
     
+    
     public func login(username: String,
                       password: String,
                       completion: CWClientCompletion? = nil) {
@@ -93,6 +94,13 @@ public class CWChatClient: NSObject {
         
         // 登陆成功之后
         initUser()
+    }
+    
+    public func logout() {
+        //停止发送消息
+        
+        //断开xmppStream
+        xmppManager.xmppStream.disconnect()
     }
     
     private func initUser() {

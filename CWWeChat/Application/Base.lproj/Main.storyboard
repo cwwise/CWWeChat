@@ -1,30 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xrx-9d-Zn6">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <scene sceneID="lph-CZ-eJ1">
             <objects>
-                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
+                <viewController id="85V-hn-5fP" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="cI7-ou-ioA"/>
+                        <viewControllerLayoutGuide type="bottom" id="c0X-hN-Rr9"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="h9C-bi-cvJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AAb-ij-mpB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1801" y="45"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PKC-9B-QXX">
+            <objects>
+                <navigationController storyboardIdentifier="CWRootController" automaticallyAdjustsScrollViewInsets="NO" id="xrx-9d-Zn6" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kmS-Zm-dXw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nJf-mo-oov" kind="relationship" relationship="rootViewController" id="q6g-Y7-c4X"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IFc-54-fE8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="90" y="45"/>
+        </scene>
+        <!--Welcome Controller-->
+        <scene sceneID="p60-77-VCn">
+            <objects>
+                <viewController storyboardIdentifier="CWWelcomeController" id="nJf-mo-oov" customClass="CWWelcomeController" customModule="CWWeChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qB2-Cl-8Ph"/>
+                        <viewControllerLayoutGuide type="bottom" id="7ah-m9-dmy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9uf-1B-j0F">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login_background" translatesAutoresizingMaskIntoConstraints="NO" id="Gfc-8d-V0p">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_logo" translatesAutoresizingMaskIntoConstraints="NO" id="LzS-Sk-Y3b">
+                                <rect key="frame" x="141" y="132" width="92" height="78"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPp-hB-OTc">
+                                <rect key="frame" x="298" y="20" width="62" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="简体中文"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOL-MF-UrS">
+                                <rect key="frame" x="20" y="568" width="335" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="pwl-ef-ihF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="登陆" backgroundImage="button_normal"/>
+                                <state key="selected" backgroundImage="button_select"/>
+                                <state key="highlighted" backgroundImage="button_select"/>
+                                <connections>
+                                    <action selector="loginButtonAction:" destination="nJf-mo-oov" eventType="touchUpInside" id="UWr-Lt-P1K"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="还没有微信号？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2L-jK-hhV">
+                                <rect key="frame" x="98" y="633" width="100" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDK-i2-oic">
+                                <rect key="frame" x="189" y="626" width="80" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="D1Z-rr-iol"/>
+                                    <constraint firstAttribute="width" constant="80" id="u1M-id-Jkl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="立即注册"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="mDK-i2-oic" firstAttribute="leading" secondItem="W2L-jK-hhV" secondAttribute="trailing" constant="-9" id="5J9-Fp-Ae2"/>
+                            <constraint firstItem="7ah-m9-dmy" firstAttribute="top" secondItem="JOL-MF-UrS" secondAttribute="bottom" constant="54" id="6n2-Vw-CAv"/>
+                            <constraint firstItem="JOL-MF-UrS" firstAttribute="leading" secondItem="9uf-1B-j0F" secondAttribute="leadingMargin" constant="4" id="7MD-pR-Wau"/>
+                            <constraint firstItem="7ah-m9-dmy" firstAttribute="top" secondItem="W2L-jK-hhV" secondAttribute="bottom" constant="17.5" id="Am0-Wr-mgg"/>
+                            <constraint firstItem="LzS-Sk-Y3b" firstAttribute="centerX" secondItem="9uf-1B-j0F" secondAttribute="centerX" id="H4u-Xo-99w"/>
+                            <constraint firstItem="JOL-MF-UrS" firstAttribute="centerX" secondItem="9uf-1B-j0F" secondAttribute="centerX" id="PkD-sV-bag"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iPp-hB-OTc" secondAttribute="trailing" constant="-1" id="QOo-2h-Leg"/>
+                            <constraint firstItem="iPp-hB-OTc" firstAttribute="top" secondItem="qB2-Cl-8Ph" secondAttribute="bottom" constant="20" id="TSl-di-3Aa"/>
+                            <constraint firstItem="W2L-jK-hhV" firstAttribute="centerX" secondItem="JOL-MF-UrS" secondAttribute="centerX" constant="-40" id="WVK-46-cTT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JOL-MF-UrS" secondAttribute="trailing" constant="4" id="kDM-6p-Z3j"/>
+                            <constraint firstItem="LzS-Sk-Y3b" firstAttribute="top" secondItem="qB2-Cl-8Ph" secondAttribute="bottom" constant="132" id="pbG-ca-pbK"/>
+                            <constraint firstItem="mDK-i2-oic" firstAttribute="centerY" secondItem="W2L-jK-hhV" secondAttribute="centerY" id="tUG-fq-Mkb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="aYQ-HV-f5g"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="Gfc-8d-V0p" id="koa-4q-3dI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5vV-V0-qSA" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1054" y="45"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="button_normal" width="16" height="16"/>
+        <image name="button_select" width="16" height="16"/>
+        <image name="login_background" width="375" height="667"/>
+        <image name="login_logo" width="92" height="78"/>
+    </resources>
 </document>

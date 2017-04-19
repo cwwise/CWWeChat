@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LCActionSheet
 
 class CWMineSettingController: CWBaseTableViewController {
 
@@ -65,9 +66,27 @@ class CWMineSettingController: CWBaseTableViewController {
         let section3 = CWTableViewSection(items: [item5, item6])
         
         let item7 = CWButtonItem(title: "退出微信")
+        item7.selectionAction = { (item) in
+            let title = "退出不会删除任何历史数据，下次登录依然可以使用本账户"
+            let actionHandle: LCActionSheetClickedHandle = { (actionSheet, index) in
+                if index == 1 {
+                    self.logout()
+                }
+            }
+            let actionSheet = LCActionSheet(title: title, cancelButtonTitle: "取消", clicked: actionHandle, otherButtonTitleArray: ["退出登录"])
+            actionSheet.destructiveButtonIndexSet = [1] as Set
+            actionSheet.show()
+            
+        }
         let section4 = CWTableViewSection(items: [item7])
-
         tableViewManager.addSection(contentsOf: [section1, section2, section3, section4])        
+    }
+    
+    func logout() {
+        CWChatClient.share.logout()
+        if let appdelegate = UIApplication.shared.delegate as? AppDelegate {
+            appdelegate.logoutSuccess()
+        }
     }
 
     override func didReceiveMemoryWarning() {
