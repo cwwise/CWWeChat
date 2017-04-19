@@ -24,11 +24,13 @@ protocol CWChatMessageCellDelegate: NSObjectProtocol {
     ///   - phone: phone
     func messageCellDidTapPhone(_ cell: CWChatMessageCell, phone: String)
     
-    
     /// cell被点击
     ///
     /// - Parameter cell: cell
     func messageCellDidTap(_ cell: CWChatMessageCell)
+    
+    func messageCellResendButtonClick(_ cell: CWChatMessageCell)
+
     
     /// 头像点击的回调方法
     ///
@@ -98,8 +100,13 @@ class CWChatMessageCell: UITableViewCell {
                 make.size.equalTo(messageModel.messageFrame.contentSize)
             })
             
-            activityView.snp.makeConstraints({ (make) in
+            activityView.snp.remakeConstraints({ (make) in
                 make.right.equalTo(messageContentView.snp.left).offset(-3)
+                make.centerY.equalTo(messageContentView).offset(-4)
+            })
+            
+            errorButton.snp.remakeConstraints({ (make) in
+                make.right.equalTo(messageContentView.snp.left).offset(-2)
                 make.centerY.equalTo(messageContentView).offset(-4)
             })
             
@@ -133,8 +140,13 @@ class CWChatMessageCell: UITableViewCell {
                 make.size.equalTo(messageModel.messageFrame.contentSize)
             })
 
-            activityView.snp.makeConstraints({ (make) in
+            activityView.snp.remakeConstraints({ (make) in
                 make.left.equalTo(messageContentView.snp.right).offset(3)
+                make.centerY.equalTo(messageContentView).offset(-4)
+            })
+            
+            errorButton.snp.remakeConstraints({ (make) in
+                make.left.equalTo(messageContentView.snp.right).offset(2)
                 make.centerY.equalTo(messageContentView).offset(-4)
             })
             
@@ -158,6 +170,12 @@ class CWChatMessageCell: UITableViewCell {
     
     //更新消息状态
     func updateState() {
+        
+        if messageModel.isSend == false {
+            activityView.stopAnimating()
+            errorButton.isHidden = true
+            return
+        }
         
         // 发送中展示
         if messageModel.message.sendStatus == .successed {
@@ -208,6 +226,10 @@ class CWChatMessageCell: UITableViewCell {
         }
     }
     
+    func errorButtonClick(_ button: UIButton) {
+        self.delegate?.messageCellResendButtonClick(self)
+    }
+    
     // MARK: 属性
     /// 用户名称
     var usernameLabel:UILabel = {
@@ -252,8 +274,9 @@ class CWChatMessageCell: UITableViewCell {
     /// 发送失败
     lazy var errorButton:UIButton = {
         let errorButton = UIButton(type: .custom)
-        errorButton.setImage(UIImage(named:"message_sendfaild"), for: UIControlState())
+        errorButton.setImage(CWAsset.MessageSendFail.image, for: UIControlState())
         errorButton.sizeToFit()
+        errorButton.addTarget(self, action: #selector(errorButtonClick(_:)), for: .touchUpInside)
         errorButton.isHidden = true
         return errorButton
     }()

@@ -42,12 +42,12 @@ class CWBaseMessageController: UIViewController {
         
 //        let voiceBody1 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
 //        let message1 = CWChatMessage(targetId: conversation.targetId, messageBody: voiceBody1)
-//        message1.sendStatus = .sending
+//        message1.sendStatus = .failed
 //        self.messageList.append(CWChatMessageModel(message: message1))
 //        
 //        let voiceBody2 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
-//        let message2 = CWChatMessage(targetId: conversation.targetId, direction: .receive,messageBody: voiceBody2)
-//        message2.sendStatus = .sending
+//        let message2 = CWChatMessage(targetId: conversation.targetId, direction: .receive, messageBody: voiceBody2)
+//        message2.sendStatus = .failed
 //
 //        self.messageList.append(CWChatMessageModel(message: message2))
 //        
@@ -231,17 +231,29 @@ extension CWBaseMessageController: CWChatMessageCellDelegate {
             }
             
             if voiceCell.messageModel.mediaPlayStutus == .playing {
-                voiceCell.stopAnimating()
                 voiceCell.messageModel.mediaPlayStutus = .played
             } else {
                 voiceCell.messageModel.mediaPlayStutus = .playing
-                voiceCell.startAnimating()
             }
-            
+            voiceCell.updateState()
             log.debug("点击声音")
         default:
             log.debug("其他类型")
         }
+    }
+    
+    func messageCellResendButtonClick(_ cell: CWChatMessageCell) {
+        let alert = UIAlertController(title: nil, message: "重发此消息？", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            
+        }
+        let sendAction = UIAlertAction(title: "重发", style: .default) { (action) in
+            
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(sendAction)
+
+        self.present(alert, animated: true, completion: nil)
     }
     
     func messageCellDidTapLink(_ cell: CWChatMessageCell, link: URL) {
@@ -308,14 +320,19 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
         let messageModel = CWChatMessageModel(message: message)
         self.messageList.append(messageModel)
         
+        let indexPath = IndexPath(row: self.messageList.count-1, section: 0)
+        
         self.tableView.reloadData()
         updateMessageAndScrollBottom(false)
         
         let chatManager = CWChatClient.share.chatManager
         chatManager.sendMessage(message, progress: { (progress) in
             
-            let _ = self.messageList.index(where: {$0.message.messageId == message.messageId})
-
+            //防止cell 不在显示区域崩溃的问题
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWChatMessageCell else {
+                return
+            }
+            cell.updateState()
             
         }) { (message, error) in
 
@@ -330,17 +347,7 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
                 
             }
             
-            // 获取当前的message的Index
-            let index = self.messageList.index(where: { (listMessage) -> Bool in
-                guard let tempMessage = listMessage as? CWChatMessageModel else { return false }
-                return tempMessage.message.messageId == message.messageId
-            })
-            guard let localIndex = index else {
-                return
-            }
-            
             //防止cell 不在显示区域崩溃的问题
-            let indexPath = IndexPath(row: localIndex, section: 0)
             guard let cell = self.tableView.cellForRow(at: indexPath) as? CWChatMessageCell else {
                 return
             }

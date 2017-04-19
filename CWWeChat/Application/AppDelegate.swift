@@ -40,14 +40,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         chatClient.login(username: "haohao", password: "1234567")
     }
     
-    func logoutSuccess() {
-        let loginVC = UIStoryboard.welcomeViewController()
-        self.window?.rootViewController = loginVC
-    }
-    
     func loginSuccess() {
         let tabBarController = CWChatTabBarController()
         self.window?.rootViewController = tabBarController
+    }
+    
+    func logoutSuccess() {
+        let loginVC = UIStoryboard.welcomeViewController()
+        self.window?.rootViewController = loginVC
     }
     
     ///设置Log日志

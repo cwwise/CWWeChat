@@ -29,6 +29,8 @@ public class CWChatMessageModel: NSObject {
     var showTime: Bool = false
     /// 音频播放状态 默认未播放
     var mediaPlayStutus: CWMediaPlayStutus = .none
+    
+    var isSend: Bool
     /// 消息
     var messageFrame = CWChatMessageFrame()
     
@@ -36,7 +38,8 @@ public class CWChatMessageModel: NSObject {
     var content: String?
     
     public init(message: CWChatMessage) {
-        self.message = message;
+        self.message = message
+        self.isSend = message.direction == .send
         super.init()
         
         switch message.messageType {

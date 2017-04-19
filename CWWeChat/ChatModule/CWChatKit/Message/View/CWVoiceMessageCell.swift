@@ -66,41 +66,32 @@ class CWVoiceMessageCell: CWChatMessageCell {
             setUpVoicePlayIndicatorImageView(true)
             
             let edge = ChatCellUI.right_edge_insets
-            voiceImageView.snp.makeConstraints { (make) in
+            voiceImageView.snp.remakeConstraints { (make) in
                 make.top.equalTo(edge.top)
                 make.right.equalTo(-edge.right)
             }
             
-            redTipImageView.snp.makeConstraints({ (make) in
+            redTipImageView.snp.remakeConstraints({ (make) in
                 make.size.equalTo(CGSize(width: redtip_width, height: redtip_width))
                 make.top.equalTo(5)
                 make.right.equalTo(backgroundImageView.snp.left).offset(-kRedTipMargin)
             })
-            
-            redTipImageView.isHidden = true
             
         } else {
             
             let edge = ChatCellUI.left_edge_insets
             
             setUpVoicePlayIndicatorImageView(false)
-            voiceImageView.snp.makeConstraints { (make) in
+            voiceImageView.snp.remakeConstraints { (make) in
                 make.top.equalTo(edge.top)
                 make.left.equalTo(edge.left)
             }
             
-            redTipImageView.snp.makeConstraints({ (make) in
+            redTipImageView.snp.remakeConstraints({ (make) in
                 make.size.equalTo(CGSize(width: redtip_width, height: redtip_width))
                 make.top.equalTo(5)
                 make.left.equalTo(backgroundImageView.snp.right).offset(kRedTipMargin)
             })
-            
-            if messageModel.mediaPlayStutus == .none {
-                redTipImageView.isHidden = false
-            } else {
-                redTipImageView.isHidden = true
-            }
-            
         }
         
     }
@@ -121,6 +112,25 @@ class CWVoiceMessageCell: CWChatMessageCell {
         }
         voiceImageView.animationDuration = 1
         voiceImageView.animationImages = images
+    }
+    
+    override func updateState() {
+        super.updateState()
+        
+        // 如果正在播放 播放动画
+        if messageModel.mediaPlayStutus == .playing {
+            startAnimating()
+            redTipImageView.isHidden = true
+        }
+        else if messageModel.mediaPlayStutus == .none
+            && messageModel.isSend == false {
+            redTipImageView.isHidden = false
+            stopAnimating()
+        }
+        else {
+            redTipImageView.isHidden = true
+            stopAnimating()
+        }
     }
     
     /// 结束动画

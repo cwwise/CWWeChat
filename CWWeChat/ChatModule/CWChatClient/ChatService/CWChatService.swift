@@ -150,7 +150,7 @@ extension CWChatService: CWChatManager {
     }
     
     /// 发送回执消息(不保存消息)
-    func sendMessageReadAck(message: CWChatMessage, completion: @escaping CWMessageCompletionBlock) {
+    func sendMessageReadAck(_ message: CWChatMessage, completion: @escaping CWMessageCompletionBlock) {
         
         dispatchManager.sendMessage(message, completion: completion)
     }
@@ -162,7 +162,7 @@ extension CWChatService: CWChatManager {
     ///   - progress: 附件上传进度回调block
     ///   - completion: 发送消息结果
     func sendMessage(_ message: CWChatMessage,
-                     progress: @escaping CWMessageProgressBlock, 
+                     progress: CWMessageProgressBlock?,
                      completion: @escaping CWMessageCompletionBlock) {
 
         // 添加信息
@@ -175,7 +175,7 @@ extension CWChatService: CWChatManager {
         // 切换到主线程来处理
         let _progress: CWMessageProgressBlock = { (progressValue) in
             DispatchQueue.main.async(execute: { 
-                progress(progressValue)
+                progress?(progressValue)
             })
         }
         // 先插入到消息列表

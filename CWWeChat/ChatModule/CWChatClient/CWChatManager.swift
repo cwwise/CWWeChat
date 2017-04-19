@@ -87,7 +87,7 @@ public protocol CWChatManager: NSObjectProtocol {
     /// - Parameters:
     ///   - message: 回执消息
     ///   - completion: 发送完成回调block
-    func sendMessageReadAck(message: CWChatMessage,
+    func sendMessageReadAck(_ message: CWChatMessage,
                             completion: @escaping CWMessageCompletionBlock)
     
     /// 发送消息
@@ -97,7 +97,7 @@ public protocol CWChatManager: NSObjectProtocol {
     ///   - progress: 附件上传进度回调block
     ///   - completion: 发送完成回调block
     func sendMessage(_ message: CWChatMessage,
-                     progress: @escaping CWMessageProgressBlock,
+                     progress: CWMessageProgressBlock?,
                      completion: @escaping CWMessageCompletionBlock)
     
     /// 重新发送消息
