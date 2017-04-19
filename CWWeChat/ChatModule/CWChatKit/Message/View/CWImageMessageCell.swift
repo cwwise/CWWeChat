@@ -34,6 +34,9 @@ class CWImageMessageCell: CWChatMessageCell {
         
         self.messageContentView.layer.mask = self.maskLayer
         self.messageContentView.addSubview(self.messageImageView)
+        
+        self.messageContentView.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.require(toFail: doubletapGesture)
     }
     
     override func updateMessage(_ messageModel: CWChatMessageModel) {
@@ -41,7 +44,6 @@ class CWImageMessageCell: CWChatMessageCell {
     
         self.maskLayer.contents = self.backgroundImageView.image?.cgImage
         self.maskLayer.frame = CGRect(origin: .zero, size: messageModel.messageFrame.contentSize)
-    
         messageImageView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
@@ -58,7 +60,7 @@ class CWImageMessageCell: CWChatMessageCell {
         } else {
             messageImageView.image = nil
         }
-
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -24,6 +24,12 @@ protocol CWChatMessageCellDelegate: NSObjectProtocol {
     ///   - phone: phone
     func messageCellDidTapPhone(_ cell: CWChatMessageCell, phone: String)
     
+    
+    /// cell被点击
+    ///
+    /// - Parameter cell: cell
+    func messageCellDidTap(_ cell: CWChatMessageCell)
+    
     /// 头像点击的回调方法
     ///
     /// - Parameter userId: 用户id
@@ -61,15 +67,6 @@ class CWChatMessageCell: UITableViewCell {
         self.contentView.addSubview(self.errorButton)
     }
     
-    /// 设置数据
-    func configureCell(message messageModel: CWChatMessageModel) {
-        
-        // 设置数据
-        
-        
-        // 更新UI
-    }
-    
     /// 
     func updateMessage(_ messageModel: CWChatMessageModel) {
         self.messageModel = messageModel
@@ -97,8 +94,13 @@ class CWChatMessageCell: UITableViewCell {
             // 内容
             messageContentView.snp.remakeConstraints({ (make) in
                 make.right.equalTo(avatarImageView.snp.left).offset(-kAvatarToMessageContent)
-                make.top.equalTo(usernameLabel.snp.bottom)
+                make.top.equalTo(usernameLabel.snp.bottom).offset(-ChatCellUI.bubbleTopMargin)
                 make.size.equalTo(messageModel.messageFrame.contentSize)
+            })
+            
+            activityView.snp.makeConstraints({ (make) in
+                make.right.equalTo(messageContentView.snp.left).offset(-3)
+                make.centerY.equalTo(messageContentView).offset(-4)
             })
             
             let image = #imageLiteral(resourceName: "sender_background_normal")
@@ -127,10 +129,15 @@ class CWChatMessageCell: UITableViewCell {
             // 内容
             messageContentView.snp.remakeConstraints({ (make) in
                 make.left.equalTo(avatarImageView.snp.right).offset(kAvatarToMessageContent)
-                make.top.equalTo(usernameLabel.snp.bottom).offset(0)
+                make.top.equalTo(usernameLabel.snp.bottom).offset(-ChatCellUI.bubbleTopMargin)
                 make.size.equalTo(messageModel.messageFrame.contentSize)
             })
 
+            activityView.snp.makeConstraints({ (make) in
+                make.left.equalTo(messageContentView.snp.right).offset(3)
+                make.centerY.equalTo(messageContentView).offset(-4)
+            })
+            
             let image = #imageLiteral(resourceName: "receiver_background_normal")
             let highlightedImage = #imageLiteral(resourceName: "receiver_background_highlight")
 
@@ -150,11 +157,11 @@ class CWChatMessageCell: UITableViewCell {
     /// 上传消息进度（图片和视频）
     
     //更新消息状态
-    func updateChatMessageCellState() {
+    func updateState() {
         
         // 发送中展示
-        if messageModel.message.sendStatus == .sending {
-            activityView.startAnimating()
+        if messageModel.message.sendStatus == .successed {
+            activityView.stopAnimating()
             errorButton.isHidden = true
         }
         // 如果失败就显示重发按钮
@@ -162,7 +169,7 @@ class CWChatMessageCell: UITableViewCell {
             activityView.stopAnimating()
             errorButton.isHidden = false
         } else {
-            activityView.stopAnimating()
+            activityView.startAnimating()
             errorButton.isHidden = true
         }
     }
@@ -175,7 +182,6 @@ class CWChatMessageCell: UITableViewCell {
         guard let delegate = self.delegate, let messageModel = self.messageModel, tap.state == .ended  else {
             return
         }
-
         let message = messageModel.message
         let targetId = (message.direction == .receive) ? message.targetId : (message.senderId ?? "")
         delegate.messageCellUserAvatarDidClick(targetId)
@@ -184,7 +190,11 @@ class CWChatMessageCell: UITableViewCell {
     // MARK: 手势事件
     func bubbleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
  
+        guard tapGestureRecognizer.state == .ended else {
+            return
+        }
         
+        self.delegate?.messageCellDidTap(self)
     }
     
     func bubbleDoubleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
@@ -246,6 +256,12 @@ class CWChatMessageCell: UITableViewCell {
         errorButton.sizeToFit()
         errorButton.isHidden = true
         return errorButton
+    }()
+    
+    ///手势操作
+    fileprivate(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bubbleTapped(_:)))
+        return tapGestureRecognizer
     }()
     
     fileprivate(set) lazy var doubletapGesture: UITapGestureRecognizer = {

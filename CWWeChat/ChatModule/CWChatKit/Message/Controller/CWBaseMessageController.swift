@@ -18,6 +18,7 @@ class CWBaseMessageController: UIViewController {
     /// 消息数据数组
     public var messageList = Array<AnyObject>()
     
+
     /// 显示消息时间相关的
     var messageTimeIntervalTag: Double = -1
     var messageAccumulate:Int = 0
@@ -31,23 +32,26 @@ class CWBaseMessageController: UIViewController {
         let chatManager = CWChatClient.share.chatManager
         chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
         
-//        self.conversation.fetchMessagesStart { (list, error) in
-//            if error == nil {
-//                let messageList = self.formatMessages(list)
-//                self.messageList.append(contentsOf: messageList)
-//                self.tableView.reloadData()
-//            }
-//        }
+        self.conversation.fetchMessagesStart { (list, error) in
+            if error == nil {
+                let messageList = self.formatMessages(list)
+                self.messageList.append(contentsOf: messageList)
+                self.tableView.reloadData()
+            }
+        }
         
-        let voiceBody1 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
-        let message1 = CWChatMessage(targetId: conversation.targetId, messageBody: voiceBody1)
-        self.messageList.append(CWChatMessageModel(message: message1))
-        
-        let voiceBody2 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
-        let message2 = CWChatMessage(targetId: conversation.targetId, direction: .receive,messageBody: voiceBody2)
-        self.messageList.append(CWChatMessageModel(message: message2))
-        
-        self.tableView.reloadData()
+//        let voiceBody1 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
+//        let message1 = CWChatMessage(targetId: conversation.targetId, messageBody: voiceBody1)
+//        message1.sendStatus = .sending
+//        self.messageList.append(CWChatMessageModel(message: message1))
+//        
+//        let voiceBody2 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
+//        let message2 = CWChatMessage(targetId: conversation.targetId, direction: .receive,messageBody: voiceBody2)
+//        message2.sendStatus = .sending
+//
+//        self.messageList.append(CWChatMessageModel(message: message2))
+//        
+//        self.tableView.reloadData()
     }
     
     func setupUI() {
@@ -69,6 +73,7 @@ class CWBaseMessageController: UIViewController {
 
         tableView.register(CWTimeMessageCell.self, forCellReuseIdentifier: CWTimeMessageCell.identifier)
     }
+    
     
     //MARK: UI属性
     /// TableView
@@ -168,13 +173,13 @@ extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
             timeCell.timeLabel.text = message as? String
             return timeCell
         }
-        
         let identifier = messageModel.message.messageType.identifier()
+    
         // 时间和tip消息 是例外的种类 以后判断
         let messageCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CWChatMessageCell
         messageCell.delegate = self
         messageCell.updateMessage(messageModel)
-        
+        messageCell.updateState()
         return messageCell
     }
     
@@ -182,7 +187,7 @@ extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
         let message = messageList[indexPath.row]
         
         guard let messageModel = message as? CWChatMessageModel else {
-            return kTimeMessageCellHeight
+            return 30.0
         }
         return messageModel.messageFrame.heightOfCell
     }
@@ -211,6 +216,32 @@ extension CWBaseMessageController: CWChatManagerDelegate {
 extension CWBaseMessageController: CWChatMessageCellDelegate {
     func messageCellUserAvatarDidClick(_ userId: String) {
         log.debug("cell头像 点击...\(userId)")
+    }
+    
+    func messageCellDidTap(_ cell: CWChatMessageCell) {
+        
+        switch cell.messageModel.message.messageType{
+        case .image:
+            log.debug("点击图片")
+            
+        case .voice:
+            
+            guard let voiceCell = cell as? CWVoiceMessageCell else {
+                return
+            }
+            
+            if voiceCell.messageModel.mediaPlayStutus == .playing {
+                voiceCell.stopAnimating()
+                voiceCell.messageModel.mediaPlayStutus = .played
+            } else {
+                voiceCell.messageModel.mediaPlayStutus = .playing
+                voiceCell.startAnimating()
+            }
+            
+            log.debug("点击声音")
+        default:
+            log.debug("其他类型")
+        }
     }
     
     func messageCellDidTapLink(_ cell: CWChatMessageCell, link: URL) {
@@ -268,7 +299,6 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
                                     messageBody: imageBody)
 
         self.sendMessage(message)
-
     }
     
     func sendMessage(_ message: CWChatMessage) {
@@ -284,15 +314,37 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
         let chatManager = CWChatClient.share.chatManager
         chatManager.sendMessage(message, progress: { (progress) in
             
+            let _ = self.messageList.index(where: {$0.message.messageId == message.messageId})
+
+            
         }) { (message, error) in
-    
-            // 发送消息失败
-            if error != nil {
+
+            let chatManager = CWChatClient.share.chatManager
+            chatManager.updateMessage(message, completion: { (message, error) in
+                
+            })
+            // 发送消息成功
+            if error == nil {
                 
             } else {
                 
             }
             
+            // 获取当前的message的Index
+            let index = self.messageList.index(where: { (listMessage) -> Bool in
+                guard let tempMessage = listMessage as? CWChatMessageModel else { return false }
+                return tempMessage.message.messageId == message.messageId
+            })
+            guard let localIndex = index else {
+                return
+            }
+            
+            //防止cell 不在显示区域崩溃的问题
+            let indexPath = IndexPath(row: localIndex, section: 0)
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWChatMessageCell else {
+                return
+            }
+            cell.updateState()
         }
         
     }

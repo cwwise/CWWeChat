@@ -21,12 +21,6 @@ class CWVoiceMessageCell: CWChatMessageCell {
         return voiceImageView
     }()
     
-    ///手势操作
-    fileprivate(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bubbleTapped(_:)))
-        return tapGestureRecognizer
-    }()
-    
     lazy var redTipImageView:UIImageView = {
         let redTipImageView = UIImageView()
         redTipImageView.clipsToBounds = true
@@ -49,6 +43,8 @@ class CWVoiceMessageCell: CWChatMessageCell {
         addGeneralView()
         self.messageContentView.addSubview(self.backgroundImageView)
         self.messageContentView.addSubview(self.voiceImageView)
+        self.messageContentView.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.require(toFail: doubletapGesture)
         
         self.contentView.addSubview(self.redTipImageView)
         self.contentView.addSubview(self.voiceLengthLable)
@@ -59,39 +55,54 @@ class CWVoiceMessageCell: CWChatMessageCell {
     
         // 消息实体
         let body = messageModel.message.messageBody as! CWVoiceMessageBody
-        let size = messageModel.messageFrame.contentSize
         
         backgroundImageView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
         
+        let kRedTipMargin: CGFloat = 0
         //如果是自己发送，在右边
         if messageModel.message.direction == .send {
             setUpVoicePlayIndicatorImageView(true)
+            
+            let edge = ChatCellUI.right_edge_insets
             voiceImageView.snp.makeConstraints { (make) in
-                make.top.equalTo(12)
-                make.right.equalTo(-20)
+                make.top.equalTo(edge.top)
+                make.right.equalTo(-edge.right)
             }
             
             redTipImageView.snp.makeConstraints({ (make) in
                 make.size.equalTo(CGSize(width: redtip_width, height: redtip_width))
                 make.top.equalTo(5)
-                make.right.equalTo(backgroundImageView.snp.left).offset(-5)
+                make.right.equalTo(backgroundImageView.snp.left).offset(-kRedTipMargin)
             })
+            
+            redTipImageView.isHidden = true
             
         } else {
+            
+            let edge = ChatCellUI.left_edge_insets
+            
             setUpVoicePlayIndicatorImageView(false)
             voiceImageView.snp.makeConstraints { (make) in
-                make.top.equalTo(12)
-                make.left.equalTo(20)
+                make.top.equalTo(edge.top)
+                make.left.equalTo(edge.left)
             }
             
             redTipImageView.snp.makeConstraints({ (make) in
                 make.size.equalTo(CGSize(width: redtip_width, height: redtip_width))
                 make.top.equalTo(5)
-                make.left.equalTo(backgroundImageView.snp.right).offset(5)
+                make.left.equalTo(backgroundImageView.snp.right).offset(kRedTipMargin)
             })
+            
+            if messageModel.mediaPlayStutus == .none {
+                redTipImageView.isHidden = false
+            } else {
+                redTipImageView.isHidden = true
+            }
+            
         }
+        
     }
     
     func setUpVoicePlayIndicatorImageView(_ send: Bool) {

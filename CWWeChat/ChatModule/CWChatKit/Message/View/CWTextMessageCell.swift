@@ -36,9 +36,7 @@ class CWTextMessageCell: CWChatMessageCell {
             messageLabel.snp.makeConstraints { (make) in
                 make.edges.equalTo(edge)
             }
-            
         } else {
-            
             let edge = ChatCellUI.left_edge_insets
             messageLabel.snp.makeConstraints { (make) in
                 make.edges.equalTo(edge)

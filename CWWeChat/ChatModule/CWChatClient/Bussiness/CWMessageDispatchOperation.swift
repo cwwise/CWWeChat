@@ -168,9 +168,11 @@ class CWMessageDispatchOperation: Operation {
         self.messageSendResult = state
         _endOperation()
         if state {
-            completion?(message, CWChatError(errorCode: .customer, error: "发送失败"))
-        } else {
+            message.sendStatus = .successed
             completion?(message, nil)
+        } else {
+            message.sendStatus = .failed
+            completion?(message, CWChatError(errorCode: .customer, error: "发送失败"))
         }
         
     }
