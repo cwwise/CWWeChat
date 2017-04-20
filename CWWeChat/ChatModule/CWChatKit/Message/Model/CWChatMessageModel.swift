@@ -49,6 +49,10 @@ public class CWChatMessageModel: NSObject {
             setupImageMessage()
         case .voice:
             setupVoiceMessage()
+        case .expression:
+            setupExpressionMessage()
+        case .location:
+            setupLocationMessage()
         default:
             break
 
@@ -115,7 +119,6 @@ public class CWChatMessageModel: NSObject {
     func setupVoiceMessage() {
 
         let voiceMessage = message.messageBody as! CWVoiceMessageBody
-                        
         var scale: CGFloat = CGFloat(voiceMessage.voiceLength)/60.0
         if scale > 1 {
             scale = 1
@@ -128,10 +131,10 @@ public class CWChatMessageModel: NSObject {
     func setupLocationMessage() {
         
         
-        
     }
     
     func setupExpressionMessage() {
+        
         
     }
     

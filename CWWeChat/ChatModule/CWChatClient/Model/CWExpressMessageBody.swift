@@ -8,6 +8,33 @@
 
 import UIKit
 
-class CWExpressMessageBody: NSObject {
+class CWExpressMessageBody: NSObject, CWMessageBody {
+    weak var message: CWChatMessage?
+    /// 消息体类型
+    var type: CWMessageType = .expression
+    /// 本地路径
+    var localPath: String?
+    /// 服务器地址
+    var remoteURL: URL?
+    
+    init(localPath: String? = nil,
+         remoteURL: URL? = nil) {
+        
+        self.localPath = localPath
+        self.remoteURL = remoteURL
+        
+    }
+    
+}
 
+extension CWExpressMessageBody {
+    
+    var messageEncode: String {
+        return ""
+    }
+    
+    func messageDecode(string: String) {
+        
+    }
+    
 }

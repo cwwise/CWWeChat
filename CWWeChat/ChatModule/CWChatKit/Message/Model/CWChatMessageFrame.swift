@@ -26,12 +26,6 @@ public struct CWChatMessageFrame {
         self.heightOfCell = heightOfCell
         self.contentSize = contentSize
         self.textLayout = textLayout
-        
+
     }
-    
-    
-    
-    
-    
-    
 }
