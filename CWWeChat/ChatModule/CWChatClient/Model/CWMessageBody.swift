@@ -16,6 +16,14 @@ public enum CWFileDownloadStatus: Int {
     case pending
 }
 
+/// 附件上传状态
+public enum CWFileUploadStatus: Int {
+    case downloading
+    case successed
+    case fail
+    case pending
+}
+
 // TODO: 先简单这么处理，想到好的方式再修改 （方便查看保存成string）
 public protocol CWMessageCoding {
     /// 保存到数据库中的字段

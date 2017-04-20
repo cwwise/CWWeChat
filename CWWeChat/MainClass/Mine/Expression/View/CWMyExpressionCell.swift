@@ -40,7 +40,7 @@ class CWMyExpressionCell: UITableViewCell {
             return
         }
         self.textLabel?.text = group.groupName
-        self.imageView?.image = UIImage(named: group.groupIconPath!)
+        self.imageView?.image = UIImage(named: group.groupIcon)
 
     }
     

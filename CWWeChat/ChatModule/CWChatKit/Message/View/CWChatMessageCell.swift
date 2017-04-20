@@ -258,6 +258,10 @@ class CWChatMessageCell: UITableViewCell {
         
         messageContentView.addGestureRecognizer(self.longPressGestureRecognizer)
         messageContentView.addGestureRecognizer(self.doubletapGesture)
+        
+        messageContentView.addGestureRecognizer(self.tapGestureRecognizer)
+        self.tapGestureRecognizer.require(toFail: self.doubletapGesture)
+        
         return messageContentView
     }()
     

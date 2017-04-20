@@ -45,10 +45,7 @@ class CWChatImageView: UIImageView {
         self.addSubview(activityView)
         self.addSubview(indicatorLabel)
         
-        //初始化状态
-        self.indicatorbackgroundView.isHidden = true
-        self.activityView.stopAnimating()
-        self.indicatorLabel.isHidden = true 
+        hideProgressView()
     }
     
     override func layoutSubviews() {
@@ -61,6 +58,18 @@ class CWChatImageView: UIImageView {
         self.indicatorLabel.frame.center = CGPoint(x: self.bounds.midX, y: self.bounds.midY+8)
     }
     
+    func hideProgressView()  {
+        //初始化状态
+        self.indicatorbackgroundView.isHidden = true
+        self.activityView.stopAnimating()
+        self.indicatorLabel.isHidden = true 
+    }
+    
+    func showProgress(_ progress: Int) {
+        self.indicatorbackgroundView.isHidden = false
+        self.activityView.startAnimating()
+        self.indicatorLabel.text = "\(progress)%"
+    }
     
     
     required init?(coder aDecoder: NSCoder) {

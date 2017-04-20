@@ -21,7 +21,7 @@ let kChatTextMaxWidth = kScreenWidth * 0.58
 let kChatImageMaxWidth = kScreenWidth * 0.45
 let kChatImageMinWidth = kScreenWidth * 0.25
 
-let kChatVoiceMaxWidth = kScreenWidth * 0.58
+let kChatVoiceMaxWidth = kScreenWidth * 0.3
 
 public struct ChatCellUI {
     

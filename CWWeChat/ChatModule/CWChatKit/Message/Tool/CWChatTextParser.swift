@@ -119,23 +119,26 @@ class CWChatTextParser: NSObject {
                 continue
             }
             
-            let dict = [String:String]()
+            //用来存放字典，字典中存储的是图片和图片对应的位置            
+            let imageDict = [String:String]()
             
             let text = attributedText.string as NSString
             let imageName = text.substring(with: emotion.range) as String
             
-            guard let theImageName = dict[imageName] else { 
+            guard let theImageName = imageDict[imageName],
+            let emotionImage = UIImage(named: theImageName) else { 
                 continue
             }
             
-            let imageString =  "\(theImageName)"
-            let emojiText = NSMutableAttributedString.yy_attachmentString(withEmojiImage: UIImage(named: imageString)!, fontSize: fontSize + 1)
+            let emojiText = NSMutableAttributedString.yy_attachmentString(withEmojiImage: emotionImage, fontSize: fontSize + 1)
             attributedText.replaceCharacters(in: range, with: emojiText!)
             
             emoClipLength += range.length - 1
         }        
         
     }
+    
+    
 }
 
 class CWChatTextParseHelper {

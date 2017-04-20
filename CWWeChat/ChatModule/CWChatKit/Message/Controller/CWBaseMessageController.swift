@@ -32,26 +32,26 @@ class CWBaseMessageController: UIViewController {
         let chatManager = CWChatClient.share.chatManager
         chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
         
-        self.conversation.fetchMessagesStart { (list, error) in
-            if error == nil {
-                let messageList = self.formatMessages(list)
-                self.messageList.append(contentsOf: messageList)
-                self.tableView.reloadData()
-            }
-        }
+//        self.conversation.fetchMessagesStart { (list, error) in
+//            if error == nil {
+//                let messageList = self.formatMessages(list)
+//                self.messageList.append(contentsOf: messageList)
+//                self.tableView.reloadData()
+//            }
+//        }
         
-//        let voiceBody1 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
-//        let message1 = CWChatMessage(targetId: conversation.targetId, messageBody: voiceBody1)
-//        message1.sendStatus = .failed
-//        self.messageList.append(CWChatMessageModel(message: message1))
-//        
-//        let voiceBody2 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 10)
-//        let message2 = CWChatMessage(targetId: conversation.targetId, direction: .receive, messageBody: voiceBody2)
-//        message2.sendStatus = .failed
-//
-//        self.messageList.append(CWChatMessageModel(message: message2))
-//        
-//        self.tableView.reloadData()
+        let voiceBody1 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 1)
+        let message1 = CWChatMessage(targetId: conversation.targetId, messageBody: voiceBody1)
+        message1.sendStatus = .failed
+        self.messageList.append(CWChatMessageModel(message: message1))
+        
+        let voiceBody2 = CWVoiceMessageBody(voicePath: nil, voiceURL: nil, voiceLength: 60)
+        let message2 = CWChatMessage(targetId: conversation.targetId, direction: .receive, messageBody: voiceBody2)
+        message2.sendStatus = .failed
+
+        self.messageList.append(CWChatMessageModel(message: message2))
+        
+        self.tableView.reloadData()
     }
     
     func setupUI() {
@@ -328,7 +328,6 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
         let chatManager = CWChatClient.share.chatManager
         chatManager.sendMessage(message, progress: { (progress) in
             
-            //防止cell 不在显示区域崩溃的问题
             guard let cell = self.tableView.cellForRow(at: indexPath) as? CWChatMessageCell else {
                 return
             }
@@ -336,6 +335,7 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
             
         }) { (message, error) in
 
+            // 更新消息
             let chatManager = CWChatClient.share.chatManager
             chatManager.updateMessage(message, completion: { (message, error) in
                 
@@ -347,7 +347,6 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
                 
             }
             
-            //防止cell 不在显示区域崩溃的问题
             guard let cell = self.tableView.cellForRow(at: indexPath) as? CWChatMessageCell else {
                 return
             }

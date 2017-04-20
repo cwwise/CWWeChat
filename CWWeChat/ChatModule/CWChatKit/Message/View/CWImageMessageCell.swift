@@ -12,6 +12,7 @@ class CWImageMessageCell: CWChatMessageCell {
 
     lazy var messageImageView: CWChatImageView = {
         let messageImageView = CWChatImageView()
+        messageImageView.backgroundColor = UIColor.gray
         return messageImageView
     }()
     
@@ -60,6 +61,20 @@ class CWImageMessageCell: CWChatMessageCell {
         } else {
             messageImageView.image = nil
         }
+        
+        
+    }
+    
+    override func updateState() {
+        super.updateState()
+        
+        // 消息实体
+        let message = messageModel.message
+        let body = message.messageBody as! CWImageMessageBody
+        
+//        if <#condition#> {
+//            <#code#>
+//        }
         
     }
     

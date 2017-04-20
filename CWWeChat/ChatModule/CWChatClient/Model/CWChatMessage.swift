@@ -82,6 +82,7 @@ public enum CWMessageType: Int {
     case image              //图片
     case voice              //声音
     case video              //视频
+    case file               //文件
     case location           //位置
     case expression         //表情
     
@@ -98,11 +99,15 @@ public enum CWMessageType: Int {
             return "ChatMessageVideoCell"
         case .expression:
             return "ChatMessageExpressionCell"
+        case .file:
+            return "ChatFileExpressionCell"
         default:
             return "ChatMessageCell"
         }
     }
 }
+
+
 
 
 /// 聊天消息

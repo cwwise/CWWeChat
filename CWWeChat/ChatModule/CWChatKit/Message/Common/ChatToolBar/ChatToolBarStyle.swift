@@ -9,10 +9,10 @@
 import UIKit
 
 public enum CWEmojiType: Int {
+    case image
     case emoji
     case favorite
-    case face
-    case image
+    case expression
 }
 
 public enum CWToolBarStatus: Int {
