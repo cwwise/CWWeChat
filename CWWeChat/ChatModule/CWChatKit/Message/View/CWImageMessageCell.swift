@@ -66,16 +66,26 @@ class CWImageMessageCell: CWChatMessageCell {
     }
     
     override func updateState() {
-        super.updateState()
+        // 不需要 调用super
         
         // 消息实体
         let message = messageModel.message
         let body = message.messageBody as! CWImageMessageBody
         
-//        if <#condition#> {
-//            <#code#>
-//        }
+        if message.sendStatus == .failed {
+            errorButton.isHidden = false
+            messageImageView.hideProgressView()
+        } else if message.sendStatus == .successed {
+            messageImageView.hideProgressView()
+            errorButton.isHidden = true
+        } else {
+            errorButton.isHidden = true
+        }
         
+    }
+    
+    override func updateProgress(_ progress: Int) {
+        messageImageView.showProgress(progress)
     }
     
     required init?(coder aDecoder: NSCoder) {

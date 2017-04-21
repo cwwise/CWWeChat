@@ -167,7 +167,6 @@ class CWChatMessageCell: UITableViewCell {
     
     //MARK: 更新状态
     /// 上传消息进度（图片和视频）
-    
     //更新消息状态
     func updateState() {
         
@@ -190,6 +189,11 @@ class CWChatMessageCell: UITableViewCell {
             activityView.startAnimating()
             errorButton.isHidden = true
         }
+    }
+    
+    // 更新进度
+    func updateProgress(_ progress: Int) {
+        
     }
     
     

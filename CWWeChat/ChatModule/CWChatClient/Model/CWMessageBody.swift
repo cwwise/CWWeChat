@@ -18,7 +18,7 @@ public enum CWFileDownloadStatus: Int {
 
 /// 附件上传状态
 public enum CWFileUploadStatus: Int {
-    case downloading
+    case uploading
     case successed
     case fail
     case pending

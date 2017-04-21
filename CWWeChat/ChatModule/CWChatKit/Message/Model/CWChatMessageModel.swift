@@ -82,8 +82,8 @@ public class CWChatMessageModel: NSObject {
         let textLayout = YYTextLayout(container: textContainer, text: textAttri)!
         
         var contentSize = textLayout.textBoundingSize
-        contentSize = CGSize(width: ceil(contentSize.width)+edge.left+edge.right,
-                             height: ceil(contentSize.height)+edge.top+edge.bottom)
+        contentSize = CGSize(width: contentSize.width+edge.left+edge.right,
+                             height: contentSize.height+edge.top+edge.bottom)
         let heightOfCell = contentSize.height + kMessageCellBottomMargin + kMessageCellTopMargin
         
         messageFrame = CWChatMessageFrame(heightOfCell: heightOfCell,
@@ -94,22 +94,22 @@ public class CWChatMessageModel: NSObject {
     
     func setupImageMessage() {
         
-        var contentSize: CGSize = CGSize.zero
+        var contentSize: CGSize
         let imageSize = (message.messageBody as! CWImageMessageBody).size
         //根据图片的比例大小计算图片的frame
         if imageSize.width > imageSize.height {
             var height = kChatImageMaxWidth * imageSize.height / imageSize.width
-            height = [kChatImageMinWidth,height].max()!
+            height = max(kChatImageMinWidth, height)
             contentSize = CGSize(width: ceil(kChatImageMaxWidth), height: ceil(height))
         } else {
             var width = kChatImageMaxWidth * imageSize.width / imageSize.height
-            width = [kChatImageMinWidth,width].max()!
+            width = max(kChatImageMinWidth, width)
             contentSize = CGSize(width: ceil(width), height: ceil(kChatImageMaxWidth))
         }
         
         let edge = UIEdgeInsets.zero
-        contentSize = CGSize(width: ceil(contentSize.width)+edge.left+edge.right,
-                             height: ceil(contentSize.height)+edge.top+edge.bottom)
+        contentSize = CGSize(width: contentSize.width+edge.left+edge.right,
+                             height: contentSize.height+edge.top+edge.bottom)
         
         let heightOfCell = contentSize.height + kMessageCellBottomMargin + kMessageCellTopMargin
         messageFrame = CWChatMessageFrame(heightOfCell: heightOfCell, contentSize: contentSize)

@@ -25,55 +25,52 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
     /// 上传图片
     func uploadImage() {
     
-        let url = "http://localhost:3000/upload"
-        
-        let parameters = [
-            "file_name": "swift_file.jpeg"
-        ]
-        
-        let imageBody = message.messageBody as! CWImageMessageBody
-        let fileURL = URL(fileURLWithPath: kChatUserImagePath+imageBody.originalLocalPath!)
-
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(fileURL, withName: "image")
-            for (key, value) in parameters {
-                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
-            }
-        }, to: url)
-        { (result) in
-            switch result {
-            case .success(let upload, _, _):
-                
-                upload.uploadProgress(closure: { (progress) in
-                    //Print progress
-                    print(progress)
-                })
-                
-                upload.responseJSON { response in
-                    print(response.result)
-                }
-                
-            case .failure(let encodingError): 
-                print(encodingError)
-                break
-            }
-        }
-        
-
-        
-//        var info = ["size": NSStringFromCGSize(size)]
-//        if let urlString = imageBody.originalURL?.absoluteString {
-//            info["url"] = urlString
+//        let url = "http://localhost:3000/upload"
+//        
+//        let parameters = [
+//            "file_name": "swift_file.jpeg"
+//        ]
+//        
+//        let imageBody = message.messageBody as! CWImageMessageBody
+//        let fileURL = URL(fileURLWithPath: kChatUserImagePath+imageBody.originalLocalPath!)
+//
+//        Alamofire.upload(multipartFormData: { (multipartFormData) in
+//            multipartFormData.append(fileURL, withName: "image")
+//            for (key, value) in parameters {
+//                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+//            }
+//        }, to: url)
+//        { (result) in
+//            switch result {
+//            case .success(let upload, _, _):
+//                
+//                upload.uploadProgress(closure: { (progress) in
+//                    //Print progress
+//                    print(progress)
+//                })
+//                
+//                upload.responseJSON { response in
+//                    print(response.result)
+//                }
+//                
+//            case .failure(let encodingError): 
+//                print(encodingError)
+//                break
+//            }
 //        }
 //        
-//        let data = try! JSONSerialization.data(withJSONObject: info, options: .prettyPrinted)
-//        let string = String(data: data, encoding: .utf8)!
-//        
-//        let toId = message.targetId
-//        let messageId = message.messageId
-//        let sendResult = self.messageTransmitter.sendMessage(content: string, targetId: toId, messageId: messageId ,type: message.messageType.rawValue)
-//        messageSendCallback(sendResult)
+        var progress: Int = 0
+        while progress <= 100 {
+            progress += 10
+            self.progress?(progress)
+            sleep(3)
+        }
         
+        if progress >= 100 {
+            progress = 100
+        }
+        testInfo()
+        sendContentMessage()
     }
     
     func testInfo() {
@@ -96,20 +93,30 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
         let imageBody = message.messageBody as! CWImageMessageBody
         imageBody.size = size
         imageBody.originalURL = url
-        
-        
     }
     
     
     func sendContentMessage() {
+        // 需要添加判断 判断originalURL是存在 存在则上传成功
+        
+        let imageBody = message.messageBody as! CWImageMessageBody
+
+        var info = ["size": NSStringFromCGSize(imageBody.size)]
+        if let urlString = imageBody.originalURL?.absoluteString {
+            info["url"] = urlString
+        }
+        
+        let data = try! JSONSerialization.data(withJSONObject: info, options: .prettyPrinted)
+        let string = String(data: data, encoding: .utf8)!
         
         let toId = message.targetId
         let messageId = message.messageId
-        
-        let imageBody = message.messageBody as! CWImageMessageBody
-        let content = String(describing: imageBody.originalURL)
-        
-        let sendResult = self.messageTransmitter.sendMessage(content: content, targetId: toId, messageId: messageId ,type: 1)
+    
+        let sendResult = messageTransmitter.sendMessage(content: string,
+                                                        targetId: toId,
+                                                        messageId: messageId,
+                                                        chatType: message.chatType.rawValue,
+                                                        type: message.messageType.rawValue)
         messageSendCallback(sendResult)
     }
 }
