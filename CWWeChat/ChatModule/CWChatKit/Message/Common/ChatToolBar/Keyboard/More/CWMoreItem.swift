@@ -8,15 +8,15 @@
 
 import UIKit
 
-public class CWMoreKeyboardItem: NSObject {
+public class CWMoreItem: NSObject {
     
-    public var type: CWMoreKeyboardItemType
+    public var type: CWMoreItemType
     public var title: String
     public var imagePath: String
     
     public init(title:String,
          imagePath:String,
-         type:CWMoreKeyboardItemType) {
+         type:CWMoreItemType) {
         self.title = title
         self.imagePath = imagePath
         self.type = type

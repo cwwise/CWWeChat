@@ -8,16 +8,14 @@
 
 import UIKit
 
-class CWMoreKeyBoardHelper: NSObject {
+class CWMoreInputViewHelper: NSObject {
 
     /// 更多键盘item的数组
-    var chatMoreKeyboardData: [CWMoreKeyboardItem]
+    var chatMoreKeyboardData: [CWMoreItem] = [CWMoreItem]()
     
     override init() {
         
-        chatMoreKeyboardData = [CWMoreKeyboardItem]()
         super.init()
-        
         //创建数据
         let titleArray = ["照片", "拍摄", "小视频", "视频聊天", "红包", "转账",
                           "位置", "收藏", "个人名片", "语音输入", "卡券"]
@@ -26,8 +24,8 @@ class CWMoreKeyBoardHelper: NSObject {
                           "moreKB_friendcard", "moreKB_voice", "moreKB_wallet"]
 
         for i in 0..<titleArray.count {
-            let type = CWMoreKeyboardItemType(rawValue: i)!
-            let item = CWMoreKeyboardItem(title: titleArray[i], imagePath: imageArray[i], type: type)
+            let type = CWMoreItemType(rawValue: i)!
+            let item = CWMoreItem(title: titleArray[i], imagePath: imageArray[i], type: type)
             chatMoreKeyboardData.append(item)
         }
 

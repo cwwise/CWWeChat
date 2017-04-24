@@ -9,15 +9,13 @@
 import UIKit
 import CHIPageControl
 
-public protocol CWMoreKeyBoardDelegate: NSObjectProtocol {
-    func moreKeyBoard(_ keyboard: CWMoreKeyBoard, didSelect item: CWMoreKeyboardItem)
+public protocol CWMoreInputViewDelegate: NSObjectProtocol {
+    func moreInputView(_ inputView: CWMoreInputView, didSelect item: CWMoreItem)
 }
 
-
-
-public class CWMoreKeyBoard: UIView {
+public class CWMoreInputView: UIView {
     
-    fileprivate var items = [CWMoreKeyboardItem]()
+    fileprivate var items = [CWMoreItem]()
     
     private convenience init() {
         let size = CGSize(width: kScreenWidth, height: kMoreKeyBoardHeight)
@@ -33,20 +31,20 @@ public class CWMoreKeyBoard: UIView {
         self.addSubview(pageControl)
     }
     
-    weak var deleagte: CWMoreKeyBoardDelegate?
+    weak var deleagte: CWMoreInputViewDelegate?
     
     // 加载items
-    func loadMoreItems(_ items: [CWMoreKeyboardItem]) {
+    func loadMoreItems(_ items: [CWMoreItem]) {
         self.items = items
         collectionView.reloadData()
     }
     
     lazy var collectionView: UICollectionView = {
         let frame = CGRect.zero
-        let layout = CWFullyHorizontalFlowLayout(colNumber: 4, lineNumber: 2)
+        let layout = UICollectionViewLayout()
         var collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.dataSource = self
-        collectionView.register(CWMoreKeyboardCell.self, forCellWithReuseIdentifier: CWMoreKeyboardCell.identifier)
+        collectionView.register(CWMoreItemCell.self, forCellWithReuseIdentifier: CWMoreItemCell.identifier)
         return collectionView
     }()
     
@@ -65,7 +63,7 @@ public class CWMoreKeyBoard: UIView {
     }
 }
 
-extension CWMoreKeyBoard: UICollectionViewDataSource {
+extension CWMoreInputView: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
@@ -73,7 +71,7 @@ extension CWMoreKeyBoard: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CWMoreKeyboardCell.identifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CWMoreItemCell.identifier, for: indexPath)
         
         return cell
     }
