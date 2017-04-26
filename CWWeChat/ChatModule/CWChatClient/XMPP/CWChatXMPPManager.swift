@@ -270,8 +270,12 @@ extension CWChatXMPPManager: XMPPStreamManagementDelegate {
     }
     
     func xmppStreamManagement(_ sender: XMPPStreamManagement!, didReceiveAckForStanzaIds stanzaIds: [Any]!) {
-        log.debug(stanzaIds)
         // 收到id
+        guard let messageid = stanzaIds as? [String] else {
+            return
+        }
+        log.debug(messageid)
+
     }
 }
 

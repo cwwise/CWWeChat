@@ -169,6 +169,11 @@ extension CWChatMessage {
             return "消息类型\(messageType)"
         }
     }
+    
+    public override var hashValue: Int {
+        return messageId.hashValue
+    }
+    
 }
 
 
