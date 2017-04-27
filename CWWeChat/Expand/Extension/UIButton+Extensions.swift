@@ -43,4 +43,47 @@ extension UIButton {
         self.setBackgroundImage(selectImage?.resizableImage(), for: .highlighted)
         self.setBackgroundImage(disableImage?.resizableImage(), for: .disabled)
     }
+    
+    /**
+     button 提交Style
+     */
+    public func deleteStyle() {
+        
+        //设置字体大小颜色
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        
+        self.setTitleColor(UIColor.white, for: UIControlState())
+        self.setTitleColor(UIColor.white.withAlphaComponent(0.3), for: .disabled)
+        self.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
+        
+        let normalImage = UIImage(named: "button_normal")
+        let disableImage = UIImage(named: "button_disable")
+        let selectImage = UIImage(named: "button_select")
+        
+        self.setBackgroundImage(normalImage?.resizableImage(), for: UIControlState())
+        self.setBackgroundImage(selectImage?.resizableImage(), for: .highlighted)
+        self.setBackgroundImage(disableImage?.resizableImage(), for: .disabled)
+    }
+    
+    /**
+     button 提交Style
+     */
+    public func normalStyle() {
+        
+        //设置字体大小颜色
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        
+        self.setTitleColor(UIColor.white, for: UIControlState())
+        self.setTitleColor(UIColor.white.withAlphaComponent(0.3), for: .disabled)
+        self.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
+        
+        let normalImage = UIImage(named: "button_normal")
+        let disableImage = UIImage(named: "button_disable")
+        let selectImage = UIImage(named: "button_select")
+        
+        self.setBackgroundImage(normalImage?.resizableImage(), for: UIControlState())
+        self.setBackgroundImage(selectImage?.resizableImage(), for: .highlighted)
+        self.setBackgroundImage(disableImage?.resizableImage(), for: .disabled)
+    }
+    
 }

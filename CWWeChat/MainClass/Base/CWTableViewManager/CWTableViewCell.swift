@@ -21,6 +21,7 @@ public class CWTableViewCell: UITableViewCell {
     
     lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
+        titleLabel.textColor = UIColor.black
         titleLabel.font = kCWItemTitleFont
         return titleLabel
     }()

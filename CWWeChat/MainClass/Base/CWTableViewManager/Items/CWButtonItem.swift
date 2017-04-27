@@ -8,17 +8,21 @@
 
 import UIKit
 
-enum CWBoolCellStyle {
+enum CWButtonCellStyle {
     case common
+    case operate(CWButtonType)
+}
+
+public enum CWButtonType {
+    case normal
     case commit
     case delete
 }
 
-
 class CWButtonItem: CWTableViewItem {
-    var style: CWBoolCellStyle = .common
+    var style: CWButtonCellStyle = .common
 
-    init(title: String, style: CWBoolCellStyle = .common) {
+    init(title: String, style: CWButtonCellStyle = .common) {
         super.init(title: title)
         self.style = style
     }

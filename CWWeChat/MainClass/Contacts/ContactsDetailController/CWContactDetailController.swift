@@ -21,6 +21,15 @@ class CWContactDetailController: CWBaseTableViewController {
         super.viewDidLoad()
         self.title = "详细资料"
 
+        
+        let style = CWTableViewStyle()
+        style.titleTextFont = UIFont.systemFont(ofSize: 15)
+        style.titleTextColor = UIColor(hex: "333333")
+        style.detailTextFont = UIFont.systemFont(ofSize: 15)
+        style.detailTextColor = UIColor(hex: "333333")
+
+        tableViewManager.style = style
+        
         self.tableView.register(CWContactInfoCell.self, forCellReuseIdentifier: CWContactInfoCell.identifier)
         self.tableView.register(CWContactDetailAlbumCell.self, forCellReuseIdentifier: CWContactDetailAlbumCell.identifier)
         setupData()
@@ -41,10 +50,10 @@ class CWContactDetailController: CWBaseTableViewController {
         let item5 = CWTableViewItem(title: "更多")
         tableViewManager.addSection(itemsOf: [item3, item4, item5])
 
-        let item6 = CWButtonItem(title: "发消息", style: .commit)
-        let item7 = CWButtonItem(title: "视频聊天", style: .commit)
-        let _ = CWTableViewSection(items: [item6, item7])
-//        tableViewManager.addSection(section)
+        let item6 = CWButtonItem(title: "发消息", style: .operate(.commit))
+        let item7 = CWButtonItem(title: "视频聊天", style: .operate(.normal))
+        let section = CWTableViewSection(items: [item6, item7])
+        tableViewManager.addSection(section)
     }
 
     override func didReceiveMemoryWarning() {

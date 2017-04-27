@@ -36,7 +36,8 @@ public class CWTableViewManager: NSObject {
     public weak var delegate: CWTableViewManagerDelegate?
     public weak var dataSource: CWTableViewManagerDataSource?
 
-    var sections: [CWTableViewSection]
+    public var style: CWTableViewStyle?
+    public private(set) var sections: [CWTableViewSection]
     
     /// 初始化方法
     ///
@@ -83,12 +84,15 @@ public class CWTableViewManager: NSObject {
     }
     
     // MARK: 操作section
-    public func addSection(_ section: CWTableViewSection) {
-        sections.append(section)
+    public func addSection(contentsOf sections: [CWTableViewSection]) {
+        for section in sections {
+            self.addSection(section)
+        }
     }
     
-    public func addSection(contentsOf sections: [CWTableViewSection]) {
-        self.sections.append(contentsOf: sections)
+    public func addSection(_ section: CWTableViewSection) {
+        section.tableViewManager = self
+        sections.append(section)
     }
 
 }

@@ -31,7 +31,7 @@ class CWConversationController: CWBaseConversationController {
     }
     
     func sendMessage() {
-        let conversation = CWChatClient.share.chatManager.fecthConversation(chatType: .single, targetId: "haohao")
+        let conversation = CWChatClient.share.chatManager.fecthConversation(chatType: .single, targetId: "chenwei")
         let chatVC = CWChatMessageController()
         chatVC.conversation = conversation
         chatVC.hidesBottomBarWhenPushed = true

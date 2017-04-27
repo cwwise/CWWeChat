@@ -30,6 +30,14 @@ public class CWTableViewItem: NSObject {
     
     public var selectionAction: CWSelectionHandler?
     
+    public var indexPath: IndexPath? {
+        guard let index = section?.items.index(of: self),
+            let section_index = section?.index else {
+                return nil
+        }
+        return IndexPath(row: index, section: section_index)
+    }
+    
     public init(title: String, 
                 subTitle: String? = nil,
                 rightImageURL: URL? = nil) {
