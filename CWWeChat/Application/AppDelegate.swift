@@ -33,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loginXMPP() {
-//        let options = CWChatClientOptions(chatServer: "localhost", chatDomain: "cwcoder.com")
-        let options = CWChatClientOptions(chatServer: "hosted.im", chatDomain: "hellochatim.p1.im")
+        let options = CWChatClientOptions(chatServer: "localhost", chatDomain: "cwcoder.com")
+//        let options = CWChatClientOptions(chatServer: "hosted.im", chatDomain: "hellochatim.p1.im")
         let chatClient = CWChatClient.share
         chatClient.initialize(with: options)
         chatClient.login(username: "haohao", password: "1234567")

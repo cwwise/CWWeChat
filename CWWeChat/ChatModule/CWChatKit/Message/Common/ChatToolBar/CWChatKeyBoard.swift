@@ -15,7 +15,7 @@ enum CWChatKeyBoardStyle {
 
 /// 数据源
 protocol CWChatKeyBoardDataSource {
-    func chatKeyBoardMoreItems() -> [CWMoreKeyboardItem]
+    func chatKeyBoardMoreItems() -> [CWMoreItem]
 }
 
 public class CWChatKeyBoard: UIView {
@@ -140,9 +140,9 @@ public class CWChatKeyBoard: UIView {
         return chatToolBar
     }()
     
-    lazy var moreKeyboard: CWMoreKeyBoard = {
+    lazy var moreKeyboard: CWMoreInputView = {
         let frame = CGRect(x: 0, y: kChatKeyBoardHeight-kMoreKeyBoardHeight, width: kScreenWidth, height: kMoreKeyBoardHeight)
-        let moreKeyboard = CWMoreKeyBoard(frame: frame)
+        let moreKeyboard = CWMoreInputView(frame: frame)
         return moreKeyboard
     }()
     

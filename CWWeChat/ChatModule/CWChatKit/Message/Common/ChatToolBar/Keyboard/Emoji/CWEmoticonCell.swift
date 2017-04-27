@@ -24,10 +24,9 @@ class CWEmoticonCell: UICollectionViewCell {
         }
     }
     
-    var imageView: UIImageView
+    var imageView: UIImageView = UIImageView()
     
     override init(frame: CGRect) {
-        imageView = UIImageView()
         super.init(frame: frame)
         
         imageView.contentMode = .scaleAspectFit

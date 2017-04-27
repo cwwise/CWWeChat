@@ -67,12 +67,10 @@ class CWChatService: XMPPModule {
         
         // 执行代理方法
         executeConversationUpdate(conversation)
+        // 如果会话不存在 则保存到数据库
         if exist == false {
             conversationStore.addConversation(conversation: conversation)
-        } else {
-            
         }
-    
     }
     
     /// 执行代理方法
@@ -132,18 +130,24 @@ extension CWChatService: CWChatManager {
         return conversation
     }
     
-    func deleteConversation(_ targetId: String, deleteMessages: Bool) {
+    func deleteConversation(_ targetId: String, deleteMessages: Bool = false) {
         conversationStore.deleteConversation(targetId)
         if deleteMessages {
-            messageStore.deleteMessages(by: targetId)
+            messageStore.deleteMessages(targetId: targetId)
         }
-        
-    }
-     
-    func deleteConversation(_ targetId: String) {
-        self.deleteConversation(targetId, deleteMessages: false)
     }
     
+    func deleteAllConversation() {
+    
+        // 获取到所有会话
+        // 删除所有会话对应的消息，还有聊天文件。
+        let list = fetchAllConversations()
+        for conversation in list {
+            messageStore.deleteMessages(targetId: conversation.targetId)
+        }
+        conversationStore.deleteConversations()
+    }
+     
     /// 更新消息
     func updateMessage(_ message: CWChatMessage, completion: @escaping CWMessageCompletionBlock) {
         messageStore.updateMessage(message)

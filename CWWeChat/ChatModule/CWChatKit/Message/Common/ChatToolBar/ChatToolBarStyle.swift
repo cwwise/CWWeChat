@@ -25,7 +25,7 @@ public enum CWToolBarStatus: Int {
 
 
 ///键盘相关的枚举
-public enum CWMoreKeyboardItemType: Int {
+public enum CWMoreItemType: Int {
     case image
     case camera
     case video

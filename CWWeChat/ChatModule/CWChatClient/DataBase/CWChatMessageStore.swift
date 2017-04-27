@@ -14,13 +14,12 @@ import SQLite
  
  使用SQLite.swift
  */
-class CWChatMessageStore: NSObject {
-    
-    /// 当前用户的唯一id，创建数据库名称
-    private(set) var userId: String
+class CWChatMessageStore: CWChatBaseStore {
+        
+    // 保存 table是否存在的表
+    private var tableExistList = [String: Bool]()
     
     //MARK: 数据库属性
-    fileprivate let messageTable = Table("message")
     //消息唯一id
     fileprivate let id = Expression<Int64>("id")
     // 消息id
@@ -45,47 +44,19 @@ class CWChatMessageStore: NSObject {
     
     /// 拓展字端
     fileprivate let ext1 = Expression<String>("ext1")
-    
-    lazy var messageDB:Connection = {
-        //数据
-        do {
-            let messageDB = try Connection(self.path)
-            messageDB.busyTimeout = 3
-            messageDB.busyHandler({ tries in
-                if tries >= 3 {
-                    return false
-                }
-                return true
-            })
-            return messageDB
-        } catch {
-            print(error)
-            return try! Connection()
+
+    func messageTable(_ targetId: String) -> Table {
+        if tableExistList[targetId] == nil {
+            createMessageTable(targetId: targetId)
         }
-    }()
-    
-    /// 数据库路径
-    lazy var path: String = {
-        let userPath = CWChatClient.share.userFilePath
-        let path = "\(userPath)/chat/"
-        if !FileManager.default.fileExists(atPath: path) {
-            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
-        }
-        log.verbose(path)
-        return path + "chatmessage.sqlite3"
-    }()
-    
-    //MARK: 初始化
-    init(userId: String) {
-        self.userId = userId
-        super.init()
-        createMessageTable()
+        return Table("message_"+targetId)
     }
     
     /// 创建message数据表
-    func createMessageTable() {
+    func createMessageTable(targetId: String) {
         do {
-            let create = messageTable.create(ifNotExists: true) { t in
+            let table = Table("message_"+targetId)
+            let create = table.create(ifNotExists: true) { t in
                 t.column(id, primaryKey: .autoincrement)
                 t.column(messageId, unique: true)
                 t.column(senderId)
@@ -100,7 +71,9 @@ class CWChatMessageStore: NSObject {
                 t.column(ext1, defaultValue: "")}
             log.verbose(create.asSQL())
             try messageDB.run(create)
-            _ = messageTable.createIndex([messageId])
+            _ = table.createIndex([messageId])
+            
+            tableExistList[targetId] = true
         } catch {
             log.error(error)
         }
@@ -119,7 +92,7 @@ extension CWChatMessageStore {
             return
         }
         let body = message.messageBody.messageEncode
-        let insert = messageTable.insert(messageId <- message.messageId,
+        let insert = messageTable(message.targetId).insert(messageId <- message.messageId,
                                          target_Id <- message.targetId,
                                          senderId <- sendId,
                                          date <- message.timestamp,
@@ -141,7 +114,7 @@ extension CWChatMessageStore {
 extension CWChatMessageStore {
 
     func lastMessage(by targetId: String) -> CWChatMessage? {
-        let query = messageTable.filter(target_Id == targetId).order(date.desc)
+        let query = messageTable(targetId).filter(target_Id == targetId).order(date.desc)
         do {
             let raw = try messageDB.pluck(query)
             return createMessageByRow(raw)
@@ -152,12 +125,13 @@ extension CWChatMessageStore {
     }
     
     func fecthMessages(targetId: String,
+                       messageId: String? = nil,
                        timestamp: Double? = nil,
                        count: Int = 20) -> [CWChatMessage]{
         
         var messages = [CWChatMessage]()
         
-        var query = messageTable.filter(targetId == target_Id)
+        var query = messageTable(targetId).filter(targetId == target_Id)
         if timestamp != nil {
             query = query.filter(date < timestamp!)
         }
@@ -211,7 +185,7 @@ extension CWChatMessageStore {
 extension CWChatMessageStore {
     
     func markAllMessagesAsRead(_ targetId: String) {
-        let filter = messageTable.filter(target_Id == targetId).where(readed == false)
+        let filter = messageTable(targetId).filter(target_Id == targetId).where(readed == false)
         let update = filter.update(readed <- true)
         do {
             try messageDB.run(update)
@@ -221,8 +195,8 @@ extension CWChatMessageStore {
         
     }
     
-    func markMessageRead(_ _messageId: String) {
-        let filter = messageTable.filter(messageId == _messageId)
+    func markMessageRead(_ targetId: String, message_Id: String) {
+        let filter = messageTable(targetId).filter(messageId == message_Id)
         let update = filter.update(readed <- true)
         do {
             try messageDB.run(update)
@@ -232,10 +206,11 @@ extension CWChatMessageStore {
     }
     
     func updateMessage(_ message: CWChatMessage) {
-        let filter = messageTable.filter(messageId == message.messageId)
+        let filter = messageTable(message.targetId).filter(messageId == message.messageId)
         let body = message.messageBody.messageEncode
         let update = filter.update(sendStatus <- message.sendStatus.rawValue,
                                    content <- body)
+
         log.verbose(update.asSQL())
         do {
             try messageDB.run(update)
@@ -245,7 +220,7 @@ extension CWChatMessageStore {
     }
     
     func updateMessageDate(_ message: CWChatMessage) {
-        let filter = messageTable.filter(messageId == message.messageId)
+        let filter = messageTable(message.targetId).filter(messageId == message.messageId)
         let update = filter.update(date <- message.timestamp)
         log.verbose(update.asSQL())
         do {
@@ -265,8 +240,8 @@ extension CWChatMessageStore {
      
      - parameter messageID: 消息唯一的id messageID
      */
-    func deleteMessage(by messageID:String) -> Bool {
-        let query = messageTable.filter(messageID == messageId)
+    func deleteMessage(targetId: String, messageID:String) -> Bool {
+        let query = messageTable(targetId).filter(messageID == messageId)
         do {
             let rowid = try messageDB.run(query.delete())
             log.debug("删除消息成功: \(rowid), \(messageID)")
@@ -277,12 +252,12 @@ extension CWChatMessageStore {
         }
     }
     
-    /// 删除当前用户指定人的聊天记录
+    /// 删除当前用户指定人的所有聊天记录
     ///
     /// - Parameter targetId: 目标用户id
     /// - Returns: 返回删除结果
-    @discardableResult func deleteMessages(by targetId: String) -> Bool {
-        let query = messageTable.filter(senderId == self.userId && targetId == targetId)
+    @discardableResult func deleteMessages(targetId: String) -> Bool {
+        let query = messageTable(targetId)
         do {
             let _ = try messageDB.run(query.delete())
             log.debug("删除用户\(targetId)消息成功")
@@ -292,16 +267,6 @@ extension CWChatMessageStore {
             return false
         }
     }
-    
-    /**
-     删除所有聊天记录
-     */
-    func deleteAllMessage() {
-        do {
-            _ = try messageDB.run(messageTable.delete())
-        } catch {
-            log.error("删除全部消息失败: \(error)")
-        }
-    }
+
 }
 

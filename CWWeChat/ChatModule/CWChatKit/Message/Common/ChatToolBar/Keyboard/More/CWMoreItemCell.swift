@@ -9,9 +9,9 @@
 import UIKit
 import SnapKit
 
-class CWMoreKeyboardCell: UICollectionViewCell {
+class CWMoreItemCell: UICollectionViewCell {
 
-    var item: CWMoreKeyboardItem? {
+    var item: CWMoreItem? {
         didSet {
             updateInfo()
         }

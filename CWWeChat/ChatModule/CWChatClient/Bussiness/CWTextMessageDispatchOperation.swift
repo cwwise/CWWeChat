@@ -18,15 +18,13 @@ class CWTextMessageDispatchOperation: CWMessageDispatchOperation {
         
         let textBody = message.messageBody as! CWTextMessageBody
         let content = textBody.text
-        
+        sleep(4)
         let sendResult = self.messageTransmitter.sendMessage(content: content,
                                                              targetId: toId, 
                                                              messageId: messageId,
                                                              chatType: message.chatType.rawValue,
                                                              type: message.messageType.rawValue)
         
-        sleep(3)
-        // 其实sendResult并不能代表发送到服务器 需要服务器添加ack部分 后期待处理
         messageSendCallback(sendResult)
     }
 }
