@@ -16,7 +16,7 @@ import SQLite
  */
 class CWChatMessageStore: CWChatBaseStore {
         
-    // 保存 table是否存在的表
+    // 判断是否存在对应的表
     private var tableExistList = [String: Bool]()
     
     //MARK: 数据库属性

@@ -18,13 +18,11 @@ class CWTextMessageDispatchOperation: CWMessageDispatchOperation {
         
         let textBody = message.messageBody as! CWTextMessageBody
         let content = textBody.text
-        sleep(4)
-        let sendResult = self.messageTransmitter.sendMessage(content: content,
+        let _ = self.messageTransmitter.sendMessage(content: content,
                                                              targetId: toId, 
                                                              messageId: messageId,
                                                              chatType: message.chatType.rawValue,
                                                              type: message.messageType.rawValue)
         
-        messageSendCallback(sendResult)
     }
 }

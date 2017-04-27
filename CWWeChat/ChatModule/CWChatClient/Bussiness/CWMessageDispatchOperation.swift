@@ -138,8 +138,11 @@ class CWMessageDispatchOperation: Operation {
     /// 取消线程发送
     override func cancel() {
         if local_cancelled == false {
+            local_finished = true
             local_cancelled = true
             local_executing = false
+            
+            noticationWithOperationState()
         }
         super.cancel()
     }
@@ -160,6 +163,10 @@ class CWMessageDispatchOperation: Operation {
     func _endOperation() {
         self.local_executing = false
         self.local_finished = true
+    }
+    
+    func _cancelOperation() {
+        
     }
     
     /// 消息状态

@@ -23,7 +23,7 @@ class CWMessageDispatchManager: NSObject {
         super.init()
         
         messageQueue.name = "发送消息"
-        messageQueue.maxConcurrentOperationCount = 1
+        messageQueue.maxConcurrentOperationCount = 5
         messageQueue.isSuspended = messageQueueSuspended
         
         NotificationCenter.default.addObserver(self, selector: #selector(monitorNetworkStatus(_:)), name: kCWNetworkReachabilityNotification, object: nil)
@@ -73,7 +73,7 @@ class CWMessageDispatchManager: NSObject {
             for messageOperation in messageQueue.operations {
                 let operation = messageOperation as! CWMessageDispatchOperation
                 if operation.message.messageId == messageId {
-                    operation.cancel()
+                    operation.messageSendCallback(true)
                 }
             }
         }

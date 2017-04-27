@@ -181,8 +181,15 @@ extension CWChatService: CWChatManager {
                 progress?(progressValue)
             })
         }
+        
+        let _completion: CWMessageCompletionBlock = { (_ message: CWChatMessage, _ error: CWChatError?) in
+            DispatchQueue.main.async(execute: {
+                completion(message, error)
+            })
+        }
+        
         // 先插入到消息列表
-        dispatchManager.sendMessage(message, progress: _progress, completion: completion)
+        dispatchManager.sendMessage(message, progress: _progress, completion: _completion)
     }
     
     /// 重新发送消息
