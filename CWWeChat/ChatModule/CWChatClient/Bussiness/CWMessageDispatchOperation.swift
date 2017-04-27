@@ -116,7 +116,6 @@ class CWMessageDispatchOperation: Operation {
          completion: CWMessageCompletionBlock? = nil) {
         
         self.message = message
-        self.repeatCount = 1
         self.messageSendResult = false
         self.progress = progress
         self.completion = completion

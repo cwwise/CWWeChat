@@ -36,7 +36,7 @@ public class CWChatConversation: NSObject {
         guard let service = CWChatClient.share.chatManager as? CWChatService else {
             return
         }
-        service.messageStore.markMessageRead(messageId)
+        service.messageStore.markMessageRead(targetId, message_Id: messageId)
     }
     
     /// 将所有未读消息设置为已读
@@ -95,7 +95,7 @@ public extension CWChatConversation {
     }
     
     
-    ///  从数据库获取指定类型的消息，取到的消息按时间排序，如果参考的时间戳为负数，则从最新消息取，如果aCount小于等于0当作1处理
+    ///  从数据库获取指定类型的消息，取到的消息按时间排序，如果参考的时间戳为负数，则从最新消息取，如果count小于等于0当作1处理
     ///
     /// - Parameters:
     ///   - type: 消息类型
@@ -108,6 +108,8 @@ public extension CWChatConversation {
                                count: Int = 20,
                                searchDirection: CWMessageSearchDirection = .down,
                                completion: CWConversationResultCompletion) {
+        
+        
         
         
         

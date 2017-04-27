@@ -14,10 +14,9 @@ import SQLite
  
  使用SQLite.swift
  */
-class CWChatConversationStore: NSObject {
+class CWChatConversationStore: CWChatBaseStore {
 
     /// 当前用户的唯一id，创建数据库名称
-    var userId: String
     
     let conversationTable = Table("conversation")
     
@@ -32,39 +31,10 @@ class CWChatConversationStore: NSObject {
     // 草稿
     let _draft = Expression<String?>("draft")
     
-    lazy var conversationDB:Connection = {
-        do {
-            let connection = try Connection(self.path)
-            connection.busyTimeout = 3
-            connection.busyHandler({ tries in
-                if tries >= 3 {
-                    return false
-                }
-                return true
-            })
-            return connection
-        } catch  {
-            log.error(error)
-            return try! Connection()
-        }
-    }()
-    
-    /// 数据库路径
-    lazy var path: String = {
-        let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let userPath = CWChatClient.share.userFilePath
-        let path = "\(userPath)/chat/"
-        if !FileManager.default.fileExists(atPath: path) {
-            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
-        }
-        log.verbose(path)
-        return path + "chatsession.sqlite3"
-    }()
     
     //MARK: 初始化
-    init(userId: String) {
-        self.userId = userId
-        super.init()
+    override init(userId: String) {
+        super.init(userId: userId)
         createMessageTable()
     }
     
@@ -73,7 +43,7 @@ class CWChatConversationStore: NSObject {
      */
     func createMessageTable() {
         do {
-            try conversationDB.run(conversationTable.create(ifNotExists: true) { t in
+            try messageDB.run(conversationTable.create(ifNotExists: true) { t in
                 t.column(id, primaryKey: .autoincrement)
                 t.column(target_id, unique: true)
                 t.column(chatType, defaultValue:0)
@@ -104,7 +74,7 @@ extension CWChatConversationStore {
                                               )
         log.verbose(insert.asSQL())
         do {
-            try conversationDB.run(insert)
+            try messageDB.run(insert)
         } catch {
             log.error(error)
         }
@@ -117,7 +87,7 @@ extension CWChatConversationStore {
         
         let update = filter.update(date <- timestamp)
         do {
-            try conversationDB.run(update)
+            try messageDB.run(update)
         } catch {
             log.error(error)
         }
@@ -132,7 +102,7 @@ extension CWChatConversationStore {
     func fecthAllConversations() -> [CWChatConversation] {
         var list = [CWChatConversation]()
         do {
-            let result = try conversationDB.prepare(conversationTable.order(date))
+            let result = try messageDB.prepare(conversationTable.order(date))
             for conversation in result {
                 let model = self.createConversationByRow(conversation)
                 list.append(model)
@@ -151,7 +121,7 @@ extension CWChatConversationStore {
         var create = true
         let sql = conversationTable.filter(type.rawValue==chatType && targetId == target_id)
         do {
-            let raw = try conversationDB.pluck(sql)
+            let raw = try messageDB.pluck(sql)
             if raw != nil {
                 conversation = createConversationByRow(raw!)
                 create = false
@@ -192,7 +162,17 @@ extension CWChatConversationStore {
     @discardableResult func deleteConversation(_ targetId: String) -> Bool {
         do {
             let query = conversationTable.filter(targetId==target_id)
-            try conversationDB.run(query.delete())
+            try messageDB.run(query.delete())
+            return true
+        } catch {
+            log.error(error)
+            return false
+        }
+    }
+    
+    @discardableResult func deleteConversations() -> Bool {
+        do {
+            try messageDB.run(conversationTable.delete())
             return true
         } catch {
             log.error(error)

@@ -12,32 +12,43 @@ import UIKit
  根据xmpp返回的消息来判断 消息是否发送成功
  */
 
-public let kCWMessageDispatchSuccessNotification = NSNotification.Name("kCWMessageDispatchSuccessNotification")
-
 /// 消息发送管理队列
 class CWMessageDispatchManager: NSObject {
     /// 队列
-    var messageQueue: OperationQueue
+    var messageQueue: OperationQueue = OperationQueue()
+    
+    var messageQueueSuspended: Bool = false
     
     override init() {
-        messageQueue = OperationQueue()
-        messageQueue.name = "发送消息"
-        messageQueue.maxConcurrentOperationCount = 5
-        messageQueue.isSuspended = false
         super.init()
-        monitorNetworkStatus()
         
+        messageQueue.name = "发送消息"
+        messageQueue.maxConcurrentOperationCount = 1
+        messageQueue.isSuspended = messageQueueSuspended
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(monitorNetworkStatus(_:)), name: kCWNetworkReachabilityNotification, object: nil)
+        
+        /// 添加消息发送成功的观察
         NotificationCenter.default.addObserver(forName: kCWMessageDispatchSuccessNotification, object: nil, queue: OperationQueue()) { (notication) in
             
-            if let messageIds = notication.userInfo?["messageid"] as? [String] {
+            if let messageIds = notication.object as? [String] {
                 self.sendMessageSuccess(messageIds: messageIds)
             }
-            
         }
     }
     
     /// 监听网络状态和XMPP连接状态
-    func monitorNetworkStatus() {
+    func monitorNetworkStatus(_ notification: Notification) {
+        
+        guard let status = notification.object as? Bool else {
+            return
+        }
+        /// status = YES messageQueueSuspended = false 网络链接
+        // 网络连接不通的时候 将队列挂起
+        if status == messageQueueSuspended {
+            messageQueueSuspended = status
+            messageQueue.isSuspended = messageQueueSuspended
+        }
         
     }
     
@@ -77,6 +88,7 @@ class CWMessageDispatchManager: NSObject {
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         log.debug("CWMessageDispatchManager销毁..")
     }
     

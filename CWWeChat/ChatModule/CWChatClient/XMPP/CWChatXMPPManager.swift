@@ -10,6 +10,11 @@ import UIKit
 import XMPPFramework
 import Alamofire
 
+public let kCWMessageDispatchSuccessNotification = NSNotification.Name("kCWMessageDispatchSuccessNotification")
+
+public let kCWNetworkReachabilityNotification = NSNotification.Name("kCWNetworkReachabilityNotification")
+
+
 // xmpp管理实例
 class CWChatXMPPManager: NSObject {
     
@@ -26,7 +31,7 @@ class CWChatXMPPManager: NSObject {
 
     var options: CWChatClientOptions!
     /// 网络状态监听
-    var reachable: NetworkReachabilityManager?
+    public var reachable: NetworkReachabilityManager?
     
     var isLogin: Bool = true
     var password: String!
@@ -77,20 +82,24 @@ class CWChatXMPPManager: NSObject {
         ///监视网络变化
         reachable = Alamofire.NetworkReachabilityManager(host: "www.baidu.com")
         let listener = { (status: NetworkReachabilityManager.NetworkReachabilityStatus) in
+            
+            var networkStatus = false
             switch status {
                 
             case .notReachable:
-                log.verbose("The network is not reachable")
+                networkStatus = false
                 
             case .unknown :
-                log.verbose("It is unknown whether the network is reachable")
+                networkStatus = false
                 
             case .reachable(.ethernetOrWiFi):
-                log.verbose("The network is reachable over the WiFi connection")
+                networkStatus = true
                 
             case .reachable(.wwan):
-                log.verbose("The network is reachable over the WWAN connection")
+                networkStatus = true
             }
+            
+            NotificationCenter.default.post(name: kCWNetworkReachabilityNotification, object: networkStatus)
         }
         reachable?.listener = listener
         reachable?.startListening()
@@ -275,7 +284,7 @@ extension CWChatXMPPManager: XMPPStreamManagementDelegate {
             return
         }
         log.debug(messageid)
-
+        NotificationCenter.default.post(name: kCWMessageDispatchSuccessNotification, object: messageid)
     }
 }
 
