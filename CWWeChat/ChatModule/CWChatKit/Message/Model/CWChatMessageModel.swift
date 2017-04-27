@@ -29,7 +29,10 @@ public class CWChatMessageModel: NSObject {
     var showTime: Bool = false
     /// 音频播放状态 默认未播放
     var mediaPlayStutus: CWMediaPlayStutus = .none
+    /// 上传进度
+    var uploadProgress: Float = 0.0
     
+    /// 是否是发送方
     var isSend: Bool
     /// 消息
     var messageFrame = CWChatMessageFrame()

@@ -192,7 +192,7 @@ class CWChatMessageCell: UITableViewCell {
     }
     
     // 更新进度
-    func updateProgress(_ progress: Int) {
+    func updateProgress() {
         
     }
     

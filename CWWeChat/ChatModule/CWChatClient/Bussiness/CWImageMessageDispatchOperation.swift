@@ -11,11 +11,10 @@ import Alamofire
 
 class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
     
-    var imageUploadState: Int = 0
-    
     override func sendMessage() {
+        let imageBody = message.messageBody as! CWImageMessageBody
         /// 如果图片上传成功，则发送信息到对方，否则进行图片上传
-        if imageUploadState == 1 {
+        if imageBody.originalURL != nil {
             sendContentMessage()
         } else {
             uploadImage()
@@ -59,15 +58,15 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
 //            }
 //        }
 //        
-        var progress: Int = 0
-        while progress <= 100 {
-            progress += 10
+        var progress: Float = 0
+        while progress <= 1 {
             self.progress?(progress)
+            progress += 0.1
             sleep(3)
         }
         
-        if progress >= 100 {
-            progress = 100
+        if progress >= 1 {
+            progress = 1
         }
         testInfo()
         sendContentMessage()

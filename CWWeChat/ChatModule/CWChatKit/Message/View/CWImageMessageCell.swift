@@ -53,30 +53,25 @@ class CWImageMessageCell: CWChatMessageCell {
         let message = messageModel.message
         let body = message.messageBody as! CWImageMessageBody
         
-        if let path = body.originalLocalPath {
+        if let url = body.originalURL {
+            messageImageView.cw_setImage(with: url, placeholder: nil)
+        }
+        else if let path = body.originalLocalPath {
             let url = URL(fileURLWithPath: kChatUserImagePath+path)
-            messageImageView.yy_setImage(with: url, placeholder: nil, options: .progressiveBlur, completion: nil)
-        } else if let url = body.originalURL {
-            messageImageView.yy_setImage(with: url, placeholder: nil, options: .progressiveBlur, completion: nil)
-        } else {
+            messageImageView.cw_setImage(with: url, placeholder: nil)
+        } else  {
             messageImageView.image = nil
         }
-        
-        
+
     }
     
     override func updateState() {
-        // 不需要 调用super
-        
         // 消息实体
         let message = messageModel.message
-        let body = message.messageBody as! CWImageMessageBody
         
         if message.sendStatus == .failed {
             errorButton.isHidden = false
-            messageImageView.hideProgressView()
         } else if message.sendStatus == .successed {
-            messageImageView.hideProgressView()
             errorButton.isHidden = true
         } else {
             errorButton.isHidden = true
@@ -84,8 +79,20 @@ class CWImageMessageCell: CWChatMessageCell {
         
     }
     
-    override func updateProgress(_ progress: Int) {
-        messageImageView.showProgress(progress)
+    override func updateProgress() {
+        
+        if messageModel.isSend == false {
+            messageImageView.hideProgressView()
+            return
+        }
+        
+        if messageModel.message.sendStatus == .failed ||
+           messageModel.message.sendStatus == .successed{
+            messageImageView.hideProgressView()
+        } else {
+            let progress = Int(messageModel.uploadProgress * 100)
+            messageImageView.showProgress(progress)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

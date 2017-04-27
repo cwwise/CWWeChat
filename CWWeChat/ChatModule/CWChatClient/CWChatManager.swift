@@ -40,7 +40,7 @@ public extension CWChatManagerDelegate {
 /// 消息执行结果回调
 public typealias CWMessageCompletionBlock = (_ message: CWChatMessage, _ error: CWChatError?) -> Void
 /// 消息进度
-public typealias CWMessageProgressBlock = (_ progress: Int) -> Void
+public typealias CWMessageProgressBlock = (_ progress: Float) -> Void
 
 /// 聊天相关操作
 public protocol CWChatManager: NSObjectProtocol {

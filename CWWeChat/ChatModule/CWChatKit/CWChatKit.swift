@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import YYCache
+import YYWebImage
 
 public protocol CWChatUserInfoDataSource: NSObjectProtocol {
     func loadUserInfo(userId: String, completion: @escaping ( (CWChatUser?) -> Void))
@@ -25,6 +25,21 @@ public class CWChatKit: NSObject {
         cache.shouldRemoveAllObjectsWhenEnteringBackground = false
         return cache
     }()
+    
+    public var chatWebImageManager: YYWebImageManager = {
+        let path = "\(CWChatClient.share.userFilePath)/image"
+        let imageCache = YYImageCache(path: path)
+        imageCache?.diskCache.customFileNameBlock = { (key) in
+            return key
+        }
+        let queue = OperationQueue()
+        let chatWebImageManager = YYWebImageManager(cache: imageCache, queue: queue)
+        chatWebImageManager.cacheKeyFilter = { (url) in
+            return url.lastPathComponent
+        }
+        return chatWebImageManager
+    }()
+    
     
     public weak var userInfoDataSource: CWChatUserInfoDataSource?
     

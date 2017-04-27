@@ -180,6 +180,8 @@ extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
         messageCell.delegate = self
         messageCell.updateMessage(messageModel)
         messageCell.updateState()
+        messageCell.updateProgress()
+
         return messageCell
     }
     
@@ -301,9 +303,8 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
     func chatInputView(_ inputView: CWInputToolBar, image: UIImage) {
         
         let imageName = String.UUIDString()+".jpg"
-        let path = kChatUserImagePath+imageName
-
-        FileManager.saveContentImage(image, imagePath: path)
+        let cache = CWChatKit.share.chatWebImageManager.cache
+        cache?.setImage(image, forKey: imageName)
         
         let imageBody = CWImageMessageBody(path: imageName, size: image.size)
         let message = CWChatMessage(targetId: conversation.targetId,
@@ -328,10 +329,11 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
         let chatManager = CWChatClient.share.chatManager
         chatManager.sendMessage(message, progress: { (progress) in
             
+            messageModel.uploadProgress = progress
             guard let cell = self.tableView.cellForRow(at: indexPath) as? CWChatMessageCell else {
                 return
             }
-            cell.updateProgress(progress)
+            cell.updateProgress()
             
         }) { (message, error) in
 
@@ -350,6 +352,7 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
             guard let cell = self.tableView.cellForRow(at: indexPath) as? CWChatMessageCell else {
                 return
             }
+            cell.updateProgress()
             cell.updateState()
         }
         

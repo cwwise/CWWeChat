@@ -34,18 +34,18 @@ class CWExpressionMessageCell: CWChatMessageCell {
             make.edges.equalTo(UIEdgeInsets.zero)
         }
         
-        // 消息实体
-        let message = messageModel.message
-        let body = message.messageBody as! CWExpressMessageBody
-        
-        if let path = body.localPath {
-            let url = URL(fileURLWithPath: kChatUserImagePath+path)
-            expressionView.yy_setImage(with: url, placeholder: nil, options: .progressiveBlur, completion: nil)
-        } else if let url = body.remoteURL {
-            expressionView.yy_setImage(with: url, placeholder: nil, options: .progressiveBlur, completion: nil)
-        } else {
-            expressionView.image = nil
-        }
+//        // 消息实体
+//        let message = messageModel.message
+//        let body = message.messageBody as! CWExpressMessageBody
+//        
+//        if let path = body.localPath {
+//            let url = URL(fileURLWithPath: kChatUserImagePath+path)
+//            expressionView.yy_setImage(with: url, placeholder: nil, options: .progressiveBlur, completion: nil)
+//        } else if let url = body.remoteURL {
+//            expressionView.yy_setImage(with: url, placeholder: nil, options: .progressiveBlur, completion: nil)
+//        } else {
+//            expressionView.image = nil
+//        }
         
         
     }

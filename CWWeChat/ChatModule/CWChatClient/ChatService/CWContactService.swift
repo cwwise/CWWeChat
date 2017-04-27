@@ -21,11 +21,9 @@ class CWContactService: XMPPModule {
     }();
 
     var completion: CWContactCompletion?
-    
     override init!(dispatchQueue queue: DispatchQueue!) {
         super.init(dispatchQueue: queue)
     }
-
 }
 
 

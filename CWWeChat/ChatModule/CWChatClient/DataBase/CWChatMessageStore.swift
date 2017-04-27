@@ -231,9 +231,11 @@ extension CWChatMessageStore {
         }
     }
     
-    func updateMessageStatus(_ message: CWChatMessage) {
+    func updateMessage(_ message: CWChatMessage) {
         let filter = messageTable.filter(messageId == message.messageId)
-        let update = filter.update(sendStatus <- message.sendStatus.rawValue)
+        let body = message.messageBody.messageEncode
+        let update = filter.update(sendStatus <- message.sendStatus.rawValue,
+                                   content <- body)
         log.verbose(update.asSQL())
         do {
             try messageDB.run(update)

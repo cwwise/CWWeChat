@@ -146,7 +146,7 @@ extension CWChatService: CWChatManager {
     
     /// 更新消息
     func updateMessage(_ message: CWChatMessage, completion: @escaping CWMessageCompletionBlock) {
-        messageStore.updateMessageStatus(message)
+        messageStore.updateMessage(message)
     }
     
     /// 发送回执消息(不保存消息)
@@ -164,7 +164,6 @@ extension CWChatService: CWChatManager {
     func sendMessage(_ message: CWChatMessage,
                      progress: CWMessageProgressBlock?,
                      completion: @escaping CWMessageCompletionBlock) {
-
         // 添加信息
         if message.senderId == nil {
             message.senderId = CWChatClient.share.userId
