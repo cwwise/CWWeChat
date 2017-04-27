@@ -9,14 +9,18 @@
 import UIKit
 import SwiftyJSON
 
-typealias CWContactListChanged = ([CWContactGroupModel],[String],Int)->Void
+typealias CWContactListChanged = ([CWContactGroupModel], [String], Int) -> Void
 
-class CWContactHelper: NSObject {
+typealias CWFetchContactComplete = (CWContactModel,CWChatError?) -> Void
 
+public class CWContactHelper: NSObject {
+
+    static let share = CWContactHelper()
     ///默认的分组
     fileprivate var defaultGroup: CWContactGroupModel!
     
     var contactsData = [CWContactModel]()
+    var contactsDict = [String: CWContactModel]()
 
     var sortContactsData = [CWContactGroupModel]()
     var sortSectionHeaders = [String]()
@@ -27,12 +31,22 @@ class CWContactHelper: NSObject {
         return contactsData.count
     }
     
-    override init() {
+    private override init() {
         super.init()
         setupDefaultGroup()
         initTestData()
-
     }
+    
+    func fetchContactById(_ userId: String, complete: CWFetchContactComplete) {
+        
+        if let contact = contactsDict[userId] {
+            complete(contact, nil)
+        }
+        
+        // 如果没有找到，进行网络查询
+        
+    }
+    
     
     func initTestData() {
         
@@ -53,6 +67,7 @@ class CWContactHelper: NSObject {
             user.nickname = subJson["nikeName"].string
             user.avatarURL = subJson["avatarURL"].string
             contactsData.append(user)
+            contactsDict[userId] = user
         }
         
         DispatchQueue.global().async {

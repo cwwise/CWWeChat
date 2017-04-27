@@ -118,8 +118,7 @@ extension CWBaseConversationController: UITableViewDelegate, UITableViewDataSour
         tableView.deselectRow(at: indexPath, animated: true)
         let conversation = conversationList[indexPath.row].conversation
 
-        let chatVC = CWChatMessageController()
-        chatVC.conversation = conversation
+        let chatVC = CWChatMessageController(conversation: conversation)
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)
     }

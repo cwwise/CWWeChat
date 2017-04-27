@@ -11,6 +11,24 @@ import YYImage
 
 class CWChatMessageController: CWBaseMessageController {
     
+    init(targetId: String? = nil, conversation: CWChatConversation? = nil) {
+        super.init(nibName: nil, bundle: nil)
+        if let conversation = conversation {
+            self.conversation = conversation
+        }
+        else if let targetId = targetId {
+            let conversation = CWChatClient.share.chatManager.fecthConversation(chatType: .single, targetId: targetId)
+            self.conversation = conversation
+        } else {
+            assert(true, "没有targetId或者conversation")
+        }
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = rightBarItem
@@ -20,7 +38,6 @@ class CWChatMessageController: CWBaseMessageController {
             imageView.image = UIImage(contentsOfFile: path)
             self.tableView.backgroundView = imageView
         }
-
     }
     
     func rightBarItemDown(_ barItem: UIBarButtonItem) {
@@ -36,7 +53,7 @@ class CWChatMessageController: CWBaseMessageController {
     
     
     override func messageCellUserAvatarDidClick(_ userId: String) {
-        let detailVC = CWContactDetailController()
+        let detailVC = CWContactDetailController(userId: userId)
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     

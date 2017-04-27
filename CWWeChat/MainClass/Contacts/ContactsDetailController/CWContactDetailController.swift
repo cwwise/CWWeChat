@@ -7,9 +7,23 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class CWContactDetailController: CWBaseTableViewController {
 
+    var userId: String
+    init(userId: String) {
+        self.userId = userId
+        super.init(nibName: nil, bundle: nil)
+    }
+ 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    fileprivate var contact: CWContactModel!
+    
     lazy var tableViewManager: CWTableViewManager = {
         let tableViewManager = CWTableViewManager(tableView: self.tableView)
         tableViewManager.delegate = self
@@ -21,6 +35,10 @@ class CWContactDetailController: CWBaseTableViewController {
         super.viewDidLoad()
         self.title = "详细资料"
 
+        CWContactHelper.share.fetchContactById(userId, complete: { (contact, error) in
+            self.contact = contact
+            self.tableView.reloadData()
+        })
         
         let style = CWTableViewStyle()
         style.titleTextFont = UIFont.systemFont(ofSize: 15)
@@ -50,12 +68,23 @@ class CWContactDetailController: CWBaseTableViewController {
         let item5 = CWTableViewItem(title: "更多")
         tableViewManager.addSection(itemsOf: [item3, item4, item5])
 
-        let item6 = CWButtonItem(title: "发消息", style: .operate(.commit))
-        let item7 = CWButtonItem(title: "视频聊天", style: .operate(.normal))
-        let section = CWTableViewSection(items: [item6, item7])
-        tableViewManager.addSection(section)
+        
+        let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 100)
+        let footerView = CWContactDetailFooterView(frame: frame)
+        
+        footerView.button.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.goChatController()
+            }).disposed(by: DisposeBag())
+        
+        self.tableView.tableFooterView = footerView
     }
 
+    func goChatController() {
+        let chatVC = CWChatMessageController(targetId: userId)
+        self.navigationController?.pushViewController(chatVC, animated: true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -70,11 +99,9 @@ extension CWContactDetailController: CWTableViewManagerDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CWContactInfoCell.identifier,
                                                      for: indexPath) as! CWContactInfoCell
-            let model = CWContactModel(userId: "haohao", username: "haohao")
-            model.nickname = "陈威"
-            model.avatarURL = "\(kHeaderImageBaseURLString)\(model.userId).jpg"
-
-            cell.userModel = model
+            if contact != nil {
+                cell.userModel = contact
+            }
             return cell
         } else if indexPath.section == 2 && indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CWContactDetailAlbumCell.identifier,

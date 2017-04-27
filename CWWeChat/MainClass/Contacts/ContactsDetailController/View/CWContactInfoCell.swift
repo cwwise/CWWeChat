@@ -93,7 +93,7 @@ class CWContactInfoCell: UITableViewCell {
         self.avatarImageView.yy_setImage(with: url, placeholder: defaultHeadeImage)
         
         nikenameLabel.text = nikename
-        usernameLabel.text = userModel.username
+        usernameLabel.text = "微信号："+userModel.username
     }
     
     

@@ -11,9 +11,8 @@ import UIKit
 /// 联系人
 class CWContactsController: UIViewController {
 
-    lazy var contactHelper: CWContactHelper = {
-        return CWContactHelper()
-    }()
+    var contactHelper = CWContactHelper.share
+
     var groupList = [CWContactGroupModel]()
     var sectionHeaders = [String]()
 
@@ -113,11 +112,10 @@ extension CWContactsController: UITableViewDataSource, UITableViewDelegate {
         return headerView
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section == 0 { 
+        if indexPath.section == 0 {
             if indexPath.row == 0 {
                 let newFriendVC = CWNewFrinedsController()
                 newFriendVC.hidesBottomBarWhenPushed = true
@@ -128,7 +126,14 @@ extension CWContactsController: UITableViewDataSource, UITableViewDelegate {
                 self.navigationController?.pushViewController(groupchatVC, animated: true)
             }
         }
-        
+        else {
+            guard let userId = groupList[indexPath.section][indexPath.row]?.userId else {
+                return
+            }
+            let detail = CWContactDetailController(userId: userId)
+            detail.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(detail, animated: true)
+        }
         
     }
     

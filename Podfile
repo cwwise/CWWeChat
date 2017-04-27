@@ -13,6 +13,8 @@ target 'CWWeChat' do
   # request
   pod 'Alamofire'
   pod 'Moya/RxSwift'
+  pod 'RxSwift'
+  pod 'RxCocoa'
   pod 'OHHTTPStubs/Swift'
 
   pod 'YYText'

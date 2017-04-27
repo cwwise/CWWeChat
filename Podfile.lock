@@ -43,6 +43,8 @@ PODS:
   - pop (1.0.9)
   - Quick (1.1.0)
   - Result (3.2.1)
+  - RxCocoa (3.4.0):
+    - RxSwift (~> 3.4)
   - RxSwift (3.4.0)
   - SnapKit (3.2.0)
   - SQLite.swift (0.11.3):
@@ -76,6 +78,8 @@ DEPENDENCIES:
   - OHHTTPStubs/Swift
   - pop
   - Quick
+  - RxCocoa
+  - RxSwift
   - SnapKit
   - SQLite.swift
   - SwiftyBeaver
@@ -102,6 +106,7 @@ SPEC CHECKSUMS:
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
   Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
+  RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SQLite.swift: 99b36c22084427f0abbeb957556ce1528cf10bb3
@@ -113,6 +118,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 061d52ce7001f648d99aa4933b3d37098a795845
+PODFILE CHECKSUM: fa7e2cb31ae648acdf44a642de36e823ca48d1be
 
 COCOAPODS: 1.2.1
