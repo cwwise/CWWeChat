@@ -67,20 +67,9 @@ class CWShareCell: UITableViewCell {
             imageView.isHighlighted = true
             imageView.clipsToBounds = true
             imageView.backgroundColor = UIColor.gray
-            imageView.isExclusiveTouch = true
             imageView.isUserInteractionEnabled = true
-            
-            let tap = UITapGestureRecognizer()
-            tap.rx.event
-                .subscribe(onNext: { [weak self] recognizer in
-                    guard let strongSelf = self else {
-                        return
-                    }
-                    if recognizer.state == .ended {
-                        strongSelf.delegate?.shareCell(strongSelf, didClickImageAtIndex: i)
-                    }
-                })
-                .disposed(by: DisposeBag())
+            imageView.tag = 100+i
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapAction(_:)))
             imageView.addGestureRecognizer(tap)
             
             pictureViews.append(imageView)
@@ -88,6 +77,12 @@ class CWShareCell: UITableViewCell {
         }
         
         
+    }
+    
+    func tapAction(_ tap: UITapGestureRecognizer) {
+        if let tag = tap.view?.tag, tap.state == .ended {
+            self.delegate?.shareCell(self, didClickImageAtIndex: tag-100)
+        }
     }
     
     func setLayout(_ layout: CWShareLayout) {
@@ -115,6 +110,7 @@ class CWShareCell: UITableViewCell {
         self.contentLabel.top = top
         
         // 图片
+        top += layout.textHeight
         top += layout.pictureMargin
         self.setImageViewsWithTop(top)
     }

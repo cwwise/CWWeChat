@@ -30,7 +30,7 @@ class CWShareLayout: NSObject {
     /// 文本布局
     var textLayout: YYTextLayout?
     /// 图片上边距
-    var pictureMargin: CGFloat = 12
+    var pictureMargin: CGFloat = 10
     /// 图片部分高度
     var pictureHeight: CGFloat = 0
     /// 图片大小

@@ -35,7 +35,15 @@ class CWShareController: CWBaseTableViewController {
                                  username: username,
                                  userId: userId,
                                  date: share_Date)
-        share.content = "有一天 春花秋月 夏蝉冬雪 不会散去 有一天 一关上门 一躺下来 不再离去 有一天 爱看的天 爱踏的地 我爱着的你"
+        share.content = "有一天 春花秋月 夏蝉冬雪 不会散去 \n有一天 一关上门 一躺下来 不再离去 \n有一天 爱看的天 爱踏的地 我爱着的你"
+        
+        for i in 1...5 {
+            let url1 = URL(string: "http://image.cwcoder.com/cwwechat00\(i).jpg")!
+            let url2 = URL(string: "http://image.cwcoder.com/cwwechat00\(i).jpg?imageView2/1/w/250/h/200/q/75")!
+
+            let imageModel = CWSharePictureModel(thumbnailURL: url2, largetURL: url1)
+            share.imageArray.append(imageModel)
+        }
         
         let layout = CWShareLayout(shareModel: share)
         shareLayouts.append(layout)
@@ -62,6 +70,7 @@ extension CWShareController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CWShareCell.identifier, for: indexPath) as! CWShareCell
+        cell.delegate = self
         cell.setLayout(shareLayouts[indexPath.row])
         return cell
     }
@@ -69,3 +78,13 @@ extension CWShareController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
+
+extension CWShareController: CWShareCellDelegate {
+    func shareCell(_ cell: CWShareCell, didClickImageAtIndex index: Int) {
+        log.debug("选择---\(index)")
+    }
+    
+    func shareCell(_ cell: CWShareCell, didClickInText text: NSAttributedString, textRange: NSRange) {
+        
+    }
+}
