@@ -9,7 +9,6 @@
 import UIKit
 import YYText.YYTextUtilities
 
-
 enum CWMediaPlayStutus {
     case none
     case playing

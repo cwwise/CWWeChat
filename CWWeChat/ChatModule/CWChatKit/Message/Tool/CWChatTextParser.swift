@@ -23,13 +23,14 @@ private struct CWTextParser {
 
 class CWChatTextParser: NSObject {
     
-    class func parseText(_ text: String) -> NSMutableAttributedString? {
+    class func parseText(_ text: String,
+                         attributes: [String: Any] = kChatTextAttribute) -> NSMutableAttributedString? {
 
         if text.characters.count == 0 {
             return nil
         }
         
-        let attributedText = NSMutableAttributedString(string: text, attributes: kChatTextAttribute)
+        let attributedText = NSMutableAttributedString(string: text, attributes: attributes)
         //匹配电话
         self.enumeratePhoneParser(attributedText)
         //匹配 URL

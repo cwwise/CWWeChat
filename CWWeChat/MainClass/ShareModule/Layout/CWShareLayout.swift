@@ -13,20 +13,24 @@ class CWShareLayout: NSObject {
     
     var shareModel: CWShareModel
     /// 顶部留白
-    var marginTop: CGFloat = 0
+    var marginTop: CGFloat = CWShareUI.kTopMargin
     /// 下边留白
-    var marginBottom: CGFloat = 0
+    var marginBottom: CGFloat = CWShareUI.kTopMargin
     /// 总高度
     var height: CGFloat = 0
     /// 姓名(包括留白)
-    var profileHeight: CGFloat = 0
+    var profileHeight: CGFloat = CWShareUI.kUsernameSize.height
     /// 布局
     var nameTextLayout: YYTextLayout?
     
+    /// 上边距
+    var textMargin: CGFloat = 10
     /// 文本高度
     var textHeight: CGFloat = 0
     /// 文本布局
     var textLayout: YYTextLayout?
+    /// 图片上边距
+    var pictureMargin: CGFloat = 12
     /// 图片部分高度
     var pictureHeight: CGFloat = 0
     /// 图片大小
@@ -43,6 +47,27 @@ class CWShareLayout: NSObject {
 
     init(shareModel: CWShareModel) {
         self.shareModel = shareModel
+        super.init()
+        self.layout()
+    }
+    
+    func layout() {
+      
+        self.layoutProfile()
+        self.layoutContent()
+        self.layoutPicture()
+        self.layoutTime()
+
+        height += marginTop
+        height += profileHeight
+        // 文本
+        height += textMargin
+        height += textHeight
+        // 图片
+        height += pictureMargin
+        height += pictureHeight
+
+        height += marginBottom
     }
     
     // 更新时间字符串
@@ -50,12 +75,44 @@ class CWShareLayout: NSObject {
         
     }
     
+    func layoutProfile() {
+        
+        let username = NSMutableAttributedString(string: shareModel.username)
+        username.yy_color = UIColor(hex: "#576B95")
+        username.yy_font = UIFont.systemFont(ofSize: 16)
+        
+        let container = YYTextContainer(size: CWShareUI.kUsernameSize)
+        nameTextLayout = YYTextLayout(container: container, text: username)
+    }
+    
     /// 文字布局
-    
-    
+    func layoutContent() {
+
+        guard let content = shareModel.content else {
+            return
+        }
+        
+        let size = CGSize(width: CWShareUI.kContentWidth, height: CGFloat.greatestFiniteMagnitude)
+
+        let textFont = UIFont.systemFont(ofSize: 15)
+        let attributes = [NSFontAttributeName: textFont,
+                          NSForegroundColorAttributeName: UIColor.black]
+        
+        let modifier = CWTextLinePositionModifier(font: textFont)
+        // YYTextContainer
+        let textContainer = YYTextContainer(size: size)
+        textContainer.linePositionModifier = modifier
+        textContainer.maximumNumberOfRows = 0
+        
+        let textAttri = CWChatTextParser.parseText(content, attributes: attributes)!
+        let textLayout = YYTextLayout(container: textContainer, text: textAttri)!
+        
+        self.textLayout = textLayout
+        self.textHeight = modifier.heightForLineCount(Int(textLayout.rowCount))
+    }
     
     /// 布局图片部分
-    func _layoutPicture() {
+    func layoutPicture() {
        
         if shareModel.imageArray.count == 0 {
             return
@@ -88,18 +145,12 @@ class CWShareLayout: NSObject {
         self.pictureHeight = picHeight
     }
     
-    func _layoutTime() {
-        
-        guard let _ = shareModel.createdAt else {
-            timeTextLayout = nil
-            return
-        }
+    func layoutTime() {
         
         let timeString = "2017年8月"
         let timeText = NSMutableAttributedString(string: timeString)
         timeText.yy_font = UIFont.systemFont(ofSize: 12)
         timeText.yy_color = CWShareUI.kGrayTextColor
-        
         
         let container = YYTextContainer(size: CGSize(width: 100, height: 20))
         container.maximumNumberOfRows = 1

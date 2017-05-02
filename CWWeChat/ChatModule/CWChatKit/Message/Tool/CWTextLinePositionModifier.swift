@@ -15,8 +15,8 @@ private let descentScale: CGFloat = 0.16
 class CWTextLinePositionModifier: NSObject, YYTextLinePositionModifier {
     
     var font: UIFont // 基准字体 (例如 Heiti SC/PingFang SC)
-    fileprivate var paddingTop: CGFloat = 2 //文本顶部留白
-    fileprivate var paddingBottom: CGFloat = 2 //文本底部留白
+    var paddingTop: CGFloat = 2 //文本顶部留白
+    var paddingBottom: CGFloat = 2 //文本底部留白
     fileprivate var lineHeightMultiple: CGFloat //行距倍数
     
     required init(font: UIFont) {

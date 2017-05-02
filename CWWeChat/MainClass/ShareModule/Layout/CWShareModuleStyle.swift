@@ -13,12 +13,13 @@ struct CWShareUI {
     static let kTopMargin: CGFloat = 10
     static let kLeftMargin: CGFloat = 10
     /// 头像
-    static let kAvatarWidth: CGFloat = 42
-    static let kAvatarHeight: CGFloat = 42
-    /// 姓名部分最大宽度
-    static let kNameMaxWidth: CGFloat = 120
+    static let kAvatarSize = CGSize(width: 42, height: 42)
+    /// 姓名size
+    static let kUsernameSize = CGSize(width: 120, height: 20)
+
     /// 文字
     static let kPaddingText: CGFloat = 10
+    static let kContentWidth: CGFloat = kScreenWidth - 2*kLeftMargin - kAvatarSize.width - kPaddingText
     
     // 图片留白
     static let kCellPaddingPic: CGFloat = 5
