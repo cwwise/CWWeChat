@@ -39,7 +39,7 @@ class CWChatConversationStore: CWChatBaseStore {
     }
     
     /**
-     创建TableView
+     创建Table
      */
     func createMessageTable() {
         do {

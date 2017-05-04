@@ -19,7 +19,8 @@ target 'CWWeChat' do
 
   pod 'YYText'
   pod 'YYWebImage'
-  
+  pod 'YYModel'
+
   # database
   pod 'SQLite.swift'
   
