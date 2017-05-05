@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import YYWebImage
 
 class CWEmoticonCell: UICollectionViewCell {
     
     var emoticon: CWEmoji? {
         willSet {
-            
+            if newValue == emoticon {
+                return
+            }
         }
     }
     
@@ -34,9 +37,20 @@ class CWEmoticonCell: UICollectionViewCell {
         self.contentView.addSubview(imageView)
     }
     
-    
     func updateContent() {
+        // 先简单判断 后期加上 网络表情的处理
+        if isDelete {
+            imageView.image = nil
+        } else {
+            let imagePath = Bundle.main.path(forResource: emoticon?.png, ofType: nil)
+            imageView.yy_setImage(with: URL(fileURLWithPath: imagePath!), options: .ignoreDiskCache)
+        }
         
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.center = CGPoint(x: self.width/2, y: self.height/2)
     }
     
     required init?(coder aDecoder: NSCoder) {

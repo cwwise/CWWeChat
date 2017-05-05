@@ -107,8 +107,9 @@ class CWShareStore: NSObject {
         
         do {
             try shareDB.transaction {
-                
                 for share in shareList {
+                    
+                    // 插入之前 需要判断是否存在，如果存在 则更新一些必要数据
                     
                     let imagename = ""
                     let videoname = ""
@@ -128,11 +129,7 @@ class CWShareStore: NSObject {
                                                         self.f_isPraise <- share.isPraise
                                                         )
                     try self.shareDB.run(insert)
-                    
-                    
                 }
-                
-                
             }
         } catch {
             log.error(error)
