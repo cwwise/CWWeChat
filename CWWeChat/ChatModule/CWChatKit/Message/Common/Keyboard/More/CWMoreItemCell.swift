@@ -9,8 +9,14 @@
 import UIKit
 import SnapKit
 
+protocol CWMoreItemCellDelegate: NSObjectProtocol {
+    func moreItemCell(_ cell: CWMoreItemCell, didSelectItem item: CWMoreItem)
+}
+
 class CWMoreItemCell: UICollectionViewCell {
 
+    weak var delegate: CWMoreItemCellDelegate?
+    
     var item: CWMoreItem? {
         didSet {
             updateInfo()
@@ -46,9 +52,17 @@ class CWMoreItemCell: UICollectionViewCell {
             make.height.equalTo(iconButton.snp.width)
         }
         
+        iconButton.addTarget(self, action: #selector(iconButtonClick), for: .touchUpInside)
+        
         titleLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.contentView)
             make.bottom.equalTo(self.contentView)
+        }
+    }
+    
+    func iconButtonClick() {
+        if let item = self.item {
+            self.delegate?.moreItemCell(self, didSelectItem: item)
         }
     }
     

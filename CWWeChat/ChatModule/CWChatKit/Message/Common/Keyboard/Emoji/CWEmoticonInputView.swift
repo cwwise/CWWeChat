@@ -9,9 +9,17 @@
 import UIKit
 import YYText.YYTextUtilities
 
+private let kOnePageCount = 23
 private let kOneLineItem = 8
 private let kViewHeight: CGFloat = 8
 private let kOneEmoticonHeight: CGFloat = 50
+private let kToolbarHeight: CGFloat = 37
+
+protocol CWEmoticonInputViewDelegate: NSObjectProtocol {
+    func emoticonInputDidTapComplete()
+    func emoticonInputDidTapBackspace()
+    func emoticonInputDidTapText(_ text: String)
+}
 
 class CWEmoticonInputView: UIView {
     
@@ -20,12 +28,62 @@ class CWEmoticonInputView: UIView {
         return CWEmoticonInputView(frame: frame)
     }()
     
+    weak var delegate: CWEmoticonInputViewDelegate?
+    
     var collectionView: CWEmoticonScrollView!
     
-    var emoticonGroupTotalPageCount: Int
+    var emoticonGroupPageIndexs = [Int]()
+    var emoticonGroupPageCounts = [Int]()
+    
+    var sendButton: UIButton = UIButton(type: .custom)
+    var currentPageIndex: Int = 0
+    var emoticonGroupTotalPageCount: Int = 0
     
     private override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        setupTopLine()
+        setupGroup()
+        setupCollectionView()
+        setupToolbar()
+    }
+    
+    func setupTopLine() {
+        let line = UIView()
+        line.width = self.width
+        line.height = YYTextCGFloatFromPixel(1)
+        line.backgroundColor = UIColor(hex: "#e9e9e9")
+        line.autoresizingMask = .flexibleWidth
+        self.addSubview(line)
+    }
+    
+    func setupGroup() {
+        let emoticonGroups = [CWEmojiGroup]()
+        
+        var indexs = [Int]()
+        var index = 0
+        for group in emoticonGroups {
+            indexs.append(index)
+            var count = ceil(Float(group.emoticons.count) / Float(kOnePageCount))
+            if count == 0 {
+                count = 1
+            }
+            index += Int(count)
+        }
+        emoticonGroupPageIndexs = indexs
+        
+        var pageCounts = [Int]()
+        emoticonGroupTotalPageCount = 0
+        
+        for group in emoticonGroups {
+            var pageCount = ceil(Float(group.emoticons.count) / Float(kOnePageCount))
+            if (pageCount == 0) {
+                pageCount = 1
+            }
+            pageCounts.append(Int(pageCount))
+            emoticonGroupTotalPageCount += Int(pageCount)
+        }
+        emoticonGroupPageCounts = pageCounts
     }
     
     func setupCollectionView() {
@@ -52,6 +110,42 @@ class CWEmoticonInputView: UIView {
         self.addSubview(collectionView)
     }
     
+    func setupToolbar() {
+        let toolbarFrame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kToolbarHeight)
+        let toolbar = UIView(frame: toolbarFrame)
+        toolbar.backgroundColor = UIColor(hex: "#EDEDED")
+        
+        // 按钮
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.alwaysBounceHorizontal = true
+        scrollView.size = CGSize(width: toolbar.width-60, height: toolbar.height)
+        
+        toolbar.bottom = self.height;
+        self.addSubview(toolbar)
+        
+        
+        // 完成按钮
+        sendButton.frame = CGRect(x: kScreenWidth-60, y: 0, width: 60, height: self.height)
+        sendButton.backgroundColor = UIColor(hex: "#3099FA")
+        sendButton.setTitle("完成", for: .normal)
+        sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        sendButton.addTarget(self, action: #selector(sendButtonClick), for: .touchUpInside)
+        
+        toolbar.addSubview(sendButton)
+    }
+    
+    func emoticonForIndexPath(_ indexPath: IndexPath) -> CWEmoticonCell? {
+        let section = indexPath.section
+        
+        
+        return nil
+    }
+    
+    func sendButtonClick() {
+        
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -59,12 +153,59 @@ class CWEmoticonInputView: UIView {
 }
 
 extension CWEmoticonInputView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
     
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+}
+
+extension CWEmoticonInputView: CWEmoticonScrollViewDelegate {
+    func emoticonScrollViewDidTapCell(_ cell: CWEmoticonCell) {
+        
+        if cell.isDelete {
+            self.delegate?.emoticonInputDidTapBackspace()
+        } else if let emoticon = cell.emoticon {
+            
+            var text: String?
+            switch emoticon.type {
+            case .image:
+                text = emoticon.chs
+            default: break
+                
+            }
+            
+            if let text = text {
+                self.delegate?.emoticonInputDidTapText(text)
+            }
+        }
+    }
 }
 
 extension CWEmoticonInputView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
+        return emoticonGroupTotalPageCount
     }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return kOnePageCount+1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CWEmoticonCell.identifier, for: indexPath) as! CWEmoticonCell
+        if indexPath.row == kOnePageCount {
+            cell.isDelete = true
+            cell.emoticon = nil
+        } else {
+            cell.isDelete = false
+            
+        }
+        
+        return cell
+    }
+    
+    
 }
 
