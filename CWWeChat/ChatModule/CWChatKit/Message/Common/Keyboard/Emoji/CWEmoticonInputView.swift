@@ -11,7 +11,7 @@ import YYText.YYTextUtilities
 
 private let kOnePageCount = 23
 private let kOneLineItem = 8
-private let kViewHeight: CGFloat = 8
+private let kViewHeight: CGFloat = 216
 private let kOneEmoticonHeight: CGFloat = 50
 private let kToolbarHeight: CGFloat = 37
 
@@ -41,7 +41,8 @@ class CWEmoticonInputView: UIView {
     
     private override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        self.backgroundColor = UIColor(hex: "#E7EFF5")
+
         setupTopLine()
         setupGroup()
         setupCollectionView()
@@ -103,6 +104,7 @@ class CWEmoticonInputView: UIView {
         
         let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kOneEmoticonHeight*3)
         collectionView = CWEmoticonScrollView(frame: frame, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.clear
         collectionView.register(CWEmoticonCell.self, forCellWithReuseIdentifier: CWEmoticonCell.identifier)
         collectionView.delegate = self;
         collectionView.dataSource = self;

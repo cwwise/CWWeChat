@@ -24,7 +24,6 @@ public protocol CWChatToolBarDelegate: NSObjectProtocol {
 
 public class CWChatToolBar: UIView {
 
-    var status: CWToolBarStatus = .initial 
     weak var delegate: CWChatToolBarDelegate?
     /// 临时记录输入的textView
     var currentText: String?
@@ -44,8 +43,7 @@ public class CWChatToolBar: UIView {
         emoticonButton.autoresizingMask = [.flexibleTopMargin]
 
         emoticonButton.setNormalImage(self.kEmojiImage, highlighted:self.kEmojiImageHL)
-        emoticonButton.tag = CWToolBarStatus.emoji.rawValue
-        emoticonButton.addTarget(self, action: #selector(toolButtonSelector(_:)), for: .touchDown)
+        emoticonButton.addTarget(self, action: #selector(handelEmotionClick(_:)), for: .touchDown)
         return emoticonButton
     }()
     
@@ -55,18 +53,16 @@ public class CWChatToolBar: UIView {
         voiceButton.autoresizingMask = [.flexibleTopMargin]
 
         voiceButton.setNormalImage(self.kVoiceImage, highlighted:self.kVoiceImageHL)
-        voiceButton.tag = CWToolBarStatus.voice.rawValue
-        voiceButton.addTarget(self, action: #selector(toolButtonSelector(_:)), for: .touchDown)
+        voiceButton.addTarget(self, action: #selector(handelVoiceClick(_:)), for: .touchDown)
         return voiceButton
     }()
     
     ///更多按钮
     lazy var moreButton: UIButton = {
         let moreButton = UIButton(type: .custom)
-        moreButton.tag = CWToolBarStatus.more.rawValue
         moreButton.autoresizingMask = [.flexibleTopMargin]
         moreButton.setNormalImage(self.kMoreImage, highlighted:self.kMoreImageHL)
-        moreButton.addTarget(self, action: #selector(toolButtonSelector(_:)), for: .touchDown)
+        moreButton.addTarget(self, action: #selector(handelMoreClick(_:)), for: .touchDown)
         return moreButton
     }()
     
@@ -198,7 +194,7 @@ public class CWChatToolBar: UIView {
         voiceButton.isSelected = false
         emoticonButton.isSelected = false
         moreButton.isSelected = false
-        updateToolStatus(.initial)
+
     }
     
     func prepareForBeginComment() {
@@ -208,64 +204,7 @@ public class CWChatToolBar: UIView {
     func prepareForEndComment() {
         
     }
-    
-    //MARK: Action
-    func toolButtonSelector(_ button: UIButton) {
-        // 加个判断
-        var selectStatus = CWToolBarStatus(rawValue: button.tag)!
-        
-        if button == emoticonButton {
-            emoticonButton.isSelected = !emoticonButton.isSelected
-            moreButton.isSelected = false
-            voiceButton.isSelected = false
-        } else if button == moreButton {
-            
-            let pickerVC = UIImagePickerController()
-            pickerVC.sourceType = .photoLibrary
-            pickerVC.delegate = self
-            if let viewcontroller = UIApplication.shared.keyWindow?.rootViewController {
-                viewcontroller.present(pickerVC, animated: true, completion: nil)
-            }
-            
-            
-            emoticonButton.isSelected = false
-            moreButton.isSelected = !moreButton.isSelected
-            voiceButton.isSelected = false
-        } else if button == voiceButton {
-            emoticonButton.isSelected = false
-            moreButton.isSelected = false
-            voiceButton.isSelected = !voiceButton.isSelected
-        }
-        
-        if button.isSelected == false {
-            selectStatus = .keyboard
-            beginInputing()
-        }
-        updateToolStatus(selectStatus)
-    }
-    
-    func updateToolStatus(_ status: CWToolBarStatus?) {
-        guard let status = status, status != self.status else {
-            return
-        }
-        self.status = status
-        
-        switch status {
-        case .initial:
-            resumeTextViewContentSize()
-            self.inputTextView.resignFirstResponder()
-        case .voice:
-            adjustTextViewContentSize()
-            self.inputTextView.resignFirstResponder()
-        case .more,.emoji:
-            adjustTextViewContentSize()
-            self.inputTextView.resignFirstResponder()
-        case .keyboard:
-            resumeTextViewContentSize()
-        }
-        
-    }
-    
+
     func handelVoiceClick(_ sender: UIButton) {
         self.voiceButton.isSelected = !self.voiceButton.isSelected
         self.emoticonButton.isSelected = false
@@ -308,11 +247,35 @@ public class CWChatToolBar: UIView {
         self.resumeTextViewContentSize()
 
         UIView.animate(withDuration: 0.2) {
-            self.recordButton.isHidden = !sender.isSelected
-            self.inputTextView.isHidden = sender.isSelected
+            self.recordButton.isHidden = true
+            self.inputTextView.isHidden = false
         }
-        self.delegate?.chatToolBar(self, voiceButtonPressed: sender.isSelected, keyBoardState: keyBoardChanged)
+        self.delegate?.chatToolBar(self, emoticonButtonPressed: sender.isSelected, keyBoardState: keyBoardChanged)
         
+    }
+    
+    func handelMoreClick(_ sender: UIButton) {
+        self.moreButton.isSelected = !self.moreButton.isSelected
+        self.voiceButton.isSelected = false
+        self.emoticonButton.isSelected = false
+        
+        var keyBoardChanged = true
+        if sender.isSelected {
+            if inputTextView.isFirstResponder == false {
+                keyBoardChanged = false
+            }
+            self.inputTextView.resignFirstResponder()
+        } else {
+            self.inputTextView.becomeFirstResponder()
+        }
+        
+        self.resumeTextViewContentSize()
+        
+        UIView.animate(withDuration: 0.2) {
+            self.recordButton.isHidden = true
+            self.inputTextView.isHidden = false
+        }
+        self.delegate?.chatToolBar(self, moreButtonPressed: sender.isSelected, keyBoardState: keyBoardChanged)
     }
     
     // MARK: 功能

@@ -15,15 +15,6 @@ public enum CWEmojiType: Int {
     case expression
 }
 
-public enum CWToolBarStatus: Int {
-    case initial
-    case emoji
-    case voice
-    case more
-    case keyboard
-}
-
-
 ///键盘相关的枚举
 public enum CWMoreItemType: Int {
     case image

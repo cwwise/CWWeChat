@@ -13,12 +13,9 @@ class CWDemoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.automaticallyAdjustsScrollViewInsets = false
-        
-        let moreView = CWMoreInputView()
-        moreView.loadMoreItems(CWMoreInputViewHelper().chatMoreKeyboardData)
-        moreView.bottom = self.view.height
-        self.view.addSubview(moreView)
+      
+        let keyboard = CWChatKeyboard()
+        self.view.addSubview(keyboard)
         // Do any additional setup after loading the view.
     }
 
@@ -27,6 +24,10 @@ class CWDemoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        self.view.endEditing(true)
+        print("ceshi123")
+    }
 
     /*
     // MARK: - Navigation

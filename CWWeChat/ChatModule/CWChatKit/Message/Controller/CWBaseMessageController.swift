@@ -289,19 +289,20 @@ extension CWBaseMessageController: CWChatMessageCellDelegate {
 
 // MARK: - CWInputToolBarDelegate
 extension CWBaseMessageController: CWChatToolBarDelegate {
-   
-    func chatToolBar(_ chatToolBar: CWChatToolBar, voiceButtonPressed select: Bool, keyBoardState change:Bool) {
-        
-    }
-    
-    func chatToolBar(_ chatToolBar: CWChatToolBar, emotionButtonPressed select: Bool, keyBoardState change:Bool) {
-        
-    }
-    
-    func chatToolBar(_ chatToolBar: CWChatToolBar, moreButtonPressed select: Bool, keyBoardState change:Bool) {
-        
-    }
 
+    func chatToolBar(_ chatToolBar: CWChatToolBar, emoticonButtonPressed select: Bool, keyBoardState change: Bool) {
+        
+    }
+    
+    func chatToolBar(_ chatToolBar: CWChatToolBar, moreButtonPressed select: Bool, keyBoardState change: Bool) {
+        
+    }
+    
+    func chatToolBar(_ chatToolBar: CWChatToolBar, voiceButtonPressed select: Bool, keyBoardState change: Bool) {
+        
+    }
+    
+    
     //
     func chatToolBar(_ chatToolBar: CWChatToolBar, sendText text: String) {
         
