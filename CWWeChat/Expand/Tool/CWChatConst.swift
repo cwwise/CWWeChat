@@ -13,6 +13,7 @@ import CocoaLumberjack
 let kScreenSize = UIScreen.main.bounds.size
 let kScreenWidth = UIScreen.main.bounds.size.width
 let kScreenHeight = UIScreen.main.bounds.size.height
+let kScreenScale = UIScreen.main.scale
 
 let kNavigationBarHeight:CGFloat = 64
 

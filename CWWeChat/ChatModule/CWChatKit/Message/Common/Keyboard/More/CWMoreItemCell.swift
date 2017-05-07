@@ -25,14 +25,16 @@ class CWMoreItemCell: UICollectionViewCell {
     
     lazy fileprivate var iconButton:UIButton = {
         let iconButton = UIButton(type: .custom)
-        iconButton.doCircleRadius(5)
+        iconButton.backgroundColor = UIColor.white
+        iconButton.doCircleRadius(5, borderColor: UIColor(hex: "#D8DBDD"))
         return iconButton
     }()
     
     lazy fileprivate var titleLabel:UILabel = {
        let titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFont(ofSize: 12)
-        titleLabel.textColor = UIColor.gray
+        titleLabel.font = UIFont.systemFont(ofSize: 13)
+        titleLabel.textColor = UIColor(hex: "#888")
+        titleLabel.textAlignment = .center
         return titleLabel
     }()
     
@@ -48,15 +50,14 @@ class CWMoreItemCell: UICollectionViewCell {
         iconButton.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView)
             make.centerX.equalTo(self.contentView)
-            make.width.equalTo(self.contentView)
-            make.height.equalTo(iconButton.snp.width)
+            make.size.equalTo(CGSize(width: 60, height: 60))
         }
         
         iconButton.addTarget(self, action: #selector(iconButtonClick), for: .touchUpInside)
         
         titleLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.contentView)
-            make.bottom.equalTo(self.contentView)
+            make.top.equalTo(iconButton.snp.bottom).offset(6)
         }
     }
     
@@ -71,13 +72,11 @@ class CWMoreItemCell: UICollectionViewCell {
         guard let cellitem = item else {
             iconButton.isHidden = true
             titleLabel.isHidden = true
-            isUserInteractionEnabled = false
             return
         }
         
         iconButton.isHidden = false
         titleLabel.isHidden = false
-        isUserInteractionEnabled = true
         
         titleLabel.text = cellitem.title
         iconButton.setImage(UIImage(named: cellitem.imagePath), for: UIControlState())

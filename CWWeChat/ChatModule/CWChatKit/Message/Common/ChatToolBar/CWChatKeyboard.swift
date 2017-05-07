@@ -1,5 +1,5 @@
 //
-//  CWChatKeyBoard.swift
+//  CWChatKeyboard.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/4/11.
@@ -8,26 +8,24 @@
 
 import UIKit
 
-enum CWChatKeyBoardStyle {
-    case chat
-    case comment
+enum CWChatKeyboardStyle {
+    case chat    //聊天
+    case comment //评论
 }
 
 /// 数据源
-protocol CWChatKeyBoardDataSource {
+protocol CWChatKeyboardDataSource {
     func chatKeyBoardMoreItems() -> [CWMoreItem]
 }
 
-public class CWChatKeyBoard: UIView {
+public class CWChatKeyboard: UIView {
     
-    public static let keyBoard = CWChatKeyBoard()
-
+    public static let keyboard = CWChatKeyboard()
+    
     public weak var associateTableView: UITableView?
 
     /// 风格
-    var keyBoardStyle: CWChatKeyBoardStyle = .chat
-    
-    var placeHolder: String?
+    var keyboardStyle: CWChatKeyboardStyle = .chat
     
     /// 是否开启语言
     var allowVoice: Bool = true
@@ -37,31 +35,35 @@ public class CWChatKeyBoard: UIView {
     var allowMore: Bool = true
     
     var lastChatKeyboardY: CGFloat = 0.0
-
-    
-    func keyboardUp() {
-        
-    }
-    
-    func keyboardDown() {
-        
-    }
     
     private convenience init() {
-        let frame = CGRect(x: 0, y: kScreenHeight-kChatKeyBoardHeight, 
-                           width: kScreenWidth, height: kChatKeyBoardHeight)
+        let frame = CGRect(x: 0, y: kScreenHeight-kChatKeyboardHeight,
+                           width: kScreenWidth, height: kChatKeyboardHeight)
         self.init(frame: frame)
     }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(chatToolBar)
-        self.addSubview(moreKeyboard)
+        self.addSubview(moreInputView)
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillChangeFrame(_:)),
                                                name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
+    
+    var placeHolder: String? {
+        didSet {
+            
+        }
+    }
+    
+    var placeHolderColor: String? {
+        didSet {
+            
+        }
+    }
+    
     
     func keyboardWillChangeFrame(_ notification: Notification) {
         
@@ -70,15 +72,15 @@ public class CWChatKeyBoard: UIView {
             
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveLinear, animations: { 
                 
-                self.moreKeyboard.isHidden = false
+                self.moreInputView.isHidden = false
                 
                 self.lastChatKeyboardY = self.y
                 
                 self.frame = CGRect(x: 0, y: self.superview!.height, width: kScreenWidth, height: self.height)
 
                 
-                let frame = CGRect(x: 0, y: self.height-kMoreKeyBoardHeight, width: kScreenWidth, height: kMoreKeyBoardHeight)
-                self.moreKeyboard.frame = frame
+                let frame = CGRect(x: 0, y: self.height-kMoreInputViewHeight, width: kScreenWidth, height: kMoreInputViewHeight)
+                self.moreInputView.frame = frame
                 
                 self.updateAssociateTableViewFrame()
                 
@@ -93,7 +95,7 @@ public class CWChatKeyBoard: UIView {
             let endFrameValue = notification.userInfo![UIKeyboardFrameBeginUserInfoKey] as! NSValue
             let endFrame = endFrameValue.cgRectValue
             
-            let chatToolBarHeight = self.height - kMoreKeyBoardHeight
+            let chatToolBarHeight = self.height - kMoreInputViewHeight
             let targetY = endFrame.origin.y - chatToolBarHeight - (kScreenHeight - self.superview!.height)
 
             if beginFrame.height > 0 && (beginFrame.y - endFrame.y > 0) {
@@ -133,17 +135,43 @@ public class CWChatKeyBoard: UIView {
         }
         
     }
-
-    lazy var chatToolBar: CWInputToolBar = {
+    
+    // 开启键盘
+    func keyboardUp() {
+        if self.keyboardStyle == .comment {
+            
+        } else {
+            
+        }
+    }
+    
+    // 隐藏键盘
+    func keyboardDown() {
+        if self.keyboardStyle == .comment {
+            
+        } else {
+            
+        }
+    }
+    
+    // MARK: Getter
+    lazy var chatToolBar: CWChatToolBar = {
         let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kChatToolBarHeight)
-        let chatToolBar = CWInputToolBar(frame:frame)
+        let chatToolBar = CWChatToolBar(frame:frame)
         return chatToolBar
     }()
     
-    lazy var moreKeyboard: CWMoreInputView = {
-        let frame = CGRect(x: 0, y: kChatKeyBoardHeight-kMoreKeyBoardHeight, width: kScreenWidth, height: kMoreKeyBoardHeight)
-        let moreKeyboard = CWMoreInputView(frame: frame)
-        return moreKeyboard
+    // 表情
+    lazy var emoticonInputView: CWEmoticonInputView = {
+        let emoticonInputView = CWEmoticonInputView.shareView
+        return emoticonInputView
+    }()
+    
+    // 更多部分
+    lazy var moreInputView: CWMoreInputView = {
+        let frame = CGRect(x: 0, y: kChatKeyboardHeight-kMoreInputViewHeight, width: kScreenWidth, height: kMoreInputViewHeight)
+        let moreInputView = CWMoreInputView(frame: frame)
+        return moreInputView
     }()
     
     required public init?(coder aDecoder: NSCoder) {

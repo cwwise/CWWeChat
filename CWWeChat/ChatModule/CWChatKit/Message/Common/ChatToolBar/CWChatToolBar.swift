@@ -1,5 +1,5 @@
 //
-//  CWInputToolBar.swift
+//  CWChatToolBar.swift
 //  CWWeChat
 //
 //  Created by chenwei on 2017/4/1.
@@ -7,108 +7,28 @@
 //
 
 import UIKit
+import YYText
 
 /// toolBar代理事件
-public protocol CWInputToolBarDelegate: class {
+public protocol CWChatToolBarDelegate: NSObjectProtocol {
+
+    func chatToolBar(_ chatToolBar: CWChatToolBar, voiceButtonPressed select: Bool, keyBoardState change:Bool)
+    func chatToolBar(_ chatToolBar: CWChatToolBar, emoticonButtonPressed select: Bool, keyBoardState change:Bool)
+    func chatToolBar(_ chatToolBar: CWChatToolBar, moreButtonPressed select: Bool, keyBoardState change:Bool)
+
     ///发送文字
-    func chatInputView(_ inputView: CWInputToolBar, sendText text: String)
+    func chatToolBar(_ chatToolBar: CWChatToolBar, sendText text: String)
     ///发送图片
-    func chatInputView(_ inputView: CWInputToolBar, image: UIImage)
+    func chatToolBar(_ chatToolBar: CWChatToolBar, image: UIImage)
 }
 
-public class CWInputToolBar: UIView {
+public class CWChatToolBar: UIView {
 
     var status: CWToolBarStatus = .initial 
-    weak var delegate: CWInputToolBarDelegate?
+    weak var delegate: CWChatToolBarDelegate?
     /// 临时记录输入的textView
     var currentText: String?
     var previousTextViewHeight: CGFloat = 36
-    
-    //MARK: 初始化
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
-    }
-
-    func setupUI() {
-        self.autoresizingMask = [UIViewAutoresizing.flexibleWidth,UIViewAutoresizing.flexibleTopMargin]
-        self.isOpaque = true
-        self.backgroundColor = UIColor.white
-        
-        addSubview(self.voiceButton)
-        addSubview(self.emotionButton)
-        addSubview(self.moreButton)
-        addSubview(self.recordButton)
-        addSubview(self.inputTextView)
-        
-        setupFrame()
-        self.kvoController.observe(self.inputTextView, keyPath: "contentSize", options: .new, action: #selector(layoutAndAnimateTextView))
-    }
-    
-    func setupFrame() {
-        
-        // 需要显示按钮的总宽度，包括间隔在内
-        var allButtonWidth:CGFloat = 0.0
-        // 水平间隔
-        let horizontalPadding:CGFloat = 8
-        // 垂直间隔
-        let verticalPadding:CGFloat = 5
-        // 
-        var textViewLeftMargin:CGFloat = 6.0
-        
-        var buttonFrame = CGRect.zero
-        buttonFrame.size = CGSize(width: self.textViewLineHeight(),
-                                  height: self.textViewLineHeight())
-        //录音
-        buttonFrame.origin = CGPoint(x: horizontalPadding, y: verticalPadding)
-        voiceButton.frame = buttonFrame
-        
-        allButtonWidth += buttonFrame.right
-        textViewLeftMargin += buttonFrame.right
-        
-        
-        //更多
-        buttonFrame.origin = CGPoint(x: kScreenWidth-horizontalPadding-buttonFrame.width,
-                                     y: verticalPadding)
-        moreButton.frame = buttonFrame
-        allButtonWidth += buttonFrame.width + 2.5*horizontalPadding
-        //表情
-        buttonFrame.origin = CGPoint(x: moreButton.frame.x-horizontalPadding-buttonFrame.width,
-                                     y: verticalPadding)
-        emotionButton.frame = buttonFrame
-        allButtonWidth += buttonFrame.width + 1.5*horizontalPadding
-        //
-        //输入框高度
-        let width = self.bounds.width - allButtonWidth;
-        let height = self.textViewLineHeight()
-        inputTextView.frame = CGRect(x: textViewLeftMargin, y: 4.5, width: width, height: height)
-        recordButton.frame = inputTextView.frame
-    }
-    
-    
-    override public func draw(_ rect: CGRect) {
-        super.draw(rect)
-        
-        let context = UIGraphicsGetCurrentContext()
-        context?.setLineWidth(0.5)
-        context?.setStrokeColor(UIColor.gray.cgColor)
-        
-        context?.beginPath()
-        context?.move(to: CGPoint(x: 0, y: 0))
-        context?.addLine(to: CGPoint(x: kScreenWidth, y: 0))
-        context?.closePath()
-        context?.strokePath()
-    }
-    
-    func textViewContent(_ content: String) {
-        self.currentText = content
-        self.inputTextView.text = content
-    }
-    
-    func clearTextViewContent() {
-        self.currentText = ""
-        self.inputTextView.text = ""
-    }
     
     // MARK: 属性
     /// 输入框
@@ -119,14 +39,14 @@ public class CWInputToolBar: UIView {
     }()
 
     /// 表情按钮
-    lazy var emotionButton: UIButton = {
-        let emotionButton = UIButton(type: .custom)
-        emotionButton.autoresizingMask = [.flexibleTopMargin]
+    lazy var emoticonButton: UIButton = {
+        let emoticonButton = UIButton(type: .custom)
+        emoticonButton.autoresizingMask = [.flexibleTopMargin]
 
-        emotionButton.setNormalImage(self.kEmojiImage, highlighted:self.kEmojiImageHL)        
-        emotionButton.tag = CWToolBarStatus.emoji.rawValue
-        emotionButton.addTarget(self, action: #selector(toolButtonSelector(_:)), for: .touchDown)
-        return emotionButton
+        emoticonButton.setNormalImage(self.kEmojiImage, highlighted:self.kEmojiImageHL)
+        emoticonButton.tag = CWToolBarStatus.emoji.rawValue
+        emoticonButton.addTarget(self, action: #selector(toolButtonSelector(_:)), for: .touchDown)
+        return emoticonButton
     }()
     
     /// 文字和录音切换
@@ -140,13 +60,6 @@ public class CWInputToolBar: UIView {
         return voiceButton
     }()
     
-    /// 录音按钮
-    lazy var recordButton: CWRecordButton = {
-        let recordButton = CWRecordButton(frame: CGRect.zero)
-        recordButton.tag = 103
-        return recordButton
-    }()
-    
     ///更多按钮
     lazy var moreButton: UIButton = {
         let moreButton = UIButton(type: .custom)
@@ -157,7 +70,28 @@ public class CWInputToolBar: UIView {
         return moreButton
     }()
     
+    /// 录音按钮
+    lazy var recordButton: CWRecordButton = {
+        let recordButton = CWRecordButton(frame: CGRect.zero)
+        recordButton.tag = 103
+        return recordButton
+    }()
     
+    var allowVoice: Bool = true
+    var allowFaceView: Bool = true
+    var allowMoreView: Bool = true
+
+    var voiceSelected: Bool {
+        return self.voiceButton.isSelected
+    }
+    var faceSelected: Bool {
+        return self.emoticonButton.isSelected
+    }
+    
+    var moreSelected: Bool {
+        return self.moreButton.isSelected
+    }
+
     //按钮的图片
     var kVoiceImage:UIImage = CWAsset.Chat_toolbar_voice.image
     var kVoiceImageHL:UIImage = CWAsset.Chat_toolbar_voice_HL.image
@@ -171,6 +105,87 @@ public class CWInputToolBar: UIView {
     var kKeyboardImage:UIImage = CWAsset.Chat_toolbar_keyboard.image
     var kKeyboardImageHL:UIImage = CWAsset.Chat_toolbar_keyboard_HL.image
     
+    //MARK: 初始化
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    func setupUI() {
+        self.autoresizingMask = [UIViewAutoresizing.flexibleWidth,UIViewAutoresizing.flexibleTopMargin]
+        self.backgroundColor = UIColor.white
+        
+        addSubview(self.voiceButton)
+        addSubview(self.emoticonButton)
+        addSubview(self.moreButton)
+        addSubview(self.recordButton)
+        addSubview(self.inputTextView)
+        
+        setupFrame()
+        self.kvoController.observe(self.inputTextView, keyPath: "contentSize", options: .new, action: #selector(layoutAndAnimateTextView))
+        setupTopLine()
+    }
+    
+    func setupFrame() {
+        let toolBarHeight = self.height
+        
+        let kItem: CGFloat = 42
+        let buttonSize = CGSize(width: kItem, height: kChatToolBarHeight)
+       
+        if self.allowVoice {
+            let origin = CGPoint(x: 0, y: toolBarHeight-buttonSize.height)
+            voiceButton.frame = CGRect(origin: origin, size: buttonSize)
+        } else {
+            voiceButton.frame = CGRect.zero
+        }
+        
+        if self.allowMoreView {
+            let origin = CGPoint(x: kScreenWidth-buttonSize.width, y: toolBarHeight-buttonSize.height)
+            moreButton.frame = CGRect(origin: origin, size: buttonSize)
+        } else {
+            moreButton.frame = CGRect.zero
+        }
+        
+        if self.allowFaceView {
+            let origin = CGPoint(x: kScreenWidth-buttonSize.width*2, y: toolBarHeight-buttonSize.height)
+            emoticonButton.frame = CGRect(origin: origin, size: buttonSize)
+        } else {
+            emoticonButton.frame = CGRect.zero
+        }
+        
+        var textViewX = voiceButton.right
+        var textViewWidth = emoticonButton.left - voiceButton.right
+        
+        if textViewX == 0 {
+            textViewX = 8
+            textViewWidth -= textViewX
+        }
+        
+        let height = self.textViewLineHeight()
+        inputTextView.frame = CGRect(x: textViewX, y: (kChatToolBarHeight - height)/2.0,
+                                     width: textViewWidth, height: height)
+        recordButton.frame = inputTextView.frame
+    }
+    
+    
+    func setupTopLine() {
+        let line = UIView()
+        line.width = self.width
+        line.height = YYTextCGFloatFromPixel(1)
+        line.backgroundColor = UIColor(hex: "#e9e9e9")
+        line.autoresizingMask = .flexibleWidth
+        self.addSubview(line)
+    }
+
+    public func setTextViewContent(_ content: String) {
+        self.currentText = content
+        self.inputTextView.text = content
+    }
+    
+    public func clearTextViewContent() {
+        self.currentText = ""
+        self.inputTextView.text = ""
+    }
     
     func beginInputing() {
         self.inputTextView.becomeFirstResponder()
@@ -181,9 +196,17 @@ public class CWInputToolBar: UIView {
             return
         }
         voiceButton.isSelected = false
-        emotionButton.isSelected = false
+        emoticonButton.isSelected = false
         moreButton.isSelected = false
         updateToolStatus(.initial)
+    }
+    
+    func prepareForBeginComment() {
+        
+    }
+    
+    func prepareForEndComment() {
+        
     }
     
     //MARK: Action
@@ -191,8 +214,8 @@ public class CWInputToolBar: UIView {
         // 加个判断
         var selectStatus = CWToolBarStatus(rawValue: button.tag)!
         
-        if button == emotionButton {
-            emotionButton.isSelected = !emotionButton.isSelected
+        if button == emoticonButton {
+            emoticonButton.isSelected = !emoticonButton.isSelected
             moreButton.isSelected = false
             voiceButton.isSelected = false
         } else if button == moreButton {
@@ -205,11 +228,11 @@ public class CWInputToolBar: UIView {
             }
             
             
-            emotionButton.isSelected = false
+            emoticonButton.isSelected = false
             moreButton.isSelected = !moreButton.isSelected
             voiceButton.isSelected = false
         } else if button == voiceButton {
-            emotionButton.isSelected = false
+            emoticonButton.isSelected = false
             moreButton.isSelected = false
             voiceButton.isSelected = !voiceButton.isSelected
         }
@@ -243,15 +266,53 @@ public class CWInputToolBar: UIView {
         
     }
     
+    func handelVoiceClick(_ sender: UIButton) {
+        self.voiceButton.isSelected = !self.voiceButton.isSelected
+        self.emoticonButton.isSelected = false
+        self.moreButton.isSelected = false
+
+        var keyBoardChanged = true
+        if sender.isSelected {
+            if inputTextView.isFirstResponder == false {
+                keyBoardChanged = false
+            }
+            self.adjustTextViewContentSize()
+            self.inputTextView.resignFirstResponder()
+        } else {
+            self.resumeTextViewContentSize()
+            self.inputTextView.becomeFirstResponder()
+        }
+        
+        UIView.animate(withDuration: 0.2) { 
+            self.recordButton.isHidden = !sender.isSelected
+            self.inputTextView.isHidden = sender.isSelected
+        }
+        self.delegate?.chatToolBar(self, voiceButtonPressed: sender.isSelected, keyBoardState: keyBoardChanged)
+    }
     
-    // MARK: 
-    func showVoiceView(_ show: Bool) {
+    func handelEmotionClick(_ sender: UIButton) {
+        self.emoticonButton.isSelected = !self.emoticonButton.isSelected
+        self.voiceButton.isSelected = false
+        self.moreButton.isSelected = false
         
-        self.voiceButton.isSelected = show
-        self.recordButton.isSelected = show
-        self.recordButton.isHidden = !show
+        var keyBoardChanged = true
+        if sender.isSelected {
+            if inputTextView.isFirstResponder == false {
+                keyBoardChanged = false
+            }
+            self.inputTextView.resignFirstResponder()
+        } else {
+            self.inputTextView.becomeFirstResponder()
+        }
         
-        self.inputTextView.isHidden = !self.recordButton.isHidden
+        self.resumeTextViewContentSize()
+
+        UIView.animate(withDuration: 0.2) {
+            self.recordButton.isHidden = !sender.isSelected
+            self.inputTextView.isHidden = sender.isSelected
+        }
+        self.delegate?.chatToolBar(self, voiceButtonPressed: sender.isSelected, keyBoardState: keyBoardChanged)
+        
     }
     
     // MARK: 功能
@@ -270,7 +331,7 @@ public class CWInputToolBar: UIView {
     // MARK: 高度变化
     func layoutAndAnimateTextView() {
         
-        let maxHeight = self.textViewLineHeight() * 5
+        let maxHeight = self.textViewLineHeight() * 4
         let contentHeight = ceil(inputTextView.sizeThatFits(inputTextView.size).height)
     
         let isShrinking = contentHeight < self.previousTextViewHeight
@@ -318,20 +379,28 @@ public class CWInputToolBar: UIView {
     func adjustTextViewHeightBy(_ changeInHeight: CGFloat) {
         
         let prevFrame = self.inputTextView.frame
-//        let numLines = self.inputTextView.numberOfLinesOfText()
-        self.inputTextView.frame = CGRect(x: prevFrame.x, 
+        let numLines = self.inputTextView.numberOfLinesOfText()
+        
+        self.inputTextView.frame = CGRect(x: prevFrame.x,
                                           y: prevFrame.y,
                                           width: prevFrame.width, 
                                           height: prevFrame.height + changeInHeight)
-        self.inputTextView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+       
+        if numLines > 6 {
+            self.inputTextView.contentInset = UIEdgeInsetsMake(4, 0, 4, 0)
+        } else {
+            self.inputTextView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        }
+        
+        if numLines > 6 {
+            
+        }
     }
     
     //MARK: 计算高度
     func textViewLineHeight() -> CGFloat {
         return 36.0
     }
-    
-    
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -341,11 +410,11 @@ public class CWInputToolBar: UIView {
 }
 
 // MARK: - UITextViewDelegate
-extension CWInputToolBar: UITextViewDelegate {
+extension CWChatToolBar: UITextViewDelegate {
     // 开始编辑的时候
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         voiceButton.isSelected = false
-        emotionButton.isSelected = false
+        emoticonButton.isSelected = false
         moreButton.isSelected = false
         return true
     }
@@ -370,27 +439,22 @@ extension CWInputToolBar: UITextViewDelegate {
     
     ///发送文字
     func sendCurrentTextViewText() {
-        guard self.inputTextView.text.characters.count > 0 else {
-            return
-        }
-        
-        delegate?.chatInputView(self, sendText: self.inputTextView.text)
-        //还有待修改
-        self.inputTextView.text = ""
+        delegate?.chatToolBar(self, sendText: self.inputTextView.text)
+        self.currentText = ""
     }
     
 }
 
 
 // 暂时的，需要修改。
-extension CWInputToolBar:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+extension CWChatToolBar:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        self.delegate?.chatInputView(self, image: image)
+        self.delegate?.chatToolBar(self, image: image)
         picker.dismiss(animated: true, completion: nil)
     }
     

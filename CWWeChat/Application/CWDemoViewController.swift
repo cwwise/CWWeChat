@@ -13,6 +13,8 @@ class CWDemoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.automaticallyAdjustsScrollViewInsets = false
+        
         let moreView = CWMoreInputView()
         moreView.loadMoreItems(CWMoreInputViewHelper().chatMoreKeyboardData)
         moreView.bottom = self.view.height

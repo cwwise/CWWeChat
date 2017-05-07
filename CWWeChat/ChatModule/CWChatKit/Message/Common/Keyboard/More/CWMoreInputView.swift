@@ -16,7 +16,7 @@ public protocol CWMoreInputViewDelegate: NSObjectProtocol {
 
 private let kOneLines: Int = 2
 private let kOneLineItem: Int = 4
-private let kOneItemHeight: CGFloat = 158/2
+private let kOneItemHeight: CGFloat = 280/3
 
 public class CWMoreInputView: UIView {
     
@@ -26,7 +26,7 @@ public class CWMoreInputView: UIView {
     var pageItemCount: Int = 0
     
     private convenience init() {
-        let size = CGSize(width: kScreenWidth, height: kMoreKeyBoardHeight)
+        let size = CGSize(width: kScreenWidth, height: kMoreInputViewHeight)
         let origin = CGPoint(x: 0, y: kScreenHeight-size.height)
         let frame = CGRect(origin: origin, size: size)
         self.init(frame: frame)
@@ -34,10 +34,10 @@ public class CWMoreInputView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        self.backgroundColor = UIColor(hex: "#E7EFF5")
         self.addSubview(collectionView)
         self.addSubview(pageControl)
-        pageControl.top = collectionView.bottom + 10
+        pageControl.top = collectionView.bottom
     }
     
     weak var deleagte: CWMoreInputViewDelegate?
@@ -53,6 +53,7 @@ public class CWMoreInputView: UIView {
     }
     
     lazy var collectionView: UICollectionView = {
+        // 间距
         var itemWidth = (kScreenWidth - 10*2)/CGFloat(kOneLineItem)
         itemWidth = YYTextCGFloatPixelRound(itemWidth)
         
@@ -67,11 +68,14 @@ public class CWMoreInputView: UIView {
         layout.minimumInteritemSpacing = 0
         layout.sectionInset = UIEdgeInsetsMake(0, paddingLeft, 0, paddingRight)
         
-        let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kOneItemHeight*CGFloat(kOneLines)+11)
+        let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kOneItemHeight*CGFloat(kOneLines))
         var collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
-        collectionView.top = 15
         collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor.clear
+        collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(CWMoreItemCell.self, forCellWithReuseIdentifier: CWMoreItemCell.identifier)
+        collectionView.top = 10
         return collectionView
     }()
     
@@ -79,8 +83,8 @@ public class CWMoreInputView: UIView {
         let pageControl = CHIPageControlAleppo(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 25))
         pageControl.radius = 4
         pageControl.hidesForSinglePage = true
-        pageControl.tintColor = UIColor.gray
-        pageControl.currentPageTintColor = UIColor.white
+        pageControl.tintColor = UIColor(hex: "#BBBBBB")
+        pageControl.currentPageTintColor = UIColor(hex: "#8B8B8B")
         pageControl.progress = 0
         return pageControl
     }()
@@ -93,11 +97,11 @@ public class CWMoreInputView: UIView {
 extension CWMoreInputView: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return totalPageCount
+        return pageItemCount
     }
     
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return pageItemCount
+        return totalPageCount
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -108,7 +112,7 @@ extension CWMoreInputView: UICollectionViewDataSource {
     
     func moreItemForIndexPath(_ indexPath: IndexPath) -> CWMoreItem? {
         var index = indexPath.section * self.pageItemCount + indexPath.row
-        
+//
         let page = index / self.pageItemCount
         index = index % self.pageItemCount
         
@@ -117,7 +121,7 @@ extension CWMoreInputView: UICollectionViewDataSource {
 
         let resultIndex = self.pageItemCount / kOneLines * y + x + page * self.pageItemCount
         if resultIndex > items.count - 1 {
-            return items.last
+            return nil
         }
         return items[resultIndex]
     }
