@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class CWDemoViewController: UIViewController {
 
@@ -14,7 +15,49 @@ class CWDemoViewController: UIViewController {
         super.viewDidLoad()
         
       
+        guard let emoticonPath = Bundle.main.path(forResource: "Emotion", ofType: "bundle"),
+        let emoticonBundle = Bundle(path: emoticonPath),
+            let plist = emoticonBundle.path(forResource: "emotions", ofType: "plist"),
+            let array = NSArray(contentsOfFile: plist) else {
+                return
+        }
+        
+        var groups = [CWEmoticonGroup]()
+
+        let json = JSON(array)
+        for groupInfo in json.arrayValue {
+            
+            let type = groupInfo["type"].stringValue
+            let groupId = groupInfo["groupid"].stringValue
+            let groupName = groupInfo["groupname"].stringValue
+            let groupicon = groupInfo["groupicon"].stringValue
+            
+            var emoticons = [CWEmoticon]()
+            
+            let items = groupInfo["items"].arrayValue
+            for item in items {
+                
+                if type == "image" {
+                    let emoticon = CWEmoticon(chs: item["text"].stringValue,
+                                              png: item["image"].stringValue)
+                    emoticons.append(emoticon)
+                }
+                
+            }
+            
+            if type == "expression" {
+                break
+            }
+            
+            let group = CWEmoticonGroup(groupID: groupId,
+                                        groupName: groupName,
+                                        groupIcon: groupicon,
+                                        emoticons: emoticons)
+            groups.append(group)
+        }
+        
         let keyboard = CWChatKeyboard()
+        keyboard.emoticonInputView.setupGroup(groups)
         self.view.addSubview(keyboard)
         // Do any additional setup after loading the view.
     }

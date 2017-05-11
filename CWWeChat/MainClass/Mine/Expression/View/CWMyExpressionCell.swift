@@ -14,7 +14,7 @@ protocol CWMyExpressionCellDelegate: class{
 
 class CWMyExpressionCell: UITableViewCell {
 
-    var group: CWEmojiGroup? {
+    var group: CWEmoticonGroup? {
         didSet {
             setupInfo()
         }

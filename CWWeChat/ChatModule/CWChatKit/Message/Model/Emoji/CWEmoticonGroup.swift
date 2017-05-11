@@ -8,22 +8,24 @@
 
 import UIKit
 
-class CWEmojiGroup: NSObject {
+class CWEmoticonGroup: NSObject {
     
     var groupID: String
     var groupName: String
     var groupIcon: String
-    var emoticons: [CWEmoji] = [CWEmoji]()
+    var emoticons: [CWEmoticon] = [CWEmoticon]()
     
     init(groupID: String, 
          groupName: String,
          groupIcon: String,
-         emoticons: [CWEmoji]) {
+         emoticons: [CWEmoticon]) {
         self.groupID = groupID
         self.groupName = groupName
         self.groupIcon = groupIcon
         self.emoticons = emoticons
     }
+    
+    
     
 }
 

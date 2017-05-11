@@ -11,22 +11,13 @@ import YYWebImage
 
 class CWEmoticonCell: UICollectionViewCell {
     
-    var emoticon: CWEmoji? {
-        willSet {
-            if newValue == emoticon {
-                return
-            }
+    var emoticon: CWEmoticon? {
+        didSet {
+            updateContent()
         }
     }
     
-    var isDelete: Bool = false {
-        willSet {
-            if newValue == isDelete {
-                return
-            }
-        }
-    }
-    
+    var isDelete: Bool = false
     var imageView: UIImageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -40,10 +31,16 @@ class CWEmoticonCell: UICollectionViewCell {
     func updateContent() {
         // 先简单判断 后期加上 网络表情的处理
         if isDelete {
-            imageView.image = nil
+            imageView.image = UIImage(named: "DeleteEmoticonBtn")
         } else {
-            let imagePath = Bundle.main.path(forResource: emoticon?.png, ofType: nil)
-            imageView.yy_setImage(with: URL(fileURLWithPath: imagePath!), options: .ignoreDiskCache)
+            if let emoticon = emoticon {
+                let emoticonPath = Bundle.main.path(forResource: "Emotion", ofType: "bundle")
+                let emoticonBundle = Bundle(path: emoticonPath!)
+                let imagePath = emoticonBundle?.path(forResource: emoticon.png!+"@2x", ofType: "png")
+                imageView.yy_setImage(with: URL(fileURLWithPath: imagePath!), options: .ignoreDiskCache)
+            } else {
+               imageView.image = nil
+            }
         }
         
     }

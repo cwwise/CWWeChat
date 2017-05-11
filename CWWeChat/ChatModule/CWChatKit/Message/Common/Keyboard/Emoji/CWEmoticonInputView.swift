@@ -31,20 +31,23 @@ class CWEmoticonInputView: UIView {
     weak var delegate: CWEmoticonInputViewDelegate?
     
     var collectionView: CWEmoticonScrollView!
-    
+    // 表情数组
+    var emoticonGroups = [CWEmoticonGroup]()
     var emoticonGroupPageIndexs = [Int]()
     var emoticonGroupPageCounts = [Int]()
+    // 当前页面数
+    var currentPageIndex: Int = 0
+    // 总共页码
+    var emoticonGroupTotalPageCount: Int = 0
     
     var sendButton: UIButton = UIButton(type: .custom)
-    var currentPageIndex: Int = 0
-    var emoticonGroupTotalPageCount: Int = 0
+
     
     private override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor(hex: "#E7EFF5")
 
         setupTopLine()
-        setupGroup()
         setupCollectionView()
         setupToolbar()
     }
@@ -58,9 +61,8 @@ class CWEmoticonInputView: UIView {
         self.addSubview(line)
     }
     
-    func setupGroup() {
-        let emoticonGroups = [CWEmojiGroup]()
-        
+    func setupGroup(_ emoticonGroups: [CWEmoticonGroup]) {
+        self.emoticonGroups = emoticonGroups
         var indexs = [Int]()
         var index = 0
         for group in emoticonGroups {
@@ -85,6 +87,8 @@ class CWEmoticonInputView: UIView {
             emoticonGroupTotalPageCount += Int(pageCount)
         }
         emoticonGroupPageCounts = pageCounts
+        self.collectionView.reloadData()
+        
     }
     
     func setupCollectionView() {
@@ -137,9 +141,32 @@ class CWEmoticonInputView: UIView {
         toolbar.addSubview(sendButton)
     }
     
-    func emoticonForIndexPath(_ indexPath: IndexPath) -> CWEmoticonCell? {
+    func emoticonForIndexPath(_ indexPath: IndexPath) -> CWEmoticon? {
         let section = indexPath.section
-        
+    
+        for i in (0...emoticonGroupPageIndexs.count-1).reversed() {
+            
+            let pageIndex = emoticonGroupPageIndexs[i]
+            if section >= pageIndex {
+                
+                let group = emoticonGroups[i]
+                let page = section - pageIndex
+                var index = page * kOnePageCount+indexPath.row
+                
+                // transpose line/row
+                let ip = index / kOnePageCount
+                let ii = index % kOnePageCount
+                let reIndex = (ii % 3) * kOnePageCount + (ii / 3)
+                index = reIndex + ip * kOnePageCount
+                
+                if index < group.emoticons.count {
+                    return group.emoticons[index]
+                } else {
+                    return nil
+                }
+            }
+            
+        }
         
         return nil
     }
@@ -202,7 +229,7 @@ extension CWEmoticonInputView: UICollectionViewDataSource {
             cell.emoticon = nil
         } else {
             cell.isDelete = false
-            
+            cell.emoticon = self.emoticonForIndexPath(indexPath)
         }
         
         return cell

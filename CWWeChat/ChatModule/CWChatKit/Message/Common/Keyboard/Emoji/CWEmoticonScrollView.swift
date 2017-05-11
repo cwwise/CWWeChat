@@ -16,7 +16,9 @@ class CWEmoticonScrollView: UICollectionView {
 
     // magnifier是长按 之后展示表情的部分
     var magnifier: UIImageView = {
-        let magnifier = UIImageView()
+        let magnifier = UIImageView(image: UIImage(named: "EmoticonTips"))
+        magnifier.size = CGSize(width: 50, height: 80)
+        magnifier.isHidden = true
         return magnifier
     }()
     
@@ -44,7 +46,15 @@ class CWEmoticonScrollView: UICollectionView {
         
         magnifier.addSubview(magnifierLabel)
         magnifier.addSubview(magnifierContent)
+        magnifierContent.centerX = magnifier.width/2
+        magnifierLabel.top = 49
+        magnifierLabel.centerX = magnifier.width/2
 
+        self.showsHorizontalScrollIndicator = false
+        self.isPagingEnabled = true
+        self.canCancelContentTouches = false
+        self.isMultipleTouchEnabled = false
+        self.clipsToBounds = false
         self.addSubview(magnifier)
     }
     
@@ -154,9 +164,11 @@ class CWEmoticonScrollView: UICollectionView {
         }
         
         let rect = cell.convert(cell.bounds, to: self)
-        magnifier.centerX = rect.minX
+        magnifier.centerX = rect.midX
         magnifier.bottom = rect.maxY - 9;
         magnifier.isHidden = false;
+        
+        magnifierLabel.text = cell.emoticon?.chs
         
         magnifierContent.image = cell.imageView.image
         magnifierContent.top = 20;
@@ -179,7 +191,7 @@ class CWEmoticonScrollView: UICollectionView {
     }
     
     func hideMagnifier() {
-        magnifier.isHighlighted = true
+        magnifier.isHidden = true
     }
     
 }
