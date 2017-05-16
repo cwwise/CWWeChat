@@ -15,15 +15,6 @@ public enum CWEmojiType: Int {
     case expression
 }
 
-public enum CWToolBarStatus: Int {
-    case initial
-    case emoji
-    case voice
-    case more
-    case keyboard
-}
-
-
 ///键盘相关的枚举
 public enum CWMoreItemType: Int {
     case image
@@ -40,9 +31,9 @@ public enum CWMoreItemType: Int {
 }
 
 
-let kMoreKeyBoardHeight: CGFloat = 216
+let kMoreInputViewHeight: CGFloat = 216
 let kChatToolBarHeight: CGFloat = 49
 
-let kChatKeyBoardHeight = kMoreKeyBoardHeight + kChatToolBarHeight
+let kChatKeyboardHeight = kMoreInputViewHeight + kChatToolBarHeight
 
 

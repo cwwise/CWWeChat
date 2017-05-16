@@ -23,23 +23,22 @@ class CWShareCell: UITableViewCell {
     
     weak var delegate: CWShareCellDelegate?
     var cellLayout: CWShareLayout?
-    
-    var pictureViews: [UIImageView] = [UIImageView]()
-    
+
+    // 头像
     lazy var avatarImageView: UIImageView = {
         let avatarView = UIImageView()
         avatarView.origin = CGPoint(x: CWShareUI.kTopMargin, y: CWShareUI.kLeftMargin)
         avatarView.size = CWShareUI.kAvatarSize
         return avatarView
     }()
-    
+    // 用户名
     lazy var nameLabel: YYLabel = {
         let nameLabel = YYLabel()
         nameLabel.origin = CGPoint(x: self.avatarImageView.right+CWShareUI.kPaddingText, y: CWShareUI.kTopMargin)
         nameLabel.size = CWShareUI.kUsernameSize
         return nameLabel
     }()
-    
+    // 内容
     lazy var contentLabel: YYLabel = {
         let contentLabel = YYLabel()
         contentLabel.left = self.nameLabel.left
@@ -47,6 +46,14 @@ class CWShareCell: UITableViewCell {
         return contentLabel
     }()
     
+    // 图片
+    var pictureViews: [UIImageView] = [UIImageView]()
+    
+    // 评论部分
+    lazy var commnetView: CWShareCommentView = {
+        let commnetView = CWShareCommentView()
+        return commnetView
+    }()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -76,6 +83,7 @@ class CWShareCell: UITableViewCell {
             self.contentView.addSubview(imageView)
         }
         
+        self.contentView.addSubview(commnetView)
         
     }
     
@@ -108,11 +116,20 @@ class CWShareCell: UITableViewCell {
         self.contentLabel.textLayout = layout.textLayout
         self.contentLabel.height = layout.textHeight
         self.contentLabel.top = top
-        
-        // 图片
         top += layout.textHeight
+
+        // 图片
         top += layout.pictureMargin
         self.setImageViewsWithTop(top)
+        top += layout.pictureHeight
+        
+        // 时间和评论
+        
+        // 点赞和评论列表
+        let frame = CGRect(x: contentLabel.left, y: top+10,
+                           width: CWShareUI.kContentWidth, height: layout.commentHeight)
+        self.commnetView.frame = frame
+        
     }
     
     func setImageViewsWithTop(_ imageTop: CGFloat) {
@@ -158,6 +175,8 @@ class CWShareCell: UITableViewCell {
         }
         
     }
+    
+    
     
     
     required init?(coder aDecoder: NSCoder) {

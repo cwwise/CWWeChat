@@ -27,6 +27,12 @@ class CWShareVideoModel: NSObject {
     }
 }
 
+enum CWShareType: Int {
+    case normal // 图文
+    case vidio  // 视频
+    case url
+}
+
 class CWShareModel: NSObject {
     
     /// 分享id
@@ -37,14 +43,24 @@ class CWShareModel: NSObject {
     var userId: String
     
     var date: Date
+    
+    var shareType: CWShareType = .normal
 
     var content: String?
-    
     var videoModel: CWShareVideoModel?
     
     var imageArray = [CWSharePictureModel]()
     var commentArray = [CWShareReplyModel]()
     var praiseArray = [CWShareReplyModel]()
+        
+    // 是否上传成功
+    var sendSuccess: Bool = true
+    // 是否已经读过
+    var isRead: Bool = false
+    // 是否点赞
+    var isPraise: Bool = false
+    // 是否删除
+    var isDelete: Bool = false
 
     init(shareId: String, username: String, userId: String, date: Date) {
         

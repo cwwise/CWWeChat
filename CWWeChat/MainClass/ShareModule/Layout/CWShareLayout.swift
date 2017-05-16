@@ -67,6 +67,10 @@ class CWShareLayout: NSObject {
         height += pictureMargin
         height += pictureHeight
 
+        commentHeight = 40
+        
+        height += commentHeight
+        
         height += marginBottom
     }
     

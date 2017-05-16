@@ -19,7 +19,7 @@ extension UIButton {
     public func doCircleRadius(_ radiu: CGFloat, borderColor color:UIColor = UIColor.gray) {
         self.clipsToBounds = true
         self.layer.cornerRadius = radiu
-        self.layer.borderWidth = 0.5
+        self.layer.borderWidth = 1/kScreenScale
         self.layer.borderColor = color.cgColor
     }
     

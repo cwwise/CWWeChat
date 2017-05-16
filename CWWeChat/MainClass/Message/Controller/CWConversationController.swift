@@ -27,10 +27,16 @@ class CWConversationController: CWBaseConversationController {
             // Fallback on earlier versions
         }
         
-        //把聊天界面图片缓存
     }
     
     func sendMessage() {
+        
+        
+        let demo = CWDemoViewController()
+        demo.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(demo, animated: true)
+        return
+        
         let chatVC = CWChatMessageController(targetId: "chenwei")
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)

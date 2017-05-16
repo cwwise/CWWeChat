@@ -79,7 +79,7 @@ class CWBaseMessageController: UIViewController {
     /// TableView
     lazy var tableView: UITableView = {
         let frame = CGRect(x: 0, y: 0,
-                           width: kScreenWidth, height: kScreenHeight-45)
+                           width: kScreenWidth, height: kScreenHeight-kChatToolBarHeight)
         let tableView = UITableView(frame: frame, style: .plain)
         tableView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
         tableView.backgroundColor = UIColor.tableViewBackgroundColor()
@@ -91,10 +91,10 @@ class CWBaseMessageController: UIViewController {
         return tableView
     }()
     
-    lazy var chatToolBar: CWInputToolBar = {
-        let frame = CGRect(x: 0, y: kScreenHeight-45,
-                           width: kScreenWidth, height: 45)
-        let chatToolBar = CWInputToolBar(frame:frame)
+    lazy var chatToolBar: CWChatToolBar = {
+        let frame = CGRect(x: 0, y: kScreenHeight-kChatToolBarHeight,
+                           width: kScreenWidth, height: kChatToolBarHeight)
+        let chatToolBar = CWChatToolBar(frame:frame)
         chatToolBar.delegate = self
         return chatToolBar
     }()
@@ -288,19 +288,32 @@ extension CWBaseMessageController: CWChatMessageCellDelegate {
 
 
 // MARK: - CWInputToolBarDelegate
-extension CWBaseMessageController: CWInputToolBarDelegate {
+extension CWBaseMessageController: CWChatToolBarDelegate {
+
+    func chatToolBar(_ chatToolBar: CWChatToolBar, emoticonButtonPressed select: Bool, keyBoardState change: Bool) {
+        
+    }
+    
+    func chatToolBar(_ chatToolBar: CWChatToolBar, moreButtonPressed select: Bool, keyBoardState change: Bool) {
+        
+    }
+    
+    func chatToolBar(_ chatToolBar: CWChatToolBar, voiceButtonPressed select: Bool, keyBoardState change: Bool) {
+        
+    }
+    
+    
     //
-    func chatInputView(_ inputView: CWInputToolBar, sendText text: String) {
+    func chatToolBar(_ chatToolBar: CWChatToolBar, sendText text: String) {
         
         let textObject = CWTextMessageBody(text: text)
         let message = CWChatMessage(targetId: conversation.targetId,
                                     direction: .send,
                                     messageBody: textObject)
         self.sendMessage(message)
-    
     }
     
-    func chatInputView(_ inputView: CWInputToolBar, image: UIImage) {
+    func chatToolBar(_ chatToolBar: CWChatToolBar, image: UIImage) {
         
         let imageName = String.UUIDString()+".jpg"
         let cache = CWChatKit.share.chatWebImageManager.cache
@@ -310,7 +323,6 @@ extension CWBaseMessageController: CWInputToolBarDelegate {
         let message = CWChatMessage(targetId: conversation.targetId,
                                     direction: .send,
                                     messageBody: imageBody)
-
         self.sendMessage(message)
     }
     
