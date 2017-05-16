@@ -281,7 +281,7 @@ extension CWChatXMPPManager: XMPPStreamManagementDelegate {
     func xmppStreamManagement(_ sender: XMPPStreamManagement!, didReceiveAckForStanzaIds stanzaIds: [Any]!) {
         // 收到id
         guard let messageid = stanzaIds as? [String] else {
-            return
+            return 
         }
         log.debug(messageid)
         NotificationCenter.default.post(name: kCWMessageDispatchSuccessNotification, object: messageid)

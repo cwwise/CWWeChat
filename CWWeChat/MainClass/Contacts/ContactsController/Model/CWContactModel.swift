@@ -26,7 +26,9 @@ public class CWContactModel: NSObject {
         
     }
     /// 头像URL
-    var avatarURL: String?
+    var avatarURL: URL?
+    var avatarPath: String?
+
     /// 备注
     var remarkName: String?
     /**
@@ -34,9 +36,9 @@ public class CWContactModel: NSObject {
      *
      *  来源：备注 > 昵称 > 用户名
      */
-    ///拼音缩写
+    /// 拼音缩写
     var pinying: String = ""
-    ///拼音首字母
+    /// 拼音首字母
     var pinyingInitial: String = ""
     
     // 详情

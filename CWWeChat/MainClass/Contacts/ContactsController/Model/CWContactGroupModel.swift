@@ -35,6 +35,10 @@ class CWContactGroupModel: NSObject {
         contactList.append(model)
     }
     
+    func append(contentsOf models: [CWContactModel]) {
+        contactList.append(contentsOf: models)
+    }
+    
     subscript(index: Int) -> CWContactModel? {
         get {
             if index > contactList.count {return nil}
