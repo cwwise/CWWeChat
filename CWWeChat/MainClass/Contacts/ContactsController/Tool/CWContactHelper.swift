@@ -17,7 +17,7 @@ public class CWContactHelper: NSObject {
 
     static let share = CWContactHelper()
     ///默认的分组
-    fileprivate var defaultGroup: CWContactGroupModel!
+    fileprivate var defaultGroup = CWContactGroupModel()
     
     var contactsData = [CWContactModel]()
     var contactsDict = [String: CWContactModel]()
@@ -60,12 +60,12 @@ public class CWContactHelper: NSObject {
         let contactList = JSON(data: contantData!)
         
         for (_,subJson):(String, JSON) in contactList {
-            let userId = subJson["userID"].string!
-            let username = subJson["username"].string!
+            let userId = subJson["userID"].stringValue
+            let username = subJson["username"].stringValue
             let user = CWContactModel(userId: userId, username: username)
             user.remarkName = subJson["remarkName"].string
             user.nickname = subJson["nikeName"].string
-            user.avatarURL = subJson["avatarURL"].string
+            user.avatarURL = subJson["avatarURL"].url
             contactsData.append(user)
             contactsDict[userId] = user
         }
@@ -94,54 +94,45 @@ public class CWContactHelper: NSObject {
         // 遍历数据 根据首字母 如果没有拼音字母 则添加到＃组别中
         let othergroup = CWContactGroupModel(groupName: "#")
         
-        var currentGroup: CWContactGroupModel?
-        var lastInitial = "-1"
+        // 第一组
+        var tempInitial = contactsData[0].pinyingInitial.fistLetter
+        var currentGroup = CWContactGroupModel(groupName: tempInitial)
+        analyzeGroupData.append(currentGroup)
+        sectionHeaders.append(tempInitial)
         
         for contactModel in contactsData {
 
             //首字母
-            let initial = contactModel.pinyingInitial.fistLetter            
+            let initial = contactModel.pinyingInitial.fistLetter         
             if matchLetter(string: initial) == false {
                 othergroup.append(contactModel)
                 continue
             }
             
             //如果不相同，则说明之前没有这个首字母添加到数组，
-            if initial != lastInitial {
-                
-                if let currentGroup = currentGroup,
-                    currentGroup.contactCount > 0{
-                    analyzeGroupData.append(currentGroup)
-                    sectionHeaders.append(currentGroup.groupName!)
-                }
-                
-                lastInitial = initial
+            if initial != tempInitial {
+            
+                tempInitial = initial
                 currentGroup = CWContactGroupModel(groupName: initial)
-                currentGroup?.append(contactModel)
+                currentGroup.append(contactModel)
+            
+                analyzeGroupData.append(currentGroup)
+                sectionHeaders.append(tempInitial)
                 
             } else {
-                currentGroup!.append(contactModel)
+                currentGroup.append(contactModel)
             }
             
-            
         }
         
-        
-        if (currentGroup != nil) && currentGroup!.contactCount > 0 {
-            analyzeGroupData.append(currentGroup!)
-            sectionHeaders.append(lastInitial)
-        }
         
         if (othergroup.contactCount > 0) {
             analyzeGroupData.append(othergroup)
             sectionHeaders.append(othergroup.groupName!)
         }
         
-        sortContactsData.removeAll()
-        sortContactsData.append(contentsOf: analyzeGroupData)
-        
-        sortSectionHeaders.removeAll()
-        sortSectionHeaders.append(contentsOf: sectionHeaders)
+        sortContactsData = analyzeGroupData
+        sortSectionHeaders = sectionHeaders
     
         DispatchQueue.main.async(execute: {
             self.dataChange?(self.sortContactsData,
@@ -151,6 +142,7 @@ public class CWContactHelper: NSObject {
         
     }
     
+    // 判断是否为字母
     func matchLetter(string: String) -> Bool {
         if string.characters.count == 0 {return false}
         let index = string.index(string.startIndex, offsetBy: 1)
@@ -170,10 +162,10 @@ public class CWContactHelper: NSObject {
         for index in 0..<titleArray.count {
             let item = CWContactModel(userId: idArray[index], username: "")
             item.nickname = titleArray[index]
-            item.avatarURL = iconArray[index]
+            item.avatarPath = iconArray[index]
             contactArray.append(item)
         }
-        defaultGroup = CWContactGroupModel(contactList: contactArray)
+        defaultGroup.append(contentsOf: contactArray)
     }
     
 }
