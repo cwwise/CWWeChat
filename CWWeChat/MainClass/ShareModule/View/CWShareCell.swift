@@ -49,6 +49,20 @@ class CWShareCell: UITableViewCell {
     // 图片
     var pictureViews: [UIImageView] = [UIImageView]()
     
+    lazy var timeLabel: YYLabel = {
+        let timeLabel = YYLabel()
+        timeLabel.left = self.nameLabel.left
+        timeLabel.size = CGSize(width: 120, height: 17)
+        return timeLabel
+    }()
+    
+    lazy var toolButton: UIButton = {
+        let toolButton = UIButton(type: .custom)
+        toolButton.size = CGSize(width: 20, height: 17)
+        toolButton.setImage(UIImage(named: "share_action"), for: .normal)
+        return toolButton
+    }()
+    
     // 评论部分
     lazy var commnetView: CWShareCommentView = {
         let commnetView = CWShareCommentView()
@@ -82,7 +96,8 @@ class CWShareCell: UITableViewCell {
             pictureViews.append(imageView)
             self.contentView.addSubview(imageView)
         }
-        
+        self.contentView.addSubview(timeLabel)
+        self.contentView.addSubview(toolButton)
         self.contentView.addSubview(commnetView)
         
     }
@@ -102,7 +117,8 @@ class CWShareCell: UITableViewCell {
         self.cellLayout = layout
         let share = layout.shareModel
         // 头像
-        let avatarURL = URL(string: kHeaderImageBaseURLString+share.userId)
+        
+        let avatarURL = URL(string: "\(kImageBaseURLString)\(share.userId).jpg")
         self.avatarImageView.yy_setImage(with: avatarURL, placeholder: defaultHeadeImage)
         // 姓名
         self.nameLabel.textLayout = layout.nameTextLayout
@@ -123,10 +139,16 @@ class CWShareCell: UITableViewCell {
         self.setImageViewsWithTop(top)
         top += layout.pictureHeight
         
-        // 时间和评论
+        // 时间和操作
+        self.toolButton.top = top + 8
+        self.toolButton.right = kScreenWidth - CWShareUI.kLeftMargin
+
+        self.timeLabel.textLayout = layout.timeTextLayout
+        self.timeLabel.top = top + 8
         
+        top += layout.timeHeight
         // 点赞和评论列表
-        let frame = CGRect(x: contentLabel.left, y: top+10,
+        let frame = CGRect(x: contentLabel.left, y: top,
                            width: CWShareUI.kContentWidth, height: layout.commentHeight)
         self.commnetView.frame = frame
         

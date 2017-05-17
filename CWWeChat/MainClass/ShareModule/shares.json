@@ -1,0 +1,37 @@
+{
+    "code":"200",
+    "data": [{
+             "shareId":"",
+             "username": "陈威",
+             "userId": "chenwei",
+             "date": 1495026300017,
+             "type": 1,
+             "content": "有一天 春花秋月 夏蝉冬雪 不会散去 \n有一天 一关上门 一躺下来 不再离去 \n有一天 爱看的天 爱踏的地 我爱着的你",
+             "images": [{
+                        "thumbnailURL": "http://image.cwcoder.com/cwwechat001.jpg?imageView2/1/w/250/h/200/q/75",
+                        "largetURL": "http://image.cwcoder.com/cwwechat001.jpg"
+                        },
+                        {
+                        "thumbnailURL": "http://image.cwcoder.com/cwwechat002.jpg?imageView2/1/w/250/h/200/q/75",
+                        "largetURL": "http://image.cwcoder.com/cwwechat002.jpg"
+                        }]
+             },
+             {
+             "shareId":"124",
+             "username": "盖聂",
+             "userId": "diana",
+             "date": 1495026300017,
+             "type": 1,
+             "content": "田蜜主动联络田言，商讨为田虎争夺侠魁的相关事宜，并与蚩尤堂、烈山堂、共工堂结盟。\n 田蜜、英布、梅三娘、骨妖四人夺得准备带着残片离开时，胜七却突然出现，来向田蜜寻仇。梅三娘、骨妖一时不能取胜。田蜜让英布前去帮忙，但英布以只答应过田蜜抢夺荧惑之石为由拒绝出手。这时田仲及时赶到。田仲一人还不足以对付胜七，与梅三娘、骨妖一起使出农家的地泽二十四阵法。但胜七找出阵法破绽而破了阵法，这时田虎来到与胜七交战。",
+             "images": [{
+                        "thumbnailURL": "http://image.cwcoder.com/cwwechat003.jpg?imageView2/1/w/250/h/200/q/75",
+                        "largetURL": "http://image.cwcoder.com/cwwechat003.jpg"
+                        },
+                        {
+                        "thumbnailURL": "http://image.cwcoder.com/cwwechat004.jpg?imageView2/1/w/250/h/200/q/75",
+                        "largetURL": "http://image.cwcoder.com/cwwechat004.jpg"
+                        }]
+             }
+             
+             ]
+}

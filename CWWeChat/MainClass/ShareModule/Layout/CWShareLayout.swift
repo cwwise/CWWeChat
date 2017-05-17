@@ -24,7 +24,7 @@ class CWShareLayout: NSObject {
     var nameTextLayout: YYTextLayout?
     
     /// 上边距
-    var textMargin: CGFloat = 10
+    var textMargin: CGFloat = 6
     /// 文本高度
     var textHeight: CGFloat = 0
     /// 文本布局
@@ -35,7 +35,8 @@ class CWShareLayout: NSObject {
     var pictureHeight: CGFloat = 0
     /// 图片大小
     var pictureSize: CGSize = .zero
-    
+    // 总高度
+    var timeHeight: CGFloat = 33
     // 时间
     var timeTextLayout: YYTextLayout?
     // 点赞部分
@@ -69,6 +70,9 @@ class CWShareLayout: NSObject {
 
         commentHeight = 40
         
+        // 时间label中间的间隔
+        height += timeHeight
+        
         height += commentHeight
         
         height += marginBottom
@@ -83,7 +87,7 @@ class CWShareLayout: NSObject {
         
         let username = NSMutableAttributedString(string: shareModel.username)
         username.yy_color = UIColor(hex: "#576B95")
-        username.yy_font = UIFont.systemFont(ofSize: 16)
+        username.yy_font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium)
         
         let container = YYTextContainer(size: CWShareUI.kUsernameSize)
         nameTextLayout = YYTextLayout(container: container, text: username)

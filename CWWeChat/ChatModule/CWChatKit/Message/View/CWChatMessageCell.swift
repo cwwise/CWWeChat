@@ -160,7 +160,7 @@ class CWChatMessageCell: UITableViewCell {
             userId = message.targetId
         }
         
-        let avatarURL = "\(kHeaderImageBaseURLString)\(userId).jpg"
+        let avatarURL = "\(kImageBaseURLString)\(userId).jpg"
         avatarImageView.yy_setImage(with: URL(string: avatarURL), placeholder: defaultHeadeImage)
     }
     

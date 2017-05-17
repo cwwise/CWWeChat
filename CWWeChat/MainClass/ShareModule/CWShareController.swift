@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class CWShareController: CWBaseTableViewController {
 
@@ -26,27 +27,46 @@ class CWShareController: CWBaseTableViewController {
     }
     
     func setupUI() {
-        let shareId = "123"
-        let username = "陈威"
-        let userId = "cwwise"
-        let share_Date = Date()
         
-        let share = CWShareModel(shareId: shareId,
-                                 username: username,
-                                 userId: userId,
-                                 date: share_Date)
-        share.content = "有一天 春花秋月 夏蝉冬雪 不会散去 \n有一天 一关上门 一躺下来 不再离去 \n有一天 爱看的天 爱踏的地 我爱着的你"
         
-        for i in 1...5 {
-            let url1 = URL(string: "http://image.cwcoder.com/cwwechat00\(i).jpg")!
-            let url2 = URL(string: "http://image.cwcoder.com/cwwechat00\(i).jpg?imageView2/1/w/250/h/200/q/75")!
-
-            let imageModel = CWSharePictureModel(thumbnailURL: url2, largetURL: url1)
-            share.imageArray.append(imageModel)
+        guard let path = Bundle.main.path(forResource: "shares", ofType: "json"),
+            let shareData = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
+            return
         }
         
-        let layout = CWShareLayout(shareModel: share)
-        shareLayouts.append(layout)
+        guard let shareList = JSON(data: shareData).dictionary?["data"]?.array else {
+            return
+        }
+        
+        for share in shareList {
+            let shareId = share["share"].stringValue
+            let username = share["username"].stringValue
+            let userId = share["userId"].stringValue
+            let date = share["date"].doubleValue
+
+            let content = share["content"].string
+            let share_Date = Date(timeIntervalSince1970: date/1000)
+            let shareModel = CWShareModel(shareId: shareId,
+                                     username: username,
+                                     userId: userId,
+                                     date: share_Date)
+            shareModel.content = content
+            
+            let items = share["images"].arrayValue
+            for item in items {
+                let url1 = URL(string: item["largetURL"].stringValue)!
+                let url2 = URL(string: item["thumbnailURL"].stringValue)!
+
+                let imageModel = CWSharePictureModel(thumbnailURL: url2, largetURL: url1)
+                shareModel.imageArray.append(imageModel)
+            }
+            
+            let layout = CWShareLayout(shareModel: shareModel)
+            shareLayouts.append(layout)
+            
+        }
+        
+
         
     }
     

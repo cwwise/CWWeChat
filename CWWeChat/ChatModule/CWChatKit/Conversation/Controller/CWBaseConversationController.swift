@@ -81,7 +81,7 @@ extension CWBaseConversationController: CWChatUserInfoDataSource {
         //先从本地缓存获取，如果没有，则做网络请求来获取
         let model = CWChatUserModel(userId: "chenwei")
         model.nickname = userId
-        model.avatarURL = "\(kHeaderImageBaseURLString)\(userId).jpg"
+        model.avatarURL = "\(kImageBaseURLString)\(userId).jpg"
         completion(model)
     }
 }

@@ -30,7 +30,7 @@ extension CWPersonalInfoController {
 
         let avatarItem = CWTableViewItem(title: "头像")
         avatarItem.cellHeight = 87
-        avatarItem.rightImageURL = URL(string: "\(kHeaderImageBaseURLString)chenwei.jpg")
+        avatarItem.rightImageURL = URL(string: "\(kImageBaseURLString)chenwei.jpg")
 
         let nikename = "武藤游戏boy"
         let nikenameItem = CWTableViewItem(title: "名字", subTitle: nikename)

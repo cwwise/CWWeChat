@@ -13,7 +13,7 @@ public protocol CWChatUserInfoDataSource: NSObjectProtocol {
     func loadUserInfo(userId: String, completion: @escaping ( (CWChatUser?) -> Void))
 }
 
-public let kHeaderImageBaseURLString = "http://o7ve5wypa.bkt.clouddn.com/"
+public let kImageBaseURLString = "http://image.cwcoder.com/"
 
 public class CWChatKit: NSObject {
     /// 单例
