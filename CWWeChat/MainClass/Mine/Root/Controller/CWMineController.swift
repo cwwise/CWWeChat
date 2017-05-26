@@ -41,7 +41,7 @@ extension CWMineController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CWMineUserCell
             let model = CWContactModel(userId: "chenwei", username: "chenwei")
             model.nickname = "陈威"
-            model.avatarURL = "\(kImageBaseURLString)\(model.userId).jpg"
+            model.avatarURL = URL(string: "\(kImageBaseURLString)\(model.userId).jpg")
             
             cell.userModel = model
             return cell

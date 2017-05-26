@@ -1,6 +1,6 @@
 //
 //  ShareViewController.swift
-//  CWShareWeChat
+//  CWMomentWeChat
 //
 //  Created by wei chen on 2017/4/12.
 //  Copyright © 2017年 cwcoder. All rights reserved.

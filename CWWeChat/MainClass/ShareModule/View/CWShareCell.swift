@@ -1,5 +1,5 @@
 //
-//  CWShareCell.swift
+//  CWMomentCell.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/3/30.
@@ -11,38 +11,38 @@ import YYText
 import YYWebImage
 import RxSwift
 
-protocol CWShareCellDelegate: NSObjectProtocol {
+protocol CWMomentCellDelegate: NSObjectProtocol {
     
-    func shareCell(_ cell:CWShareCell, didClickImageAtIndex index:Int)
+    func shareCell(_ cell:CWMomentCell, didClickImageAtIndex index:Int)
     
-    func shareCell(_ cell:CWShareCell, didClickInText text:NSAttributedString, textRange: NSRange)
+    func shareCell(_ cell:CWMomentCell, didClickInText text:NSAttributedString, textRange: NSRange)
 }
 
 
-class CWShareCell: UITableViewCell {
+class CWMomentCell: UITableViewCell {
     
-    weak var delegate: CWShareCellDelegate?
-    var cellLayout: CWShareLayout?
+    weak var delegate: CWMomentCellDelegate?
+    var cellLayout: CWMomentLayout?
 
     // 头像
     lazy var avatarImageView: UIImageView = {
         let avatarView = UIImageView()
-        avatarView.origin = CGPoint(x: CWShareUI.kTopMargin, y: CWShareUI.kLeftMargin)
-        avatarView.size = CWShareUI.kAvatarSize
+        avatarView.origin = CGPoint(x: CWMomentUI.kTopMargin, y: CWMomentUI.kLeftMargin)
+        avatarView.size = CWMomentUI.kAvatarSize
         return avatarView
     }()
     // 用户名
     lazy var nameLabel: YYLabel = {
         let nameLabel = YYLabel()
-        nameLabel.origin = CGPoint(x: self.avatarImageView.right+CWShareUI.kPaddingText, y: CWShareUI.kTopMargin)
-        nameLabel.size = CWShareUI.kUsernameSize
+        nameLabel.origin = CGPoint(x: self.avatarImageView.right+CWMomentUI.kPaddingText, y: CWMomentUI.kTopMargin)
+        nameLabel.size = CWMomentUI.kUsernameSize
         return nameLabel
     }()
     // 内容
     lazy var contentLabel: YYLabel = {
         let contentLabel = YYLabel()
         contentLabel.left = self.nameLabel.left
-        contentLabel.width = CWShareUI.kContentWidth
+        contentLabel.width = CWMomentUI.kContentWidth
         return contentLabel
     }()
     
@@ -64,8 +64,8 @@ class CWShareCell: UITableViewCell {
     }()
     
     // 评论部分
-    lazy var commnetView: CWShareCommentView = {
-        let commnetView = CWShareCommentView()
+    lazy var commnetView: CWMomentCommentView = {
+        let commnetView = CWMomentCommentView()
         return commnetView
     }()
     
@@ -108,7 +108,7 @@ class CWShareCell: UITableViewCell {
         }
     }
     
-    func setLayout(_ layout: CWShareLayout) {
+    func setLayout(_ layout: CWMomentLayout) {
     
         if layout === cellLayout {
             return
@@ -141,7 +141,7 @@ class CWShareCell: UITableViewCell {
         
         // 时间和操作
         self.toolButton.top = top + 8
-        self.toolButton.right = kScreenWidth - CWShareUI.kLeftMargin
+        self.toolButton.right = kScreenWidth - CWMomentUI.kLeftMargin
 
         self.timeLabel.textLayout = layout.timeTextLayout
         self.timeLabel.top = top + 8
@@ -149,7 +149,7 @@ class CWShareCell: UITableViewCell {
         top += layout.timeHeight
         // 点赞和评论列表
         let frame = CGRect(x: contentLabel.left, y: top,
-                           width: CWShareUI.kContentWidth, height: layout.commentHeight)
+                           width: CWMomentUI.kContentWidth, height: layout.commentHeight)
         self.commnetView.frame = frame
         
     }
@@ -178,11 +178,11 @@ class CWShareCell: UITableViewCell {
                     origin.x = leftMarigin
                     origin.y = imageTop
                 case 4:
-                    origin.x = leftMarigin + CGFloat(i%2) * (picSize.width + CWShareUI.kCellPaddingPic)
-                    origin.y = imageTop + CGFloat(i/2) * (picSize.height + CWShareUI.kCellPaddingPic)
+                    origin.x = leftMarigin + CGFloat(i%2) * (picSize.width + CWMomentUI.kCellPaddingPic)
+                    origin.y = imageTop + CGFloat(i/2) * (picSize.height + CWMomentUI.kCellPaddingPic)
                 default:
-                    origin.x = leftMarigin + CGFloat(i%3) * (picSize.width + CWShareUI.kCellPaddingPic)
-                    origin.y = imageTop + CGFloat(i/3) * (picSize.height + CWShareUI.kCellPaddingPic)
+                    origin.x = leftMarigin + CGFloat(i%3) * (picSize.width + CWMomentUI.kCellPaddingPic)
+                    origin.y = imageTop + CGFloat(i/3) * (picSize.height + CWMomentUI.kCellPaddingPic)
                 }
                 imageView.isHidden = false
                 imageView.frame = CGRect(origin: origin, size: picSize)

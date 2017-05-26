@@ -1,5 +1,5 @@
 //
-//  CWShareModuleStyle.swift
+//  CWMomentModuleStyle.swift
 //  CWWeChat
 //
 //  Created by chenwei on 2017/4/11.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct CWShareUI {
+struct CWMomentUI {
     
     static let kTopMargin: CGFloat = 10
     static let kLeftMargin: CGFloat = 10
@@ -28,6 +28,7 @@ struct CWShareUI {
     static let kImageMaxWidth: CGFloat = 150
 
     // 颜色
+    static let kNameTextColor = UIColor(hex: "#576B95")
     static let kGrayTextColor = UIColor(hex: "#999")
     static let kTextHighlightBackgroundColor = UIColor(hex: "#bfdffe")
 }

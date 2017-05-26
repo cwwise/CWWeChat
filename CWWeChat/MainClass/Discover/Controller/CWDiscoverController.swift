@@ -38,7 +38,7 @@ extension CWDiscoverController {
         
         if indexPath.row == 0 {
             
-            let controller = CWShareController()
+            let controller = CWMomentController()
             controller.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(controller, animated: true)
             

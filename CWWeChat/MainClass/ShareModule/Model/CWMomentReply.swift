@@ -1,5 +1,5 @@
 //
-//  CWShareReplyModel.swift
+//  CWMomentReply.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/3/30.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-enum CWShareReplyType {
+enum CWMomentReplyType {
     case unkown
     case comment
     case praise
 }
 
 
-class CWShareReplyModel: NSObject {
+class CWMomentReply: NSObject {
    
     var shareId: String!
 
@@ -27,5 +27,5 @@ class CWShareReplyModel: NSObject {
     
     var replyDate: Date!
     
-    var replyType: CWShareReplyType = .unkown
+    var replyType: CWMomentReplyType = .unkown
 }

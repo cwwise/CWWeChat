@@ -1,5 +1,5 @@
 //
-//  CWShareStore.swift
+//  CWMomentStore.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/5/3.
@@ -9,12 +9,12 @@
 import UIKit
 import SQLite.Swift
 
-class CWShareStore: NSObject {
+class CWMomentStore: NSObject {
 
-    static let share = CWShareStore()
+    static let share = CWMomentStore()
     // 添加前缀 field
     //MARK: 数据库属性
-    let shareTable = Table("cwshare")
+    let shareTable = Table("CWMoment")
     //消息唯一id
     fileprivate let id = Expression<Int64>("id")
 
@@ -97,13 +97,13 @@ class CWShareStore: NSObject {
     }
     
     
-    func insertShare(_ share: CWShareModel) {
+    func insertShare(_ share: CWMoment) {
         
 
         
     }
     
-    func insertShareList(_ shareList: [CWShareModel]) {
+    func insertShareList(_ shareList: [CWMoment]) {
         
         do {
             try shareDB.transaction {

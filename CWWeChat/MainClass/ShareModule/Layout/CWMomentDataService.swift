@@ -1,5 +1,5 @@
 //
-//  CWShareDataService.swift
+//  CWMomentDataService.swift
 //  CWWeChat
 //
 //  Created by chenwei on 2017/4/11.
@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class CWShareDataService: NSObject {
+class CWMomentDataService: NSObject {
     
     func testData() {
         

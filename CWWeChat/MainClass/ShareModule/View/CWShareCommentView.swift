@@ -1,5 +1,5 @@
 //
-//  CWShareCommentView.swift
+//  CWMomentCommentView.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/5/3.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// 评论和点赞的 view
-class CWShareCommentView: UIView {
+class CWMomentCommentView: UIView {
 
     var backgroundView: UIImageView = {
         let image = UIImage(named: "share_comment")

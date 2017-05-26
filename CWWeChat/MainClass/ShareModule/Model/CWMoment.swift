@@ -1,5 +1,5 @@
 //
-//  CWShareModel.swift
+//  CWMoment.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/3/29.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// 图片
-class CWSharePictureModel: NSObject {
+class CWMomentPictureModel: NSObject {
     var thumbnailURL: URL
     var largetURL: URL
     var size: CGSize = CGSize.zero
@@ -20,20 +20,20 @@ class CWSharePictureModel: NSObject {
     }
 }
 
-class CWShareVideoModel: NSObject {
+class CWMomentVideoModel: NSObject {
     var videoURL: URL
     init(videoURL: URL) {
         self.videoURL = videoURL
     }
 }
 
-enum CWShareType: Int {
+enum CWMomentType: Int {
     case normal // 图文
     case vidio  // 视频
     case url
 }
 
-class CWShareModel: NSObject {
+class CWMoment: NSObject {
     
     /// 分享id
     var shareId: String
@@ -44,14 +44,14 @@ class CWShareModel: NSObject {
     
     var date: Date
     
-    var shareType: CWShareType = .normal
+    var shareType: CWMomentType = .normal
 
     var content: String?
-    var videoModel: CWShareVideoModel?
+    var videoModel: CWMomentVideoModel?
     
-    var imageArray = [CWSharePictureModel]()
-    var commentArray = [CWShareReplyModel]()
-    var praiseArray = [CWShareReplyModel]()
+    var imageArray = [CWMomentPictureModel]()
+    var commentArray = [CWMomentReply]()
+    var praiseArray = [CWMomentReply]()
         
     // 是否上传成功
     var sendSuccess: Bool = true

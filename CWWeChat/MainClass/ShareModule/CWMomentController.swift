@@ -1,5 +1,5 @@
 //
-//  CWShareController.swift
+//  CWMomentController.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/3/30.
@@ -9,9 +9,9 @@
 import UIKit
 import SwiftyJSON
 
-class CWShareController: CWBaseTableViewController {
+class CWMomentController: CWBaseTableViewController {
 
-    var shareLayouts = [CWShareLayout]()
+    var shareLayouts = [CWMomentLayout]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class CWShareController: CWBaseTableViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        self.tableView.register(CWShareCell.self, forCellReuseIdentifier: CWShareCell.identifier)
+        self.tableView.register(CWMomentCell.self, forCellReuseIdentifier: CWMomentCell.identifier)
         setupUI()
     }
     
@@ -46,7 +46,7 @@ class CWShareController: CWBaseTableViewController {
 
             let content = share["content"].string
             let share_Date = Date(timeIntervalSince1970: date/1000)
-            let shareModel = CWShareModel(shareId: shareId,
+            let shareModel = CWMoment(shareId: shareId,
                                      username: username,
                                      userId: userId,
                                      date: share_Date)
@@ -57,11 +57,11 @@ class CWShareController: CWBaseTableViewController {
                 let url1 = URL(string: item["largetURL"].stringValue)!
                 let url2 = URL(string: item["thumbnailURL"].stringValue)!
 
-                let imageModel = CWSharePictureModel(thumbnailURL: url2, largetURL: url1)
+                let imageModel = CWMomentPictureModel(thumbnailURL: url2, largetURL: url1)
                 shareModel.imageArray.append(imageModel)
             }
             
-            let layout = CWShareLayout(shareModel: shareModel)
+            let layout = CWMomentLayout(shareModel: shareModel)
             shareLayouts.append(layout)
             
         }
@@ -78,7 +78,7 @@ class CWShareController: CWBaseTableViewController {
 
 }
 
-extension CWShareController: UITableViewDataSource, UITableViewDelegate {
+extension CWMomentController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shareLayouts.count
@@ -89,7 +89,7 @@ extension CWShareController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CWShareCell.identifier, for: indexPath) as! CWShareCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CWMomentCell.identifier, for: indexPath) as! CWMomentCell
         cell.delegate = self
         cell.setLayout(shareLayouts[indexPath.row])
         return cell
@@ -99,12 +99,12 @@ extension CWShareController: UITableViewDataSource, UITableViewDelegate {
 }
 
 
-extension CWShareController: CWShareCellDelegate {
-    func shareCell(_ cell: CWShareCell, didClickImageAtIndex index: Int) {
+extension CWMomentController: CWMomentCellDelegate {
+    func shareCell(_ cell: CWMomentCell, didClickImageAtIndex index: Int) {
         log.debug("选择---\(index)")
     }
     
-    func shareCell(_ cell: CWShareCell, didClickInText text: NSAttributedString, textRange: NSRange) {
+    func shareCell(_ cell: CWMomentCell, didClickInText text: NSAttributedString, textRange: NSRange) {
         
     }
 }

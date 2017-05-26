@@ -1,5 +1,5 @@
 //
-//  CWShareReplyStore.swift
+//  CWMomentReplyStore.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/5/4.
@@ -9,9 +9,9 @@
 import UIKit
 import SQLite.Swift
 
-class CWShareReplyStore: NSObject {
+class CWMomentReplyStore: NSObject {
 
-    static let share = CWShareReplyStore()
+    static let share = CWMomentReplyStore()
     
     private override init() {
         super.init()

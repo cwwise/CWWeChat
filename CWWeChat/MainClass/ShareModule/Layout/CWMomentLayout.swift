@@ -1,5 +1,5 @@
 //
-//  CWShareLayout.swift
+//  CWMomentLayout.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/3/30.
@@ -9,17 +9,17 @@
 import UIKit
 import YYText
 
-class CWShareLayout: NSObject {
+class CWMomentLayout: NSObject {
     
-    var shareModel: CWShareModel
+    var shareModel: CWMoment
     /// 顶部留白
-    var marginTop: CGFloat = CWShareUI.kTopMargin
+    var marginTop: CGFloat = CWMomentUI.kTopMargin
     /// 下边留白
-    var marginBottom: CGFloat = CWShareUI.kTopMargin
+    var marginBottom: CGFloat = CWMomentUI.kTopMargin
     /// 总高度
     var height: CGFloat = 0
     /// 姓名(包括留白)
-    var profileHeight: CGFloat = CWShareUI.kUsernameSize.height
+    var profileHeight: CGFloat = CWMomentUI.kUsernameSize.height
     /// 布局
     var nameTextLayout: YYTextLayout?
     
@@ -46,7 +46,7 @@ class CWShareLayout: NSObject {
     var commentHeight: CGFloat = 0
     var commentLayoutArray = [YYTextLayout]()
 
-    init(shareModel: CWShareModel) {
+    init(shareModel: CWMoment) {
         self.shareModel = shareModel
         super.init()
         self.layout()
@@ -86,10 +86,10 @@ class CWShareLayout: NSObject {
     func layoutProfile() {
         
         let username = NSMutableAttributedString(string: shareModel.username)
-        username.yy_color = UIColor(hex: "#576B95")
+        username.yy_color = CWMomentUI.kNameTextColor
         username.yy_font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium)
         
-        let container = YYTextContainer(size: CWShareUI.kUsernameSize)
+        let container = YYTextContainer(size: CWMomentUI.kUsernameSize)
         nameTextLayout = YYTextLayout(container: container, text: username)
     }
     
@@ -100,7 +100,7 @@ class CWShareLayout: NSObject {
             return
         }
         
-        let size = CGSize(width: CWShareUI.kContentWidth, height: CGFloat.greatestFiniteMagnitude)
+        let size = CGSize(width: CWMomentUI.kContentWidth, height: CGFloat.greatestFiniteMagnitude)
 
         let textFont = UIFont.systemFont(ofSize: 15)
         let attributes = [NSFontAttributeName: textFont,
@@ -130,8 +130,8 @@ class CWShareLayout: NSObject {
         var picHeight: CGFloat = 0
         
         let scale = kScreenWidth / 375.0
-        let len1_3 = YYTextCGFloatPixelRound(CWShareUI.kImageWidth * scale)
-        let maxLen = YYTextCGFloatPixelRound(CWShareUI.kImageMaxWidth * scale)
+        let len1_3 = YYTextCGFloatPixelRound(CWMomentUI.kImageWidth * scale)
+        let maxLen = YYTextCGFloatPixelRound(CWMomentUI.kImageMaxWidth * scale)
         
         switch shareModel.imageArray.count {
         case 1:
@@ -143,10 +143,10 @@ class CWShareLayout: NSObject {
             picHeight = len1_3
         case 4,5,6:
             picSize = CGSize(width: len1_3, height: len1_3)
-            picHeight = len1_3*2 + CWShareUI.kCellPaddingPic
+            picHeight = len1_3*2 + CWMomentUI.kCellPaddingPic
         default:
             picSize = CGSize(width: len1_3, height: len1_3)
-            picHeight = len1_3*3 + CWShareUI.kCellPaddingPic*2
+            picHeight = len1_3*3 + CWMomentUI.kCellPaddingPic*2
         }
         
         self.pictureSize = picSize
@@ -158,7 +158,7 @@ class CWShareLayout: NSObject {
         let timeString = "2017年8月"
         let timeText = NSMutableAttributedString(string: timeString)
         timeText.yy_font = UIFont.systemFont(ofSize: 12)
-        timeText.yy_color = CWShareUI.kGrayTextColor
+        timeText.yy_color = CWMomentUI.kGrayTextColor
         
         let container = YYTextContainer(size: CGSize(width: 100, height: 20))
         container.maximumNumberOfRows = 1
@@ -174,19 +174,39 @@ class CWShareLayout: NSObject {
         
         let highlightBorder = YYTextBorder()
         highlightBorder.insets = UIEdgeInsets(top: -2, left: 0, bottom: -2, right: 2)
-        highlightBorder.fillColor = CWShareUI.kTextHighlightBackgroundColor
+        highlightBorder.fillColor = CWMomentUI.kTextHighlightBackgroundColor
         
-        var praiseAttri = NSMutableAttributedString()
+        let praiseAttri = NSMutableAttributedString()
         
-        let praiseFont = UIFont.systemFont(ofSize: 14)
-        let icon = UIImage(named: "")
-        let iconSize = CGSize(width: 18, height: 18)
+        let praiseFont = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        let icon = UIImage(named: "momentHeart")
+        let iconSize = CGSize(width: 18, height: 16)
         let attach = NSMutableAttributedString.yy_attachmentString(withContent: icon, contentMode: .scaleAspectFit, attachmentSize: iconSize, alignTo: praiseFont, alignment: .center)
         
         praiseAttri.append(attach)
         
-        let _ = CGSize(width: 10, height: 10)
+        for praise in praiseArray {
+            
+            let nameText = NSMutableAttributedString(string: praise.username)
+            nameText.yy_color = CWMomentUI.kNameTextColor
+            nameText.yy_font = praiseFont
 
+            let hightLight = YYTextHighlight()
+            hightLight.setBackgroundBorder(highlightBorder)
+            hightLight.userInfo = ["userId": praise.userId]
+            
+            nameText.yy_setTextHighlight(hightLight, range: NSMakeRange(0, nameText.length))
+            
+            praiseAttri.append(nameText)
+            // 最后不需要添加,
+            if praise === praiseArray.last {
+                let divisionText = NSMutableAttributedString(string: "，")
+                divisionText.yy_font = praiseFont
+                divisionText.yy_color = CWMomentUI.kNameTextColor
+                praiseAttri.append(divisionText)
+            }
+            
+        }
         
         
     }
