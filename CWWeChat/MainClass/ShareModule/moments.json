@@ -1,7 +1,7 @@
 {
     "code":"200",
     "data": [{
-             "shareId":"",
+             "momentId":"",
              "username": "陈威",
              "userId": "chenwei",
              "date": 1495026300017,
@@ -17,7 +17,7 @@
                         }]
              },
              {
-             "shareId":"124",
+             "momentId":"124",
              "username": "盖聂",
              "userId": "diana",
              "date": 1495026300017,

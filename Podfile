@@ -19,21 +19,19 @@ target 'CWWeChat' do
 
   pod 'YYText'
   pod 'YYWebImage'
-  pod 'YYModel'
 
   # database
   pod 'SQLite.swift'
-  
+
   # log
   pod 'SwiftyBeaver'
 
   # chat
-  pod 'XMPPFramework', '~> 3.7.0'
+  pod 'XMPPFramework'
   
   # UI
   pod 'MBProgressHUD'
   pod 'CHIPageControl/Aleppo'
-  pod 'IGListKit'
   pod 'LCActionSheet'
   
   # animation

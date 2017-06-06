@@ -11,7 +11,7 @@ import YYText
 
 class CWMomentLayout: NSObject {
     
-    var shareModel: CWMoment
+    var moment: CWMoment
     /// 顶部留白
     var marginTop: CGFloat = CWMomentUI.kTopMargin
     /// 下边留白
@@ -46,8 +46,8 @@ class CWMomentLayout: NSObject {
     var commentHeight: CGFloat = 0
     var commentLayoutArray = [YYTextLayout]()
 
-    init(shareModel: CWMoment) {
-        self.shareModel = shareModel
+    init(moment: CWMoment) {
+        self.moment = moment
         super.init()
         self.layout()
     }
@@ -58,6 +58,7 @@ class CWMomentLayout: NSObject {
         self.layoutContent()
         self.layoutPicture()
         self.layoutTime()
+        self.layoutPraiseText()
 
         height += marginTop
         height += profileHeight
@@ -85,7 +86,7 @@ class CWMomentLayout: NSObject {
     
     func layoutProfile() {
         
-        let username = NSMutableAttributedString(string: shareModel.username)
+        let username = NSMutableAttributedString(string: moment.username)
         username.yy_color = CWMomentUI.kNameTextColor
         username.yy_font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium)
         
@@ -96,7 +97,7 @@ class CWMomentLayout: NSObject {
     /// 文字布局
     func layoutContent() {
 
-        guard let content = shareModel.content else {
+        guard let content = moment.content else {
             return
         }
         
@@ -122,7 +123,7 @@ class CWMomentLayout: NSObject {
     /// 布局图片部分
     func layoutPicture() {
        
-        if shareModel.imageArray.count == 0 {
+        if moment.imageArray.count == 0 {
             return
         }
         
@@ -133,7 +134,7 @@ class CWMomentLayout: NSObject {
         let len1_3 = YYTextCGFloatPixelRound(CWMomentUI.kImageWidth * scale)
         let maxLen = YYTextCGFloatPixelRound(CWMomentUI.kImageMaxWidth * scale)
         
-        switch shareModel.imageArray.count {
+        switch moment.imageArray.count {
         case 1:
             // 待修改，如果一张照片按比较计算size
             picSize = CGSize(width: maxLen, height: maxLen)
@@ -165,9 +166,9 @@ class CWMomentLayout: NSObject {
         timeTextLayout = YYTextLayout(container: container, text: timeText)
     }
     
-    func _layoutPraiseText() {
+    func layoutPraiseText() {
         
-        let praiseArray = shareModel.praiseArray
+        let praiseArray = moment.praiseArray
         if praiseArray.count == 0 {
             return
         }
@@ -207,6 +208,24 @@ class CWMomentLayout: NSObject {
             }
             
         }
+    
+    }
+    
+    // 布局回复
+    func layoutComment() {
+        
+        let commentArray = moment.commentArray
+        if commentArray.count == 0 {
+            return
+        }
+        
+        let highlightBorder = YYTextBorder()
+        highlightBorder.insets = UIEdgeInsets(top: -2, left: 0, bottom: -2, right: 2)
+        highlightBorder.fillColor = CWMomentUI.kTextHighlightBackgroundColor
+        
+        let commentAttri = NSMutableAttributedString()
+
+        
         
         
     }

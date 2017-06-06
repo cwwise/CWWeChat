@@ -16,16 +16,28 @@ enum CWMomentReplyType {
 
 
 class CWMomentReply: NSObject {
-   
-    var shareId: String!
+    // 对应的id
+    var momentId: String!
 
+    var replyId: String!
     var username: String!
     var userId: String!
 
     var receiveUserId: String?
     var receiveUserName: String?
     
-    var replyDate: Date!
-    
+    var replyDate: Date = Date()
     var replyType: CWMomentReplyType = .unkown
+    
+    // 初始化方法
+    init(replyId: String,
+         momentId: String,
+         username: String,
+         userId: String) {
+        
+        self.replyId = replyId
+        self.momentId = momentId
+        self.username = username
+        self.userId = userId
+    }
 }

@@ -268,7 +268,7 @@ extension CWBaseMessageController: CWChatMessageCellDelegate {
         let otherButtonTitle = ["呼叫","复制号码","添加到手机通讯录"]
         let actionSheet = LCActionSheet(title: title, delegate: nil, cancelButtonTitle: "取消", otherButtonTitleArray: otherButtonTitle)
         
-        actionSheet.clickedHandle = { (actionSheet, index) in
+        actionSheet.clickedHandler = { (actionSheet, index) in
             
             if index == 0 {
                 let phoneString = "telprompt://\(phone)"

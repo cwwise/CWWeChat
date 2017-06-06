@@ -1,32 +1,27 @@
 PODS:
   - Alamofire (4.4.0)
-  - CHIPageControl/Aleppo (0.1.2)
-  - CocoaAsyncSocket (7.6.0)
-  - CocoaLumberjack (3.1.0):
-    - CocoaLumberjack/Default (= 3.1.0)
-    - CocoaLumberjack/Extensions (= 3.1.0)
-  - CocoaLumberjack/Default (3.1.0)
-  - CocoaLumberjack/Extensions (3.1.0):
+  - CHIPageControl/Aleppo (0.1.3)
+  - CocoaAsyncSocket (7.6.1)
+  - CocoaLumberjack (3.2.0):
+    - CocoaLumberjack/Default (= 3.2.0)
+    - CocoaLumberjack/Extensions (= 3.2.0)
+  - CocoaLumberjack/Default (3.2.0)
+  - CocoaLumberjack/Extensions (3.2.0):
     - CocoaLumberjack/Default
   - Hue (2.0.1)
-  - IGListKit (2.1.0):
-    - IGListKit/Default (= 2.1.0)
-  - IGListKit/Default (2.1.0):
-    - IGListKit/Diffing
-  - IGListKit/Diffing (2.1.0)
   - KissXML (5.2.0)
   - KVOController (1.2.0)
-  - LCActionSheet (2.7.4):
+  - LCActionSheet (3.2.3):
     - Masonry (~> 1.0.2)
   - Masonry (1.0.2)
   - MBProgressHUD (1.0.0)
-  - Moya/Core (8.0.3):
+  - Moya/Core (8.0.5):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
-  - Moya/RxSwift (8.0.3):
+  - Moya/RxSwift (8.0.5):
     - Moya/Core
     - RxSwift (~> 3.0)
-  - Nimble (6.1.0)
+  - Nimble (7.0.0)
   - OHHTTPStubs/Core (6.0.0)
   - OHHTTPStubs/Default (6.0.0):
     - OHHTTPStubs/Core
@@ -42,15 +37,15 @@ PODS:
     - OHHTTPStubs/Default
   - pop (1.0.9)
   - Quick (1.1.0)
-  - Result (3.2.1)
-  - RxCocoa (3.4.0):
+  - Result (3.2.3)
+  - RxCocoa (3.5.0):
     - RxSwift (~> 3.4)
-  - RxSwift (3.4.0)
+  - RxSwift (3.5.0)
   - SnapKit (3.2.0)
   - SQLite.swift (0.11.3):
     - SQLite.swift/standard (= 0.11.3)
   - SQLite.swift/standard (0.11.3)
-  - SwiftyBeaver (1.2.0)
+  - SwiftyBeaver (1.2.2)
   - SwiftyJSON (3.1.4)
   - XMPPFramework (3.7.0):
     - CocoaAsyncSocket (~> 7.6.0)
@@ -69,7 +64,6 @@ DEPENDENCIES:
   - Alamofire
   - CHIPageControl/Aleppo
   - Hue
-  - IGListKit
   - KVOController
   - LCActionSheet
   - MBProgressHUD
@@ -84,33 +78,32 @@ DEPENDENCIES:
   - SQLite.swift
   - SwiftyBeaver
   - SwiftyJSON
-  - XMPPFramework (~> 3.7.0)
+  - XMPPFramework
   - YYText
   - YYWebImage
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
-  CHIPageControl: d0fbe54bd9f1b092f543623a15a39211dd6443ba
-  CocoaAsyncSocket: b9d5589f07baf9de8f34cc25abd4fcba28f13805
-  CocoaLumberjack: 8311463ddf9ee86a06ef92a071dd656c89244500
+  CHIPageControl: 2d3a0edacd7e3bc113bc88cbf187ba8f0b045548
+  CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
+  CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
   Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
-  IGListKit: b826c68ef7a4ae1626c09d4d3e1ea7a169e6c36e
   KissXML: 1c1eeeb6b94e4522cd2f2373e5d0d03c9227738f
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
-  LCActionSheet: b2007e47f1d157b7076e3b6e91c64f5a13dcccc6
+  LCActionSheet: b68d6fc4cb252f5ad37f20387b853caa95657b67
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  Moya: d3721622e3cc0cc2f038d69a258686f0b66e7252
-  Nimble: c53e6903fee94041b90ded74f135820437d8bf59
+  Moya: c37eec09a098ba9991b5a963b291fc5704bdb9ef
+  Nimble: 874982b605d4d752fcac6be695d13c502de84b1b
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
-  RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
-  RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
+  Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
+  RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
+  RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SQLite.swift: 99b36c22084427f0abbeb957556ce1528cf10bb3
-  SwiftyBeaver: ee865c50ec462ff142f232145057818491c2b344
+  SwiftyBeaver: 90a39e3dc5136b7285f2e4c870b107e3933b8b84
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
@@ -118,6 +111,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: fa7e2cb31ae648acdf44a642de36e823ca48d1be
+PODFILE CHECKSUM: 9c2428301d28f28b0f85b1ab1951c1033e7c5f7e
 
 COCOAPODS: 1.2.1

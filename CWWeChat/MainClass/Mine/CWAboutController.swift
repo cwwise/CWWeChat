@@ -69,14 +69,16 @@ class CWAboutController: CWBaseTableViewController {
         headerView.title = "微信 CWWeChat \(UIApplication.shared.appVersion)"
         self.tableView.tableHeaderView = headerView
         
-        // footerViw
-        self.tableView.tableFooterView?.height = kScreenHeight - kNavigationBarHeight - headerViewHeight - 4*kCWDefaultItemCellHeight - 40
-        self.tableView.tableFooterView?.addSubview(self.lienseLabel)
-        self.lienseLabel.snp.makeConstraints { (make) in
-            make.left.right.equalTo(self.tableView.tableFooterView!)
-            make.bottom.equalTo(self.tableView.tableFooterView!).offset(-1)
+        if let tableFooterView = self.tableView.tableFooterView {
+            // footerViw
+            tableFooterView.height = kScreenHeight - kNavigationBarHeight - headerViewHeight - 4*kCWDefaultItemCellHeight - 40
+            tableFooterView.addSubview(self.lienseLabel)
+            self.lienseLabel.snp.makeConstraints { (make) in
+                make.left.right.equalTo(tableFooterView)
+                make.bottom.equalTo(tableFooterView).offset(-1)
+            }
         }
-        
+    
     }
 
 }

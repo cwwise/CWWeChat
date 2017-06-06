@@ -36,7 +36,7 @@ enum CWMomentType: Int {
 class CWMoment: NSObject {
     
     /// 分享id
-    var shareId: String
+    var momentId: String
     /// 用户名
     var username: String
     /// 用户id
@@ -44,7 +44,7 @@ class CWMoment: NSObject {
     
     var date: Date
     
-    var shareType: CWMomentType = .normal
+    var momentType: CWMomentType = .normal
 
     var content: String?
     var videoModel: CWMomentVideoModel?
@@ -62,9 +62,9 @@ class CWMoment: NSObject {
     // 是否删除
     var isDelete: Bool = false
 
-    init(shareId: String, username: String, userId: String, date: Date) {
+    init(momentId: String, username: String, userId: String, date: Date) {
         
-        self.shareId = shareId
+        self.momentId = momentId
         self.username = username
         self.userId = userId
         self.date = date

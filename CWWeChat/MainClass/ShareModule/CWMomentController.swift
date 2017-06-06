@@ -28,45 +28,9 @@ class CWMomentController: CWBaseTableViewController {
     
     func setupUI() {
         
+        let dataService = CWMomentDataService()
         
-        guard let path = Bundle.main.path(forResource: "shares", ofType: "json"),
-            let shareData = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
-            return
-        }
-        
-        guard let shareList = JSON(data: shareData).dictionary?["data"]?.array else {
-            return
-        }
-        
-        for share in shareList {
-            let shareId = share["share"].stringValue
-            let username = share["username"].stringValue
-            let userId = share["userId"].stringValue
-            let date = share["date"].doubleValue
-
-            let content = share["content"].string
-            let share_Date = Date(timeIntervalSince1970: date/1000)
-            let shareModel = CWMoment(shareId: shareId,
-                                     username: username,
-                                     userId: userId,
-                                     date: share_Date)
-            shareModel.content = content
-            
-            let items = share["images"].arrayValue
-            for item in items {
-                let url1 = URL(string: item["largetURL"].stringValue)!
-                let url2 = URL(string: item["thumbnailURL"].stringValue)!
-
-                let imageModel = CWMomentPictureModel(thumbnailURL: url2, largetURL: url1)
-                shareModel.imageArray.append(imageModel)
-            }
-            
-            let layout = CWMomentLayout(shareModel: shareModel)
-            shareLayouts.append(layout)
-            
-        }
-        
-
+        shareLayouts = dataService.parseMomentData()
         
     }
     

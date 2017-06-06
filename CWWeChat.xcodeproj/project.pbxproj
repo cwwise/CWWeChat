@@ -159,6 +159,7 @@
 		8C4927891E939EA400B3C482 /* CWWeChat_ChatStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4927881E939EA400B3C482 /* CWWeChat_ChatStoreTests.swift */; };
 		8C49278B1E95308200B3C482 /* CWChatroomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C49278A1E95308200B3C482 /* CWChatroomManager.swift */; };
 		8C49278D1E95316A00B3C482 /* CWChatroomService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C49278C1E95316A00B3C482 /* CWChatroomService.swift */; };
+		8C5EEC041EDBB5A200AD6DF4 /* momentReply.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C5EEC031EDBB5A200AD6DF4 /* momentReply.json */; };
 		8C84B9471E8C04780020D508 /* CWMoment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B9461E8C04780020D508 /* CWMoment.swift */; };
 		8C84B9491E8C1B8F0020D508 /* CWMomentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B9481E8C1B8F0020D508 /* CWMomentController.swift */; };
 		8C84B94B1E8C1BB70020D508 /* CWShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B94A1E8C1BB70020D508 /* CWShareCell.swift */; };
@@ -190,11 +191,11 @@
 		8CA7EB0B1E9E81D300467C37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7EB0A1E9E81D300467C37 /* Assets.xcassets */; };
 		8CA7EB131E9FD5C600467C37 /* chat_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7EB121E9FD5C600467C37 /* chat_background.png */; };
 		8CA7EB1F1EA1CE8900467C37 /* CWTextLinePositionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7EB1E1EA1CE8900467C37 /* CWTextLinePositionModifier.swift */; };
-		8CAEC0ED1ECC814D00786F38 /* shares.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CAEC0EC1ECC814D00786F38 /* shares.json */; };
+		8CAA09A31EE700B200A1FAD1 /* UIImageView+ChatKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAA09A21EE700B200A1FAD1 /* UIImageView+ChatKit.swift */; };
+		8CAEC0ED1ECC814D00786F38 /* moments.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CAEC0EC1ECC814D00786F38 /* moments.json */; };
 		8CB02BAD1EA8EE13003B94BC /* CWVoiceIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB02BAC1EA8EE13003B94BC /* CWVoiceIndicatorView.swift */; };
 		8CB02BAF1EA8EF9E003B94BC /* CWVoiceRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB02BAE1EA8EF9E003B94BC /* CWVoiceRecorder.swift */; };
 		8CB02BB11EA8F7E5003B94BC /* CWEmotionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB02BB01EA8F7E5003B94BC /* CWEmotionHelper.swift */; };
-		8CB02BB31EAA4D01003B94BC /* UIImageView+ChatKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB02BB21EAA4D01003B94BC /* UIImageView+ChatKit.swift */; };
 		8CD40A5F1EB233E70051772C /* CWContactDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD40A5E1EB233E70051772C /* CWContactDetailFooterView.swift */; };
 		8CD40A611EB23A090051772C /* CWTextItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD40A601EB23A090051772C /* CWTextItem.swift */; };
 		8CFCF5371E9017FB00E56C31 /* CWChatMessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFCF5361E9017FB00E56C31 /* CWChatMessageStore.swift */; };
@@ -413,6 +414,7 @@
 		8C4927881E939EA400B3C482 /* CWWeChat_ChatStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWWeChat_ChatStoreTests.swift; sourceTree = "<group>"; };
 		8C49278A1E95308200B3C482 /* CWChatroomManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatroomManager.swift; sourceTree = "<group>"; };
 		8C49278C1E95316A00B3C482 /* CWChatroomService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatroomService.swift; sourceTree = "<group>"; };
+		8C5EEC031EDBB5A200AD6DF4 /* momentReply.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = momentReply.json; sourceTree = "<group>"; };
 		8C84B9461E8C04780020D508 /* CWMoment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMoment.swift; sourceTree = "<group>"; };
 		8C84B9481E8C1B8F0020D508 /* CWMomentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CWMomentController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8C84B94A1E8C1BB70020D508 /* CWShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CWShareCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -446,11 +448,11 @@
 		8CA7EB0A1E9E81D300467C37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8CA7EB121E9FD5C600467C37 /* chat_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_background.png; sourceTree = "<group>"; };
 		8CA7EB1E1EA1CE8900467C37 /* CWTextLinePositionModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTextLinePositionModifier.swift; sourceTree = "<group>"; };
-		8CAEC0EC1ECC814D00786F38 /* shares.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shares.json; sourceTree = "<group>"; };
+		8CAA09A21EE700B200A1FAD1 /* UIImageView+ChatKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+ChatKit.swift"; sourceTree = "<group>"; };
+		8CAEC0EC1ECC814D00786F38 /* moments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = moments.json; sourceTree = "<group>"; };
 		8CB02BAC1EA8EE13003B94BC /* CWVoiceIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWVoiceIndicatorView.swift; sourceTree = "<group>"; };
 		8CB02BAE1EA8EF9E003B94BC /* CWVoiceRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWVoiceRecorder.swift; sourceTree = "<group>"; };
 		8CB02BB01EA8F7E5003B94BC /* CWEmotionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWEmotionHelper.swift; sourceTree = "<group>"; };
-		8CB02BB21EAA4D01003B94BC /* UIImageView+ChatKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImageView+ChatKit.swift"; path = "CWWeChat/ChatModule/CWChatKit/Message/Tool/UIImageView+ChatKit.swift"; sourceTree = SOURCE_ROOT; };
 		8CD40A5E1EB233E70051772C /* CWContactDetailFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWContactDetailFooterView.swift; sourceTree = "<group>"; };
 		8CD40A601EB23A090051772C /* CWTextItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTextItem.swift; sourceTree = "<group>"; };
 		8CFCF5361E9017FB00E56C31 /* CWChatMessageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatMessageStore.swift; sourceTree = "<group>"; };
@@ -689,17 +691,8 @@
 				1F3491D11E878AD500B36641 /* View */,
 				1FA724511E9CB1F0009B6456 /* Common */,
 				1FA527D01E9381EA00D1BE54 /* Tool */,
-				1F3491CC1E878AD500B36641 /* Bussiness */,
 			);
 			path = Message;
-			sourceTree = "<group>";
-		};
-		1F3491CC1E878AD500B36641 /* Bussiness */ = {
-			isa = PBXGroup;
-			children = (
-				8CB02BB21EAA4D01003B94BC /* UIImageView+ChatKit.swift */,
-			);
-			path = Bussiness;
 			sourceTree = "<group>";
 		};
 		1F3491CD1E878AD500B36641 /* Controller */ = {
@@ -859,7 +852,6 @@
 			children = (
 				1F3492421E87922A00B36641 /* Controller */,
 				1F3492431E87922A00B36641 /* Model */,
-				1F3492441E87922A00B36641 /* Tool */,
 				1F3492451E87922A00B36641 /* View */,
 			);
 			path = Login;
@@ -999,13 +991,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		1F3492441E87922A00B36641 /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tool;
-			sourceTree = "<group>";
-		};
 		1F3492451E87922A00B36641 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1133,6 +1118,7 @@
 				8CA7EB1E1EA1CE8900467C37 /* CWTextLinePositionModifier.swift */,
 				1FA527D11E9381EE00D1BE54 /* CWChatTextParser.swift */,
 				8CB02BB01EA8F7E5003B94BC /* CWEmotionHelper.swift */,
+				8CAA09A21EE700B200A1FAD1 /* UIImageView+ChatKit.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1388,7 +1374,8 @@
 			isa = PBXGroup;
 			children = (
 				8C84B9481E8C1B8F0020D508 /* CWMomentController.swift */,
-				8CAEC0EC1ECC814D00786F38 /* shares.json */,
+				8CAEC0EC1ECC814D00786F38 /* moments.json */,
+				8C5EEC031EDBB5A200AD6DF4 /* momentReply.json */,
 				8C84B9421E8C038E0020D508 /* DataService */,
 				8C84B9431E8C038E0020D508 /* Layout */,
 				8C84B9441E8C038E0020D508 /* Model */,
@@ -1658,7 +1645,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CA7EB131E9FD5C600467C37 /* chat_background.png in Resources */,
-				8CAEC0ED1ECC814D00786F38 /* shares.json in Resources */,
+				8C5EEC041EDBB5A200AD6DF4 /* momentReply.json in Resources */,
+				8CAEC0ED1ECC814D00786F38 /* moments.json in Resources */,
 				1F3492261E878AD500B36641 /* receivemsg.caf in Resources */,
 				8C8C8CC31EC49D0800CED124 /* Emotion.bundle in Resources */,
 				1F3491B81E87897F00B36641 /* Main.storyboard in Resources */,
@@ -1890,6 +1878,7 @@
 				1FA724471E9C9EA9009B6456 /* CWAccountSafetyController.swift in Sources */,
 				1F40949A1E9DFAC8008D959C /* CWAboutHeaderView.swift in Sources */,
 				1F3D615C1E9F4A4700A1DA4B /* CWTableViewTextCell.swift in Sources */,
+				8CAA09A31EE700B200A1FAD1 /* UIImageView+ChatKit.swift in Sources */,
 				1F6B9F1A1E8CC6F300AD7FC7 /* CWMessageHandleProtocol.swift in Sources */,
 				8C0BFE1C1E92196B007343F1 /* CWPlayMessageAudio.swift in Sources */,
 				8C0BFE101E9209D8007343F1 /* CWContactCell.swift in Sources */,
@@ -1969,7 +1958,6 @@
 				1FA724611E9CD161009B6456 /* CWMomentDataService.swift in Sources */,
 				8C0BFE151E920A6E007343F1 /* CWContactDetailAlbumCell.swift in Sources */,
 				1F0165221E989E43001696F2 /* CWGroupChatController.swift in Sources */,
-				8CB02BB31EAA4D01003B94BC /* UIImageView+ChatKit.swift in Sources */,
 				1F3492121E878AD500B36641 /* NSString+PinYin.swift in Sources */,
 				1F3492051E878AD500B36641 /* CWChatMessage.swift in Sources */,
 				8C0BFE1A1E920F31007343F1 /* CWContactHelper.swift in Sources */,
@@ -2096,7 +2084,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -2104,7 +2094,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2145,7 +2139,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -2153,7 +2149,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

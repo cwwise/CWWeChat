@@ -14,15 +14,15 @@ class CWMomentStore: NSObject {
     static let share = CWMomentStore()
     // 添加前缀 field
     //MARK: 数据库属性
-    let shareTable = Table("CWMoment")
+    let momentTable = Table("CWMoment")
     //消息唯一id
     fileprivate let id = Expression<Int64>("id")
 
-    fileprivate let f_shareId = Expression<String>("shareId")
+    fileprivate let f_momentId = Expression<String>("momentId")
     fileprivate let f_userId = Expression<String>("userId")
     fileprivate let f_username = Expression<String>("username")
 
-    fileprivate let f_sharetype = Expression<Int>("sharetype")
+    fileprivate let f_momenttype = Expression<Int>("momenttype")
     //
     fileprivate let f_imagename = Expression<String>("imagename")
     fileprivate let f_videoname = Expression<String>("videoname")
@@ -40,18 +40,18 @@ class CWMomentStore: NSObject {
         super.init()
     }
     
-    lazy var shareDB:Connection = {
+    lazy var momentDB:Connection = {
         //数据
         do {
-            let shareDB = try Connection(self.path)
-            shareDB.busyTimeout = 3
-            shareDB.busyHandler({ tries in
+            let momentDB = try Connection(self.path)
+            momentDB.busyTimeout = 3
+            momentDB.busyHandler({ tries in
                 if tries >= 3 {
                     return false
                 }
                 return true
             })
-            return shareDB
+            return momentDB
         } catch {
             print(error)
             return try! Connection()
@@ -72,12 +72,12 @@ class CWMomentStore: NSObject {
     // 创建数据库
     func createMessageTable() {
         do {
-            try shareDB.run(shareTable.create(ifNotExists: true) { t in
+            try momentDB.run(momentTable.create(ifNotExists: true) { t in
                 t.column(id, primaryKey: .autoincrement)
-                t.column(f_shareId, unique: true)
+                t.column(f_momentId, unique: true)
                 t.column(f_userId)
                 t.column(f_username)
-                t.column(f_sharetype)
+                t.column(f_momenttype)
                 
                 t.column(f_imagename)
                 t.column(f_videoname)
@@ -97,38 +97,38 @@ class CWMomentStore: NSObject {
     }
     
     
-    func insertShare(_ share: CWMoment) {
+    func insertMoment(_ moment: CWMoment) {
         
 
         
     }
     
-    func insertShareList(_ shareList: [CWMoment]) {
+    func insertMomentList(_ momentList: [CWMoment]) {
         
         do {
-            try shareDB.transaction {
-                for share in shareList {
+            try momentDB.transaction {
+                for moment in momentList {
                     
                     // 插入之前 需要判断是否存在，如果存在 则更新一些必要数据
                     
                     let imagename = ""
                     let videoname = ""
                     let timestamp = 123
-                    let insert = self.shareTable.insert(self.f_shareId <- share.shareId,
-                                                        self.f_userId <- share.userId,
-                                                        self.f_username <- share.username,
-                                                        self.f_sharetype <- share.shareType.rawValue,
+                    let insert = self.momentTable.insert(self.f_momentId <- moment.momentId,
+                                                        self.f_userId <- moment.userId,
+                                                        self.f_username <- moment.username,
+                                                        self.f_momenttype <- moment.momentType.rawValue,
                                                         self.f_imagename <- imagename,
                                                         self.f_videoname <- videoname,
-                                                        self.f_content <- share.content ?? "",
+                                                        self.f_content <- moment.content ?? "",
                                                         self.f_timestamp <- timestamp,
                                                         
-                                                        self.f_sendSuccess <- share.sendSuccess,
-                                                        self.f_isRead <- share.isRead,
-                                                        self.f_isDelete <- share.isDelete,
-                                                        self.f_isPraise <- share.isPraise
+                                                        self.f_sendSuccess <- moment.sendSuccess,
+                                                        self.f_isRead <- moment.isRead,
+                                                        self.f_isDelete <- moment.isDelete,
+                                                        self.f_isPraise <- moment.isPraise
                                                         )
-                    try self.shareDB.run(insert)
+                    try self.momentDB.run(insert)
                 }
             }
         } catch {

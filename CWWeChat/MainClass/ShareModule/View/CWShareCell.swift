@@ -115,10 +115,10 @@ class CWMomentCell: UITableViewCell {
         }
         
         self.cellLayout = layout
-        let share = layout.shareModel
+        let moment = layout.moment
         // 头像
         
-        let avatarURL = URL(string: "\(kImageBaseURLString)\(share.userId).jpg")
+        let avatarURL = URL(string: "\(kImageBaseURLString)\(moment.userId).jpg")
         self.avatarImageView.yy_setImage(with: avatarURL, placeholder: defaultHeadeImage)
         // 姓名
         self.nameLabel.textLayout = layout.nameTextLayout
@@ -163,8 +163,8 @@ class CWMomentCell: UITableViewCell {
         let leftMarigin = self.contentLabel.left
         
         let picSize = layout.pictureSize
-        let pics = layout.shareModel.imageArray
-        let picsCount = layout.shareModel.imageArray.count
+        let pics = layout.moment.imageArray
+        let picsCount = layout.moment.imageArray.count
         
         for i in 0..<9 {
             let imageView = pictureViews[i]
