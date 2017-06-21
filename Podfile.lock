@@ -61,7 +61,7 @@ PODS:
     - YYImage
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (from `https://github.com/Alamofire/Alamofire`, branch `swift4`)
   - CHIPageControl/Aleppo
   - Hue
   - KVOController
@@ -73,17 +73,39 @@ DEPENDENCIES:
   - pop
   - Quick
   - RxCocoa
-  - RxSwift
+  - RxSwift (from `https://github.com/ReactiveX/RxSwift`, branch `swift4.0`)
   - SnapKit
-  - SQLite.swift
+  - SQLite.swift (from `https://github.com/stephencelis/SQLite.swift`, branch `swift-4`)
   - SwiftyBeaver
   - SwiftyJSON
   - XMPPFramework
   - YYText
   - YYWebImage
 
+EXTERNAL SOURCES:
+  Alamofire:
+    :branch: swift4
+    :git: https://github.com/Alamofire/Alamofire
+  RxSwift:
+    :branch: swift4.0
+    :git: https://github.com/ReactiveX/RxSwift
+  SQLite.swift:
+    :branch: swift-4
+    :git: https://github.com/stephencelis/SQLite.swift
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :commit: 9d6d16316edfb8ece47abebe1621d05ee6b0e6ed
+    :git: https://github.com/Alamofire/Alamofire
+  RxSwift:
+    :commit: 43cf3b1958d53112199bb0bc7c9efe9fa5a407be
+    :git: https://github.com/ReactiveX/RxSwift
+  SQLite.swift:
+    :commit: 5e771a1af67f52b5154cc5e9ee3f0f5f4a3e07a5
+    :git: https://github.com/stephencelis/SQLite.swift
+
 SPEC CHECKSUMS:
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Alamofire: 4c2bf7fa03c4a626163606de0a417568c270575e
   CHIPageControl: 2d3a0edacd7e3bc113bc88cbf187ba8f0b045548
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
   CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
@@ -100,9 +122,9 @@ SPEC CHECKSUMS:
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
   Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
   RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
-  RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
+  RxSwift: 52c0cf4799c1db7de469b6a68c4f786be7bc9f14
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
-  SQLite.swift: 99b36c22084427f0abbeb957556ce1528cf10bb3
+  SQLite.swift: 79e1f0559d8a21ecc0efcf353088ea13d838335e
   SwiftyBeaver: 90a39e3dc5136b7285f2e4c870b107e3933b8b84
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
@@ -111,6 +133,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 9c2428301d28f28b0f85b1ab1951c1033e7c5f7e
+PODFILE CHECKSUM: dfd5cd5767468d59e06f3963fb8fc1542d579998
 
 COCOAPODS: 1.2.1

@@ -11,19 +11,18 @@ target 'CWWeChat' do
   pod 'SnapKit'
   
   # request
-  pod 'Alamofire'
   pod 'Moya/RxSwift'
-  pod 'RxSwift'
   pod 'RxCocoa'
   pod 'OHHTTPStubs/Swift'
 
   pod 'YYText'
   pod 'YYWebImage'
 
-  # database
-  pod 'SQLite.swift'
-
-  # log
+  pod 'SQLite.swift', :git => 'https://github.com/stephencelis/SQLite.swift' , :branch => 'swift-4'
+  pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire' , :branch => 'swift4'
+  pod 'RxSwift', :git=> 'https://github.com/ReactiveX/RxSwift', :branch => 'swift4.0'
+      
+# log
   pod 'SwiftyBeaver'
 
   # chat

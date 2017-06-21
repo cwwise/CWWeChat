@@ -1594,6 +1594,7 @@
 					1F3491791E8786EE00B36641 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = UEL43GU3G3;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					1F34918D1E8786EE00B36641 = {
@@ -1609,6 +1610,7 @@
 					8CA7EAF81E9E7CD500467C37 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = UEL43GU3G3;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -2192,7 +2194,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.cwcwchat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -2210,7 +2213,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.cwcwchat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -2285,7 +2289,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.cwcwchat.CWShareWeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -2302,7 +2307,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwcoder.cwcwchat.CWShareWeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
