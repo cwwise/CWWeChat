@@ -51,8 +51,8 @@ extension CWContactService: CWContactManager {
     }
     
     func addContact(_ contact: CWChatUser, message: String, completion: CWAddContactCompletion?) {
-        let domain = CWChatClient.share.options.chatDomain
-        let resource = CWChatClient.share.options.chatResource
+        let domain = CWChatClient.share.options.domain
+        let resource = CWChatClient.share.options.resource
         let jid = XMPPJID(user: contact.userId, domain: domain, resource: resource)
         xmppRoster.addUser(jid, withNickname: contact.userId)
     }

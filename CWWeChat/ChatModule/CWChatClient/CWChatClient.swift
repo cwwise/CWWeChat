@@ -63,7 +63,7 @@ public class CWChatClient: NSObject {
     /// 是否连接服务器
     private(set) var isConnected: Bool = false
     /// 用户是否已登录
-    private(set) var isLoggedIn: Bool = false
+    private(set) var isLogin: Bool = false
     
     /// XMPP实例
     private var xmppManager = CWChatXMPPManager.share
@@ -135,7 +135,7 @@ public extension CWChatClient {
     
     var userFilePath: String {
         let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let path = "\(documentPath)/cwchat/\(self.options.chatDomain)/\(self.userId!)"
+        let path = "\(documentPath)/cwchat/\(self.options.domain)/\(self.userId!)"
         return path
     }
     

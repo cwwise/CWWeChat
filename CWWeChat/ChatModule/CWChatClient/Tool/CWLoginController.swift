@@ -141,7 +141,7 @@ class CWLoginController: UIViewController {
 //        hud.bezelView.backgroundColor = UIColor.gray
         hud.label.text = "Loading..."
         
-        let options = CWChatClientOptions(chatServer: "im.cwcoder.com", chatDomain: "im.cwcoder.com")
+        let options = CWChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
         let chatClient = CWChatClient.share
         chatClient.initialize(with: options)
         chatClient.login(username: userName, password: password) { (username, error) in

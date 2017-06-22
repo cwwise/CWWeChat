@@ -129,11 +129,11 @@ class CWChatXMPPManager: NSObject {
         self.completion = completion
         
         let timeoutInterval: TimeInterval = 60
-        let resource = options.chatResource
-        let domain = options.chatDomain
+        let resource = options.resource
+        let domain = options.domain
         
-        xmppStream.hostName = options.chatServer
-        xmppStream.hostPort = options.chatPort
+        xmppStream.hostName = options.host
+        xmppStream.hostPort = options.port
         xmppStream.myJID = XMPPJID(user: userName, domain: domain, resource: resource)
         do {
             try xmppStream.connect(withTimeout: timeoutInterval)

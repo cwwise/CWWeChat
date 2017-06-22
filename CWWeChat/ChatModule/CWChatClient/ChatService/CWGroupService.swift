@@ -40,7 +40,7 @@ extension CWGroupServic: CWGroupManager {
         //serviceName 默认是conference
         let serviceName = "conference"
         let options = CWChatClient.share.options
-        groupChat.discoverRooms(forServiceNamed: serviceName+"."+options.chatDomain)
+        groupChat.discoverRooms(forServiceNamed: serviceName+"."+options.domain)
     }
     
     func createGroup(title: String,
@@ -50,7 +50,7 @@ extension CWGroupServic: CWGroupManager {
                      completion: CWGroupCompletion) {
         let options = CWChatClient.share.options
 
-        let jid = XMPPJID(string: "chenwei@conference."+options.chatDomain)
+        let jid = XMPPJID(string: "chenwei@conference."+options.domain)
         guard let roomjid = jid else {
             completion(nil, CWChatError(errorCode: .customer, error: "系统错误"))
             return
