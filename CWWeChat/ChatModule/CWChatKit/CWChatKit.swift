@@ -19,26 +19,10 @@ public class CWChatKit: NSObject {
     /// 单例
     public static let share = CWChatKit()
     
-//    public var cache: YYMemoryCache = {
-//        let cache = YYMemoryCache()
-//        cache.name = "cache"
-//        cache.shouldRemoveAllObjectsWhenEnteringBackground = false
-//        return cache
-//    }()
-    
     public var chatWebImageManager: ImageCache = {
         let cache = ImageCache(name: "hello")
-//        let path = "\(CWChatClient.share.userFilePath)/image"
-//        let imageCache = YYImageCache(path: path)
-//        imageCache?.diskCache.customFileNameBlock = { (key) in
-//            return key
-//        }
-//        let queue = OperationQueue()
-//        let chatWebImageManager = YYWebImageManager(cache: imageCache, queue: queue)
-//        chatWebImageManager.cacheKeyFilter = { (url) in
-//            return url.lastPathComponent
-//        }
-//        return chatWebImageManager
+
+        
         return cache
     }()
     

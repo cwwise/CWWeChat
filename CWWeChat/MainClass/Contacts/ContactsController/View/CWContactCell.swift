@@ -53,7 +53,6 @@ class CWContactCell: UITableViewCell {
         } else {
             self.avatarImageView.kf.setImage(with: contactModel.avatarURL, placeholder: defaultHeadeImage) 
         }
-        
         self.usernameLabel.text = contactModel.nickname;
     }
     

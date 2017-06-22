@@ -8,12 +8,11 @@
 
 import UIKit
 import Kingfisher
-import YYImage
 
 class CWExpressionMessageCell: CWChatMessageCell {
 
-    lazy var expressionView: YYAnimatedImageView = {
-        let expressionView = YYAnimatedImageView()
+    lazy var expressionView: UIImageView = {
+        let expressionView = UIImageView()
         expressionView.backgroundColor = UIColor.clear
         return expressionView
     }()

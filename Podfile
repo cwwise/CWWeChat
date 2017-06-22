@@ -18,7 +18,6 @@ target 'CWWeChat' do
   pod 'OHHTTPStubs/Swift'
 
   pod 'YYText'
-  pod 'YYImage'
   pod 'SwiftyImage'
   pod 'Kingfisher'
 

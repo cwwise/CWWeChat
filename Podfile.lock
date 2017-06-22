@@ -54,9 +54,6 @@ PODS:
     - CocoaAsyncSocket (~> 7.6.0)
     - CocoaLumberjack
     - KissXML (~> 5.2.0)
-  - YYImage (1.0.4):
-    - YYImage/Core (= 1.0.4)
-  - YYImage/Core (1.0.4)
   - YYText (1.0.7)
 
 DEPENDENCIES:
@@ -81,7 +78,6 @@ DEPENDENCIES:
   - SwiftyImage
   - SwiftyJSON
   - XMPPFramework
-  - YYImage
   - YYText
 
 SPEC CHECKSUMS:
@@ -111,9 +107,8 @@ SPEC CHECKSUMS:
   SwiftyImage: 4d3feb0211beb7217b39ac553e3ee64ceb72d611
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
-  YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 34bd911480f09734ca92f4d2ec0caebdab3811e3
+PODFILE CHECKSUM: 6c1eb4fa0e4b9284c408170ca6c7d7f551f4b46b
 
 COCOAPODS: 1.2.1
