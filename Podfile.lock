@@ -9,6 +9,7 @@ PODS:
   - CocoaLumberjack/Extensions (3.2.0):
     - CocoaLumberjack/Default
   - Hue (2.0.1)
+  - Kingfisher (3.10.2)
   - KissXML (5.2.0)
   - KVOController (1.2.0)
   - LCActionSheet (3.2.3):
@@ -36,6 +37,7 @@ PODS:
   - OHHTTPStubs/Swift (6.0.0):
     - OHHTTPStubs/Default
   - pop (1.0.9)
+  - PPBadgeViewSwift (1.0.0)
   - Quick (1.1.0)
   - Result (3.2.3)
   - RxCocoa (3.5.0):
@@ -46,24 +48,22 @@ PODS:
     - SQLite.swift/standard (= 0.11.3)
   - SQLite.swift/standard (0.11.3)
   - SwiftyBeaver (1.2.2)
+  - SwiftyImage (1.1.0)
   - SwiftyJSON (3.1.4)
   - XMPPFramework (3.7.0):
     - CocoaAsyncSocket (~> 7.6.0)
     - CocoaLumberjack
     - KissXML (~> 5.2.0)
-  - YYCache (1.0.4)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
   - YYImage/Core (1.0.4)
   - YYText (1.0.7)
-  - YYWebImage (1.0.5):
-    - YYCache
-    - YYImage
 
 DEPENDENCIES:
   - Alamofire
   - CHIPageControl/Aleppo
   - Hue
+  - Kingfisher
   - KVOController
   - LCActionSheet
   - MBProgressHUD
@@ -71,16 +71,18 @@ DEPENDENCIES:
   - Nimble
   - OHHTTPStubs/Swift
   - pop
+  - PPBadgeViewSwift
   - Quick
   - RxCocoa
   - RxSwift
   - SnapKit
   - SQLite.swift
   - SwiftyBeaver
+  - SwiftyImage
   - SwiftyJSON
   - XMPPFramework
+  - YYImage
   - YYText
-  - YYWebImage
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
@@ -88,6 +90,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
   CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
   Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
+  Kingfisher: 7297492bf8cec9b2e2dee3519f2219948580d98e
   KissXML: 1c1eeeb6b94e4522cd2f2373e5d0d03c9227738f
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
   LCActionSheet: b68d6fc4cb252f5ad37f20387b853caa95657b67
@@ -97,6 +100,7 @@ SPEC CHECKSUMS:
   Nimble: 874982b605d4d752fcac6be695d13c502de84b1b
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  PPBadgeViewSwift: 92c992703e7c6d5ce3d1ebffddc7084716b84e01
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
   Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
   RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
@@ -104,13 +108,12 @@ SPEC CHECKSUMS:
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SQLite.swift: 99b36c22084427f0abbeb957556ce1528cf10bb3
   SwiftyBeaver: 90a39e3dc5136b7285f2e4c870b107e3933b8b84
+  SwiftyImage: 4d3feb0211beb7217b39ac553e3ee64ceb72d611
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
-  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
-  YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 9c2428301d28f28b0f85b1ab1951c1033e7c5f7e
+PODFILE CHECKSUM: 34bd911480f09734ca92f4d2ec0caebdab3811e3
 
 COCOAPODS: 1.2.1

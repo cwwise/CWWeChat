@@ -59,8 +59,8 @@ class CWLoginController: UIViewController {
     
     func setupNavigationBar() {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-
-        let whiteImage = UIImage.yy_image(with: UIColor.white, size: CGSize(width: 1, height: 1))
+        
+        let whiteImage = UIImage.size(CGSize(width: 1, height: 1)).color(UIColor.white).image
 
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(whiteImage, for: .default)

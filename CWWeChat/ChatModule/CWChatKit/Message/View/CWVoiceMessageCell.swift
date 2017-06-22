@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import YYImage
+import Kingfisher
 
 private let redtip_width: CGFloat = 6
 

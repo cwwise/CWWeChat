@@ -97,7 +97,7 @@ public class CWTableViewCell: UITableViewCell {
             })
         }
         
-        rightImageView.yy_setImage(with: item.rightImageURL, placeholder: nil)
+        rightImageView.kf.setImage(with: item.rightImageURL, placeholder: nil)
         if item.disableHighlight {
             self.selectionStyle = .none
         } else {

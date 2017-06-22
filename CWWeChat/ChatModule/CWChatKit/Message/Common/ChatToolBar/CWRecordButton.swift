@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import YYWebImage
+import Kingfisher
+import SwiftyImage
 
 class CWRecordButton: UIButton {
 
@@ -16,7 +17,8 @@ class CWRecordButton: UIButton {
         
         self.setTitle("按住     说话", for: UIControlState())
         self.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
-        self.setBackgroundImage(UIImage.yy_image(with: UIColor(hex: "#F6F6F6")), for: .normal)
+        let normalImage = UIImage.size(width: 10, height: 10).color(UIColor(hex: "#F6F6F6")).image
+        self.setBackgroundImage(normalImage, for: .normal)
         self.setTitleColor(UIColor.black, for: UIControlState())
         self.layer.borderColor = UIColor(hex: "#DADADA").cgColor
         self.layer.borderWidth = 0.5

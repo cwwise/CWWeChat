@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import YYWebImage
 
 /// 图片发送部分进度view
 class CWChatImageView: UIImageView {

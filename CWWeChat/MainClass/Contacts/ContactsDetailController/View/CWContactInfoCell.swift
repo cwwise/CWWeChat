@@ -88,7 +88,7 @@ class CWContactInfoCell: UITableViewCell {
         
         let nikename = userModel.nickname ?? ""
         
-        avatarImageView.yy_setImage(with: userModel.avatarURL, placeholder: defaultHeadeImage)
+        avatarImageView.kf.setImage(with: userModel.avatarURL, placeholder: defaultHeadeImage)
         
         nikenameLabel.text = nikename
         usernameLabel.text = "微信号："+userModel.username

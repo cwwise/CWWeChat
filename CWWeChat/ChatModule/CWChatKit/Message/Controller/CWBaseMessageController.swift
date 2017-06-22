@@ -285,8 +285,6 @@ extension CWBaseMessageController: CWChatMessageCellDelegate {
     }
 }
 
-
-
 // MARK: - CWInputToolBarDelegate
 extension CWBaseMessageController: CWChatToolBarDelegate {
 
@@ -316,8 +314,8 @@ extension CWBaseMessageController: CWChatToolBarDelegate {
     func chatToolBar(_ chatToolBar: CWChatToolBar, image: UIImage) {
         
         let imageName = String.UUIDString()+".jpg"
-        let cache = CWChatKit.share.chatWebImageManager.cache
-        cache?.setImage(image, forKey: imageName)
+        let cache = CWChatKit.share.chatWebImageManager
+        cache.store(image, forKey: imageName)
         
         let imageBody = CWImageMessageBody(path: imageName, size: image.size)
         let message = CWChatMessage(targetId: conversation.targetId,

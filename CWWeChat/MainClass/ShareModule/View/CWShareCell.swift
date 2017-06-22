@@ -8,7 +8,7 @@
 
 import UIKit
 import YYText
-import YYWebImage
+import Kingfisher
 import RxSwift
 
 protocol CWMomentCellDelegate: NSObjectProtocol {
@@ -119,7 +119,8 @@ class CWMomentCell: UITableViewCell {
         // 头像
         
         let avatarURL = URL(string: "\(kImageBaseURLString)\(moment.userId).jpg")
-        self.avatarImageView.yy_setImage(with: avatarURL, placeholder: defaultHeadeImage)
+
+        self.avatarImageView.kf.setImage(with: avatarURL, placeholder: defaultHeadeImage)
         // 姓名
         self.nameLabel.textLayout = layout.nameTextLayout
         
@@ -169,7 +170,7 @@ class CWMomentCell: UITableViewCell {
         for i in 0..<9 {
             let imageView = pictureViews[i]
             if i >= picsCount {
-                imageView.yy_cancelCurrentImageRequest()
+                imageView.kf.cancelDownloadTask()
                 imageView.isHidden = true
             } else {
                 var origin = CGPoint.zero
@@ -190,7 +191,7 @@ class CWMomentCell: UITableViewCell {
                 
                 let imageModel = pics[i]
                 
-                imageView.yy_setImage(with: imageModel.thumbnailURL, placeholder: nil)
+                imageView.kf.setImage(with: imageModel.thumbnailURL, placeholder: nil)
                 
             }
             

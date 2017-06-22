@@ -54,11 +54,11 @@ class CWImageMessageCell: CWChatMessageCell {
         let body = message.messageBody as! CWImageMessageBody
         
         if let url = body.originalURL {
-            messageImageView.cw_setImage(with: url, placeholder: nil)
+            messageImageView.kf.setImage(with: url, placeholder: nil)
         }
         else if let path = body.originalLocalPath {
             let url = URL(fileURLWithPath: kChatUserImagePath+path)
-            messageImageView.cw_setImage(with: url, placeholder: nil)
+            messageImageView.kf.setImage(with: url, placeholder: nil)
         } else  {
             messageImageView.image = nil
         }

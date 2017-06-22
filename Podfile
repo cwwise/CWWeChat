@@ -18,7 +18,9 @@ target 'CWWeChat' do
   pod 'OHHTTPStubs/Swift'
 
   pod 'YYText'
-  pod 'YYWebImage'
+  pod 'YYImage'
+  pod 'SwiftyImage'
+  pod 'Kingfisher'
 
   # database
   pod 'SQLite.swift'
@@ -30,6 +32,7 @@ target 'CWWeChat' do
   pod 'XMPPFramework'
   
   # UI
+  pod 'PPBadgeViewSwift'
   pod 'MBProgressHUD'
   pod 'CHIPageControl/Aleppo'
   pod 'LCActionSheet'

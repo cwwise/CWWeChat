@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import YYWebImage
 
 class CWEmoticonCell: UICollectionViewCell {
     
@@ -37,7 +36,7 @@ class CWEmoticonCell: UICollectionViewCell {
                 let emoticonPath = Bundle.main.path(forResource: "Emotion", ofType: "bundle")
                 let emoticonBundle = Bundle(path: emoticonPath!)
                 let imagePath = emoticonBundle?.path(forResource: emoticon.png!+"@2x", ofType: "png")
-                imageView.yy_setImage(with: URL(fileURLWithPath: imagePath!), options: .ignoreDiskCache)
+                imageView.kf.setImage(with: URL(fileURLWithPath: imagePath!))
             } else {
                imageView.image = nil
             }
