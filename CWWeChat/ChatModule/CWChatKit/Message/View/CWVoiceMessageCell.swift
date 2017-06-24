@@ -11,7 +11,7 @@ import Kingfisher
 
 private let redtip_width: CGFloat = 6
 
-class CWVoiceMessageCell: CWChatMessageCell {
+class CWVoiceMessageCell: CWMessageCell {
     
     /// voice图标的imageView
     lazy var voiceImageView:UIImageView = {

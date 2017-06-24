@@ -1,5 +1,5 @@
 //
-//  CWChatMessageCell.swift
+//  CWMessageCell.swift
 //  CWWeChat
 //
 //  Created by chenwei on 2017/3/26.
@@ -8,28 +8,28 @@
 
 import UIKit
 
-protocol CWChatMessageCellDelegate: NSObjectProtocol {
+protocol CWMessageCellDelegate: NSObjectProtocol {
     
     /// 点击cell文字中的URL
     ///
     /// - Parameters:
     ///   - cell: cell
     ///   - link: link
-    func messageCellDidTapLink(_ cell: CWChatMessageCell, link: URL)
+    func messageCellDidTapLink(_ cell: CWMessageCell, link: URL)
     
     /// 点击cell文字中的电话
     ///
     /// - Parameters:
     ///   - cell: cell
     ///   - phone: phone
-    func messageCellDidTapPhone(_ cell: CWChatMessageCell, phone: String)
+    func messageCellDidTapPhone(_ cell: CWMessageCell, phone: String)
     
     /// cell被点击
     ///
     /// - Parameter cell: cell
-    func messageCellDidTap(_ cell: CWChatMessageCell)
+    func messageCellDidTap(_ cell: CWMessageCell)
     
-    func messageCellResendButtonClick(_ cell: CWChatMessageCell)
+    func messageCellResendButtonClick(_ cell: CWMessageCell)
 
     
     /// 头像点击的回调方法
@@ -38,15 +38,15 @@ protocol CWChatMessageCellDelegate: NSObjectProtocol {
     func messageCellUserAvatarDidClick(_ userId: String)
 }
 
-extension CWChatMessageCellDelegate {
-    func messageCellDidTapLink(_ cell: CWChatMessageCell, link: URL) {}
-    func messageCellDidTapPhone(_ cell: CWChatMessageCell, phone: String){}
+extension CWMessageCellDelegate {
+    func messageCellDidTapLink(_ cell: CWMessageCell, link: URL) {}
+    func messageCellDidTapPhone(_ cell: CWMessageCell, phone: String){}
     func messageCellUserAvatarDidClick(_ userId: String) {}
 }
 
-class CWChatMessageCell: UITableViewCell {
+class CWMessageCell: UITableViewCell {
 
-    weak var delegate: CWChatMessageCellDelegate?
+    weak var delegate: CWMessageCellDelegate?
 
     var messageModel: CWChatMessageModel!
     

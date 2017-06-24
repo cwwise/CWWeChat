@@ -117,7 +117,7 @@ class CWMomentStore: NSObject {
                     let insert = self.momentTable.insert(self.f_momentId <- moment.momentId,
                                                         self.f_userId <- moment.userId,
                                                         self.f_username <- moment.username,
-                                                        self.f_momenttype <- moment.momentType.rawValue,
+                                                        self.f_momenttype <- moment.type.rawValue,
                                                         self.f_imagename <- imagename,
                                                         self.f_videoname <- videoname,
                                                         self.f_content <- moment.content ?? "",

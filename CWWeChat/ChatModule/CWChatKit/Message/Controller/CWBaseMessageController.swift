@@ -66,7 +66,7 @@ class CWBaseMessageController: UIViewController {
      注册cell class
      */
     func registerCell() {
-        tableView.register(CWChatMessageCell.self, forCellReuseIdentifier: CWMessageType.none.identifier())
+        tableView.register(CWMessageCell.self, forCellReuseIdentifier: CWMessageType.none.identifier())
         tableView.register(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.text.identifier())
         tableView.register(CWImageMessageCell.self, forCellReuseIdentifier: CWMessageType.image.identifier())
         tableView.register(CWVoiceMessageCell.self, forCellReuseIdentifier: CWMessageType.voice.identifier())
@@ -176,7 +176,7 @@ extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
         let identifier = messageModel.message.messageType.identifier()
     
         // 时间和tip消息 是例外的种类 以后判断
-        let messageCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CWChatMessageCell
+        let messageCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CWMessageCell
         messageCell.delegate = self
         messageCell.updateMessage(messageModel)
         messageCell.updateState()
@@ -214,13 +214,13 @@ extension CWBaseMessageController: CWChatManagerDelegate {
 }
 
 
-// MARK: - CWChatMessageCellDelegate
-extension CWBaseMessageController: CWChatMessageCellDelegate {
+// MARK: - CWMessageCellDelegate
+extension CWBaseMessageController: CWMessageCellDelegate {
     func messageCellUserAvatarDidClick(_ userId: String) {
         log.debug("cell头像 点击...\(userId)")
     }
     
-    func messageCellDidTap(_ cell: CWChatMessageCell) {
+    func messageCellDidTap(_ cell: CWMessageCell) {
         
         switch cell.messageModel.message.messageType{
         case .image:
@@ -244,7 +244,7 @@ extension CWBaseMessageController: CWChatMessageCellDelegate {
         }
     }
     
-    func messageCellResendButtonClick(_ cell: CWChatMessageCell) {
+    func messageCellResendButtonClick(_ cell: CWMessageCell) {
         let alert = UIAlertController(title: nil, message: "重发此消息？", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
             
@@ -258,12 +258,12 @@ extension CWBaseMessageController: CWChatMessageCellDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func messageCellDidTapLink(_ cell: CWChatMessageCell, link: URL) {
+    func messageCellDidTapLink(_ cell: CWMessageCell, link: URL) {
         let webViewController = CWWebViewController(url: link)
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
     
-    func messageCellDidTapPhone(_ cell: CWChatMessageCell, phone: String) {
+    func messageCellDidTapPhone(_ cell: CWMessageCell, phone: String) {
         let title = "\(phone)可能是一个电话号码，你可以"
         let otherButtonTitle = ["呼叫","复制号码","添加到手机通讯录"]
         let actionSheet = LCActionSheet(title: title, delegate: nil, cancelButtonTitle: "取消", otherButtonTitleArray: otherButtonTitle)
@@ -340,7 +340,7 @@ extension CWBaseMessageController: CWChatToolBarDelegate {
         chatManager.sendMessage(message, progress: { (progress) in
             
             messageModel.uploadProgress = progress
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWChatMessageCell else {
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWMessageCell else {
                 return
             }
             cell.updateProgress()
@@ -359,7 +359,7 @@ extension CWBaseMessageController: CWChatToolBarDelegate {
                 
             }
             
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWChatMessageCell else {
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWMessageCell else {
                 return
             }
             cell.updateProgress()

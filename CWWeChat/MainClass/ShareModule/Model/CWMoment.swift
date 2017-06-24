@@ -8,8 +8,15 @@
 
 import UIKit
 
+enum CWMomentType: Int {
+    case normal // 图文
+    case vidio  // 视频
+    case url
+    case music  //音乐
+}
+
 /// 图片
-class CWMomentPictureModel: NSObject {
+class CWMomentPhoto: NSObject {
     var thumbnailURL: URL
     var largetURL: URL
     var size: CGSize = CGSize.zero
@@ -20,18 +27,27 @@ class CWMomentPictureModel: NSObject {
     }
 }
 
-class CWMomentVideoModel: NSObject {
+class CWMomentVideo: NSObject {
     var videoURL: URL
     init(videoURL: URL) {
         self.videoURL = videoURL
     }
 }
 
-enum CWMomentType: Int {
-    case normal // 图文
-    case vidio  // 视频
-    case url
+class CWMultimedia: NSObject {
+    var url: URL
+    var imageURL: URL
+    var title: String
+    var source: String?
+    init(url: URL, imageURL: URL, title: String, source: String? = nil) {
+        self.url = url
+        self.imageURL = imageURL
+        self.title = title
+        self.source = source
+    }
 }
+
+
 
 class CWMoment: NSObject {
     
@@ -44,12 +60,14 @@ class CWMoment: NSObject {
     
     var date: Date
     
-    var momentType: CWMomentType = .normal
+    var type: CWMomentType = .normal
 
     var content: String?
-    var videoModel: CWMomentVideoModel?
+    var videoModel: CWMomentVideo?
+    var multimedia: CWMultimedia?
+    var imageArray = [CWMomentPhoto]()
     
-    var imageArray = [CWMomentPictureModel]()
+    
     var commentArray = [CWMomentReply]()
     var praiseArray = [CWMomentReply]()
         

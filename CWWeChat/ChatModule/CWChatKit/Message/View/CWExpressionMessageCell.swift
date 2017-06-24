@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class CWExpressionMessageCell: CWChatMessageCell {
+class CWExpressionMessageCell: CWMessageCell {
 
     lazy var expressionView: UIImageView = {
         let expressionView = UIImageView()

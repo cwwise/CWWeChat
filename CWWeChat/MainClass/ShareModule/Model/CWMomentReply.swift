@@ -8,12 +8,11 @@
 
 import UIKit
 
-enum CWMomentReplyType {
+enum CWMomentReplyType: Int {
     case unkown
     case comment
     case praise
 }
-
 
 class CWMomentReply: NSObject {
     // 对应的id

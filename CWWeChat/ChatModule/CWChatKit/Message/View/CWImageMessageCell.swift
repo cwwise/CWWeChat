@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWImageMessageCell: CWChatMessageCell {
+class CWImageMessageCell: CWMessageCell {
 
     lazy var messageImageView: CWChatImageView = {
         let messageImageView = CWChatImageView()

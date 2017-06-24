@@ -9,7 +9,7 @@
 import UIKit
 import YYText
 
-class CWTextMessageCell: CWChatMessageCell {
+class CWTextMessageCell: CWMessageCell {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
