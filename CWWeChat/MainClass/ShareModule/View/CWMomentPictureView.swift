@@ -23,6 +23,7 @@ class CWMomentPictureView: UIView {
             imageView.backgroundColor = UIColor.gray
             imageView.isUserInteractionEnabled = true
             imageView.tag = 100+i
+            imageView.contentMode = .scaleAspectFill
             let tap = UITapGestureRecognizer(target: self, action: #selector(tapAction(_:)))
             imageView.addGestureRecognizer(tap)
             

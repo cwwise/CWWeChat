@@ -24,6 +24,7 @@ class CWMomentPhoto: NSObject {
     init(thumbnailURL: URL, largetURL: URL, size: CGSize = .zero) {
         self.thumbnailURL = thumbnailURL
         self.largetURL = largetURL
+        self.size = size
     }
 }
 

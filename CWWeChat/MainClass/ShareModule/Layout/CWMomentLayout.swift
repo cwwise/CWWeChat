@@ -154,8 +154,24 @@ class CWMomentLayout: NSObject {
         switch moment.imageArray.count {
         case 1:
             // 待修改，如果一张照片按比较计算size
-            picSize = CGSize(width: maxLen, height: maxLen)
-            picHeight = maxLen
+            if moment.imageArray.first?.size == CGSize.zero {
+                picSize = CGSize(width: maxLen, height: maxLen)
+            } else {
+                let imageSize = moment.imageArray.first!.size
+                // 判断图片是长图
+                //根据图片的比例大小计算图片的frame
+                if imageSize.width > imageSize.height {
+                    var height = kChatImageMaxWidth * imageSize.height / imageSize.width
+                    height = max(kChatImageMinWidth, height)
+                    picSize = CGSize(width: ceil(kChatImageMaxWidth), height: ceil(height))
+                } else {
+                    var width = kChatImageMaxWidth * imageSize.width / imageSize.height
+                    width = max(kChatImageMinWidth, width)
+                    picSize = CGSize(width: ceil(width), height: ceil(kChatImageMaxWidth))
+                }
+            }
+            
+            picHeight = picSize.height
         case 2,3:
             picSize = CGSize(width: len1_3, height: len1_3)
             picHeight = len1_3

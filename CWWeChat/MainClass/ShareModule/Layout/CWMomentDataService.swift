@@ -55,8 +55,9 @@ class CWMomentDataService: NSObject {
             for item in items {
                 let url1 = URL(string: item["largetURL"].stringValue)!
                 let url2 = URL(string: item["thumbnailURL"].stringValue)!
+                let size = CGSize(width: item["width"].intValue, height: item["height"].intValue)
                 
-                let imageModel = CWMomentPhoto(thumbnailURL: url2, largetURL: url1)
+                let imageModel = CWMomentPhoto(thumbnailURL: url2, largetURL: url1, size: size)
                 momentModel.imageArray.append(imageModel)
             }
             
