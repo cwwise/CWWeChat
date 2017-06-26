@@ -65,12 +65,13 @@ extension CWBaseMessageController {
                         
                         if hideKeyBoard {
                             self.chatToolBar.bottom = self.view.height
+                            self.tableView.height = kScreenHeight-kChatToolBarHeight
                             self.tableView.bottom = self.chatToolBar.top
                         } else {
                             self.chatToolBar.bottom = self.view.height-keyboardFrame.height
+                            self.tableView.height = kScreenHeight-kChatToolBarHeight-keyboardFrame.height
                             self.tableView.bottom = self.chatToolBar.top
                         }
-                        
                         
         }) { (bool) in
             

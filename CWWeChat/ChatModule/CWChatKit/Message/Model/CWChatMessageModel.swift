@@ -9,35 +9,33 @@
 import UIKit
 import YYText.YYTextUtilities
 
-enum CWMediaPlayStutus {
+public enum CWMediaPlayStutus {
     case none
     case playing
     case played
 }
 
+public protocol CWMessageBelong {
+    var isSend: Bool {get}
+}
 
-public let kChatTextAttribute = [NSForegroundColorAttributeName:UIColor.black,
-                                  NSFontAttributeName: UIFont.fontTextMessageText()]
 /// 消息model 
-public class CWChatMessageModel: NSObject {
+public class CWChatMessageModel: NSObject, CWMessageBelong {
 
     /// 聊天消息（后期需要修改 message设置为private）添加一些属性来做替换
     var message: CWChatMessage
-    
     /// 是否显示时间
-    var showTime: Bool = false
+    public var showTime: Bool = false
     /// 音频播放状态 默认未播放
-    var mediaPlayStutus: CWMediaPlayStutus = .none
+    public var mediaPlayStutus: CWMediaPlayStutus = .none
     /// 上传进度
-    var uploadProgress: Float = 0.0
-    
+    public var uploadProgress: Float = 0.0
     /// 是否是发送方
-    var isSend: Bool
+    private(set) public var isSend: Bool
     /// 消息
-    var messageFrame = CWChatMessageFrame()
-    
+    public var messageFrame = CWChatMessageFrame()
     /// 文本消息
-    var content: String?
+    public var content: String?
     
     public init(message: CWChatMessage) {
         self.message = message
@@ -92,7 +90,6 @@ public class CWChatMessageModel: NSObject {
                                           contentSize: contentSize,
                                           textLayout: textLayout)
     }
-    
     
     func setupImageMessage() {
         

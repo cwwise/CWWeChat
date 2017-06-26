@@ -9,7 +9,7 @@
 import UIKit
 
 /// 会话模型
-class CWChatConversationModel: NSObject {
+public class CWChatConversationModel: NSObject {
 
     /// 会话
     private(set) var conversation: CWChatConversation

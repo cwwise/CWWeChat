@@ -59,4 +59,10 @@ let kNamelabelSpaceY: CGFloat =   1.0
 let kAvatarToMessageContent:    CGFloat = 5.0
 let kMessageCellEdgeOffset:     CGFloat = 6.0
 
+public let kChatTextAttribute = [NSForegroundColorAttributeName:UIColor.black,
+                                 NSFontAttributeName: UIFont.fontTextMessageText()]
+
+
+
+
 

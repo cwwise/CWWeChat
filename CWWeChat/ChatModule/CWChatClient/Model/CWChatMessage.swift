@@ -85,7 +85,8 @@ public enum CWMessageType: Int {
     case file               //文件
     case location           //位置
     case expression         //表情
-    
+    case notification       //通知
+
     //获取cell的reuseIdentifier
     func identifier() -> String {
         switch self {

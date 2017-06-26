@@ -15,10 +15,9 @@ private let kMaxShowtimeMessageInterval: Double = 3*60.0
 class CWBaseMessageController: UIViewController {
     // 目标会话
     public var conversation: CWChatConversation!
-    /// 消息数据数组
+    /// 消息数据数组(这个部分 写的不太好)
     public var messageList = Array<AnyObject>()
     
-
     /// 显示消息时间相关的
     var messageTimeIntervalTag: Double = -1
     var messageAccumulate:Int = 0
@@ -336,6 +335,7 @@ extension CWBaseMessageController: CWChatToolBarDelegate {
         let indexPath = IndexPath(row: self.messageList.count-1, section: 0)
         self.tableView.reloadData()
         updateMessageAndScrollBottom(false)
+        
         
         // 发送消息 会先存储消息，然后
         let chatManager = CWChatClient.share.chatManager

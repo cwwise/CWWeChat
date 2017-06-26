@@ -32,6 +32,10 @@ class CWContactDetailFooterView: UIView {
         
     }
     
+    func hello() {
+        print("123123123")
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

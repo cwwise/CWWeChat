@@ -13,6 +13,7 @@ import RxSwift
 class CWContactDetailController: CWBaseTableViewController {
 
     var userId: String
+    
     init(userId: String) {
         self.userId = userId
         super.init(nibName: nil, bundle: nil)
@@ -21,6 +22,8 @@ class CWContactDetailController: CWBaseTableViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    let bag = DisposeBag()
     
     fileprivate var contact: CWContactModel!
     
@@ -71,11 +74,10 @@ class CWContactDetailController: CWBaseTableViewController {
         
         let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 100)
         let footerView = CWContactDetailFooterView(frame: frame)
-        
         footerView.button.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.goChatController()
-            }).disposed(by: DisposeBag())
+            }).disposed(by: bag)
         
         self.tableView.tableFooterView = footerView
     }
