@@ -44,6 +44,22 @@
                 "source": "cocoachina"
                 }
              },
+             
+             {
+             "momentId":"125",
+             "username": "Jerry",
+             "userId": "jerry",
+             "date": 1495026300017,
+             "type": 2,
+             "content": "对于这种情况，如何在用户上传成功后获取真实的尺寸",
+             "news": {
+             "title": "获取图片宽度和高度的bug",
+             "imageurl": "http://cc.cocimg.com/api/uploads/20170623/1498213347593822.jpg",
+             "url": "http://www.cocoachina.com/programmer/20170623/19625.html",
+             "source": "cocoachina"
+             }
+             },
+             
              {
              "momentId":"125",
              "username": "烈山堂",

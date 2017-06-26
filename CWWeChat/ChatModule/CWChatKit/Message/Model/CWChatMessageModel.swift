@@ -18,10 +18,10 @@ enum CWMediaPlayStutus {
 
 public let kChatTextAttribute = [NSForegroundColorAttributeName:UIColor.black,
                                   NSFontAttributeName: UIFont.fontTextMessageText()]
-/// 消息model
+/// 消息model 
 public class CWChatMessageModel: NSObject {
 
-    /// 聊天消息
+    /// 聊天消息（后期需要修改 message设置为private）添加一些属性来做替换
     var message: CWChatMessage
     
     /// 是否显示时间

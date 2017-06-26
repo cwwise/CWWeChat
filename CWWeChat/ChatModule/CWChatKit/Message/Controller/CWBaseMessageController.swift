@@ -301,7 +301,7 @@ extension CWBaseMessageController: CWChatToolBarDelegate {
     }
     
     
-    //
+    // 发送文字
     func chatToolBar(_ chatToolBar: CWChatToolBar, sendText text: String) {
         
         let textObject = CWTextMessageBody(text: text)
@@ -311,6 +311,8 @@ extension CWBaseMessageController: CWChatToolBarDelegate {
         self.sendMessage(message)
     }
     
+    // 发送图片
+    // 主要要考虑的是 
     func chatToolBar(_ chatToolBar: CWChatToolBar, image: UIImage) {
         
         let imageName = String.UUIDString()+".jpg"
@@ -332,10 +334,10 @@ extension CWBaseMessageController: CWChatToolBarDelegate {
         self.messageList.append(messageModel)
         
         let indexPath = IndexPath(row: self.messageList.count-1, section: 0)
-        
         self.tableView.reloadData()
         updateMessageAndScrollBottom(false)
         
+        // 发送消息 会先存储消息，然后
         let chatManager = CWChatClient.share.chatManager
         chatManager.sendMessage(message, progress: { (progress) in
             
@@ -347,11 +349,12 @@ extension CWBaseMessageController: CWChatToolBarDelegate {
             
         }) { (message, error) in
 
-            // 更新消息
+            // 更新消息状态
             let chatManager = CWChatClient.share.chatManager
             chatManager.updateMessage(message, completion: { (message, error) in
                 
             })
+            
             // 发送消息成功
             if error == nil {
                 

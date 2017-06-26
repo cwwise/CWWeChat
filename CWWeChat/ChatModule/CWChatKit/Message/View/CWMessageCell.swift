@@ -5,6 +5,9 @@
 //  Created by chenwei on 2017/3/26.
 //  Copyright © 2017年 chenwei. All rights reserved.
 //
+//  所有消息的基类 
+//  其余的cell 都是 填充messageContentView里面的内容
+//  布局部分使用 snpKit来实现 看看后期是否需要用frame来代替
 
 import UIKit
 
@@ -167,7 +170,8 @@ class CWMessageCell: UITableViewCell {
     
     //MARK: 更新状态
     /// 上传消息进度（图片和视频）
-    //更新消息状态
+    
+    // 更新消息状态
     func updateState() {
         
         if messageModel.isSend == false {
@@ -195,7 +199,6 @@ class CWMessageCell: UITableViewCell {
     func updateProgress() {
         
     }
-    
     
     // MARK: cell中的事件处理
     ///头像点击
@@ -265,7 +268,8 @@ class CWMessageCell: UITableViewCell {
         
         messageContentView.addGestureRecognizer(self.tapGestureRecognizer)
         self.tapGestureRecognizer.require(toFail: self.doubletapGesture)
-        
+        self.tapGestureRecognizer.require(toFail: self.longPressGestureRecognizer)
+
         return messageContentView
     }()
     
@@ -279,7 +283,7 @@ class CWMessageCell: UITableViewCell {
     
     /// 指示
     var activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-    /// 发送失败
+    /// 发送失败按钮
     lazy var errorButton:UIButton = {
         let errorButton = UIButton(type: .custom)
         errorButton.setImage(CWAsset.MessageSendFail.image, for: UIControlState())

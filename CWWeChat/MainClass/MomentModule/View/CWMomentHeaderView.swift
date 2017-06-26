@@ -41,6 +41,7 @@ class CWMomentHeaderView: UIView {
         self.addSubview(backgroundImageView)
         self.addSubview(usernameLabel)
         self.addSubview(headerImageView)
+        self.backgroundColor = UIColor.white
         
         self.backgroundImageView.frame = CGRect(x: 0, y: -50, width: self.width, height: self.height)
         self.headerImageView.snp.makeConstraints { (make) in
@@ -53,6 +54,11 @@ class CWMomentHeaderView: UIView {
             make.bottom.equalTo(backgroundImageView.snp.bottom).offset(-10)
             make.right.equalTo(headerImageView.snp.left).offset(-20)
         }
+        
+        self.usernameLabel.text = "武藤游戏boy"
+        let url = URL(string: "http://image.cwcoder.com/chenwei.jpg")
+        self.headerImageView.kf.setImage(with: url)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -17,7 +17,7 @@ class CWTextMessageCell: CWMessageCell {
     
     override func setup() {
         super.setup()
-        addGeneralView()
+        self.addGeneralView()
         self.messageContentView.addSubview(self.backgroundImageView)
         self.messageContentView.addSubview(self.messageLabel)
     }
@@ -30,7 +30,7 @@ class CWTextMessageCell: CWMessageCell {
         backgroundImageView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
-        // 是自己的
+        // 是自己的发送的消息
         if message.direction == .send {
             let edge = ChatCellUI.right_edge_insets
             messageLabel.snp.makeConstraints { (make) in
@@ -45,11 +45,13 @@ class CWTextMessageCell: CWMessageCell {
         messageLabel.textLayout = messageModel.messageFrame.textLayout
     }
     
+    // YYText点击事件
     func didTapMessageLabelText(_ text: NSAttributedString, range: NSRange) {
         
         guard let hightlight = text.yy_attribute(YYTextHighlightAttributeName, at: UInt(range.location)) as? YYTextHighlight else {
             return
         }
+        
         guard let info = hightlight.userInfo, info.count > 0, 
             let delegate = self.delegate else {
             return
