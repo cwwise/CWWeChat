@@ -10,7 +10,7 @@ import UIKit
 import XMPPFramework
 
 protocol CWMessageHandleDelegate: NSObjectProtocol {
-    func handMessageComplete(message: CWChatMessage)
+    func handMessageComplete(message: CWMessage)
 }
 
 class CWMessageHandle: NSObject, CWMessageHandleProtocol {

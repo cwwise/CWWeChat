@@ -10,7 +10,7 @@ import UIKit
 
 class CWFileMessageBody: NSObject, CWMessageBody {
     
-    weak var message: CWChatMessage?
+    weak var message: CWMessage?
     /// 消息体类型
     var type: CWMessageType = .file
     

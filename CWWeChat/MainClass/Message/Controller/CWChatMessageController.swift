@@ -8,32 +8,15 @@
 
 import UIKit
 
-class CWChatMessageController: CWBaseMessageController {
-    
-    init(targetId: String? = nil, conversation: CWChatConversation? = nil) {
-        super.init(nibName: nil, bundle: nil)
-        if let conversation = conversation {
-            self.conversation = conversation
-        }
-        else if let targetId = targetId {
-            let conversation = CWChatClient.share.chatManager.fecthConversation(chatType: .single, targetId: targetId)
-            self.conversation = conversation
-        } else {
-            assert(true, "没有targetId或者conversation")
-        }
+public class CWChatMessageController: CWBaseMessageController {
         
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = rightBarItem
         //背景图
         if let path = Bundle.main.path(forResource: "chat_background", ofType: "png") {
             let imageView = UIImageView(frame: self.view.bounds)
+            imageView.contentMode = .scaleAspectFill
             imageView.image = UIImage(contentsOfFile: path)
             self.tableView.backgroundView = imageView
         }
@@ -60,7 +43,7 @@ class CWChatMessageController: CWBaseMessageController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

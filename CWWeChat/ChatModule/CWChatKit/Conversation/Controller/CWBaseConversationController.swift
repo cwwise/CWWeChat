@@ -168,7 +168,7 @@ extension CWBaseConversationController: UISearchBarDelegate {
 // MARK: - CWChatManagerDelegate
 extension CWBaseConversationController: CWChatManagerDelegate {
     // 收到会话变化
-    public func conversationDidUpdate(_ conversation: CWChatConversation) {
+    public func conversationDidUpdate(_ conversation: CWConversation) {
 
         var unread = 0
         var index = -1

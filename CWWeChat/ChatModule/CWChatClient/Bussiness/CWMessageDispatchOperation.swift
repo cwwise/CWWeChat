@@ -21,7 +21,7 @@ class CWMessageDispatchOperation: Operation {
     }
     
     /// 消息实体
-    var message: CWChatMessage
+    var message: CWMessage
     /// 进度回调的block
     var progress: CWMessageProgressBlock?
     /// 完成结果
@@ -96,7 +96,7 @@ class CWMessageDispatchOperation: Operation {
     /// 重复执行的次数
     var repeatCount: Int = 0
     
-    class func operationWithMessage(_ message: CWChatMessage,
+    class func operationWithMessage(_ message: CWMessage,
                                     progress: CWMessageProgressBlock? = nil,
                                     completion: CWMessageCompletionBlock? = nil) -> CWMessageDispatchOperation {
         
@@ -111,7 +111,7 @@ class CWMessageDispatchOperation: Operation {
         
     }
     
-    init(_ message: CWChatMessage,
+    init(_ message: CWMessage,
          progress: CWMessageProgressBlock? = nil, 
          completion: CWMessageCompletionBlock? = nil) {
         

@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class CWImageMessageBody: NSObject, CWMessageBody {
     
-    weak var message: CWChatMessage?
+    weak var message: CWMessage?
     /// 消息体类型
     var type: CWMessageType = .image
     /// 图片尺寸

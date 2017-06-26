@@ -23,7 +23,7 @@ public protocol CWMessageBelong {
 public class CWChatMessageModel: NSObject, CWMessageBelong {
 
     /// 聊天消息（后期需要修改 message设置为private）添加一些属性来做替换
-    var message: CWChatMessage
+    var message: CWMessage
     /// 是否显示时间
     public var showTime: Bool = false
     /// 音频播放状态 默认未播放
@@ -37,7 +37,7 @@ public class CWChatMessageModel: NSObject, CWMessageBelong {
     /// 文本消息
     public var content: String?
     
-    public init(message: CWChatMessage) {
+    public init(message: CWMessage) {
         self.message = message
         self.isSend = message.direction == .send
         super.init()

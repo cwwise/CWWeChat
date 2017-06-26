@@ -53,7 +53,7 @@ class CWMessageDispatchManager: NSObject {
     }
     
     
-    func sendMessage(_ message: CWChatMessage,
+    func sendMessage(_ message: CWMessage,
                      progress: CWMessageProgressBlock? = nil,
                      completion: CWMessageCompletionBlock? = nil) {        
         
