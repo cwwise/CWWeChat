@@ -17,6 +17,7 @@ class CWEmoticonCell: UICollectionViewCell {
     }
     
     var isDelete: Bool = false
+    
     var imageView: UIImageView = UIImageView()
     
     override init(frame: CGRect) {
