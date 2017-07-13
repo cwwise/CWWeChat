@@ -8,7 +8,11 @@
 
 import UIKit
 
-class CWTextCellLayout: NSObject {
+protocol CWContentCellLayoutConfig {
+    
+}
+
+class CWTextCellLayout: CWContentCellLayoutConfig {
 
 
 }

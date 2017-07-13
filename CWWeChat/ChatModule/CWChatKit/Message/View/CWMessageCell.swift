@@ -167,6 +167,31 @@ class CWMessageCell: UITableViewCell {
         avatarImageView.kf.setImage(with: URL(string: avatarURL), placeholder: defaultHeadeImage)
     }
     
+    // MARK: Layout
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layoutAvatar()
+        layoutUserName()
+        layoutContent()
+        layoutLoading()
+    }
+    
+    func layoutAvatar() {
+        
+    }
+    
+    func layoutUserName() {
+        
+    }
+    
+    func layoutContent() {
+        
+    }
+    
+    func layoutLoading() {
+        
+    }
     
     //MARK: 更新状态
     /// 上传消息进度（图片和视频）

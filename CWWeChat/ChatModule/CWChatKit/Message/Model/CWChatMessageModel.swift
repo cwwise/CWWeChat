@@ -19,6 +19,8 @@ public protocol CWMessageBelong {
     var isSend: Bool {get}
 }
 
+
+
 /// 消息model 
 public class CWChatMessageModel: NSObject, CWMessageBelong {
 
@@ -26,6 +28,9 @@ public class CWChatMessageModel: NSObject, CWMessageBelong {
     var message: CWMessage
     /// 是否显示时间
     public var showTime: Bool = false
+    
+    public var showUserName: Bool = false
+    
     /// 音频播放状态 默认未播放
     public var mediaPlayStutus: CWMediaPlayStutus = .none
     /// 上传进度
