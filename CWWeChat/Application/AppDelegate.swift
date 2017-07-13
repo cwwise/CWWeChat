@@ -29,6 +29,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         loginXMPP()
         //注册推送信息
         registerRemoteNotification()
+        
+        DispatchQueue.main.async {
+            if let window = self.window {
+                let label = FPSLabel(frame: CGRect(x: window.bounds.width - 55 - 8, y: 20, width: 55, height: 20))
+                label.autoresizingMask = [.flexibleLeftMargin, .flexibleBottomMargin]
+                window.addSubview(label)
+            }
+        }
+        
         return true
     }
     
