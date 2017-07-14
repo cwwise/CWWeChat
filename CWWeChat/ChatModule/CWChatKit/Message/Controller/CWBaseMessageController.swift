@@ -15,7 +15,7 @@ private let kMaxShowtimeMessageInterval: Double = 3*60.0
 public class CWBaseMessageController: UIViewController {
     // 目标会话
     public var conversation: CWConversation
-    /// 消息数据数组(这个部分 写的不太好)
+    /// 消息数据数组(这个部分 写的不太好) 还有消息
     public var messageList = Array<AnyObject>()
     
     /// 显示消息时间相关的
