@@ -10,4 +10,20 @@ import UIKit
 
 class CWMessageLayoutAttributes: UICollectionViewLayoutAttributes {
 
+    var headerFrame: CGRect = .zero
+    
+    public override init() {
+        super.init()
+    }
+    
+    override func copy(with zone: NSZone? = nil) -> Any {
+        guard let copiedAttributes = super.copy(with: zone) as? CWMessageLayoutAttributes else {
+            return super.copy(with: zone)
+        }
+        
+        return copiedAttributes
+    }
+    
+    
+    
 }
