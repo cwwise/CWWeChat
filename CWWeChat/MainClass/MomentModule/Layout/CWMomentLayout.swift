@@ -18,27 +18,31 @@ class CWMomentLayout: NSObject {
     var marginBottom: CGFloat = CWMomentUI.kTopMargin
     /// 总高度
     var height: CGFloat = 0
-    /// 姓名(包括留白)
-    var profileHeight: CGFloat = CWMomentUI.kUsernameSize.height
-    /// 布局
-    var nameTextLayout: YYTextLayout?
     
-    /// 上边距
-    var textMargin: CGFloat = 6
-    /// 文本高度
-    var textHeight: CGFloat = 0
+    // 头像
+    var avatarFrame: CGRect = .zero
+    // 用户名
+    var usernameFrame: CGRect = .zero
+    /// 布局
+    var usernameTextLayout: YYTextLayout?
+    
+    /// 文字和用户名的距离
+    private var contentTopMargin: CGFloat = 6
+    var contentFrame: CGRect = .zero
     /// 文本布局
-    var textLayout: YYTextLayout?
-    /// 图片上边距
-    var pictureMargin: CGFloat = 10
-    /// 图片部分高度
-    var pictureHeight: CGFloat = 0
-    /// 图片大小
+    var contentTextLayout: YYTextLayout?
+
+    // 图片或者新闻 音乐
+    var multimediaFrame: CGRect = .zero
+    /// 图片大小(待修改 如果图片只有一张需要根据比例算)
     var pictureSize: CGSize = .zero
-    // 总高度
-    var timeHeight: CGFloat = 33
+    
+    var toolButtonFrame: CGRect = .zero
+    
+    var timeFrame: CGRect = .zero
     // 时间
     var timeTextLayout: YYTextLayout?
+    
     // 点赞部分
     var praiseHeight: CGFloat = 0
     var praiseLayout: YYTextLayout?
@@ -54,28 +58,29 @@ class CWMomentLayout: NSObject {
     
     func layout() {
       
+        var origin = CGPoint(x: CWMomentUI.kTopMargin, y: CWMomentUI.kLeftMargin)
+        var size = CWMomentUI.kAvatarSize
+        avatarFrame = CGRect(origin: origin, size: size)
+                
         self.layoutProfile()
         self.layoutContent()
+        
         self.layoutPicture()
+        self.layoutNews()
         self.layoutTime()
+        
+        size = CGSize(width: 20, height: 17)
+        origin = CGPoint(x: kScreenWidth - CWMomentUI.kLeftMargin-size.width, y: multimediaFrame.bottom+8)
+        toolButtonFrame = CGRect(origin: origin, size: size)
+
         self.layoutPraiseText()
-
-        height += marginTop
-        height += profileHeight
-        // 文本
-        height += textMargin
-        height += textHeight
+    
         // 图片
-        height += pictureMargin
-        height += pictureHeight
-
+        height += timeFrame.bottom
+        
         commentHeight = 40
-        
-        // 时间label中间的间隔
-        height += timeHeight
-        
         height += commentHeight
-        
+    
         height += marginBottom
     }
     
@@ -91,13 +96,19 @@ class CWMomentLayout: NSObject {
         username.yy_font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium)
         
         let container = YYTextContainer(size: CWMomentUI.kUsernameSize)
-        nameTextLayout = YYTextLayout(container: container, text: username)
+        usernameTextLayout = YYTextLayout(container: container, text: username)
+        
+        let origin = CGPoint(x: avatarFrame.right+CWMomentUI.kPaddingText, y: CWMomentUI.kTopMargin)
+        let size = CWMomentUI.kUsernameSize
+        usernameFrame = CGRect(origin: origin, size: size)
     }
     
     /// 文字布局
     func layoutContent() {
 
         guard let content = moment.content else {
+            self.contentFrame = CGRect(x: usernameFrame.x, y: usernameFrame.bottom+contentTopMargin,
+                                       width: CWMomentUI.kContentWidth, height: 0)
             return
         }
         
@@ -116,14 +127,20 @@ class CWMomentLayout: NSObject {
         let textAttri = CWChatTextParser.parseText(content, attributes: attributes)!
         let textLayout = YYTextLayout(container: textContainer, text: textAttri)!
         
-        self.textLayout = textLayout
-        self.textHeight = modifier.heightForLineCount(Int(textLayout.rowCount))
+        self.contentTextLayout = textLayout
+        
+        // 计算高度
+        let textHeight = modifier.heightForLineCount(Int(textLayout.rowCount))
+        self.contentFrame = CGRect(x: usernameFrame.x, y: usernameFrame.bottom+contentTopMargin,
+                                   width: CWMomentUI.kContentWidth, height: textHeight)
     }
     
     /// 布局图片部分
     func layoutPicture() {
        
         if moment.imageArray.count == 0 {
+            self.multimediaFrame = CGRect(x: usernameFrame.x, y: contentFrame.bottom+10,
+                                          width: CWMomentUI.kContentWidth, height: 0)
             return
         }
         
@@ -137,8 +154,24 @@ class CWMomentLayout: NSObject {
         switch moment.imageArray.count {
         case 1:
             // 待修改，如果一张照片按比较计算size
-            picSize = CGSize(width: maxLen, height: maxLen)
-            picHeight = maxLen
+            if moment.imageArray.first?.size == CGSize.zero {
+                picSize = CGSize(width: maxLen, height: maxLen)
+            } else {
+                let imageSize = moment.imageArray.first!.size
+                // 判断图片是长图
+                //根据图片的比例大小计算图片的frame
+                if imageSize.width > imageSize.height {
+                    var height = kChatImageMaxWidth * imageSize.height / imageSize.width
+                    height = max(kChatImageMinWidth, height)
+                    picSize = CGSize(width: ceil(kChatImageMaxWidth), height: ceil(height))
+                } else {
+                    var width = kChatImageMaxWidth * imageSize.width / imageSize.height
+                    width = max(kChatImageMinWidth, width)
+                    picSize = CGSize(width: ceil(width), height: ceil(kChatImageMaxWidth))
+                }
+            }
+            
+            picHeight = picSize.height
         case 2,3:
             picSize = CGSize(width: len1_3, height: len1_3)
             picHeight = len1_3
@@ -151,19 +184,36 @@ class CWMomentLayout: NSObject {
         }
         
         self.pictureSize = picSize
-        self.pictureHeight = picHeight
+        self.multimediaFrame = CGRect(x: usernameFrame.x, y: contentFrame.bottom+10,
+                                      width: CWMomentUI.kContentWidth, height: picHeight)
+    }
+    
+    func layoutNews() {
+        if (moment.multimedia != nil) && moment.type == .url {
+            self.multimediaFrame = CGRect(x: usernameFrame.x, y: contentFrame.bottom+10,
+                                          width: CWMomentUI.kContentWidth, height: 50)
+        } 
+        
     }
     
     func layoutTime() {
         
-        let timeString = "2017年8月"
+        var timeString = "2017年8月 "
+        if let source = moment.multimedia?.source {
+            timeString += source
+        }
         let timeText = NSMutableAttributedString(string: timeString)
         timeText.yy_font = UIFont.systemFont(ofSize: 12)
         timeText.yy_color = CWMomentUI.kGrayTextColor
         
-        let container = YYTextContainer(size: CGSize(width: 100, height: 20))
+        let width: CGFloat = 200
+        
+        let container = YYTextContainer(size: CGSize(width: width, height: 20))
         container.maximumNumberOfRows = 1
         timeTextLayout = YYTextLayout(container: container, text: timeText)
+
+        self.timeFrame = CGRect(x: usernameFrame.x, y: multimediaFrame.bottom+8, 
+                                width: width, height: 17)
     }
     
     func layoutPraiseText() {

@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import YYWebImage
+import Kingfisher
 
-class CWExpressionMessageCell: CWChatMessageCell {
+class CWExpressionMessageCell: CWMessageCell {
 
-    lazy var expressionView: YYAnimatedImageView = {
-        let expressionView = YYAnimatedImageView()
+    lazy var expressionView: UIImageView = {
+        let expressionView = UIImageView()
         expressionView.backgroundColor = UIColor.clear
         return expressionView
     }()
@@ -40,9 +40,9 @@ class CWExpressionMessageCell: CWChatMessageCell {
 //        
 //        if let path = body.localPath {
 //            let url = URL(fileURLWithPath: kChatUserImagePath+path)
-//            expressionView.yy_setImage(with: url, placeholder: nil, options: .progressiveBlur, completion: nil)
+//            expressionView.kf.setImage(with: url, placeholder: nil, options: .progressiveBlur, completion: nil)
 //        } else if let url = body.remoteURL {
-//            expressionView.yy_setImage(with: url, placeholder: nil, options: .progressiveBlur, completion: nil)
+//            expressionView.kf.setImage(with: url, placeholder: nil, options: .progressiveBlur, completion: nil)
 //        } else {
 //            expressionView.image = nil
 //        }

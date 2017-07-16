@@ -9,14 +9,14 @@
 import UIKit
 
 /// 会话
-class CWBaseConversationController: UIViewController {
+public class CWBaseConversationController: UIViewController {
 
-    // 方便获取
-    var chatManager: CWChatManager {return CWChatClient.share.chatManager}
+    // 
+    public var chatManager = CWChatClient.share.chatManager
     // 会话列表
-    var conversationList = [CWChatConversationModel]()
+    public var conversationList = [CWChatConversationModel]()
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
@@ -35,7 +35,7 @@ class CWBaseConversationController: UIViewController {
         tableView.register(CWChatConversationCell.self, forCellReuseIdentifier: CWChatConversationCell.identifier)
     }
 
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -76,7 +76,7 @@ class CWBaseConversationController: UIViewController {
 
 // MARK: - CWChatUserInfoDataSource
 extension CWBaseConversationController: CWChatUserInfoDataSource {
-    func loadUserInfo(userId: String, completion: @escaping ((CWChatUser?) -> Void)) {
+    public func loadUserInfo(userId: String, completion: @escaping ((CWChatUser?) -> Void)) {
        
         //先从本地缓存获取，如果没有，则做网络请求来获取
         let model = CWChatUserModel(userId: "chenwei")
@@ -90,7 +90,7 @@ extension CWBaseConversationController: CWChatUserInfoDataSource {
 //MARK: UITableViewDelegate UITableViewDataSource
 extension CWBaseConversationController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let deleteTitle = "删除"
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: deleteTitle) { (action:UITableViewRowAction, indexPath) in
@@ -113,7 +113,7 @@ extension CWBaseConversationController: UITableViewDelegate, UITableViewDataSour
         return [deleteAction,moreAction]
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
         let conversation = conversationList[indexPath.row].conversation
@@ -123,11 +123,11 @@ extension CWBaseConversationController: UITableViewDelegate, UITableViewDataSour
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.conversationList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CWChatConversationCell.identifier, for: indexPath) as! CWChatConversationCell
         cell.conversationModel = conversationList[indexPath.row]
         return cell
@@ -137,23 +137,23 @@ extension CWBaseConversationController: UITableViewDelegate, UITableViewDataSour
 // MARK: - UISearchBarDelegate
 extension CWBaseConversationController: UISearchBarDelegate {
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.tabBarController?.tabBar.isHidden = true
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+    public func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         let message = "语言搜索"
         let alertController = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
         let alertAtion = UIAlertAction(title: "确定", style: .default) { (action) in
@@ -168,7 +168,7 @@ extension CWBaseConversationController: UISearchBarDelegate {
 // MARK: - CWChatManagerDelegate
 extension CWBaseConversationController: CWChatManagerDelegate {
     // 收到会话变化
-    func conversationDidUpdate(_ conversation: CWChatConversation) {
+    public func conversationDidUpdate(_ conversation: CWConversation) {
 
         var unread = 0
         var index = -1

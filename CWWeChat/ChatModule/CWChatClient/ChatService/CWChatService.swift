@@ -42,7 +42,7 @@ class CWChatService: XMPPModule {
     /// 执行 消息变化和会话变化的代理，保存消息
     ///
     /// - Parameter message: 接收到的消息
-    public func receiveMessage(_ message: CWChatMessage) {
+    public func receiveMessage(_ message: CWMessage) {
         
         executeMessagesDidReceive(message)
         updateConversation(with: message)
@@ -50,14 +50,14 @@ class CWChatService: XMPPModule {
         messageStore.appendMessage(message)
     }
     
-    public func saveMessage(_ message: CWChatMessage)  {
+    public func saveMessage(_ message: CWMessage)  {
         
         updateConversation(with: message)
         // 保存消息
         messageStore.appendMessage(message)
     }
     
-    public func updateConversation(with message: CWChatMessage) {
+    public func updateConversation(with message: CWMessage) {
         // 更新会话
         var exist: Bool = false
         let conversation = conversationStore.fecthConversation(message.chatType,
@@ -76,7 +76,7 @@ class CWChatService: XMPPModule {
     /// 执行代理方法
     ///
     /// - Parameter message: 消息实体
-    private func executeMessagesDidReceive(_ message :CWChatMessage) {
+    private func executeMessagesDidReceive(_ message :CWMessage) {
         
         executeDelegateSelector { (delegate, queue) in
             //执行Delegate的方法
@@ -88,7 +88,7 @@ class CWChatService: XMPPModule {
         }
     }
     
-    private func executeConversationUpdate(_ conversation :CWChatConversation) {
+    private func executeConversationUpdate(_ conversation :CWConversation) {
 
         executeDelegateSelector { (delegate, queue) in
             //执行Delegate的方法
@@ -115,7 +115,7 @@ extension CWChatService: CWChatManager {
     }
     
     // MARK: 会话
-    func fetchAllConversations() -> [CWChatConversation] {
+    func fetchAllConversations() -> [CWConversation] {
         let list = conversationStore.fecthAllConversations()
         for conversation in list {
             let lastMessage = messageStore.lastMessage(by: conversation.targetId)
@@ -124,7 +124,7 @@ extension CWChatService: CWChatManager {
         return list
     }
     
-    func fecthConversation(chatType: CWChatType, targetId: String) -> CWChatConversation {
+    func fecthConversation(chatType: CWChatType, targetId: String) -> CWConversation {
         let conversation = conversationStore.fecthConversation(chatType,
                                                                targetId: targetId)
         return conversation
@@ -149,12 +149,12 @@ extension CWChatService: CWChatManager {
     }
      
     /// 更新消息
-    func updateMessage(_ message: CWChatMessage, completion: @escaping CWMessageCompletionBlock) {
+    func updateMessage(_ message: CWMessage, completion: @escaping CWMessageCompletionBlock) {
         messageStore.updateMessage(message)
     }
     
     /// 发送回执消息(不保存消息)
-    func sendMessageReadAck(_ message: CWChatMessage, completion: @escaping CWMessageCompletionBlock) {
+    func sendMessageReadAck(_ message: CWMessage, completion: @escaping CWMessageCompletionBlock) {
         
         dispatchManager.sendMessage(message, completion: completion)
     }
@@ -165,7 +165,7 @@ extension CWChatService: CWChatManager {
     ///   - message: 消息实体
     ///   - progress: 附件上传进度回调block
     ///   - completion: 发送消息结果
-    func sendMessage(_ message: CWChatMessage,
+    func sendMessage(_ message: CWMessage,
                      progress: CWMessageProgressBlock?,
                      completion: @escaping CWMessageCompletionBlock) {
         // 添加信息
@@ -182,7 +182,7 @@ extension CWChatService: CWChatManager {
             })
         }
         
-        let _completion: CWMessageCompletionBlock = { (_ message: CWChatMessage, _ error: CWChatError?) in
+        let _completion: CWMessageCompletionBlock = { (_ message: CWMessage, _ error: CWChatError?) in
             DispatchQueue.main.async(execute: {
                 completion(message, error)
             })
@@ -198,7 +198,7 @@ extension CWChatService: CWChatManager {
     ///   - message: 消息
     ///   - progress: 附件上传进度回调block
     ///   - completion: 发送完成回调block
-    func resendMessage(_ message: CWChatMessage,
+    func resendMessage(_ message: CWMessage,
                        progress: @escaping CWMessageProgressBlock,
                        completion: @escaping CWMessageCompletionBlock) {
         

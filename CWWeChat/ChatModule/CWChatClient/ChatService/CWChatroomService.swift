@@ -37,7 +37,7 @@ extension CWChatroomService: CWChatroomManager {
     func fetchChatrooms() {
         
         let options = CWChatClient.share.options
-        self.multiChat.discoverRooms(forServiceNamed: "conference."+options.chatDomain)
+        self.multiChat.discoverRooms(forServiceNamed: "conference."+options.domain)
     }
     
     func createGroup(title: String,
@@ -47,7 +47,7 @@ extension CWChatroomService: CWChatroomManager {
                      completion: CWGroupCompletion) {
         let options = CWChatClient.share.options
         
-        let jid = XMPPJID(string: "chenwei@conference."+options.chatDomain)
+        let jid = XMPPJID(string: "chenwei@conference."+options.domain)
         guard let roomjid = jid else {
             completion(nil, CWChatError(errorCode: .customer, error: "系统错误"))
             return
@@ -58,7 +58,7 @@ extension CWChatroomService: CWChatroomManager {
 
         var userjidList = [XMPPJID]()
         for user in invitees {
-            let userjid = XMPPJID(user: user, domain: options.chatDomain, resource: options.chatResource)!
+            let userjid = XMPPJID(user: user, domain: options.domain, resource: options.resource)!
             userjidList.append(userjid)
         }
         // affiliations 友好关系

@@ -12,18 +12,31 @@ import LCActionSheet
 private let kMaxShowTimeMessageCount = 30
 private let kMaxShowtimeMessageInterval: Double = 3*60.0
 
-class CWBaseMessageController: UIViewController {
+public class CWBaseMessageController: UIViewController {
     // 目标会话
-    public var conversation: CWChatConversation!
-    /// 消息数据数组
+    public var conversation: CWConversation
+    /// 消息数据数组(这个部分 写的不太好)
     public var messageList = Array<AnyObject>()
     
-
     /// 显示消息时间相关的
     var messageTimeIntervalTag: Double = -1
     var messageAccumulate:Int = 0
     
-    override func viewDidLoad() {
+    convenience public init(targetId: String) {
+        let conversation = CWChatClient.share.chatManager.fecthConversation(chatType: .single, targetId: targetId)
+        self.init(conversation: conversation)
+    }
+    
+    public init(conversation: CWConversation) {
+        self.conversation = conversation
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.white
@@ -66,7 +79,7 @@ class CWBaseMessageController: UIViewController {
      注册cell class
      */
     func registerCell() {
-        tableView.register(CWChatMessageCell.self, forCellReuseIdentifier: CWMessageType.none.identifier())
+        tableView.register(CWMessageCell.self, forCellReuseIdentifier: CWMessageType.none.identifier())
         tableView.register(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.text.identifier())
         tableView.register(CWImageMessageCell.self, forCellReuseIdentifier: CWMessageType.image.identifier())
         tableView.register(CWVoiceMessageCell.self, forCellReuseIdentifier: CWMessageType.voice.identifier())
@@ -103,7 +116,7 @@ class CWBaseMessageController: UIViewController {
         log.debug(self)
     }
     
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -117,7 +130,7 @@ extension CWBaseMessageController {
         conversation.markAllMessagesAsRead()
     }
     
-    func formatMessages(_ messages: [CWChatMessage]) -> [AnyObject] {
+    func formatMessages(_ messages: [CWMessage]) -> [AnyObject] {
         
         var messageModelList = [AnyObject]()
         for message in messages {
@@ -153,19 +166,19 @@ extension CWBaseMessageController {
 
 // MARK: - UITableViewDelegate && UITableViewDataSource
 extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messageList.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let message = messageList[indexPath.row]
         guard let messageModel = message as? CWChatMessageModel else {
@@ -176,7 +189,7 @@ extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
         let identifier = messageModel.message.messageType.identifier()
     
         // 时间和tip消息 是例外的种类 以后判断
-        let messageCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CWChatMessageCell
+        let messageCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CWMessageCell
         messageCell.delegate = self
         messageCell.updateMessage(messageModel)
         messageCell.updateState()
@@ -185,7 +198,7 @@ extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
         return messageCell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let message = messageList[indexPath.row]
         
         guard let messageModel = message as? CWChatMessageModel else {
@@ -200,11 +213,11 @@ extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - CWChatManagerDelegate
 extension CWBaseMessageController: CWChatManagerDelegate {
     
-    func messageStatusDidChange(_ message: CWChatMessage, error: CWChatError?) {
+    public func messageStatusDidChange(_ message: CWMessage, error: CWChatError?) {
         
     }
     
-    func messagesDidReceive(_ message: CWChatMessage) {
+    public func messagesDidReceive(_ message: CWMessage) {
         let messageModel = CWChatMessageModel(message: message)
         messageList.append(messageModel)
         
@@ -214,13 +227,13 @@ extension CWBaseMessageController: CWChatManagerDelegate {
 }
 
 
-// MARK: - CWChatMessageCellDelegate
-extension CWBaseMessageController: CWChatMessageCellDelegate {
+// MARK: - CWMessageCellDelegate
+extension CWBaseMessageController: CWMessageCellDelegate {
     func messageCellUserAvatarDidClick(_ userId: String) {
         log.debug("cell头像 点击...\(userId)")
     }
     
-    func messageCellDidTap(_ cell: CWChatMessageCell) {
+    func messageCellDidTap(_ cell: CWMessageCell) {
         
         switch cell.messageModel.message.messageType{
         case .image:
@@ -244,7 +257,7 @@ extension CWBaseMessageController: CWChatMessageCellDelegate {
         }
     }
     
-    func messageCellResendButtonClick(_ cell: CWChatMessageCell) {
+    func messageCellResendButtonClick(_ cell: CWMessageCell) {
         let alert = UIAlertController(title: nil, message: "重发此消息？", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
             
@@ -258,12 +271,12 @@ extension CWBaseMessageController: CWChatMessageCellDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func messageCellDidTapLink(_ cell: CWChatMessageCell, link: URL) {
+    func messageCellDidTapLink(_ cell: CWMessageCell, link: URL) {
         let webViewController = CWWebViewController(url: link)
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
     
-    func messageCellDidTapPhone(_ cell: CWChatMessageCell, phone: String) {
+    func messageCellDidTapPhone(_ cell: CWMessageCell, phone: String) {
         let title = "\(phone)可能是一个电话号码，你可以"
         let otherButtonTitle = ["呼叫","复制号码","添加到手机通讯录"]
         let actionSheet = LCActionSheet(title: title, delegate: nil, cancelButtonTitle: "取消", otherButtonTitleArray: otherButtonTitle)
@@ -285,48 +298,48 @@ extension CWBaseMessageController: CWChatMessageCellDelegate {
     }
 }
 
-
-
 // MARK: - CWInputToolBarDelegate
 extension CWBaseMessageController: CWChatToolBarDelegate {
 
-    func chatToolBar(_ chatToolBar: CWChatToolBar, emoticonButtonPressed select: Bool, keyBoardState change: Bool) {
+    public func chatToolBar(_ chatToolBar: CWChatToolBar, emoticonButtonPressed select: Bool, keyBoardState change: Bool) {
         
     }
     
-    func chatToolBar(_ chatToolBar: CWChatToolBar, moreButtonPressed select: Bool, keyBoardState change: Bool) {
+    public func chatToolBar(_ chatToolBar: CWChatToolBar, moreButtonPressed select: Bool, keyBoardState change: Bool) {
         
     }
     
-    func chatToolBar(_ chatToolBar: CWChatToolBar, voiceButtonPressed select: Bool, keyBoardState change: Bool) {
+    public func chatToolBar(_ chatToolBar: CWChatToolBar, voiceButtonPressed select: Bool, keyBoardState change: Bool) {
         
     }
     
     
-    //
-    func chatToolBar(_ chatToolBar: CWChatToolBar, sendText text: String) {
+    // 发送文字
+    public func chatToolBar(_ chatToolBar: CWChatToolBar, sendText text: String) {
         
         let textObject = CWTextMessageBody(text: text)
-        let message = CWChatMessage(targetId: conversation.targetId,
+        let message = CWMessage(targetId: conversation.targetId,
                                     direction: .send,
                                     messageBody: textObject)
         self.sendMessage(message)
     }
     
-    func chatToolBar(_ chatToolBar: CWChatToolBar, image: UIImage) {
+    // 发送图片
+    // 主要要考虑的是 
+    public func chatToolBar(_ chatToolBar: CWChatToolBar, image: UIImage) {
         
         let imageName = String.UUIDString()+".jpg"
-        let cache = CWChatKit.share.chatWebImageManager.cache
-        cache?.setImage(image, forKey: imageName)
+        let cache = CWChatKit.share.chatWebImageManager
+        cache.store(image, forKey: imageName)
         
         let imageBody = CWImageMessageBody(path: imageName, size: image.size)
-        let message = CWChatMessage(targetId: conversation.targetId,
+        let message = CWMessage(targetId: conversation.targetId,
                                     direction: .send,
                                     messageBody: imageBody)
         self.sendMessage(message)
     }
     
-    func sendMessage(_ message: CWChatMessage) {
+    func sendMessage(_ message: CWMessage) {
         // 添加当前聊天类型
         message.chatType = self.conversation.type
         
@@ -334,26 +347,28 @@ extension CWBaseMessageController: CWChatToolBarDelegate {
         self.messageList.append(messageModel)
         
         let indexPath = IndexPath(row: self.messageList.count-1, section: 0)
-        
         self.tableView.reloadData()
         updateMessageAndScrollBottom(false)
         
+        
+        // 发送消息 会先存储消息，然后
         let chatManager = CWChatClient.share.chatManager
         chatManager.sendMessage(message, progress: { (progress) in
             
             messageModel.uploadProgress = progress
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWChatMessageCell else {
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWMessageCell else {
                 return
             }
             cell.updateProgress()
             
         }) { (message, error) in
 
-            // 更新消息
+            // 更新消息状态
             let chatManager = CWChatClient.share.chatManager
             chatManager.updateMessage(message, completion: { (message, error) in
                 
             })
+            
             // 发送消息成功
             if error == nil {
                 
@@ -361,7 +376,7 @@ extension CWBaseMessageController: CWChatToolBarDelegate {
                 
             }
             
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWChatMessageCell else {
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWMessageCell else {
                 return
             }
             cell.updateProgress()

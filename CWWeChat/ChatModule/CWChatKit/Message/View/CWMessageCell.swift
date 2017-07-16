@@ -1,35 +1,38 @@
 //
-//  CWChatMessageCell.swift
+//  CWMessageCell.swift
 //  CWWeChat
 //
 //  Created by chenwei on 2017/3/26.
 //  Copyright © 2017年 chenwei. All rights reserved.
 //
+//  所有消息的基类 
+//  其余的cell 都是 填充messageContentView里面的内容
+//  布局部分使用 snpKit来实现 看看后期是否需要用frame来代替
 
 import UIKit
 
-protocol CWChatMessageCellDelegate: NSObjectProtocol {
+protocol CWMessageCellDelegate: NSObjectProtocol {
     
     /// 点击cell文字中的URL
     ///
     /// - Parameters:
     ///   - cell: cell
     ///   - link: link
-    func messageCellDidTapLink(_ cell: CWChatMessageCell, link: URL)
+    func messageCellDidTapLink(_ cell: CWMessageCell, link: URL)
     
     /// 点击cell文字中的电话
     ///
     /// - Parameters:
     ///   - cell: cell
     ///   - phone: phone
-    func messageCellDidTapPhone(_ cell: CWChatMessageCell, phone: String)
+    func messageCellDidTapPhone(_ cell: CWMessageCell, phone: String)
     
     /// cell被点击
     ///
     /// - Parameter cell: cell
-    func messageCellDidTap(_ cell: CWChatMessageCell)
+    func messageCellDidTap(_ cell: CWMessageCell)
     
-    func messageCellResendButtonClick(_ cell: CWChatMessageCell)
+    func messageCellResendButtonClick(_ cell: CWMessageCell)
 
     
     /// 头像点击的回调方法
@@ -38,15 +41,15 @@ protocol CWChatMessageCellDelegate: NSObjectProtocol {
     func messageCellUserAvatarDidClick(_ userId: String)
 }
 
-extension CWChatMessageCellDelegate {
-    func messageCellDidTapLink(_ cell: CWChatMessageCell, link: URL) {}
-    func messageCellDidTapPhone(_ cell: CWChatMessageCell, phone: String){}
+extension CWMessageCellDelegate {
+    func messageCellDidTapLink(_ cell: CWMessageCell, link: URL) {}
+    func messageCellDidTapPhone(_ cell: CWMessageCell, phone: String){}
     func messageCellUserAvatarDidClick(_ userId: String) {}
 }
 
-class CWChatMessageCell: UITableViewCell {
+class CWMessageCell: UITableViewCell {
 
-    weak var delegate: CWChatMessageCellDelegate?
+    weak var delegate: CWMessageCellDelegate?
 
     var messageModel: CWChatMessageModel!
     
@@ -161,13 +164,39 @@ class CWChatMessageCell: UITableViewCell {
         }
         
         let avatarURL = "\(kImageBaseURLString)\(userId).jpg"
-        avatarImageView.yy_setImage(with: URL(string: avatarURL), placeholder: defaultHeadeImage)
+        avatarImageView.kf.setImage(with: URL(string: avatarURL), placeholder: defaultHeadeImage)
     }
     
+    // MARK: Layout
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layoutAvatar()
+        layoutUserName()
+        layoutContent()
+        layoutLoading()
+    }
+    
+    func layoutAvatar() {
+        
+    }
+    
+    func layoutUserName() {
+        
+    }
+    
+    func layoutContent() {
+        
+    }
+    
+    func layoutLoading() {
+        
+    }
     
     //MARK: 更新状态
     /// 上传消息进度（图片和视频）
-    //更新消息状态
+    
+    // 更新消息状态
     func updateState() {
         
         if messageModel.isSend == false {
@@ -195,7 +224,6 @@ class CWChatMessageCell: UITableViewCell {
     func updateProgress() {
         
     }
-    
     
     // MARK: cell中的事件处理
     ///头像点击
@@ -265,7 +293,8 @@ class CWChatMessageCell: UITableViewCell {
         
         messageContentView.addGestureRecognizer(self.tapGestureRecognizer)
         self.tapGestureRecognizer.require(toFail: self.doubletapGesture)
-        
+        self.tapGestureRecognizer.require(toFail: self.longPressGestureRecognizer)
+
         return messageContentView
     }()
     
@@ -279,7 +308,7 @@ class CWChatMessageCell: UITableViewCell {
     
     /// 指示
     var activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-    /// 发送失败
+    /// 发送失败按钮
     lazy var errorButton:UIButton = {
         let errorButton = UIButton(type: .custom)
         errorButton.setImage(CWAsset.MessageSendFail.image, for: UIControlState())

@@ -1,5 +1,5 @@
 //
-//  CWChatConversationStore.swift
+//  CWConversationStore.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/4/2.
@@ -61,7 +61,7 @@ class CWChatConversationStore: CWChatBaseStore {
 
 extension CWChatConversationStore {
     // 添加会话
-    func addConversation(conversation: CWChatConversation) {
+    func addConversation(conversation: CWConversation) {
 
         let timestamp = conversation.lastMessage?.timestamp ?? NSDate().timeIntervalSince1970
         let insert = conversationTable.insert(target_id <- conversation.targetId,
@@ -80,7 +80,7 @@ extension CWChatConversationStore {
     }
     
     // 更新会话时间
-    func updateConversationTime(_ conversation: CWChatConversation) {
+    func updateConversationTime(_ conversation: CWConversation) {
         let filter = conversationTable.filter(target_id == conversation.targetId)
         let timestamp = conversation.lastMessage?.timestamp ?? NSDate().timeIntervalSince1970
         
@@ -98,8 +98,8 @@ extension CWChatConversationStore {
 // MARK: 查找
 extension CWChatConversationStore {
     
-    func fecthAllConversations() -> [CWChatConversation] {
-        var list = [CWChatConversation]()
+    func fecthAllConversations() -> [CWConversation] {
+        var list = [CWConversation]()
         do {
             let result = try messageDB.prepare(conversationTable.order(date))
             for conversation in result {
@@ -114,9 +114,9 @@ extension CWChatConversationStore {
     
     func fecthConversation(_ type: CWChatType, 
                            targetId: String, 
-                           isExist: UnsafeMutablePointer<Bool>? = nil) -> CWChatConversation {
+                           isExist: UnsafeMutablePointer<Bool>? = nil) -> CWConversation {
         
-        var conversation: CWChatConversation
+        var conversation: CWConversation
         var create = true
         let sql = conversationTable.filter(type.rawValue==chatType && targetId == target_id)
         do {
@@ -125,11 +125,11 @@ extension CWChatConversationStore {
                 conversation = createConversationByRow(raw!)
                 create = false
             } else {
-                conversation = CWChatConversation(targetId: targetId, type: type)
+                conversation = CWConversation(targetId: targetId, type: type)
             }
         } catch  {
             log.error(error)
-            conversation = CWChatConversation(targetId: targetId, type: type)
+            conversation = CWConversation(targetId: targetId, type: type)
         }
         
         if (isExist != nil) {
@@ -140,10 +140,10 @@ extension CWChatConversationStore {
     }
     
     
-    func createConversationByRow(_ row: Row) -> CWChatConversation {
+    func createConversationByRow(_ row: Row) -> CWConversation {
         let targetId = row[target_id]
         let type = CWChatType(rawValue: row[chatType]) ?? .single
-        let conversation = CWChatConversation(targetId: targetId, type: type)
+        let conversation = CWConversation(targetId: targetId, type: type)
         conversation.draft = row[_draft]
         conversation.unreadCount = row[unread_count]
         conversation.isTop = row[isTop]

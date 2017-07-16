@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWImageMessageCell: CWChatMessageCell {
+class CWImageMessageCell: CWMessageCell {
 
     lazy var messageImageView: CWChatImageView = {
         let messageImageView = CWChatImageView()
@@ -31,13 +31,13 @@ class CWImageMessageCell: CWChatMessageCell {
     
     override func setup() {
         super.setup()
-        addGeneralView()
+        self.addGeneralView()
         
         self.messageContentView.layer.mask = self.maskLayer
         self.messageContentView.addSubview(self.messageImageView)
         
         self.messageContentView.addGestureRecognizer(tapGestureRecognizer)
-        tapGestureRecognizer.require(toFail: doubletapGesture)
+        self.tapGestureRecognizer.require(toFail: doubletapGesture)
     }
     
     override func updateMessage(_ messageModel: CWChatMessageModel) {
@@ -53,12 +53,13 @@ class CWImageMessageCell: CWChatMessageCell {
         let message = messageModel.message
         let body = message.messageBody as! CWImageMessageBody
         
+        // 如果图片是自己发送，图片正在上传过程中是没有URL的，所以是用本地路径的图片。
         if let url = body.originalURL {
-            messageImageView.cw_setImage(with: url, placeholder: nil)
+            messageImageView.kf.setImage(with: url, placeholder: nil)
         }
         else if let path = body.originalLocalPath {
             let url = URL(fileURLWithPath: kChatUserImagePath+path)
-            messageImageView.cw_setImage(with: url, placeholder: nil)
+            messageImageView.kf.setImage(with: url, placeholder: nil)
         } else  {
             messageImageView.image = nil
         }

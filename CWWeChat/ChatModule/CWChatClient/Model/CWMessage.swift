@@ -85,7 +85,8 @@ public enum CWMessageType: Int {
     case file               //文件
     case location           //位置
     case expression         //表情
-    
+    case notification       //通知
+
     //获取cell的reuseIdentifier
     func identifier() -> String {
         switch self {
@@ -111,7 +112,7 @@ public enum CWMessageType: Int {
 
 
 /// 聊天消息
-public class CWChatMessage: NSObject {
+public class CWMessage: NSObject {
 
     /// 会话类型
     public var chatType: CWChatType = .single
@@ -159,7 +160,7 @@ public class CWChatMessage: NSObject {
     
 }
 
-extension CWChatMessage {
+extension CWMessage {
     override public var description: String {
         switch messageType {
         case .text:

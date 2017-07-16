@@ -37,7 +37,7 @@ public protocol CWMessageCoding {
 
 public protocol CWMessageBody: CWMessageCoding {
     /// 聊天消息
-    weak var message: CWChatMessage? { get set }
+    weak var message: CWMessage? { get set }
     /// 消息类型
     var type: CWMessageType { get set}
 }

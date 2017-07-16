@@ -9,10 +9,10 @@
 import UIKit
 
 /// 会话模型
-class CWChatConversationModel: NSObject {
+public class CWChatConversationModel: NSObject {
 
     /// 会话
-    private(set) var conversation: CWChatConversation
+    private(set) var conversation: CWConversation
     
     var targetId: String {
         return conversation.targetId
@@ -62,7 +62,7 @@ class CWChatConversationModel: NSObject {
         
     }
     
-    init(conversation: CWChatConversation) {
+    init(conversation: CWConversation) {
         self.conversation = conversation
         
         

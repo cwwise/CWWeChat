@@ -15,30 +15,30 @@ public protocol CWChatManagerDelegate: NSObjectProtocol {
     /// 会话状态发生变化
     ///
     /// - Parameter conversation: 会话
-    func conversationDidUpdate(_ conversation: CWChatConversation)
+    func conversationDidUpdate(_ conversation: CWConversation)
     
     // MARK: Message
     /// 消息状态发生变化
     ///
     /// - Parameter message: 状态发生变化的消息
     /// - Parameter error: 错误信息
-    func messageStatusDidChange(_ message: CWChatMessage, error: CWChatError?)
+    func messageStatusDidChange(_ message: CWMessage, error: CWChatError?)
     
     /// 收到消息
     ///
     /// - Parameter message: 消息实体
-    func messagesDidReceive(_ message: CWChatMessage)
+    func messagesDidReceive(_ message: CWMessage)
 }
 
 // 让协议变成可选
 public extension CWChatManagerDelegate {
-    func conversationDidUpdate(_ conversation: CWChatConversation) {}
-    func messagesDidReceive(_ message: CWChatMessage) {}
-    func messageStatusDidChange(_ message: CWChatMessage, error: CWChatError?) {}
+    func conversationDidUpdate(_ conversation: CWConversation) {}
+    func messagesDidReceive(_ message: CWMessage) {}
+    func messageStatusDidChange(_ message: CWMessage, error: CWChatError?) {}
 }
 
 /// 消息执行结果回调
-public typealias CWMessageCompletionBlock = (_ message: CWChatMessage, _ error: CWChatError?) -> Void
+public typealias CWMessageCompletionBlock = (_ message: CWMessage, _ error: CWChatError?) -> Void
 /// 消息进度
 public typealias CWMessageProgressBlock = (_ progress: Float) -> Void
 
@@ -61,9 +61,9 @@ public protocol CWChatManager: NSObjectProtocol {
     /// 获取所有会话
     ///
     /// - Returns: 会话列表
-    func fetchAllConversations() -> [CWChatConversation]
+    func fetchAllConversations() -> [CWConversation]
     
-    func fecthConversation(chatType: CWChatType, targetId: String) -> CWChatConversation
+    func fecthConversation(chatType: CWChatType, targetId: String) -> CWConversation
     
     /// 删除会话
     ///
@@ -82,14 +82,14 @@ public protocol CWChatManager: NSObjectProtocol {
     /// - Parameters:
     ///   - message: 消息
     ///   - completion: 回调结果
-    func updateMessage(_ message: CWChatMessage, completion: @escaping CWMessageCompletionBlock)
+    func updateMessage(_ message: CWMessage, completion: @escaping CWMessageCompletionBlock)
     
     /// 发送回执消息
     ///
     /// - Parameters:
     ///   - message: 回执消息
     ///   - completion: 发送完成回调block
-    func sendMessageReadAck(_ message: CWChatMessage,
+    func sendMessageReadAck(_ message: CWMessage,
                             completion: @escaping CWMessageCompletionBlock)
     
     /// 发送消息
@@ -98,7 +98,7 @@ public protocol CWChatManager: NSObjectProtocol {
     ///   - message: 消息
     ///   - progress: 附件上传进度回调block
     ///   - completion: 发送完成回调block
-    func sendMessage(_ message: CWChatMessage,
+    func sendMessage(_ message: CWMessage,
                      progress: CWMessageProgressBlock?,
                      completion: @escaping CWMessageCompletionBlock)
     
@@ -108,7 +108,7 @@ public protocol CWChatManager: NSObjectProtocol {
     ///   - message: 消息
     ///   - progress: 附件上传进度回调block
     ///   - completion: 发送完成回调block
-    func resendMessage(_ message: CWChatMessage,
+    func resendMessage(_ message: CWMessage,
                      progress: @escaping CWMessageProgressBlock,
                      completion: @escaping CWMessageCompletionBlock)
     

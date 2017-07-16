@@ -3,20 +3,20 @@ platform :ios, '9.0'
 target 'CWWeChat' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  # ignore cocoapod warnings
   inhibit_all_warnings!
 
   # Pods for CWWeChat  
   # layout
   pod 'SnapKit'
-  
+
   # request
   pod 'Moya/RxSwift'
   pod 'RxCocoa'
   pod 'OHHTTPStubs/Swift'
 
   pod 'YYText'
-  pod 'YYWebImage'
+  pod 'SwiftyImage'
+  pod 'Kingfisher'
 
   pod 'SQLite.swift', :git => 'https://github.com/stephencelis/SQLite.swift' , :branch => 'swift-4'
   pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire' , :branch => 'swift4'
@@ -29,12 +29,17 @@ target 'CWWeChat' do
   pod 'XMPPFramework'
   
   # UI
+  pod 'PPBadgeViewSwift'
   pod 'MBProgressHUD'
   pod 'CHIPageControl/Aleppo'
   pod 'LCActionSheet'
   
   # animation
   pod 'pop'
+  
+  # 相机
+  # pod "SwiftyCam"
+  
   
   # tool
   pod 'Hue'

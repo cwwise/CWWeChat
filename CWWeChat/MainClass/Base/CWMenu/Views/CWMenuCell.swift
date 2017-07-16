@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import YYWebImage
+import Kingfisher
 
 let redPoint_Width:CGFloat = 8.0
 
@@ -97,7 +97,7 @@ class CWMenuCell: UITableViewCell {
         if let rightIconURL = menuItem.rightIconURL {
         
             let url = URL(string: rightIconURL)!
-            self.rightImageView.yy_setImage(with: url, placeholder: nil)
+            self.rightImageView.kf.setImage(with: url, placeholder: nil)
         
         } else {
         

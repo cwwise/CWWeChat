@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import YYCache.YYMemoryCache
 
 class CWContactCache: NSObject {
 

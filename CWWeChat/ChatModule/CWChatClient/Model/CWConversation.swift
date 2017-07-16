@@ -9,13 +9,13 @@
 import UIKit
 
 /// 消息会话
-public class CWChatConversation: NSObject {
+public class CWConversation: NSObject {
     /// 目标
     public private(set) var targetId: String
     /// 类型
     public private(set) var type: CWChatType
     /// 最近一条消息
-    public private(set) var lastMessage: CWChatMessage?
+    public private(set) var lastMessage: CWMessage?
     /// 是否置顶
     public var isTop: Bool = false
     /// 草稿
@@ -47,7 +47,7 @@ public class CWChatConversation: NSObject {
         service.messageStore.markAllMessagesAsRead(self.targetId)
     }
     
-    public func appendMessage(_ message: CWChatMessage?) {
+    public func appendMessage(_ message: CWMessage?) {
         lastMessage = message
     }
     
@@ -55,20 +55,20 @@ public class CWChatConversation: NSObject {
     ///
     /// - Parameter messageId: 消息ID
     /// - Returns: 对应ID的消息
-    public func loadMessage(with messageId: String) -> CWChatMessage? {
+    public func loadMessage(with messageId: String) -> CWMessage? {
     
         return nil
     }
 }
 
-public func ==(lhs: CWChatConversation, rhs: CWChatConversation) -> Bool {
+public func ==(lhs: CWConversation, rhs: CWConversation) -> Bool {
     return lhs.targetId == rhs.targetId
 }
 
-public typealias CWConversationResultCompletion = (_ messages: [CWChatMessage], _ error: CWChatError?) -> Void
+public typealias CWConversationResultCompletion = (_ messages: [CWMessage], _ error: CWChatError?) -> Void
 
 // MARK: 查询消息
-public extension CWChatConversation {
+public extension CWConversation {
     
     ///  从数据库获取指定数量的消息，取到的消息按时间排序，并且不包含参考的消息，如果参考消息的ID为空，则从最新消息取
     ///

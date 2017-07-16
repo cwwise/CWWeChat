@@ -59,8 +59,8 @@ class CWLoginController: UIViewController {
     
     func setupNavigationBar() {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-
-        let whiteImage = UIImage.yy_image(with: UIColor.white, size: CGSize(width: 1, height: 1))
+        
+        let whiteImage = UIImage.size(CGSize(width: 1, height: 1)).color(UIColor.white).image
 
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(whiteImage, for: .default)
@@ -141,7 +141,7 @@ class CWLoginController: UIViewController {
 //        hud.bezelView.backgroundColor = UIColor.gray
         hud.label.text = "Loading..."
         
-        let options = CWChatClientOptions(chatServer: "im.cwcoder.com", chatDomain: "im.cwcoder.com")
+        let options = CWChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
         let chatClient = CWChatClient.share
         chatClient.initialize(with: options)
         chatClient.login(username: userName, password: password) { (username, error) in

@@ -51,9 +51,8 @@ class CWContactCell: UITableViewCell {
         if let avatarPath = contactModel.avatarPath {
             self.avatarImageView.image = UIImage(named: avatarPath)
         } else {
-            self.avatarImageView.yy_setImage(with: contactModel.avatarURL, placeholder: defaultHeadeImage) 
+            self.avatarImageView.kf.setImage(with: contactModel.avatarURL, placeholder: defaultHeadeImage) 
         }
-        
         self.usernameLabel.text = contactModel.nickname;
     }
     

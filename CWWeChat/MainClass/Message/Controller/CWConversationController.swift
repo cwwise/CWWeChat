@@ -31,7 +31,6 @@ class CWConversationController: CWBaseConversationController {
     
     func sendMessage() {
         
-        
         let demo = CWDemoViewController()
         demo.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(demo, animated: true)
@@ -66,7 +65,7 @@ extension CWConversationController: UIViewControllerPreviewingDelegate {
         // Create a detail view controller and set its properties.        
         let conversationModel = self.conversationList[indexPath.row]
 
-        let viewController = CWChatMessageController()
+        let viewController = CWChatMessageController(conversation: conversationModel.conversation)
         viewController.conversation = conversationModel.conversation
         viewController.hidesBottomBarWhenPushed = true
         /*

@@ -18,7 +18,7 @@ class CWChatConversationCell: UITableViewCell {
         self.contentView.addSubview(self.headerImageView)
         self.contentView.addSubview(self.usernameLabel)
         self.contentView.addSubview(self.timeLabel)
-        self.contentView.addSubview(self.detailInfoLabel)
+        self.contentView.addSubview(self.contentLabel)
         self.headerImageView.addSubview(self.badgeView)
         
         p_snap()
@@ -31,10 +31,13 @@ class CWChatConversationCell: UITableViewCell {
     // MARK: UI
     func p_snap() {
         
+        let leftMargin = ChatSessionCellUI.headerImageViewLeftPadding
+        let topMargin = ChatSessionCellUI.headerImageViewTopPadding
+
         headerImageView.snp.makeConstraints { (make) in
-            make.left.equalTo(ChatSessionCellUI.headerImageViewLeftPadding)
-            make.top.equalTo(ChatSessionCellUI.headerImageViewTopPadding)
-            make.bottom.equalTo(-ChatSessionCellUI.headerImageViewTopPadding)
+            make.left.equalTo(leftMargin)
+            make.top.equalTo(topMargin)
+            make.bottom.equalTo(-topMargin)
             make.width.equalTo(self.headerImageView.snp.height);
         }
         
@@ -48,16 +51,18 @@ class CWChatConversationCell: UITableViewCell {
         //时间
         timeLabel.snp.makeConstraints { (make) in
             make.top.equalTo(usernameLabel)
-            make.right.equalTo(self.contentView).offset(-ChatSessionCellUI.headerImageViewLeftPadding)
+            make.right.equalTo(self.contentView).offset(-leftMargin)
         }
         
         //详细label
-        detailInfoLabel.snp.makeConstraints { (make) in
+        contentLabel.snp.makeConstraints { (make) in
             make.left.equalTo(usernameLabel)
             make.bottom.equalTo(headerImageView.snp.bottom).offset(-2.0)
-            make.right.equalTo(self.contentView).offset(-ChatSessionCellUI.headerImageViewLeftPadding)
+            make.right.equalTo(self.contentView).offset(-leftMargin)
         }
     }
+    
+    
     
     /// 设置数据
     func setupUI()  {
@@ -66,14 +71,20 @@ class CWChatConversationCell: UITableViewCell {
         CWChatKit.share.userInfoDataSource?.loadUserInfo(userId: targetId, completion: { user in
             if let userModel = user,
                 let url = URL(string: userModel.avatarURL!) {
-                self.headerImageView.yy_setImage(with: url, placeholder: defaultHeadeImage)
+                self.headerImageView.kf.setImage(with: url, placeholder: defaultHeadeImage)
                 self.usernameLabel.text = userModel.nickname
             }
         })
 
         self.timeLabel.text = conversationModel.lastMessageTime
-        self.detailInfoLabel.text = conversationModel.conversationTitle
+        self.contentLabel.text = conversationModel.conversationTitle
         self.badgeView.badgeValue = conversationModel.unreadCount
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        
     }
     
     
@@ -84,7 +95,6 @@ class CWChatConversationCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     
@@ -98,6 +108,7 @@ class CWChatConversationCell: UITableViewCell {
     ///头像
     fileprivate var headerImageView:UIImageView = {
         let headerImageView = UIImageView()
+        headerImageView.contentMode = .scaleAspectFill
         return headerImageView
     }()
     
@@ -117,11 +128,11 @@ class CWChatConversationCell: UITableViewCell {
     }()
     
     ///详细信息
-    fileprivate var detailInfoLabel:UILabel = {
-        let detailInfoLabel = UILabel()
-        detailInfoLabel.font = UIFont.systemFont(ofSize: 14)
-        detailInfoLabel.textColor = UIColor.gray
-        return detailInfoLabel
+    fileprivate var contentLabel:UILabel = {
+        let contentLabel = UILabel()
+        contentLabel.font = UIFont.systemFont(ofSize: 14)
+        contentLabel.textColor = UIColor.gray
+        return contentLabel
     }()
     
     ///badgeView

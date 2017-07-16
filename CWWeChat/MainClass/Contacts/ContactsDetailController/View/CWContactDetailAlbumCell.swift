@@ -72,7 +72,7 @@ class CWContactDetailAlbumCell: UITableViewCell {
             let imageView = imageViewArray[i]
             if i < imageURLArray.count {
                 let imageUri = imageURLArray[i]
-                imageView.yy_setImage(with: URL(string: imageUri), placeholder: nil)
+                imageView.kf.setImage(with: URL(string: imageUri), placeholder: nil)
                 imageView.isHidden = false
             } else {
                 imageView.isHidden = true

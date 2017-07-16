@@ -74,7 +74,7 @@ class CWMessageTransmitter: NSObject {
         if chatType == 1 {
             return name
         }
-        let domain = CWChatXMPPManager.share.options.chatDomain
+        let domain = CWChatXMPPManager.share.options.domain
         return name + "@" + domain
     }
 

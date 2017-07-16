@@ -29,12 +29,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         loginXMPP()
         //注册推送信息
         registerRemoteNotification()
+        
+        DispatchQueue.main.async {
+            if let window = self.window {
+                let label = FPSLabel(frame: CGRect(x: window.bounds.width - 55 - 8, y: 20, width: 55, height: 20))
+                label.autoresizingMask = [.flexibleLeftMargin, .flexibleBottomMargin]
+                window.addSubview(label)
+            }
+        }
+        
         return true
     }
     
     func loginXMPP() {
-        let options = CWChatClientOptions(chatServer: "im.cwcoder.com", chatDomain: "im.cwcoder.com")
-//        let options = CWChatClientOptions(chatServer: "hosted.im", chatDomain: "hellochatim.p1.im")
+        let options = CWChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
         let chatClient = CWChatClient.share
         chatClient.initialize(with: options)
         chatClient.login(username: "haohao", password: "1234567")

@@ -26,7 +26,7 @@ class CWChatMessageParse: XMPPModule {
     }()
 
     
-    func registerLocalNotification(with message: CWChatMessage) {
+    func registerLocalNotification(with message: CWMessage) {
         
         
         
@@ -64,7 +64,7 @@ extension CWChatMessageParse: XMPPStreamDelegate {
 // MARK: - CWMessageHandleDelegate
 extension CWChatMessageParse: CWMessageHandleDelegate {
     
-    func handMessageComplete(message: CWChatMessage) {
+    func handMessageComplete(message: CWMessage) {
         // 先保存消息
         let chatService = CWChatClient.share.chatManager as! CWChatService
         chatService.receiveMessage(message)
