@@ -31,7 +31,7 @@ class CWConversationController: CWBaseConversationController {
     
     func sendMessage() {
         
-        let demo = CWDemoViewController()
+        let demo = CWCollectionViewController(targetId: "hello@cwwise.com")
         demo.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(demo, animated: true)
         return

@@ -108,9 +108,6 @@ public enum CWMessageType: Int {
     }
 }
 
-
-
-
 /// 聊天消息
 public class CWMessage: NSObject {
 
@@ -176,5 +173,31 @@ extension CWMessage {
     }
     
 }
+
+
+// MARK: - 便利方法
+extension CWMessage {
+    
+    public convenience init(targetId: String,
+                messageID: String = String.UUIDString(),
+                chatType: CWChatType = .single,
+                direction: CWMessageDirection = .send,
+                isRead: Bool = true,
+                timestamp: TimeInterval = NSDate().timeIntervalSince1970,
+                text: String) {
+        
+        let messageBody = CWTextMessageBody(text: text)
+        self.init(targetId: targetId,
+                  messageID: messageID,
+                  chatType: chatType,
+                  direction: direction,
+                  isRead: isRead,
+                  timestamp: timestamp,
+                  messageBody: messageBody)
+    }
+    
+}
+
+
 
 

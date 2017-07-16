@@ -8,10 +8,12 @@
 
 import UIKit
 
+let kAvaterWidth: CGFloat = 40
 
 /// layout 部分
-class CWMessageLayoutSettings: NSObject {
+struct CWMessageLayoutSettings {
 
+    
     
     
     

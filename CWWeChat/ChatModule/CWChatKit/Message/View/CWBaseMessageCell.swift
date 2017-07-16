@@ -38,21 +38,44 @@ protocol CWBaseMessageCellDelegate: NSObjectProtocol {
     func messageCellUserAvatarDidClick(_ userId: String)
 }
 
+/*
+ 
+ cell 每一种cell 对应左右布局 两种不同的reuseIdentifier
+ 
+ TextContentView
+ ImageContentView
+ 
+ 
+ **/
+
 class CWBaseMessageCell: UICollectionViewCell {
     
     weak var delegate: CWBaseMessageCellDelegate?
     
-    var messageModel: CWChatMessageModel!
+    fileprivate var layoutAttributes: CWMessageLayoutAttributes?
+    
+    var message: CWMessageModel? {
+        return self.layoutAttributes?.message
+    }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.contentView.addSubview(avatarImageView)
+        self.contentView.addSubview(usernameLabel)
+
+        
+    }
+    
     // MARK: cell中的事件处理
     ///头像点击
     func avatarViewDidTapDown(_ tap: UITapGestureRecognizer) {
         
-        guard let delegate = self.delegate, let messageModel = self.messageModel, tap.state == .ended  else {
+        guard let delegate = self.delegate, let message = message, tap.state == .ended  else {
             return
         }
-        let message = messageModel.message
-        let targetId = (message.direction == .receive) ? message.targetId : (message.senderId ?? "")
+        
+        let targetId = message.isSend ? message.targetId : message.senderId
         delegate.messageCellUserAvatarDidClick(targetId)
     }
     
@@ -102,6 +125,21 @@ class CWBaseMessageCell: UICollectionViewCell {
         return avatarImageView
     }()
     
+    /// 消息的内容部分
+    lazy var messageContentView: CWMessageContentView = {
+        let messageContentView = CWMessageContentView()
+        
+        messageContentView.addGestureRecognizer(self.longPressGestureRecognizer)
+        messageContentView.addGestureRecognizer(self.doubletapGesture)
+        
+        messageContentView.addGestureRecognizer(self.tapGestureRecognizer)
+        self.tapGestureRecognizer.require(toFail: self.doubletapGesture)
+        self.tapGestureRecognizer.require(toFail: self.longPressGestureRecognizer)
+        
+        return messageContentView
+    }()
+    
+    
     /// 指示
     var activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     /// 发送失败按钮
@@ -132,6 +170,9 @@ class CWBaseMessageCell: UICollectionViewCell {
         return longpressGestureRecognizer
     }()
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 
@@ -150,23 +191,18 @@ extension CWBaseMessageCell {
         guard let layoutAttributes = layoutAttributes as? CWMessageLayoutAttributes else {
             return
         }
+        self.layoutAttributes = layoutAttributes
         
-        _ = layoutAttributes.headerFrame
         
+        avatarImageView.frame = layoutAttributes.avatarFrame
+        usernameLabel.frame = layoutAttributes.usernameFrame
+        
+        
+        // 赋值
+        let userId = self.message!.targetId
+        let avatarURL = "\(kImageBaseURLString)\(userId).jpg"
+        avatarImageView.kf.setImage(with: URL(string: avatarURL), placeholder: defaultHeadeImage)
     }
-    
-    func updateViews() {
-        
-        
-        
-    }
-    
-    // 设置view frame
-    func updateViewLayouts() {
-        
-    }
-    
-    
     
     
 }
