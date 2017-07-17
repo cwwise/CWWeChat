@@ -13,6 +13,9 @@ protocol CWMessageViewLayoutDelegate: NSObjectProtocol {
     func collectionView(_ collectionView: UICollectionView, itemAt indexPath: IndexPath) -> CWMessageModel
 }
 
+/**
+ 使用collectionView 不太熟悉 待完善
+ */
 class CWMessageViewLayout: UICollectionViewLayout {
     
     weak var delegate: CWMessageViewLayoutDelegate?
@@ -133,7 +136,7 @@ extension CWMessageViewLayout {
         
         point = CGPoint(x: kAvaterImageViewMargin, y: kMessageCellTopMargin)
 
-        attributes.avatarFrame = CGRect(origin: point, size: size)
+        attributes.layout[.avatar] = CGRect(origin: point, size: size)
         
     }
     

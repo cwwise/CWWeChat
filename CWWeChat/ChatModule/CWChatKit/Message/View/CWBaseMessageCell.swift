@@ -194,9 +194,8 @@ extension CWBaseMessageCell {
         self.layoutAttributes = layoutAttributes
         
         
-        avatarImageView.frame = layoutAttributes.avatarFrame
-        usernameLabel.frame = layoutAttributes.usernameFrame
-        
+        avatarImageView.frame = layoutAttributes.layout[.avatar]
+        usernameLabel.frame = layoutAttributes.layout[.username]
         
         // 赋值
         let userId = self.message!.targetId

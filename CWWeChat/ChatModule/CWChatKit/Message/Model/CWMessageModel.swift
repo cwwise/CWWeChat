@@ -33,6 +33,18 @@ class CWMessageModel: NSObject {
         return message.senderId!
     }
     
+    // 文字
+    
+    // 图片
+    
+    // 语音
+    
+    // 位置
+    
+    // 消息
+    
+    public var messageFrame = CWMessageFrame()
+    
     /// 是否显示时间
     public var showTime: Bool = false
     /// 是否显示用户名 
