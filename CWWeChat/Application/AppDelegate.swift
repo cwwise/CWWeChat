@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //设置logger
         setupLogger()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        loginSuccess()
+        loginEmoticonSuccess()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         
@@ -51,6 +51,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func loginSuccess() {
         let tabBarController = CWChatTabBarController()
         self.window?.rootViewController = tabBarController
+    }
+    
+    func loginEmoticonSuccess() {
+        
+        let expressController = CWExpressionViewController()
+        self.window?.rootViewController = CWChatNavigationController(rootViewController: expressController)
     }
     
     func logoutSuccess() {

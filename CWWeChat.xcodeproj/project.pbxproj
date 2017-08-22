@@ -105,8 +105,6 @@
 		1F86643B1F00B74E0093F979 /* CWMomentStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F86642A1F00B74E0093F979 /* CWMomentStyle.swift */; };
 		1F86643C1F00B74E0093F979 /* CWMoment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F86642C1F00B74E0093F979 /* CWMoment.swift */; };
 		1F86643D1F00B74E0093F979 /* CWMomentReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F86642D1F00B74E0093F979 /* CWMomentReply.swift */; };
-		1F86643E1F00B74E0093F979 /* momentReply.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F86642E1F00B74E0093F979 /* momentReply.json */; };
-		1F86643F1F00B74E0093F979 /* moments.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F86642F1F00B74E0093F979 /* moments.json */; };
 		1F8664401F00B74E0093F979 /* CWMomentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8664311F00B74E0093F979 /* CWMomentCell.swift */; };
 		1F8664411F00B74E0093F979 /* CWMomentCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8664321F00B74E0093F979 /* CWMomentCommentView.swift */; };
 		1F8664421F00B74E0093F979 /* CWMomentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8664331F00B74E0093F979 /* CWMomentHeaderView.swift */; };
@@ -208,6 +206,10 @@
 		8CFCF5371E9017FB00E56C31 /* CWChatMessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFCF5361E9017FB00E56C31 /* CWChatMessageStore.swift */; };
 		8CFCF5391E90E33700E56C31 /* CWChatConversationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFCF5381E90E33700E56C31 /* CWChatConversationStore.swift */; };
 		8CFCF53B1E90E3EE00E56C31 /* CWChatBaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFCF53A1E90E3EE00E56C31 /* CWChatBaseStore.swift */; };
+		8CFF56041F28B62F000FC575 /* momentReply.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CFF56021F28B62F000FC575 /* momentReply.json */; };
+		8CFF56051F28B62F000FC575 /* moments.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CFF56031F28B62F000FC575 /* moments.json */; };
+		8CFF56071F28B707000FC575 /* CWMomentFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF56061F28B707000FC575 /* CWMomentFlowLayout.swift */; };
+		8CFF56091F28B792000FC575 /* CWMomentAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF56081F28B792000FC575 /* CWMomentAttributes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -364,8 +366,6 @@
 		1F86642A1F00B74E0093F979 /* CWMomentStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentStyle.swift; sourceTree = "<group>"; };
 		1F86642C1F00B74E0093F979 /* CWMoment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMoment.swift; sourceTree = "<group>"; };
 		1F86642D1F00B74E0093F979 /* CWMomentReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentReply.swift; sourceTree = "<group>"; };
-		1F86642E1F00B74E0093F979 /* momentReply.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = momentReply.json; sourceTree = "<group>"; };
-		1F86642F1F00B74E0093F979 /* moments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = moments.json; sourceTree = "<group>"; };
 		1F8664311F00B74E0093F979 /* CWMomentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentCell.swift; sourceTree = "<group>"; };
 		1F8664321F00B74E0093F979 /* CWMomentCommentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentCommentView.swift; sourceTree = "<group>"; };
 		1F8664331F00B74E0093F979 /* CWMomentHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentHeaderView.swift; sourceTree = "<group>"; };
@@ -472,6 +472,10 @@
 		8CFCF5361E9017FB00E56C31 /* CWChatMessageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatMessageStore.swift; sourceTree = "<group>"; };
 		8CFCF5381E90E33700E56C31 /* CWChatConversationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatConversationStore.swift; sourceTree = "<group>"; };
 		8CFCF53A1E90E3EE00E56C31 /* CWChatBaseStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatBaseStore.swift; sourceTree = "<group>"; };
+		8CFF56021F28B62F000FC575 /* momentReply.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = momentReply.json; sourceTree = "<group>"; };
+		8CFF56031F28B62F000FC575 /* moments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = moments.json; sourceTree = "<group>"; };
+		8CFF56061F28B707000FC575 /* CWMomentFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentFlowLayout.swift; sourceTree = "<group>"; };
+		8CFF56081F28B792000FC575 /* CWMomentAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentAttributes.swift; sourceTree = "<group>"; };
 		CC9054EAE42E392A75546C97 /* Pods-CWWeChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.debug.xcconfig"; sourceTree = "<group>"; };
 		E4A293988EBEF7146C1E79EF /* Pods-CWWeChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1116,11 +1120,10 @@
 			isa = PBXGroup;
 			children = (
 				1F8664231F00B74E0093F979 /* CWMomentController.swift */,
+				8CFF56011F28B62F000FC575 /* Data */,
 				1F8664241F00B74E0093F979 /* DataService */,
 				1F8664271F00B74E0093F979 /* Layout */,
 				1F86642B1F00B74E0093F979 /* Model */,
-				1F86642E1F00B74E0093F979 /* momentReply.json */,
-				1F86642F1F00B74E0093F979 /* moments.json */,
 				1F8664301F00B74E0093F979 /* View */,
 			);
 			path = MomentModule;
@@ -1140,6 +1143,8 @@
 			children = (
 				1F8664281F00B74E0093F979 /* CWMomentDataService.swift */,
 				1F8664291F00B74E0093F979 /* CWMomentLayout.swift */,
+				8CFF56061F28B707000FC575 /* CWMomentFlowLayout.swift */,
+				8CFF56081F28B792000FC575 /* CWMomentAttributes.swift */,
 				1F86642A1F00B74E0093F979 /* CWMomentStyle.swift */,
 			);
 			path = Layout;
@@ -1207,9 +1212,9 @@
 		1FA724011E9B6C2D009B6456 /* Expression */ = {
 			isa = PBXGroup;
 			children = (
-				1FA724111E9B6D29009B6456 /* View */,
 				1FA7240D1E9B6C72009B6456 /* CWExpressionViewController.swift */,
 				1FA7240E1E9B6C72009B6456 /* CWMyExpressionViewController.swift */,
+				1FA724111E9B6D29009B6456 /* View */,
 			);
 			path = Expression;
 			sourceTree = "<group>";
@@ -1538,6 +1543,15 @@
 			path = image;
 			sourceTree = "<group>";
 		};
+		8CFF56011F28B62F000FC575 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8CFF56021F28B62F000FC575 /* momentReply.json */,
+				8CFF56031F28B62F000FC575 /* moments.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		FD435830FB8A0BDDBF411282 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1697,15 +1711,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F86643E1F00B74E0093F979 /* momentReply.json in Resources */,
 				8CA7EB131E9FD5C600467C37 /* chat_background.png in Resources */,
 				1F3492261E878AD500B36641 /* receivemsg.caf in Resources */,
 				8C8C8CC31EC49D0800CED124 /* Emotion.bundle in Resources */,
 				1F3491B81E87897F00B36641 /* Main.storyboard in Resources */,
-				1F86643F1F00B74E0093F979 /* moments.json in Resources */,
+				8CFF56041F28B62F000FC575 /* momentReply.json in Resources */,
 				1F34922A1E878AD500B36641 /* shake_sound_male.wav in Resources */,
 				1F3491B61E87897F00B36641 /* Assets.xcassets in Resources */,
 				1F3491B71E87897F00B36641 /* LaunchScreen.storyboard in Resources */,
+				8CFF56051F28B62F000FC575 /* moments.json in Resources */,
 				1F3492271E878AD500B36641 /* sendmsg.caf in Resources */,
 				1F3492281E878AD500B36641 /* shake_match.wav in Resources */,
 				1F34922B1E878AD500B36641 /* ContactList.json in Resources */,
@@ -1890,8 +1904,10 @@
 				8C0BFE0B1E9209D8007343F1 /* CWContactsController+SearchBar.swift in Sources */,
 				8C16ECCE1EA26D8700C46823 /* CWVoiceMessageCell.swift in Sources */,
 				1F8664441F00B74E0093F979 /* CWMomentPictureView.swift in Sources */,
+				8CFF56071F28B707000FC575 /* CWMomentFlowLayout.swift in Sources */,
 				8C84B9511E8D60360020D508 /* CWChatManager.swift in Sources */,
 				1F3492911E88227100B36641 /* UITableView+Reusable.swift in Sources */,
+				8CFF56091F28B792000FC575 /* CWMomentAttributes.swift in Sources */,
 				1F4094901E9DD64B008D959C /* CWCommonSettingController.swift in Sources */,
 				1FA7245D1E9CBEBA009B6456 /* CWLocationMessageCell.swift in Sources */,
 				1F3492211E878AD500B36641 /* CWTableViewItem.swift in Sources */,

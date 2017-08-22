@@ -19,6 +19,7 @@ class CWMomentLayout: NSObject {
     /// 总高度
     var height: CGFloat = 0
     
+    
     // 头像
     var avatarFrame: CGRect = .zero
     // 用户名

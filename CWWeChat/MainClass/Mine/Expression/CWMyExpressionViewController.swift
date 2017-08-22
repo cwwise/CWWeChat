@@ -27,6 +27,7 @@ class CWMyExpressionViewController: UIViewController {
     func setupUI() {
         self.navigationItem.rightBarButtonItem = self.rightBarButtonItem
         
+        self.view.backgroundColor = UIColor.white
         //模态视图需要添加取消
         if self.navigationController?.viewControllers.first == self {
             let cancleItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(CWExpressionViewController.cancelBarButtonDown))
