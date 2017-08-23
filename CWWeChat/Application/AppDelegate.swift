@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func loginEmoticonSuccess() {
         
-        let expressController = CWExpressionViewController()
+        let expressController = CWExpressionController()
         self.window?.rootViewController = CWChatNavigationController(rootViewController: expressController)
     }
     

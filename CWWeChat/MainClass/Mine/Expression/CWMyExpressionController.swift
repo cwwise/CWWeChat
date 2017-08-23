@@ -1,5 +1,5 @@
 //
-//  CWMyExpressionViewController.swift
+//  CWMyExpressionController.swift
 //  CWWeChat
 //
 //  Created by chenwei on 16/7/11.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// 我的表情
-class CWMyExpressionViewController: UIViewController {
+class CWMyExpressionController: UIViewController {
 
     lazy var rightBarButtonItem: UIBarButtonItem = {
         let rightBarButtonItem = UIBarButtonItem(title: "排序", style: .plain,target: self, action: #selector(rightBarButtonDown))
@@ -30,7 +30,7 @@ class CWMyExpressionViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         //模态视图需要添加取消
         if self.navigationController?.viewControllers.first == self {
-            let cancleItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(CWExpressionViewController.cancelBarButtonDown))
+            let cancleItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(cancelBarButtonDown))
             self.navigationItem.leftBarButtonItem = cancleItem
         }
     }

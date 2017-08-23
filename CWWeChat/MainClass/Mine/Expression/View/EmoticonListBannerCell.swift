@@ -26,6 +26,7 @@ class EmoticonListBannerCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         pagerView = FSPagerView()
+        pagerView.isInfinite = true
         pagerView.dataSource = self
         pagerView.delegate = self
         pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -64,10 +65,15 @@ extension EmoticonListBannerCell: FSPagerViewDelegate, FSPagerViewDataSource {
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
+        cell.clipsToBounds = true
         let emoticon = emoticonList[index]
         cell.imageView?.kf.setImage(with: emoticon.banner)
         return cell
     }
     
+    func pagerView(_ pagerView: FSPagerView, shouldHighlightItemAt index: Int) -> Bool {
+        return false
+    }
+
 }
 

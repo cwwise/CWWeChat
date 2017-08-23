@@ -1,5 +1,5 @@
 //
-//  CWExpressionViewController.swift
+//  CWExpressionController.swift
 //  CWWeChat
 //
 //  Created by chenwei on 16/7/11.
@@ -9,18 +9,33 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import Kingfisher
 
-class CWExpressionViewController: UIViewController {
+class CWExpressionController: UIViewController {
 
     var segmentedControl: UISegmentedControl!
         
     var rightBarButtonItem: UIBarButtonItem!
     
     var tableView: UITableView!
+    
+    lazy var searchController: CWSearchController = {
+        let searchController = CWSearchController(searchResultsController: self.searchResultController)
+        searchController.searchResultsUpdater = self.searchResultController
+        searchController.searchBar.placeholder = "搜索"
+        searchController.searchBar.delegate = self
+        searchController.showVoiceButton = true
+        return searchController
+    }()
+    
+    //搜索结果
+    var searchResultController: CWSearchResultController = {
+        let searchResultController = CWSearchResultController()
+        return searchResultController
+    }()
+    
     // 
     var bannerList: [EmoticonPackage] = []
-    var packageList: [[EmoticonPackage]] = [[]]
+    var packageList: [[EmoticonPackage]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,63 +55,34 @@ class CWExpressionViewController: UIViewController {
             
         }
         
-//        let packageList = EmoticonRouter.packageList(page: 1, tags: ["精选"])
-//        Alamofire.request(packageList).responseJSON { (response) in
-//
-//            switch response.result {
-//            case .success(let value):
-//                let json = JSON(value)
-//                
-//                var packageList = [EmoticonPackage]()
-//                let packages = json["packages"].arrayValue
-//                for item in packages {
-//                    
-//                    let package = EmoticonPackage(id: item["id"].stringValue,
-//                                                  name: item["name"].stringValue)
-//                    
-//                    package.subTitle = item["sub_title"].stringValue
-//                    
-//                    package.banner = item["background_detail"]["full_url"].url
-//                    package.cover = item["cover_detail"]["full_url"].url
-//                    
-//                    packageList.append(package)
-//                }
-//                print(packageList)
-//
-//            case .failure(let error):
-//                print(error)
-//            }
-//            
-//        }
+        // banner
+        EmoticonService.shared.downloadRecommendList { (list, success) in
+            if success {
+                self.bannerList = list
+                self.tableView.reloadData()
+            }
+        }
         
-//        EmoticonService.shared.downloadPackage(with: "")
-        loadRecommends()
-        // Do any additional setup after loading the view.
+        EmoticonService.shared.downloadPackageList(tag: ["热门表情"]) { (list, success) in
+            if success {
+                self.packageList.insert(list, at: 0)
+                self.tableView.reloadData()
+            }
+        }
+        
+        EmoticonService.shared.downloadPackageList(tag: ["二次元"]) { (list, success) in
+            if success {
+                self.packageList.append(list)
+                self.tableView.reloadData()
+            }
+        }
+        
     }
     
-    func loadRecommends() {
-        Alamofire.request(EmoticonRouter.recommends).responseJSON { (response) in
-            
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                var packageList = [EmoticonPackage]()
-
-                for item in json["recommends"].arrayValue {
-                    let package = EmoticonPackage(id: item["content"].stringValue,
-                                                  name: item["name"].stringValue)
-                    package.banner = item["image"]["full_url"].url
-                    packageList.append(package)
-                }
-                self.bannerList = packageList
-                self.tableView.reloadData()
-            
-            case .failure(let error):
-                print(error)
-            }
-            
-        }
-    }
+    
+  
+    
+    
     
     func setupUI() {
         
@@ -106,6 +92,8 @@ class CWExpressionViewController: UIViewController {
         tableView.register(EmoticonListHeaderView.self, forHeaderFooterViewReuseIdentifier: "header")
         tableView.register(EmoticonListCell.self, forCellReuseIdentifier: "cell")
         tableView.register(EmoticonListBannerCell.self, forCellReuseIdentifier: "banner")
+        tableView.tableHeaderView = self.searchController.searchBar
+        tableView.tableFooterView = UIView()
 
         self.view.addSubview(tableView)
         
@@ -131,7 +119,7 @@ class CWExpressionViewController: UIViewController {
     }
     
     func rightBarButtonDown() {
-        let myExpression = CWMyExpressionViewController()
+        let myExpression = CWMyExpressionController()
         self.navigationController?.pushViewController(myExpression, animated: true)
     }
     
@@ -147,8 +135,12 @@ class CWExpressionViewController: UIViewController {
     
 }
 
+extension CWExpressionController: UISearchBarDelegate {
 
-extension CWExpressionViewController: UITableViewDelegate, UITableViewDataSource {
+    
+}
+
+extension CWExpressionController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return packageList.count + 1
@@ -158,7 +150,7 @@ extension CWExpressionViewController: UITableViewDelegate, UITableViewDataSource
         if section == 0 {
             return 1
         }
-        return packageList[section].count
+        return packageList[section-1].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -170,12 +162,14 @@ extension CWExpressionViewController: UITableViewDelegate, UITableViewDataSource
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EmoticonListCell
+        cell.emoticonInfo = packageList[indexPath.section-1][indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as! EmoticonListHeaderView
-        
+        let titles = ["热门表情", "二次元"]
+        header.titleLabel.text = titles[section-1]
         return header
     }
     
@@ -183,18 +177,22 @@ extension CWExpressionViewController: UITableViewDelegate, UITableViewDataSource
         if section == 0 {
             return 0
         }
-        return 40
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 100
+            return 150
         }
         return 80
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

@@ -19,7 +19,7 @@ enum EmoticonRouter: URLRequestConvertible {
 
     case tagList
     
-    case packageList(page: Int, tags: [String])
+    case packageList(page: Int, tags: String)
     // 
     case packageDetail(packageId: String)
     // 轮播图
@@ -66,8 +66,67 @@ enum EmoticonRouter: URLRequestConvertible {
 }
 
 class EmoticonService {
+
+    public typealias CompleteBlock = ((_ result: [EmoticonPackage], _ success: Bool) -> Void)
     
     public static let shared = EmoticonService()
+
+    // banner
+    func downloadRecommendList(complete: @escaping CompleteBlock) {
+        Alamofire.request(EmoticonRouter.recommends).responseJSON { (response) in
+            
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                var packageList = [EmoticonPackage]()
+                
+                for item in json["recommends"].arrayValue {
+                    let package = EmoticonPackage(id: item["content"].stringValue,
+                                                  name: item["name"].stringValue)
+                    package.banner = item["image"]["full_url"].url
+                    packageList.append(package)
+                }
+                complete(packageList, true)
+                
+            case .failure(_):
+                complete([], false)
+            }
+            
+        }
+    }
+    
+    func downloadPackageList(tag: [String], complete: @escaping CompleteBlock) {
+        let packageList = EmoticonRouter.packageList(page: 1, tags: tag.first!)
+        Alamofire.request(packageList).responseJSON { (response) in
+            
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                
+                var packageList = [EmoticonPackage]()
+                let packages = json["packages"].arrayValue
+                for item in packages {
+                    
+                    let package = EmoticonPackage(id: item["id"].stringValue,
+                                                  name: item["name"].stringValue)
+                    
+                    package.subTitle = item["sub_title"].stringValue
+                    
+                    package.banner = item["background_detail"]["full_url"].url
+                    package.cover = item["cover_detail"]["full_url"].url
+                    
+                    packageList.append(package)
+                }
+                complete(packageList, true)
+                
+            case .failure(_):
+                complete([], false)
+
+            }
+            
+        }
+    }
+    
 
     
     func downloadPackage(with packageId: String) {

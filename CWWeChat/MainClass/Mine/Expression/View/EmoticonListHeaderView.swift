@@ -16,12 +16,15 @@ class EmoticonListHeaderView: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
+        self.contentView.backgroundColor = UIColor.white
         setupUI()
         addSnap()
     }
     
     func setupUI() {
         titleLabel = UILabel()
+        titleLabel.textColor = UIColor.black
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
         self.contentView.addSubview(titleLabel)
         
         accessoryView = UIButton(type: .custom)
@@ -32,7 +35,8 @@ class EmoticonListHeaderView: UITableViewHeaderFooterView {
     func addSnap() {
         
         titleLabel.snp.makeConstraints { (make) in
-            
+            make.left.equalTo(15)
+            make.top.equalTo(30)
         }
         
         accessoryView.snp.makeConstraints { (make) in
