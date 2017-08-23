@@ -97,6 +97,11 @@
 		1F6B9F1A1E8CC6F300AD7FC7 /* CWMessageHandleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F191E8CC6F300AD7FC7 /* CWMessageHandleProtocol.swift */; };
 		1F6B9F1C1E8CC7C600AD7FC7 /* CWChatMessageHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F1B1E8CC7C600AD7FC7 /* CWChatMessageHandle.swift */; };
 		1F6B9F1E1E8CCF4E00AD7FC7 /* CWChatMessageParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F1D1E8CCF4E00AD7FC7 /* CWChatMessageParse.swift */; };
+		1F803BAF1F4D221300DFDC4A /* EmoticonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F803BAE1F4D221300DFDC4A /* EmoticonService.swift */; };
+		1F803BB21F4D30B300DFDC4A /* EmoticonPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F803BB11F4D30B300DFDC4A /* EmoticonPackage.swift */; };
+		1F803BB41F4D7F7100DFDC4A /* EmoticonListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F803BB31F4D7F7100DFDC4A /* EmoticonListCell.swift */; };
+		1F803BB61F4D880700DFDC4A /* EmoticonListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F803BB51F4D880700DFDC4A /* EmoticonListHeaderView.swift */; };
+		1F803BB81F4D8B0600DFDC4A /* EmoticonListBannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F803BB71F4D8B0600DFDC4A /* EmoticonListBannerCell.swift */; };
 		1F8664361F00B74E0093F979 /* CWMomentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8664231F00B74E0093F979 /* CWMomentController.swift */; };
 		1F8664371F00B74E0093F979 /* CWMomentReplyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8664251F00B74E0093F979 /* CWMomentReplyStore.swift */; };
 		1F8664381F00B74E0093F979 /* CWMomentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8664261F00B74E0093F979 /* CWMomentStore.swift */; };
@@ -356,6 +361,11 @@
 		1F6B9F191E8CC6F300AD7FC7 /* CWMessageHandleProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageHandleProtocol.swift; sourceTree = "<group>"; };
 		1F6B9F1B1E8CC7C600AD7FC7 /* CWChatMessageHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatMessageHandle.swift; sourceTree = "<group>"; };
 		1F6B9F1D1E8CCF4E00AD7FC7 /* CWChatMessageParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatMessageParse.swift; sourceTree = "<group>"; };
+		1F803BAE1F4D221300DFDC4A /* EmoticonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonService.swift; sourceTree = "<group>"; };
+		1F803BB11F4D30B300DFDC4A /* EmoticonPackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonPackage.swift; sourceTree = "<group>"; };
+		1F803BB31F4D7F7100DFDC4A /* EmoticonListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonListCell.swift; sourceTree = "<group>"; };
+		1F803BB51F4D880700DFDC4A /* EmoticonListHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonListHeaderView.swift; sourceTree = "<group>"; };
+		1F803BB71F4D8B0600DFDC4A /* EmoticonListBannerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonListBannerCell.swift; sourceTree = "<group>"; };
 		1F8664231F00B74E0093F979 /* CWMomentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentController.swift; sourceTree = "<group>"; };
 		1F8664251F00B74E0093F979 /* CWMomentReplyStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentReplyStore.swift; sourceTree = "<group>"; };
 		1F8664261F00B74E0093F979 /* CWMomentStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentStore.swift; sourceTree = "<group>"; };
@@ -1112,6 +1122,22 @@
 			path = CWOptionsController;
 			sourceTree = "<group>";
 		};
+		1F803BAD1F4D21F900DFDC4A /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				1F803BAE1F4D221300DFDC4A /* EmoticonService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		1F803BB01F4D302F00DFDC4A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1F803BB11F4D30B300DFDC4A /* EmoticonPackage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		1F8664221F00B74E0093F979 /* MomentModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1207,6 +1233,8 @@
 		1FA724011E9B6C2D009B6456 /* Expression */ = {
 			isa = PBXGroup;
 			children = (
+				1F803BB01F4D302F00DFDC4A /* Model */,
+				1F803BAD1F4D21F900DFDC4A /* Service */,
 				1FA724111E9B6D29009B6456 /* View */,
 				1FA7240D1E9B6C72009B6456 /* CWExpressionViewController.swift */,
 				1FA7240E1E9B6C72009B6456 /* CWMyExpressionViewController.swift */,
@@ -1260,6 +1288,9 @@
 			isa = PBXGroup;
 			children = (
 				1F4094951E9DEF2D008D959C /* CWMyExpressionCell.swift */,
+				1F803BB31F4D7F7100DFDC4A /* EmoticonListCell.swift */,
+				1F803BB71F4D8B0600DFDC4A /* EmoticonListBannerCell.swift */,
+				1F803BB51F4D880700DFDC4A /* EmoticonListHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1882,6 +1913,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FA724541E9CB1F0009B6456 /* CWChatToolBar.swift in Sources */,
+				1F803BAF1F4D221300DFDC4A /* EmoticonService.swift in Sources */,
+				1F803BB21F4D30B300DFDC4A /* EmoticonPackage.swift in Sources */,
 				8C0BFDD91E9127FD007343F1 /* CWGroupManager.swift in Sources */,
 				1F34921F1E878AD500B36641 /* CWTableViewBoolCell.swift in Sources */,
 				1FA7240F1E9B6C72009B6456 /* CWExpressionViewController.swift in Sources */,
@@ -1941,6 +1974,7 @@
 				8C0BFE1C1E92196B007343F1 /* CWPlayMessageAudio.swift in Sources */,
 				8C0BFE101E9209D8007343F1 /* CWContactCell.swift in Sources */,
 				1FA724501E9CAA44009B6456 /* CWTableFooterTitleView.swift in Sources */,
+				1F803BB81F4D8B0600DFDC4A /* EmoticonListBannerCell.swift in Sources */,
 				1F34920C1E878AD500B36641 /* CWChatXMPPManager.swift in Sources */,
 				8C0BFDD51E90EF70007343F1 /* CWChatConversationCell.swift in Sources */,
 				1F34926C1E87B84100B36641 /* CWWebViewController.swift in Sources */,
@@ -1966,6 +2000,7 @@
 				8CB02BAD1EA8EE13003B94BC /* CWVoiceIndicatorView.swift in Sources */,
 				1F34920E1E878AD500B36641 /* CWChatMessageModel.swift in Sources */,
 				1F3492241E878AD500B36641 /* CWTableViewStyle.swift in Sources */,
+				1F803BB61F4D880700DFDC4A /* EmoticonListHeaderView.swift in Sources */,
 				1F3492371E878FD700B36641 /* CWChatUIConstant.swift in Sources */,
 				8C16ECD21EA2765300C46823 /* CWVoiceMessageBody.swift in Sources */,
 				8C0BFE0F1E9209D8007343F1 /* CWContactModel.swift in Sources */,
@@ -2020,6 +2055,7 @@
 				8C0BFE1A1E920F31007343F1 /* CWContactHelper.swift in Sources */,
 				1F3492131E878AD500B36641 /* UIApplication+CWChat.swift in Sources */,
 				1F3492301E878BE300B36641 /* CWMessageTransmitter.swift in Sources */,
+				1F803BB41F4D7F7100DFDC4A /* EmoticonListCell.swift in Sources */,
 				8C8C7CE81EBCC40000CED124 /* CWMoreItemCell.swift in Sources */,
 				1F3D615A1E9F477300A1DA4B /* CWOptionsController.swift in Sources */,
 				1F34927D1E87DAC400B36641 /* CWMenuCell.swift in Sources */,

@@ -8,6 +8,7 @@ PODS:
   - CocoaLumberjack/Default (3.2.0)
   - CocoaLumberjack/Extensions (3.2.0):
     - CocoaLumberjack/Default
+  - FSPagerView (0.5.5)
   - Hue (2.0.1)
   - Kingfisher (3.10.2)
   - KissXML (5.2.0)
@@ -59,6 +60,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - CHIPageControl/Aleppo
+  - FSPagerView
   - Hue
   - Kingfisher
   - KVOController
@@ -85,6 +87,7 @@ SPEC CHECKSUMS:
   CHIPageControl: 2d3a0edacd7e3bc113bc88cbf187ba8f0b045548
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
   CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
+  FSPagerView: 3ec72e6b201d77a48adab5ed1d33b43a8cc153d6
   Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
   Kingfisher: 7297492bf8cec9b2e2dee3519f2219948580d98e
   KissXML: 1c1eeeb6b94e4522cd2f2373e5d0d03c9227738f
@@ -109,6 +112,6 @@ SPEC CHECKSUMS:
   XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: de4e12ee79269f1f35a54fd940d0f20f60855f52
+PODFILE CHECKSUM: cf96e8e0b517a7ad7dd26f6cc3958996df1a59f0
 
 COCOAPODS: 1.2.1
