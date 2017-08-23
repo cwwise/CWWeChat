@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.4.0)
+  - Alamofire (4.5.0)
   - CHIPageControl/Aleppo (0.1.3)
   - CocoaAsyncSocket (7.6.1)
   - CocoaLumberjack (3.2.0):
@@ -8,6 +8,7 @@ PODS:
   - CocoaLumberjack/Default (3.2.0)
   - CocoaLumberjack/Extensions (3.2.0):
     - CocoaLumberjack/Default
+  - FSPagerView (0.5.4)
   - Hue (2.0.1)
   - Kingfisher (3.10.2)
   - KissXML (5.2.0)
@@ -22,7 +23,7 @@ PODS:
   - Moya/RxSwift (8.0.5):
     - Moya/Core
     - RxSwift (~> 3.0)
-  - Nimble (7.0.0)
+  - Nimble (7.0.1)
   - OHHTTPStubs/Core (6.0.0)
   - OHHTTPStubs/Default (6.0.0):
     - OHHTTPStubs/Core
@@ -59,6 +60,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - CHIPageControl/Aleppo
+  - FSPagerView
   - Hue
   - Kingfisher
   - KVOController
@@ -81,10 +83,11 @@ DEPENDENCIES:
   - YYText
 
 SPEC CHECKSUMS:
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   CHIPageControl: 2d3a0edacd7e3bc113bc88cbf187ba8f0b045548
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
   CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
+  FSPagerView: e523cd48dd16c55e66408acc43e03ac581b723df
   Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
   Kingfisher: 7297492bf8cec9b2e2dee3519f2219948580d98e
   KissXML: 1c1eeeb6b94e4522cd2f2373e5d0d03c9227738f
@@ -93,7 +96,7 @@ SPEC CHECKSUMS:
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Moya: c37eec09a098ba9991b5a963b291fc5704bdb9ef
-  Nimble: 874982b605d4d752fcac6be695d13c502de84b1b
+  Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   PPBadgeViewSwift: 92c992703e7c6d5ce3d1ebffddc7084716b84e01
@@ -109,6 +112,6 @@ SPEC CHECKSUMS:
   XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 7ee2a5d280ab5e0592f8b605dd869179e910833f
+PODFILE CHECKSUM: cf96e8e0b517a7ad7dd26f6cc3958996df1a59f0
 
 COCOAPODS: 1.2.1

@@ -35,6 +35,9 @@ target 'CWWeChat' do
   pod 'CHIPageControl/Aleppo'
   pod 'LCActionSheet'
   
+  # 表情
+  pod 'FSPagerView'
+  
   # animation
   pod 'pop'
   
