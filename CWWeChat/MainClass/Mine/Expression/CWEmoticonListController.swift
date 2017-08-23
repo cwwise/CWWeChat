@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class CWExpressionController: UIViewController {
+class CWEmoticonListController: UIViewController {
 
     var segmentedControl: UISegmentedControl!
         
@@ -79,11 +79,6 @@ class CWExpressionController: UIViewController {
         
     }
     
-    
-  
-    
-    
-    
     func setupUI() {
         
         tableView = UITableView(frame: self.view.frame, style: .grouped)
@@ -119,7 +114,7 @@ class CWExpressionController: UIViewController {
     }
     
     func rightBarButtonDown() {
-        let myExpression = CWMyExpressionController()
+        let myExpression = CWMyEmoticonController()
         self.navigationController?.pushViewController(myExpression, animated: true)
     }
     
@@ -135,12 +130,12 @@ class CWExpressionController: UIViewController {
     
 }
 
-extension CWExpressionController: UISearchBarDelegate {
+extension CWEmoticonListController: UISearchBarDelegate {
 
     
 }
 
-extension CWExpressionController: UITableViewDelegate, UITableViewDataSource {
+extension CWEmoticonListController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return packageList.count + 1

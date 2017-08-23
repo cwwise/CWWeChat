@@ -8,19 +8,19 @@
 
 import UIKit
 
-protocol CWMyExpressionCellDelegate: class{
-    func expressionCellDeleteButtonDown()
+protocol MyEmoticonCellDelegate: class{
+    func emoticonCellDeleteButtonDown()
 }
 
-class CWMyExpressionCell: UITableViewCell {
+class MyEmoticonCell: UITableViewCell {
 
-    var group: CWEmoticonGroup? {
+    var group: EmoticonPackage? {
         didSet {
             setupInfo()
         }
     }
     
-    var delegate: CWMyExpressionCellDelegate?
+    var delegate: MyEmoticonCellDelegate?
     
     var deleteButton: UIButton = {
         let deleteButton = UIButton(type: .custom)
@@ -32,15 +32,14 @@ class CWMyExpressionCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.accessoryView = self.deleteButton
+
+        
+        
     }
     
     func setupInfo() {
-        guard let group = group else {
-            return
-        }
-        self.textLabel?.text = group.groupName
-        self.imageView?.image = UIImage(named: group.groupIcon)
+       
+        
 
     }
     

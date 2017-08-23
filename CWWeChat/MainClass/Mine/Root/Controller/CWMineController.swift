@@ -62,7 +62,7 @@ extension CWMineController {
             return
         }
         else if indexPath.section == 2 {
-            let expressionVC = CWExpressionController()
+            let expressionVC = CWEmoticonListController()
             expressionVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(expressionVC, animated: true)
         } else {
