@@ -36,8 +36,8 @@ class EmoticonPackage: NSObject {
     /// 表情作者
     class EmoticonAuthor: NSObject {
         var name: String = ""
-        var avatar: String = ""
-        var banner: String = ""
+        var avatar: URL?
+        var banner: URL?
         var userDescription: String = ""
     }
     

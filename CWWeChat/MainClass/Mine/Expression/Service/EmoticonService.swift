@@ -123,6 +123,14 @@ class EmoticonService {
                     package.banner = item["background_detail"]["full_url"].url
                     package.cover = item["cover_detail"]["full_url"].url
                     
+                    let author = EmoticonPackage.EmoticonAuthor()
+                    author.name = item["author"]["name"].stringValue
+                    author.avatar = item["author"]["avatar"].url
+                    author.banner = item["author"]["banner"].url
+                    author.userDescription = item["author"]["description"].stringValue
+
+                    package.author = author
+                    
                     packageList.append(package)
                 }
                 complete(packageList, true)
@@ -178,6 +186,13 @@ class EmoticonService {
                 
                 emoticonPackage.banner = package["background_detail"]["full_url"].url
                 emoticonPackage.cover = package["cover_detail"]["full_url"].url
+                
+                let author = EmoticonPackage.EmoticonAuthor()
+                author.name = package["author"]["name"].stringValue
+                author.avatar = package["author"]["avatar"].url
+                author.banner = package["author"]["banner"].url
+                author.userDescription = package["author"]["description"].stringValue
+                emoticonPackage.author = author
                 
                 complete(emoticonPackage, true)
                 

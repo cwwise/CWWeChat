@@ -24,10 +24,13 @@ class CWEmoticonDetailController: UIViewController {
             EmoticonService.shared.fetchPackageDetail(with: emoticonPackage.id,
                                                       complete: { (package, success) in
                 
+                                                        if success {
+                                                            self.emoticonPackage = package
+                                                            self.collectionView.reloadData()
+
+                                                        }
                                     
                                                         
-                
-                
             })
 
         }
@@ -35,15 +38,21 @@ class CWEmoticonDetailController: UIViewController {
     }
     
     func setupUI() {
+        self.title = emoticonPackage.name
+        
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 220/3, height: 260/2)
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
-        
-        
-        
+        let width = ceil((kScreenWidth - 2*27 - 3*15)/4)
+        layout.itemSize = CGSize(width: width, height: width)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 27, bottom: 10, right: 27)
+        layout.minimumLineSpacing = 15
+        layout.minimumInteritemSpacing = 15
+        layout.headerReferenceSize = CGSize(width: kScreenWidth, height: 340)
+        layout.footerReferenceSize = CGSize(width: kScreenWidth, height: 200)
+
         collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor.white
         collectionView.register(EmoticonDetailCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.register(EmoticonDetailHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
         collectionView.register(EmoticonDetailFooterView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer")
@@ -64,11 +73,8 @@ class CWEmoticonDetailController: UIViewController {
         let _ = cell.imageView.image
         
         
-        
     }
-    
-    
-    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -89,6 +95,10 @@ extension CWEmoticonDetailController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! EmoticonDetailCell
+        let emoticon = emoticonPackage.emoticonList[indexPath.row]
+        
+        cell.imageView.kf.setImage(with: emoticon.originalUrl)
+        
         return cell
     }
     
@@ -103,7 +113,6 @@ extension CWEmoticonDetailController: UICollectionViewDelegate, UICollectionView
         } else {
             let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer", for: indexPath) as! EmoticonDetailFooterView
             footer.emoticonPackage = emoticonPackage
-
             return footer
         }
     }

@@ -48,9 +48,17 @@ class EmoticonListCell: UITableViewCell {
         subtitleLabel.font = UIFont.systemFont(ofSize: 13)
         self.contentView.addSubview(subtitleLabel)
         
+        let textColor = UIColor(hex: "#1AAD19")
+        let normalImage = UIImage.size(width: 10, height: 10)
+            .border(color: textColor)
+            .border(width: 1)
+            .corner(radius: 5).image.resizableImage()
+
         downloadButton = UIButton(type: .custom)
+        downloadButton.setBackgroundImage(normalImage, for: .normal)
         downloadButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         downloadButton.setTitle("下载", for: .normal)
+        downloadButton.setTitleColor(textColor, for: .normal)
         downloadButton.addTarget(self, action: #selector(downloadAction), for: .touchUpInside)
         self.contentView.addSubview(downloadButton)
         
@@ -77,10 +85,12 @@ class EmoticonListCell: UITableViewCell {
             make.right.equalTo(-40)
         }
         
+
+        
         downloadButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
             make.right.equalTo(-10)
-            make.size.equalTo(CGSize(width: 60, height: 24))
+            make.size.equalTo(CGSize(width: 60, height: 25))
         }
         
     }

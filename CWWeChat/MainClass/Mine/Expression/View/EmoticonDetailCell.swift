@@ -7,15 +7,17 @@
 //
 
 import UIKit
+import Kingfisher
 
 class EmoticonDetailCell: UICollectionViewCell {
     
-    var imageView: UIImageView!
+    var imageView: AnimatedImageView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView = AnimatedImageView()
+        imageView.autoPlayAnimatedImage = false
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         self.contentView.addSubview(imageView)
         
