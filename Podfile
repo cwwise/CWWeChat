@@ -41,8 +41,6 @@ target 'CWWeChat' do
   # animation
   pod 'pop'
   
-  # 相机
-  # pod "SwiftyCam"
   
   
   # tool

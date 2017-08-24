@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class EmoticonDetailHeaderView: UICollectionReusableView {
     
@@ -22,23 +23,34 @@ class EmoticonDetailHeaderView: UICollectionReusableView {
     //
     var tipLabel: UILabel!
     
-    var emoticonPackage: EmoticonPackage!
+    var emoticonPackage: EmoticonPackage! {
+        didSet {
+            setupInfo()
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        
+        setupUI()
+        addSnap()
     }
     
     func setupUI() {
         
         imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         self.addSubview(imageView)
         
         titleLabel = UILabel()
+        titleLabel.font = UIFont.systemFont(ofSize: 15)
+        titleLabel.textColor = UIColor.black
         self.addSubview(titleLabel)
 
         subTitleLabel = UILabel()
+        subTitleLabel.font = UIFont.systemFont(ofSize: 15)
+        subTitleLabel.textColor = UIColor.black
         self.addSubview(subTitleLabel)
         
         actionButton = UIButton(type: .custom)
@@ -48,14 +60,27 @@ class EmoticonDetailHeaderView: UICollectionReusableView {
         self.layer.addSublayer(divisionLayer)
 
         tipLabel = UILabel()
+        tipLabel.textColor = UIColor.white
+        tipLabel.font = UIFont.systemFont(ofSize: 14)
+        tipLabel.text = "长按可以预览"
         self.addSubview(tipLabel)
     }
     
     func addSnap() {
         
+        imageView.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(self)
+            make.height.equalTo(220)
+        }
+        
+        
     }
     
     func setupInfo() {
+        
+        imageView.kf.setImage(with: emoticonPackage.banner)
+        titleLabel.text = emoticonPackage.name
+        subTitleLabel.text = emoticonPackage.subTitle
         
     }
     

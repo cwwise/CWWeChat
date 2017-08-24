@@ -35,7 +35,7 @@ class CWEmoticonListController: UIViewController {
     
     // 
     var bannerList: [EmoticonPackage] = []
-    var packageList: [[EmoticonPackage]] = []
+    var packageList: [EmoticonZone] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,17 +62,20 @@ class CWEmoticonListController: UIViewController {
                 self.tableView.reloadData()
             }
         }
-        
-        EmoticonService.shared.downloadPackageList(tag: ["热门表情"]) { (list, success) in
+        let tag1 = "热门表情"
+        EmoticonService.shared.downloadPackageList(tag: [tag1]) { (list, success) in
             if success {
-                self.packageList.insert(list, at: 0)
+                let zone = EmoticonZone(name: tag1, packageList: list)
+                self.packageList.insert(zone, at: 0)
                 self.tableView.reloadData()
             }
         }
         
-        EmoticonService.shared.downloadPackageList(tag: ["二次元"]) { (list, success) in
+        let tag2 = "二次元"
+        EmoticonService.shared.downloadPackageList(tag: [tag2]) { (list, success) in
             if success {
-                self.packageList.append(list)
+                let zone = EmoticonZone(name: tag1, packageList: list)
+                self.packageList.append(zone)
                 self.tableView.reloadData()
             }
         }
@@ -114,7 +117,7 @@ class CWEmoticonListController: UIViewController {
     }
     
     func rightBarButtonDown() {
-        let myExpression = CWMyEmoticonController()
+        let myExpression = CWMyEmoticonListController()
         self.navigationController?.pushViewController(myExpression, animated: true)
     }
     
@@ -163,8 +166,7 @@ extension CWEmoticonListController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as! EmoticonListHeaderView
-        let titles = ["热门表情", "二次元"]
-        header.titleLabel.text = titles[section-1]
+        header.titleLabel.text = packageList[section-1].name
         return header
     }
     

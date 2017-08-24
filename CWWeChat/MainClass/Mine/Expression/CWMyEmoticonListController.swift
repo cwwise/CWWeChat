@@ -1,5 +1,5 @@
 //
-//  CWMyEmoticonController.swift
+//  CWMyEmoticonListController.swift
 //  CWWeChat
 //
 //  Created by chenwei on 16/7/11.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// 我的表情
-class CWMyEmoticonController: UIViewController {
+class CWMyEmoticonListController: UIViewController {
 
     lazy var rightBarButtonItem: UIBarButtonItem = {
         let rightBarButtonItem = UIBarButtonItem(title: "排序", style: .plain,target: self, action: #selector(rightBarButtonDown))

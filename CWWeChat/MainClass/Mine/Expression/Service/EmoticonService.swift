@@ -181,7 +181,7 @@ class EmoticonService {
                 
                 complete(emoticonPackage, true)
                 
-            case .failure(let error):
+            case .failure(_):
                 complete(nil, false)
             }
             
