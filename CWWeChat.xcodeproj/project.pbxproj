@@ -173,6 +173,8 @@
 		8C34AFA21E9BD78D00977742 /* CWChatMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34AFA11E9BD78D00977742 /* CWChatMessageController.swift */; };
 		8C34AFA41E9BD84A00977742 /* CWChatDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34AFA31E9BD84A00977742 /* CWChatDetailViewController.swift */; };
 		8C3CC3AA1F4DDBC100CB7B61 /* CWEmoticonDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CC3A91F4DDBC100CB7B61 /* CWEmoticonDetailController.swift */; };
+		8C3CC3AC1F4DDE6B00CB7B61 /* EmoticonDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CC3AB1F4DDE6B00CB7B61 /* EmoticonDetailHeaderView.swift */; };
+		8C3CC3AE1F4DDEAD00CB7B61 /* EmoticonDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CC3AD1F4DDEAD00CB7B61 /* EmoticonDetailFooterView.swift */; };
 		8C49277E1E92544900B3C482 /* CWLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C49277D1E92544900B3C482 /* CWLoginController.swift */; };
 		8C4927801E92678800B3C482 /* CWBaseMessageController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C49277F1E92678800B3C482 /* CWBaseMessageController+Keyboard.swift */; };
 		8C4927831E928EB400B3C482 /* CWUploadToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4927821E928EB400B3C482 /* CWUploadToken.swift */; };
@@ -443,6 +445,8 @@
 		8C34AFA11E9BD78D00977742 /* CWChatMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatMessageController.swift; sourceTree = "<group>"; };
 		8C34AFA31E9BD84A00977742 /* CWChatDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatDetailViewController.swift; sourceTree = "<group>"; };
 		8C3CC3A91F4DDBC100CB7B61 /* CWEmoticonDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWEmoticonDetailController.swift; sourceTree = "<group>"; };
+		8C3CC3AB1F4DDE6B00CB7B61 /* EmoticonDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonDetailHeaderView.swift; sourceTree = "<group>"; };
+		8C3CC3AD1F4DDEAD00CB7B61 /* EmoticonDetailFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonDetailFooterView.swift; sourceTree = "<group>"; };
 		8C49277D1E92544900B3C482 /* CWLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CWLoginController.swift; path = CWWeChat/ChatModule/CWChatClient/Tool/CWLoginController.swift; sourceTree = SOURCE_ROOT; };
 		8C49277F1E92678800B3C482 /* CWBaseMessageController+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CWBaseMessageController+Keyboard.swift"; sourceTree = "<group>"; };
 		8C4927821E928EB400B3C482 /* CWUploadToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWUploadToken.swift; sourceTree = "<group>"; };
@@ -1240,11 +1244,11 @@
 		1FA724011E9B6C2D009B6456 /* Expression */ = {
 			isa = PBXGroup;
 			children = (
-				1F803BB01F4D302F00DFDC4A /* Model */,
-				1F803BAD1F4D21F900DFDC4A /* Service */,
 				1FA7240D1E9B6C72009B6456 /* CWEmoticonListController.swift */,
 				8C3CC3A91F4DDBC100CB7B61 /* CWEmoticonDetailController.swift */,
 				1FA7240E1E9B6C72009B6456 /* CWMyEmoticonController.swift */,
+				1F803BB01F4D302F00DFDC4A /* Model */,
+				1F803BAD1F4D21F900DFDC4A /* Service */,
 				1FA724111E9B6D29009B6456 /* View */,
 			);
 			path = Expression;
@@ -1299,6 +1303,8 @@
 				1F803BB31F4D7F7100DFDC4A /* EmoticonListCell.swift */,
 				1F803BB71F4D8B0600DFDC4A /* EmoticonListBannerCell.swift */,
 				1F803BB51F4D880700DFDC4A /* EmoticonListHeaderView.swift */,
+				8C3CC3AB1F4DDE6B00CB7B61 /* EmoticonDetailHeaderView.swift */,
+				8C3CC3AD1F4DDEAD00CB7B61 /* EmoticonDetailFooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1953,6 +1959,7 @@
 				1F3492251E878AD500B36641 /* CWBoolItem.swift in Sources */,
 				1FA527D21E9381EE00D1BE54 /* CWChatTextParser.swift in Sources */,
 				8CD40A611EB23A090051772C /* CWTextItem.swift in Sources */,
+				8C3CC3AE1F4DDEAD00CB7B61 /* EmoticonDetailFooterView.swift in Sources */,
 				8C0BFE131E9209F7007343F1 /* CWContactDetailController.swift in Sources */,
 				1FA724101E9B6C72009B6456 /* CWMyEmoticonController.swift in Sources */,
 				1F592A631EA8BD05007558E9 /* CWExpressMessageBody.swift in Sources */,
@@ -1974,6 +1981,7 @@
 				1F3492141E878AD500B36641 /* UIBarButtonItem+Extensions.swift in Sources */,
 				1F6B9F181E8CC6E200AD7FC7 /* CWMessageHandle.swift in Sources */,
 				1F34927B1E87DAC400B36641 /* CWMenuViewController.swift in Sources */,
+				8C3CC3AC1F4DDE6B00CB7B61 /* EmoticonDetailHeaderView.swift in Sources */,
 				1F8664411F00B74E0093F979 /* CWMomentCommentView.swift in Sources */,
 				8C4927831E928EB400B3C482 /* CWUploadToken.swift in Sources */,
 				8C0BFDD71E90FD91007343F1 /* CWContactManager.swift in Sources */,

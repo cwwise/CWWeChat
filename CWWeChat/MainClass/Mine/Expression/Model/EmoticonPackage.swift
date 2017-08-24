@@ -36,6 +36,9 @@ class EmoticonPackage: NSObject {
     // 副标题
     var subTitle: String?
     
+    // 更新时间
+    var updated_at: String?
+    
     var cover: URL?
     // banner url 
     var banner: URL?

@@ -12,13 +12,27 @@ class CWEmoticonDetailController: UIViewController {
 
     var collectionView: UICollectionView!
     
-    
+    var emoticonPackage: EmoticonPackage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // 判断是否需要刷新
+        if emoticonPackage.emoticonList.count == 0 {
+            EmoticonService.shared.fetchPackageDetail(with: emoticonPackage.id,
+                                                      complete: { (package, success) in
+                
+                                    
+                                                        
+                
+                
+            })
+
+        }
+        
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

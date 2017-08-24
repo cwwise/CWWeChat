@@ -75,6 +75,8 @@ class EmoticonService {
 
     public typealias CompleteBlock = ((_ result: [EmoticonPackage], _ success: Bool) -> Void)
     
+    public typealias InfoCompleteBlock = ((_ result: EmoticonPackage?, _ success: Bool) -> Void)
+
     public static let shared = EmoticonService()
 
     // banner
@@ -134,8 +136,7 @@ class EmoticonService {
     }
     
 
-    
-    func downloadPackage(with packageId: String) {
+    func fetchPackageDetail(with packageId: String, complete: @escaping InfoCompleteBlock) {
         
         let packageDetail = EmoticonRouter.packageDetail(packageId: packageId)
         Alamofire.request(packageDetail).responseJSON { (response) in
@@ -152,7 +153,7 @@ class EmoticonService {
                 for item in contents {
                     
                     let emoticonInfo = contentsDetail[item.stringValue]
-                    let size = CGSize(width: emoticonInfo["width"].intValue, 
+                    let size = CGSize(width: emoticonInfo["width"].intValue,
                                       height: emoticonInfo["height"].intValue)
                     let emoticon = Emoticon(id: emoticonInfo["id"].stringValue)
                     emoticon.size = size
@@ -170,7 +171,7 @@ class EmoticonService {
                     emoticonList.append(emoticon)
                 }
                 
-                let emoticonPackage = EmoticonPackage(id: package["id"].stringValue, 
+                let emoticonPackage = EmoticonPackage(id: package["id"].stringValue,
                                                       name: package["name"].stringValue)
                 emoticonPackage.emoticonList = emoticonList
                 emoticonPackage.subTitle = package["sub_title"].stringValue
@@ -178,22 +179,35 @@ class EmoticonService {
                 emoticonPackage.banner = package["background_detail"]["full_url"].url
                 emoticonPackage.cover = package["cover_detail"]["full_url"].url
                 
+                complete(emoticonPackage, true)
+                
+            case .failure(let error):
+                complete(nil, false)
+            }
+            
+        }
+        
+        
+    }
+    
+    func downloadPackage(with packageId: String, complete: @escaping CompleteBlock) {
+        
+        fetchPackageDetail(with: packageId) { (package, success) in
+            
+            if let package = package {
+                
                 // 获取成功 开始下载图片
-                let urls = emoticonPackage.emoticonList.flatMap({ (emoticon) -> URL in
+                let urls = package.emoticonList.flatMap({ (emoticon) -> URL in
                     return emoticon.originalUrl!
                 })
                 print("开始下载")
                 // 保存到数据库
-                self.saveEmoticonPackage(emoticonPackage)
+                self.saveEmoticonPackage(package)
                 // 下载图片
-                self.downloadResources(urls, id: emoticonPackage.id)
-                
-            case .failure(let error):
-                print(error)
+                self.downloadResources(urls, id: package.id)
             }
             
         }
-
     }
     
     func saveEmoticonPackage(_ package: EmoticonPackage) {
