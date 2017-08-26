@@ -24,9 +24,8 @@ class EmoticonDetailCell: UICollectionViewCell {
         imageView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
+        
     }
-    
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

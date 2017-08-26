@@ -15,6 +15,8 @@ class CWEmoticonDetailController: UIViewController {
     
     var emoticonPackage: EmoticonPackage!
     
+    var lastSelectCell: EmoticonDetailCell?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -68,8 +70,21 @@ class CWEmoticonDetailController: UIViewController {
         guard let indexPath = collectionView.indexPathForItem(at: position),
             let cell = collectionView.cellForItem(at: indexPath) as? EmoticonDetailCell else {
             return
-        } 
-    
+        }
+        
+        if cell == lastSelectCell {
+            return
+        }
+        
+        // 取消之前cell选中状态
+        
+        lastSelectCell = cell
+        
+        
+        
+        print("长按")
+        
+        
         let _ = cell.imageView.image
         
         
