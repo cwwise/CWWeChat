@@ -25,7 +25,7 @@ class CWEmoticonDetailController: UIViewController {
                                                       complete: { (package, success) in
                 
                                                         if success {
-                                                            self.emoticonPackage = package
+                                                            self.emoticonPackage.emoticonList = package!.emoticonList
                                                             self.collectionView.reloadData()
 
                                                         }
@@ -97,7 +97,7 @@ extension CWEmoticonDetailController: UICollectionViewDelegate, UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! EmoticonDetailCell
         let emoticon = emoticonPackage.emoticonList[indexPath.row]
         
-        cell.imageView.kf.setImage(with: emoticon.originalUrl)
+        cell.imageView.kf.setImage(with: emoticon)
         
         return cell
     }

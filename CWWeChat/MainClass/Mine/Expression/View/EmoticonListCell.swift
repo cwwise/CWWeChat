@@ -97,7 +97,7 @@ class EmoticonListCell: UITableViewCell {
     
     func setupInfo()  {
         
-        iconImageView.kf.setImage(with: emoticonInfo.cover)
+        iconImageView.kf.setImage(with: emoticonInfo)
         titleLabel.text = emoticonInfo.name
         subtitleLabel.text = emoticonInfo.subTitle
         

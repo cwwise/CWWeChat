@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class Emoticon: NSObject {
     
@@ -35,3 +36,15 @@ class Emoticon: NSObject {
         self.id = id
     }
 }
+
+extension Emoticon: Resource {
+    
+    var downloadURL: URL {
+        return originalUrl!
+    }
+    
+    var cacheKey: String {
+        return id
+    }
+}
+

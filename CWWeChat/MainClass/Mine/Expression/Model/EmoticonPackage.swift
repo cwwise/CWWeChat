@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 // 一组有序的表情，构成一个表情包。
 // 一组有序的表情包，构成一个分区。
@@ -67,6 +68,17 @@ class EmoticonPackage: NSObject {
         self.name = name
     }
     
+}
+
+extension EmoticonPackage: Resource {
+    
+    var downloadURL: URL {
+        return cover!
+    }
+    
+    var cacheKey: String {
+        return id
+    }
 }
 
 
