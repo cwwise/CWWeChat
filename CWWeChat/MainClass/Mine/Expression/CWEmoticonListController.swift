@@ -56,14 +56,14 @@ class CWEmoticonListController: UIViewController {
         }
         
         // banner
-        EmoticonService.shared.downloadRecommendList { (list, success) in
+        EmoticonService.shared.fetchRecommendList { (list, success) in
             if success {
                 self.bannerList = list
                 self.tableView.reloadData()
             }
         }
         let tag1 = "热门表情"
-        EmoticonService.shared.downloadPackageList(tag: [tag1]) { (list, success) in
+        EmoticonService.shared.fetchPackageList(tag: [tag1]) { (list, success) in
             if success {
                 let zone = EmoticonZone(name: tag1, packageList: list)
                 self.packageList.insert(zone, at: 0)
@@ -72,7 +72,7 @@ class CWEmoticonListController: UIViewController {
         }
         
         let tag2 = "二次元"
-        EmoticonService.shared.downloadPackageList(tag: [tag2]) { (list, success) in
+        EmoticonService.shared.fetchPackageList(tag: [tag2]) { (list, success) in
             if success {
                 let zone = EmoticonZone(name: tag1, packageList: list)
                 self.packageList.append(zone)

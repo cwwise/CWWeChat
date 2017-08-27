@@ -24,8 +24,18 @@ class EmoticonDetailCell: UICollectionViewCell {
         imageView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
-        
     }
+    
+    override var isSelected: Bool {
+        willSet {
+            if newValue {
+                self.contentView.backgroundColor = UIColor.lightGray
+            } else {
+                self.contentView.backgroundColor = UIColor.white
+            }
+        }
+    }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

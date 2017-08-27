@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 /// 表情包详情界面
 class CWEmoticonDetailController: UIViewController {
@@ -16,11 +17,15 @@ class CWEmoticonDetailController: UIViewController {
     var emoticonPackage: EmoticonPackage!
     
     var lastSelectCell: EmoticonDetailCell?
-    
+    // 长按预览表情
+    var magnifierImageView: UIImageView!
+    var magnifierContentView: AnimatedImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
+        setupMagnifier()
         // 判断是否需要刷新
         if emoticonPackage.emoticonList.count == 0 {
             EmoticonService.shared.fetchPackageDetail(with: emoticonPackage.id,
@@ -64,7 +69,54 @@ class CWEmoticonDetailController: UIViewController {
         collectionView.addGestureRecognizer(long)
     }
     
+    func setupMagnifier() {
+        // 背景图
+        magnifierImageView = UIImageView()
+        magnifierImageView.isHidden = true
+        magnifierImageView.frame = CGRect(x: 0, y: 0, width: 140, height: 155)
+        magnifierImageView.image = backgroundImage()
+        // 表情展示
+        magnifierContentView = AnimatedImageView()
+        magnifierContentView.contentMode = .scaleAspectFit
+        magnifierImageView.addSubview(magnifierContentView)
+        
+        magnifierContentView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets(top: 10, left: 10, bottom: 25, right: 10))
+        }
+        collectionView.addSubview(magnifierImageView)
+    }
+    
+    func backgroundImage() -> UIImage? {
+        
+        // 合成背景图
+        let leftImage = UIImage(named: "EmoticonBigTipsLeft")?.resizableImage()
+        let midImage = UIImage(named: "EmoticonBigTipsMiddle")
+        let rightImage = UIImage(named: "EmoticonBigTipsRight")?.resizableImage()
+        
+        let height: CGFloat = 155
+        let width: CGFloat = 140
+
+        let size = CGSize(width: width, height: height)
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
+        
+        let leftWidth: CGFloat = (width - 30)/2
+        
+        leftImage?.draw(in: CGRect(x: 0, y: 0, width: leftWidth, height: height))
+        midImage?.draw(in: CGRect(x: leftWidth, y: 0, width: 30, height: height))
+        rightImage?.draw(in: CGRect(x: leftWidth+30, y: 0, width: leftWidth, height: height))
+
+        let resultImg = UIGraphicsGetImageFromCurrentImageContext()
+
+        return resultImg
+    }
+    
     func longPressAction(_ gesture: UILongPressGestureRecognizer) {
+        
+        if gesture.state == .ended {
+            magnifierImageView.isHidden = true
+            lastSelectCell?.isSelected = false
+            return
+        }
         
         let position = gesture.location(in: self.collectionView)
         guard let indexPath = collectionView.indexPathForItem(at: position),
@@ -72,21 +124,22 @@ class CWEmoticonDetailController: UIViewController {
             return
         }
         
+        magnifierImageView.isHidden = false
+        cell.isSelected = true
+
         if cell == lastSelectCell {
             return
         }
         
+        lastSelectCell?.isSelected = false
         // 取消之前cell选中状态
-        
         lastSelectCell = cell
         
+        let frame = cell.convert(cell.bounds, to: self.collectionView)
+        magnifierContentView.image = cell.imageView.image
         
-        
-        print("长按")
-        
-        
-        let _ = cell.imageView.image
-        
+        magnifierImageView.centerX = frame.midX
+        magnifierImageView.bottom = frame.top
         
     }
 

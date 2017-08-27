@@ -55,8 +55,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func loginEmoticonSuccess() {
         
-        let expressController = CWEmoticonListController()
-        self.window?.rootViewController = CWChatNavigationController(rootViewController: expressController)
+        let emoticonController = CWEmoticonListController()
+        self.window?.rootViewController = CWChatNavigationController(rootViewController: emoticonController)
+    }
+    
+    func loginMomentSuccess() {
+        let momentController = CWMomentController()
+        self.window?.rootViewController = CWChatNavigationController(rootViewController: momentController)
     }
     
     func logoutSuccess() {

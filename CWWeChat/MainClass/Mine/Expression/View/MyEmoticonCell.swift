@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol MyEmoticonCellDelegate: class{
     func emoticonCellDeleteButtonDown(cell: MyEmoticonCell)
@@ -16,7 +17,7 @@ class MyEmoticonCell: UITableViewCell {
     
     var delegate: MyEmoticonCellDelegate?
 
-    var iconImageView: UIImageView!
+    var iconImageView: AnimatedImageView!
     
     var titleLabel: UILabel!
     
@@ -45,7 +46,8 @@ class MyEmoticonCell: UITableViewCell {
         deleteButton.addTarget(self, action: #selector(deleteButtonDown), for: .touchUpInside)
         self.contentView.addSubview(deleteButton)
         
-        iconImageView = UIImageView()
+        iconImageView = AnimatedImageView()
+        iconImageView.autoPlayAnimatedImage = false
         iconImageView.contentMode = .scaleAspectFill
         self.addSubview(iconImageView)
         

@@ -23,7 +23,7 @@ class CWMyEmoticonListController: CWBaseTableViewController {
         setupUI()
 
         let tag2 = "二次元"
-        EmoticonService.shared.downloadPackageList(tag: [tag2]) { (list, success) in
+        EmoticonService.shared.fetchPackageList(tag: [tag2]) { (list, success) in
             if success {
                 self.emoticonList.append(contentsOf: list)
                 self.tableView.reloadData()

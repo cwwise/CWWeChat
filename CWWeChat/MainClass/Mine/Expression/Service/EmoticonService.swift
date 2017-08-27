@@ -80,7 +80,7 @@ class EmoticonService {
     public static let shared = EmoticonService()
 
     // banner
-    func downloadRecommendList(complete: @escaping CompleteBlock) {
+    func fetchRecommendList(complete: @escaping CompleteBlock) {
         Alamofire.request(EmoticonRouter.recommends).responseJSON { (response) in
             
             switch response.result {
@@ -103,12 +103,13 @@ class EmoticonService {
         }
     }
     
-    func downloadPackageList(tag: [String], complete: @escaping CompleteBlock) {
+    func fetchPackageList(tag: [String], complete: @escaping CompleteBlock) {
         let packageList = EmoticonRouter.packageList(page: 1, tags: tag.first!)
         Alamofire.request(packageList).responseJSON { (response) in
             
             switch response.result {
             case .success(let value):
+   
                 let json = JSON(value)
                 
                 var packageList = [EmoticonPackage]()
@@ -151,8 +152,8 @@ class EmoticonService {
             
             switch response.result {
             case .success(let value):
-                let json = JSON(value)
                 
+                let json = JSON(value)
                 let package = json["package"]
                 let contentsDetail = package["contents_details"]
                 let contents = package["contents"].arrayValue
