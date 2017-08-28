@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //设置logger
         setupLogger()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        loginEmoticonSuccess()
+        loginSuccess()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         
