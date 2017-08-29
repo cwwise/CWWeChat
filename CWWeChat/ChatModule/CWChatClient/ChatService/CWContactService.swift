@@ -15,7 +15,7 @@ class CWContactService: XMPPModule {
     lazy var xmppRoster: XMPPRoster = {
         let xmppRosterStorage = XMPPRosterMemoryStorage()
         let xmppRoster = XMPPRoster(rosterStorage: xmppRosterStorage)
-        xmppRoster?.activate(CWChatXMPPManager.share.xmppStream)
+        xmppRoster?.activate(self.xmppStream)
         xmppRoster?.addDelegate(self, delegateQueue: self.moduleQueue)
         return xmppRoster!
     }();

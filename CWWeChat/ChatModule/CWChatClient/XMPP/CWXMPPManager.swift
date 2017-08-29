@@ -1,5 +1,5 @@
 //
-//  CWChatXMPPManager.swift
+//  CWXMPPManager.swift
 //  CWWeChat
 //
 //  Created by chenwei on 2017/2/12.
@@ -16,9 +16,8 @@ public let kCWNetworkReachabilityNotification = NSNotification.Name("kCWNetworkR
 
 
 // xmpp管理实例
-class CWChatXMPPManager: NSObject {
+class CWXMPPManager: NSObject {
     
-    public static let share = CWChatXMPPManager()
     /// xmpp流
     private(set) var xmppStream: XMPPStream
     /// xmpp重新连接
@@ -38,8 +37,8 @@ class CWChatXMPPManager: NSObject {
     var completion: CWClientCompletion?
     
     /// 初始化方法
-    private override init() {
-        xmppQueue = DispatchQueue(label: "com.cwxmppchat.cwcoder", attributes: DispatchQueue.Attributes.concurrent)
+    override init() {
+        xmppQueue = DispatchQueue(label: "com.cwxmppchat.cwwise", attributes: DispatchQueue.Attributes.concurrent)
         
         let memoryStorage = XMPPStreamManagementMemoryStorage()
         streamManagement = XMPPStreamManagement(storage: memoryStorage)
@@ -180,7 +179,7 @@ class CWChatXMPPManager: NSObject {
 }
 
 // MARK: - XMPPStreamDelegate
-extension CWChatXMPPManager: XMPPStreamDelegate {
+extension CWXMPPManager: XMPPStreamDelegate {
 
     /// 开始连接
     func xmppStreamWillConnect(_ sender: XMPPStream!) {
@@ -218,7 +217,7 @@ extension CWChatXMPPManager: XMPPStreamDelegate {
     // 验证成功
     func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
         self.completion?(xmppStream.myJID.user, nil)
-
+        log.debug("登陆成功。。。")
         goOnline()
         
         streamManagement.autoResume = true
@@ -270,7 +269,7 @@ extension CWChatXMPPManager: XMPPStreamDelegate {
 
 }
 
-extension CWChatXMPPManager: XMPPStreamManagementDelegate {
+extension CWXMPPManager: XMPPStreamManagementDelegate {
     
     func xmppStreamManagementDidRequestAck(_ sender: XMPPStreamManagement!) {}
     

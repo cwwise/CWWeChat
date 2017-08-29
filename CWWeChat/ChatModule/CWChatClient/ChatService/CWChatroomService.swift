@@ -13,7 +13,7 @@ class CWChatroomService: XMPPModule {
     
     lazy var multiChat: XMPPMUCLight = {
         let muc = XMPPMUCLight(dispatchQueue: self.moduleQueue)
-        muc?.activate(CWChatXMPPManager.share.xmppStream)
+        muc?.activate(self.xmppStream)
         return muc!
     }()
     
@@ -53,7 +53,7 @@ extension CWChatroomService: CWChatroomManager {
             return
         }
         let room = XMPPRoomLight(jid: roomjid, roomname: title)
-        room.activate(CWChatXMPPManager.share.xmppStream)
+        room.activate(self.xmppStream)
         room.addDelegate(self, delegateQueue: self.moduleQueue)
 
         var userjidList = [XMPPJID]()

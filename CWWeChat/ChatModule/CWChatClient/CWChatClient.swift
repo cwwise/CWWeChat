@@ -66,14 +66,27 @@ public class CWChatClient: NSObject {
     private(set) var isLogin: Bool = false
     
     /// XMPP实例
-    private var xmppManager = CWChatXMPPManager.share
+    private var xmppManager: CWXMPPManager = CWXMPPManager()
     
     private override init() {
         version = "0.0.1"
-        chatManager = CWChatService(dispatchQueue: DispatchQueue.global()) 
-        contactManager = CWContactService(dispatchQueue: DispatchQueue.global())
-        groupManager = CWGroupServic(dispatchQueue: DispatchQueue.global())
-        chatroomManager = CWChatroomService(dispatchQueue: DispatchQueue.global())
+        
+        let chatManager = CWChatService(dispatchQueue: DispatchQueue.global())!
+        let _ = chatManager.activate(xmppManager.xmppStream)
+        self.chatManager = chatManager
+        
+        let contactManager = CWContactService(dispatchQueue: DispatchQueue.global())!
+        let _ = contactManager.activate(xmppManager.xmppStream)
+        self.contactManager = contactManager
+        
+        let groupManager = CWGroupServic(dispatchQueue: DispatchQueue.global())!
+        let _ = groupManager.activate(xmppManager.xmppStream)
+        self.groupManager = groupManager
+        
+        let chatroomManager = CWChatroomService(dispatchQueue: DispatchQueue.global())!
+        let _ = chatroomManager.activate(xmppManager.xmppStream)
+        self.chatroomManager = chatroomManager
+        
         super.init()
     }
     
@@ -84,8 +97,6 @@ public class CWChatClient: NSObject {
         self.options = options
         xmppManager.options = options
     }
-    
-    
     
     public func login(username: String,
                       password: String,

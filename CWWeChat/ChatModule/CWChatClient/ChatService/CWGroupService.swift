@@ -15,7 +15,7 @@ class CWGroupServic: XMPPModule {
     
     lazy var groupChat: XMPPMUC = {
         let groupChat = XMPPMUC(dispatchQueue: self.moduleQueue)
-        groupChat?.activate(CWChatXMPPManager.share.xmppStream)
+        groupChat?.activate(self.xmppStream)
         return groupChat!
     }()
     
@@ -57,7 +57,7 @@ extension CWGroupServic: CWGroupManager {
         }
         let storage = XMPPRoomCoreDataStorage.sharedInstance()
         let room = XMPPRoom(roomStorage: storage, jid: jid)!
-        room.activate(CWChatXMPPManager.share.xmppStream)
+        room.activate(self.xmppStream)
         room.addDelegate(self, delegateQueue: self.moduleQueue)
         room.join(usingNickname: "陈威", history: nil)
     }
@@ -77,7 +77,7 @@ extension CWGroupServic: XMPPMUCDelegate {
                 let roomjid = XMPPJID(string: jid)
                 self.room = XMPPRoom(roomStorage: XMPPRoomCoreDataStorage.sharedInstance(), jid: roomjid)
                 self.room.addDelegate(self, delegateQueue: self.moduleQueue)
-                self.room.activate(CWChatXMPPManager.share.xmppStream)
+                self.room.activate(self.xmppStream)
                 self.room.join(usingNickname: "helloworld", history: nil)
             }
         }
