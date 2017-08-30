@@ -18,8 +18,6 @@ public protocol CWChatToolBarDelegate: NSObjectProtocol {
 
     ///发送文字
     func chatToolBar(_ chatToolBar: CWChatToolBar, sendText text: String)
-    ///发送图片
-    func chatToolBar(_ chatToolBar: CWChatToolBar, image: UIImage)
 }
 
 public class CWChatToolBar: UIView {
@@ -404,21 +402,6 @@ extension CWChatToolBar: UITextViewDelegate {
     func sendCurrentTextViewText() {
         delegate?.chatToolBar(self, sendText: self.inputTextView.text)
         self.currentText = ""
-    }
-    
-}
-
-
-// 暂时的，需要修改。
-extension CWChatToolBar:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        self.delegate?.chatToolBar(self, image: image)
-        picker.dismiss(animated: true, completion: nil)
     }
     
 }

@@ -9,23 +9,21 @@
 import UIKit
 import SnapKit
 
-protocol MoreItemCellDelegate: NSObjectProtocol {
-    func moreItemCell(_ cell: MoreItemCell, didSelectItem item: MoreItem)
-}
 
 class MoreItemCell: UICollectionViewCell {
     
-    weak var delegate: MoreItemCellDelegate?
-
     var item: MoreItem? {
         didSet {
             updateInfo()
         }
     }
     
+    var touchAction: ((MoreItem)->Void)?
+    
     lazy var itemButton: UIButton = {
         let itemBtn = UIButton()
         itemBtn.backgroundColor = UIColor.white
+        itemBtn.addTarget(self, action: #selector(itemButtonClick), for: .touchUpInside)
         itemBtn.layer.cornerRadius = 10
         itemBtn.layer.masksToBounds = true
         itemBtn.layer.borderColor = UIColor.lightGray.cgColor
@@ -64,8 +62,8 @@ class MoreItemCell: UICollectionViewCell {
     }
     
     func itemButtonClick() {
-        if let item = self.item {
-            self.delegate?.moreItemCell(self, didSelectItem: item)
+        if let item = self.item, let action = self.touchAction {
+            action(item)
         }
     }
     

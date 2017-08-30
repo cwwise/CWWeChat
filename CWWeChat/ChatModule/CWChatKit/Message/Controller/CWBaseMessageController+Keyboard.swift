@@ -34,7 +34,7 @@ extension CWBaseMessageController {
     
     
     func hideKeyboard() {
-        self.chatToolBar.endInputing()
+       // self.keyboard.en
     }
     
     ///键盘将要隐藏
@@ -64,13 +64,11 @@ extension CWBaseMessageController {
                        animations: {
                         
                         if hideKeyBoard {
-                            self.chatToolBar.bottom = self.view.height
                             self.tableView.height = kScreenHeight-kChatToolBarHeight
-                            self.tableView.bottom = self.chatToolBar.top
+                            //self.tableView.bottom = self.chatToolBar.top
                         } else {
-                            self.chatToolBar.bottom = self.view.height-keyboardFrame.height
                             self.tableView.height = kScreenHeight-kChatToolBarHeight-keyboardFrame.height
-                            self.tableView.bottom = self.chatToolBar.top
+                            //self.tableView.bottom = self.chatToolBar.top
                         }
                         
         }) { (bool) in
@@ -97,3 +95,117 @@ extension CWBaseMessageController {
     }
     
 }
+
+// 处理键盘事件
+// MARK: - KeyboardDelegate
+extension CWBaseMessageController {
+    
+    // 发送图片
+    // 主要要考虑的是
+    public func sendImageMessage(image: UIImage) {
+ 
+        let imageName = String.UUIDString()+".jpg"
+        CWChatKit.share.store(image: image, forKey: imageName)
+        // 保存
+        let imageBody = CWImageMessageBody(path: imageName, size: image.size)
+        let message = CWMessage(targetId: conversation.targetId,
+                                direction: .send,
+                                messageBody: imageBody)
+        self.sendMessage(message)
+    }
+    
+    func sendMessage(_ message: CWMessage) {
+        // 添加当前聊天类型
+        message.chatType = self.conversation.type
+        
+        let messageModel = CWChatMessageModel(message: message)
+        self.messageList.append(messageModel)
+        
+        let indexPath = IndexPath(row: self.messageList.count-1, section: 0)
+        self.tableView.reloadData()
+        updateMessageAndScrollBottom(false)
+        
+        
+        // 发送消息 会先存储消息，然后
+        let chatManager = CWChatClient.share.chatManager
+        chatManager.sendMessage(message, progress: { (progress) in
+            
+            messageModel.uploadProgress = progress
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWMessageCell else {
+                return
+            }
+            cell.updateProgress()
+            
+        }) { (message, error) in
+            
+            // 更新消息状态
+            let chatManager = CWChatClient.share.chatManager
+            chatManager.updateMessage(message, completion: { (message, error) in
+                
+            })
+            
+            // 发送消息成功
+            if error == nil {
+                
+            } else {
+                
+            }
+            
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWMessageCell else {
+                return
+            }
+            cell.updateProgress()
+            cell.updateState()
+        }
+        
+    }
+    
+}
+
+extension CWBaseMessageController: CWChatKeyboardDelegate {
+    
+    func keyboard(_ keyboard: CWChatKeyboard, sendText text: String) {
+        let textObject = CWTextMessageBody(text: text)
+        let message = CWMessage(targetId: conversation.targetId,
+                                direction: .send,
+                                messageBody: textObject)
+        self.sendMessage(message)
+    }
+    
+    // 发送表情
+    
+}
+
+extension CWBaseMessageController: MoreInputViewDelegate {
+    func moreInputView(_ inputView: MoreInputView, didSelect item: MoreItem) {
+        
+        switch item.type {
+        case .image:
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            self.present(picker, animated: true, completion: nil)
+            
+        default:
+            break
+        }
+        
+        
+    }
+}
+
+
+//
+extension CWBaseMessageController:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        sendImageMessage(image: image)
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+

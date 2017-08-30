@@ -16,7 +16,7 @@ import SwiftyJSON
  通过tags获取表情部分还是不太会使用
  */
 
-let parameters = ["app_id": "65737441-7070-6c69-6361-74696f6e4944",
+private let parameters = ["app_id": "65737441-7070-6c69-6361-74696f6e4944",
                   "user_id": "01ce1513-370d-41c7-921c-e23e7f6ac86c",
                   "auth_token": "c2ea7be31d68f8ccce05452076630131"]
 

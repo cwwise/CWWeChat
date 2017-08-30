@@ -106,7 +106,9 @@ extension MoreInputView: UICollectionViewDataSource, UICollectionViewDelegate {
             cell.item = self.items[index]
         }
         
-        
+        cell.touchAction = { (item) in
+            self.delegate?.moreInputView(self, didSelect: item)
+        }
         return cell
     }
     

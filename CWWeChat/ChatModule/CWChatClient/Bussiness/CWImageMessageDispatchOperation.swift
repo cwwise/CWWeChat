@@ -24,18 +24,18 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
     
     /// 上传图片
     func uploadImage() {
-        
-        let url = "https://api.cwwise.com/v1/files/upload"
-        let _ = ["filename": "swift_file.jpeg"]
-        
         let imageBody = message.messageBody as! CWImageMessageBody
+
+        let url = "https://api.cwwise.com/v1/files/upload"
+        let parameters = ["filename": imageBody.originalLocalPath!]
+        
         let fileURL = URL(fileURLWithPath: kChatUserImagePath+imageBody.originalLocalPath!)
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(fileURL, withName: "image")
-           // for (key, value) in parameters {
-             //   multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
-           // }
+            for (key, value) in parameters {
+                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+            }
         }, to: url)
         { (result) in
             switch result {
@@ -49,7 +49,6 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
                 upload.responseJSON { response in
                     switch response.result {
                     case .success(let value):
-                        print(value)
                         let json = JSON(value)
                         imageBody.originalURL = URL(string: "https://api.cwwise.com/images/\(json["filename"].stringValue)")
                         self.sendContentMessage()

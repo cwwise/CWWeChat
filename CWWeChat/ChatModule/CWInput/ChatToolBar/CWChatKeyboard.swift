@@ -19,10 +19,18 @@ protocol CWChatKeyboardDataSource {
     func chatKeyBoardMoreItems() -> [MoreItem]
 }
 
+protocol CWChatKeyboardDelegate: NSObjectProtocol {
+    
+    // 发送文字
+    func keyboard(_ keyboard: CWChatKeyboard, sendText text: String)
+    
+}
+
 public class CWChatKeyboard: UIView {
         
     public weak var associateTableView: UITableView?
 
+    weak var delegate: CWChatKeyboardDelegate?
     /// 风格
     var keyboardStyle: CWChatKeyboardStyle = .chat
     
@@ -230,7 +238,6 @@ public class CWChatKeyboard: UIView {
     lazy var moreInputView: MoreInputView = {
         let frame = CGRect(x: 0, y: kChatKeyboardHeight-kMoreInputViewHeight, width: kScreenWidth, height: kMoreInputViewHeight)
         let moreInputView = MoreInputView(frame: frame)
-        moreInputView.delegate = self
         let items = MoreInputDataHelper().chatMoreKeyboardData
         moreInputView.loadData(items)
         return moreInputView
@@ -302,11 +309,8 @@ extension CWChatKeyboard: CWChatToolBarDelegate {
     ///发送文字
     public func chatToolBar(_ chatToolBar: CWChatToolBar, sendText text: String) {
         
-    }
-    
-    ///发送图片
-    public func chatToolBar(_ chatToolBar: CWChatToolBar, image: UIImage) {
-        
+        chatToolBar.clearTextViewContent()
+        self.delegate?.keyboard(self, sendText: text)
     }
     
 }
@@ -322,8 +326,4 @@ extension CWChatKeyboard: EmoticonInputViewDelegate {
     }
 }
 
-extension CWChatKeyboard: MoreInputViewDelegate {
-    func moreInputView(_ inputView: MoreInputView, didSelect item: MoreItem) {
-        
-    }
-}
+
