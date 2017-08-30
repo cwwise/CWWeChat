@@ -63,9 +63,9 @@ class CWContactDetailAlbumCell: UITableViewCell {
     func setupInformation() {
         
         let imageURLArray = [
-            "http://image.cwcoder.com/cwwechat008.jpg",
-            "http://image.cwcoder.com/cwwechat009.jpg",
-            "http://image.cwcoder.com/cwwechat010.jpg",]
+            "http://qiniu.cwwise.com/cwwechat008.jpg",
+            "http://qiniu.cwwise.com/cwwechat009.jpg",
+            "http://qiniu.cwwise.com/cwwechat010.jpg",]
 
         for i in 0..<imageViewArray.count {
             

@@ -219,8 +219,8 @@ public class CWChatKeyboard: UIView {
     }()
     
     // 表情
-    lazy var emoticonInputView: CWEmoticonInputView = {
-        let emoticonInputView = CWEmoticonInputView.shareView
+    lazy var emoticonInputView: EmoticonInputView = {
+        let emoticonInputView = EmoticonInputView()
         emoticonInputView.delegate = self
         emoticonInputView.y = self.moreInputView.y
         return emoticonInputView
@@ -311,20 +311,15 @@ extension CWChatKeyboard: CWChatToolBarDelegate {
     
 }
 
-extension CWChatKeyboard: CWEmoticonInputViewDelegate {
-    func emoticonInputDidTapComplete() {
+extension CWChatKeyboard: EmoticonInputViewDelegate {
+    
+    public func emoticonInputView(_ inputView: EmoticonInputView, didSelect emoticon: Emoticon?) {
         
     }
     
-    func emoticonInputDidTapBackspace() {
-        
-        
-    }
-    
-    func emoticonInputDidTapText(_ text: String) {
+    public func didPressSend() {
         
     }
-    
 }
 
 extension CWChatKeyboard: CWMoreInputViewDelegate {

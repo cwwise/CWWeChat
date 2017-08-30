@@ -109,7 +109,7 @@ class EmoticonDetailHeaderView: UICollectionReusableView {
         subTitleLabel.text = emoticonPackage.subTitle
         
         // 显示动画
-        if emoticonPackage.emoticonList.first?.type == .gif {
+        if emoticonPackage.emoticonList.first?.format == .gif {
             
         } else {
             

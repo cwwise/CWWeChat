@@ -169,9 +169,9 @@ class EmoticonService {
                     emoticon.originalUrl = emoticonInfo["full_url"].url
                     emoticon.thumbUrl = emoticonInfo["medium_url"].url
                     if emoticonInfo["format"].string == "gif" {
-                        emoticon.type = .gif
+                        emoticon.format = .gif
                     } else {
-                        emoticon.type = .image
+                        emoticon.format = .image
                     }
                     
                     let index = emoticon.id.index(emoticon.id.startIndex, offsetBy: 5)

@@ -9,20 +9,24 @@
 import UIKit
 import Kingfisher
 
-class Emoticon: NSObject {
+public enum EmoticonType: Int {
+    case normal
+    case big
+}
+
+public enum EmoticonFormat: Int {
+    case image
+    case gif
+}
+
+public class Emoticon: NSObject {
     
-    enum Image {
-        case small
-        case big
-    }
-    
-    enum `Type` {
-        case gif
-        case image
-    }
     var id: String
     // 表情类型
-    var type: Type = .image
+    var type: EmoticonType = .normal
+    
+    var format: EmoticonFormat = .image
+
     // 表情size
     var size: CGSize = CGSize.zero
     // 标题
@@ -35,15 +39,22 @@ class Emoticon: NSObject {
     init(id: String) {
         self.id = id
     }
+    
+    convenience init(id: String, title: String, path: URL) {
+        self.init(id: id)
+        self.title = title
+        self.originalUrl = path
+    }
+    
 }
 
 extension Emoticon: Resource {
     
-    var downloadURL: URL {
+    public var downloadURL: URL {
         return originalUrl!
     }
     
-    var cacheKey: String {
+    public var cacheKey: String {
         return id
     }
 }
