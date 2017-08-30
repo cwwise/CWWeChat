@@ -14,8 +14,18 @@ class CWDemoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var groupList = [EmoticonGroup]()
+        if let qqemoticon = EmoticonGroup(identifier: "com.qq.classic") {
+            groupList.append(qqemoticon)
+        }
+        
+        if let liemoticon = EmoticonGroup(identifier: "cn.com.a-li") {
+            liemoticon.type = .big
+            groupList.append(liemoticon)
+        }
+        
         let keyboard = CWChatKeyboard()
-       // keyboard.emoticonInputView.setupGroup(groups)
+        keyboard.emoticonInputView.loadData(groupList)
         self.view.addSubview(keyboard)
         // Do any additional setup after loading the view.
     }

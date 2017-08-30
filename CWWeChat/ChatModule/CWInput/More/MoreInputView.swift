@@ -15,7 +15,6 @@ protocol MoreInputViewDelegate: NSObjectProtocol {
 
 private let kOnePageLines: Int = 2
 private let kOnePageLineItems: Int = 4
-private let kOneItemHeight: CGFloat = 93
 
 class MoreInputView: UIView {
     
@@ -33,12 +32,12 @@ class MoreInputView: UIView {
         
         var layout = MoreInputViewLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 15, left: 15, bottom: 10, right: 15)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
       
         
-        let frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: kOneItemHeight*CGFloat(kOnePageLines))
+        let frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: 190)
         let collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.register(MoreItemCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.dataSource = self

@@ -26,7 +26,6 @@ class MoreItemCell: UICollectionViewCell {
     lazy var itemButton: UIButton = {
         let itemBtn = UIButton()
         itemBtn.backgroundColor = UIColor.white
-        itemBtn.isUserInteractionEnabled = false
         itemBtn.layer.cornerRadius = 10
         itemBtn.layer.masksToBounds = true
         itemBtn.layer.borderColor = UIColor.lightGray.cgColor
@@ -82,7 +81,7 @@ class MoreItemCell: UICollectionViewCell {
         itemLabel.isHidden = false
         
         itemLabel.text = cellitem.title
-        itemButton.setImage(UIImage(named: cellitem.imagePath), for: .normal)
+        itemButton.setImage(UIImage(named: cellitem.imagename), for: .normal)
     }
     
     
