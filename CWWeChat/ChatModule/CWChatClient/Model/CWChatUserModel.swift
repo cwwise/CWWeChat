@@ -8,13 +8,14 @@
 
 import UIKit
 
-public protocol CWChatUser: NSObjectProtocol {
+public protocol CWChatUser {
     //用户Id
     var userId: String {get}
     // 用户名称
     var nickname: String? {get set}
     // 用户头像
     var avatarURL: String? {get set}
+    
     init(userId: String)
 }
 

@@ -21,7 +21,7 @@ class CWTextMessageBody: NSObject, CWMessageBody {
     }
 }
 
-extension CWTextMessageBody: CWMessageCoding {
+extension CWTextMessageBody {
     
     var messageEncode: String {
         return text

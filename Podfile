@@ -25,7 +25,7 @@ target 'CWWeChat' do
 
   # log
   pod 'SwiftyBeaver'
-
+  
   # chat
   pod 'XMPPFramework'
   
@@ -41,6 +41,9 @@ target 'CWWeChat' do
   # animation
   pod 'pop'
   
+  pod 'AMapSearch'
+  pod 'AMapLocation'
+  pod 'AMap2DMap'
   
   
   # tool
