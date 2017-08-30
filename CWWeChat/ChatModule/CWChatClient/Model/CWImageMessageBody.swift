@@ -57,7 +57,8 @@ extension CWImageMessageBody {
     }
 }
 
-extension CWImageMessageBody: CWMessageCoding {
+extension CWImageMessageBody {
+    
     var messageEncode: String {
         
         do {

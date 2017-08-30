@@ -1,5 +1,5 @@
 //
-//  CWExpressMessageBody.swift
+//  CWEmoticonMessageBody.swift
 //  CWWeChat
 //
 //  Created by chenwei on 2017/4/20.
@@ -8,14 +8,15 @@
 
 import UIKit
 
-class CWExpressMessageBody: NSObject, CWMessageBody {
+class CWEmoticonMessageBody: NSObject, CWMessageBody {
     weak var message: CWMessage?
     /// 消息体类型
-    var type: CWMessageType = .expression
+    var type: CWMessageType = .emoticon
     /// 本地路径
     var localPath: String?
     /// 服务器地址
     var remoteURL: URL?
+    
     
     init(localPath: String? = nil,
          remoteURL: URL? = nil) {
@@ -27,7 +28,7 @@ class CWExpressMessageBody: NSObject, CWMessageBody {
     
 }
 
-extension CWExpressMessageBody {
+extension CWEmoticonMessageBody {
     
     var messageEncode: String {
         return ""

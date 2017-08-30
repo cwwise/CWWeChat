@@ -1,5 +1,12 @@
 PODS:
   - Alamofire (4.5.0)
+  - AMap2DMap (4.6.0):
+    - AMapFoundation (~> 1.3)
+  - AMapFoundation (1.4.2)
+  - AMapLocation (2.4.0):
+    - AMapFoundation (~> 1.4)
+  - AMapSearch (5.3.0):
+    - AMapFoundation (~> 1.2)
   - CHIPageControl/Aleppo (0.1.3)
   - CocoaAsyncSocket (7.6.1)
   - CocoaLumberjack (3.2.0):
@@ -59,6 +66,9 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - AMap2DMap
+  - AMapLocation
+  - AMapSearch
   - CHIPageControl/Aleppo
   - FSPagerView
   - Hue
@@ -84,6 +94,10 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  AMap2DMap: 003fa70526983a1469ae6fc3323a6ee8b5ccf53c
+  AMapFoundation: 6c0471c9a6a0ad17dad46e3d800ad56ca170f82a
+  AMapLocation: 47b62b5381a66e4d0c2931b70ffde72682427896
+  AMapSearch: beb01c6b2e7be18fb4898e97162fedf144420c6f
   CHIPageControl: 2d3a0edacd7e3bc113bc88cbf187ba8f0b045548
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
   CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
@@ -112,6 +126,6 @@ SPEC CHECKSUMS:
   XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 4825d0c25c8196edaf1e3a1c72da48ef73304508
+PODFILE CHECKSUM: f5b00e0cf148d855d4996fdbe39ba9c23ed2f21b
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1
