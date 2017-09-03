@@ -33,8 +33,10 @@ target 'CWWeChat' do
   pod 'PPBadgeViewSwift'
   pod 'MBProgressHUD'
   pod 'CHIPageControl/Aleppo'
-  pod 'LCActionSheet'
-  
+ 
+  pod 'CWActionSheet'
+  pod 'CWShareView'
+
   # 表情
   pod 'FSPagerView'
   

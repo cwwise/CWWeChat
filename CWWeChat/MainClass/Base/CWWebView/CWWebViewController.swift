@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import KVOController
+import CWShareView
 
 private var webViewContentKey = "webViewContentKey"
 private var webViewBackgroundColorKey = "webViewBackgroundColorKey"
@@ -99,6 +100,10 @@ class CWWebViewController: UIViewController {
         
         self.navigationItem.leftBarButtonItems = [backButtonItem]
         
+        let barItemImage = UIImage(named: "barbuttonicon_more")
+        let rightBarItem = UIBarButtonItem(image: barItemImage, style: .done, target: self, action: #selector(rightBarItemClick))
+        self.navigationItem.rightBarButtonItem = rightBarItem
+
         //遍历设置背景颜色
         for subView in webView.scrollView.subviews {
             if "\(subView.classForCoder)" == "WKContentView" {
@@ -160,6 +165,43 @@ class CWWebViewController: UIViewController {
         } else {
            _ = self.navigationController?.popViewController(animated: true)
         }
+        
+    }
+    
+    func rightBarItemClick() {
+
+        var shareList1: [ShareItem] = []
+
+        let shareItem1_1 = ShareItem(title: "发送给朋友", icon: #imageLiteral(resourceName: "Action_Share"))
+        let shareItem1_2 = ShareItem(title: "分享到朋友圈", icon: #imageLiteral(resourceName: "Action_Moments"))
+        let shareItem1_3 = ShareItem(title: "收藏", icon: #imageLiteral(resourceName: "Action_MyFavAdd"))
+        let shareItem1_4 = ShareItem(title: "在Safari中打开", icon: #imageLiteral(resourceName: "Action_Safari"))
+        let shareItem1_5 = ShareItem(title: "分享到新浪", icon: #imageLiteral(resourceName: "Action_Sina"))
+        let shareItem1_6 = ShareItem(title: "分享到QQ", icon: #imageLiteral(resourceName: "Action_QQ"))
+        let shareItem1_7 = ShareItem(title: "分享到QQ空间", icon: #imageLiteral(resourceName: "Action_qzone"))
+        let shareItem1_8 = ShareItem(title: "分享到Facebook", icon: #imageLiteral(resourceName: "Action_facebook"))
+        
+        shareList1.append(contentsOf: [shareItem1_1, shareItem1_2, shareItem1_3, shareItem1_4,
+                                       shareItem1_5, shareItem1_6, shareItem1_7, shareItem1_8])
+        
+        var shareList2: [ShareItem] = []
+
+        let shareItem2_1 = ShareItem(title: "查看公众号", icon: #imageLiteral(resourceName: "Action_Verified"))
+        let shareItem2_2 = ShareItem(title: "复制链接", icon: #imageLiteral(resourceName: "Action_Copy"))
+        let shareItem2_3 = ShareItem(title: "调整字体", icon: #imageLiteral(resourceName: "Action_Font"))
+        let shareItem2_4 = ShareItem(title: "刷新", icon: #imageLiteral(resourceName: "Action_Refresh"))
+        
+        shareList2.append(contentsOf: [shareItem2_1, shareItem2_2, shareItem2_3, shareItem2_4])
+        
+        let clickedHandler = { (shareView: ShareView, indexPath: IndexPath) in
+            print(indexPath.section, indexPath.row)
+        }
+        
+        let title = "网页由mp.weixin.qq.com提供"
+        let shareView = ShareView(title: title,
+                                  shareItems: [shareList1, shareList2], 
+                                  clickedHandler: clickedHandler)        
+        shareView.show()
         
     }
     

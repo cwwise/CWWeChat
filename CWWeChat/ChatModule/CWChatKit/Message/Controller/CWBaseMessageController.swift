@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LCActionSheet
+import CWActionSheet
 
 private let kMaxShowTimeMessageCount = 30
 private let kMaxShowtimeMessageInterval: Double = 3*60.0
@@ -288,9 +288,8 @@ extension CWBaseMessageController: CWMessageCellDelegate {
     func messageCellDidTapPhone(_ cell: CWMessageCell, phone: String) {
         let title = "\(phone)可能是一个电话号码，你可以"
         let otherButtonTitle = ["呼叫","复制号码","添加到手机通讯录"]
-        let actionSheet = LCActionSheet(title: title, delegate: nil, cancelButtonTitle: "取消", otherButtonTitleArray: otherButtonTitle)
         
-        actionSheet.clickedHandler = { (actionSheet, index) in
+        let clickedHandler = { (actionSheet: ActionSheetView, index: Int) in
             
             if index == 0 {
                 let phoneString = "telprompt://\(phone)"
@@ -303,6 +302,13 @@ extension CWBaseMessageController: CWMessageCellDelegate {
             }
             
         }
+        
+        let actionSheet = ActionSheetView(title: title, 
+                                          cancelButtonTitle: "取消", 
+                                          otherButtonTitles: otherButtonTitle,
+                                          clickedHandler: clickedHandler)
+        
+ 
         actionSheet.show()
     }
 }
