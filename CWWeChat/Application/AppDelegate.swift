@@ -44,7 +44,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let options = CWChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
         let chatClient = CWChatClient.share
         chatClient.initialize(with: options)
-        chatClient.login(username: "haohao", password: "1234567")
+        
+        chatClient.loginManager.login(username: "haohao",
+                                      password: "1234567") { (username, error) in
+                                        
+                                        if let username = username {
+                                            print("登录成功...\(username)")
+                                        }
+        }
     }
     
     func loginSuccess() {

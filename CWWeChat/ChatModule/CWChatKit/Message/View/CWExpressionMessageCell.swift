@@ -39,7 +39,7 @@ class CWExpressionMessageCell: CWMessageCell {
 //        let body = message.messageBody as! CWExpressMessageBody
 //        
 //        if let path = body.localPath {
-//            let url = URL(fileURLWithPath: kChatUserImagePath+path)
+//            let url = URL(fileURLWithPath: path)
 //            expressionView.kf.setImage(with: url, placeholder: nil, options: .progressiveBlur, completion: nil)
 //        } else if let url = body.remoteURL {
 //            expressionView.kf.setImage(with: url, placeholder: nil, options: .progressiveBlur, completion: nil)

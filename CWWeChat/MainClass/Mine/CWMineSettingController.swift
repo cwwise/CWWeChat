@@ -86,7 +86,7 @@ class CWMineSettingController: CWBaseTableViewController {
     }
     
     func logout() {
-        CWChatClient.share.logout()
+        CWChatClient.share.loginManager.logout()
         if let appdelegate = UIApplication.shared.delegate as? AppDelegate {
             appdelegate.logoutSuccess()
         }

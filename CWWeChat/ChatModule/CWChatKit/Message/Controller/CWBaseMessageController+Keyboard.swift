@@ -105,9 +105,10 @@ extension CWBaseMessageController {
     public func sendImageMessage(image: UIImage) {
  
         let imageName = String.UUIDString()+".jpg"
+        let filePath = CWChatKit.share.getFilePath(with: imageName)
         CWChatKit.share.store(image: image, forKey: imageName)
         // 保存
-        let imageBody = CWImageMessageBody(path: imageName, size: image.size)
+        let imageBody = CWImageMessageBody(path: filePath, size: image.size)
         let message = CWMessage(targetId: conversation.targetId,
                                 direction: .send,
                                 messageBody: imageBody)

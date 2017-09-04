@@ -31,10 +31,14 @@ class CWXMPPManager: NSObject {
     /// 网络状态监听
     public var reachable: NetworkReachabilityManager?
     
-    var isLogin: Bool = true
+    /// 这3个变量 注册和登录 用来临时记录
+    var isLoginUser: Bool = true
     var password: String!
-    var completion: CWClientCompletion?
+    var completion: CWLoginHandler?
     
+    /// 是否已经登陆
+    var isLogined: Bool = false
+
     /// 初始化方法
     override init() {
         xmppQueue = DispatchQueue(label: "com.cwxmppchat.cwwise", attributes: DispatchQueue.Attributes.concurrent)
@@ -111,20 +115,14 @@ class CWXMPPManager: NSObject {
         
     }
     
-    func loginServer(with userName: String,
-                     password: String,
-                     isLogin: Bool = true,
-                     completion: CWClientCompletion?) {
-
+    
+    func connetService(user: String) {
+        
         if reachable?.isReachable == false {
-            completion?(nil, CWChatError(error: "网络连接失败"))
+            self.completion?(nil, CWChatError(error: "网络连接失败"))
+            self.completion = nil
             return
         }
-        
-        // 保存变量
-        self.isLogin = isLogin
-        self.password = password
-        self.completion = completion
         
         let timeoutInterval: TimeInterval = 60
         let resource = options.resource
@@ -132,13 +130,15 @@ class CWXMPPManager: NSObject {
         
         xmppStream.hostName = options.host
         xmppStream.hostPort = options.port
-        xmppStream.myJID = XMPPJID(user: userName, domain: domain, resource: resource)
+        xmppStream.myJID = XMPPJID(user: user, domain: domain, resource: resource)
         do {
             try xmppStream.connect(withTimeout: timeoutInterval)
         } catch {
             let error = CWChatError(errorCode: .serverTimeout)
             self.completion?(nil, error)
+            self.completion = nil
         }
+        
     }
     
     
@@ -188,12 +188,13 @@ extension CWXMPPManager: XMPPStreamDelegate {
     /// 连接失败
     func xmppStreamDidDisconnect(_ sender: XMPPStream!, withError error: Error!) {
         self.completion?(nil, CWChatError(error: "连接服务器失败"))
+        self.completion = nil
     }
     
     /// 已经连接，就输入密码
     func xmppStreamDidConnect(_ sender: XMPPStream!) {
         do {
-            if isLogin {
+            if isLoginUser {
                 try xmppStream.authenticate(withPassword: password)
             } else {
                 let result = xmppStream.supportsInBandRegistration()
@@ -209,6 +210,8 @@ extension CWXMPPManager: XMPPStreamDelegate {
     func xmppStream(_ sender: XMPPStream!, didNotAuthenticate error: DDXMLElement!) {
         log.error("xmpp验证失败...\(error)")
         self.completion?(nil, CWChatError(errorCode: .authenticationFailed))
+        self.completion = nil
+
         //登陆失败之后 则断开连接。
         sender.disconnect()
     }
@@ -216,6 +219,8 @@ extension CWXMPPManager: XMPPStreamDelegate {
     // 验证成功
     func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
         self.completion?(xmppStream.myJID.user, nil)
+        self.completion = nil
+
         log.debug("登陆成功。。。")
         goOnline()
         
@@ -226,10 +231,12 @@ extension CWXMPPManager: XMPPStreamDelegate {
     func xmppStreamDidRegister(_ sender: XMPPStream!) {
         log.debug("xmpp注册成功")
         self.completion?(xmppStream.myJID.user, nil)
+        self.completion = nil
     }
     
     func xmppStream(_ sender: XMPPStream!, didNotRegister error: DDXMLElement!) {
         self.completion?(nil, CWChatError(error: "注册失败"))
+        self.completion = nil
     }
     
     // 收到错误信息
@@ -278,11 +285,43 @@ extension CWXMPPManager: XMPPStreamManagementDelegate {
     
     func xmppStreamManagement(_ sender: XMPPStreamManagement!, didReceiveAckForStanzaIds stanzaIds: [Any]!) {
         // 收到id
-        guard let messageid = stanzaIds as? [String] else {
+        guard let messageid = stanzaIds as? [String] , messageid.count != 0 else {
             return 
         }
         log.debug(messageid)
         NotificationCenter.default.post(name: kCWMessageDispatchSuccessNotification, object: messageid)
     }
 }
+
+extension CWXMPPManager: CWLoginManager {
+    
+    func login(username: String, password: String, completion: CWLoginHandler?) {
+        
+        // 保存变量
+        self.isLoginUser = true
+        self.password = password
+        self.completion = completion
+        
+        connetService(user: username)
+    }
+    
+    func register(username: String, password: String, completion: CWLoginHandler?) {
+        
+        
+        
+    }
+    
+    func currentAccount() -> String {
+        return xmppStream.myJID.user
+    }
+        
+    func logout() {
+        //停止发送消息
+        
+        //断开xmppStream
+        self.xmppStream.disconnect()
+    }
+    
+}
+
 

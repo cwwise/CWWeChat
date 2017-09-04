@@ -27,10 +27,10 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
         let imageBody = message.messageBody as! CWImageMessageBody
 
         let url = "https://api.cwwise.com/v1/files/upload"
-        let parameters = ["filename": imageBody.originalLocalPath!]
         
-        let fileURL = URL(fileURLWithPath: kChatUserImagePath+imageBody.originalLocalPath!)
-        
+        let fileURL = URL(fileURLWithPath: imageBody.originalLocalPath!)
+        let parameters = ["filename": fileURL.lastPathComponent]
+
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(fileURL, withName: "image")
             for (key, value) in parameters {
@@ -42,7 +42,6 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
             case .success(let upload, _, _):
                 
                 upload.uploadProgress(closure: { (progress) in
-                    print(progress)
                     self.progress?(Float(progress.fractionCompleted))
                 })
                 
