@@ -680,9 +680,9 @@
 				8C0BFDD81E9127FD007343F1 /* CWGroupManager.swift */,
 				8C49278A1E95308200B3C482 /* CWChatroomManager.swift */,
 				8C84B9521E8D62F70020D508 /* ChatService */,
+				8C0BFDDA1E91289B007343F1 /* Group */,
 				8C4927811E928EA200B3C482 /* Request */,
 				8C0BFE1D1E92480D007343F1 /* Tool */,
-				8C0BFDDA1E91289B007343F1 /* Group */,
 				1F34922E1E878BC600B36641 /* Bussiness */,
 				1F3491BD1E878AD500B36641 /* DataBase */,
 				1F3491BE1E878AD500B36641 /* MessageHandle */,
@@ -1823,7 +1823,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/CWActionSheet/CWActionSheet.framework",
 				"${BUILT_PRODUCTS_DIR}/CWShareView/CWShareView.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
@@ -1852,7 +1851,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHIPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CWActionSheet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CWShareView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",

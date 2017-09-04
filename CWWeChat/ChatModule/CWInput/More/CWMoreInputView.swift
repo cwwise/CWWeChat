@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CHIPageControl
 import YYText
 
 public protocol CWMoreInputViewDelegate: NSObjectProtocol {
@@ -79,15 +78,7 @@ public class CWMoreInputView: UIView {
         return collectionView
     }()
     
-    var pageControl: CHIPageControlAleppo = {
-        let pageControl = CHIPageControlAleppo(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 25))
-        pageControl.radius = 4
-        pageControl.hidesForSinglePage = true
-        pageControl.tintColor = UIColor(hex: "#BBBBBB")
-        pageControl.currentPageTintColor = UIColor(hex: "#8B8B8B")
-        pageControl.progress = 0
-        return pageControl
-    }()
+    var pageControl: UIPageControl!
     
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

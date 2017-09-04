@@ -20,12 +20,12 @@ protocol CWChatroomManager {
     ///
     /// - Parameter delegate: 代理
     /// - Parameter delegateQueue: 代理执行线程
-    func addChatroomDelegate(_ delegate: CWGroupManagerDelegate, delegateQueue: DispatchQueue)
+    func addChatroomDelegate(_ delegate: CWChatroomManagerDelegate, delegateQueue: DispatchQueue)
     
     /// 删除代理
     ///
     /// - Parameter delegate: 代理
-    func removeChatroomDelegate(_ delegate: CWGroupManagerDelegate)
+    func removeChatroomDelegate(_ delegate: CWChatroomManagerDelegate)
     
     func fetchChatrooms();
     

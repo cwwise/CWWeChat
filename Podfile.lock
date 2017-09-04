@@ -7,7 +7,6 @@ PODS:
     - AMapFoundation (~> 1.4)
   - AMapSearch (5.3.0):
     - AMapFoundation (~> 1.2)
-  - CHIPageControl/Aleppo (0.1.3)
   - CocoaAsyncSocket (7.6.1)
   - CocoaLumberjack (3.2.0):
     - CocoaLumberjack/Default (= 3.2.0)
@@ -68,7 +67,6 @@ DEPENDENCIES:
   - AMap2DMap
   - AMapLocation
   - AMapSearch
-  - CHIPageControl/Aleppo
   - CWActionSheet
   - CWShareView
   - FSPagerView
@@ -98,7 +96,6 @@ SPEC CHECKSUMS:
   AMapFoundation: 6c0471c9a6a0ad17dad46e3d800ad56ca170f82a
   AMapLocation: 47b62b5381a66e4d0c2931b70ffde72682427896
   AMapSearch: beb01c6b2e7be18fb4898e97162fedf144420c6f
-  CHIPageControl: 2d3a0edacd7e3bc113bc88cbf187ba8f0b045548
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
   CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
   CWActionSheet: f41e6e071110ba1a7867ffb351b8e86cb718b53a
@@ -126,6 +123,6 @@ SPEC CHECKSUMS:
   XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 1e2c5c77faa03978773e581c32190a50ef50f242
+PODFILE CHECKSUM: b37285b33b54b4577eb6e00a6e4256afc62fc3b9
 
 COCOAPODS: 1.3.1

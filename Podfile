@@ -32,7 +32,6 @@ target 'CWWeChat' do
   # UI
   pod 'PPBadgeViewSwift'
   pod 'MBProgressHUD'
-  pod 'CHIPageControl/Aleppo'
  
   pod 'CWActionSheet'
   pod 'CWShareView'
@@ -46,7 +45,6 @@ target 'CWWeChat' do
   pod 'AMapSearch'
   pod 'AMapLocation'
   pod 'AMap2DMap'
-  
   
   # tool
   pod 'Hue'

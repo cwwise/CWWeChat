@@ -6,7 +6,6 @@
 //  Copyright © 2017年 chenwei. All rights reserved.
 //
 
-import UIKit
 import XMPPFramework
 import Alamofire
 

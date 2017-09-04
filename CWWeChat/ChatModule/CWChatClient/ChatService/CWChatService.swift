@@ -36,7 +36,7 @@ class CWChatService: XMPPModule {
         // 消息发送和解析
         messageTransmitter = CWMessageTransmitter(dispatchQueue: queue)
         messageParse = CWChatMessageParse(dispatchQueue: queue)
-       
+        
         dispatchManager = CWMessageDispatchManager()
         super.init(dispatchQueue: queue)
     }

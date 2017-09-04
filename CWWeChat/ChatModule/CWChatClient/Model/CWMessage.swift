@@ -109,8 +109,6 @@ public enum CWMessageType: Int {
 }
 
 
-
-
 /// 聊天消息
 public class CWMessage: NSObject {
 

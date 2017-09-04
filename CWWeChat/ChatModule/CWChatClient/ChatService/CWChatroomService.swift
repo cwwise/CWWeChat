@@ -26,11 +26,11 @@ class CWChatroomService: XMPPModule {
 
 extension CWChatroomService: CWChatroomManager {
     
-    func addChatroomDelegate(_ delegate: CWGroupManagerDelegate, delegateQueue: DispatchQueue) {
+    func addChatroomDelegate(_ delegate: CWChatroomManagerDelegate, delegateQueue: DispatchQueue) {
         addDelegate(delegate, delegateQueue: delegateQueue)
     }
     
-    func removeChatroomDelegate(_ delegate: CWGroupManagerDelegate) {
+    func removeChatroomDelegate(_ delegate: CWChatroomManagerDelegate) {
         removeDelegate(delegate)
     }
     
