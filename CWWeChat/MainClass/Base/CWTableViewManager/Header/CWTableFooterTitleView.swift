@@ -14,9 +14,9 @@ class CWTableFooterTitleView: CWTableHeaderTitleView {
         super.init(reuseIdentifier: reuseIdentifier)
         
         self.titleLabel.snp.remakeConstraints { (make) in
-            make.left.equalTo(self.contentView).offset(kCWCellLeftMargin)
-            make.right.equalTo(self.contentView).offset(-kCWCellLeftMargin)
-            make.top.equalTo(self.contentView).offset(7)
+            make.left.equalTo(kCWCellLeftMargin)
+            make.right.equalTo(-kCWCellLeftMargin)
+            make.top.equalTo(7)
         }
         
     }
