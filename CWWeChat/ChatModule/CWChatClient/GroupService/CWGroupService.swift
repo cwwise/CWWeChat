@@ -9,25 +9,27 @@
 import Foundation
 import XMPPFramework
 
-class CWGroupServic: XMPPModule {
+class CWGroupService: XMPPModule {
     
     var room: XMPPRoom!
     
     lazy var groupChat: XMPPMUC = {
         let groupChat = XMPPMUC(dispatchQueue: self.moduleQueue)
-        groupChat?.activate(self.xmppStream)
         return groupChat!
     }()
     
     override init!(dispatchQueue queue: DispatchQueue!) {
         super.init(dispatchQueue: queue)
-        self.groupChat.addDelegate(self, delegateQueue: self.moduleQueue)
     }
     
+    func didActivate() {
+        self.groupChat.activate(self.xmppStream)
+        self.groupChat.addDelegate(self, delegateQueue: self.moduleQueue)
+    }
 }
 
 
-extension CWGroupServic: CWGroupManager {
+extension CWGroupService: CWGroupManager {
     
     func addGroupDelegate(_ delegate: CWGroupManagerDelegate, delegateQueue: DispatchQueue) {
         addDelegate(delegate, delegateQueue: delegateQueue)
@@ -65,7 +67,7 @@ extension CWGroupServic: CWGroupManager {
 }
 
 // 发现多人聊天
-extension CWGroupServic: XMPPMUCDelegate {
+extension CWGroupService: XMPPMUCDelegate {
     func xmppMUC(_ sender: XMPPMUC!, didDiscoverRooms rooms: [Any]!, forServiceNamed serviceName: String!) {        
         guard let rooms = rooms else { return }
         for item in rooms {
@@ -95,7 +97,7 @@ extension CWGroupServic: XMPPMUCDelegate {
 }
 
 
-extension CWGroupServic: XMPPRoomDelegate {
+extension CWGroupService: XMPPRoomDelegate {
 
     public func xmppRoomDidCreate(_ sender: XMPPRoom!) {
         log.debug(sender.roomJID)

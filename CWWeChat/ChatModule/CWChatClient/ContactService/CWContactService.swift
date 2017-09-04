@@ -11,18 +11,24 @@ import XMPPFramework
 
 /// 联系人模块 实现
 class CWContactService: XMPPModule {
-
+    
     lazy var xmppRoster: XMPPRoster = {
         let xmppRosterStorage = XMPPRosterMemoryStorage()
         let xmppRoster = XMPPRoster(rosterStorage: xmppRosterStorage)
         xmppRoster?.activate(self.xmppStream)
+        xmppRosterStorage?.configure(withParent: xmppRoster, queue: self.moduleQueue)
         xmppRoster?.addDelegate(self, delegateQueue: self.moduleQueue)
         return xmppRoster!
     }();
 
     var completion: CWContactCompletion?
+    
     override init!(dispatchQueue queue: DispatchQueue!) {
         super.init(dispatchQueue: queue)
+    }
+    
+    func didActivate() {
+
     }
 }
 
@@ -75,6 +81,15 @@ extension CWContactService: XMPPRosterMemoryStorageDelegate {
 
         self.completion?(contacts, nil)
     }
+}
+
+
+extension CWContactService: XMPPRosterDelegate {
+    
+    func xmppRoster(_ sender: XMPPRoster!, didReceivePresenceSubscriptionRequest presence: XMPPPresence!) {
+        print("接受到好友请求")
+    }
+    
 }
 
 

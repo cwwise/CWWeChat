@@ -32,6 +32,12 @@ class CWContactsController: UIViewController {
             self.tableView.reloadData()
         }
         contactHelper.dataChange = block
+        
+        
+        let contactManager = CWChatClient.share.contactManager
+        contactManager.fetchContactsFromServer { (list, error) in
+            print(list)
+        }
     }
     
     func setupUI() {

@@ -135,7 +135,7 @@ public class CWMessage: NSObject {
     /// 已读
     public var isRead: Bool = true
     /// 消息扩展
-    public var ext: Dictionary<String, Any>?
+    public var ext: Dictionary<String, AnyObject>?
     
     public init(targetId: String,
          messageID: String = String.UUIDString(),

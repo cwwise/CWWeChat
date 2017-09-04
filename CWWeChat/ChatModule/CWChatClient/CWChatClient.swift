@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 /**
  chat当前连接状态
  
@@ -58,7 +57,6 @@ public class CWChatClient: NSObject {
     private(set) var groupManager: CWGroupManager
     /// 聊天室模块
     private(set) var chatroomManager: CWChatroomManager
-
     
     /// 是否连接服务器
     private(set) var isConnected: Bool = false
@@ -79,7 +77,7 @@ public class CWChatClient: NSObject {
         let _ = contactManager.activate(xmppManager.xmppStream)
         self.contactManager = contactManager
         
-        let groupManager = CWGroupServic(dispatchQueue: DispatchQueue.global())!
+        let groupManager = CWGroupService(dispatchQueue: DispatchQueue.global())!
         let _ = groupManager.activate(xmppManager.xmppStream)
         self.groupManager = groupManager
         
@@ -119,15 +117,6 @@ public class CWChatClient: NSObject {
         xmppManager.xmppStream.disconnect()
     }
     
-    private func initUser() {
-
-        let path = kChatUserImagePath
-        if !FileManager.default.fileExists(atPath: path) {
-            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
-        }
-        
-    }
-    
     public func register(username: String,
                          password: String,
                          completion: CWClientCompletion? = nil) {
@@ -137,6 +126,15 @@ public class CWChatClient: NSObject {
                                 isLogin: false,
                                 completion: completion)
 
+    }
+    
+    private func initUser() {
+        
+        let path = kChatUserImagePath
+        if FileManager.default.fileExists(atPath: path) == false {
+            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+        }
+        
     }
     
     
