@@ -1616,9 +1616,9 @@
 		8CC856241F5D74A700CA0546 /* GroupService */ = {
 			isa = PBXGroup;
 			children = (
-				8CC856291F5D74D400CA0546 /* CWGroupService.swift */,
 				8CC856251F5D74AF00CA0546 /* CWChatGroup.swift */,
 				8CC856261F5D74AF00CA0546 /* CWChatGroupOptions.swift */,
+				8CC856291F5D74D400CA0546 /* CWGroupService.swift */,
 			);
 			path = GroupService;
 			sourceTree = "<group>";

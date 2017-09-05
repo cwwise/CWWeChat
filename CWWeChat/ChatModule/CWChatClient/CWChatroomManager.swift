@@ -27,11 +27,9 @@ protocol CWChatroomManager {
     /// - Parameter delegate: 代理
     func removeChatroomDelegate(_ delegate: CWChatroomManagerDelegate)
     
-    func fetchChatrooms();
+    func fetchChatrooms()
     
-    func createGroup(title: String,
-                     invitees: [String],
-                     message: String,
-                     setting: CWChatGroupOptions,
-                     completion: CWGroupCompletion)
+    func createChatroom(title: String,
+                        invitees: [String],
+                        message: String)
 }

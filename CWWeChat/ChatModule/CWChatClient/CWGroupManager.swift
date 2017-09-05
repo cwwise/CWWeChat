@@ -35,6 +35,6 @@ public protocol CWGroupManager {
                      invitees: [String],
                      message: String,
                      setting: CWChatGroupOptions,
-                     completion: CWGroupCompletion)
+                     completion: CWGroupCompletion?)
 }
 
