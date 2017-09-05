@@ -164,7 +164,7 @@ extension CWGroupService: XMPPMUCDelegate {
         log.debug("收到邀请"+message.description)
         let storage = XMPPRoomCoreDataStorage.sharedInstance()
         room = XMPPRoom(roomStorage: storage, jid: roomJID)!
-        room.join(usingNickname: "测试数据", history: nil)
+        room.join(usingNickname: "测试用户", history: nil)
     }
         
     /// 收到邀请拒绝

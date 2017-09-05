@@ -12,8 +12,9 @@ class CWGroupChatController: CWBaseConversationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "群聊"
+
         fetchGroupChat()
-        
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createGroupChat))
         self.navigationItem.rightBarButtonItem = barButtonItem
     }

@@ -54,6 +54,11 @@ class CWContactDetailController: CWBaseTableViewController {
         self.tableView.register(CWContactInfoCell.self, forCellReuseIdentifier: CWContactInfoCell.identifier)
         self.tableView.register(CWContactDetailAlbumCell.self, forCellReuseIdentifier: CWContactDetailAlbumCell.identifier)
         setupData()
+        
+        
+        let barItemImage = UIImage(named: "barbuttonicon_more")
+        let rightBarItem = UIBarButtonItem(image: barItemImage, style: .done, target: self, action: #selector(rightBarItemClick))
+        self.navigationItem.rightBarButtonItem = rightBarItem
     }
     
     func setupData() {
@@ -85,6 +90,11 @@ class CWContactDetailController: CWBaseTableViewController {
     func goChatController() {
         let chatVC = CWChatMessageController(targetId: userId)
         self.navigationController?.pushViewController(chatVC, animated: true)
+    }
+    
+    func rightBarItemClick() {
+        let settingVC = CWContactSettingController()
+        self.navigationController?.pushViewController(settingVC, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
