@@ -21,11 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //设置logger
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        loginSuccess()
+        loginMomentSuccess()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         setupLogger()
-        loginXMPP()
+        //loginXMPP()
         //注册推送信息
         registerRemoteNotification()
         
@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loginMomentSuccess() {
-        let momentController = CWMomentController()
+        let momentController = CWMomentListController()
         self.window?.rootViewController = CWChatNavigationController(rootViewController: momentController)
     }
     

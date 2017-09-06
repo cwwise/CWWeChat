@@ -226,6 +226,8 @@
 		8CC8562A1F5D74D400CA0546 /* CWGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC856291F5D74D400CA0546 /* CWGroupService.swift */; };
 		8CC8562C1F5D74DC00CA0546 /* CWContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8562B1F5D74DC00CA0546 /* CWContactService.swift */; };
 		8CCA575C1F5EEDC60072EBF0 /* CWContactSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA575B1F5EEDC60072EBF0 /* CWContactSettingController.swift */; };
+		8CCA575E1F5EF9BA0072EBF0 /* CWMomentCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA575D1F5EF9BA0072EBF0 /* CWMomentCollectionCell.swift */; };
+		8CCA57601F5EFD020072EBF0 /* CWMomentListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA575F1F5EFD020072EBF0 /* CWMomentListController.swift */; };
 		8CD40A5F1EB233E70051772C /* CWContactDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD40A5E1EB233E70051772C /* CWContactDetailFooterView.swift */; };
 		8CD40A611EB23A090051772C /* CWTextItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD40A601EB23A090051772C /* CWTextItem.swift */; };
 		8CFCF5371E9017FB00E56C31 /* CWChatMessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFCF5361E9017FB00E56C31 /* CWChatMessageStore.swift */; };
@@ -517,6 +519,8 @@
 		8CC856291F5D74D400CA0546 /* CWGroupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWGroupService.swift; sourceTree = "<group>"; };
 		8CC8562B1F5D74DC00CA0546 /* CWContactService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWContactService.swift; sourceTree = "<group>"; };
 		8CCA575B1F5EEDC60072EBF0 /* CWContactSettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWContactSettingController.swift; sourceTree = "<group>"; };
+		8CCA575D1F5EF9BA0072EBF0 /* CWMomentCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentCollectionCell.swift; sourceTree = "<group>"; };
+		8CCA575F1F5EFD020072EBF0 /* CWMomentListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentListController.swift; sourceTree = "<group>"; };
 		8CD40A5E1EB233E70051772C /* CWContactDetailFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWContactDetailFooterView.swift; sourceTree = "<group>"; };
 		8CD40A601EB23A090051772C /* CWTextItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTextItem.swift; sourceTree = "<group>"; };
 		8CFCF5361E9017FB00E56C31 /* CWChatMessageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatMessageStore.swift; sourceTree = "<group>"; };
@@ -1181,6 +1185,7 @@
 			isa = PBXGroup;
 			children = (
 				1F8664231F00B74E0093F979 /* CWMomentController.swift */,
+				8CCA575F1F5EFD020072EBF0 /* CWMomentListController.swift */,
 				8CFF56011F28B62F000FC575 /* Data */,
 				1F8664241F00B74E0093F979 /* DataService */,
 				1F8664271F00B74E0093F979 /* Layout */,
@@ -1223,6 +1228,7 @@
 		1F8664301F00B74E0093F979 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8CCA575D1F5EF9BA0072EBF0 /* CWMomentCollectionCell.swift */,
 				1F8664311F00B74E0093F979 /* CWMomentCell.swift */,
 				1F8664321F00B74E0093F979 /* CWMomentCommentView.swift */,
 				1F8664331F00B74E0093F979 /* CWMomentHeaderView.swift */,
@@ -2156,6 +2162,7 @@
 				1F34920E1E878AD500B36641 /* CWChatMessageModel.swift in Sources */,
 				8CA924791F56F88300570846 /* MoreInputViewLayout.swift in Sources */,
 				1F3492241E878AD500B36641 /* CWTableViewStyle.swift in Sources */,
+				8CCA575E1F5EF9BA0072EBF0 /* CWMomentCollectionCell.swift in Sources */,
 				1F803BB61F4D880700DFDC4A /* EmoticonListHeaderView.swift in Sources */,
 				1F3492371E878FD700B36641 /* CWChatUIConstant.swift in Sources */,
 				8C16ECD21EA2765300C46823 /* CWVoiceMessageBody.swift in Sources */,
@@ -2249,6 +2256,7 @@
 				8C49277E1E92544900B3C482 /* CWLoginController.swift in Sources */,
 				1F6B9F161E8CB1C400AD7FC7 /* CWTextMessageDispatchOperation.swift in Sources */,
 				8CA7EAF41E9D41DE00467C37 /* CWAboutController.swift in Sources */,
+				8CCA57601F5EFD020072EBF0 /* CWMomentListController.swift in Sources */,
 				8C4927871E92991900B3C482 /* CWTimeMessageCell.swift in Sources */,
 				1F3492711E87C06300B36641 /* CWBaseTableViewController.swift in Sources */,
 				8C49278D1E95316A00B3C482 /* CWChatroomService.swift in Sources */,
