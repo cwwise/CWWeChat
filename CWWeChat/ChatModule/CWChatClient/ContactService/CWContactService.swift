@@ -150,7 +150,7 @@ extension CWContactService: XMPPvCardTempModuleDelegate {
     }
     
     func xmppvCardTempModule(_ vCardTempModule: XMPPvCardTempModule!, failedToUpdateMyvCard error: DDXMLElement!) {
-        print("更新失败...")
+        log.error("更新失败...")
 
     }
 }

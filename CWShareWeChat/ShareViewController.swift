@@ -37,8 +37,6 @@ class ShareViewController: SLComposeServiceViewController {
                 guard let content = self.contentText, let webURL = url else {
                     return
                 }
-                print(content)
-                print(webURL)
             })
         })
     }

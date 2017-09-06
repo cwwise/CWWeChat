@@ -25,7 +25,7 @@ class CWPersonalInfoController: CWBaseTableViewController {
         setupItemData()
         
         let currentUser = contactManager.userInfo(with: CWChatClient.share.userId)
-        print(currentUser.userInfo)
+        log.debug(currentUser.userInfo)
         
         let rightItem = UIBarButtonItem(title: "提交", style: .done, target: self, action: #selector(updateUserInfo))
         self.navigationItem.rightBarButtonItem = rightItem
@@ -82,7 +82,7 @@ extension CWPersonalInfoController: CWTableViewManagerDelegate {
 
 extension CWPersonalInfoController: CWContactManagerDelegate {
     func onUserInfoChanged(user: CWUser) {
-        print(user.userInfo.sign ?? "未设置签名")
+        log.debug(user.userInfo.sign ?? "未设置签名")
     }
 }
 

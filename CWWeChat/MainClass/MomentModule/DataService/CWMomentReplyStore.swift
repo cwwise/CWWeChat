@@ -30,7 +30,7 @@ class CWMomentReplyStore: NSObject {
             })
             return messageDB
         } catch {
-            print(error)
+            log.error(error)
             return try! Connection()
         }
     }()

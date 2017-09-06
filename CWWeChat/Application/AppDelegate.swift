@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                       password: "1234567") { (username, error) in
                                         
                                         if let username = username {
-                                            print("登录成功...\(username)")
+                                            log.debug("登录成功...\(username)")
                                         }
         }
     }

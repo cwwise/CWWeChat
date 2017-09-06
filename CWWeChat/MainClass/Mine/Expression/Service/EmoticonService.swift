@@ -216,7 +216,6 @@ class EmoticonService {
                 let urls = package.emoticonList.flatMap({ (emoticon) -> URL in
                     return emoticon.originalUrl!
                 })
-                print("开始下载")
                 // 保存到数据库
                 self.saveEmoticonPackage(package)
                 // 下载图片
@@ -237,11 +236,11 @@ class EmoticonService {
         
         let prefetcher = ImagePrefetcher(resources: resources, options: [options], progressBlock: { (skippedResources, failedResources, completedResources) in
             
-            print("progress--\(Float(completedResources.count)/Float(resources.count))")
+            log.debug("progress--\(Float(completedResources.count)/Float(resources.count))")
             
         }) { (skippedResources, failedResources, completedResources) in
             
-            print("success--\(Float(completedResources.count)/Float(resources.count))")
+            log.debug("success--\(Float(completedResources.count)/Float(resources.count))")
             
         }
         prefetcher.start()

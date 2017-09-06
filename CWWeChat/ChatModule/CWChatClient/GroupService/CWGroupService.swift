@@ -181,7 +181,6 @@ extension CWGroupService: XMPPRoomDelegate {
         log.debug(sender.roomJID)
         //
         sender.configureRoom(usingOptions: nil)
-        print("需要配置消息")
     }
 
     func xmppRoomDidJoin(_ sender: XMPPRoom!) {

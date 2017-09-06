@@ -53,12 +53,12 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
                         self.sendContentMessage()
 
                     case .failure(let error):
-                        print(error)
+                        log.error(error)
                     }
                 }
                 
             case .failure(let encodingError): 
-                print(encodingError)
+                log.error(encodingError)
                 break
             }
         }
