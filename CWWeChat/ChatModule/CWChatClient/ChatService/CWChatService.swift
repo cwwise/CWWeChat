@@ -9,19 +9,23 @@
 import Foundation
 import XMPPFramework
 
+/// 聊天模块
+/// 继承XMPPModule 主要是因为多代理
 class CWChatService: XMPPModule {
-    // 消息存储
+    
+    /// 消息存储
     lazy private(set) var messageStore: CWChatMessageStore = {
         let messageStore = CWChatMessageStore(userId: CWChatClient.share.userId)
         return messageStore
     }()
     
+    /// 会话存储
     lazy private(set) var conversationStore: CWChatConversationStore = {
         let conversationStore = CWChatConversationStore(userId: CWChatClient.share.userId)
         return conversationStore
     }()
     
-    /// 发送
+    /// xmpp消息发送部分
     private(set) var messageTransmitter: CWMessageTransmitter
     /// 消息发送管理
     fileprivate var dispatchManager: CWMessageDispatchManager
@@ -30,12 +34,16 @@ class CWChatService: XMPPModule {
     
     override init!(dispatchQueue queue: DispatchQueue!) {
         // 消息发送和解析
-        messageTransmitter = CWMessageTransmitter()
-        dispatchManager = CWMessageDispatchManager()
-        messageParse = CWChatMessageParse()
+        messageTransmitter = CWMessageTransmitter(dispatchQueue: queue)
+        messageParse = CWChatMessageParse(dispatchQueue: queue)
         
+        dispatchManager = CWMessageDispatchManager()
         super.init(dispatchQueue: queue)
-        messageParse.activate(CWChatXMPPManager.share.xmppStream)
+    }
+
+    func didActivate() {
+        messageParse.activate(self.xmppStream)
+        messageTransmitter.activate(self.xmppStream)
     }
     
     /// 收到消息执行

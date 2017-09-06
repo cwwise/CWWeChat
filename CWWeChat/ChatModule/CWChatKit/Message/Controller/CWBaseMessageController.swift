@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LCActionSheet
+import CWActionSheet
 
 private let kMaxShowTimeMessageCount = 30
 private let kMaxShowtimeMessageInterval: Double = 3*60.0
@@ -63,15 +63,30 @@ public class CWBaseMessageController: UIViewController {
 //        message2.sendStatus = .failed
 //
 //        self.messageList.append(CWChatMessageModel(message: message2))
-        
         self.tableView.reloadData()
     }
     
     func setupUI() {
         self.view.addSubview(tableView)
-        self.view.addSubview(chatToolBar)
         
-        registerKeyboardNotifacation()
+        var groupList = [EmoticonGroup]()
+        if let qqemoticon = EmoticonGroup(identifier: "com.qq.classic") {
+            groupList.append(qqemoticon)
+        }
+        
+        if let liemoticon = EmoticonGroup(identifier: "cn.com.a-li") {
+            liemoticon.type = .big
+            groupList.append(liemoticon)
+        }
+        
+        keyboard.delegate = self
+        keyboard.emoticonInputView.loadData(groupList)
+        keyboard.moreInputView.delegate = self
+        keyboard.associateTableView = tableView
+        self.view.addSubview(keyboard)
+        
+        
+       // registerKeyboardNotifacation()
         registerCell()
     }
     
@@ -104,16 +119,10 @@ public class CWBaseMessageController: UIViewController {
         return tableView
     }()
     
-    lazy var chatToolBar: CWChatToolBar = {
-        let frame = CGRect(x: 0, y: kScreenHeight-kChatToolBarHeight,
-                           width: kScreenWidth, height: kChatToolBarHeight)
-        let chatToolBar = CWChatToolBar(frame:frame)
-        chatToolBar.delegate = self
-        return chatToolBar
-    }()
-    
+    var keyboard: CWChatKeyboard = CWChatKeyboard()
+
     deinit {
-        log.debug(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override public func didReceiveMemoryWarning() {
@@ -279,9 +288,8 @@ extension CWBaseMessageController: CWMessageCellDelegate {
     func messageCellDidTapPhone(_ cell: CWMessageCell, phone: String) {
         let title = "\(phone)可能是一个电话号码，你可以"
         let otherButtonTitle = ["呼叫","复制号码","添加到手机通讯录"]
-        let actionSheet = LCActionSheet(title: title, delegate: nil, cancelButtonTitle: "取消", otherButtonTitleArray: otherButtonTitle)
         
-        actionSheet.clickedHandler = { (actionSheet, index) in
+        let clickedHandler = { (actionSheet: ActionSheetView, index: Int) in
             
             if index == 0 {
                 let phoneString = "telprompt://\(phone)"
@@ -294,95 +302,14 @@ extension CWBaseMessageController: CWMessageCellDelegate {
             }
             
         }
+        
+        let actionSheet = ActionSheetView(title: title, 
+                                          cancelButtonTitle: "取消", 
+                                          otherButtonTitles: otherButtonTitle,
+                                          clickedHandler: clickedHandler)
+        
+ 
         actionSheet.show()
     }
 }
 
-// MARK: - CWInputToolBarDelegate
-extension CWBaseMessageController: CWChatToolBarDelegate {
-
-    public func chatToolBar(_ chatToolBar: CWChatToolBar, emoticonButtonPressed select: Bool, keyBoardState change: Bool) {
-        
-    }
-    
-    public func chatToolBar(_ chatToolBar: CWChatToolBar, moreButtonPressed select: Bool, keyBoardState change: Bool) {
-        
-    }
-    
-    public func chatToolBar(_ chatToolBar: CWChatToolBar, voiceButtonPressed select: Bool, keyBoardState change: Bool) {
-        
-    }
-    
-    
-    // 发送文字
-    public func chatToolBar(_ chatToolBar: CWChatToolBar, sendText text: String) {
-        
-        let textObject = CWTextMessageBody(text: text)
-        let message = CWMessage(targetId: conversation.targetId,
-                                    direction: .send,
-                                    messageBody: textObject)
-        self.sendMessage(message)
-    }
-    
-    // 发送图片
-    // 主要要考虑的是 
-    public func chatToolBar(_ chatToolBar: CWChatToolBar, image: UIImage) {
-        
-        let imageName = String.UUIDString()+".jpg"
-        let cache = CWChatKit.share.chatWebImageManager
-        cache.store(image, forKey: imageName)
-        
-        let imageBody = CWImageMessageBody(path: imageName, size: image.size)
-        let message = CWMessage(targetId: conversation.targetId,
-                                    direction: .send,
-                                    messageBody: imageBody)
-        self.sendMessage(message)
-    }
-    
-    func sendMessage(_ message: CWMessage) {
-        // 添加当前聊天类型
-        message.chatType = self.conversation.type
-        
-        let messageModel = CWChatMessageModel(message: message)
-        self.messageList.append(messageModel)
-        
-        let indexPath = IndexPath(row: self.messageList.count-1, section: 0)
-        self.tableView.reloadData()
-        updateMessageAndScrollBottom(false)
-        
-        
-        // 发送消息 会先存储消息，然后
-        let chatManager = CWChatClient.share.chatManager
-        chatManager.sendMessage(message, progress: { (progress) in
-            
-            messageModel.uploadProgress = progress
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWMessageCell else {
-                return
-            }
-            cell.updateProgress()
-            
-        }) { (message, error) in
-
-            // 更新消息状态
-            let chatManager = CWChatClient.share.chatManager
-            chatManager.updateMessage(message, completion: { (message, error) in
-                
-            })
-            
-            // 发送消息成功
-            if error == nil {
-                
-            } else {
-                
-            }
-            
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWMessageCell else {
-                return
-            }
-            cell.updateProgress()
-            cell.updateState()
-        }
-        
-    }
-    
-}

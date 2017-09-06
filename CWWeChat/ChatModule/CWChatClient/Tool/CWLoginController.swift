@@ -144,7 +144,7 @@ class CWLoginController: UIViewController {
         let options = CWChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
         let chatClient = CWChatClient.share
         chatClient.initialize(with: options)
-        chatClient.login(username: userName, password: password) { (username, error) in
+        chatClient.loginManager.login(username: userName, password: password) { (username, error) in
            
             DispatchQueue.main.async(execute: {
                 hud.mode = .text

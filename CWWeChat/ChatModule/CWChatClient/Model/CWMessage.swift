@@ -84,7 +84,7 @@ public enum CWMessageType: Int {
     case video              //视频
     case file               //文件
     case location           //位置
-    case expression         //表情
+    case emoticon           //表情
     case notification       //通知
 
     //获取cell的reuseIdentifier
@@ -98,7 +98,7 @@ public enum CWMessageType: Int {
             return "ChatMessageVoiceCell"
         case .video:
             return "ChatMessageVideoCell"
-        case .expression:
+        case .emoticon:
             return "ChatMessageExpressionCell"
         case .file:
             return "ChatFileExpressionCell"
@@ -107,6 +107,7 @@ public enum CWMessageType: Int {
         }
     }
 }
+
 
 /// 聊天消息
 public class CWMessage: NSObject {
@@ -134,7 +135,7 @@ public class CWMessage: NSObject {
     /// 已读
     public var isRead: Bool = true
     /// 消息扩展
-    public var ext: Dictionary<String, Any>?
+    public var ext: Dictionary<String, AnyObject>?
     
     public init(targetId: String,
          messageID: String = String.UUIDString(),

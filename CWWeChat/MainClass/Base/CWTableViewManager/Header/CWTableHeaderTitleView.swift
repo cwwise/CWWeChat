@@ -34,9 +34,9 @@ class CWTableHeaderTitleView: UITableViewHeaderFooterView {
     //MARK: 添加约束
     func p_addSnap() {
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.contentView).offset(kCWCellLeftMargin)
-            make.right.equalTo(self.contentView).offset(-kCWCellLeftMargin)
-            make.bottom.equalTo(self.contentView).offset(-7)
+            make.left.equalTo(kCWCellLeftMargin)
+            make.right.equalTo(-kCWCellLeftMargin)
+            make.bottom.equalTo(-7)
         }
     }
     

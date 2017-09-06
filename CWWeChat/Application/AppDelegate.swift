@@ -20,12 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         //设置logger
-        setupLogger()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         loginSuccess()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
-        
+        setupLogger()
         loginXMPP()
         //注册推送信息
         registerRemoteNotification()
@@ -45,12 +44,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let options = CWChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
         let chatClient = CWChatClient.share
         chatClient.initialize(with: options)
-        chatClient.login(username: "haohao", password: "1234567")
+        
+        chatClient.loginManager.login(username: "haohao",
+                                      password: "1234567") { (username, error) in
+                                        
+                                        if let username = username {
+                                            print("登录成功...\(username)")
+                                        }
+        }
     }
     
     func loginSuccess() {
         let tabBarController = CWChatTabBarController()
         self.window?.rootViewController = tabBarController
+    }
+    
+    func loginEmoticonSuccess() {
+        
+        let emoticonController = CWEmoticonListController()
+        self.window?.rootViewController = CWChatNavigationController(rootViewController: emoticonController)
+    }
+    
+    func loginMomentSuccess() {
+        let momentController = CWMomentController()
+        self.window?.rootViewController = CWChatNavigationController(rootViewController: momentController)
     }
     
     func logoutSuccess() {

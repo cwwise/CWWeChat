@@ -56,7 +56,7 @@ class CWMomentHeaderView: UIView {
         }
         
         self.usernameLabel.text = "武藤游戏boy"
-        let url = URL(string: "http://image.cwcoder.com/chenwei.jpg")
+        let url = URL(string: kImageBaseURLString+"chenwei.jpg")
         self.headerImageView.kf.setImage(with: url)
         
     }

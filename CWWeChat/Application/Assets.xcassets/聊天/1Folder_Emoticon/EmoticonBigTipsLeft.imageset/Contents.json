@@ -5,6 +5,17 @@
       "scale" : "1x"
     },
     {
+      "resizing" : {
+        "mode" : "3-part-horizontal",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1
+        },
+        "cap-insets" : {
+          "right" : 18,
+          "left" : 41
+        }
+      },
       "idiom" : "universal",
       "filename" : "EmoticonBigTipsLeft@2x.png",
       "scale" : "2x"

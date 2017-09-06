@@ -54,8 +54,8 @@ public class CWChatMessageModel: NSObject, CWMessageBelong {
             setupImageMessage()
         case .voice:
             setupVoiceMessage()
-        case .expression:
-            setupExpressionMessage()
+        case .emoticon:
+            setupEmoticonMessage()
         case .location:
             setupLocationMessage()
         default:
@@ -137,7 +137,7 @@ public class CWChatMessageModel: NSObject, CWMessageBelong {
         
     }
     
-    func setupExpressionMessage() {
+    func setupEmoticonMessage() {
         
         
     }

@@ -25,22 +25,26 @@ target 'CWWeChat' do
 
   # log
   pod 'SwiftyBeaver'
-
+  
   # chat
   pod 'XMPPFramework'
   
   # UI
   pod 'PPBadgeViewSwift'
   pod 'MBProgressHUD'
-  pod 'CHIPageControl/Aleppo'
-  pod 'LCActionSheet'
+ 
+  pod 'CWActionSheet'
+  pod 'CWShareView'
+
+  # 表情
+  pod 'FSPagerView'
   
   # animation
   pod 'pop'
   
-  # 相机
-  # pod "SwiftyCam"
-  
+  pod 'AMapSearch'
+  pod 'AMapLocation'
+  pod 'AMap2DMap'
   
   # tool
   pod 'Hue'
