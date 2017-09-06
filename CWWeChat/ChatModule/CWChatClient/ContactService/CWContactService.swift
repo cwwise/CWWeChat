@@ -54,11 +54,16 @@ extension CWContactService: CWContactManager {
         self.completion = completion
     }
     
-    func addContact(_ contact: CWChatUser, message: String, completion: CWAddContactCompletion?) {
+    func addContact(_ contact: CWUser, message: String, completion: CWAddContactCompletion?) {
         let domain = CWChatClient.share.options.domain
         let resource = CWChatClient.share.options.resource
         let jid = XMPPJID(user: contact.userId, domain: domain, resource: resource)
         xmppRoster.addUser(jid, withNickname: contact.userId)
+    }
+    
+    
+    func updateMyUserInfo(_ userInfo: [CWUserInfoUpdateTag: String]) {
+        
     }
     
 }
@@ -67,11 +72,11 @@ extension CWContactService: XMPPRosterMemoryStorageDelegate {
 
     func xmppRosterDidPopulate(_ sender: XMPPRosterMemoryStorage!) {
 
-        var contacts = [CWChatUserModel]()
+        var contacts = [CWUser]()
         let users = sender.sortedUsersByName()
         for user in users! {
             if let user = user as? XMPPUser {
-                let model = CWChatUserModel(userId: user.jid().user)
+                let model = CWUser(userId: user.jid().user)
                 model.nickname = user.nickname() ?? user.jid().user
                 contacts.append(model)
             }

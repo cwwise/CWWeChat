@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 public protocol CWChatUserInfoDataSource: NSObjectProtocol {
-    func loadUserInfo(userId: String, completion: @escaping ( (CWChatUser?) -> Void))
+    func loadUserInfo(userId: String, completion: @escaping ( (CWUser?) -> Void))
 }
 
 public let kImageBaseURLString = "http://qiniu.cwwise.com/"
