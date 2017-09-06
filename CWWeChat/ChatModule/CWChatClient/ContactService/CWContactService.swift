@@ -20,13 +20,26 @@ class CWContactService: XMPPModule {
         return xmppRoster!
     }();
     
+    var vCardModule: XMPPvCardTempModule = {
+        let vCardStorage = XMPPvCardCoreDataStorage.sharedInstance()
+        let vCardModule = XMPPvCardTempModule(vCardStorage: vCardStorage)
+        return vCardModule!
+    }()
+    
     override init!(dispatchQueue queue: DispatchQueue!) {
         super.init(dispatchQueue: queue)
     }
     
     func didActivate() {
-        self.xmppRoster.addDelegate(self, delegateQueue: self.moduleQueue)
-        self.xmppRoster.activate(self.xmppStream)
+        xmppRoster.addDelegate(self, delegateQueue: self.moduleQueue)
+        xmppRoster.activate(self.xmppStream)
+        
+        vCardModule.activate(self.xmppStream)
+        vCardModule.addDelegate(self, delegateQueue: self.moduleQueue)
+    }
+    
+    func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
+        vCardModule.fetchvCardTemp(for: sender.myJID)
     }
 }
 
@@ -55,21 +68,43 @@ extension CWContactService: CWContactManager {
     }
     
     func addContact(_ contact: CWUser, message: String, completion: CWAddContactCompletion?) {
-        let domain = CWChatClient.share.options.domain
-        let resource = CWChatClient.share.options.resource
-        let jid = XMPPJID(user: contact.userId, domain: domain, resource: resource)
-        xmppRoster.addUser(jid, withNickname: contact.userId)
+        xmppRoster.addUser(chatJID(with: contact.userId), withNickname: contact.nickname)
     }
     
     
     func updateMyUserInfo(_ userInfo: [CWUserInfoUpdateTag: String]) {
         
+        let vCardTemp = vCardModule.myvCardTemp
+        if let nickName = userInfo[CWUserInfoUpdateTag.nickName] {
+            vCardTemp?.nickname = nickName
+        }
+        
+        if let sign = userInfo[CWUserInfoUpdateTag.sign] {
+            vCardTemp?.note = sign
+        }
+
+        vCardModule.updateMyvCardTemp(vCardTemp)
+    }
+    
+    func userInfo(with userId: String) -> CWUser {
+        let jid = chatJID(with: userId)
+        
+        if let vCardTemp = vCardModule.vCardTemp(for: jid, shouldFetch: true) {
+            let user = CWUser(userId: jid.user, vCardTemp: vCardTemp)
+            return user
+        } else {
+            let user = CWUser(userId: userId)
+            return user
+        }
     }
     
 }
 
+
+// MARK: - XMPPRosterMemoryStorageDelegate
 extension CWContactService: XMPPRosterMemoryStorageDelegate {
 
+    /// 获取联系人
     func xmppRosterDidPopulate(_ sender: XMPPRosterMemoryStorage!) {
 
         var contacts = [CWUser]()
@@ -84,8 +119,10 @@ extension CWContactService: XMPPRosterMemoryStorageDelegate {
 
         self.completion?(contacts, nil)
     }
+    
+    
+    
 }
-
 
 extension CWContactService: XMPPRosterDelegate {
     
@@ -95,5 +132,40 @@ extension CWContactService: XMPPRosterDelegate {
     
 }
 
+
+extension CWContactService: XMPPvCardTempModuleDelegate {
+    func xmppvCardTempModule(_ vCardTempModule: XMPPvCardTempModule!, didReceivevCardTemp vCardTemp: XMPPvCardTemp!, for jid: XMPPJID!) {
+        
+        let user = CWUser(userId: jid.user, vCardTemp: vCardTemp)
+        executeDelegateSelector { (delegate, queue) in
+            if let delegate = delegate as? CWContactManagerDelegate {
+                delegate.onUserInfoChanged(user: user)
+            }
+        }
+        
+    }
+    
+    func xmppvCardTempModuleDidUpdateMyvCard(_ vCardTempModule: XMPPvCardTempModule!) {
+        
+    }
+    
+    func xmppvCardTempModule(_ vCardTempModule: XMPPvCardTempModule!, failedToUpdateMyvCard error: DDXMLElement!) {
+        print("更新失败...")
+
+    }
+}
+
+// 根据 XMPPvCardTemp生成CWUser
+extension CWUser {
+    
+    convenience init(userId: String, vCardTemp: XMPPvCardTemp) {
+        let userInfo = CWUserInfo()
+        userInfo.sign = vCardTemp.note
+
+        self.init(userId: userId, userInfo: userInfo)
+        self.nickname = vCardTemp.nickname
+    }
+    
+}
 
 

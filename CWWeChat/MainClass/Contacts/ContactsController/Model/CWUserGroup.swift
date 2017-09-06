@@ -1,5 +1,5 @@
 //
-//  CWContactGroupModel.swift
+//  CWUserGroup.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/4/3.
@@ -8,18 +8,18 @@
 
 import UIKit
 
-class CWContactGroupModel: NSObject {
+class CWUserGroup: NSObject {
     //组的名称
     var groupName: String?
     //用户列表
-    private(set) var contactList: [CWContactModel]
+    private(set) var contactList: [CWUserModel]
     
     var contactCount: Int {
         return contactList.count
     }
     
     init(groupName: String? = nil,
-         contactList: [CWContactModel] = [CWContactModel]() ) {
+         contactList: [CWUserModel] = [CWUserModel]() ) {
         self.groupName = groupName
         self.contactList = contactList
         super.init()
@@ -31,15 +31,15 @@ class CWContactGroupModel: NSObject {
      
      - parameter model: 联系人实例
      */
-    func append(_ model: CWContactModel) {
+    func append(_ model: CWUserModel) {
         contactList.append(model)
     }
     
-    func append(contentsOf models: [CWContactModel]) {
+    func append(contentsOf models: [CWUserModel]) {
         contactList.append(contentsOf: models)
     }
     
-    subscript(index: Int) -> CWContactModel? {
+    subscript(index: Int) -> CWUserModel? {
         get {
             if index > contactList.count {return nil}
             return contactList[index]

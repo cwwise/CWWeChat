@@ -13,7 +13,7 @@ class CWContactsController: UIViewController {
 
     var contactHelper = CWContactHelper.share
 
-    var groupList = [CWContactGroupModel]()
+    var groupList = [CWUserGroup]()
     var sectionHeaders = [String]()
 
     override func viewDidLoad() {
@@ -25,7 +25,7 @@ class CWContactsController: UIViewController {
         footerLabel.text = "\(contactHelper.contactCount)位联系人"
         searchResultController.contactList = contactHelper.contactsData
         
-        let block = { (groupListData:[CWContactGroupModel], sectionHeadersData:[String], count: Int) -> Void in
+        let block = { (groupListData:[CWUserGroup], sectionHeadersData:[String], count: Int) -> Void in
             self.groupList = groupListData
             self.sectionHeaders = sectionHeadersData
             self.footerLabel.text = "\(count)位联系人"

@@ -11,6 +11,8 @@ import UIKit
 /// 个人信息
 class CWPersonalInfoController: CWBaseTableViewController {
     
+    var contactManager = CWChatClient.share.contactManager
+
     lazy var tableViewManager: CWTableViewManager = {
         let tableViewManager = CWTableViewManager(tableView: self.tableView)
         tableViewManager.delegate = self
@@ -21,7 +23,26 @@ class CWPersonalInfoController: CWBaseTableViewController {
         super.viewDidLoad()
         self.title = "个人信息"
         setupItemData()
-        // Do any additional setup after loading the view.
+        
+        let currentUser = contactManager.userInfo(with: CWChatClient.share.userId)
+        print(currentUser.userInfo)
+        
+        let rightItem = UIBarButtonItem(title: "提交", style: .done, target: self, action: #selector(updateUserInfo))
+        self.navigationItem.rightBarButtonItem = rightItem
+        
+        contactManager.addContactDelegate(self, delegateQueue: DispatchQueue.main)
+    }
+    
+    func updateUserInfo() {
+        
+        
+        
+        
+        contactManager.updateMyUserInfo([CWUserInfoUpdateTag.sign: "我是一个好的开发者"])
+    }
+    
+    deinit {
+        contactManager.removeContactDelegate(self)
     }
 }
 
@@ -58,3 +79,10 @@ extension CWPersonalInfoController: CWTableViewManagerDelegate {
     
     
 }
+
+extension CWPersonalInfoController: CWContactManagerDelegate {
+    func onUserInfoChanged(user: CWUser) {
+        print(user.userInfo.sign ?? "未设置签名")
+    }
+}
+

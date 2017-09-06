@@ -56,7 +56,7 @@ extension CWChatroomService: CWChatroomManager {
 
         var userjidList = [XMPPJID]()
         for user in invitees {
-            let userjid = XMPPJID(user: user, domain: options.domain, resource: options.resource)!
+            let userjid = chatJID(with: user)
             userjidList.append(userjid)
         }
         // affiliations 友好关系

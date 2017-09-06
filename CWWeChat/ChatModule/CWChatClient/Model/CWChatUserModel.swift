@@ -14,10 +14,15 @@ public class CWUser: NSObject {
     
     var nickname: String?
 
-    private(set) var userInfo: CWUserInfo?
+    private(set) var userInfo: CWUserInfo
     
-    init(userId: String) {
-        
+    convenience init(userId: String, userInfo: CWUserInfo) {
+        self.init(userId: userId)
+        self.userInfo = userInfo
+    }
+    
+    public init(userId: String) {
+        userInfo = CWUserInfo()
         self.userId = userId
     }
 }
@@ -27,13 +32,15 @@ public class CWUserInfo: NSObject {
     var nickName: String?
     // 备注
     var alias: String?
-    
+    // 头像
     var avatarUrl: String?
-    
+    // 签名
     var sign: String?
-    
-    var gender: String?
-    
+    // email
     var email: String?
+    
+    public override var description: String {
+        return "nickName:\(nickName ?? "未设置"), sign:\(sign ?? "未设置")"
+    }
 }
 
