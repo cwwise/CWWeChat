@@ -16,12 +16,11 @@ protocol CWMessageViewLayoutDelegate: NSObjectProtocol {
 /**
  使用collectionView 不太熟悉 待完善
  */
-class CWMessageViewLayout: UICollectionViewLayout {
+class CWMessageViewLayout: UICollectionViewFlowLayout {
     
     weak var delegate: CWMessageViewLayoutDelegate?
     
-    
-    var setting = CWMessageLayoutSettings()
+    var setting = CWMessageLayoutSettings.share
     
     var needLayout: Bool = true
     
@@ -37,11 +36,11 @@ class CWMessageViewLayout: UICollectionViewLayout {
         return CGSize(width: collectionViewWidth, height: contentHeight)
     }
     
-    private var collectionViewHeight: CGFloat {
+    fileprivate var collectionViewHeight: CGFloat {
         return collectionView!.frame.height
     }
     
-    private var collectionViewWidth: CGFloat {
+    fileprivate var collectionViewWidth: CGFloat {
         return collectionView!.frame.width
     }
     
@@ -76,39 +75,11 @@ extension CWMessageViewLayout {
 
             let cellIndexPath = IndexPath(item: item, section: section)
             let attributes = CWMessageLayoutAttributes(forCellWith: cellIndexPath)
-            let message = delegate.collectionView(collectionView, itemAt: cellIndexPath)
-            attributes.message = message
-            
-            setupCommonViewFrame(with: message, attributes: attributes)
-            
-            var contentSize: CGSize = CGSize.zero
-            // 根据消息不同类型 计算
-            if message.messageType == .text {
-                
-                let content = (message.messageBody as! CWTextMessageBody).text
-                let size = CGSize(width: kChatTextMaxWidth, height: CGFloat.greatestFiniteMagnitude)
-                var edge: UIEdgeInsets
-                if message.isSend {
-                    edge = ChatCellUI.right_edge_insets
-                } else {
-                    edge = ChatCellUI.left_edge_insets
-                }
-                
-                let modifier = CWTextLinePositionModifier(font: UIFont.fontTextMessageText())
-                // YYTextContainer
-                let textContainer = YYTextContainer(size: size)
-                textContainer.linePositionModifier = modifier
-                textContainer.maximumNumberOfRows = 0
-                
-                let textAttri = CWChatTextParser.parseText(content)!
-                let textLayout = YYTextLayout(container: textContainer, text: textAttri)!
-                
-                contentSize = CGSize(width: textLayout.textBoundingSize.width+edge.left+edge.right,
-                                     height: textLayout.textBoundingSize.height+edge.top+edge.bottom)
-            }
+                        
+            configure(attributes: attributes)
             
             // cell 高度
-            let heightOfCell = contentSize.height + kMessageCellBottomMargin + kMessageCellTopMargin
+            let heightOfCell = attributes.messageContainerFrame.height + kMessageCellBottomMargin + kMessageCellTopMargin
 
             attributes.frame = CGRect(x: 0, y: contentHeight, width: kScreenWidth, height: heightOfCell)
             
@@ -122,23 +93,92 @@ extension CWMessageViewLayout {
         
     }
     
-    func setupCommonViewFrame(with message: CWMessageModel, attributes: CWMessageLayoutAttributes) {
-        
-        var size: CGSize = CGSize.zero
-        var point: CGPoint = CGPoint.zero
-        
-        size = CGSize(width: 40, height: 40)
-        if message.isSend {
-            
-        } else {
-            
+    private func configure(attributes: CWMessageLayoutAttributes) {
+
+        guard let collectionView = collectionView,
+            let message = delegate?.collectionView(collectionView, itemAt: attributes.indexPath) else {
+            return
         }
         
-        point = CGPoint(x: kAvaterImageViewMargin, y: kMessageCellTopMargin)
-
-        attributes.layout[.avatar] = CGRect(origin: point, size: size)
+        attributes.avaterFrame = avatarFrame(with: message)
+        attributes.usernameFrame = usernameFrame(with: attributes, message: message)
         
+        setupContainerFrame(with: attributes, message: message)
     }
+    
+    // 头像
+    func avatarFrame(with message: CWMessageModel) -> CGRect {
+        let size: CGSize = setting.kAvaterSize
+        let origin: CGPoint
+        if message.isSend {
+            origin = CGPoint(x: collectionViewWidth - setting.kMessageToLeftPadding - size.width,
+                             y: setting.kMessageToTopPadding)
+        } else {
+            origin = CGPoint(x: setting.kMessageToLeftPadding, y: setting.kMessageToTopPadding)
+        }
+        return CGRect(origin: origin, size: size)
+    }
+    
+    // 昵称(如果有昵称，则昵称和头像y一样)
+    func usernameFrame(with attributes: CWMessageLayoutAttributes, message: CWMessageModel) -> CGRect {
+        
+        var size: CGSize = setting.kUsernameSize
+        let origin: CGPoint
+        if message.showUsername == false {
+            size = CGSize.zero
+        }
+        
+        if message.isSend {
+            origin = CGPoint(x: attributes.avaterFrame.minX - setting.kUsernameLeftPadding - size.width,
+                             y: attributes.avaterFrame.minY)
+        } else {
+            origin = CGPoint(x: attributes.avaterFrame.maxX + setting.kUsernameLeftPadding,
+                             y: attributes.avaterFrame.minY)
+        }
+        return CGRect(origin: origin, size: size)
+    }
+    
+    func setupContainerFrame(with attributes: CWMessageLayoutAttributes, message: CWMessageModel) {
+        
+        // 如果是文字
+        var contentSize: CGSize = CGSize.zero
+        // 根据消息不同类型 计算
+        if message.messageType == .text {
+            
+            let content = (message.messageBody as! CWTextMessageBody).text
+            let size = CGSize(width: kChatTextMaxWidth, height: CGFloat.greatestFiniteMagnitude)
+            var edge: UIEdgeInsets
+            if message.isSend {
+                edge = ChatCellUI.right_edge_insets
+            } else {
+                edge = ChatCellUI.left_edge_insets
+            }
+            
+            let modifier = CWTextLinePositionModifier(font: setting.contentTextFont)
+            // YYTextContainer
+            let textContainer = YYTextContainer(size: size)
+            textContainer.linePositionModifier = modifier
+            textContainer.maximumNumberOfRows = 0
+            
+            let textAttri = CWChatTextParser.parseText(content)!
+            let textLayout = YYTextLayout(container: textContainer, text: textAttri)!
+            
+            contentSize = CGSize(width: textLayout.textBoundingSize.width+edge.left+edge.right,
+                                 height: textLayout.textBoundingSize.height+edge.top+edge.bottom)
+            message.textLayout = textLayout
+        }
+        
+        let origin: CGPoint
+        if message.isSend {
+            origin = CGPoint(x: attributes.avaterFrame.minX - setting.kUsernameLeftPadding - contentSize.width,
+                             y: attributes.usernameFrame.minY)
+        } else {
+            origin = CGPoint(x: attributes.avaterFrame.maxX + setting.kUsernameLeftPadding,
+                             y: attributes.usernameFrame.minY)
+        }
+        attributes.messageContainerFrame = CGRect(origin: origin, size: contentSize)
+    }
+    
     
     // 所有cell 布局
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {

@@ -10,12 +10,20 @@ import UIKit
 
 // 
 class CWMessageLayoutAttributes: UICollectionViewLayoutAttributes {
+    
+    var avaterFrame: CGRect
+    
+    var usernameFrame: CGRect
+    // 内容部分
+    var messageContainerFrame: CGRect
+    
+    var messageContainerInsets: UIEdgeInsets
 
-    var message: CWMessageModel?
-    
-    lazy var layout: CWMessageFrame = self.message?.messageFrame ?? CWMessageFrame()
-    
     public override init() {
+        avaterFrame = CGRect.zero
+        usernameFrame = CGRect.zero
+        messageContainerFrame = CGRect.zero
+        messageContainerInsets = UIEdgeInsets.zero
         super.init()
     }
     
@@ -23,8 +31,11 @@ class CWMessageLayoutAttributes: UICollectionViewLayoutAttributes {
         guard let copiedAttributes = super.copy(with: zone) as? CWMessageLayoutAttributes else {
             return super.copy(with: zone)
         }
-    
-        copiedAttributes.message = message
+            
+        copiedAttributes.avaterFrame = avaterFrame
+        copiedAttributes.usernameFrame = usernameFrame
+        copiedAttributes.messageContainerFrame = messageContainerFrame
+        copiedAttributes.messageContainerInsets = messageContainerInsets
         
         return copiedAttributes
     }

@@ -8,16 +8,8 @@
 
 import UIKit
 
-protocol CWMessageContentViewDelegate: NSObjectProtocol {
-    func onCatchEvent(_ event: NSObject)
-}
-
 class CWMessageContentView: UIView {
-
-    weak var delegate: CWMessageContentViewDelegate?
-    
-    private(set) var message: CWMessageModel?
-    
+        
     var bubbleImageView: UIImageView!
     
     override init(frame: CGRect) {
@@ -26,9 +18,6 @@ class CWMessageContentView: UIView {
         self.clipsToBounds = true
     }
     
-    func refresh(message: CWMessageModel) {
-        self.message = message
-    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

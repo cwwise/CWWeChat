@@ -31,7 +31,6 @@ class CWCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
         self.view.addSubview(collectionView)
         
         let message = CWMessage(targetId: "hello", text: "测试数据一条")
@@ -47,14 +46,8 @@ class CWCollectionViewController: UIViewController {
         let message = CWMessage(targetId: "hello", text: "测试数据\(messageList.count)条")
         let messageModel = CWMessageModel(message: message)
         messageList.append(messageModel)
-        
-        let indexPath = IndexPath(row: messageList.count - 1, section: 0)
-        collectionView.performBatchUpdates({ 
-            self.collectionView.insertItems(at: [indexPath])
-        }) { (finshed) in
-            
-        }
-//        collectionView.reloadData()
+
+        collectionView.reloadData()
     }
     
     lazy var collectionView: UICollectionView = {
@@ -91,7 +84,9 @@ extension CWCollectionViewController: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CWBaseMessageCell
+        let message = messageList[indexPath.row]
+        cell.refresh(message: message)
         return cell
     }
     

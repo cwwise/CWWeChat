@@ -70,7 +70,7 @@ public extension CWChatClient {
     
     var userFilePath: String {
         let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let path = "\(documentPath)/cwchat/\(self.options.domain)/\(self.userId)"
+        let path = "\(documentPath)/\(self.options.domain)/\(self.userId)"
         
         
         return path

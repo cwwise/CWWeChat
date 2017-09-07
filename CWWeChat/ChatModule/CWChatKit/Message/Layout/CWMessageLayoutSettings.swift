@@ -11,11 +11,36 @@ import UIKit
 let kAvaterWidth: CGFloat = 40
 
 /// layout 部分
-struct CWMessageLayoutSettings {
+class CWMessageLayoutSettings {
+    
+    public static var share = CWMessageLayoutSettings()
+    
+    var kMessageToLeftPadding: CGFloat
+    
+    var kMessageToTopPadding: CGFloat
+    
+    var kMessageToBottomPadding: CGFloat
 
+    // 头像
+    var kAvaterSize: CGSize
+    // 昵称
+    var kUsernameSize: CGSize
     
+    var kUsernameLeftPadding: CGFloat
+
+    var contentTextFont: UIFont
     
-    
+    private init() {
+        kAvaterSize = CGSize(width: 40, height: 40)
+        kMessageToLeftPadding = 10
+        kMessageToTopPadding = 10
+        kMessageToBottomPadding = 10
+        
+        kUsernameSize = CGSize(width: 120, height: 20)
+        kUsernameLeftPadding = 10
+        
+        contentTextFont = UIFont.systemFont(ofSize: 16)
+    }
     
 }
 

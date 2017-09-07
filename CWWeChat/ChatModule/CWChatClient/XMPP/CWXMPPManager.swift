@@ -312,7 +312,8 @@ extension CWXMPPManager: CWLoginManager {
     }
     
     func currentAccount() -> String {
-        return xmppStream.myJID.user
+        return ""
+        return xmppStream.myJID.user ?? ""
     }
         
     func logout() {

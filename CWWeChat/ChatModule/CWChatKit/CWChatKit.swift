@@ -24,7 +24,7 @@ public class CWChatKit: NSObject {
     private var chatUserImagePath: String
     
     private override init() {
-        chatUserImagePath = "\(CWChatClient.share.userFilePath)/image/data/"
+        chatUserImagePath = "\(CWChatClient.share.userFilePath)/image/"
         if FileManager.default.fileExists(atPath: chatUserImagePath) == false {
             try! FileManager.default.createDirectory(atPath: chatUserImagePath, withIntermediateDirectories: true, attributes: nil)
         }

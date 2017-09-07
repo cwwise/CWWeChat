@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YYText
 
 class CWMessageModel: NSObject {
     
@@ -33,7 +34,8 @@ class CWMessageModel: NSObject {
         return message.senderId!
     }
     
-    // 文字
+    // 文字(还待完善)
+    public var textLayout: YYTextLayout?
     
     // 图片
     
@@ -43,7 +45,6 @@ class CWMessageModel: NSObject {
     
     // 消息
     
-    public var messageFrame = CWMessageFrame()
     
     /// 是否显示时间
     public var showTime: Bool = false
