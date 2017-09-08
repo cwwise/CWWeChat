@@ -8,24 +8,39 @@
 
 import UIKit
 
-public protocol CWChatUser {
-    //用户Id
-    var userId: String {get}
-    // 用户名称
-    var nickname: String? {get set}
-    // 用户头像
-    var avatarURL: String? {get set}
+public class CWUser: NSObject {
     
-    init(userId: String)
-}
-
-class CWChatUserModel: NSObject, CWChatUser {
+    var userId: String
     
-    private(set) var userId: String
     var nickname: String?
-    var avatarURL: String?
 
-    required init(userId: String) {
+    private(set) var userInfo: CWUserInfo
+    
+    convenience init(userId: String, userInfo: CWUserInfo) {
+        self.init(userId: userId)
+        self.userInfo = userInfo
+    }
+    
+    public init(userId: String) {
+        userInfo = CWUserInfo()
         self.userId = userId
     }
 }
+
+public class CWUserInfo: NSObject {
+    // 昵称
+    var nickName: String?
+    // 备注
+    var alias: String?
+    // 头像
+    var avatarUrl: String?
+    // 签名
+    var sign: String?
+    // email
+    var email: String?
+    
+    public override var description: String {
+        return "nickName:\(nickName ?? "未设置"), sign:\(sign ?? "未设置")"
+    }
+}
+

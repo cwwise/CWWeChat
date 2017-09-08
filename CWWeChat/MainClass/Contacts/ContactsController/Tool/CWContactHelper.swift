@@ -9,27 +9,24 @@
 import UIKit
 import SwiftyJSON
 
-typealias CWContactListChanged = ([CWContactGroupModel], [String], Int) -> Void
+typealias CWContactListChanged = ([[CWUserModel]], [String], Int) -> Void
 
-typealias CWFetchContactComplete = (CWContactModel,CWChatError?) -> Void
+typealias CWFetchContactComplete = (CWUserModel,CWChatError?) -> Void
 
 public class CWContactHelper: NSObject {
 
     static let share = CWContactHelper()
     ///默认的分组
-    fileprivate var defaultGroup = CWContactGroupModel()
+    fileprivate var defaultGroup = [CWUserModel]()
     
-    var contactsData = [CWContactModel]()
-    var contactsDict = [String: CWContactModel]()
+    var contactsData = [CWUserModel]()
+    var contactsDict = [String: CWUserModel]()
 
-    var sortContactsData = [CWContactGroupModel]()
-    var sortSectionHeaders = [String]()
+    var sectionHeaders = [String]()
+    
+    var sortedContactArray = [[CWUserModel]]()
     
     var dataChange: CWContactListChanged?
-
-    var contactCount: Int {
-        return contactsData.count
-    }
     
     private override init() {
         super.init()
@@ -42,9 +39,7 @@ public class CWContactHelper: NSObject {
         if let contact = contactsDict[userId] {
             complete(contact, nil)
         }
-        
         // 如果没有找到，进行网络查询
-        
     }
     
     
@@ -62,7 +57,7 @@ public class CWContactHelper: NSObject {
         for (_,subJson):(String, JSON) in contactList {
             let userId = subJson["userID"].stringValue
             let username = subJson["username"].stringValue
-            let user = CWContactModel(userId: userId, username: username)
+            let user = CWUserModel(userId: userId, username: username)
             user.remarkName = subJson["remarkName"].string
             user.nickname = subJson["nikeName"].string
             user.avatarURL = subJson["avatarURL"].url
@@ -85,58 +80,43 @@ public class CWContactHelper: NSObject {
             return pingYingA < pingYingB
         }
         
-        //头部分
-        var analyzeGroupData = [CWContactGroupModel]()
-        analyzeGroupData.append(self.defaultGroup)
+        sectionHeaders = [String]()
+        let indexCollation = UILocalizedIndexedCollation.current()
+        sectionHeaders.append(contentsOf: indexCollation.sectionTitles)
         
-        var sectionHeaders = [UITableViewIndexSearch]
+        // 设置数组
+        var sortedArray = [[CWUserModel]]()
+        for _ in 0..<sectionHeaders.count {
+            sortedArray.append([CWUserModel]())
+        }
         
-        // 遍历数据 根据首字母 如果没有拼音字母 则添加到＃组别中
-        let othergroup = CWContactGroupModel(groupName: "#")
-        
-        // 第一组
-        var tempInitial = contactsData[0].pinyingInitial.fistLetter
-        var currentGroup = CWContactGroupModel(groupName: tempInitial)
-        analyzeGroupData.append(currentGroup)
-        sectionHeaders.append(tempInitial)
-        
-        for contactModel in contactsData {
-
-            //首字母
-            let initial = contactModel.pinyingInitial.fistLetter         
+        for contact in contactsData {
+            let initial = contact.pinyingInitial.fistLetter
+            // 如果不是字母
+            let section: Int
             if matchLetter(string: initial) == false {
-                othergroup.append(contactModel)
-                continue
-            }
-            
-            //如果不相同，则说明之前没有这个首字母添加到数组，
-            if initial != tempInitial {
-            
-                tempInitial = initial
-                currentGroup = CWContactGroupModel(groupName: initial)
-                currentGroup.append(contactModel)
-            
-                analyzeGroupData.append(currentGroup)
-                sectionHeaders.append(tempInitial)
-                
+                section = sectionHeaders.count - 1
             } else {
-                currentGroup.append(contactModel)
+                section = sectionHeaders.index(of: initial)!
             }
-            
+            sortedArray[section].append(contact)
         }
         
-        
-        if (othergroup.contactCount > 0) {
-            analyzeGroupData.append(othergroup)
-            sectionHeaders.append(othergroup.groupName!)
+        // 去除空的section
+        for i in (0..<sortedArray.count).reversed() {
+            let sectionArray = sortedArray[i]
+            if sectionArray.count == 0 {
+                sortedArray.remove(at: i)
+                sectionHeaders.remove(at: i)
+            }
         }
+        sortedArray.insert(defaultGroup, at: 0)
         
-        sortContactsData = analyzeGroupData
-        sortSectionHeaders = sectionHeaders
-    
+        self.sortedContactArray = sortedArray
+        // 头部分
         DispatchQueue.main.async(execute: {
-            self.dataChange?(self.sortContactsData,
-                             self.sortSectionHeaders,
+            self.dataChange?(self.sortedContactArray,
+                             self.sectionHeaders,
                              self.contactsData.count)
         })
         
@@ -158,14 +138,12 @@ public class CWContactHelper: NSObject {
                          "contact_signature","contact_official_account"]
         let idArray = ["-1","-2", "-3", "-4"]
         
-        var contactArray = [CWContactModel]()
         for index in 0..<titleArray.count {
-            let item = CWContactModel(userId: idArray[index], username: "")
+            let item = CWUserModel(userId: idArray[index], username: "")
             item.nickname = titleArray[index]
-            item.avatarPath = iconArray[index]
-            contactArray.append(item)
+            item.avatarImage = UIImage(named: iconArray[index])
+            defaultGroup.append(item)
         }
-        defaultGroup.append(contentsOf: contactArray)
     }
     
 }

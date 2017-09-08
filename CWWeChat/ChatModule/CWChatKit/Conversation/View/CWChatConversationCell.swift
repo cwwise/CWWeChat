@@ -69,11 +69,15 @@ class CWChatConversationCell: UITableViewCell {
         
         let targetId = conversationModel.conversation.targetId
         CWChatKit.share.userInfoDataSource?.loadUserInfo(userId: targetId, completion: { user in
-            if let userModel = user,
-                let url = URL(string: userModel.avatarURL!) {
-                self.headerImageView.kf.setImage(with: url, placeholder: defaultHeadeImage)
+            
+            if let userModel = user {
+                if let avatarUrl = userModel.userInfo.avatarUrl {
+                    self.headerImageView.kf.setImage(with: URL(string: avatarUrl), placeholder: defaultHeadeImage)
+                }
                 self.usernameLabel.text = userModel.nickname
             }
+            
+            
         })
 
         self.timeLabel.text = conversationModel.lastMessageTime

@@ -13,19 +13,19 @@ class CWContactsController: UIViewController {
 
     var contactHelper = CWContactHelper.share
 
-    var groupList = [CWContactGroupModel]()
+    var groupList = [[CWUserModel]]()
     var sectionHeaders = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-
-        groupList = contactHelper.sortContactsData
-        sectionHeaders = contactHelper.sortSectionHeaders
-        footerLabel.text = "\(contactHelper.contactCount)位联系人"
+        
+        groupList = contactHelper.sortedContactArray
+        sectionHeaders = contactHelper.sectionHeaders
+        footerLabel.text = "\(contactHelper.contactsData.count)位联系人"
         searchResultController.contactList = contactHelper.contactsData
         
-        let block = { (groupListData:[CWContactGroupModel], sectionHeadersData:[String], count: Int) -> Void in
+        let block = { (groupListData:[[CWUserModel]], sectionHeadersData:[String], count: Int) -> Void in
             self.groupList = groupListData
             self.sectionHeaders = sectionHeadersData
             self.footerLabel.text = "\(count)位联系人"
@@ -107,10 +107,29 @@ extension CWContactsController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: CWContactHeaderView.identifier) as! CWContactHeaderView
-        
-        let group = groupList[section]
-        headerView.titleLabel.text = group.groupName
+        headerView.titleLabel.text = sectionHeaders[section-1]
         return headerView
+    }
+    
+    // MARK: UITableViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let group = groupList[section]
+        return group.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return groupList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CWContactCell.identifier) as! CWContactCell
+        let group = groupList[indexPath.section]
+        cell.contactModel = group[indexPath.row]
+        return cell
+    }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return self.sectionHeaders
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -128,35 +147,13 @@ extension CWContactsController: UITableViewDataSource, UITableViewDelegate {
             }
         }
         else {
-            guard let userId = groupList[indexPath.section][indexPath.row]?.userId else {
-                return
-            }
+      
+            let userId = groupList[indexPath.section][indexPath.row].userId
             let detail = CWContactDetailController(userId: userId)
             detail.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(detail, animated: true)
         }
         
-    }
-    
-    // MARK: UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let group = groupList[section]
-        return group.contactCount
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return groupList.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CWContactCell.identifier) as! CWContactCell
-        let group = groupList[indexPath.section]
-        cell.contactModel = group[indexPath.row]
-        return cell
-    }
-    
-    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return self.sectionHeaders
     }
     
 }

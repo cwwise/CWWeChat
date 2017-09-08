@@ -9,6 +9,13 @@
 import UIKit
 import XMPPFramework
 
+func chatJID(with userId: String) -> XMPPJID {
+    let domain = CWChatClient.share.options.domain
+    let resource = CWChatClient.share.options.resource
+    let jid = XMPPJID(user: userId, domain: domain, resource: resource)!
+    return jid
+}
+
 public extension XMPPModule {
     // 执行代理方法
     public func executeDelegateSelector(_ action: ((AnyObject?, DispatchQueue?) -> Void)) {

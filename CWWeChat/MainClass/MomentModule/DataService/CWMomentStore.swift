@@ -53,7 +53,7 @@ class CWMomentStore: NSObject {
             })
             return momentDB
         } catch {
-            print(error)
+            log.error(error)
             return try! Connection()
         }
     }()

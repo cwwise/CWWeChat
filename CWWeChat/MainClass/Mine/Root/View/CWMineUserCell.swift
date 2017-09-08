@@ -13,7 +13,7 @@ class CWMineUserCell: UITableViewCell {
     let mine_space_x: CGFloat  =  14.0
     let mine_space_y: CGFloat  =  12.0
     
-    var userModel: CWContactModel! {
+    var userModel: CWUserModel! {
         didSet {
             self.setupUserInfomation()
         }

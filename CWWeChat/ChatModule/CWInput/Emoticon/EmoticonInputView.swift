@@ -218,11 +218,10 @@ extension EmoticonInputView: EmoticonToolViewDelegate {
 extension EmoticonInputView: EmoticonPageCellDelegate {
 
     func emoticonPageCell(_ cell: EmoticonPageCell, didSelect emoticon: Emoticon?) {
-        if let emoticon = emoticon {
-            print(emoticon.title ?? "")
+        if let _ = emoticon {
+
         } else {
             //删除按钮
-            print("删除按钮")
         }
     }
     

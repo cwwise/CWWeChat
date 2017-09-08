@@ -1,5 +1,5 @@
 //
-//  CWContactModel.swift
+//  CWUserModel.swift
 //  CWWeChat
 //
 //  Created by chenwei on 2017/3/26.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class CWContactModel: NSObject {
+public class CWUserModel: NSObject {
 
     /// 用户id
     var userId: String
@@ -27,7 +27,7 @@ public class CWContactModel: NSObject {
     }
     /// 头像URL
     var avatarURL: URL?
-    var avatarPath: String?
+    var avatarImage: UIImage?
 
     /// 备注
     var remarkName: String?
@@ -42,7 +42,7 @@ public class CWContactModel: NSObject {
     var pinyingInitial: String = ""
     
     // 详情
-    var detailInfo = CWContactDetailModel()
+    var detailInfo = CWUserInfo()
     
     init(userId: String, username: String) {
         self.username = username
@@ -55,6 +55,6 @@ public class CWContactModel: NSObject {
     
 }
 
-func ==(lhs: CWContactModel, rhs: CWContactModel) -> Bool {
+func ==(lhs: CWUserModel, rhs: CWUserModel) -> Bool {
     return lhs.userId == rhs.userId
 }

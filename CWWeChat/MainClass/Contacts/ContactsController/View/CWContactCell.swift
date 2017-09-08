@@ -16,7 +16,7 @@ let kHeight_ContactCell: CGFloat = 54
 class CWContactCell: UITableViewCell {
     
     ///用户model
-    var contactModel: CWContactModel! {
+    var contactModel: CWUserModel! {
         didSet {
             self.setupUI()
         }
@@ -48,8 +48,8 @@ class CWContactCell: UITableViewCell {
     ///设置UI
     func setupUI() {
         // 待修改
-        if let avatarPath = contactModel.avatarPath {
-            self.avatarImageView.image = UIImage(named: avatarPath)
+        if let avatarImage = contactModel.avatarImage {
+            self.avatarImageView.image = avatarImage
         } else {
             self.avatarImageView.kf.setImage(with: contactModel.avatarURL, placeholder: defaultHeadeImage) 
         }

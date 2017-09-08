@@ -8,14 +8,29 @@
 
 import UIKit
 
-/// 好友相关的回调
-public protocol CWContactManagerDelegate {
+public enum CWUserInfoUpdateTag: String {
+    // 昵称
+    case nickName
+    // 头像
+    case avatar
+    // 签名
+    case sign
     
+    case email
+    
+    case phone
 }
 
-public typealias CWContactCompletion = (_ contacts: [CWChatUser], _ error: CWChatError?) -> Void
-public typealias CWAddContactCompletion = (_ contact: CWChatUser, _ error: CWChatError?) -> Void
 
+/// 好友相关的回调
+public protocol CWContactManagerDelegate {
+    /// 用户信息修改回调
+    func onUserInfoChanged(user: CWUser)
+}
+
+public typealias CWContactCompletion = (_ contacts: [CWUser], _ error: CWChatError?) -> Void
+
+public typealias CWAddContactCompletion = (_ contact: CWUser, _ error: CWChatError?) -> Void
 
 public protocol CWContactManager {
     /// 添加代理
@@ -32,5 +47,9 @@ public protocol CWContactManager {
     // MARK: 获取好友
     func fetchContactsFromServer(completion: CWContactCompletion?)
     
-    func addContact(_ contact: CWChatUser, message: String, completion: CWAddContactCompletion?)
+    func addContact(_ contact: CWUser, message: String, completion: CWAddContactCompletion?)
+    
+    func updateMyUserInfo(_ userInfo: [CWUserInfoUpdateTag: String])
+    // 获取用户信息
+    func userInfo(with userId: String) -> CWUser
 }

@@ -11,9 +11,9 @@ import UIKit
 /// 搜索结果
 class CWSearchResultController: UIViewController {
     // 原始数据
-    public var contactList:[CWContactModel]?
+    public var contactList:[CWUserModel]?
     // 搜索结果
-    fileprivate var searchContactResult = [CWContactModel]()
+    fileprivate var searchContactResult = [CWUserModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()

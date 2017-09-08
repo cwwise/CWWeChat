@@ -76,12 +76,12 @@ public class CWBaseConversationController: UIViewController {
 
 // MARK: - CWChatUserInfoDataSource
 extension CWBaseConversationController: CWChatUserInfoDataSource {
-    public func loadUserInfo(userId: String, completion: @escaping ((CWChatUser?) -> Void)) {
+    public func loadUserInfo(userId: String, completion: @escaping ((CWUser?) -> Void)) {
        
         //先从本地缓存获取，如果没有，则做网络请求来获取
-        let model = CWChatUserModel(userId: "chenwei")
+        let model = CWUser(userId: "chenwei")
         model.nickname = userId
-        model.avatarURL = "\(kImageBaseURLString)\(userId).jpg"
+      //  model.avatarURL = "\(kImageBaseURLString)\(userId).jpg"
         completion(model)
     }
 }
