@@ -101,9 +101,10 @@ extension CWMessageViewLayout {
         }
         
         attributes.avaterFrame = avatarFrame(with: message)
-        attributes.usernameFrame = usernameFrame(with: attributes, message: message)
         
+        setupUsernameFrame(with: attributes, message: message)
         setupContainerFrame(with: attributes, message: message)
+        setupStateFrame(with: attributes, message: message)
     }
     
     // 头像
@@ -120,7 +121,7 @@ extension CWMessageViewLayout {
     }
     
     // 昵称(如果有昵称，则昵称和头像y一样)
-    func usernameFrame(with attributes: CWMessageLayoutAttributes, message: CWMessageModel) -> CGRect {
+    func setupUsernameFrame(with attributes: CWMessageLayoutAttributes, message: CWMessageModel) {
         
         var size: CGSize = setting.kUsernameSize
         let origin: CGPoint
@@ -135,7 +136,7 @@ extension CWMessageViewLayout {
             origin = CGPoint(x: attributes.avaterFrame.maxX + setting.kUsernameLeftPadding,
                              y: attributes.avaterFrame.minY)
         }
-        return CGRect(origin: origin, size: size)
+        attributes.usernameFrame = CGRect(origin: origin, size: size)
     }
     
     func setupContainerFrame(with attributes: CWMessageLayoutAttributes, message: CWMessageModel) {
@@ -179,6 +180,20 @@ extension CWMessageViewLayout {
         attributes.messageContainerFrame = CGRect(origin: origin, size: contentSize)
     }
     
+    func setupStateFrame(with attributes: CWMessageLayoutAttributes, message: CWMessageModel) {
+        let containerFrame = attributes.messageContainerFrame
+        let origin: CGPoint
+        if message.isSend {
+            origin = CGPoint(x: containerFrame.minX - 2 - setting.errorSize.width,
+                            y: containerFrame.midY - 5)
+        } else {
+            origin = CGPoint(x: containerFrame.minX + 2 + setting.errorSize.width,
+                            y: containerFrame.midY - 5)
+        }
+        attributes.errorFrame = CGRect(origin: origin, size: setting.errorSize)
+        attributes.activityFrame = CGRect(origin: origin, size: setting.errorSize)
+    }
+        
     
     // 所有cell 布局
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {

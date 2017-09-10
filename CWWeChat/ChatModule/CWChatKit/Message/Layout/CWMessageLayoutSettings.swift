@@ -8,7 +8,8 @@
 
 import UIKit
 
-let kAvaterWidth: CGFloat = 40
+
+
 
 /// layout 部分
 class CWMessageLayoutSettings {
@@ -30,6 +31,8 @@ class CWMessageLayoutSettings {
 
     var contentTextFont: UIFont
     
+    var errorSize: CGSize
+    
     private init() {
         kAvaterSize = CGSize(width: 40, height: 40)
         kMessageToLeftPadding = 10
@@ -40,6 +43,8 @@ class CWMessageLayoutSettings {
         kUsernameLeftPadding = 10
         
         contentTextFont = UIFont.systemFont(ofSize: 16)
+        
+        errorSize = CGSize(width: 15, height: 15)
     }
     
 }

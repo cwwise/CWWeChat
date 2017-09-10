@@ -19,11 +19,18 @@ class CWMessageLayoutAttributes: UICollectionViewLayoutAttributes {
     
     var messageContainerInsets: UIEdgeInsets
 
+    var errorFrame: CGRect
+
+    var activityFrame: CGRect
+
+    
     public override init() {
         avaterFrame = CGRect.zero
         usernameFrame = CGRect.zero
         messageContainerFrame = CGRect.zero
         messageContainerInsets = UIEdgeInsets.zero
+        errorFrame = CGRect.zero
+        activityFrame = CGRect.zero
         super.init()
     }
     
@@ -36,6 +43,8 @@ class CWMessageLayoutAttributes: UICollectionViewLayoutAttributes {
         copiedAttributes.usernameFrame = usernameFrame
         copiedAttributes.messageContainerFrame = messageContainerFrame
         copiedAttributes.messageContainerInsets = messageContainerInsets
+        
+        copiedAttributes.errorFrame = errorFrame
         
         return copiedAttributes
     }

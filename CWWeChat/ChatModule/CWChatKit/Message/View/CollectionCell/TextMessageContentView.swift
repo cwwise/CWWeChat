@@ -1,18 +1,17 @@
 //
-//  CWChatTextMessageCell.swift
+//  CWTextMessageContentView.swift
 //  CWWeChat
 //
-//  Created by chenwei on 2017/9/7.
+//  Created by chenwei on 2017/9/8.
 //  Copyright © 2017年 cwwise. All rights reserved.
 //
 
 import UIKit
 import YYText
 
-class CWChatTextMessageCell: CWBaseMessageCell {
-    
+class TextMessageContentView: MessageContentView {
     // 文本
-    fileprivate lazy var messageLabel: YYLabel = {
+    private lazy var messageLabel: YYLabel = {
         let messageLabel = YYLabel()
         messageLabel.displaysAsynchronously = false
         messageLabel.ignoreCommonProperties = true
@@ -24,10 +23,45 @@ class CWChatTextMessageCell: CWBaseMessageCell {
         return messageLabel
     }()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.addSubview(messageLabel)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func refresh(message: CWMessageModel) {
         super.refresh(message: message)
         messageLabel.textLayout = message.textLayout
-        messageLabel.frame = self.messageContentView.bounds
+        
+        // 是自己的发送的消息
+        if message.isSend == true {
+            let edge = ChatCellUI.right_edge_insets
+            messageLabel.snp.makeConstraints { (make) in
+                make.edges.equalTo(edge)
+            }
+        } else {
+            let edge = ChatCellUI.left_edge_insets
+            messageLabel.snp.makeConstraints { (make) in
+                make.edges.equalTo(edge)
+            }
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        guard let message = message else {
+            messageLabel.frame = self.bounds
+            return
+        }
+        
+        
+        
+        
+          
     }
     
     // YYText点击事件
@@ -43,12 +77,16 @@ class CWChatTextMessageCell: CWBaseMessageCell {
         }
         
         if let phone = info[kChatTextKeyPhone] as? String {
-            delegate.messageCellDidTapPhone(self, phone: phone)
+          //  delegate.messageCellDidTapPhone(self, phone: phone)
         }
         else if let URLString = info[kChatTextKeyURL] as? String, let URL = URL(string: URLString) {
-            delegate.messageCellDidTapLink(self, link: URL)
+          //  delegate.messageCellDidTapLink(self, link: URL)
         }
     }
     
-
+    
+    // 配置menuAction
+    
+    
+    
 }

@@ -76,9 +76,9 @@ class CWBaseMessageCell: UICollectionViewCell {
     }()
     
     /// 消息的内容部分
-    lazy var messageContentView: CWMessageContentView = {
+    lazy var messageContentView: MessageContentView = {
         
-        let messageContentView = CWMessageContentView()
+        let messageContentView = TextMessageContentView()
         
         messageContentView.addGestureRecognizer(self.longPressGestureRecognizer)
         messageContentView.addGestureRecognizer(self.doubletapGesture)
@@ -87,6 +87,8 @@ class CWBaseMessageCell: UICollectionViewCell {
         self.tapGestureRecognizer.require(toFail: self.doubletapGesture)
         self.tapGestureRecognizer.require(toFail: self.longPressGestureRecognizer)
         
+        self.contentView.addSubview(messageContentView)
+
         return messageContentView
     }()
     
@@ -136,6 +138,8 @@ class CWBaseMessageCell: UICollectionViewCell {
         let userId = self.message!.targetId
         let avatarURL = "\(kImageBaseURLString)\(userId).jpg"
         avatarImageView.kf.setImage(with: URL(string: avatarURL), placeholder: defaultHeadeImage)
+    
+        self.messageContentView.refresh(message: message)
     }
     
     
@@ -175,6 +179,13 @@ class CWBaseMessageCell: UICollectionViewCell {
     func errorButtonClick(_ button: UIButton) {
         self.delegate?.messageCellResendButtonClick(self)
     }
+    
+    override var isSelected: Bool {
+        didSet {
+            
+        }
+    }
+    
         
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
