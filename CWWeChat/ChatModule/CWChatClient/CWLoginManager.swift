@@ -24,13 +24,15 @@ public protocol CWLoginManagerDelegate: NSObjectProtocol {
 /// 登陆注册模块
 public protocol CWLoginManager: NSObjectProtocol {
     
+    var isConnented: Bool { get }
+    
     var isLogined: Bool { get }
+    
+    var currentAccount: String { get }
     
     func login(username: String, password: String, completion: CWLoginHandler?)
     
     func register(username: String, password: String, completion: CWLoginHandler?)
 
-    func currentAccount() -> String
-    
     func logout()
 }

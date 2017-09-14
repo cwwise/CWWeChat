@@ -10,8 +10,6 @@ import Foundation
 
 // 配置信息
 public class CWChatClientOptions: NSObject {
-    ///  是否自动登录
-    var isAutoLogin: Bool = true
     
     /// 端口号
     var port: UInt16 = 5222
@@ -22,14 +20,10 @@ public class CWChatClientOptions: NSObject {
     /// 来源 app iOS 安卓等等
     var resource: String
     
-    init(host: String = "localhost", domain: String) {
+    init(host: String, domain: String) {
         self.host = host
         self.domain = domain
         self.resource = "ios"
         super.init()
-    }
-    
-    convenience override init() {
-        self.init(domain: "")
     }
 }

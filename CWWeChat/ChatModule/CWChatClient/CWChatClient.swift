@@ -15,7 +15,7 @@ public class CWChatClient: NSObject {
     /// 版本
     private(set) var version: String
     /// 聊天配置信息
-    private(set) var options = CWChatClientOptions()
+    private(set) var options: CWChatClientOptions
     /// login
     private(set) var loginManager: CWLoginManager
     /// 聊天模块
@@ -28,7 +28,7 @@ public class CWChatClient: NSObject {
     private(set) var chatroomManager: CWChatroomManager
     
     public var userId: String {
-        return self.loginManager.currentAccount()
+        return self.loginManager.currentAccount
     }
     
     private override init() {
@@ -53,6 +53,7 @@ public class CWChatClient: NSObject {
         let _ = chatroomManager.activate(xmppManager.xmppStream)
         self.chatroomManager = chatroomManager
         
+        self.options = CWChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
         super.init()
     }
     
@@ -71,8 +72,6 @@ public extension CWChatClient {
     var userFilePath: String {
         let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let path = "\(documentPath)/\(self.options.domain)/\(self.userId)"
-        
-        
         return path
     }
     

@@ -26,7 +26,6 @@
 		1F34920D1E878AD500B36641 /* CWChatMessageFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491CF1E878AD500B36641 /* CWChatMessageFrame.swift */; };
 		1F34920E1E878AD500B36641 /* CWChatMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491D01E878AD500B36641 /* CWChatMessageModel.swift */; };
 		1F34920F1E878AD500B36641 /* CWMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491D21E878AD500B36641 /* CWMessageCell.swift */; };
-		1F3492101E878AD500B36641 /* NSFileManager+ChatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491D91E878AD500B36641 /* NSFileManager+ChatExtension.swift */; };
 		1F3492111E878AD500B36641 /* NSString+Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491DA1E878AD500B36641 /* NSString+Chat.swift */; };
 		1F3492121E878AD500B36641 /* NSString+PinYin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491DB1E878AD500B36641 /* NSString+PinYin.swift */; };
 		1F3492131E878AD500B36641 /* UIApplication+CWChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491DC1E878AD500B36641 /* UIApplication+CWChat.swift */; };
@@ -318,7 +317,6 @@
 		1F3491CF1E878AD500B36641 /* CWChatMessageFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatMessageFrame.swift; sourceTree = "<group>"; };
 		1F3491D01E878AD500B36641 /* CWChatMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatMessageModel.swift; sourceTree = "<group>"; };
 		1F3491D21E878AD500B36641 /* CWMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageCell.swift; sourceTree = "<group>"; };
-		1F3491D91E878AD500B36641 /* NSFileManager+ChatExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+ChatExtension.swift"; sourceTree = "<group>"; };
 		1F3491DA1E878AD500B36641 /* NSString+Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Chat.swift"; sourceTree = "<group>"; };
 		1F3491DB1E878AD500B36641 /* NSString+PinYin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+PinYin.swift"; sourceTree = "<group>"; };
 		1F3491DC1E878AD500B36641 /* UIApplication+CWChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+CWChat.swift"; sourceTree = "<group>"; };
@@ -702,7 +700,6 @@
 				8CC856231F5D74A000CA0546 /* ContactService */,
 				8CC856241F5D74A700CA0546 /* GroupService */,
 				8C1AA3E01F5D9BF20001D739 /* ResourceManager */,
-				8C4927811E928EA200B3C482 /* Request */,
 				8C0BFE1D1E92480D007343F1 /* Tool */,
 				1F34922E1E878BC600B36641 /* Bussiness */,
 				1F3491BD1E878AD500B36641 /* DataBase */,
@@ -831,7 +828,6 @@
 		1F3491D81E878AD500B36641 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				1F3491D91E878AD500B36641 /* NSFileManager+ChatExtension.swift */,
 				1F3491DA1E878AD500B36641 /* NSString+Chat.swift */,
 				1F3491DB1E878AD500B36641 /* NSString+PinYin.swift */,
 				1F3491DC1E878AD500B36641 /* UIApplication+CWChat.swift */,
@@ -1544,13 +1540,6 @@
 			path = ResourceManager;
 			sourceTree = "<group>";
 		};
-		8C4927811E928EA200B3C482 /* Request */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Request;
-			sourceTree = "<group>";
-		};
 		8C84B9521E8D62F70020D508 /* ChatService */ = {
 			isa = PBXGroup;
 			children = (
@@ -2219,7 +2208,6 @@
 				1F3492931E88244B00B36641 /* CWBaseMessageController.swift in Sources */,
 				1F592A3D1EA74884007558E9 /* CWWelcomeController.swift in Sources */,
 				8CC856271F5D74AF00CA0546 /* CWChatGroup.swift in Sources */,
-				1F3492101E878AD500B36641 /* NSFileManager+ChatExtension.swift in Sources */,
 				8C84B9581E8D6DBF0020D508 /* CWImageMessageBody.swift in Sources */,
 				1F9199741F625F510042403D /* TextMessageContentView.swift in Sources */,
 				1F803BBA1F4E670000DFDC4A /* EmoticonDetailCell.swift in Sources */,
