@@ -169,6 +169,25 @@ extension CWMessageViewLayout {
             message.textLayout = textLayout
         }
         
+        else if message.messageType == .image {
+            
+            let imageSize = (message.messageBody as! CWImageMessageBody).size
+            //根据图片的比例大小计算图片的frame
+            if imageSize.width > imageSize.height {
+                var height = kChatImageMaxWidth * imageSize.height / imageSize.width
+                height = max(kChatImageMinWidth, height)
+                contentSize = CGSize(width: ceil(kChatImageMaxWidth), height: ceil(height))
+            } else {
+                var width = kChatImageMaxWidth * imageSize.width / imageSize.height
+                width = max(kChatImageMinWidth, width)
+                contentSize = CGSize(width: ceil(width), height: ceil(kChatImageMaxWidth))
+            }
+            
+            let edge = UIEdgeInsets.zero
+            contentSize = CGSize(width: contentSize.width+edge.left+edge.right,
+                                 height: contentSize.height+edge.top+edge.bottom)
+        }
+                
         let origin: CGPoint
         if message.isSend {
             origin = CGPoint(x: attributes.avaterFrame.minX - setting.kUsernameLeftPadding - contentSize.width,

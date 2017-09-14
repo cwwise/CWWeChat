@@ -57,4 +57,13 @@ class CWMessageModel: NSObject {
         super.init()
     }
     
+    
+    
+    
 }
+
+extension CWMessageModel {
+    
+}
+
+

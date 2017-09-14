@@ -35,19 +35,6 @@ class TextMessageContentView: MessageContentView {
     override func refresh(message: CWMessageModel) {
         super.refresh(message: message)
         messageLabel.textLayout = message.textLayout
-        
-        // 是自己的发送的消息
-        if message.isSend == true {
-            let edge = ChatCellUI.right_edge_insets
-            messageLabel.snp.makeConstraints { (make) in
-                make.edges.equalTo(edge)
-            }
-        } else {
-            let edge = ChatCellUI.left_edge_insets
-            messageLabel.snp.makeConstraints { (make) in
-                make.edges.equalTo(edge)
-            }
-        }
     }
     
     override func layoutSubviews() {
@@ -58,10 +45,20 @@ class TextMessageContentView: MessageContentView {
             return
         }
         
+        let edge: UIEdgeInsets
+        if message.isSend == true {
+            edge = ChatCellUI.right_edge_insets
+        } else {
+            edge = ChatCellUI.left_edge_insets
+        }
         
-        
-        
-          
+        let x = self.bounds.minX + edge.left
+        let y = self.bounds.minY + edge.top
+        let width = self.bounds.width - edge.left - edge.right
+        let height = self.bounds.height - edge.top - edge.bottom
+
+        let frame = CGRect(x: x, y: y, width: width, height: height)
+        messageLabel.frame = frame
     }
     
     // YYText点击事件

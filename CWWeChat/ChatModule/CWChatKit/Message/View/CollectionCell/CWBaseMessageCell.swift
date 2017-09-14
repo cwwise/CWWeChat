@@ -78,7 +78,15 @@ class CWBaseMessageCell: UICollectionViewCell {
     /// 消息的内容部分
     lazy var messageContentView: MessageContentView = {
         
-        let messageContentView = TextMessageContentView()
+        let messageContentView: MessageContentView
+        let messageType = CWMessageType(identifier: self.reuseIdentifier!)
+        if messageType == .text {
+            messageContentView = TextMessageContentView()
+        } else if messageType == .image {
+            messageContentView = ImageMessageContentView()
+        } else {
+            messageContentView = MessageContentView()
+        }
         
         messageContentView.addGestureRecognizer(self.longPressGestureRecognizer)
         messageContentView.addGestureRecognizer(self.doubletapGesture)
@@ -91,6 +99,8 @@ class CWBaseMessageCell: UICollectionViewCell {
 
         return messageContentView
     }()
+    
+    
     
     /// 指示
     var activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -212,6 +222,7 @@ extension CWBaseMessageCell {
         avatarImageView.frame = layoutAttributes.avaterFrame
         usernameLabel.frame = layoutAttributes.usernameFrame
         messageContentView.frame = layoutAttributes.messageContainerFrame
+        print(layoutAttributes.messageContainerFrame)
     }
     
 }

@@ -22,7 +22,6 @@ class CWMessageLayoutAttributes: UICollectionViewLayoutAttributes {
     var errorFrame: CGRect
 
     var activityFrame: CGRect
-
     
     public override init() {
         avaterFrame = CGRect.zero
@@ -45,7 +44,7 @@ class CWMessageLayoutAttributes: UICollectionViewLayoutAttributes {
         copiedAttributes.messageContainerInsets = messageContainerInsets
         
         copiedAttributes.errorFrame = errorFrame
-        
+                
         return copiedAttributes
     }
     

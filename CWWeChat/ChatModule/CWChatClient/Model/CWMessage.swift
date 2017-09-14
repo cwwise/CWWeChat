@@ -88,7 +88,7 @@ public enum CWMessageType: Int {
     case notification       //通知
 
     //获取cell的reuseIdentifier
-    func identifier() -> String {
+    var identifier: String {
         switch self {
         case .text:
             return "ChatMessageTextCell"
@@ -104,6 +104,17 @@ public enum CWMessageType: Int {
             return "ChatFileExpressionCell"
         default:
             return "ChatMessageCell"
+        }
+    }
+    
+    init(identifier: String) {
+        switch identifier {
+        case "ChatMessageTextCell":
+            self = .text
+        case "ChatMessageImageCell":
+            self = .image
+        default:
+            self = .none
         }
     }
 }
@@ -178,7 +189,7 @@ extension CWMessage {
 
 // MARK: - 便利方法
 extension CWMessage {
-    
+    // 文本
     public convenience init(targetId: String,
                 messageID: String = String.UUIDString(),
                 chatType: CWChatType = .single,
@@ -196,6 +207,7 @@ extension CWMessage {
                   timestamp: timestamp,
                   messageBody: messageBody)
     }
+    
     
 }
 

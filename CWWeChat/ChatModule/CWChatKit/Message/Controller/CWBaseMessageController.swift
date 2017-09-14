@@ -94,10 +94,10 @@ public class CWBaseMessageController: UIViewController {
      注册cell class
      */
     func registerCell() {
-        tableView.register(CWMessageCell.self, forCellReuseIdentifier: CWMessageType.none.identifier())
-        tableView.register(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.text.identifier())
-        tableView.register(CWImageMessageCell.self, forCellReuseIdentifier: CWMessageType.image.identifier())
-        tableView.register(CWVoiceMessageCell.self, forCellReuseIdentifier: CWMessageType.voice.identifier())
+        tableView.register(CWMessageCell.self, forCellReuseIdentifier: CWMessageType.none.identifier)
+        tableView.register(CWTextMessageCell.self, forCellReuseIdentifier: CWMessageType.text.identifier)
+        tableView.register(CWImageMessageCell.self, forCellReuseIdentifier: CWMessageType.image.identifier)
+        tableView.register(CWVoiceMessageCell.self, forCellReuseIdentifier: CWMessageType.voice.identifier)
 
         tableView.register(CWTimeMessageCell.self, forCellReuseIdentifier: CWTimeMessageCell.identifier)
     }
@@ -195,7 +195,7 @@ extension CWBaseMessageController: UITableViewDelegate, UITableViewDataSource {
             timeCell.timeLabel.text = message as? String
             return timeCell
         }
-        let identifier = messageModel.message.messageType.identifier()
+        let identifier = messageModel.message.messageType.identifier
     
         // 时间和tip消息 是例外的种类 以后判断
         let messageCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CWMessageCell

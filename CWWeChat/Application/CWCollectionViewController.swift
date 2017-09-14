@@ -43,11 +43,42 @@ class CWCollectionViewController: UIViewController {
     }
     
     func sendMessage() {
+        let index = arc4random() % 3
+        if index == 0 {
+            sendTextMessage()
+        } else {
+            sendImageMessage()
+        } 
+        
+     
+    }
+    
+    func sendTextMessage() {
         let message = CWMessage(targetId: "hello", text: "测试数据\(messageList.count)条")
         let messageModel = CWMessageModel(message: message)
         messageList.append(messageModel)
 
         collectionView.reloadData()
+    }
+    
+    func sendImageMessage() {
+        let url = URL(string: "http://7xsmd8.com1.z0.glb.clouddn.com/cwwechat002.jpg")
+        let size = CGSize(width: 200, height: 300)
+        let messageBody = CWImageMessageBody(path: nil, originalURL: url, size: size)
+        let message = CWMessage(targetId: "hello", messageBody: messageBody)
+
+        let messageModel = CWMessageModel(message: message)
+        messageList.append(messageModel)
+        
+        collectionView.reloadData()
+
+    }
+    
+    func sendVoiceMessage() {
+        
+        
+        
+        
     }
     
     lazy var collectionView: UICollectionView = {
@@ -59,7 +90,10 @@ class CWCollectionViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.white
         collectionView.alwaysBounceVertical = true
-        collectionView.register(CWBaseMessageCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(CWBaseMessageCell.self, forCellWithReuseIdentifier: CWMessageType.none.identifier)
+        collectionView.register(CWBaseMessageCell.self, forCellWithReuseIdentifier: CWMessageType.text.identifier)
+        collectionView.register(CWBaseMessageCell.self, forCellWithReuseIdentifier: CWMessageType.image.identifier)
+
         return collectionView
     }()
 
@@ -84,8 +118,11 @@ extension CWCollectionViewController: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CWBaseMessageCell
+        
         let message = messageList[indexPath.row]
+
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: message.messageType.identifier,
+                                                      for: indexPath) as! CWBaseMessageCell
         cell.refresh(message: message)
         return cell
     }
