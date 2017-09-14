@@ -23,13 +23,19 @@
 - 项目使用cocoaPod管理，下载之后运行pod install
 
 ## <a id="功能"></a>功能
-- 发送文字，图片
+- [x] 发送文字，图片
+- [x] 表情键盘
+- [ ] 表情模块
+  - [x] 表情商店,以及详情
+- [ ] 朋友圈 
 
 ## <a id="预览"></a>预览
  ![image](https://github.com/cwwise/CWWeChat/blob/master/source/Images/Simulator_chat.png)
  ![image](https://github.com/cwwise/CWWeChat/blob/master/source/Images/Simulator_contact.png)
  ![image](https://github.com/cwwise/CWWeChat/blob/master/source/Images/Simulator_discover.png)
  ![image](https://github.com/cwwise/CWWeChat/blob/master/source/Images/Simulator_mine.png)
+  ![image](https://github.com/cwwise/CWWeChat/blob/master/source/Images/Simulator_mine_emoction1.png)
+   ![image](https://github.com/cwwise/CWWeChat/blob/master/source/Images/Simulator_mine_emoction2.png)
 
 ## <a id="License"></a>License
 CWWeChat is released under the MIT license. See [LICENSE](https://github.com/cwwise/CWWeChat/blob/master/LICENSE) for details.

@@ -29,7 +29,7 @@ class CWImageMessageBody: NSObject, CWMessageBody {
     
     /// 原图服务器地址
     var originalURL: URL?
-    /// 原图的本地路径（现在只是imageName kChatUserImagePath+name通过拼接来获取）
+    /// 原图的本地路径
     var originalLocalPath: String?
     
     init(path: String? = nil,
@@ -57,7 +57,8 @@ extension CWImageMessageBody {
     }
 }
 
-extension CWImageMessageBody: CWMessageCoding {
+extension CWImageMessageBody {
+    
     var messageEncode: String {
         
         do {

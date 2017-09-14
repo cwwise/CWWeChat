@@ -58,7 +58,7 @@ class CWImageMessageCell: CWMessageCell {
             messageImageView.kf.setImage(with: url, placeholder: nil)
         }
         else if let path = body.originalLocalPath {
-            let url = URL(fileURLWithPath: kChatUserImagePath+path)
+            let url = URL(fileURLWithPath: path)
             messageImageView.kf.setImage(with: url, placeholder: nil)
         } else  {
             messageImageView.image = nil

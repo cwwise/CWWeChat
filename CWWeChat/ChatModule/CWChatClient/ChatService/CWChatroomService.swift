@@ -11,14 +11,19 @@ import XMPPFramework
 
 class CWChatroomService: XMPPModule {
     
+    var roomLight: XMPPRoomLight!
+    
     lazy var multiChat: XMPPMUCLight = {
         let muc = XMPPMUCLight(dispatchQueue: self.moduleQueue)
-        muc?.activate(CWChatXMPPManager.share.xmppStream)
         return muc!
     }()
     
     override init!(dispatchQueue queue: DispatchQueue!) {
         super.init(dispatchQueue: queue)
+    }
+    
+    func didActivate() {
+        self.multiChat.activate(self.xmppStream)
         self.multiChat.addDelegate(self, delegateQueue: self.moduleQueue)
     }
     
@@ -26,35 +31,28 @@ class CWChatroomService: XMPPModule {
 
 extension CWChatroomService: CWChatroomManager {
     
-    func addChatroomDelegate(_ delegate: CWGroupManagerDelegate, delegateQueue: DispatchQueue) {
+    func addChatroomDelegate(_ delegate: CWChatroomManagerDelegate, delegateQueue: DispatchQueue) {
         addDelegate(delegate, delegateQueue: delegateQueue)
     }
     
-    func removeChatroomDelegate(_ delegate: CWGroupManagerDelegate) {
+    func removeChatroomDelegate(_ delegate: CWChatroomManagerDelegate) {
         removeDelegate(delegate)
     }
     
     func fetchChatrooms() {
-        
         let options = CWChatClient.share.options
         self.multiChat.discoverRooms(forServiceNamed: "conference."+options.domain)
     }
     
-    func createGroup(title: String,
+    func createChatroom(title: String,
                      invitees: [String],
-                     message: String,
-                     setting: CWChatGroupOptions,
-                     completion: CWGroupCompletion) {
+                     message: String) {
         let options = CWChatClient.share.options
         
-        let jid = XMPPJID(string: "chenwei@conference."+options.domain)
-        guard let roomjid = jid else {
-            completion(nil, CWChatError(errorCode: .customer, error: "系统错误"))
-            return
-        }
-        let room = XMPPRoomLight(jid: roomjid, roomname: title)
-        room.activate(CWChatXMPPManager.share.xmppStream)
-        room.addDelegate(self, delegateQueue: self.moduleQueue)
+        let roomjid = XMPPJID(string: "demo@conference."+options.domain)
+        roomLight = XMPPRoomLight(jid: roomjid!, roomname: title)
+        roomLight.activate(self.xmppStream)
+        roomLight.addDelegate(self, delegateQueue: self.moduleQueue)
 
         var userjidList = [XMPPJID]()
         for user in invitees {
@@ -62,7 +60,7 @@ extension CWChatroomService: CWChatroomManager {
             userjidList.append(userjid)
         }
         // affiliations 友好关系
-        room.createRoomLight(withMembersJID: userjidList)
+        roomLight.createRoomLight(withMembersJID: userjidList)
         
     }
     

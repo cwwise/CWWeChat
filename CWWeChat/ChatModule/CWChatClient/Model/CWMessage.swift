@@ -84,11 +84,11 @@ public enum CWMessageType: Int {
     case video              //视频
     case file               //文件
     case location           //位置
-    case expression         //表情
+    case emoticon           //表情
     case notification       //通知
 
     //获取cell的reuseIdentifier
-    func identifier() -> String {
+    var identifier: String {
         switch self {
         case .text:
             return "ChatMessageTextCell"
@@ -98,7 +98,7 @@ public enum CWMessageType: Int {
             return "ChatMessageVoiceCell"
         case .video:
             return "ChatMessageVideoCell"
-        case .expression:
+        case .emoticon:
             return "ChatMessageExpressionCell"
         case .file:
             return "ChatFileExpressionCell"
@@ -106,9 +106,18 @@ public enum CWMessageType: Int {
             return "ChatMessageCell"
         }
     }
+    
+    init(identifier: String) {
+        switch identifier {
+        case "ChatMessageTextCell":
+            self = .text
+        case "ChatMessageImageCell":
+            self = .image
+        default:
+            self = .none
+        }
+    }
 }
-
-
 
 
 /// 聊天消息
@@ -137,7 +146,7 @@ public class CWMessage: NSObject {
     /// 已读
     public var isRead: Bool = true
     /// 消息扩展
-    public var ext: Dictionary<String, Any>?
+    public var ext: Dictionary<String, AnyObject>?
     
     public init(targetId: String,
          messageID: String = String.UUIDString(),
@@ -176,5 +185,32 @@ extension CWMessage {
     }
     
 }
+
+
+// MARK: - 便利方法
+extension CWMessage {
+    // 文本
+    public convenience init(targetId: String,
+                messageID: String = String.UUIDString(),
+                chatType: CWChatType = .single,
+                direction: CWMessageDirection = .send,
+                isRead: Bool = true,
+                timestamp: TimeInterval = NSDate().timeIntervalSince1970,
+                text: String) {
+        
+        let messageBody = CWTextMessageBody(text: text)
+        self.init(targetId: targetId,
+                  messageID: messageID,
+                  chatType: chatType,
+                  direction: direction,
+                  isRead: isRead,
+                  timestamp: timestamp,
+                  messageBody: messageBody)
+    }
+    
+    
+}
+
+
 
 

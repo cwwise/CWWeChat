@@ -13,13 +13,7 @@ import XMPPFramework
 let sendMessageTimeoutInterval: TimeInterval = 30
 
 /// 发送消息
-class CWMessageTransmitter: NSObject {
-    
-    static let share = CWMessageTransmitter()
-    /// xmpp实例
-    private var xmppStream: XMPPStream {
-        return CWChatXMPPManager.share.xmppStream
-    }
+class CWMessageTransmitter: XMPPModule {
     
     @discardableResult func sendMessage(content: String,
                      targetId: String,
@@ -38,7 +32,7 @@ class CWMessageTransmitter: NSObject {
         log.debug(message)
         // 发送消息
         var receipte: XMPPElementReceipt?
-        self.xmppStream.send(message, andGet: &receipte)
+        xmppStream.send(message, andGet: &receipte)
         guard let elementReceipte = receipte else {
             return false
         }
@@ -74,7 +68,7 @@ class CWMessageTransmitter: NSObject {
         if chatType == 1 {
             return name
         }
-        let domain = CWChatXMPPManager.share.options.domain
+        let domain = CWChatClient.share.options.domain
         return name + "@" + domain
     }
 

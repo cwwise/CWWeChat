@@ -32,6 +32,7 @@ class CWContactsController: UIViewController {
             self.tableView.reloadData()
         }
         contactHelper.dataChange = block
+
     }
     
     func setupUI() {

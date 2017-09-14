@@ -13,12 +13,40 @@ public protocol CWTableViewCellDelegate: NSObjectProtocol {
     func cellDidSelect()
 }
 
+public enum CWCellLineStyle {
+    case none
+    case `default`
+    case fill
+}
 
 public class CWTableViewCell: UITableViewCell {
     
     public weak var delegate: CWTableViewCellDelegate?
     public var item: CWTableViewItem!
     
+    public var leftSeparatorSpace: CGFloat = 15 {
+        didSet {
+            self.setNeedsDisplay() 
+        }
+    }
+
+    public var rightSeparatorSpace: CGFloat = 0 {
+        didSet {
+            self.setNeedsDisplay() 
+        }
+    }
+
+    public var topLineStyle: CWCellLineStyle = .none {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    public var bottomLineStyle: CWCellLineStyle = .none {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+
     lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
         titleLabel.textColor = UIColor.black
@@ -105,4 +133,37 @@ public class CWTableViewCell: UITableViewCell {
         }
         
     }
+    
+    
+    public override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+        
+        context.setLineWidth(1)
+        context.setStrokeColor(UIColor(hex: "#e9e9e9").cgColor)
+        
+        if self.topLineStyle != .none {
+            context.beginPath()
+            let startX = self.topLineStyle == .fill ? 0 : leftSeparatorSpace
+            let endX = self.width - self.rightSeparatorSpace
+            context.move(to: CGPoint(x: startX, y: 0))
+            context.addLine(to: CGPoint(x: endX, y: 0))
+            context.strokePath()
+        }
+        
+        if self.bottomLineStyle != .none {
+            context.beginPath()
+            let startX = self.topLineStyle == .fill ? 0 : leftSeparatorSpace
+            let endX = self.width - self.rightSeparatorSpace
+            context.move(to: CGPoint(x: startX, y: self.height))
+            context.addLine(to: CGPoint(x: endX, y: self.height))
+            context.strokePath()
+        }
+        
+    }
+    
+    
 }

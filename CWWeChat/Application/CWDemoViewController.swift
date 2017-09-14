@@ -14,50 +14,18 @@ class CWDemoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      
-        guard let emoticonPath = Bundle.main.path(forResource: "Emotion", ofType: "bundle"),
-        let emoticonBundle = Bundle(path: emoticonPath),
-            let plist = emoticonBundle.path(forResource: "emotions", ofType: "plist"),
-            let array = NSArray(contentsOfFile: plist) else {
-                return
+        var groupList = [EmoticonGroup]()
+        if let qqemoticon = EmoticonGroup(identifier: "com.qq.classic") {
+            groupList.append(qqemoticon)
         }
         
-        var groups = [CWEmoticonGroup]()
-
-        let json = JSON(array)
-        for groupInfo in json.arrayValue {
-            
-            let type = groupInfo["type"].stringValue
-            let groupId = groupInfo["groupid"].stringValue
-            let groupName = groupInfo["groupname"].stringValue
-            let groupicon = groupInfo["groupicon"].stringValue
-            
-            var emoticons = [CWEmoticon]()
-            
-            let items = groupInfo["items"].arrayValue
-            for item in items {
-                
-                if type == "image" {
-                    let emoticon = CWEmoticon(chs: item["text"].stringValue,
-                                              png: item["image"].stringValue)
-                    emoticons.append(emoticon)
-                }
-                
-            }
-            
-            if type == "expression" {
-                break
-            }
-            
-            let group = CWEmoticonGroup(groupID: groupId,
-                                        groupName: groupName,
-                                        groupIcon: groupicon,
-                                        emoticons: emoticons)
-            groups.append(group)
+        if let liemoticon = EmoticonGroup(identifier: "cn.com.a-li") {
+            liemoticon.type = .big
+            groupList.append(liemoticon)
         }
         
         let keyboard = CWChatKeyboard()
-        keyboard.emoticonInputView.setupGroup(groups)
+        keyboard.emoticonInputView.loadData(groupList)
         self.view.addSubview(keyboard)
         // Do any additional setup after loading the view.
     }
@@ -69,7 +37,6 @@ class CWDemoViewController: UIViewController {
     
     deinit {
         self.view.endEditing(true)
-        print("ceshi123")
     }
 
     /*

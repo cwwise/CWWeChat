@@ -51,7 +51,6 @@ public class CWTableViewManager: NSObject {
         
         self.tableView?.dataSource = self
         self.tableView?.delegate = self
-        
         registerCellClass()
     }
     
