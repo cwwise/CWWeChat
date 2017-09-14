@@ -94,7 +94,7 @@ class CWMomentLayout: NSObject {
         
         let username = NSMutableAttributedString(string: moment.username)
         username.yy_color = CWMomentUI.kNameTextColor
-        username.yy_font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium)
+        username.yy_font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
         
         let container = YYTextContainer(size: CWMomentUI.kUsernameSize)
         usernameTextLayout = YYTextLayout(container: container, text: username)
@@ -116,8 +116,8 @@ class CWMomentLayout: NSObject {
         let size = CGSize(width: CWMomentUI.kContentWidth, height: CGFloat.greatestFiniteMagnitude)
 
         let textFont = UIFont.systemFont(ofSize: 15)
-        let attributes = [NSFontAttributeName: textFont,
-                          NSForegroundColorAttributeName: UIColor.black]
+        let attributes = [NSAttributedStringKey.font: textFont,
+                          NSAttributedStringKey.foregroundColor: UIColor.black]
         
         let modifier = CWTextLinePositionModifier(font: textFont)
         // YYTextContainer

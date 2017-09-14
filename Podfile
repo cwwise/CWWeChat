@@ -18,9 +18,9 @@ target 'CWWeChat' do
   pod 'SwiftyImage'
   pod 'Kingfisher'
 
-  pod 'SQLite.swift', :git => 'https://github.com/stephencelis/SQLite.swift' , :branch => 'swift-4'
-  pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire' , :branch => 'swift4'
-  pod 'RxSwift', :git=> 'https://github.com/ReactiveX/RxSwift', :branch => 'swift4.0'
+  pod 'SQLite.swift'
+  pod 'Alamofire'
+  pod 'RxSwift'
       
 # log
   pod 'SwiftyBeaver'

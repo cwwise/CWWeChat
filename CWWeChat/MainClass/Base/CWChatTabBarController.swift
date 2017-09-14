@@ -43,8 +43,8 @@ class CWChatTabBarController: UITabBarController {
             CWMineController()
         ]
         
-        let selectAttributes = [NSForegroundColorAttributeName : UIColor.chatSystemColor()]
-        let normalAttributes = [NSForegroundColorAttributeName : UIColor.lightGray]
+        let selectAttributes = [NSAttributedStringKey.foregroundColor : UIColor.chatSystemColor()]
+        let normalAttributes = [NSAttributedStringKey.foregroundColor : UIColor.lightGray]
         
         var navigationVCArray = [CWChatNavigationController]()
         for (index, controller) in viewControllerArray.enumerated() {

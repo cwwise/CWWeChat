@@ -25,8 +25,8 @@ public class CWTableViewSection: NSObject {
             }
             
             let width = kScreenWidth - 2*kCWCellLeftMargin
-            let attributes = [NSForegroundColorAttributeName:UIColor.white,
-                              NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
+            let attributes = [NSAttributedStringKey.foregroundColor:UIColor.white,
+                              NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)]
             headerHeight = CWUIUtility.textHeightOfText(headerTitle, width: width, attributes: attributes) + 7 + 15
         }
     }
@@ -40,8 +40,8 @@ public class CWTableViewSection: NSObject {
             }
             
             let width = kScreenWidth - 2*kCWCellLeftMargin
-            let attributes = [NSForegroundColorAttributeName:UIColor.white,
-                              NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
+            let attributes = [NSAttributedStringKey.foregroundColor:UIColor.white,
+                              NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)]
             footerHeight = CWUIUtility.textHeightOfText(footerTitle, width: width, attributes: attributes) + 7 + 5
         }
     }

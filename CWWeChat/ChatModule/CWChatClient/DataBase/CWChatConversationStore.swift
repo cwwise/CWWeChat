@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SQLite
 
 /**
  会话管理类
