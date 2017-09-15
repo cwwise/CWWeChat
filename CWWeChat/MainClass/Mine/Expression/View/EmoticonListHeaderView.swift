@@ -45,7 +45,7 @@ class EmoticonListHeaderView: UITableViewHeaderFooterView {
         
     }
     
-    func accessoryAction() {
+    @objc func accessoryAction() {
         
         
         

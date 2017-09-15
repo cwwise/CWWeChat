@@ -61,7 +61,7 @@ class MoreItemCell: UICollectionViewCell {
         }
     }
     
-    func itemButtonClick() {
+    @objc func itemButtonClick() {
         if let item = self.item, let action = self.touchAction {
             action(item)
         }

@@ -65,8 +65,8 @@ class CWLoginController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(whiteImage, for: .default)
         
-        let attributes = [NSForegroundColorAttributeName: UIColor.black,
-                          NSFontAttributeName: UIFont.systemFont(ofSize: 17.5)]
+        let attributes = [NSAttributedStringKey.foregroundColor: UIColor.black,
+                          NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17.5)]
         self.navigationController?.navigationBar.titleTextAttributes = attributes
         
         let backItem = UIBarButtonItem(image: UIImage(named: "backBarItemImage"), style: .done, target: self, action: #selector(cancelBarItemAction))
@@ -123,12 +123,12 @@ class CWLoginController: UIViewController {
 
     
     // MARK: 点击事件
-    func cancelBarItemAction() {
+    @objc func cancelBarItemAction() {
         self.navigationController?.popViewController(animated: true)
     }
     
     //
-    func loginButtonAction() {
+    @objc func loginButtonAction() {
         
         self.view.endEditing(true)
         
@@ -163,7 +163,7 @@ class CWLoginController: UIViewController {
         }
     }
     
-    func textValueChanged(_ textField: UITextField) {
+    @objc func textValueChanged(_ textField: UITextField) {
         let first = judgeTextFieldIsAvailable(userNameTextField)
         let seconde = judgeTextFieldIsAvailable(passwordTextField)
         self.loginButton.isEnabled = first && seconde

@@ -22,7 +22,7 @@ public class CWChatMessageController: CWBaseMessageController {
         }
     }
     
-    func rightBarItemDown(_ barItem: UIBarButtonItem) {
+    @objc func rightBarItemDown(_ barItem: UIBarButtonItem) {
         let chatDetailVC = CWChatDetailViewController()
         self.navigationController?.pushViewController(chatDetailVC, animated: true)
     }
@@ -33,12 +33,6 @@ public class CWChatMessageController: CWBaseMessageController {
         return rightBarItem
     }()
     
-    
-    override func messageCellUserAvatarDidClick(_ userId: String) {
-        let detailVC = CWContactDetailController(userId: userId)
-        self.navigationController?.pushViewController(detailVC, animated: true)
-    }
-    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -48,3 +42,4 @@ public class CWChatMessageController: CWBaseMessageController {
         // Dispose of any resources that can be recreated.
     }
 }
+

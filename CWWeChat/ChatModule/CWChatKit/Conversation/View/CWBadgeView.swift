@@ -33,7 +33,7 @@ class CWBadgeView: UIView {
     var sizeOfTextForCurrentSettings: CGSize {
         let text = "\(badgeValue)" as NSString
         let size = CGSize(width: 100, height: 20)
-        let attributes = [NSFontAttributeName: self.badgeTextFont]
+        let attributes = [NSAttributedStringKey.font: self.badgeTextFont]
         let textSize = text.boundingRect(with: size, options: [.usesLineFragmentOrigin], attributes: attributes, context: nil).size
         return textSize
     }
@@ -119,9 +119,9 @@ class CWBadgeView: UIView {
         
         let style = NSMutableParagraphStyle()
         style.alignment = .center
-        let attributes = [NSFontAttributeName: self.badgeTextFont,
-                          NSForegroundColorAttributeName: self.badgeTextColor,
-                          NSParagraphStyleAttributeName: style] as [String : Any]
+        let attributes = [NSAttributedStringKey.font: self.badgeTextFont,
+                          NSAttributedStringKey.foregroundColor: self.badgeTextColor,
+                          NSAttributedStringKey.paragraphStyle: style] as [NSAttributedStringKey : Any]
         text.draw(in: textFrame, withAttributes: attributes)
         
         context?.restoreGState()

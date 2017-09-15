@@ -19,7 +19,7 @@ class CWGroupChatController: CWBaseConversationController {
         self.navigationItem.rightBarButtonItem = barButtonItem
     }
     
-    func createGroupChat() {
+    @objc func createGroupChat() {
         
         let groupManager = CWChatClient.share.groupManager
         let setting = CWChatGroupOptions()

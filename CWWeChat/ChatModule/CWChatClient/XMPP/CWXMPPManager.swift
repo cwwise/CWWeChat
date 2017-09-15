@@ -36,9 +36,6 @@ class CWXMPPManager: NSObject {
     var password: String!
     var completion: CWLoginHandler?
     
-    /// 是否已经登陆
-    var isLogined: Bool = false
-
     /// 初始化方法
     override init() {
         xmppQueue = DispatchQueue(label: "com.cwxmppchat.cwwise", attributes: DispatchQueue.Attributes.concurrent)
@@ -107,17 +104,17 @@ class CWXMPPManager: NSObject {
         reachable?.startListening()
     }
     
-    func applicationWillEnterForeground(_ application: UIApplication) {
+    @objc func applicationWillEnterForeground(_ application: UIApplication) {
         
     }
     
-    func applicationWillResignActive(_ application: UIApplication) {
+    @objc func applicationWillResignActive(_ application: UIApplication) {
         
     }
     
     
     func connetService(user: String) {
-        
+        // 
         if reachable?.isReachable == false {
             self.completion?(nil, CWChatError(error: "网络连接失败"))
             self.completion = nil
@@ -142,7 +139,7 @@ class CWXMPPManager: NSObject {
     }
     
     
-    //发送在线信息
+    //
     func goOnline() {
         let presence = XMPPPresence()
         xmppStream.send(presence)
@@ -280,7 +277,7 @@ extension CWXMPPManager: XMPPStreamManagementDelegate {
     func xmppStreamManagementDidRequestAck(_ sender: XMPPStreamManagement!) {}
     
     func xmppStreamManagement(_ sender: XMPPStreamManagement!, wasEnabled enabled: DDXMLElement!) {
-        log.info("xmppStreamManagement wasEnabled")
+
     }
     
     func xmppStreamManagement(_ sender: XMPPStreamManagement!, didReceiveAckForStanzaIds stanzaIds: [Any]!) {
@@ -295,8 +292,22 @@ extension CWXMPPManager: XMPPStreamManagementDelegate {
 
 extension CWXMPPManager: CWLoginManager {
     
-    func login(username: String, password: String, completion: CWLoginHandler?) {
+    var isConnented: Bool {
+        return xmppStream.isConnected()
+    }
         
+    var isLogined: Bool {
+        return xmppStream.isAuthenticated()
+    }
+    
+    var currentAccount: String {
+        guard let account = xmppStream.myJID.user else {
+            return ""
+        } 
+        return account
+    }
+    
+    func login(username: String, password: String, completion: CWLoginHandler?) {
         // 保存变量
         self.isLoginUser = true
         self.password = password
@@ -306,15 +317,15 @@ extension CWXMPPManager: CWLoginManager {
     }
     
     func register(username: String, password: String, completion: CWLoginHandler?) {
+        // 保存变量
+        self.isLoginUser = false
+        self.password = password
+        self.completion = completion
         
-        
-        
+        connetService(user: username)        
     }
     
-    func currentAccount() -> String {
-        return xmppStream.myJID.user
-    }
-        
+
     func logout() {
         //停止发送消息
         

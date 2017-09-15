@@ -24,7 +24,7 @@ private struct CWTextParser {
 class CWChatTextParser: NSObject {
     
     class func parseText(_ text: String,
-                         attributes: [String: Any] = kChatTextAttribute) -> NSMutableAttributedString? {
+                         attributes: [NSAttributedStringKey: Any] = kChatTextAttribute) -> NSMutableAttributedString? {
 
         if text.characters.count == 0 {
             return nil

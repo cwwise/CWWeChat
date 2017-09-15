@@ -89,7 +89,7 @@ class MyEmoticonCell: UITableViewCell {
         
     }
     
-    func deleteButtonDown() {
+    @objc func deleteButtonDown() {
         self.delegate?.emoticonCellDeleteButtonDown(cell: self)
     }
     

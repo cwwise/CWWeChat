@@ -33,7 +33,7 @@ class CWTableViewBoolCell: CWTableViewCell {
     }
     
     
-    func switchChangeStatus(_ cellSwitch: UISwitch) {
+    @objc func switchChangeStatus(_ cellSwitch: UISwitch) {
         if let _ = self.delegate {
 
         }

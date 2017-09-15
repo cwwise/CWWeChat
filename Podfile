@@ -10,9 +10,7 @@ target 'CWWeChat' do
   pod 'SnapKit'
 
   # request
-  pod 'Alamofire'
   pod 'Moya/RxSwift'
-  pod 'RxSwift'
   pod 'RxCocoa'
   pod 'OHHTTPStubs/Swift'
 
@@ -20,10 +18,11 @@ target 'CWWeChat' do
   pod 'SwiftyImage'
   pod 'Kingfisher'
 
-  # database
   pod 'SQLite.swift'
-
-  # log
+  pod 'Alamofire'
+  pod 'RxSwift'
+      
+# log
   pod 'SwiftyBeaver'
   
   # chat

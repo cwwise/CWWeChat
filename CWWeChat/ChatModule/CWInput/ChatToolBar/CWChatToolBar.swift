@@ -203,7 +203,7 @@ public class CWChatToolBar: UIView {
         
     }
 
-    func handelVoiceClick(_ sender: UIButton) {
+    @objc func handelVoiceClick(_ sender: UIButton) {
         self.voiceButton.isSelected = !self.voiceButton.isSelected
         self.emoticonButton.isSelected = false
         self.moreButton.isSelected = false
@@ -227,7 +227,7 @@ public class CWChatToolBar: UIView {
         self.delegate?.chatToolBar(self, voiceButtonPressed: sender.isSelected, keyBoardState: keyBoardChanged)
     }
     
-    func handelEmotionClick(_ sender: UIButton) {
+    @objc func handelEmotionClick(_ sender: UIButton) {
         self.emoticonButton.isSelected = !self.emoticonButton.isSelected
         self.voiceButton.isSelected = false
         self.moreButton.isSelected = false
@@ -252,7 +252,7 @@ public class CWChatToolBar: UIView {
         
     }
     
-    func handelMoreClick(_ sender: UIButton) {
+    @objc func handelMoreClick(_ sender: UIButton) {
         self.moreButton.isSelected = !self.moreButton.isSelected
         self.voiceButton.isSelected = false
         self.emoticonButton.isSelected = false
@@ -290,7 +290,7 @@ public class CWChatToolBar: UIView {
     }
     
     // MARK: 高度变化
-    func layoutAndAnimateTextView() {
+    @objc func layoutAndAnimateTextView() {
         
         let maxHeight = self.textViewLineHeight() * 4
         let contentHeight = ceil(inputTextView.sizeThatFits(inputTextView.size).height)

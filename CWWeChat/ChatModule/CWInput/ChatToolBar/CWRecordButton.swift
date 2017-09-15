@@ -36,21 +36,21 @@ class CWRecordButton: UIButton {
     }
     
     //MARK: 录音相关的
-    func recordCancel(_ button: UIButton) {
+    @objc func recordCancel(_ button: UIButton) {
 
     }
     
-    func recordComplection(_ button: UIButton) {
+    @objc func recordComplection(_ button: UIButton) {
     }
     
-    func recordDragOut(_ button: UIButton) {
+    @objc func recordDragOut(_ button: UIButton) {
     }
     
-    func recordDragIn(_ button: UIButton) {
+    @objc func recordDragIn(_ button: UIButton) {
     }
     
     ///录音按钮按下
-    func recordClick(_ button: UIButton) {
+    @objc func recordClick(_ button: UIButton) {
         
     }
     

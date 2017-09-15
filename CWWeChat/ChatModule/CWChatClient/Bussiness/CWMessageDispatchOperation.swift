@@ -152,7 +152,7 @@ class CWMessageDispatchOperation: Operation {
 
     }
     
-    func _startOperation() {
+    @objc func _startOperation() {
         //发送消息的任务
         sendMessage()
     }

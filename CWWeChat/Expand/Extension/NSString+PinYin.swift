@@ -27,7 +27,7 @@ extension String {
         for temp in array {
             if temp.characters.count == 0 {continue}
             let index = temp.index(temp.startIndex, offsetBy: 1)
-            pinYing += temp.substring(to: index)
+            pinYing += temp[..<index]
         }
         return pinYing
         
@@ -36,7 +36,7 @@ extension String {
     var fistLetter: String {
         if self.characters.count == 0 {return self}
         let index = self.index(self.startIndex, offsetBy: 1)
-        return self.substring(to: index)
+        return String(self[..<index])
     }
 }
 

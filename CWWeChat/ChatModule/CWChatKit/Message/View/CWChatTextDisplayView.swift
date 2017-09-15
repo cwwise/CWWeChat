@@ -15,7 +15,7 @@ class CWChatTextDisplayView: UIView {
     var attrString:NSAttributedString? {
         didSet {
             let mutableAttrString = NSMutableAttributedString(attributedString: attrString!)
-            mutableAttrString.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 25)],
+            mutableAttrString.addAttributes([NSAttributedStringKey.font:UIFont.systemFont(ofSize: 25)],
                                             range: NSMakeRange(0, attrString!.length))
             
             self.textView.attributedText = mutableAttrString
@@ -70,7 +70,7 @@ class CWChatTextDisplayView: UIView {
         
     }
     
-    func dismiss() {
+    @objc func dismiss() {
 //        UIApplication.shared.setStatusBarHidden(false, with: .fade)
         UIView.animate(withDuration: 0.2, animations: {
             self.alpha = 0

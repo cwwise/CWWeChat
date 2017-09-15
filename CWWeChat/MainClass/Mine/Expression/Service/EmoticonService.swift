@@ -175,7 +175,9 @@ class EmoticonService {
                     }
                     
                     let index = emoticon.id.index(emoticon.id.startIndex, offsetBy: 5)
-                    emoticon.title = emoticonInfo["description"].string ?? emoticon.id.substring(to: index)
+                    
+                    let string = String(emoticon.id[..<index])
+                    emoticon.title = emoticonInfo["description"].string ?? string
                     
                     emoticonList.append(emoticon)
                 }
