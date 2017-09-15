@@ -10,6 +10,8 @@ import UIKit
 
 protocol MessageContentViewDelegate: NSObjectProtocol {
     
+    // 点击
+    
 }
 
 /* 
@@ -55,6 +57,14 @@ class MessageContentView: UIView {
             bubbleImageView.image = image.resizableImage(withCapInsets: cap)
           //  bubbleImageView.highlightedImage = highlightedImage.resizableImage(withCapInsets: cap)
         }
+    }
+    
+    func updateState() {
+        
+    }
+    
+    func updateProgress() {
+        
     }
     
     override func layoutSubviews() {

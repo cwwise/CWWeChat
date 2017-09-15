@@ -29,17 +29,12 @@ class CWChatImageView: UIImageView {
         return indicatorLabel
     }()
     
-    convenience init() {
-        self.init(frame: .zero)
-        setup()
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        setupUI()
     }
     
-    func setup() {
+    func setupUI() {
         self.addSubview(indicatorbackgroundView)
         self.addSubview(activityView)
         self.addSubview(indicatorLabel)

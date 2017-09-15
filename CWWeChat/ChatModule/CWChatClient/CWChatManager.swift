@@ -92,6 +92,9 @@ public protocol CWChatManager: NSObjectProtocol {
     func sendMessageReadAck(_ message: CWMessage,
                             completion: @escaping CWMessageCompletionBlock)
     
+    
+    func messageTransportProgress(_ message: CWMessage) -> Float
+    
     /// 发送消息
     ///
     /// - Parameters:

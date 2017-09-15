@@ -163,8 +163,12 @@ extension CWChatService: CWChatManager {
     
     /// 发送回执消息(不保存消息)
     func sendMessageReadAck(_ message: CWMessage, completion: @escaping CWMessageCompletionBlock) {
-        
         dispatchManager.sendMessage(message, completion: completion)
+    }
+    
+    func messageTransportProgress(_ message: CWMessage) -> Float {
+        
+        return 0
     }
     
     /// 发送消息

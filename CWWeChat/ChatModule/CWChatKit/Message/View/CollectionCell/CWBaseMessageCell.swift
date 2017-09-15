@@ -15,22 +15,24 @@ protocol CWBaseMessageCellDelegate: NSObjectProtocol {
     /// - Parameters:
     ///   - cell: cell
     ///   - link: link
-    func messageCellDidTapLink(_ cell: CWBaseMessageCell, link: URL)
+    func messageCellDidTap(_ cell: CWBaseMessageCell, link: URL)
     
     /// 点击cell文字中的电话
     ///
     /// - Parameters:
     ///   - cell: cell
     ///   - phone: phone
-    func messageCellDidTapPhone(_ cell: CWBaseMessageCell, phone: String)
+    func messageCellDidTap(_ cell: CWBaseMessageCell, phone: String)
     
     /// cell被点击
     ///
     /// - Parameter cell: cell
     func messageCellDidTap(_ cell: CWBaseMessageCell)
     
+    /// cell 重发按钮点击
+    ///
+    /// - Parameter cell: cell
     func messageCellResendButtonClick(_ cell: CWBaseMessageCell)
-    
     
     /// 头像点击的回调方法
     ///
@@ -52,7 +54,7 @@ class CWBaseMessageCell: UICollectionViewCell {
     
     weak var delegate: CWBaseMessageCellDelegate?
         
-    var message: CWMessageModel!
+    var message: CWMessageModel?
     
     // MARK: 属性
     /// 用户名称
@@ -84,6 +86,8 @@ class CWBaseMessageCell: UICollectionViewCell {
             messageContentView = TextMessageContentView()
         } else if messageType == .image {
             messageContentView = ImageMessageContentView()
+        } else if messageType == .voice{
+            messageContentView = VoiceMessageContentView()
         } else {
             messageContentView = MessageContentView()
         }
@@ -196,7 +200,6 @@ class CWBaseMessageCell: UICollectionViewCell {
         }
     }
     
-        
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -222,7 +225,6 @@ extension CWBaseMessageCell {
         avatarImageView.frame = layoutAttributes.avaterFrame
         usernameLabel.frame = layoutAttributes.usernameFrame
         messageContentView.frame = layoutAttributes.messageContainerFrame
-        print(layoutAttributes.messageContainerFrame)
     }
     
 }

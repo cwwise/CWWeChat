@@ -9,6 +9,12 @@
 import UIKit
 import YYText
 
+public enum CMessagePlayStatus {
+    case none
+    case playing
+    case played
+}
+
 class CWMessageModel: NSObject {
     
     private var message: CWMessage
@@ -34,6 +40,10 @@ class CWMessageModel: NSObject {
         return message.senderId!
     }
     
+    public var transportProgress: Float = 0
+    
+    public var playStatus: CMessagePlayStatus = .none
+
     // 文字(还待完善)
     public var textLayout: YYTextLayout?
     

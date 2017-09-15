@@ -21,11 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //设置logger
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        logoutSuccess()
+        loginSuccess()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         setupLogger()
-      //  loginXMPP()
+        loginXMPP()
         //注册推送信息
         registerRemoteNotification()
         

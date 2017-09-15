@@ -28,7 +28,7 @@ protocol CWChatKeyboardDelegate: NSObjectProtocol {
 
 public class CWChatKeyboard: UIView {
         
-    public weak var associateTableView: UITableView?
+    public weak var associateTableView: UIScrollView?
 
     weak var delegate: CWChatKeyboardDelegate?
     /// 风格

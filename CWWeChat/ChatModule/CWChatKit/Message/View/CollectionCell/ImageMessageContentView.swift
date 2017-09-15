@@ -53,6 +53,13 @@ class ImageMessageContentView: MessageContentView {
         } else  {
             messageImageView.image = nil
         }
+    }
+    
+    
+    
+    func update(progress: Float) {
+        
+        
         
     }
     
