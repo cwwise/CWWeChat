@@ -104,11 +104,11 @@ class CWXMPPManager: NSObject {
         reachable?.startListening()
     }
     
-    func applicationWillEnterForeground(_ application: UIApplication) {
+    @objc func applicationWillEnterForeground(_ application: UIApplication) {
         
     }
     
-    func applicationWillResignActive(_ application: UIApplication) {
+    @objc func applicationWillResignActive(_ application: UIApplication) {
         
     }
     

@@ -147,7 +147,7 @@ public class CWContactHelper: NSObject {
         if string.characters.count == 0 {return false}
         let index = string.index(string.startIndex, offsetBy: 1)
         let regextest = NSPredicate(format: "SELF MATCHES %@", "^[A-Za-z]+$")
-        return regextest.evaluate(with: string.substring(to: index))
+        return regextest.evaluate(with: string[..<index])
     }
     
     //初始化默认的组

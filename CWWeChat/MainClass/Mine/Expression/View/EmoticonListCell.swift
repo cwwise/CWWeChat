@@ -105,7 +105,7 @@ class EmoticonListCell: UITableViewCell {
 
     
     // MARK: Action
-    func downloadAction() {
+    @objc func downloadAction() {
         
         
         

@@ -33,12 +33,12 @@ extension CWBaseMessageController {
     }
     
     
-    func hideKeyboard() {
+    @objc func hideKeyboard() {
        // self.keyboard.en
     }
     
     ///键盘将要隐藏
-    func handleWillHideKeyboard(_ notification: Notification)  {
+    @objc func handleWillHideKeyboard(_ notification: Notification)  {
         keyboardWillShowHide(notification, hideKeyBoard:true)
     }
     
@@ -46,7 +46,7 @@ extension CWBaseMessageController {
         
     }
     
-    func handleWillShowKeyboard(_ notification: Notification)  {
+    @objc func handleWillShowKeyboard(_ notification: Notification)  {
         keyboardWillShowHide(notification)
     }
     

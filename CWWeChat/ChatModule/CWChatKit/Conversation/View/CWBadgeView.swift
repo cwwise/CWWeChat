@@ -121,7 +121,7 @@ class CWBadgeView: UIView {
         style.alignment = .center
         let attributes = [NSAttributedStringKey.font: self.badgeTextFont,
                           NSAttributedStringKey.foregroundColor: self.badgeTextColor,
-                          NSAttributedStringKey.paragraphStyle: style] as [String : Any]
+                          NSAttributedStringKey.paragraphStyle: style] as [NSAttributedStringKey : Any]
         text.draw(in: textFrame, withAttributes: attributes)
         
         context?.restoreGState()

@@ -122,7 +122,7 @@ class InputTextView: UITextView {
                                          height: rect.size.height);
             self.placeHolderTextColor?.set()
             let string = self.placeHolder! as NSString
-            string.draw(in: placeHolderRect, withAttributes: [NSFontAttributeName:self.font!])
+            string.draw(in: placeHolderRect, withAttributes: [NSAttributedStringKey.font:self.font!])
         }
         
     }

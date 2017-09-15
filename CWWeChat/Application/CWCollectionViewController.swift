@@ -42,7 +42,7 @@ class CWCollectionViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    func sendMessage() {
+    @objc func sendMessage() {
         let index = arc4random() % 3
         if index == 0 {
             sendTextMessage()

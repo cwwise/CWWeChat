@@ -117,7 +117,7 @@ class Keyboard: UIView {
         self.keyBoardFrameTop = endFrameValue.cgRectValue.minY
     }
     
-    func keyboardWillShowFrame(_ notification: Notification) {
+    @objc func keyboardWillShowFrame(_ notification: Notification) {
         
         let userInfo = notification.userInfo!
         let endFrameValue = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
@@ -128,7 +128,7 @@ class Keyboard: UIView {
         }
     }
     
-    func keyboardWillHideFrame(_ notification: Notification) {
+    @objc func keyboardWillHideFrame(_ notification: Notification) {
         // 收到键盘消失
         let userInfo = notification.userInfo!
         let endFrameValue = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
@@ -159,11 +159,11 @@ class Keyboard: UIView {
     }
     
     // MARK: Action
-    func handelVoiceClick(_ sender: UIButton) {
+    @objc func handelVoiceClick(_ sender: UIButton) {
         
     }
     
-    func handelEmotionClick(_ sender: UIButton) {
+    @objc func handelEmotionClick(_ sender: UIButton) {
         
         if self.status != .emoticon {
             
@@ -188,7 +188,7 @@ class Keyboard: UIView {
         
     }
     
-    func handelMoreClick(_ sender: UIButton) {
+    @objc func handelMoreClick(_ sender: UIButton) {
         
         if self.status != .more {
             

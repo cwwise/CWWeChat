@@ -38,7 +38,7 @@ class CWMessageDispatchManager: NSObject {
     }
     
     /// 监听网络状态和XMPP连接状态
-    func monitorNetworkStatus(_ notification: Notification) {
+    @objc func monitorNetworkStatus(_ notification: Notification) {
         
         guard let status = notification.object as? Bool else {
             return

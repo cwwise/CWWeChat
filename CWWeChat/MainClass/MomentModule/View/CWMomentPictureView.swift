@@ -72,7 +72,7 @@ class CWMomentPictureView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func tapAction(_ tap: UITapGestureRecognizer) {
+    @objc func tapAction(_ tap: UITapGestureRecognizer) {
         if let tag = tap.view?.tag, tap.state == .ended {
 //            self.delegate?.shareCell(self, didClickImageAtIndex: tag-100)
         }

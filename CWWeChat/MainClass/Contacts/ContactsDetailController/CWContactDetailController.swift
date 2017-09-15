@@ -92,7 +92,7 @@ class CWContactDetailController: CWBaseTableViewController {
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
-    func rightBarItemClick() {
+    @objc func rightBarItemClick() {
         let settingVC = CWContactSettingController()
         self.navigationController?.pushViewController(settingVC, animated: true)
     }

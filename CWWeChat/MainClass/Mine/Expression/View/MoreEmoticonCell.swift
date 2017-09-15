@@ -55,7 +55,7 @@ class MoreEmoticonCell: UICollectionViewCell {
         }
     }
     
-    func itemButtonClick() {
+    @objc func itemButtonClick() {
         
         if let action = self.touchAction {
             action(self)

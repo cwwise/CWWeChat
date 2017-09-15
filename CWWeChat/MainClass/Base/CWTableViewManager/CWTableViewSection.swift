@@ -60,11 +60,11 @@ public class CWTableViewSection: NSObject {
     // see http://www.jianshu.com/p/bf6a8a054156
     ///
     init(headerTitle: String? = nil,
-                     footerTitle: String? = nil,
-                     items: [CWTableViewItem] = [CWTableViewItem]()) {
+         footerTitle: String? = nil,
+         items: [CWTableViewItem] = [CWTableViewItem]()) {
         super.init()
-        self.setValue(headerTitle, forKey: "headerTitle")
-        self.setValue(footerTitle, forKey: "footerTitle")
+       // self.setValue(headerTitle, forKey: "headerTitle")
+       // self.setValue(footerTitle, forKey: "footerTitle")
         for item in items {
             self.addItem(item)
         }

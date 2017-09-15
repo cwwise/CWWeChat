@@ -230,7 +230,7 @@ class CWMomentLayout: NSObject {
         
         let praiseAttri = NSMutableAttributedString()
         
-        let praiseFont = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        let praiseFont = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         let icon = UIImage(named: "momentHeart")
         let iconSize = CGSize(width: 18, height: 16)
         let attach = NSMutableAttributedString.yy_attachmentString(withContent: icon, contentMode: .scaleAspectFit, attachmentSize: iconSize, alignTo: praiseFont, alignment: .center)

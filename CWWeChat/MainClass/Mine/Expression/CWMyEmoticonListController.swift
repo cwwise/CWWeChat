@@ -52,11 +52,11 @@ class CWMyEmoticonListController: CWBaseTableViewController {
     }
     
     
-    func cancelBarButtonDown() {
+    @objc func cancelBarButtonDown() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func rightBarButtonDown() {
+    @objc func rightBarButtonDown() {
 
         let isEditing = self.tableView.isEditing
         

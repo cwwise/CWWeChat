@@ -134,7 +134,7 @@ class EmoticonToolView: UIView {
     }
     
     
-    func sendButtonClick() {
+    @objc func sendButtonClick() {
         self.delegate?.didPressSend()
     }
 

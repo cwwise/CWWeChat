@@ -59,16 +59,16 @@ class CWEmoticonListController: UIViewController {
     }
     
     // MARK: Action
-    func cancelBarButtonDown() {
+    @objc func cancelBarButtonDown() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func rightBarButtonDown() {
+    @objc func rightBarButtonDown() {
         let myExpression = CWMyEmoticonListController()
         self.navigationController?.pushViewController(myExpression, animated: true)
     }
     
-    func segmentedControlChanged(_ segmentedControl: UISegmentedControl)  {
+    @objc func segmentedControlChanged(_ segmentedControl: UISegmentedControl)  {
         
         if segmentedControl.selectedSegmentIndex == currentIndex {
             return

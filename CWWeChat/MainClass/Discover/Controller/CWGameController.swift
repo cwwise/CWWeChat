@@ -21,7 +21,7 @@ class CWGameController: CWWebViewController {
         // Do any additional setup after loading the view.
     }
     
-    func rightBarButtonAction(_ sender: UIBarButtonItem) {
+    @objc func rightBarButtonAction(_ sender: UIBarButtonItem) {
         
     }
 

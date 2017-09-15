@@ -14,11 +14,11 @@ PODS:
   - CocoaLumberjack/Default (3.2.1)
   - CocoaLumberjack/Extensions (3.2.1):
     - CocoaLumberjack/Default
-  - CWActionSheet (0.0.5)
-  - CWShareView (0.0.1)
+  - CWActionSheet (0.0.6)
+  - CWShareView (0.0.2)
   - FSPagerView (0.6.1)
   - Hue (2.0.1)
-  - Kingfisher (4.0.0)
+  - Kingfisher (4.0.1)
   - KissXML (5.2.0)
   - KVOController (1.2.0)
   - MBProgressHUD (1.0.0)
@@ -98,11 +98,11 @@ SPEC CHECKSUMS:
   AMapSearch: beb01c6b2e7be18fb4898e97162fedf144420c6f
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
   CocoaLumberjack: 2800c03334042fe80589423c8d80e582dcaec482
-  CWActionSheet: f41e6e071110ba1a7867ffb351b8e86cb718b53a
-  CWShareView: e2add719ddd1a5c617ea70a363a379f145e57148
+  CWActionSheet: 7ab61a8628bfe3c4b9932983e154181ea4c9cd2f
+  CWShareView: a7befa2a75fa1113c587b69b03b48556b488316d
   FSPagerView: c6cc8f66a5000ca8bb4c9c7b7168626d95c9bda6
   Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
-  Kingfisher: 5cd55fa124d1e731f1d4b04b02832e0e0432d1a9
+  Kingfisher: b771785e9461ed4b8686d40e7145f9e58100cb24
   KissXML: 1c1eeeb6b94e4522cd2f2373e5d0d03c9227738f
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a

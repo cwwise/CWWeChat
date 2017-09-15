@@ -227,7 +227,7 @@ class CWMessageCell: UITableViewCell {
     
     // MARK: cell中的事件处理
     ///头像点击
-    func avatarViewDidTapDown(_ tap: UITapGestureRecognizer) {
+    @objc func avatarViewDidTapDown(_ tap: UITapGestureRecognizer) {
     
         guard let delegate = self.delegate, let messageModel = self.messageModel, tap.state == .ended  else {
             return
@@ -238,7 +238,7 @@ class CWMessageCell: UITableViewCell {
     }
     
     // MARK: 手势事件
-    func bubbleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
+    @objc func bubbleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
  
         guard tapGestureRecognizer.state == .ended else {
             return
@@ -247,18 +247,18 @@ class CWMessageCell: UITableViewCell {
         self.delegate?.messageCellDidTap(self)
     }
     
-    func bubbleDoubleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
+    @objc func bubbleDoubleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
  
         
     }
     
-    func bubbleLongPressed(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
+    @objc func bubbleLongPressed(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
         if longPressGestureRecognizer.state == .began {
             
         }
     }
     
-    func errorButtonClick(_ button: UIButton) {
+    @objc func errorButtonClick(_ button: UIButton) {
         self.delegate?.messageCellResendButtonClick(self)
     }
     

@@ -110,7 +110,7 @@ class CWEmoticonDetailController: UIViewController {
         return resultImg
     }
     
-    func longPressAction(_ gesture: UILongPressGestureRecognizer) {
+    @objc func longPressAction(_ gesture: UILongPressGestureRecognizer) {
         
         if gesture.state == .ended {
             magnifierImageView.isHidden = true

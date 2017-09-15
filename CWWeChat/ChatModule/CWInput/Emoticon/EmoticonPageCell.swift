@@ -69,7 +69,7 @@ class EmoticonPageCell: UICollectionViewCell {
 // MARK: 长按事件
 extension EmoticonPageCell {
     
-    func longPress(_ gesture: UILongPressGestureRecognizer) {
+    @objc func longPress(_ gesture: UILongPressGestureRecognizer) {
         
         if gesture.state == .ended {
             previewer.isHidden = true

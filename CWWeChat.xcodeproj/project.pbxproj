@@ -1772,11 +1772,13 @@
 					};
 					1F34918D1E8786EE00B36641 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1F3491791E8786EE00B36641;
 					};
 					1F3491981E8786EE00B36641 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1F3491791E8786EE00B36641;
 					};
@@ -2569,7 +2571,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwwise.cwcwchat.CWShareWeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -2587,7 +2589,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cwwise.cwcwchat.CWShareWeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

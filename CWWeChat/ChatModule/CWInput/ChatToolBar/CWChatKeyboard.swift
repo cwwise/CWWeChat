@@ -74,7 +74,7 @@ public class CWChatKeyboard: UIView {
         }
     }
     
-    func toolBarFrameChange(_ info: [String: Any]) {
+    @objc func toolBarFrameChange(_ info: [String: Any]) {
         print(info)
         let newRect = (info["new"] as! NSValue).cgRectValue
         let oldRect = (info["old"] as! NSValue).cgRectValue
@@ -90,7 +90,7 @@ public class CWChatKeyboard: UIView {
         self.updateAssociateTableViewFrame()
     }
     
-    func keyboardWillChangeFrame(_ notification: Notification) {
+    @objc func keyboardWillChangeFrame(_ notification: Notification) {
         
         if self.chatToolBar.faceSelected {
             

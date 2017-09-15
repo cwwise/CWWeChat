@@ -151,11 +151,11 @@ class CWWebViewController: UIViewController {
     
     //MARK: 方法
     ///关闭
-    func navigationCloseButtonDown() {
+    @objc func navigationCloseButtonDown() {
        _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func navigationBackButtonDown() {
+    @objc func navigationBackButtonDown() {
         
         if self.webView.canGoBack {
             self.webView.goBack()
@@ -168,7 +168,7 @@ class CWWebViewController: UIViewController {
         
     }
     
-    func rightBarItemClick() {
+    @objc func rightBarItemClick() {
 
         var shareList1: [ShareItem] = []
 
