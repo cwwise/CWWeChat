@@ -139,7 +139,7 @@ class CWEmoticonDetailController: UIViewController {
         magnifierContentView.image = cell.imageView.image
         
         magnifierImageView.centerX = frame.midX
-        magnifierImageView.bottom = frame.top
+        magnifierImageView.bottom = frame.minX
         
     }
 

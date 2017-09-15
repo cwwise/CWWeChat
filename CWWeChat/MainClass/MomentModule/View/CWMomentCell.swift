@@ -138,7 +138,7 @@ class CWMomentCell: UITableViewCell {
         self.timeLabel.textLayout = layout.timeTextLayout
         self.timeLabel.frame = layout.timeFrame
         
-        var top: CGFloat = layout.timeFrame.bottom
+        var top: CGFloat = layout.timeFrame.maxY
         // 点赞和评论列表
         let frame = CGRect(x: contentLabel.left, y: top,
                            width: CWMomentUI.kContentWidth, height: layout.commentHeight)
