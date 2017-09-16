@@ -34,7 +34,7 @@ class ShareViewController: SLComposeServiceViewController {
         itemProvider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil, completionHandler: { (url, error) in
             self.extensionContext!.completeRequest(returningItems: [], completionHandler: { (result) in
 
-                guard let content = self.contentText, let webURL = url else {
+                guard let _ = self.contentText, let _ = url else {
                     return
                 }
             })

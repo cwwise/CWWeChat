@@ -33,7 +33,7 @@ class CWPersonalInfoController: CWBaseTableViewController {
         contactManager.addContactDelegate(self, delegateQueue: DispatchQueue.main)
     }
     
-    func updateUserInfo() {
+    @objc func updateUserInfo() {
         
         
         
