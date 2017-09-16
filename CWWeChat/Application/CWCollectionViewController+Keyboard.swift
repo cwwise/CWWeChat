@@ -34,20 +34,20 @@ extension CWCollectionViewController {
     }
     
     
-    func hideKeyboard() {
+    @objc func hideKeyboard() {
         // self.keyboard.en
     }
     
     ///键盘将要隐藏
-    func handleWillHideKeyboard(_ notification: Notification)  {
+    @objc func handleWillHideKeyboard(_ notification: Notification)  {
         keyboardWillShowHide(notification, hideKeyBoard:true)
     }
     
-    func keyboardWillChangeFrame(_ notification: Notification) {
+    @objc func keyboardWillChangeFrame(_ notification: Notification) {
         
     }
     
-    func handleWillShowKeyboard(_ notification: Notification)  {
+    @objc func handleWillShowKeyboard(_ notification: Notification)  {
         keyboardWillShowHide(notification)
     }
     
