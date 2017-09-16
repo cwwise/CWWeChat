@@ -18,6 +18,9 @@ class CWMenuViewController: CWBaseTableViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(CWMenuCell.self, forCellReuseIdentifier: "CWMenuCell")
+        
+        self.tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "header")
+
         // Do any additional setup after loading the view.
     }
 
@@ -54,6 +57,16 @@ extension CWMenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 5
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header")
+        return footerView
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header")
+        return headerView
     }
 }
 

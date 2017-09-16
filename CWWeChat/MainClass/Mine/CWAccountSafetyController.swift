@@ -20,7 +20,6 @@ class CWAccountSafetyController: CWBaseTableViewController {
         super.viewDidLoad()
         
         self.title = "账号与安全"
-        
         setupItemData()
     }
     
