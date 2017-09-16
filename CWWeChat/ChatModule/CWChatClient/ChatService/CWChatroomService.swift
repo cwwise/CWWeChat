@@ -22,7 +22,7 @@ class CWChatroomService: XMPPModule {
         super.init(dispatchQueue: queue)
     }
     
-    func didActivate() {
+    override func didActivate() {
         self.multiChat.activate(self.xmppStream)
         self.multiChat.addDelegate(self, delegateQueue: self.moduleQueue)
     }

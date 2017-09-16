@@ -15,11 +15,29 @@ let sendMessageTimeoutInterval: TimeInterval = 30
 /// 发送消息
 class CWMessageTransmitter: XMPPModule {
     
-    @discardableResult func sendMessage(content: String,
+    private var streamManagement: XMPPStreamManagement
+
+    override init!(dispatchQueue queue: DispatchQueue!) {
+       
+        let memoryStorage = XMPPStreamManagementMemoryStorage()
+        streamManagement = XMPPStreamManagement(storage: memoryStorage)
+   
+        super.init(dispatchQueue: queue)
+        
+        streamManagement.automaticallyRequestAcks(afterStanzaCount: 5, orTimeout: 2.0)
+        streamManagement.automaticallySendAcks(afterStanzaCount: 5, orTimeout: 2.0)
+        streamManagement.addDelegate(self, delegateQueue: queue)
+    }
+    
+    override func didActivate() {
+        streamManagement.activate(xmppStream)
+    }
+    
+    func sendMessage(content: String,
                      targetId: String,
                      messageId: String,
                      chatType:Int = 0, 
-                     type: Int = 1) -> Bool {
+                     type: Int = 1) {
         // 生成消息
         let messageElement = self.messageElement(withBody: content,
                                                  to: targetId,
@@ -27,10 +45,12 @@ class CWMessageTransmitter: XMPPModule {
                                                  type: type,
                                                  chatType: chatType)
         guard let message = messageElement else {
-            return false
+            return
         }
         log.debug(message)
         // 发送消息
+        // MARK: swift4.0 存在问题
+        /*
         var receipte: XMPPElementReceipt?
         xmppStream.send(message, andGet: &receipte)
         guard let elementReceipte = receipte else {
@@ -38,7 +58,8 @@ class CWMessageTransmitter: XMPPModule {
         }
         // 返回结果
         let result = elementReceipte.wait(sendMessageTimeoutInterval)
-        return result
+        */
+        xmppStream.send(message)
     }
     
     func messageElement(withBody body: String, 
@@ -73,4 +94,27 @@ class CWMessageTransmitter: XMPPModule {
     }
 
     
+    func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
+        streamManagement.autoResume = true
+        streamManagement.enable(withResumption: true, maxTimeout: 60)
+    }
+    
+}
+
+extension CWMessageTransmitter: XMPPStreamManagementDelegate {
+    
+    func xmppStreamManagementDidRequestAck(_ sender: XMPPStreamManagement!) {}
+    
+    func xmppStreamManagement(_ sender: XMPPStreamManagement!, wasEnabled enabled: DDXMLElement!) {
+        
+    }
+    
+    func xmppStreamManagement(_ sender: XMPPStreamManagement!, didReceiveAckForStanzaIds stanzaIds: [Any]!) {
+        // 收到id
+        guard let messageid = stanzaIds as? [String] , messageid.count != 0 else {
+            return
+        }
+        log.debug(messageid)
+        NotificationCenter.default.post(name: kCWMessageDispatchSuccessNotification, object: messageid)
+    }
 }

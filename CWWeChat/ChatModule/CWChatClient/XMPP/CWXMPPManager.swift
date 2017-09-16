@@ -13,10 +13,9 @@ public let kCWMessageDispatchSuccessNotification = NSNotification.Name("kCWMessa
 
 public let kCWNetworkReachabilityNotification = NSNotification.Name("kCWNetworkReachabilityNotification")
 
-
 // xmpp管理实例
 class CWXMPPManager: NSObject {
-    
+
     /// xmpp流
     private(set) var xmppStream: XMPPStream
     /// xmpp重新连接
@@ -24,9 +23,7 @@ class CWXMPPManager: NSObject {
     private var autoPing: XMPPAutoPing
     /// xmpp队列
     private var xmppQueue: DispatchQueue
-
-    fileprivate var streamManagement: XMPPStreamManagement
-
+    
     var options: CWChatClientOptions!
     /// 网络状态监听
     public var reachable: NetworkReachabilityManager?
@@ -40,8 +37,6 @@ class CWXMPPManager: NSObject {
     override init() {
         xmppQueue = DispatchQueue(label: "com.cwxmppchat.cwwise", attributes: DispatchQueue.Attributes.concurrent)
         
-        let memoryStorage = XMPPStreamManagementMemoryStorage()
-        streamManagement = XMPPStreamManagement(storage: memoryStorage)
         xmppStream = XMPPStream()
         xmppReconnect = XMPPReconnect()
         autoPing = XMPPAutoPing()
@@ -50,12 +45,6 @@ class CWXMPPManager: NSObject {
         /// xmpp
         xmppStream.enableBackgroundingOnSocket = true
         xmppStream.addDelegate(self, delegateQueue: xmppQueue)
-
-        /// xmppstreamManagement
-        streamManagement.activate(xmppStream)
-        streamManagement.addDelegate(self, delegateQueue: xmppQueue)
-        streamManagement.automaticallyRequestAcks(afterStanzaCount: 5, orTimeout: 2.0)
-        streamManagement.automaticallySendAcks(afterStanzaCount: 5, orTimeout: 2.0)
 
         ///配置xmpp重新连接的服务
         xmppReconnect.reconnectDelay = 3.0
@@ -220,9 +209,6 @@ extension CWXMPPManager: XMPPStreamDelegate {
 
         log.debug("登陆成功。。。")
         goOnline()
-        
-        streamManagement.autoResume = true
-        streamManagement.enable(withResumption: true, maxTimeout: 60)
     }
     
     func xmppStreamDidRegister(_ sender: XMPPStream!) {
@@ -272,24 +258,6 @@ extension CWXMPPManager: XMPPStreamDelegate {
 
 }
 
-extension CWXMPPManager: XMPPStreamManagementDelegate {
-    
-    func xmppStreamManagementDidRequestAck(_ sender: XMPPStreamManagement!) {}
-    
-    func xmppStreamManagement(_ sender: XMPPStreamManagement!, wasEnabled enabled: DDXMLElement!) {
-
-    }
-    
-    func xmppStreamManagement(_ sender: XMPPStreamManagement!, didReceiveAckForStanzaIds stanzaIds: [Any]!) {
-        // 收到id
-        guard let messageid = stanzaIds as? [String] , messageid.count != 0 else {
-            return 
-        }
-        log.debug(messageid)
-        NotificationCenter.default.post(name: kCWMessageDispatchSuccessNotification, object: messageid)
-    }
-}
-
 extension CWXMPPManager: CWLoginManager {
     
     var isConnented: Bool {
@@ -334,5 +302,3 @@ extension CWXMPPManager: CWLoginManager {
     }
     
 }
-
-

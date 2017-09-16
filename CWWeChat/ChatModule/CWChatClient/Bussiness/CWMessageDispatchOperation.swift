@@ -14,7 +14,7 @@ private let kMax_RepeatCount:Int = 5
 /// 还需要修改
 /// 发送消息线程
 class CWMessageDispatchOperation: Operation {
-    
+    /// 消息发送
     var messageTransmitter: CWMessageTransmitter {
         let chatService = CWChatClient.share.chatManager as! CWChatService
         return chatService.messageTransmitter

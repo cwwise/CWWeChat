@@ -31,9 +31,9 @@ public class CWTableViewSection: NSObject {
     }
     
     /// The height of the header of the specified section of the table view.
-    @objc public var headerHeight: CGFloat = 15
+    public var headerHeight: CGFloat = 15
     /// The height of the footer of the specified section of the table view.
-    @objc public var footerHeight: CGFloat = 5
+    public var footerHeight: CGFloat = 5
     /// The width of padding between the cell title and cell detail view
     public var cellTitlePadding: CGFloat = 20
     
@@ -41,7 +41,7 @@ public class CWTableViewSection: NSObject {
         return tableViewManager?.sections.index(of: self)
     }
     
-    // see http://www.jianshu.com/p/bf6a8a054156
+    // see http://www.jianshu.com/p/bf6a8a054156 swift4.0 中有点问题
     ///
     init(headerTitle: String? = nil,
          footerTitle: String? = nil,

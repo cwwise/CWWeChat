@@ -45,18 +45,18 @@ extension CWChatMessageParse: XMPPStreamDelegate {
     // 收到消息
     func xmppStream(_ sender: XMPPStream!, didReceive message: XMPPMessage!) {
         
-        if UIApplication.shared.applicationState == .background {
-            
-            
-        } else {
-            
-            
-        }
         log.info(message)
         messageHandle.handleMessage(message: message)
+        DispatchQueue.main.async {
+            if UIApplication.shared.applicationState == .background {
+                
+                
+            } else {
+                
+                
+            }
+        }
     }
-    
-
 }
 
 

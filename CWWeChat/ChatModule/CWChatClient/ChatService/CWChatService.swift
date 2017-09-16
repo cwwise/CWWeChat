@@ -41,7 +41,7 @@ class CWChatService: XMPPModule {
         super.init(dispatchQueue: queue)
     }
 
-    func didActivate() {
+    override func didActivate() {
         messageParse.activate(self.xmppStream)
         messageTransmitter.activate(self.xmppStream)
     }

@@ -9,14 +9,25 @@
 import UIKit
 
 /*
+ 消息发送队列Manager
+ 消息会生成对应的 Operation
+ 
+ 1. 网络不通的情况，则等待
+ 2. 如果网络通 但是xmpp链接 未链接则等待xmpp链接成功之后 重试
+ 
+ 3. 发送消息 结果按照 XMPPStreamManagementDelegate来处理
+ 
  根据xmpp返回的消息来判断 消息是否发送成功
+ 
+ 
+ 
  */
 
 /// 消息发送管理队列
 class CWMessageDispatchManager: NSObject {
     /// 队列
     var messageQueue: OperationQueue = OperationQueue()
-    
+    // 消息队列状态
     var messageQueueSuspended: Bool = false
     
     override init() {
@@ -28,7 +39,7 @@ class CWMessageDispatchManager: NSObject {
         
         NotificationCenter.default.addObserver(self, selector: #selector(monitorNetworkStatus(_:)), name: kCWNetworkReachabilityNotification, object: nil)
         
-        /// 添加消息发送成功的观察
+        /// 添加消息发送成功的通知
         NotificationCenter.default.addObserver(forName: kCWMessageDispatchSuccessNotification, object: nil, queue: OperationQueue()) { (notication) in
             
             if let messageIds = notication.object as? [String] {

@@ -81,11 +81,10 @@ class CWImageMessageDispatchOperation: CWMessageDispatchOperation {
         let toId = message.targetId
         let messageId = message.messageId
     
-        let sendResult = messageTransmitter.sendMessage(content: string,
-                                                        targetId: toId,
-                                                        messageId: messageId,
-                                                        chatType: message.chatType.rawValue,
-                                                        type: message.messageType.rawValue)
-        messageSendCallback(sendResult)
+        messageTransmitter.sendMessage(content: string,
+                                       targetId: toId,
+                                       messageId: messageId,
+                                       chatType: message.chatType.rawValue,
+                                       type: message.messageType.rawValue)
     }
 }
