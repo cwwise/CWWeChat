@@ -143,9 +143,9 @@ extension CWMessageViewLayout {
         
         // 如果是文字
         var contentSize: CGSize = CGSize.zero
-        // 根据消息不同类型 计算
-        if message.messageType == .text {
-            
+        
+        switch message.messageType {
+        case .text:
             let content = (message.messageBody as! CWTextMessageBody).text
             let size = CGSize(width: kChatTextMaxWidth, height: CGFloat.greatestFiniteMagnitude)
             var edge: UIEdgeInsets
@@ -167,10 +167,8 @@ extension CWMessageViewLayout {
             contentSize = CGSize(width: textLayout.textBoundingSize.width+edge.left+edge.right,
                                  height: textLayout.textBoundingSize.height+edge.top+edge.bottom)
             message.textLayout = textLayout
-        }
-        
-        else if message.messageType == .image {
-            
+             
+        case .image:
             let imageSize = (message.messageBody as! CWImageMessageBody).size
             //根据图片的比例大小计算图片的frame
             if imageSize.width > imageSize.height {
@@ -186,7 +184,21 @@ extension CWMessageViewLayout {
             let edge = UIEdgeInsets.zero
             contentSize = CGSize(width: contentSize.width+edge.left+edge.right,
                                  height: contentSize.height+edge.top+edge.bottom)
+            
+        case .voice:
+            
+            let voiceMessage = message.messageBody as! CWVoiceMessageBody
+            var scale: CGFloat = CGFloat(voiceMessage.voiceLength)/60.0
+            if scale > 1 {
+                scale = 1
+            }
+            contentSize = CGSize(width: ceil(scale*kChatVoiceMaxWidth)+70, height: kAvaterImageViewWidth+13)
+            
+        default:
+            break
         }
+        
+        
                 
         let origin: CGPoint
         if message.isSend {

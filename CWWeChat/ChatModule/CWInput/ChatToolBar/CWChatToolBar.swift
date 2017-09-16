@@ -314,7 +314,7 @@ public class CWChatToolBar: UIView {
                 
                 let inputViewFrame = self.frame
                 self.frame = CGRect(x: 0, 
-                                    y: inputViewFrame.y - changeInHeight,
+                                    y: inputViewFrame.minY - changeInHeight,
                                     width: inputViewFrame.width,
                                     height: inputViewFrame.height + changeInHeight)
                 
@@ -342,8 +342,8 @@ public class CWChatToolBar: UIView {
         let prevFrame = self.inputTextView.frame
         let numLines = self.inputTextView.numberOfLinesOfText()
         
-        self.inputTextView.frame = CGRect(x: prevFrame.x,
-                                          y: prevFrame.y,
+        self.inputTextView.frame = CGRect(x: prevFrame.minX,
+                                          y: prevFrame.minY,
                                           width: prevFrame.width, 
                                           height: prevFrame.height + changeInHeight)
        

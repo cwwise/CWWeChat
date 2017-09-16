@@ -105,13 +105,13 @@ class CWVoiceIndicatorView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.recordingView.center = self.bounds.center
+        self.recordingView.center = CGPoint(x: self.bounds.width/2, y: self.bounds.height/2)
     }
 
 }
 
 //对外交互的 view 控制
-// MARK: - @extension TSChatVoiceIndicatorView
+// MARK: - @extension CWVoiceIndicatorView
 extension CWVoiceIndicatorView {
     //正在录音
     func recording() {

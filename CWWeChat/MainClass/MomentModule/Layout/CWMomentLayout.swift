@@ -71,13 +71,13 @@ class CWMomentLayout: NSObject {
         self.layoutTime()
         
         size = CGSize(width: 20, height: 17)
-        origin = CGPoint(x: kScreenWidth - CWMomentUI.kLeftMargin-size.width, y: multimediaFrame.bottom+8)
+        origin = CGPoint(x: kScreenWidth - CWMomentUI.kLeftMargin-size.width, y: multimediaFrame.maxY+8)
         toolButtonFrame = CGRect(origin: origin, size: size)
 
         self.layoutPraiseText()
     
         // 图片
-        height += timeFrame.bottom
+        height += timeFrame.maxY
         
         commentHeight = 40
         height += commentHeight
@@ -99,7 +99,7 @@ class CWMomentLayout: NSObject {
         let container = YYTextContainer(size: CWMomentUI.kUsernameSize)
         usernameTextLayout = YYTextLayout(container: container, text: username)
         
-        let origin = CGPoint(x: avatarFrame.right+CWMomentUI.kPaddingText, y: CWMomentUI.kTopMargin)
+        let origin = CGPoint(x: avatarFrame.maxX+CWMomentUI.kPaddingText, y: CWMomentUI.kTopMargin)
         let size = CWMomentUI.kUsernameSize
         usernameFrame = CGRect(origin: origin, size: size)
     }
@@ -108,7 +108,7 @@ class CWMomentLayout: NSObject {
     func layoutContent() {
 
         guard let content = moment.content else {
-            self.contentFrame = CGRect(x: usernameFrame.x, y: usernameFrame.bottom+contentTopMargin,
+            self.contentFrame = CGRect(x: usernameFrame.minX, y: usernameFrame.maxY+contentTopMargin,
                                        width: CWMomentUI.kContentWidth, height: 0)
             return
         }
@@ -132,7 +132,7 @@ class CWMomentLayout: NSObject {
         
         // 计算高度
         let textHeight = modifier.heightForLineCount(Int(textLayout.rowCount))
-        self.contentFrame = CGRect(x: usernameFrame.x, y: usernameFrame.bottom+contentTopMargin,
+        self.contentFrame = CGRect(x: usernameFrame.minX, y: usernameFrame.maxY+contentTopMargin,
                                    width: CWMomentUI.kContentWidth, height: textHeight)
     }
     
@@ -140,7 +140,7 @@ class CWMomentLayout: NSObject {
     func layoutPicture() {
        
         if moment.imageArray.count == 0 {
-            self.multimediaFrame = CGRect(x: usernameFrame.x, y: contentFrame.bottom+10,
+            self.multimediaFrame = CGRect(x: usernameFrame.minX, y: contentFrame.maxY+10,
                                           width: CWMomentUI.kContentWidth, height: 0)
             return
         }
@@ -185,13 +185,13 @@ class CWMomentLayout: NSObject {
         }
         
         self.pictureSize = picSize
-        self.multimediaFrame = CGRect(x: usernameFrame.x, y: contentFrame.bottom+10,
+        self.multimediaFrame = CGRect(x: usernameFrame.minX, y: contentFrame.maxY+10,
                                       width: CWMomentUI.kContentWidth, height: picHeight)
     }
     
     func layoutNews() {
         if (moment.multimedia != nil) && moment.type == .url {
-            self.multimediaFrame = CGRect(x: usernameFrame.x, y: contentFrame.bottom+10,
+            self.multimediaFrame = CGRect(x: usernameFrame.minX, y: contentFrame.maxY+10,
                                           width: CWMomentUI.kContentWidth, height: 50)
         } 
         
@@ -213,7 +213,7 @@ class CWMomentLayout: NSObject {
         container.maximumNumberOfRows = 1
         timeTextLayout = YYTextLayout(container: container, text: timeText)
 
-        self.timeFrame = CGRect(x: usernameFrame.x, y: multimediaFrame.bottom+8, 
+        self.timeFrame = CGRect(x: usernameFrame.minX, y: multimediaFrame.maxY+8, 
                                 width: width, height: 17)
     }
     

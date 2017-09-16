@@ -29,17 +29,12 @@ class CWChatImageView: UIImageView {
         return indicatorLabel
     }()
     
-    convenience init() {
-        self.init(frame: .zero)
-        setup()
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        setupUI()
     }
     
-    func setup() {
+    func setupUI() {
         self.addSubview(indicatorbackgroundView)
         self.addSubview(activityView)
         self.addSubview(indicatorLabel)
@@ -53,8 +48,10 @@ class CWChatImageView: UIImageView {
         self.indicatorbackgroundView.frame = self.bounds
         self.activityView.center = CGPoint(x: self.bounds.midX, y: self.bounds.midY-10)
         
-        self.indicatorLabel.frame.size = CGSize(width: 100, height: 15)
-        self.indicatorLabel.frame.center = CGPoint(x: self.bounds.midX, y: self.bounds.midY+8)
+        let size = CGSize(width: 100, height: 15)
+        let origin = CGPoint(x: self.bounds.midX-50, y: self.bounds.midY)
+        
+        self.indicatorLabel.frame = CGRect(origin: origin, size: size)        
     }
     
     func hideProgressView()  {

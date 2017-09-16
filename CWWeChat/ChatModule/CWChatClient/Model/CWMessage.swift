@@ -113,6 +113,8 @@ public enum CWMessageType: Int {
             self = .text
         case "ChatMessageImageCell":
             self = .image
+        case "ChatMessageVoiceCell":
+            self = .voice
         default:
             self = .none
         }

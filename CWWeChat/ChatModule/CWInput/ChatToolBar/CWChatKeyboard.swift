@@ -28,7 +28,7 @@ protocol CWChatKeyboardDelegate: NSObjectProtocol {
 
 public class CWChatKeyboard: UIView {
         
-    public weak var associateTableView: UITableView?
+    public weak var associateTableView: UIScrollView?
 
     weak var delegate: CWChatKeyboardDelegate?
     /// 风格
@@ -138,9 +138,9 @@ public class CWChatKeyboard: UIView {
                 let duration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
                 
                 let chatToolBarHeight = self.height - kMoreInputViewHeight
-                let targetY = endFrame.y - chatToolBarHeight - (kScreenHeight - self.superview!.height)
+                let targetY = endFrame.minY - chatToolBarHeight - (kScreenHeight - self.superview!.height)
                 
-                if beginFrame.height > 0 && (beginFrame.y - endFrame.y > 0) {
+                if beginFrame.height > 0 && (beginFrame.minY - endFrame.minY > 0) {
                     // 键盘弹起 (包括，第三方键盘回调三次问题，监听仅执行最后一次)
                     self.lastChatKeyboardY = self.y
                     self.y = targetY
@@ -150,7 +150,7 @@ public class CWChatKeyboard: UIView {
                     self.updateAssociateTableViewFrame()
                     
                 }
-                else if (endFrame.y == kScreenHeight && beginFrame.y != endFrame.y && duration > 0) {
+                else if (endFrame.minY == kScreenHeight && beginFrame.minY != endFrame.minY && duration > 0) {
                     self.lastChatKeyboardY = self.y
                     if self.keyboardStyle == .chat {
                         self.y = targetY
@@ -163,7 +163,7 @@ public class CWChatKeyboard: UIView {
                     }
                     self.updateAssociateTableViewFrame()
                 }
-                else if ((beginFrame.y-endFrame.y<0) && duration == 0) {
+                else if ((beginFrame.minY-endFrame.minY<0) && duration == 0) {
                     self.lastChatKeyboardY = self.y
                     self.y = targetY
                     self.updateAssociateTableViewFrame()
