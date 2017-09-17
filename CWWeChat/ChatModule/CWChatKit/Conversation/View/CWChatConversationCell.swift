@@ -103,7 +103,7 @@ class CWChatConversationCell: UITableViewCell {
     }
     
     //MARK: 属性
-    var conversationModel: CWChatConversationModel! {
+    var conversationModel: CWConversationModel! {
         didSet {
             self.setupUI()
         }

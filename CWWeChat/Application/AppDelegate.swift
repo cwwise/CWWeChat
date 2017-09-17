@@ -21,11 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //设置logger
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        loginSuccess()
+        setupController()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         setupLogger()
-        loginXMPP()
         //注册推送信息
         registerRemoteNotification()
         
@@ -36,17 +35,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 window.addSubview(label)
             }
         }
-        
         return true
     }
     
-    func loginXMPP() {
+    func setupController() {
+        // 如果当前已经登录
+        var account: CWAccount?
+        do {
+            account = try CWAccount.userAccount()
+        } catch {
+        }
+        
+        guard let current = account else {
+            let loginVC = UIStoryboard.welcomeViewController()
+            self.window?.rootViewController = loginVC
+            return
+        }
+        
+        if current.isLogin {
+            let tabBarController = CWChatTabBarController()
+            self.window?.rootViewController = tabBarController
+            loginChatWithAccount(current)
+        } else {
+            let loginVC = UIStoryboard.welcomeViewController()
+            self.window?.rootViewController = loginVC
+        }
+    }
+    
+    func loginChatWithAccount(_ account: CWAccount) {
         let options = CWChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
         let chatClient = CWChatClient.share
         chatClient.initialize(with: options)
         
-        chatClient.loginManager.login(username: "haohao",
-                                      password: "1234567") { (username, error) in
+        chatClient.loginManager.login(username: account.username,
+                                      password: account.password) { (username, error) in
                                         
                                         if let username = username {
                                             log.debug("登录成功...\(username)")

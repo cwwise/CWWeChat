@@ -10,20 +10,25 @@ import UIKit
 
 extension UIApplication {
     
-    var appBundleName: String {
+    public var appBundleName: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
     }
     
-    var appBundleID: String {
+    public var appBundleID: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as! String
     }
     
-    var appVersion: String {
+    public var appVersion: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
     
-    var appBuildVersion: String {
+    public var appBuildVersion: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+    }
+    
+    public var documentsDirectoryPath: String {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as [String]
+        return paths[0]
     }
     
 }

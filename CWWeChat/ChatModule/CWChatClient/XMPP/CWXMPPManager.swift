@@ -9,9 +9,9 @@
 import XMPPFramework
 import Alamofire
 
-public let kCWMessageDispatchSuccessNotification = NSNotification.Name("kCWMessageDispatchSuccessNotification")
+let kCWMessageDispatchSuccessNotification = NSNotification.Name("kCWMessageDispatchSuccessNotification")
 
-public let kCWNetworkReachabilityNotification = NSNotification.Name("kCWNetworkReachabilityNotification")
+let kCWNetworkReachabilityNotification = NSNotification.Name("kCWNetworkReachabilityNotification")
 
 // xmpp管理实例
 class CWXMPPManager: NSObject {

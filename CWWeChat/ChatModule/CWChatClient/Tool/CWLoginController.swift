@@ -54,7 +54,6 @@ class CWLoginController: UIViewController {
         self.view.backgroundColor = UIColor.white
         setupUI()
         setupNavigationBar()
-        // Do any additional setup after loading the view.
     }
     
     func setupNavigationBar() {
@@ -141,14 +140,21 @@ class CWLoginController: UIViewController {
 //        hud.bezelView.backgroundColor = UIColor.gray
         hud.label.text = "Loading..."
         
-        let options = CWChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
         let chatClient = CWChatClient.share
-        chatClient.initialize(with: options)
+        chatClient.initialize(with: CWChatClientOptions.default)
         chatClient.loginManager.login(username: userName, password: password) { (username, error) in
            
             DispatchQueue.main.async(execute: {
                 hud.mode = .text
                 if error == nil {
+                    do {
+                        let account = CWAccount(username: "haohao", password: "1234567")
+                        account.isLogin = true
+                        try account.save()
+                    } catch {
+                        log.error("保存account出错..")
+                    }
+               
                     // 登陆成功
                     let appdelegate = UIApplication.shared.delegate as! AppDelegate
                     appdelegate.loginSuccess()
@@ -161,6 +167,7 @@ class CWLoginController: UIViewController {
             })
   
         }
+        
     }
     
     @objc func textValueChanged(_ textField: UITextField) {
@@ -174,6 +181,11 @@ class CWLoginController: UIViewController {
             return false
         }
         return text.characters.count >= 6
+    }
+    
+    //
+    func loginSuccess() {
+        
     }
     
     override func didReceiveMemoryWarning() {

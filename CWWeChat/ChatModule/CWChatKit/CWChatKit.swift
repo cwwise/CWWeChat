@@ -47,7 +47,6 @@ public class CWChatKit: NSObject {
         if let data = DefaultCacheSerializer.default.data(with: image, original: nil) {
             FileManager.default.createFile(atPath: filePath, contents: data, attributes: nil)
         }
-        
     }
 
 }

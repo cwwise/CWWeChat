@@ -18,7 +18,7 @@ class CWConversationController: CWBaseConversationController {
          
         let result = self.chatManager.fetchAllConversations()
         for conversation in result {
-            conversationList.append(CWChatConversationModel(conversation: conversation))
+            conversationList.append(CWConversationModel(conversation: conversation))
         }
         
         if #available(iOS 9.0, *) {
@@ -31,7 +31,7 @@ class CWConversationController: CWBaseConversationController {
     
     @objc func sendMessage() {
         
-        let demo = CWCollectionViewController(targetId: "chenwei@cwwise.com")
+        let demo = CWCollectionViewController(targetId: "chenwei")
         demo.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(demo, animated: true)
         return

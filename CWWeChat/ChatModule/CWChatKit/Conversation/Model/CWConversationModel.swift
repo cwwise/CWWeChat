@@ -1,5 +1,5 @@
 //
-//  CWChatConversationModel.swift
+//  CWConversationModel.swift
 //  CWWeChat
 //
 //  Created by chenwei on 2017/3/26.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// 会话模型
-public class CWChatConversationModel: NSObject {
+public class CWConversationModel: NSObject {
 
     /// 会话
     private(set) var conversation: CWConversation

@@ -32,7 +32,8 @@ class CWCollectionViewController: UIViewController {
     var keyboard: CWChatKeyboard = CWChatKeyboard()
     
     lazy var collectionView: UICollectionView = {
-        let frame = self.view.bounds
+        let frame = CGRect(x: 0, y: 0,
+                           width: kScreenWidth, height: kScreenHeight-kChatToolBarHeight)
         let layout = CWMessageViewLayout()
         layout.delegate = self
         let collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
@@ -55,14 +56,8 @@ class CWCollectionViewController: UIViewController {
         
         setupUI()
         
-        sendTextMessage(isSend: true)
-        sendTextMessage(isSend: false)
-        
-        sendImageMessage(isSend: true)
-        sendImageMessage(isSend: false)
-        
-        sendVoiceMessage(isSend: true)
-        sendVoiceMessage(isSend: false)
+        let chatManager = CWChatClient.share.chatManager
+        chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
     }
     
     func setupUI() {
@@ -83,60 +78,34 @@ class CWCollectionViewController: UIViewController {
         keyboard.moreInputView.delegate = self
         keyboard.associateTableView = collectionView
         self.view.addSubview(keyboard)
-        
     }
     
-    @objc func sendMessage() {
-        let index = arc4random() % 3
-        if index == 0 {
-            sendTextMessage()
-        } else if index == 1 {
-            sendImageMessage()
-        } else {
-            sendVoiceMessage()
+    func loadMessageData() {
+        self.conversation.fetchMessagesStart { (list, error) in
+            if error == nil {
+                let messageList = self.formatMessages(list)
+                self.messageList.append(contentsOf: messageList)
+                self.collectionView.reloadData()
+                self.updateMessageAndScrollBottom(false)
+            }
         }
-        
-        
     }
     
-    func sendTextMessage(isSend: Bool = false) {
-        let message = CWMessage(targetId: conversation.targetId,
-                                text: "测试数据\(messageList.count)条")
-        message.direction = isSend ? .send : .receive
-        let messageModel = CWMessageModel(message: message)
-        messageList.append(messageModel)
+    func formatMessages(_ messages: [CWMessage]) -> [CWMessageModel] {
         
-        collectionView.reloadData()
+        var messageModelList = [CWMessageModel]()
+        for message in messages {
+            // TODO: 添加时间分割显示
+            
+            let messageModel = CWMessageModel(message: message)
+            messageModelList.append(messageModel)
+        }
+        return messageModelList
     }
-    
-    func sendImageMessage(isSend: Bool = false) {
-        let url = URL(string: "http://7xsmd8.com1.z0.glb.clouddn.com/cwwechat002.jpg")
-        let size = CGSize(width: 200, height: 300)
-        let messageBody = CWImageMessageBody(path: nil, originalURL: url, size: size)
-        let message = CWMessage(targetId: conversation.targetId, messageBody: messageBody)
-        message.direction = isSend ? .send : .receive
-        
-        let messageModel = CWMessageModel(message: message)
-        messageList.append(messageModel)
-        
-        collectionView.reloadData()
-        
-    }
-    
-    func sendVoiceMessage(isSend: Bool = false) {
-        
-        let messageBody = CWVoiceMessageBody(voiceLength: 30)
-        let message = CWMessage(targetId: conversation.targetId, messageBody: messageBody)
-        message.direction = isSend ? .send : .receive
-        
-        let messageModel = CWMessageModel(message: message)
-        messageList.append(messageModel)
-        
-        collectionView.reloadData()
-    }
-    
-    
+
     deinit {
+        let chatManager = CWChatClient.share.chatManager
+        chatManager.removeChatDelegate(self)
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -184,6 +153,30 @@ extension CWCollectionViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+    }
+    
+}
+
+// MARK: - CWChatManagerDelegate
+extension CWCollectionViewController: CWChatManagerDelegate {
+    
+    // 消息状态发送变化
+    public func messageStatusDidChange(_ message: CWMessage, error: CWChatError?) {
+        
+    }
+    
+    public func messagesDidReceive(_ message: CWMessage) {
+        
+        // 判断消息是否为当前targetId
+        if message.targetId != conversation.targetId {
+            return
+        }
+        
+        let messageModel = CWMessageModel(message: message)
+        messageList.append(messageModel)
+        self.collectionView.reloadData()
+        updateMessageAndScrollBottom(false)
+
     }
     
 }

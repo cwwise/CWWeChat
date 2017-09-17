@@ -89,7 +89,7 @@ public extension CWConversation {
         
         
         let result = service.messageStore.fecthMessages(targetId: self.targetId,
-                                                     count: count)
+                                                        count: count)
         
         completion(result, nil)
     }

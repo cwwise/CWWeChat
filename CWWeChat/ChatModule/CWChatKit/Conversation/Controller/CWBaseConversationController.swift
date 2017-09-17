@@ -14,7 +14,7 @@ public class CWBaseConversationController: UIViewController {
     // 
     public var chatManager = CWChatClient.share.chatManager
     // 会话列表
-    public var conversationList = [CWChatConversationModel]()
+    public var conversationList = [CWConversationModel]()
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +71,6 @@ public class CWBaseConversationController: UIViewController {
         let searchResultController = CWSearchResultController()
         return searchResultController
     }()
-    
 }
 
 // MARK: - CWChatUserInfoDataSource
@@ -169,7 +168,7 @@ extension CWBaseConversationController: UISearchBarDelegate {
 extension CWBaseConversationController: CWChatManagerDelegate {
     // 收到会话变化
     public func conversationDidUpdate(_ conversation: CWConversation) {
-
+        /// 遍历所有会话 找到对应的index
         var unread = 0
         var index = -1
         for i in 0..<conversationList.count {
@@ -181,16 +180,19 @@ extension CWBaseConversationController: CWChatManagerDelegate {
             unread += model.unreadCount
         }
         
-        // 不是第一个
+        // 如果会话不存在 则加入刷新
         if index == -1 {
-            let model = CWChatConversationModel(conversation: conversation)
-            conversationList.insert(model, at: 0)
-        } else if (index != 0) {
-            conversationList.remove(at: index)
-            let model = CWChatConversationModel(conversation: conversation)
+            let model = CWConversationModel(conversation: conversation)
             conversationList.insert(model, at: 0)
         }
-        // 如果是第一个 直接刷新
+        // 如果是其他 则移动到第一个
+        // TODO: isTop设置需要
+        else if (index != 0) {
+            let model = conversationList.remove(at: index)
+            conversationList.insert(model, at: 0)
+        }
+        
+        // 其他情况 如是第一个 直接刷新
         tableView.reloadData()
         if unread == 0 {
             self.tabBarItem.badgeValue = nil

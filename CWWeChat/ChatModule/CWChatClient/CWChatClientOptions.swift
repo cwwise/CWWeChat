@@ -11,6 +11,11 @@ import Foundation
 // 配置信息
 public class CWChatClientOptions: NSObject {
     
+    public static var `default`: CWChatClientOptions = {
+        let options = CWChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
+        return options
+    }()
+    
     /// 端口号
     var port: UInt16 = 5222
     /// XMPP服务器 ip地址 默认为本地localhost
