@@ -88,9 +88,8 @@ class VoiceMessageContentView: MessageContentView {
         voiceImageView.animationImages = images
     }
     
-    override func updateState() {
-        super.updateState()
-        
+    func updateState() {
+    
         // 如果正在播放 播放动画
         if message?.playStatus == .playing {
             startAnimating()

@@ -18,6 +18,8 @@ class CWLocationMessageBody: NSObject, CWMessageBody {
     var longitude: Double
     /// 位置信息
     var address: String
+    /// 位置信息的图片
+    var locationImageURL: URL?
     
     init(latitude: Double, longitude: Double, address: String) {
         self.latitude = latitude

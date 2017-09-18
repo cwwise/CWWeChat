@@ -44,7 +44,8 @@ class CWMessageLayoutAttributes: UICollectionViewLayoutAttributes {
         copiedAttributes.messageContainerInsets = messageContainerInsets
         
         copiedAttributes.errorFrame = errorFrame
-                
+        copiedAttributes.activityFrame = activityFrame
+        
         return copiedAttributes
     }
     

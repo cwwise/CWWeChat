@@ -10,19 +10,6 @@ import UIKit
 
 class LocationMessageContentView: MessageContentView {
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.addSubview(addressLabel)
-        self.addSubview(detailLabel)
-        self.addSubview(mapImageView)
-    }
-    
-    override func refresh(message: CWMessageModel) {
-
-        
-    }
-    
     // 地址
     fileprivate var addressLabel: UILabel = {
         let addressLabel = UILabel()
@@ -46,6 +33,27 @@ class LocationMessageContentView: MessageContentView {
         let mapImageView = UIImageView()
         return mapImageView
     }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.addSubview(addressLabel)
+        self.addSubview(detailLabel)
+        self.addSubview(mapImageView)
+    }
+    
+    override func refresh(message: CWMessageModel) {
+
+        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        addressLabel.frame = CGRect(x: 0, y: 0, width: 120, height: 20)
+        
+        
+    }
     
     
     required init?(coder aDecoder: NSCoder) {

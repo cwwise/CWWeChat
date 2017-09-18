@@ -24,6 +24,7 @@ protocol CWChatKeyboardDelegate: NSObjectProtocol {
     // 发送文字
     func keyboard(_ keyboard: CWChatKeyboard, sendText text: String)
     
+    func keyboard(_ keyboard: CWChatKeyboard, sendEmoticon emoticon: Emoticon)
 }
 
 public class CWChatKeyboard: UIView {
@@ -316,13 +317,29 @@ extension CWChatKeyboard: CWChatToolBarDelegate {
 
 extension CWChatKeyboard: EmoticonInputViewDelegate {
     
-    public func emoticonInputView(_ inputView: EmoticonInputView, didSelect emoticon: Emoticon?) {
+    public func emoticonInputView(_ inputView: EmoticonInputView, didSelect emoticon: Emoticon) {
         
+        // 如果是大图表情 则直接发送, 小表情则拼接文字
+        if emoticon.type == .normal {
+            if let title = emoticon.title {
+                chatToolBar.inputTextView.insertText("[\(title)]")
+            }
+        } else {
+            self.delegate?.keyboard(self, sendEmoticon: emoticon)
+        }
     }
     
-    public func didPressSend() {
-        
+    public func didPressDelete(_ inputView: EmoticonInputView) {
+        print("点击删除")
     }
+
+    public func didPressSend(_ inputView: EmoticonInputView) {
+        if let text = chatToolBar.currentText {
+            self.delegate?.keyboard(self, sendText: text)
+        }
+        chatToolBar.clearTextViewContent()
+    }
+    
 }
 
 

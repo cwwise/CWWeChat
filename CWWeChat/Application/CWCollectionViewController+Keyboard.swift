@@ -136,7 +136,7 @@ extension CWCollectionViewController {
             guard let cell = self.collectionView.cellForItem(at: indexPath) as? CWBaseMessageCell else {
                 return
             }
-            cell.messageContentView.updateProgress()
+            cell.updateProgress()
             
         }) { (message, error) in
             
@@ -156,8 +156,8 @@ extension CWCollectionViewController {
             guard let cell = self.collectionView.cellForItem(at: indexPath) as? CWBaseMessageCell else {
                 return
             }
-            cell.messageContentView.updateProgress()
-            cell.messageContentView.updateState()
+            cell.updateProgress()
+            cell.updateState()
         }
         
     }
@@ -175,7 +175,9 @@ extension CWCollectionViewController: CWChatKeyboardDelegate {
     }
     
     // 发送表情
-    
+    func keyboard(_ keyboard: CWChatKeyboard, sendEmoticon emoticon: Emoticon) {
+        print("发送表情..", emoticon.id)
+    }
 }
 
 extension CWCollectionViewController: MoreInputViewDelegate {
@@ -186,7 +188,19 @@ extension CWCollectionViewController: MoreInputViewDelegate {
             let picker = UIImagePickerController()
             picker.delegate = self
             self.present(picker, animated: true, completion: nil)
-            
+        
+        case .location:
+            // 发送位置
+            let latitude = 103.00
+            let longitude = 93.00
+            let address = "朝阳区"
+            let locationObject = CWLocationMessageBody(latitude: latitude,
+                                                       longitude: longitude,
+                                                       address: address)
+            let message = CWMessage(targetId: conversation.targetId,
+                                    messageBody: locationObject)
+            self.sendMessage(message)
+        
         default:
             break
         }

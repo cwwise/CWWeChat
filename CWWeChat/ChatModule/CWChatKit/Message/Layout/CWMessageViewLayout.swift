@@ -161,7 +161,10 @@ extension CWMessageViewLayout {
             textContainer.linePositionModifier = modifier
             textContainer.maximumNumberOfRows = 0
             
-            let textAttri = CWChatTextParser.parseText(content)!
+            let attributes = [NSAttributedStringKey.font: setting.contentTextFont,
+                              NSAttributedStringKey.foregroundColor: UIColor.black]
+            
+            let textAttri = CWChatTextParser.parseText(content, attributes: attributes)!
             let textLayout = YYTextLayout(container: textContainer, text: textAttri)!
             
             contentSize = CGSize(width: textLayout.textBoundingSize.width+edge.left+edge.right,
@@ -216,10 +219,10 @@ extension CWMessageViewLayout {
         let origin: CGPoint
         if message.isSend {
             origin = CGPoint(x: containerFrame.minX - 2 - setting.errorSize.width,
-                            y: containerFrame.midY - 5)
+                            y: containerFrame.midY - 10)
         } else {
             origin = CGPoint(x: containerFrame.minX + 2 + setting.errorSize.width,
-                            y: containerFrame.midY - 5)
+                            y: containerFrame.midY - 10)
         }
         attributes.errorFrame = CGRect(origin: origin, size: setting.errorSize)
         attributes.activityFrame = CGRect(origin: origin, size: setting.errorSize)

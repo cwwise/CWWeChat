@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class CWChatMessageController: CWBaseMessageController {
+public class CWChatMessageController: CWCollectionViewController {
         
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,7 @@ public class CWChatMessageController: CWBaseMessageController {
             let imageView = UIImageView(frame: self.view.bounds)
             imageView.contentMode = .scaleAspectFill
             imageView.image = UIImage(contentsOfFile: path)
-            self.tableView.backgroundView = imageView
+            self.collectionView.backgroundView = imageView
         }
     }
     

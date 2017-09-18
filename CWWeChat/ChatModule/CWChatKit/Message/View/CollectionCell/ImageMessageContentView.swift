@@ -42,7 +42,6 @@ class ImageMessageContentView: MessageContentView {
 
         // 消息实体
         let body = message.messageBody as! CWImageMessageBody
-        
         // 如果图片是自己发送，图片正在上传过程中是没有URL的，所以是用本地路径的图片。
         if let url = body.originalURL {
             messageImageView.kf.setImage(with: url, placeholder: nil)
@@ -53,14 +52,26 @@ class ImageMessageContentView: MessageContentView {
         } else  {
             messageImageView.image = nil
         }
+        updateProgress()
     }
     
-    
-    
-    func update(progress: Float) {
+    override func updateProgress() {
+        guard let message = message else {
+            return
+        }
+
+        if message.isSend == false {
+            messageImageView.hideProgressView()
+            return
+        }
         
-        
-        
+        if message.sendStatus == .failed ||
+            message.sendStatus == .successed{
+            messageImageView.hideProgressView()
+        } else {
+            let progress = Int(message.transportProgress * 100)
+            messageImageView.showProgress(progress)
+        }
     }
     
     override func layoutSubviews() {
@@ -69,11 +80,8 @@ class ImageMessageContentView: MessageContentView {
         guard let _ = message else {
             return
         }
-        
-
         maskLayer.frame = self.bounds
         messageImageView.frame = self.bounds
-        
     }
 
 }

@@ -28,9 +28,11 @@ private let kToolViewHeight: CGFloat = 37
 
 public protocol EmoticonInputViewDelegate: class {
     
-    func emoticonInputView(_ inputView: EmoticonInputView, didSelect emoticon: Emoticon?)
+    func emoticonInputView(_ inputView: EmoticonInputView, didSelect emoticon: Emoticon)
    
-    func didPressSend()
+    func didPressDelete(_ inputView: EmoticonInputView)
+
+    func didPressSend(_ inputView: EmoticonInputView)
 }
 
 public class EmoticonInputView: UIView {
@@ -205,7 +207,7 @@ extension EmoticonInputView: EmoticonToolViewDelegate {
     
     // 这个是否需要直接把button事件添加到 EmoticonInputView
     func didPressSend() {
-        self.delegate?.didPressSend()
+        self.delegate?.didPressSend(self)
     }
     
     func didChangeEmoticonGroup(_ index: Int) {
@@ -218,10 +220,11 @@ extension EmoticonInputView: EmoticonToolViewDelegate {
 extension EmoticonInputView: EmoticonPageCellDelegate {
 
     func emoticonPageCell(_ cell: EmoticonPageCell, didSelect emoticon: Emoticon?) {
-        if let _ = emoticon {
-
+        if let emoticon = emoticon {
+            self.delegate?.emoticonInputView(self, didSelect: emoticon)
         } else {
             //删除按钮
+            self.delegate?.didPressDelete(self)
         }
     }
     

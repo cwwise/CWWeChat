@@ -6,7 +6,7 @@
 //  Copyright © 2017年 cwcoder. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import SwiftyJSON
 
 class CWImageMessageBody: NSObject, CWMessageBody {

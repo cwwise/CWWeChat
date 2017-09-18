@@ -247,12 +247,17 @@ extension Keyboard: ToolViewDelegate {
 // MARK: - EmoticonInputViewDelegate
 extension Keyboard: EmoticonInputViewDelegate {
     
-    func emoticonInputView(_ inputView: EmoticonInputView, didSelect emoticon: Emoticon?) {
+    func emoticonInputView(_ inputView: EmoticonInputView, didSelect emoticon: Emoticon) {
         
     }
     
     
-    func didPressSend() {
+    func didPressSend(_ inputView: EmoticonInputView) {
+     
+        
+    }
+    
+    func didPressDelete(_ inputView: EmoticonInputView) {
         
     }
     

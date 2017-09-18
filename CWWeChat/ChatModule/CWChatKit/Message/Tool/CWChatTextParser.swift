@@ -36,7 +36,7 @@ class CWChatTextParser: NSObject {
         //匹配 URL
         self.enumerateURLParser(attributedText)
         //匹配 [表情]
-//        self.enumerateEmotionParser(attributedText, fontSize: font.pointSize)
+        self.enumerateEmotionParser(attributedText, fontSize: 15)
         
         return attributedText
     }

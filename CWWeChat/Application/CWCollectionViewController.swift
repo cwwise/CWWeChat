@@ -9,7 +9,7 @@
 import UIKit
 import CWActionSheet
 
-class CWCollectionViewController: UIViewController {
+public class CWCollectionViewController: UIViewController {
 
     public var conversation: CWConversation
 
@@ -51,13 +51,15 @@ class CWCollectionViewController: UIViewController {
         return collectionView
     }()
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
         
         let chatManager = CWChatClient.share.chatManager
         chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)
+        
+        loadMessageData()
     }
     
     func setupUI() {
@@ -109,7 +111,7 @@ class CWCollectionViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
-    override func didReceiveMemoryWarning() {
+    public override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -124,7 +126,7 @@ extension CWCollectionViewController {
             return
         }
         let indexPath = IndexPath(row: messageList.count-1, section: 0)
-        self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+        self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: animated)
     }
     
 }
@@ -137,22 +139,27 @@ extension CWCollectionViewController: CWMessageViewLayoutDelegate {
 
 extension CWCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messageList.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let message = messageList[indexPath.row]
         let identifier = message.messageType.identifier
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! CWBaseMessageCell
-        cell.delegate = self
-        cell.refresh(message: message)
-        return cell
+        let messageCell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! CWBaseMessageCell
+        messageCell.delegate = self
+        messageCell.refresh(message: message)
+        return messageCell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+    }
+    
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
+        keyboard.keyboardDown()
     }
     
 }

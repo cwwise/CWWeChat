@@ -59,9 +59,6 @@ class MessageContentView: UIView {
         }
     }
     
-    func updateState() {
-        
-    }
     
     func updateProgress() {
         

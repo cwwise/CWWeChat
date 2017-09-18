@@ -16,7 +16,7 @@ public enum MoreItemType: Int {
     case videoCall
     case wallet
     case transfer
-    case position
+    case location
     case favorite
     case businessCard
     case voice

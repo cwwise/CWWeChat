@@ -174,7 +174,10 @@ extension CWBaseMessageController: CWChatKeyboardDelegate {
     }
     
     // 发送表情
-    
+    func keyboard(_ keyboard: CWChatKeyboard, sendEmoticon emoticon: Emoticon) {
+        
+    }
+
 }
 
 extension CWBaseMessageController: MoreInputViewDelegate {

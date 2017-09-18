@@ -104,8 +104,6 @@ class CWBaseMessageCell: UICollectionViewCell {
         return messageContentView
     }()
     
-    
-    
     /// 指示
     var activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     /// 发送失败按钮
@@ -141,21 +139,52 @@ class CWBaseMessageCell: UICollectionViewCell {
         
         self.contentView.addSubview(avatarImageView)
         self.contentView.addSubview(usernameLabel)
-        
+        self.contentView.addSubview(activityView)
+        self.contentView.addSubview(errorButton)
     }
     
     // 设置
     func refresh(message: CWMessageModel) {
         self.message = message
         
+        updateState()
         // 赋值
-        let userId = self.message!.targetId
+        let userId = message.targetId
         let avatarURL = "\(kImageBaseURLString)\(userId).jpg"
         avatarImageView.kf.setImage(with: URL(string: avatarURL), placeholder: defaultHeadeImage)
     
         self.messageContentView.refresh(message: message)
     }
     
+    func updateState() {
+        guard let message = message else {
+            return
+        }
+        // 如果是收到消息 则隐藏
+        if message.isSend == false {
+            activityView.stopAnimating()
+            errorButton.isHidden = true
+            return
+        }
+        
+        // 发送中展示
+        if message.sendStatus == .successed {
+            activityView.stopAnimating()
+            errorButton.isHidden = true
+        }
+            // 如果失败就显示重发按钮
+        else if message.sendStatus == .failed {
+            activityView.stopAnimating()
+            errorButton.isHidden = false
+        } else {
+            activityView.startAnimating()
+            errorButton.isHidden = true
+        }
+    }
+    
+    func updateProgress() {
+        self.messageContentView.updateProgress()
+    }
     
     // MARK: cell中的事件处理
     ///头像点击
@@ -187,6 +216,7 @@ class CWBaseMessageCell: UICollectionViewCell {
     @objc func bubbleLongPressed(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
         if longPressGestureRecognizer.state == .began {
             
+  
         }
     }
     
@@ -198,6 +228,19 @@ class CWBaseMessageCell: UICollectionViewCell {
         didSet {
             
         }
+    }
+    
+    // MARK: UIMenuController
+    @objc func copyContentMessage() {
+        
+    }
+    
+    override func becomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -225,6 +268,11 @@ extension CWBaseMessageCell {
         avatarImageView.frame = layoutAttributes.avaterFrame
         usernameLabel.frame = layoutAttributes.usernameFrame
         messageContentView.frame = layoutAttributes.messageContainerFrame
+        
+        //
+        activityView.frame = layoutAttributes.activityFrame
+        errorButton.frame = layoutAttributes.errorFrame
+
     }
     
 }

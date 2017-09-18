@@ -18,7 +18,7 @@ public enum CMessagePlayStatus {
 class CWMessageModel: NSObject {
     
     private var message: CWMessage
-
+    
     public var isSend: Bool {
         return message.direction == .send
     }
@@ -30,6 +30,10 @@ class CWMessageModel: NSObject {
     /// 消息类型
     public var messageType: CWMessageType {
         return message.messageBody.type
+    }
+    
+    public var sendStatus: CWMessageSendStatus {
+        return message.sendStatus
     }
     
     public var targetId: String {
