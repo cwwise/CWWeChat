@@ -2,12 +2,9 @@
 //  CWMessageCell.swift
 //  CWWeChat
 //
-//  Created by chenwei on 2017/3/26.
-//  Copyright © 2017年 chenwei. All rights reserved.
+//  Created by wei chen on 2017/7/14.
+//  Copyright © 2017年 cwcoder. All rights reserved.
 //
-//  所有消息的基类 
-//  其余的cell 都是 填充messageContentView里面的内容
-//  布局部分使用 snpKit来实现 看看后期是否需要用frame来代替
 
 import UIKit
 
@@ -18,22 +15,24 @@ protocol CWMessageCellDelegate: NSObjectProtocol {
     /// - Parameters:
     ///   - cell: cell
     ///   - link: link
-    func messageCellDidTapLink(_ cell: CWMessageCell, link: URL)
+    func messageCellDidTap(_ cell: CWMessageCell, link: URL)
     
     /// 点击cell文字中的电话
     ///
     /// - Parameters:
     ///   - cell: cell
     ///   - phone: phone
-    func messageCellDidTapPhone(_ cell: CWMessageCell, phone: String)
+    func messageCellDidTap(_ cell: CWMessageCell, phone: String)
     
     /// cell被点击
     ///
     /// - Parameter cell: cell
     func messageCellDidTap(_ cell: CWMessageCell)
     
+    /// cell 重发按钮点击
+    ///
+    /// - Parameter cell: cell
     func messageCellResendButtonClick(_ cell: CWMessageCell)
-
     
     /// 头像点击的回调方法
     ///
@@ -41,226 +40,21 @@ protocol CWMessageCellDelegate: NSObjectProtocol {
     func messageCellUserAvatarDidClick(_ userId: String)
 }
 
-extension CWMessageCellDelegate {
-    func messageCellDidTapLink(_ cell: CWMessageCell, link: URL) {}
-    func messageCellDidTapPhone(_ cell: CWMessageCell, phone: String){}
-    func messageCellUserAvatarDidClick(_ userId: String) {}
-}
+/*
+ 
+ cell 每一种cell 对应左右布局 两种不同的reuseIdentifier
+ 
+ TextContentView
+ ImageContentView
+ 
+ 
+ **/
 
-class CWMessageCell: UITableViewCell {
-
+class CWMessageCell: UICollectionViewCell {
+    
     weak var delegate: CWMessageCellDelegate?
-
-    var messageModel: CWChatMessageModel!
-    
-    // MARK: 初始化
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setup()
-    }
-    
-    func setup() {
-        self.backgroundColor = UIColor.clear
-        self.selectionStyle = .none
-    }
-
-    func addGeneralView() {
-        self.contentView.addSubview(self.avatarImageView)
-        self.contentView.addSubview(self.usernameLabel)
-        self.contentView.addSubview(self.messageContentView)
-        self.contentView.addSubview(self.activityView)
-        self.contentView.addSubview(self.errorButton)
-    }
-    
-    /// 
-    func updateMessage(_ messageModel: CWChatMessageModel) {
-        self.messageModel = messageModel
-        // 消息实体
-        let message = messageModel.message
         
-        var userId: String
-        // 是自己的
-        if message.direction == .send {
-            
-            // 头像
-            avatarImageView.snp.remakeConstraints({ (make) in
-                make.width.height.equalTo(kAvaterImageViewWidth)
-                make.right.equalTo(self.contentView).offset(-kAvaterImageViewMargin)
-                make.top.equalTo(kMessageCellTopMargin)
-            })
-            
-            usernameLabel.snp.remakeConstraints({ (make) in
-                make.top.equalTo(avatarImageView.snp.top);
-                make.right.equalTo(avatarImageView.snp.left).offset(-kMessageCellEdgeOffset)
-                make.width.lessThanOrEqualTo(120)
-                make.height.equalTo(0)
-            })
-            
-            // 内容
-            messageContentView.snp.remakeConstraints({ (make) in
-                make.right.equalTo(avatarImageView.snp.left).offset(-kAvatarToMessageContent)
-                make.top.equalTo(usernameLabel.snp.bottom).offset(-ChatCellUI.bubbleTopMargin)
-                make.size.equalTo(messageModel.messageFrame.contentSize)
-            })
-            
-            activityView.snp.remakeConstraints({ (make) in
-                make.right.equalTo(messageContentView.snp.left).offset(-3)
-                make.centerY.equalTo(messageContentView).offset(-4)
-            })
-            
-            errorButton.snp.remakeConstraints({ (make) in
-                make.right.equalTo(messageContentView.snp.left).offset(-2)
-                make.centerY.equalTo(messageContentView).offset(-4)
-            })
-            
-            let image = #imageLiteral(resourceName: "sender_background_normal")
-            let highlightedImage = #imageLiteral(resourceName: "sender_background_highlight")
-            let cap = ChatCellUI.right_cap_insets
-            backgroundImageView.image = image.resizableImage(withCapInsets: cap)
-            backgroundImageView.highlightedImage = highlightedImage.resizableImage(withCapInsets: cap)
-
-            userId = message.senderId ?? ""
-    
-        } else {
-            
-            avatarImageView.snp.remakeConstraints({ (make) in
-                make.width.height.equalTo(kAvaterImageViewWidth)
-                make.left.equalTo(kAvaterImageViewMargin)
-                make.top.equalTo(kMessageCellTopMargin)
-            })
-            
-            usernameLabel.snp.remakeConstraints({ (make) in
-                make.top.equalTo(avatarImageView.snp.top);
-                make.left.equalTo(avatarImageView.snp.right).offset(kMessageCellEdgeOffset)
-                make.width.lessThanOrEqualTo(120)
-                make.height.equalTo(0)
-            })
-            
-            // 内容
-            messageContentView.snp.remakeConstraints({ (make) in
-                make.left.equalTo(avatarImageView.snp.right).offset(kAvatarToMessageContent)
-                make.top.equalTo(usernameLabel.snp.bottom).offset(-ChatCellUI.bubbleTopMargin)
-                make.size.equalTo(messageModel.messageFrame.contentSize)
-            })
-
-            activityView.snp.remakeConstraints({ (make) in
-                make.left.equalTo(messageContentView.snp.right).offset(3)
-                make.centerY.equalTo(messageContentView).offset(-4)
-            })
-            
-            errorButton.snp.remakeConstraints({ (make) in
-                make.left.equalTo(messageContentView.snp.right).offset(2)
-                make.centerY.equalTo(messageContentView).offset(-4)
-            })
-            
-            let image = #imageLiteral(resourceName: "receiver_background_normal")
-            let highlightedImage = #imageLiteral(resourceName: "receiver_background_highlight")
-
-            let cap = ChatCellUI.left_cap_insets
-            backgroundImageView.image = image.resizableImage(withCapInsets: cap)
-            backgroundImageView.highlightedImage = highlightedImage.resizableImage(withCapInsets: cap)
-
-            userId = message.targetId
-        }
-        
-        let avatarURL = "\(kImageBaseURLString)\(userId).jpg"
-        avatarImageView.kf.setImage(with: URL(string: avatarURL), placeholder: defaultHeadeImage)
-    }
-    
-    // MARK: Layout
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        layoutAvatar()
-        layoutUserName()
-        layoutContent()
-        layoutLoading()
-    }
-    
-    func layoutAvatar() {
-        
-    }
-    
-    func layoutUserName() {
-        
-    }
-    
-    func layoutContent() {
-        
-    }
-    
-    func layoutLoading() {
-        
-    }
-    
-    //MARK: 更新状态
-    /// 上传消息进度（图片和视频）
-    
-    // 更新消息状态
-    func updateState() {
-        
-        if messageModel.isSend == false {
-            activityView.stopAnimating()
-            errorButton.isHidden = true
-            return
-        }
-        
-        // 发送中展示
-        if messageModel.message.sendStatus == .successed {
-            activityView.stopAnimating()
-            errorButton.isHidden = true
-        }
-        // 如果失败就显示重发按钮
-        else if messageModel.message.sendStatus == .failed {
-            activityView.stopAnimating()
-            errorButton.isHidden = false
-        } else {
-            activityView.startAnimating()
-            errorButton.isHidden = true
-        }
-    }
-    
-    // 更新进度
-    func updateProgress() {
-        
-    }
-    
-    // MARK: cell中的事件处理
-    ///头像点击
-    @objc func avatarViewDidTapDown(_ tap: UITapGestureRecognizer) {
-    
-        guard let delegate = self.delegate, let messageModel = self.messageModel, tap.state == .ended  else {
-            return
-        }
-        let message = messageModel.message
-        let targetId = (message.direction == .receive) ? message.targetId : (message.senderId ?? "")
-        delegate.messageCellUserAvatarDidClick(targetId)
-    }
-    
-    // MARK: 手势事件
-    @objc func bubbleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
- 
-        guard tapGestureRecognizer.state == .ended else {
-            return
-        }
-        
-        self.delegate?.messageCellDidTap(self)
-    }
-    
-    @objc func bubbleDoubleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
- 
-        
-    }
-    
-    @objc func bubbleLongPressed(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
-        if longPressGestureRecognizer.state == .began {
-            
-        }
-    }
-    
-    @objc func errorButtonClick(_ button: UIButton) {
-        self.delegate?.messageCellResendButtonClick(self)
-    }
+    var message: CWMessageModel?
     
     // MARK: 属性
     /// 用户名称
@@ -284,9 +78,19 @@ class CWMessageCell: UITableViewCell {
     }()
     
     /// 消息的内容部分
-    lazy var messageContentView: UIView = {
-        let messageContentView = UIView()
-        messageContentView.clipsToBounds = true
+    lazy var messageContentView: MessageContentView = {
+        
+        let messageContentView: MessageContentView
+        let messageType = CWMessageType(identifier: self.reuseIdentifier!)
+        if messageType == .text {
+            messageContentView = TextMessageContentView()
+        } else if messageType == .image {
+            messageContentView = ImageMessageContentView()
+        } else if messageType == .voice{
+            messageContentView = VoiceMessageContentView()
+        } else {
+            messageContentView = MessageContentView()
+        }
         
         messageContentView.addGestureRecognizer(self.longPressGestureRecognizer)
         messageContentView.addGestureRecognizer(self.doubletapGesture)
@@ -294,17 +98,11 @@ class CWMessageCell: UITableViewCell {
         messageContentView.addGestureRecognizer(self.tapGestureRecognizer)
         self.tapGestureRecognizer.require(toFail: self.doubletapGesture)
         self.tapGestureRecognizer.require(toFail: self.longPressGestureRecognizer)
+        
+        self.contentView.addSubview(messageContentView)
 
         return messageContentView
     }()
-    
-    lazy var backgroundImageView: UIImageView = {
-        let backgroundImageView = UIImageView()
-        backgroundImageView.isUserInteractionEnabled = true
-        backgroundImageView.clipsToBounds = true
-        return backgroundImageView
-    }()
-    
     
     /// 指示
     var activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -335,9 +133,146 @@ class CWMessageCell: UITableViewCell {
         longpressGestureRecognizer.delegate = self
         return longpressGestureRecognizer
     }()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.contentView.addSubview(avatarImageView)
+        self.contentView.addSubview(usernameLabel)
+        self.contentView.addSubview(activityView)
+        self.contentView.addSubview(errorButton)
+    }
+    
+    // 设置
+    func refresh(message: CWMessageModel) {
+        self.message = message
+        
+        updateState()
+        // 赋值
+        let userId = message.targetId
+        let avatarURL = "\(kImageBaseURLString)\(userId).jpg"
+        avatarImageView.kf.setImage(with: URL(string: avatarURL), placeholder: defaultHeadeImage)
+    
+        self.messageContentView.refresh(message: message)
+    }
+    
+    func updateState() {
+        guard let message = message else {
+            return
+        }
+        // 如果是收到消息 则隐藏
+        if message.isSend == false {
+            activityView.stopAnimating()
+            errorButton.isHidden = true
+            return
+        }
+        
+        // 发送中展示
+        if message.sendStatus == .successed {
+            activityView.stopAnimating()
+            errorButton.isHidden = true
+        }
+            // 如果失败就显示重发按钮
+        else if message.sendStatus == .failed {
+            activityView.stopAnimating()
+            errorButton.isHidden = false
+        } else {
+            activityView.startAnimating()
+            errorButton.isHidden = true
+        }
+    }
+    
+    func updateProgress() {
+        self.messageContentView.updateProgress()
+    }
+    
+    // MARK: cell中的事件处理
+    ///头像点击
+    @objc func avatarViewDidTapDown(_ tap: UITapGestureRecognizer) {
+        
+        guard let delegate = self.delegate, let message = message, tap.state == .ended  else {
+            return
+        }
+        
+        let targetId = message.isSend ? message.targetId : message.senderId
+        delegate.messageCellUserAvatarDidClick(targetId)
+    }
+    
+    // MARK: 手势事件
+    @objc func bubbleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
+        
+        guard tapGestureRecognizer.state == .ended else {
+            return
+        }
+        
+        self.delegate?.messageCellDidTap(self)
+    }
+    
+    @objc func bubbleDoubleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
+        
+        
+    }
+    
+    @objc func bubbleLongPressed(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        if longPressGestureRecognizer.state == .began {
+            
+  
+        }
+    }
+    
+    @objc func errorButtonClick(_ button: UIButton) {
+        self.delegate?.messageCellResendButtonClick(self)
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            
+        }
+    }
+    
+    // MARK: UIMenuController
+    @objc func copyContentMessage() {
+        
+    }
+    
+    override func becomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return true
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+// MARK: - UIGestureRecognizerDelegate
+extension CWMessageCell: UIGestureRecognizerDelegate {
+
+
+}
+
+// MARK: - 布局
+extension CWMessageCell {
+    
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
+        
+        guard let layoutAttributes = layoutAttributes as? CWMessageLayoutAttributes else {
+            return
+        }
+        
+        avatarImageView.frame = layoutAttributes.avaterFrame
+        usernameLabel.frame = layoutAttributes.usernameFrame
+        messageContentView.frame = layoutAttributes.messageContainerFrame
+        
+        //
+        activityView.frame = layoutAttributes.activityFrame
+        errorButton.frame = layoutAttributes.errorFrame
+
     }
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class CWChatMessageController: CWCollectionViewController {
+public class CWChatMessageController: CWBaseMessageController {
         
     override public func viewDidLoad() {
         super.viewDidLoad()

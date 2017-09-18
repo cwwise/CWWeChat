@@ -8,13 +8,9 @@
 
 import UIKit
 
-//MARK: UI相关
-public struct ChatSessionCellUI {
-    static let headerImageViewLeftPadding:CGFloat = 10.0
-    static let headerImageViewTopPadding:CGFloat = 10.0
-}
-
-let defaultHeadeImage = CWAsset.Default_head.image
+// 上下留白
+let kMessageCellTopMargin:      CGFloat =  2.0
+let kMessageCellBottomMargin:   CGFloat =  12.0
 
 let kChatTextMaxWidth = kScreenWidth * 0.58
 //图片
@@ -22,6 +18,8 @@ let kChatImageMaxWidth = kScreenWidth * 0.45
 let kChatImageMinWidth = kScreenWidth * 0.25
 
 let kChatVoiceMaxWidth = kScreenWidth * 0.3
+
+let defaultHeadeImage = CWAsset.Default_head.image
 
 public struct ChatCellUI {
     
@@ -37,14 +35,18 @@ public struct ChatCellUI {
     static let right_edge_insets = UIEdgeInsets(top: 2+10, left: 17, bottom: 11+9.5, right: 17)
 }
 
+//MARK: UI相关
+public struct ChatSessionCellUI {
+    static let headerImageViewLeftPadding:CGFloat = 10.0
+    static let headerImageViewTopPadding:CGFloat = 10.0
+}
+
+/*
 
 let kTimeMessageCellHeight: CGFloat = 30.0
 
 // cell布局中的间距
 let kMessageCellMargin: CGFloat =  10.0
-// 上下留白
-let kMessageCellTopMargin:      CGFloat =  2.0
-let kMessageCellBottomMargin:   CGFloat =  12.0
 
 /// 头像
 let kAvaterImageViewWidth:   CGFloat      = 40.0
@@ -62,7 +64,7 @@ let kMessageCellEdgeOffset:     CGFloat = 6.0
 public let kChatTextAttribute = [NSAttributedStringKey.foregroundColor:UIColor.black,
                                  NSAttributedStringKey.font: UIFont.fontTextMessageText()]
 
-
+*/
 
 
 

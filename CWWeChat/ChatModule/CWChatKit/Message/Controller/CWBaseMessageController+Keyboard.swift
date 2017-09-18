@@ -1,12 +1,13 @@
 //
-//  CWChatMessageController+Keyboard.swift
+//  CWBaseMessageController+Keyboard.swift
 //  CWWeChat
 //
-//  Created by wei chen on 2017/4/3.
-//  Copyright © 2017年 cwcoder. All rights reserved.
+//  Created by chenwei on 2017/9/15.
+//  Copyright © 2017年 cwwise. All rights reserved.
 //
 
 import UIKit
+
 
 // MARK: - Keyboard
 ///响应KeyBoard事件
@@ -18,7 +19,7 @@ extension CWBaseMessageController {
     func registerKeyboardNotifacation() {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        self.tableView.addGestureRecognizer(tapGesture)
+        self.collectionView.addGestureRecognizer(tapGesture)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(handleWillHideKeyboard(_:)),
                                                name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -34,7 +35,7 @@ extension CWBaseMessageController {
     
     
     @objc func hideKeyboard() {
-       // self.keyboard.en
+        // self.keyboard.en
     }
     
     ///键盘将要隐藏
@@ -42,7 +43,7 @@ extension CWBaseMessageController {
         keyboardWillShowHide(notification, hideKeyBoard:true)
     }
     
-    func keyboardWillChangeFrame(_ notification: Notification) {
+    @objc func keyboardWillChangeFrame(_ notification: Notification) {
         
     }
     
@@ -64,10 +65,10 @@ extension CWBaseMessageController {
                        animations: {
                         
                         if hideKeyBoard {
-                            self.tableView.height = kScreenHeight-kChatToolBarHeight
+                            self.collectionView.height = kScreenHeight-kChatToolBarHeight
                             //self.tableView.bottom = self.chatToolBar.top
                         } else {
-                            self.tableView.height = kScreenHeight-kChatToolBarHeight-keyboardFrame.height
+                            self.collectionView.height = kScreenHeight-kChatToolBarHeight-keyboardFrame.height
                             //self.tableView.bottom = self.chatToolBar.top
                         }
                         
@@ -103,7 +104,7 @@ extension CWBaseMessageController {
     // 发送图片
     // 主要要考虑的是
     public func sendImageMessage(image: UIImage) {
- 
+        
         let imageName = String.UUIDString()+".jpg"
         let filePath = CWChatKit.share.getFilePath(with: imageName)
         CWChatKit.share.store(image: image, forKey: imageName)
@@ -119,11 +120,11 @@ extension CWBaseMessageController {
         // 添加当前聊天类型
         message.chatType = self.conversation.type
         
-        let messageModel = CWChatMessageModel(message: message)
+        let messageModel = CWMessageModel(message: message)
         self.messageList.append(messageModel)
         
         let indexPath = IndexPath(row: self.messageList.count-1, section: 0)
-        self.tableView.reloadData()
+        self.collectionView.reloadData()
         updateMessageAndScrollBottom(false)
         
         
@@ -131,8 +132,8 @@ extension CWBaseMessageController {
         let chatManager = CWChatClient.share.chatManager
         chatManager.sendMessage(message, progress: { (progress) in
             
-            messageModel.uploadProgress = progress
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWMessageCell else {
+            messageModel.transportProgress = progress
+            guard let cell = self.collectionView.cellForItem(at: indexPath) as? CWMessageCell else {
                 return
             }
             cell.updateProgress()
@@ -152,7 +153,7 @@ extension CWBaseMessageController {
                 
             }
             
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? CWMessageCell else {
+            guard let cell = self.collectionView.cellForItem(at: indexPath) as? CWMessageCell else {
                 return
             }
             cell.updateProgress()
@@ -175,9 +176,8 @@ extension CWBaseMessageController: CWChatKeyboardDelegate {
     
     // 发送表情
     func keyboard(_ keyboard: CWChatKeyboard, sendEmoticon emoticon: Emoticon) {
-        
+        print("发送表情..", emoticon.id)
     }
-
 }
 
 extension CWBaseMessageController: MoreInputViewDelegate {
@@ -188,7 +188,19 @@ extension CWBaseMessageController: MoreInputViewDelegate {
             let picker = UIImagePickerController()
             picker.delegate = self
             self.present(picker, animated: true, completion: nil)
-            
+        
+        case .location:
+            // 发送位置
+            let latitude = 103.00
+            let longitude = 93.00
+            let address = "朝阳区"
+            let locationObject = CWLocationMessageBody(latitude: latitude,
+                                                       longitude: longitude,
+                                                       address: address)
+            let message = CWMessage(targetId: conversation.targetId,
+                                    messageBody: locationObject)
+            self.sendMessage(message)
+        
         default:
             break
         }
@@ -199,7 +211,7 @@ extension CWBaseMessageController: MoreInputViewDelegate {
 
 
 //
-extension CWBaseMessageController:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+extension CWBaseMessageController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
@@ -211,5 +223,4 @@ extension CWBaseMessageController:UIImagePickerControllerDelegate,UINavigationCo
     }
     
 }
-
 

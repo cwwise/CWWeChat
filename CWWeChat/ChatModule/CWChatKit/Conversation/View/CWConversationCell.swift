@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWChatConversationCell: UITableViewCell {
+class CWConversationCell: UITableViewCell {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

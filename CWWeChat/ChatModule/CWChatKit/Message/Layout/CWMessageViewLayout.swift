@@ -196,7 +196,8 @@ extension CWMessageViewLayout {
             if scale > 1 {
                 scale = 1
             }
-            contentSize = CGSize(width: ceil(scale*kChatVoiceMaxWidth)+70, height: kAvaterImageViewWidth+13)
+            contentSize = CGSize(width: ceil(scale*kChatVoiceMaxWidth)+70,
+                                 height: setting.kAvaterSize.height+13)
             
         default:
             break

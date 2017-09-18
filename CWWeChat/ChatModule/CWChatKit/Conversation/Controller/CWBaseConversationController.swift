@@ -32,7 +32,7 @@ public class CWBaseConversationController: UIViewController {
     }
     
     func registerCellClass() {
-        tableView.register(CWChatConversationCell.self, forCellReuseIdentifier: CWChatConversationCell.identifier)
+        tableView.register(CWConversationCell.self, forCellReuseIdentifier: CWConversationCell.identifier)
     }
 
     override public func didReceiveMemoryWarning() {
@@ -127,7 +127,7 @@ extension CWBaseConversationController: UITableViewDelegate, UITableViewDataSour
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CWChatConversationCell.identifier, for: indexPath) as! CWChatConversationCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CWConversationCell.identifier, for: indexPath) as! CWConversationCell
         cell.conversationModel = conversationList[indexPath.row]
         return cell
     }
