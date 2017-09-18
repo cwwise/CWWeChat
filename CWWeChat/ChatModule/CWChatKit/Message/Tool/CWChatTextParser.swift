@@ -36,7 +36,7 @@ class CWChatTextParser: NSObject {
         //匹配 URL
         self.enumerateURLParser(attributedText)
         //匹配 [表情]
-        self.enumerateEmotionParser(attributedText, fontSize: 15)
+        self.enumerateEmotionParser(attributedText)
         
         return attributedText
     }
@@ -100,13 +100,13 @@ class CWChatTextParser: NSObject {
         
     }
     
-    fileprivate class func enumerateEmotionParser(_ attributedText: NSMutableAttributedString, fontSize: CGFloat) {
+    fileprivate class func enumerateEmotionParser(_ attributedText: NSMutableAttributedString) {
 
         let emoticonResults = CWChatTextParseHelper.regexEmotions.matches(in: attributedText.string,
                                                                           options: [.reportProgress],
                                                                           range: attributedText.yy_rangeOfAll())
-
         var emoClipLength: Int = 0
+        let text = attributedText.string as NSString
         for emotion: NSTextCheckingResult in emoticonResults {
             if emotion.range.location == NSNotFound && emotion.range.length <= 1 {
                 continue
@@ -120,20 +120,20 @@ class CWChatTextParser: NSObject {
                 continue
             }
             
-            //用来存放字典，字典中存储的是图片和图片对应的位置            
-            let imageDict = [String:String]()
+            let fontSize = attributedText.yy_font?.pointSize ?? 16.0
             
-            let text = attributedText.string as NSString
-            let imageName = text.substring(with: emotion.range) as String
+            //用来存放字典，字典中存储的是图片和图片对应的位置
+            var title = text.substring(with: emotion.range) as String
+            let i = title.index(title.startIndex, offsetBy: 1)
+            let j = title.index(title.endIndex, offsetBy: -1)
+            title = String(title[i..<j])
             
-            guard let theImageName = imageDict[imageName],
-            let emotionImage = UIImage(named: theImageName) else { 
+            guard let emotionImage = EmoticonManager.shared.emoticonImage(with: title) else {
                 continue
             }
-            
+        
             let emojiText = NSMutableAttributedString.yy_attachmentString(withEmojiImage: emotionImage, fontSize: fontSize + 1)
             attributedText.replaceCharacters(in: range, with: emojiText!)
-            
             emoClipLength += range.length - 1
         }        
         
@@ -149,7 +149,7 @@ class CWChatTextParseHelper {
      */
     class var regexEmotions: NSRegularExpression {
         get {
-            let regularExpression = try! NSRegularExpression(pattern: "\\[[^\\[\\]]+?\\]", options: [.caseInsensitive])
+            let regularExpression = try! NSRegularExpression(pattern: "\\[[^ \\[\\]]+?\\]", options: [.caseInsensitive])
             return regularExpression
         }
     }

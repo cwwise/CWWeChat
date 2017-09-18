@@ -161,10 +161,11 @@ extension CWMessageViewLayout {
             textContainer.linePositionModifier = modifier
             textContainer.maximumNumberOfRows = 0
             
-            let attributes = [NSAttributedStringKey.font: setting.contentTextFont,
-                              NSAttributedStringKey.foregroundColor: UIColor.black]
+            let textFont = setting.contentTextFont
+            let textAttributes = [NSAttributedStringKey.font: textFont,
+                                  NSAttributedStringKey.foregroundColor: UIColor.black]
             
-            let textAttri = CWChatTextParser.parseText(content, attributes: attributes)!
+            let textAttri = CWChatTextParser.parseText(content, attributes: textAttributes)!
             let textLayout = YYTextLayout(container: textContainer, text: textAttri)!
             
             contentSize = CGSize(width: textLayout.textBoundingSize.width+edge.left+edge.right,
