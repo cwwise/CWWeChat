@@ -17,7 +17,6 @@ import SQLite
 class CWChatConversationStore: CWChatBaseStore {
 
     /// 当前用户的唯一id，创建数据库名称
-    
     let conversationTable = Table("conversation")
     
     let id = Expression<Int64>("id")
@@ -30,7 +29,6 @@ class CWChatConversationStore: CWChatBaseStore {
     let date = Expression<Double>("date")
     // 草稿
     let _draft = Expression<String?>("draft")
-    
     
     //MARK: 初始化
     override init(userId: String) {
@@ -52,7 +50,7 @@ class CWChatConversationStore: CWChatBaseStore {
                 t.column(unread_count, defaultValue:0)
                 t.column(_draft)
             })
-            _ = conversationTable.createIndex([chatType])
+            _ = conversationTable.createIndex(chatType)
         } catch {
             log.error(error)
         }
