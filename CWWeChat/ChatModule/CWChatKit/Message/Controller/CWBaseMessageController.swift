@@ -45,8 +45,9 @@ public class CWBaseMessageController: UIViewController {
         collectionView.register(CWMessageCell.self, forCellWithReuseIdentifier: CWMessageType.text.identifier)
         collectionView.register(CWMessageCell.self, forCellWithReuseIdentifier: CWMessageType.image.identifier)
         
+        collectionView.register(CWMessageCell.self, forCellWithReuseIdentifier: CWMessageType.emoticon.identifier)
+        collectionView.register(CWMessageCell.self, forCellWithReuseIdentifier: CWMessageType.location.identifier)
         collectionView.register(CWMessageCell.self, forCellWithReuseIdentifier: CWMessageType.voice.identifier)
-
 
         return collectionView
     }()

@@ -82,4 +82,47 @@ extension CWMessageModel {
 
 
 // 优化
+extension CWMessageType {
+    
+    //获取cell的reuseIdentifier
+    var identifier: String {
+        switch self {
+        case .text:
+            return "ChatMessageTextCell"
+        case .image:
+            return "ChatMessageImageCell"
+        case .voice:
+            return "ChatMessageVoiceCell"
+        case .video:
+            return "ChatMessageVideoCell"
+        case .emoticon:
+            return "ChatMessageEmoticonCell"
+        case .file:
+            return "ChatMessageFileCell"
+        case .location:
+            return "ChatMessageLocationCell"
+        default:
+            return "ChatMessageCell"
+        }
+    }
+    
+    init(identifier: String) {
+        switch identifier {
+        case "ChatMessageTextCell":
+            self = .text
+        case "ChatMessageImageCell":
+            self = .image
+        case "ChatMessageVoiceCell":
+            self = .voice
+        case "ChatMessageEmoticonCell":
+            self = .emoticon
+        case "ChatMessageLocationCell":
+            self = .location
+        default:
+            self = .none
+        }
+    }
+    
+}
+
 

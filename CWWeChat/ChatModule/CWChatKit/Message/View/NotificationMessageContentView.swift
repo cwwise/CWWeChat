@@ -8,6 +8,6 @@
 
 import UIKit
 
-class NotificationMessageContentView: UIView {
+class NotificationMessageContentView: MessageContentView {
     
 }

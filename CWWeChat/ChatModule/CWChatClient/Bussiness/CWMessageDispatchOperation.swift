@@ -149,7 +149,7 @@ class CWMessageDispatchOperation: Operation {
     
     /// 发送消息
     func sendMessage() {
-
+        noticationWithOperationState()
     }
     
     @objc func _startOperation() {

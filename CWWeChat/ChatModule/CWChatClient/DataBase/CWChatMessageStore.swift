@@ -164,17 +164,30 @@ extension CWChatMessageStore {
         case .image:
             body = CWImageMessageBody()
             body.messageDecode(string: row[content])
+            
+        case .emoticon:
+            body = CWEmoticonMessageBody()
+            body.messageDecode(string: row[content])
+            
+        case .location:
+            body = CWLocationMessageBody()
+            body.messageDecode(string: row[content])
+
         default: break
             
         }
         
+        
+        guard let messageBody = body else {
+            return nil
+        }
         
         let _direction = CWMessageDirection(rawValue: row[direction]) ?? .unknown
         let message = CWMessage(targetId: row[target_Id],
                                     messageID: row[messageId],
                                     direction: _direction,
                                     timestamp: row[date],
-                                    messageBody: body)
+                                    messageBody: messageBody)
         message.sendStatus = CWMessageSendStatus(rawValue: row[sendStatus]) ?? .pending
         message.senderId = row[senderId]
         return message

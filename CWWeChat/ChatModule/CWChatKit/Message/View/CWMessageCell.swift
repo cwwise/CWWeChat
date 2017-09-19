@@ -82,13 +82,25 @@ class CWMessageCell: UICollectionViewCell {
         
         let messageContentView: MessageContentView
         let messageType = CWMessageType(identifier: self.reuseIdentifier!)
-        if messageType == .text {
+        
+        switch messageType {
+        case .text:
             messageContentView = TextMessageContentView()
-        } else if messageType == .image {
+        case .image:
             messageContentView = ImageMessageContentView()
-        } else if messageType == .voice{
+        case .voice:
             messageContentView = VoiceMessageContentView()
-        } else {
+//        case .video:
+//            <#code#>
+//        case .file:
+//            <#code#>
+        case .location:
+            messageContentView = LocationMessageContentView()
+        case .emoticon:
+            messageContentView = EmoticonMessageContentView()
+        case .notification:
+            messageContentView = NotificationMessageContentView()
+        default:
             messageContentView = MessageContentView()
         }
         

@@ -86,39 +86,6 @@ public enum CWMessageType: Int {
     case location           //位置
     case emoticon           //表情
     case notification       //通知
-
-    //获取cell的reuseIdentifier
-    var identifier: String {
-        switch self {
-        case .text:
-            return "ChatMessageTextCell"
-        case .image:
-            return "ChatMessageImageCell"
-        case .voice:
-            return "ChatMessageVoiceCell"
-        case .video:
-            return "ChatMessageVideoCell"
-        case .emoticon:
-            return "ChatMessageExpressionCell"
-        case .file:
-            return "ChatFileExpressionCell"
-        default:
-            return "ChatMessageCell"
-        }
-    }
-    
-    init(identifier: String) {
-        switch identifier {
-        case "ChatMessageTextCell":
-            self = .text
-        case "ChatMessageImageCell":
-            self = .image
-        case "ChatMessageVoiceCell":
-            self = .voice
-        default:
-            self = .none
-        }
-    }
 }
 
 

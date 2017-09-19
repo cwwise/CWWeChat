@@ -199,6 +199,12 @@ extension CWMessageViewLayout {
             contentSize = CGSize(width: ceil(scale*kChatVoiceMaxWidth)+70,
                                  height: setting.kAvaterSize.height+13)
             
+        case .emoticon:
+            contentSize = CGSize(width: 120, height: 120)
+            
+        case .location:
+            contentSize = CGSize(width: 250, height: 150)
+            
         default:
             break
         }
