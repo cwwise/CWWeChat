@@ -18,7 +18,8 @@ target 'CWWeChat' do
   pod 'SwiftyImage'
   pod 'Kingfisher'
 
-  pod 'SQLite.swift'
+  pod 'SQLite.swift', git: 'https://github.com/stephencelis/SQLite.swift.git' , branch: 'release'
+
   pod 'Alamofire'
   pod 'RxSwift'
       
