@@ -21,29 +21,29 @@ class CWChatMessageStore: CWChatBaseStore {
     
     //MARK: 数据库属性
     //消息唯一id
-    fileprivate let id = Expression<Int64>("id")
+    private let id = Expression<Int64>("id")
     // 消息id
-    fileprivate let messageId = Expression<String>("msgid")
+    private let messageId = Expression<String>("msgid")
     //用户唯一id
-    fileprivate let senderId = Expression<String>("sid")
-    fileprivate let target_Id = Expression<String>("tid")
+    private let senderId = Expression<String>("sid")
+    private let target_Id = Expression<String>("tid")
     // 消息时间
-    fileprivate let date = Expression<Double>("date")
+    private let date = Expression<Double>("date")
     /// type
-    fileprivate let chatType = Expression<Int>("chat_type")
+    private let chatType = Expression<Int>("chat_type")
     /// 发送方
-    fileprivate let direction = Expression<Int>("direction")
+    private let direction = Expression<Int>("direction")
     /// 消息类型 文本 图片
-    fileprivate let messageType = Expression<Int>("msg_type")
+    private let messageType = Expression<Int>("msg_type")
     /// 内容
-    fileprivate let content = Expression<String>("content")
+    private let content = Expression<String>("content")
     /// 接收状态
-    fileprivate let sendStatus = Expression<Int>("send_status")
+    private let sendStatus = Expression<Int>("send_status")
     /// 是否已读
-    fileprivate let readed = Expression<Bool>("readed")
+    private let readed = Expression<Bool>("readed")
     
     /// 拓展字端
-    fileprivate let ext1 = Expression<String>("ext1")
+    private let ext1 = Expression<String>("ext1")
 
     func messageTable(_ targetId: String) -> Table {
         if tableExistList[targetId] == nil {
@@ -71,7 +71,7 @@ class CWChatMessageStore: CWChatBaseStore {
                 t.column(ext1, defaultValue: "")}
             log.verbose(create.asSQL())
             try messageDB.run(create)
-            _ = table.createIndex([messageId])
+            _ = table.createIndex(messageId)
             
             tableExistList[targetId] = true
         } catch {

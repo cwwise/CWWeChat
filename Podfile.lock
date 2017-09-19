@@ -49,11 +49,11 @@ PODS:
   - RxCocoa (3.6.1):
     - RxSwift (~> 3.6)
   - RxSwift (3.6.1)
-  - SnapKit (3.2.0)
-  - SQLite.swift (0.11.3):
-    - SQLite.swift/standard (= 0.11.3)
-  - SQLite.swift/standard (0.11.3)
-  - SwiftyBeaver (1.4.0)
+  - SnapKit (4.0.0)
+  - SQLite.swift (0.11.4):
+    - SQLite.swift/standard (= 0.11.4)
+  - SQLite.swift/standard (0.11.4)
+  - SwiftyBeaver (1.4.1)
   - SwiftyImage (1.2.0)
   - SwiftyJSON (3.1.4)
   - XMPPFramework (3.7.0):
@@ -83,12 +83,22 @@ DEPENDENCIES:
   - RxCocoa
   - RxSwift
   - SnapKit
-  - SQLite.swift
+  - SQLite.swift (from `https://github.com/stephencelis/SQLite.swift.git`, branch `release`)
   - SwiftyBeaver
   - SwiftyImage
   - SwiftyJSON
   - XMPPFramework
   - YYText
+
+EXTERNAL SOURCES:
+  SQLite.swift:
+    :branch: release
+    :git: https://github.com/stephencelis/SQLite.swift.git
+
+CHECKOUT OPTIONS:
+  SQLite.swift:
+    :commit: 9f1735a52898a3cae23020a76e2003357712c38c
+    :git: https://github.com/stephencelis/SQLite.swift.git
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
@@ -115,14 +125,14 @@ SPEC CHECKSUMS:
   Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
   RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
   RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
-  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
-  SQLite.swift: 99b36c22084427f0abbeb957556ce1528cf10bb3
-  SwiftyBeaver: 78d9186ce7595b4400ce01e5fd750d263e72dd7b
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SQLite.swift: 3e3bee21da701b5b9f87c4a672cb54f233505692
+  SwiftyBeaver: f04f739cca6826c5fb0f575fed8fa3293f76b83e
   SwiftyImage: ebaa7c7b6163cd4ad102f3bb05a8fb276d35b4f3
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: cfc8eccb301cb1cdaf36073ad46ea3fbf3de6be6
+PODFILE CHECKSUM: c2563220962d6c3ef564fbc1bdf480dc8ffb13f0
 
 COCOAPODS: 1.3.1
