@@ -6,6 +6,8 @@
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>CWWeChat</string>
+	<key>CFBundleDocumentTypes</key>
+	<array/>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -27,6 +29,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>位置信息需要许可</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>位置信息需要许可</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>发送照片需要您的许可</string>
 	<key>UIRequiredDeviceCapabilities</key>

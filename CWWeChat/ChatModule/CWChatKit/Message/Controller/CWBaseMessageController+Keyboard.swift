@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MapKit
 
 // MARK: - Keyboard
 ///响应KeyBoard事件
@@ -215,6 +215,12 @@ extension CWBaseMessageController: MoreInputViewDelegate {
     }
 }
 
+extension CWBaseMessageController: MapLocationControllerDelegate {
+    
+    func sendLocation(_ location: CLLocationCoordinate2D) {
+        
+    }
+}
 
 //
 extension CWBaseMessageController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {

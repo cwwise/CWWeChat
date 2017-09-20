@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "0900"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -97,6 +97,10 @@
             isEnabled = "YES">
          </AdditionalOption>
       </AdditionalOptions>
+      <LocationScenarioReference
+         identifier = "../CWWeChat/Application/beijingLocation.gpx"
+         referenceType = "0">
+      </LocationScenarioReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
