@@ -41,8 +41,8 @@ class MapShowController: UIViewController {
             locationManager.requestWhenInUseAuthorization()
         } else if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             locationManager.delegate = self
-            locationManager.startUpdatingLocation()
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+           // locationManager.startUpdatingLocation()
+          //locationManager.desiredAccuracy = kCLLocationAccuracyBest
         }
         
         
@@ -133,6 +133,60 @@ class MapShowController: UIViewController {
         actionSheet.show()
     }
 
+    func searchLocation() {
+        
+        let location = mapView.userLocation.coordinate
+        let span = MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100)
+        let region = MKCoordinateRegion(center: location, span: span)
+        
+        let request = MKLocalSearchRequest()
+        request.region = region
+        request.naturalLanguageQuery = "place"
+        let search = MKLocalSearch(request: request)
+        search.start { (response, error) in
+            guard let response = response else {
+                return
+            }
+            
+            for item in response.mapItems {
+                let placemark = item.placemark
+                
+                var address = ""
+                // 国家
+                if let country = placemark.country {
+                    address += country
+                }
+                // 省 直辖市
+                if let administrativeArea = placemark.administrativeArea {
+                    address += administrativeArea
+                }
+                // 城市
+                if let locality = placemark.locality {
+                    address += locality
+                }
+                // 城市相关信息
+                if let subLocality = placemark.subLocality {
+                    address += subLocality
+                }
+                
+                if let subLocality = placemark.subLocality {
+                    address += subLocality
+                }
+                // 街道相关
+                if let subThoroughfare = placemark.subThoroughfare {
+                    address += subThoroughfare
+                }
+                // 街道
+                if let locality = placemark.locality {
+                    address += locality
+                }
+                print(address)
+                print(placemark.name ?? "未知地方")
+            }
+            
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -150,7 +204,10 @@ extension MapShowController: CLLocationManagerDelegate {
 extension MapShowController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        print("点击。。。")
+
+        
+
+      //  searchLocation()
     }
     
 }
