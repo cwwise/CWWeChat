@@ -269,6 +269,7 @@ extension CWXMPPManager: CWLoginManager {
     }
     
     var currentAccount: String {
+        return ""
         guard let account = xmppStream.myJID.user else {
             return ""
         } 

@@ -33,8 +33,7 @@ class EmoticonListBannerCell: UITableViewCell {
         
         pagerView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
-        }
-        
+        }        
     }
     
     required init?(coder aDecoder: NSCoder) {

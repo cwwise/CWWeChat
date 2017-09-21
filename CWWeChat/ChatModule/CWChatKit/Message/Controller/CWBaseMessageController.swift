@@ -8,6 +8,7 @@
 
 import UIKit
 import CWActionSheet
+import MapKit
 
 public class CWBaseMessageController: UIViewController {
 
@@ -214,6 +215,16 @@ extension CWBaseMessageController: CWMessageCellDelegate {
             }
             voiceView.updateState()
             log.debug("点击声音")
+        case .location:
+            let locationBody = message as! CWLocationMessageBody
+            let map = MapShowController()
+            map.address = locationBody.address
+            map.detail = locationBody.detail
+            map.coordinate = CLLocationCoordinate2D(latitude: locationBody.latitude,
+                                                    longitude: locationBody.longitude)
+            self.navigationController?.pushViewController(map, animated: true)
+            
+            
         default:
             log.debug("其他类型")
         }

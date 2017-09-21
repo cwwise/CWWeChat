@@ -15,9 +15,9 @@ public enum CWUserInfoUpdateTag: String {
     case avatar
     // 签名
     case sign
-    
+    // email
     case email
-    
+    // 电话
     case phone
 }
 
@@ -50,6 +50,6 @@ public protocol CWContactManager {
     func addContact(_ contact: CWUser, message: String, completion: CWAddContactCompletion?)
     
     func updateMyUserInfo(_ userInfo: [CWUserInfoUpdateTag: String])
-    // 获取用户信息
+    
     func userInfo(with userId: String) -> CWUser
 }

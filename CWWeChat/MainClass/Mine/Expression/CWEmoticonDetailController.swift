@@ -83,7 +83,7 @@ class CWEmoticonDetailController: UIViewController {
         magnifierContentView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets(top: 10, left: 10, bottom: 25, right: 10))
         }
-        collectionView.addSubview(magnifierImageView)
+        self.view.addSubview(magnifierImageView)
     }
     
     func backgroundImage() -> UIImage? {
@@ -135,12 +135,11 @@ class CWEmoticonDetailController: UIViewController {
         // 取消之前cell选中状态
         lastSelectCell = cell
         
-        let frame = cell.convert(cell.bounds, to: self.collectionView)
+        let frame = cell.convert(cell.bounds, to: self.view)
         magnifierContentView.image = cell.imageView.image
         
         magnifierImageView.centerX = frame.midX
-        magnifierImageView.bottom = frame.minX
-        
+        magnifierImageView.bottom = frame.minY
     }
 
 

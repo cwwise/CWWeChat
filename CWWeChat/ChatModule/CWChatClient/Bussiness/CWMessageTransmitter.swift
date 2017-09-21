@@ -49,17 +49,13 @@ class CWMessageTransmitter: XMPPModule {
         }
         log.debug(message)
         // 发送消息
-        // MARK: swift4.0 存在问题
-        /*
         var receipte: XMPPElementReceipt?
         xmppStream.send(message, andGet: &receipte)
         guard let elementReceipte = receipte else {
-            return false
+            return
         }
         // 返回结果
-        let result = elementReceipte.wait(sendMessageTimeoutInterval)
-        */
-        xmppStream.send(message)
+        let _ = elementReceipte.wait(sendMessageTimeoutInterval)
     }
     
     func messageElement(withBody body: String, 

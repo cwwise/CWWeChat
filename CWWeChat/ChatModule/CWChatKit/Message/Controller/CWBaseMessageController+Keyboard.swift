@@ -197,8 +197,8 @@ extension CWBaseMessageController: MoreInputViewDelegate {
         
         case .location:
             // 发送位置
-            let latitude = 103.00
-            let longitude = 93.00
+            let latitude = 39.0
+            let longitude = 116.3
             let address = "朝阳区"
             let locationObject = CWLocationMessageBody(latitude: latitude,
                                                        longitude: longitude,

@@ -87,6 +87,8 @@ class CWFeaturedEmoticonController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(EmoticonListHeaderView.self, forHeaderFooterViewReuseIdentifier: "header")
+        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "footer")
+
         tableView.register(EmoticonListCell.self, forCellReuseIdentifier: "cell")
         tableView.register(EmoticonListBannerCell.self, forCellReuseIdentifier: "banner")
         tableView.tableHeaderView = self.searchController.searchBar
@@ -138,6 +140,11 @@ extension CWFeaturedEmoticonController: UITableViewDelegate, UITableViewDataSour
         return header
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "footer")
+        return footer
+    }
+        
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 0
@@ -146,7 +153,7 @@ extension CWFeaturedEmoticonController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.01
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

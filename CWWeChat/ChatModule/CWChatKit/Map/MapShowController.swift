@@ -12,12 +12,13 @@ import SnapKit
 import CWActionSheet
 
 class MapShowController: UIViewController {
-
-    var mapView: MKMapView!
-    var locationManager: CLLocationManager!
     
-    var address: String = ""
-    var detail: String = ""
+    private var mapView: MKMapView!
+    private var locationManager: CLLocationManager!
+
+    var coordinate: CLLocationCoordinate2D?
+    var address: String?
+    var detail: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +27,6 @@ class MapShowController: UIViewController {
 
         mapView = MKMapView(frame: self.view.bounds)
         mapView.delegate = self
-        mapView.showsUserLocation = true
-        mapView.userTrackingMode = .follow
         self.view.addSubview(mapView)
         mapView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 90, right: 0))
@@ -39,12 +38,7 @@ class MapShowController: UIViewController {
         
         if CLLocationManager.authorizationStatus() == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
-        } else if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            locationManager.delegate = self
-           // locationManager.startUpdatingLocation()
-          //locationManager.desiredAccuracy = kCLLocationAccuracyBest
         }
-        
         
         let locationButton = UIButton(type: .custom)
         locationButton.setImage(#imageLiteral(resourceName: "location_my_current"), for: .normal)
@@ -77,6 +71,7 @@ class MapShowController: UIViewController {
         let addressLabel = UILabel()
         addressLabel.font = UIFont.systemFont(ofSize: 18)
         addressLabel.numberOfLines = 1
+        addressLabel.text = address
         addressLabel.textColor = UIColor.black
         bottomView.addSubview(addressLabel)
         addressLabel.snp.makeConstraints { (make) in
@@ -87,6 +82,7 @@ class MapShowController: UIViewController {
         let detailLabel = UILabel()
         detailLabel.font = UIFont.systemFont(ofSize: 12)
         detailLabel.numberOfLines = 0
+        detailLabel.text = detail
         detailLabel.textColor = UIColor.gray
         bottomView.addSubview(detailLabel)
         detailLabel.snp.makeConstraints { (make) in
@@ -204,9 +200,6 @@ extension MapShowController: CLLocationManagerDelegate {
 extension MapShowController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-
-        
-
       //  searchLocation()
     }
     

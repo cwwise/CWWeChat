@@ -60,7 +60,6 @@ class LocationMessageContentView: MessageContentView {
         self.addSubview(containerView)
         containerView.layer.mask = self.maskLayer
 
-
         self.addSubview(addressLabel)
         self.addSubview(detailLabel)
         self.addSubview(mapImageView)
@@ -80,10 +79,9 @@ class LocationMessageContentView: MessageContentView {
         }
         
         self.maskLayer.contents = self.bubbleImageView.image?.cgImage
-
-        addressLabel.text = "紫南家园-南区"
-        detailLabel.text = "北京市朝阳区大望路"
-        
+        let body = message.messageBody as! CWLocationMessageBody
+        addressLabel.text = body.address
+        detailLabel.text = body.detail
     }
     
     override func layoutSubviews() {
