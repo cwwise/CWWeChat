@@ -129,6 +129,9 @@
 		1FA7244B1E9CA7CB009B6456 /* CWTableViewButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7244A1E9CA7CB009B6456 /* CWTableViewButtonCell.swift */; };
 		1FA7244E1E9CA9DD009B6456 /* CWTableHeaderTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7244D1E9CA9DD009B6456 /* CWTableHeaderTitleView.swift */; };
 		1FA724501E9CAA44009B6456 /* CWTableFooterTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7244F1E9CAA44009B6456 /* CWTableFooterTitleView.swift */; };
+		1FFC39801F73BD3B0016EDBA /* MapShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC397F1F73BD3B0016EDBA /* MapShowController.swift */; };
+		1FFC39821F73BD400016EDBA /* Map.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FFC39811F73BD400016EDBA /* Map.xcassets */; };
+		1FFC39831F73BDC20016EDBA /* MapLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48B6021F7226F3007EF312 /* MapLocationController.swift */; };
 		4E3C0C0A9AC7AC251E75415B /* Pods_CWWeChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 392080DF2A871FED246A48AD /* Pods_CWWeChatTests.framework */; };
 		732B7F111A2AF06C5FB003A1 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5C5938ABFC0D0537A59353 /* Pods_CWWeChat.framework */; };
 		8C0BFDD21E90EF70007343F1 /* CWBaseConversationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFDCC1E90EF70007343F1 /* CWBaseConversationController.swift */; };
@@ -216,9 +219,6 @@
 		8CA9248B1F570F0900570846 /* CWChatToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA924861F570F0900570846 /* CWChatToolBar.swift */; };
 		8CA9248D1F570F5200570846 /* emoticons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8CA9248C1F570F5200570846 /* emoticons.bundle */; };
 		8CAB7D911F728999003F1E70 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CAB7D901F728999003F1E70 /* MapKit.framework */; };
-		8CAB7D941F729137003F1E70 /* MapLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAB7D931F729137003F1E70 /* MapLocationController.swift */; };
-		8CAB7D971F729468003F1E70 /* Map.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CAB7D961F729468003F1E70 /* Map.xcassets */; };
-		8CAB7D991F7295F3003F1E70 /* MapShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAB7D981F7295F3003F1E70 /* MapShowController.swift */; };
 		8CB02BAD1EA8EE13003B94BC /* CWVoiceIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB02BAC1EA8EE13003B94BC /* CWVoiceIndicatorView.swift */; };
 		8CB02BAF1EA8EF9E003B94BC /* CWVoiceRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB02BAE1EA8EF9E003B94BC /* CWVoiceRecorder.swift */; };
 		8CC856271F5D74AF00CA0546 /* CWChatGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC856251F5D74AF00CA0546 /* CWChatGroup.swift */; };
@@ -354,7 +354,6 @@
 		1F4094951E9DEF2D008D959C /* MyEmoticonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEmoticonCell.swift; sourceTree = "<group>"; };
 		1F4094971E9DEFCC008D959C /* CWPersonalInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWPersonalInfoController.swift; sourceTree = "<group>"; };
 		1F4094991E9DFAC8008D959C /* CWAboutHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAboutHeaderView.swift; sourceTree = "<group>"; };
-		1F48B5FD1F721F03007EF312 /* CWWeChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CWWeChat-Bridging-Header.h"; sourceTree = "<group>"; };
 		1F48B6021F7226F3007EF312 /* MapLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationController.swift; sourceTree = "<group>"; };
 		1F592A3C1EA74884007558E9 /* CWWelcomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWWelcomeController.swift; sourceTree = "<group>"; };
 		1F592A5E1EA8B805007558E9 /* CWFileMessageBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWFileMessageBody.swift; sourceTree = "<group>"; };
@@ -409,6 +408,8 @@
 		1FA7244A1E9CA7CB009B6456 /* CWTableViewButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewButtonCell.swift; sourceTree = "<group>"; };
 		1FA7244D1E9CA9DD009B6456 /* CWTableHeaderTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableHeaderTitleView.swift; sourceTree = "<group>"; };
 		1FA7244F1E9CAA44009B6456 /* CWTableFooterTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableFooterTitleView.swift; sourceTree = "<group>"; };
+		1FFC397F1F73BD3B0016EDBA /* MapShowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapShowController.swift; sourceTree = "<group>"; };
+		1FFC39811F73BD400016EDBA /* Map.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Map.xcassets; sourceTree = "<group>"; };
 		2D5C5938ABFC0D0537A59353 /* Pods_CWWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		31E51D349FC87AA2896572C6 /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
 		392080DF2A871FED246A48AD /* Pods_CWWeChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -501,10 +502,7 @@
 		8CA924861F570F0900570846 /* CWChatToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatToolBar.swift; sourceTree = "<group>"; };
 		8CA9248C1F570F5200570846 /* emoticons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = emoticons.bundle; sourceTree = "<group>"; };
 		8CAB7D901F728999003F1E70 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		8CAB7D931F729137003F1E70 /* MapLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationController.swift; sourceTree = "<group>"; };
 		8CAB7D951F7291D1003F1E70 /* beijingLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = beijingLocation.gpx; sourceTree = "<group>"; };
-		8CAB7D961F729468003F1E70 /* Map.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Map.xcassets; sourceTree = "<group>"; };
-		8CAB7D981F7295F3003F1E70 /* MapShowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapShowController.swift; sourceTree = "<group>"; };
 		8CB02BAC1EA8EE13003B94BC /* CWVoiceIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWVoiceIndicatorView.swift; sourceTree = "<group>"; };
 		8CB02BAE1EA8EF9E003B94BC /* CWVoiceRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWVoiceRecorder.swift; sourceTree = "<group>"; };
 		8CC856251F5D74AF00CA0546 /* CWChatGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatGroup.swift; sourceTree = "<group>"; };
@@ -636,7 +634,6 @@
 				1F3491B01E87897F00B36641 /* LaunchScreen.storyboard */,
 				1F3491B21E87897F00B36641 /* Main.storyboard */,
 				1F3491B41E87897F00B36641 /* Info.plist */,
-
 				8CAB7D951F7291D1003F1E70 /* beijingLocation.gpx */,
 			);
 			path = Application;
@@ -1133,6 +1130,8 @@
 			isa = PBXGroup;
 			children = (
 				1F48B6021F7226F3007EF312 /* MapLocationController.swift */,
+				1FFC397F1F73BD3B0016EDBA /* MapShowController.swift */,
+				1FFC39811F73BD400016EDBA /* Map.xcassets */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -1578,16 +1577,6 @@
 			path = ChatToolBar;
 			sourceTree = "<group>";
 		};
-		8CAB7D921F729126003F1E70 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				8CAB7D931F729137003F1E70 /* MapLocationController.swift */,
-				8CAB7D981F7295F3003F1E70 /* MapShowController.swift */,
-				8CAB7D961F729468003F1E70 /* Map.xcassets */,
-			);
-			path = Map;
-			sourceTree = "<group>";
-		};
 		8CC856231F5D74A000CA0546 /* ContactService */ = {
 			isa = PBXGroup;
 			children = (
@@ -1770,10 +1759,10 @@
 				8CA9248D1F570F5200570846 /* emoticons.bundle in Resources */,
 				1F3491B81E87897F00B36641 /* Main.storyboard in Resources */,
 				8CFF56041F28B62F000FC575 /* momentReply.json in Resources */,
+				1FFC39821F73BD400016EDBA /* Map.xcassets in Resources */,
 				1F34922A1E878AD500B36641 /* shake_sound_male.wav in Resources */,
 				1F3491B61E87897F00B36641 /* Assets.xcassets in Resources */,
 				1F3491B71E87897F00B36641 /* LaunchScreen.storyboard in Resources */,
-				8CAB7D971F729468003F1E70 /* Map.xcassets in Resources */,
 				8CFF56051F28B62F000FC575 /* moments.json in Resources */,
 				1F3492271E878AD500B36641 /* sendmsg.caf in Resources */,
 				1F3492281E878AD500B36641 /* shake_match.wav in Resources */,
@@ -1819,10 +1808,8 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/KissXML/KissXML.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs/OHHTTPStubs.framework",
 				"${BUILT_PRODUCTS_DIR}/PPBadgeViewSwift/PPBadgeViewSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
@@ -1847,10 +1834,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KissXML.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PPBadgeViewSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
@@ -1963,6 +1948,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FFC39831F73BDC20016EDBA /* MapLocationController.swift in Sources */,
 				1F803BAF1F4D221300DFDC4A /* EmoticonService.swift in Sources */,
 				1F803BB21F4D30B300DFDC4A /* EmoticonPackage.swift in Sources */,
 				8C0BFDD91E9127FD007343F1 /* CWGroupManager.swift in Sources */,
@@ -2089,6 +2075,7 @@
 				8C0BFE0D1E9209D8007343F1 /* CWSearchResultController.swift in Sources */,
 				1F803C241F4EAE5900DFDC4A /* Emoticon.swift in Sources */,
 				8C3CC3AA1F4DDBC100CB7B61 /* CWEmoticonDetailController.swift in Sources */,
+				1FFC39801F73BD3B0016EDBA /* MapShowController.swift in Sources */,
 				1F3491B51E87897F00B36641 /* AppDelegate.swift in Sources */,
 				1FA7240A1E9B6C2D009B6456 /* CWMineController.swift in Sources */,
 				8CD40A5F1EB233E70051772C /* CWContactDetailFooterView.swift in Sources */,
@@ -2097,7 +2084,6 @@
 				8CC856271F5D74AF00CA0546 /* CWChatGroup.swift in Sources */,
 				8C84B9581E8D6DBF0020D508 /* CWImageMessageBody.swift in Sources */,
 				8C74B3EB1F6D76B400BDC819 /* CWAccount.swift in Sources */,
-				8CAB7D941F729137003F1E70 /* MapLocationController.swift in Sources */,
 				1F803BBA1F4E670000DFDC4A /* EmoticonDetailCell.swift in Sources */,
 				8C84B9541E8D630B0020D508 /* CWChatService.swift in Sources */,
 				1F6B9F141E8CAF4B00AD7FC7 /* CWMessageDispatchOperation.swift in Sources */,
@@ -2148,7 +2134,6 @@
 				1F8664431F00B74E0093F979 /* CWMomentMultimediaView.swift in Sources */,
 				8CA924781F56F88300570846 /* RecordButton.swift in Sources */,
 				8CA924761F56F88300570846 /* InputTextView.swift in Sources */,
-				8CAB7D991F7295F3003F1E70 /* MapShowController.swift in Sources */,
 				1F34926E1E87BE4200B36641 /* CWChatConst.swift in Sources */,
 				1FA527CD1E93747F00D1BE54 /* CWContactCache.swift in Sources */,
 				8CFCF53B1E90E3EE00E56C31 /* CWChatBaseStore.swift in Sources */,
@@ -2348,8 +2333,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wise.cwcwchat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "CWWeChat/Application/CWWeChat-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -2370,7 +2356,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wise.cwcwchat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "CWWeChat/Application/CWWeChat-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};

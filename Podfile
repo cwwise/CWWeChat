@@ -10,8 +10,6 @@ target 'CWWeChat' do
   pod 'SnapKit'
 
   # request
-  pod 'Moya/RxSwift'
-  pod 'RxCocoa'
   pod 'OHHTTPStubs/Swift'
 
   pod 'YYText'
@@ -19,9 +17,10 @@ target 'CWWeChat' do
   pod 'Kingfisher'
 
   pod 'SQLite.swift', git: 'https://github.com/stephencelis/SQLite.swift.git' , branch: 'release'
+  pod 'RxSwift', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'rxswift4.0-swift4.0'
+  pod 'RxCocoa', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'rxswift4.0-swift4.0'
 
   pod 'Alamofire'
-  pod 'RxSwift'
       
 # log
   pod 'SwiftyBeaver'

@@ -1,12 +1,5 @@
 PODS:
   - Alamofire (4.5.1)
-  - AMap2DMap (4.6.0):
-    - AMapFoundation (~> 1.3)
-  - AMapFoundation (1.4.2)
-  - AMapLocation (2.4.0):
-    - AMapFoundation (~> 1.4)
-  - AMapSearch (5.3.0):
-    - AMapFoundation (~> 1.2)
   - CocoaAsyncSocket (7.6.1)
   - CocoaLumberjack (3.2.1):
     - CocoaLumberjack/Default (= 3.2.1)
@@ -22,12 +15,6 @@ PODS:
   - KissXML (5.2.0)
   - KVOController (1.2.0)
   - MBProgressHUD (1.0.0)
-  - Moya/Core (9.0.0):
-    - Alamofire (~> 4.1)
-    - Result (~> 3.0)
-  - Moya/RxSwift (9.0.0):
-    - Moya/Core
-    - RxSwift (~> 3.3)
   - Nimble (7.0.1)
   - OHHTTPStubs/Core (6.0.0)
   - OHHTTPStubs/Default (6.0.0):
@@ -45,10 +32,9 @@ PODS:
   - pop (1.0.10)
   - PPBadgeViewSwift (1.1.2)
   - Quick (1.1.0)
-  - Result (3.2.3)
-  - RxCocoa (3.6.1):
-    - RxSwift (~> 3.6)
-  - RxSwift (3.6.1)
+  - RxCocoa (4.0.0-beta.0):
+    - RxSwift (~> 4.0.0-beta.0)
+  - RxSwift (4.0.0-beta.0)
   - SnapKit (4.0.0)
   - SQLite.swift (0.11.4):
     - SQLite.swift/standard (= 0.11.4)
@@ -64,24 +50,20 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - AMap2DMap
-  - AMapLocation
-  - AMapSearch
   - CWActionSheet
   - CWShareView
-  - FSPagerView
+  - FSPagerView (from `https://github.com/WenchaoD/FSPagerView`)
   - Hue
   - Kingfisher
   - KVOController
   - MBProgressHUD
-  - Moya/RxSwift
   - Nimble
   - OHHTTPStubs/Swift
   - pop
   - PPBadgeViewSwift
   - Quick
-  - RxCocoa
-  - RxSwift
+  - RxCocoa (from `https://github.com/ReactiveX/RxSwift.git`, branch `rxswift4.0-swift4.0`)
+  - RxSwift (from `https://github.com/ReactiveX/RxSwift.git`, branch `rxswift4.0-swift4.0`)
   - SnapKit
   - SQLite.swift (from `https://github.com/stephencelis/SQLite.swift.git`, branch `release`)
   - SwiftyBeaver
@@ -91,40 +73,51 @@ DEPENDENCIES:
   - YYText
 
 EXTERNAL SOURCES:
+  FSPagerView:
+    :git: https://github.com/WenchaoD/FSPagerView
+  RxCocoa:
+    :branch: rxswift4.0-swift4.0
+    :git: https://github.com/ReactiveX/RxSwift.git
+  RxSwift:
+    :branch: rxswift4.0-swift4.0
+    :git: https://github.com/ReactiveX/RxSwift.git
   SQLite.swift:
     :branch: release
     :git: https://github.com/stephencelis/SQLite.swift.git
 
 CHECKOUT OPTIONS:
+  FSPagerView:
+    :commit: 19f230333d2ffbc0eeae48c9f51d9509c672b09e
+    :git: https://github.com/WenchaoD/FSPagerView
+  RxCocoa:
+    :commit: a0bf386834ca09e0438e2edf03d740eac3c4a6ce
+    :git: https://github.com/ReactiveX/RxSwift.git
+  RxSwift:
+    :commit: a0bf386834ca09e0438e2edf03d740eac3c4a6ce
+    :git: https://github.com/ReactiveX/RxSwift.git
   SQLite.swift:
     :commit: 9f1735a52898a3cae23020a76e2003357712c38c
     :git: https://github.com/stephencelis/SQLite.swift.git
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  AMap2DMap: 003fa70526983a1469ae6fc3323a6ee8b5ccf53c
-  AMapFoundation: 6c0471c9a6a0ad17dad46e3d800ad56ca170f82a
-  AMapLocation: 47b62b5381a66e4d0c2931b70ffde72682427896
-  AMapSearch: beb01c6b2e7be18fb4898e97162fedf144420c6f
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
   CocoaLumberjack: 2800c03334042fe80589423c8d80e582dcaec482
   CWActionSheet: 7ab61a8628bfe3c4b9932983e154181ea4c9cd2f
   CWShareView: a7befa2a75fa1113c587b69b03b48556b488316d
-  FSPagerView: c6cc8f66a5000ca8bb4c9c7b7168626d95c9bda6
+  FSPagerView: 4dd9282a0a827282df81ce46cd8238d65769c190
   Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
   Kingfisher: b771785e9461ed4b8686d40e7145f9e58100cb24
   KissXML: 1c1eeeb6b94e4522cd2f2373e5d0d03c9227738f
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  Moya: cf5e6ee93af526532f92614004b8ad2ea60fd845
   Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
   PPBadgeViewSwift: ec6d6d9f7dea6911022a96659c94e463b44ea512
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
-  RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
-  RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
+  RxCocoa: f2dff5e6b6a40f842867ec5915f449e1c3af563a
+  RxSwift: cafebeafadc860ca27a2f3fb3760a8bb8663f6ef
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SQLite.swift: 3e3bee21da701b5b9f87c4a672cb54f233505692
   SwiftyBeaver: f04f739cca6826c5fb0f575fed8fa3293f76b83e
@@ -133,6 +126,6 @@ SPEC CHECKSUMS:
   XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 705736a7ee09229413a8393cc5f2f2999b432b71
+PODFILE CHECKSUM: 19d27114d5c1fb90164a9961fa536007729ef9ce
 
 COCOAPODS: 1.3.1

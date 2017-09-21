@@ -12,8 +12,6 @@ import UserNotifications
 
 let log = SwiftyBeaver.self
 
-private let kAMapKey = "754317d1b37a2034d3b752bd57eaa6d5"
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -21,9 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        AMapServices.shared().apiKey = kAMapKey
-        AMapServices.shared().enableHTTPS = true
-
         //设置logger
         self.window = UIWindow(frame: UIScreen.main.bounds)
         loginMap()
@@ -94,11 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func loginEmoticonSuccess() {
         let emoticonController = CWEmoticonListController()
         self.window?.rootViewController = CWChatNavigationController(rootViewController: emoticonController)
-    }
-    
-    func loginMap() {
-        let map = MapLocationController()
-        self.window?.rootViewController = CWChatNavigationController(rootViewController: map)
     }
     
     func loginMomentSuccess() {
