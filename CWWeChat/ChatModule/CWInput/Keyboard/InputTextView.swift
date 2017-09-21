@@ -20,7 +20,7 @@ class InputTextView: UITextView {
             
             if placeHolder.characters.count > maxChars {
                 let index = placeHolder.characters.index(placeHolder.startIndex, offsetBy: -8)
-                placeHolder = placeHolder.substring(to: index)
+                placeHolder = String(placeHolder[..<index])
                 self.placeHolder = placeHolder + "..."
             }
             self.setNeedsDisplay()
