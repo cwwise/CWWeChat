@@ -214,7 +214,7 @@ public class CWChatKeyboard: UIView {
         if self.keyboardStyle == .comment {
             
         } else {
-            
+            chatToolBar.endInputing()
         }
     }
     

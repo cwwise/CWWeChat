@@ -40,7 +40,7 @@ class MessageContentView: UIView {
     
     func refresh(message: CWMessageModel) {
         self.message = message
-        //
+        
         if message.isSend {
             let image = #imageLiteral(resourceName: "sender_background_normal")
             let _ = #imageLiteral(resourceName: "sender_background_highlight")

@@ -42,10 +42,6 @@ target 'CWWeChat' do
   # animation
   pod 'pop'
   
-  pod 'AMapSearch'
-  pod 'AMapLocation'
-  pod 'AMap2DMap'
-  
   # tool
   pod 'Hue'
   pod 'SwiftyJSON'
@@ -58,9 +54,5 @@ target 'CWWeChat' do
     pod 'Nimble'
   end
 
-  target 'CWWeChatUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 
 end

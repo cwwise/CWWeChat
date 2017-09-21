@@ -86,6 +86,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = tabBarController
     }
     
+    func loginMap() {
+        let map = MapShowController()
+        self.window?.rootViewController = CWChatNavigationController(rootViewController: map)
+    }
+    
     func loginEmoticonSuccess() {
         let emoticonController = CWEmoticonListController()
         self.window?.rootViewController = CWChatNavigationController(rootViewController: emoticonController)

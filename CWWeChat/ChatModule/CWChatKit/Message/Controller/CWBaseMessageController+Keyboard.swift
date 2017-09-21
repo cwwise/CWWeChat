@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MapKit
 
 // MARK: - Keyboard
 ///响应KeyBoard事件
@@ -177,6 +177,12 @@ extension CWBaseMessageController: CWChatKeyboardDelegate {
     // 发送表情
     func keyboard(_ keyboard: CWChatKeyboard, sendEmoticon emoticon: Emoticon) {
         print("发送表情..", emoticon.id)
+        let path = emoticon.originalUrl?.path
+        let body = CWEmoticonMessageBody(localPath: path, remoteURL: nil)
+        let message = CWMessage(targetId: conversation.targetId,
+                                direction: .send,
+                                messageBody: body)
+        self.sendMessage(message)
     }
 }
 
@@ -209,6 +215,12 @@ extension CWBaseMessageController: MoreInputViewDelegate {
     }
 }
 
+extension CWBaseMessageController: MapLocationControllerDelegate {
+    
+    func sendLocation(_ location: CLLocationCoordinate2D) {
+        
+    }
+}
 
 //
 extension CWBaseMessageController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
