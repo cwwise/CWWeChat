@@ -22,7 +22,7 @@ class CWGroupService: XMPPModule {
         super.init(dispatchQueue: queue)
     }
     
-    override func didActivate() {
+    @objc func didActivate() {
         self.groupChat.activate(self.xmppStream)
         self.groupChat.addDelegate(self, delegateQueue: self.moduleQueue)
     }

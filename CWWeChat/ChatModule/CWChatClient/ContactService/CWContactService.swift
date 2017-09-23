@@ -30,7 +30,7 @@ class CWContactService: XMPPModule {
         super.init(dispatchQueue: queue)
     }
     
-    override func didActivate() {
+    @objc func didActivate() {
         xmppRoster.addDelegate(self, delegateQueue: self.moduleQueue)
         xmppRoster.activate(self.xmppStream)
         

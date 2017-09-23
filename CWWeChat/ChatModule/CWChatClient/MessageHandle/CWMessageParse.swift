@@ -10,7 +10,7 @@ import UIKit
 import XMPPFramework
 
 /// 消息解析
-class CWChatMessageParse: XMPPModule {
+class CWMessageParse: NSObject {
 
     lazy var messageHandle: CWMessageHandle = {
         let messageHandle = CWMessageHandle()
@@ -35,7 +35,7 @@ class CWChatMessageParse: XMPPModule {
 }
 
 // MARK: - XMPPStreamDelegate
-extension CWChatMessageParse: XMPPStreamDelegate {
+extension CWMessageParse: XMPPStreamDelegate {
     
     /**
      <message xmlns="jabber:client" from="chenwei@hellochatim.p1.im/wei的MacBook Pro" to="haohao@hellochatim.p1.im/ios" type="chat" id="59D68F07-854E-4D5C-8E1F-63350E6C5CB1">
@@ -61,7 +61,7 @@ extension CWChatMessageParse: XMPPStreamDelegate {
 
 
 // MARK: - CWMessageHandleDelegate
-extension CWChatMessageParse: CWMessageHandleDelegate {
+extension CWMessageParse: CWMessageHandleDelegate {
     
     func handMessageComplete(message: CWMessage) {
         // 先保存消息

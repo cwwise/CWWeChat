@@ -28,6 +28,8 @@ class CWXMPPManager: NSObject {
     /// 网络状态监听
     public var reachable: NetworkReachabilityManager?
     
+    var multicastDelegate: GCDMulticastDelegate
+    
     /// 这3个变量 注册和登录 用来临时记录
     var isLoginUser: Bool = true
     var password: String!
@@ -40,6 +42,8 @@ class CWXMPPManager: NSObject {
         xmppStream = XMPPStream()
         xmppReconnect = XMPPReconnect()
         autoPing = XMPPAutoPing()
+        
+        multicastDelegate = GCDMulticastDelegate()
         super.init()
         
         /// xmpp
@@ -53,8 +57,8 @@ class CWXMPPManager: NSObject {
         xmppReconnect.addDelegate(self, delegateQueue: xmppQueue)
 
         //心跳机制
-//        autoPing.activate(xmppStream)
-//        autoPing.respondsToQueries = true
+        autoPing.activate(xmppStream)
+        autoPing.respondsToQueries = true
 
         setupNetworkReachable()
         registerApplicationNotification()
@@ -207,7 +211,6 @@ extension CWXMPPManager: XMPPStreamDelegate {
         self.completion?(xmppStream.myJID.user, nil)
         self.completion = nil
 
-        log.debug("登陆成功。。。")
         goOnline()
     }
     
@@ -235,6 +238,7 @@ extension CWXMPPManager: XMPPStreamDelegate {
          */
         let errormessage = error.elements(forName: "conflict")
         if errormessage.count > 0 {
+            
             log.error("异常登录")
         }
     }
@@ -269,7 +273,6 @@ extension CWXMPPManager: CWLoginManager {
     }
     
     var currentAccount: String {
-        return ""
         guard let account = xmppStream.myJID.user else {
             return ""
         } 
@@ -294,6 +297,13 @@ extension CWXMPPManager: CWLoginManager {
         connetService(user: username)        
     }
     
+    func addLoginDelegate(_ delegate: CWLoginManagerDelegate) {
+        
+    }
+    
+    func removeLoginDelegate(_ delegate: CWLoginManagerDelegate) {
+        
+    }
 
     func logout() {
         //停止发送消息

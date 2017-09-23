@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let options = CWChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
         let chatClient = CWChatClient.share
         chatClient.initialize(with: options)
-        /*
+        
         chatClient.loginManager.login(username: account.username,
                                       password: account.password) { (username, error) in
                                         
@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             log.debug("登录成功...\(username)")
                                         }
         }
-         */
+     
     }
     
     func loginSuccess() {

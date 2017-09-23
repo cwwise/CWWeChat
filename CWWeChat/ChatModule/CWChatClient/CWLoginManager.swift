@@ -33,6 +33,10 @@ public protocol CWLoginManager: NSObjectProtocol {
     func login(username: String, password: String, completion: CWLoginHandler?)
     
     func register(username: String, password: String, completion: CWLoginHandler?)
+    
+    func addLoginDelegate(_ delegate: CWLoginManagerDelegate)
 
+    func removeLoginDelegate(_ delegate: CWLoginManagerDelegate)
+    
     func logout()
 }

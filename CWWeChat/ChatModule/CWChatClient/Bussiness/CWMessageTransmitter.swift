@@ -29,7 +29,7 @@ class CWMessageTransmitter: XMPPModule {
         streamManagement.addDelegate(self, delegateQueue: queue)
     }
     
-    override func didActivate() {
+    @objc func didActivate() {
         streamManagement.activate(xmppStream)
     }
     
