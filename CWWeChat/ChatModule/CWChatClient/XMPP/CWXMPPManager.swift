@@ -28,8 +28,10 @@ class CWXMPPManager: NSObject {
     /// 网络状态监听
     public var reachable: NetworkReachabilityManager?
     
-    var multicastDelegate: GCDMulticastDelegate
+//    var multicastDelegate: GCDMulticastDelegate
     
+    private var streamManagement: XMPPStreamManagement
+
     /// 这3个变量 注册和登录 用来临时记录
     var isLoginUser: Bool = true
     var password: String!
@@ -43,7 +45,10 @@ class CWXMPPManager: NSObject {
         xmppReconnect = XMPPReconnect()
         autoPing = XMPPAutoPing()
         
-        multicastDelegate = GCDMulticastDelegate()
+        let memoryStorage = XMPPStreamManagementMemoryStorage()
+        streamManagement = XMPPStreamManagement(storage: memoryStorage)
+        
+   //     multicastDelegate = GCDMulticastDelegate()
         super.init()
         
         /// xmpp
@@ -55,6 +60,11 @@ class CWXMPPManager: NSObject {
         xmppReconnect.reconnectTimerInterval = DEFAULT_XMPP_RECONNECT_TIMER_INTERVAL
         xmppReconnect.activate(xmppStream)
         xmppReconnect.addDelegate(self, delegateQueue: xmppQueue)
+
+        streamManagement.activate(xmppStream)
+        streamManagement.addDelegate(self, delegateQueue: xmppQueue)
+        streamManagement.automaticallyRequestAcks(afterStanzaCount: 5, orTimeout: 2.0)
+        streamManagement.automaticallySendAcks(afterStanzaCount: 5, orTimeout: 2.0)
 
         //心跳机制
         autoPing.activate(xmppStream)
@@ -130,7 +140,6 @@ class CWXMPPManager: NSObject {
         }
         
     }
-    
     
     //
     func goOnline() {
@@ -212,6 +221,8 @@ extension CWXMPPManager: XMPPStreamDelegate {
         self.completion = nil
 
         goOnline()
+        streamManagement.autoResume = true
+        streamManagement.enable(withResumption: true, maxTimeout: 60)
     }
     
     func xmppStreamDidRegister(_ sender: XMPPStream!) {
@@ -260,6 +271,30 @@ extension CWXMPPManager: XMPPStreamDelegate {
         return true
     }
 
+}
+
+extension CWMessageTransmitter: XMPPStreamManagementDelegate {
+    
+    func xmppStreamManagementDidRequestAck(_ sender: XMPPStreamManagement!) {
+        log.error("测试数据")
+    }
+    
+    func xmppStreamManagement(_ sender: XMPPStreamManagement!, wasEnabled enabled: DDXMLElement!) {
+        log.debug("xmppStreamManagement wasEnabled")
+    }
+    
+    func xmppStreamManagement(_ sender: XMPPStreamManagement!, wasNotEnabled failed: DDXMLElement!) {
+        log.error("xmppStreamManagement wasNotEnabled")
+    }
+    
+    func xmppStreamManagement(_ sender: XMPPStreamManagement!, didReceiveAckForStanzaIds stanzaIds: [Any]!) {
+        // 收到id
+        guard let messageid = stanzaIds as? [String] , messageid.count != 0 else {
+            return
+        }
+        log.debug(messageid)
+        NotificationCenter.default.post(name: kCWMessageDispatchSuccessNotification, object: messageid)
+    }
 }
 
 extension CWXMPPManager: CWLoginManager {

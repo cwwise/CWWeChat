@@ -18,17 +18,18 @@ class CWChatConversationStore: CWChatBaseStore {
 
     /// 当前用户的唯一id，创建数据库名称
     let conversationTable = Table("conversation")
-    
-    let id = Expression<Int64>("id")
-    let chatType = Expression<Int>("chat_type")
-    let target_id = Expression<String>("tid")
+    /// id
+    let f_id = Expression<Int64>("id")
+    /// 聊天类型
+    let f_chatType = Expression<Int>("chat_type")
+    let f_targetId = Expression<String>("tid")
     // 是否置顶
-    let isTop = Expression<Bool>("isTop")
-    let unread_count = Expression<Int>("unread_count")
+    let f_isTop = Expression<Bool>("isTop")
+    let f_unreadCount = Expression<Int>("unread_count")
     // 时间
-    let date = Expression<Double>("date")
+    let f_date = Expression<Double>("date")
     // 草稿
-    let _draft = Expression<String?>("draft")
+    let f_draft = Expression<String?>("draft")
     
     //MARK: 初始化
     override init(userId: String) {
@@ -42,15 +43,15 @@ class CWChatConversationStore: CWChatBaseStore {
     func createMessageTable() {
         do {
             try messageDB.run(conversationTable.create(ifNotExists: true) { t in
-                t.column(id, primaryKey: .autoincrement)
-                t.column(target_id, unique: true)
-                t.column(chatType, defaultValue:0)
-                t.column(date)
-                t.column(isTop, defaultValue: false)
-                t.column(unread_count, defaultValue:0)
-                t.column(_draft)
+                t.column(f_id, primaryKey: .autoincrement)
+                t.column(f_targetId, unique: true)
+                t.column(f_chatType, defaultValue:0)
+                t.column(f_date)
+                t.column(f_isTop, defaultValue: false)
+                t.column(f_unreadCount, defaultValue:0)
+                t.column(f_draft)
             })
-            _ = conversationTable.createIndex(chatType)
+            _ = conversationTable.createIndex(f_chatType)
         } catch {
             log.error(error)
         }
@@ -63,12 +64,12 @@ extension CWChatConversationStore {
     func addConversation(conversation: CWConversation) {
 
         let timestamp = conversation.lastMessage?.timestamp ?? NSDate().timeIntervalSince1970
-        let insert = conversationTable.insert(target_id <- conversation.targetId,
-                                              isTop <- conversation.isTop,
-                                              unread_count <- conversation.unreadCount,
-                                              _draft <- conversation.draft,
-                                              chatType <- conversation.type.rawValue,
-                                              date <- timestamp
+        let insert = conversationTable.insert(f_targetId <- conversation.targetId,
+                                              f_isTop <- conversation.isTop,
+                                              f_unreadCount <- conversation.unreadCount,
+                                              f_draft <- conversation.draft,
+                                              f_chatType <- conversation.type.rawValue,
+                                              f_date <- timestamp
                                               )
         log.verbose(insert.asSQL())
         do {
@@ -80,10 +81,10 @@ extension CWChatConversationStore {
     
     // 更新会话时间
     func updateConversationTime(_ conversation: CWConversation) {
-        let filter = conversationTable.filter(target_id == conversation.targetId)
+        let filter = conversationTable.filter(f_targetId == conversation.targetId)
         let timestamp = conversation.lastMessage?.timestamp ?? NSDate().timeIntervalSince1970
         
-        let update = filter.update(date <- timestamp)
+        let update = filter.update(f_date <- timestamp)
         do {
             try messageDB.run(update)
         } catch {
@@ -100,7 +101,7 @@ extension CWChatConversationStore {
     func fecthAllConversations() -> [CWConversation] {
         var list = [CWConversation]()
         do {
-            let result = try messageDB.prepare(conversationTable.order(date))
+            let result = try messageDB.prepare(conversationTable.order(f_date))
             for conversation in result {
                 let model = self.createConversationByRow(conversation)
                 list.append(model)
@@ -117,7 +118,7 @@ extension CWChatConversationStore {
         
         var conversation: CWConversation
         var create = true
-        let sql = conversationTable.filter(type.rawValue==chatType && targetId == target_id)
+        let sql = conversationTable.filter(type.rawValue==f_chatType && targetId == f_targetId)
         do {
             let raw = try messageDB.pluck(sql)
             if raw != nil {
@@ -140,12 +141,12 @@ extension CWChatConversationStore {
     
     
     func createConversationByRow(_ row: Row) -> CWConversation {
-        let targetId = row[target_id]
-        let type = CWChatType(rawValue: row[chatType]) ?? .single
+        let targetId = row[f_targetId]
+        let type = CWChatType(rawValue: row[f_chatType]) ?? .single
         let conversation = CWConversation(targetId: targetId, type: type)
-        conversation.draft = row[_draft]
-        conversation.unreadCount = row[unread_count]
-        conversation.isTop = row[isTop]
+        conversation.draft = row[f_draft]
+        conversation.unreadCount = row[f_unreadCount]
+        conversation.isTop = row[f_isTop]
         return conversation
     }
     
@@ -159,7 +160,7 @@ extension CWChatConversationStore {
     /// - Parameter targetId: 会话id
     @discardableResult func deleteConversation(_ targetId: String) -> Bool {
         do {
-            let query = conversationTable.filter(targetId==target_id)
+            let query = conversationTable.filter(targetId==f_targetId)
             try messageDB.run(query.delete())
             return true
         } catch {

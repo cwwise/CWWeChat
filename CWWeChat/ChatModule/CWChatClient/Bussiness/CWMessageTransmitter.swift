@@ -15,22 +15,8 @@ let sendMessageTimeoutInterval: TimeInterval = 30
 /// 发送消息
 class CWMessageTransmitter: XMPPModule {
     
-    private var streamManagement: XMPPStreamManagement
-
     override init!(dispatchQueue queue: DispatchQueue!) {
-       
-        let memoryStorage = XMPPStreamManagementMemoryStorage()
-        streamManagement = XMPPStreamManagement(storage: memoryStorage)
-   
         super.init(dispatchQueue: queue)
-        
-        streamManagement.automaticallyRequestAcks(afterStanzaCount: 5, orTimeout: 2.0)
-        streamManagement.automaticallySendAcks(afterStanzaCount: 5, orTimeout: 2.0)
-        streamManagement.addDelegate(self, delegateQueue: queue)
-    }
-    
-    @objc func didActivate() {
-        streamManagement.activate(xmppStream)
     }
     
     func sendMessage(content: String,
@@ -72,7 +58,7 @@ class CWMessageTransmitter: XMPPModule {
             message = XMPPMessage(type: "groupchat", elementID: messageId)
         }
         message?.addAttribute(withName: "to", stringValue: chatJidString(withType: chatType, name: to))
-        message?.addReceiptRequest()
+      //  message?.addReceiptRequest()
         let bodyElement = DDXMLElement.element(withName: "body", stringValue: body) as! DDXMLElement
         bodyElement.addAttribute(withName: "msgtype", integerValue: type)
 
@@ -88,29 +74,7 @@ class CWMessageTransmitter: XMPPModule {
         let domain = CWChatClient.share.options.domain
         return name + "@" + domain
     }
-
-    
-    func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
-        streamManagement.autoResume = true
-        streamManagement.enable(withResumption: true, maxTimeout: 60)
-    }
     
 }
 
-extension CWMessageTransmitter: XMPPStreamManagementDelegate {
-    
-    func xmppStreamManagementDidRequestAck(_ sender: XMPPStreamManagement!) {}
-    
-    func xmppStreamManagement(_ sender: XMPPStreamManagement!, wasEnabled enabled: DDXMLElement!) {
-        
-    }
-    
-    func xmppStreamManagement(_ sender: XMPPStreamManagement!, didReceiveAckForStanzaIds stanzaIds: [Any]!) {
-        // 收到id
-        guard let messageid = stanzaIds as? [String] , messageid.count != 0 else {
-            return
-        }
-        log.debug(messageid)
-        NotificationCenter.default.post(name: kCWMessageDispatchSuccessNotification, object: messageid)
-    }
-}
+
