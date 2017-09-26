@@ -11,9 +11,11 @@ import UIKit
 public class CWUser: NSObject {
     
     var userId: String
-    
+    // 昵称
     var nickname: String?
-
+    // 头像
+    var avatarUrl: URL?
+    
     private(set) var userInfo: CWUserInfo
     
     convenience init(userId: String, userInfo: CWUserInfo) {
@@ -32,8 +34,6 @@ public class CWUserInfo: NSObject {
     var nickName: String?
     // 备注
     var alias: String?
-    // 头像
-    var avatarUrl: String?
     // 签名
     var sign: String?
     // email

@@ -21,6 +21,7 @@ private struct CWTextParser {
     }()
 }
 
+/// 文本处理
 class CWChatTextParser: NSObject {
     
     class func parseText(_ text: String,
@@ -87,7 +88,6 @@ class CWChatTextParser: NSObject {
                 
                 let text = attributedText.string as NSString
                 var URLString = text.substring(with: URL.range) as String
-                
                 
                 if !URLString.hasPrefix("http://") || !URLString.hasPrefix("https://") {
                     URLString = "http://"+URLString
