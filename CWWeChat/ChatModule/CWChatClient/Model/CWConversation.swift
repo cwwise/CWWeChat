@@ -136,6 +136,15 @@ public extension CWConversation {
         
     }
     
+    func fullTextSearch(_ text: String) {
+        
+        guard let service = CWChatClient.share.chatManager as? CWChatService else {
+            return
+        }
+        
+        service.messageStore.fullTextSearch(text)
+    }
+    
 }
 
 

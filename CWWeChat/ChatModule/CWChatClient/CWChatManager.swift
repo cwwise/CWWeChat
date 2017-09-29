@@ -121,5 +121,8 @@ public protocol CWChatManager: NSObjectProtocol {
     func resendMessage(_ message: CWMessage,
                      progress: @escaping CWMessageProgressBlock,
                      completion: @escaping CWMessageCompletionBlock)
+ 
+    
+    
     
 }

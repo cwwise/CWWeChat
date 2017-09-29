@@ -20,6 +20,8 @@ public class CWChatMessageController: CWBaseMessageController {
             imageView.image = UIImage(contentsOfFile: path)
             self.collectionView.backgroundView = imageView
         }
+        
+        self.conversation.fullTextSearch("测试")
     }
     
     @objc func rightBarItemDown(_ barItem: UIBarButtonItem) {

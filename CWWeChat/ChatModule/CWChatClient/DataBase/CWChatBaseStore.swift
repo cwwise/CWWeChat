@@ -27,7 +27,6 @@ class CWChatBaseStore: NSObject {
     }
     
     func setupMessageDB() {
-        //数据
         do {
             messageDB = try Connection(self.path)
             messageDB.busyTimeout = 3

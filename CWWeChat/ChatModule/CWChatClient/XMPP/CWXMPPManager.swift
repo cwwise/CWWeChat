@@ -255,12 +255,12 @@ extension CWXMPPManager: XMPPStreamDelegate {
     }
     
     func xmppStream(_ sender: XMPPStream!, didSend iq: XMPPIQ!) {
-        log.debug(iq)
+      //  log.debug(iq)
     }
     
     func xmppStream(_ sender: XMPPStream!, didReceive iq: XMPPIQ!) -> Bool {
         
-        log.debug(iq)
+       // log.debug(iq)
 
         if iq.requiresResponse() {
             

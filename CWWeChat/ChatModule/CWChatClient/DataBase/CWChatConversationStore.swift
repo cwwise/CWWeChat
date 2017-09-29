@@ -21,19 +21,26 @@ class CWChatConversationStore: CWChatBaseStore {
     /// id
     let f_id = Expression<Int64>("id")
     /// 聊天类型
-    let f_chatType = Expression<Int>("chat_type")
+    let f_chatType = Expression<Int>("chattype")
+    ///
     let f_targetId = Expression<String>("tid")
-    // 是否置顶
+    /// 是否置顶
     let f_isTop = Expression<Bool>("isTop")
-    let f_unreadCount = Expression<Int>("unread_count")
-    // 时间
+    ///
+    let f_unreadCount = Expression<Int>("unreadcount")
+    /// 时间
     let f_date = Expression<Double>("date")
-    // 草稿
+    /// 草稿
     let f_draft = Expression<String?>("draft")
     
     //MARK: 初始化
     override init(userId: String) {
         super.init(userId: userId)
+        createMessageTable()
+    }
+    
+    override func setupMessageDB() {
+        super.setupMessageDB()
         createMessageTable()
     }
     

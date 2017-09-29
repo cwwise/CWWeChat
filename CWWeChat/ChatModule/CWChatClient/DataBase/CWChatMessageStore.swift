@@ -17,7 +17,7 @@ import SQLite
 class CWChatMessageStore: CWChatBaseStore {
         
     // 判断是否存在对应的表
-    private var tableExistList = [String: Bool]()
+    private var messageTableList = [String: Table]()
     
     //MARK: 数据库属性
     //消息唯一id
@@ -40,15 +40,31 @@ class CWChatMessageStore: CWChatBaseStore {
     private let f_sendStatus = Expression<Int>("sendstatus")
     /// 是否已读
     private let f_readed = Expression<Bool>("readed")
-    
     /// 拓展字端
     private let f_ext1 = Expression<String>("ext1")
 
+    /// http://www.jianshu.com/p/32563e843cc0
+    /// 全文检索
+    let textTable = VirtualTable("content")
+    let f_body = Expression<String>("body")
+    let f_bodyId = Expression<String>("msgid")
+
+    
     func messageTable(_ targetId: String) -> Table {
-        if tableExistList[targetId] == nil {
+        if messageTableList[targetId] == nil {
             createMessageTable(targetId: targetId)
         }
-        return Table("message_"+targetId)
+        assert(messageTableList[targetId] != nil)
+        return messageTableList[targetId]!
+    }
+    
+    override init(userId: String) {
+        super.init(userId: userId)
+        do {
+            try messageDB.run(textTable.create(.FTS4([f_bodyId, f_body], tokenize: .Porter), ifNotExists: true))
+        } catch  {
+            print(error)
+        }
     }
     
     /// 创建message数据表
@@ -71,10 +87,15 @@ class CWChatMessageStore: CWChatBaseStore {
             try messageDB.run(create)
             _ = table.createIndex(f_messageId)
             
-            tableExistList[targetId] = true
+            messageTableList[targetId] = table
         } catch {
             log.error(error)
         }
+    }
+    
+    override func setupMessageDB() {
+        super.setupMessageDB()
+        messageTableList.removeAll(keepingCapacity: true)
     }
     
 }
@@ -94,8 +115,16 @@ extension CWChatMessageStore {
                                          f_messageType <- message.messageType.rawValue,
                                          f_content <- body,
                                          f_sendStatus <- message.sendStatus.rawValue)
+        
         log.verbose(insert.asSQL())
         do {
+            if message.messageType == .text {
+                let textBody = message.messageBody as! CWTextMessageBody
+                try messageDB.run(textTable.insert(
+                    f_body <- textBody.text,
+                    f_bodyId <- message.messageId
+                ))
+            }
             try messageDB.run(insert)
         } catch {
             log.error(error)
@@ -106,6 +135,20 @@ extension CWChatMessageStore {
 // MARK: 查找
 extension CWChatMessageStore {
 
+    func fullTextSearch(_ text: String) {
+        let query = textTable.filter(f_body.match("\(text)*"))
+        do {
+            print(query.asSQL())
+            let result = try messageDB.prepare(query)
+            for row in result.reversed() {
+                print(row)
+            }
+        } catch {
+            print(error)
+        }
+        
+    }
+    
     func lastMessage(by targetId: String) -> CWMessage? {
         let query = messageTable(targetId).filter(f_targetId == targetId).order(f_date.desc)
         do {
