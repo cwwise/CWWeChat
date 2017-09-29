@@ -90,7 +90,7 @@ public enum CWMessageType: Int {
 
 
 /// 聊天消息
-public class CWMessage: NSObject {
+public class CWMessage {
 
     /// 会话类型
     public var chatType: CWChatType = .single
@@ -100,12 +100,12 @@ public class CWMessage: NSObject {
     }
     /// 消息唯一id
     public var messageId: String
-    /// 消息发送方
+    /// 消息发送
     public var direction: CWMessageDirection = .unknown
     /// 发送状态
     public var sendStatus: CWMessageSendStatus = .pending
-    /// 发送方id (自己的id) （这个地方用？可能需要修改）
-    public var senderId: String?
+    /// 发送方id
+    public var senderId: String
     /// 接收方id
     public var targetId: String
     /// 消息体
@@ -118,28 +118,26 @@ public class CWMessage: NSObject {
     public var ext: Dictionary<String, AnyObject>?
     
     public init(targetId: String,
-         messageID: String = String.UUIDString(),
-         chatType: CWChatType = .single,
-         direction: CWMessageDirection = .send,
-         isRead: Bool = true,
-         timestamp: TimeInterval = NSDate().timeIntervalSince1970,
-         messageBody: CWMessageBody) {
+                senderId: String,
+                messageID: String = CWChatClientUtil.messageId,
+                direction: CWMessageDirection = .send,
+                timestamp: TimeInterval = CWChatClientUtil.messageDate,
+                messageBody: CWMessageBody) {
 
         self.messageBody = messageBody
-        self.timestamp = timestamp
         self.direction = direction
-        self.chatType = chatType
         
+        self.senderId = senderId
         self.targetId = targetId
         self.messageId = messageID
-        super.init()
-        self.messageBody.message = self
+        self.timestamp = timestamp
     }
     
 }
 
-extension CWMessage {
-    override public var description: String {
+extension CWMessage: Hashable, CustomStringConvertible {
+    
+    public var description: String {
         switch messageType {
         case .text:
             let textBody = self.messageBody as! CWTextMessageBody
@@ -149,34 +147,24 @@ extension CWMessage {
         }
     }
     
-    public override var hashValue: Int {
+    public var hashValue: Int {
         return messageId.hashValue
     }
     
+    public static func ==(lhs: CWMessage, rhs: CWMessage) -> Bool {
+        return lhs.messageId == rhs.messageId
+    }
 }
 
 
 // MARK: - 便利方法
 extension CWMessage {
-    // 文本
-    public convenience init(targetId: String,
-                messageID: String = String.UUIDString(),
-                chatType: CWChatType = .single,
-                direction: CWMessageDirection = .send,
-                isRead: Bool = true,
-                timestamp: TimeInterval = NSDate().timeIntervalSince1970,
-                text: String) {
-        
-        let messageBody = CWTextMessageBody(text: text)
-        self.init(targetId: targetId,
-                  messageID: messageID,
-                  chatType: chatType,
-                  direction: direction,
-                  isRead: isRead,
-                  timestamp: timestamp,
-                  messageBody: messageBody)
+
+    //
+    public convenience init(targetId: String, messageBody: CWMessageBody) {
+        let senderId = CWChatClient.share.userId
+        self.init(targetId: targetId, senderId: senderId, messageBody: messageBody)
     }
-    
     
 }
 

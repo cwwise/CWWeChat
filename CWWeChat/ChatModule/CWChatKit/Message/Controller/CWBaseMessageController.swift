@@ -174,8 +174,7 @@ extension CWBaseMessageController: CWChatManagerDelegate {
         
     }
     
-    public func messagesDidReceive(_ message: CWMessage) {
-        
+    public func didReceive(message: CWMessage) {
         // 判断消息是否为当前targetId
         if message.targetId != conversation.targetId {
             return

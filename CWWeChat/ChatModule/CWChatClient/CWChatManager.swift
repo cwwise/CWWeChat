@@ -27,13 +27,13 @@ public protocol CWChatManagerDelegate: NSObjectProtocol {
     /// 收到消息
     ///
     /// - Parameter message: 消息实体
-    func messagesDidReceive(_ message: CWMessage)
+    func didReceive(message: CWMessage)
 }
 
 // 让协议变成可选
 public extension CWChatManagerDelegate {
     func conversationDidUpdate(_ conversation: CWConversation) {}
-    func messagesDidReceive(_ message: CWMessage) {}
+    func didReceive(message: CWMessage) {}
     func messageStatusDidChange(_ message: CWMessage, error: CWChatError?) {}
 }
 
@@ -57,12 +57,17 @@ public protocol CWChatManager: NSObjectProtocol {
     func removeChatDelegate(_ delegate: CWChatManagerDelegate)
 
     // MARK: 获取会话
-    
-    /// 获取所有会话
+    /// 获取所有聊天会话
     ///
-    /// - Returns: 会话列表
+    /// - Returns: 会话的数组
     func fetchAllConversations() -> [CWConversation]
     
+    ///
+    ///
+    /// - Parameters:
+    ///   - chatType: 聊天类型
+    ///   - targetId: 目的人
+    /// - Returns: 聊天会话数组
     func fecthConversation(chatType: CWChatType, targetId: String) -> CWConversation
     
     /// 删除会话
@@ -72,7 +77,9 @@ public protocol CWChatManager: NSObjectProtocol {
     ///   - deleteMessages: 是否删除会话中的消息
     func deleteConversation(_ targetId: String, deleteMessages: Bool)
     
-    /// 删除所有会话 删除会话的消息
+    
+    /// 删除所有会话
+    ///
     func deleteAllConversation()
     
     // MARK: 消息相关

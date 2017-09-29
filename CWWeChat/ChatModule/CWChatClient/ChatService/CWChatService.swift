@@ -43,7 +43,7 @@ class CWChatService: XMPPModule {
 
     @objc func didActivate() {
         self.xmppStream.addDelegate(messageParse, delegateQueue: self.moduleQueue)
-        messageTransmitter.activate(self.xmppStream)
+        self.messageTransmitter.activate(self.xmppStream)
     }
     
     /// 收到消息执行
@@ -84,13 +84,13 @@ class CWChatService: XMPPModule {
     /// 执行代理方法
     ///
     /// - Parameter message: 消息实体
-    private func executeMessagesDidReceive(_ message :CWMessage) {
+    private func executeMessagesDidReceive(_ message: CWMessage) {
         
         executeDelegateSelector { (delegate, queue) in
             //执行Delegate的方法
             if let delegate = delegate as? CWChatManagerDelegate {
                 queue?.async(execute: {
-                    delegate.messagesDidReceive(message)
+                    delegate.didReceive(message: message)
                 })
             }
         }

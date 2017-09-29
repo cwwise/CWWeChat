@@ -108,9 +108,7 @@ extension CWBaseMessageController {
         CWChatKit.share.store(image: image, forKey: imageName)
         // 保存
         let imageBody = CWImageMessageBody(path: filePath, size: image.size)
-        let message = CWMessage(targetId: conversation.targetId,
-                                direction: .send,
-                                messageBody: imageBody)
+        let message = CWMessage(targetId: conversation.targetId, messageBody: imageBody)
         self.sendMessage(message)
     }
     
