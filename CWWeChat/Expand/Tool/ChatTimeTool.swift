@@ -22,7 +22,7 @@ class ChatTimeTool: NSObject {
         return formatter
     }()
     
-    fileprivate override init() {
+    private override init() {
         super.init()
     }
     

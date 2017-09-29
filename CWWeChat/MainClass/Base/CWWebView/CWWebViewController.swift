@@ -16,9 +16,7 @@ private var webViewBackgroundColorKey = "webViewBackgroundColorKey"
 
 private let webView_Items_Fixed_Space: CGFloat =  9
 
-/**
- 展示网页信息
- */
+/// 展示网页信息
 class CWWebViewController: UIViewController {
     
     ///是否使用网页标题作为nav标题，默认YES
@@ -67,7 +65,7 @@ class CWWebViewController: UIViewController {
         return closeButtonItem
     }()
     
-    fileprivate var authLabel: UILabel = {
+    private var authLabel: UILabel = {
         let frame = CGRect(x: 20, y: kNavigationBarHeight+13, width: kScreenWidth-2*20, height: 0)
         let authLabel = UILabel(frame: frame)
         authLabel.font = UIFont.systemFont(ofSize: 12)

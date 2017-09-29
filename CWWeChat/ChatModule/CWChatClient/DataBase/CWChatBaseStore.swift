@@ -11,17 +11,25 @@ import SQLite
 
 class CWChatBaseStore: NSObject {
     /// 当前用户的唯一id，创建数据库名称
-    var userId: String
+    var userId: String {
+        didSet {
+            setupMessageDB()
+        }
+    }
+    
+    var messageDB: Connection!
+    
     //MARK: 初始化
     init(userId: String) {
         self.userId = userId
         super.init()
+        setupMessageDB()
     }
     
-    lazy var messageDB:Connection = {
+    func setupMessageDB() {
         //数据
         do {
-            let messageDB = try Connection(self.path)
+            messageDB = try Connection(self.path)
             messageDB.busyTimeout = 3
             messageDB.busyHandler({ tries in
                 if tries >= 3 {
@@ -29,12 +37,12 @@ class CWChatBaseStore: NSObject {
                 }
                 return true
             })
-            return messageDB
         } catch {
-            log.error(error)
-            return try! Connection()
+            log.error("messageDB create fail..")
+            messageDB = try! Connection()
         }
-    }()
+    }
+    
     
     /// 数据库路径
     lazy var path: String = {
@@ -46,6 +54,7 @@ class CWChatBaseStore: NSObject {
         log.verbose(path)
         return path + "chatmessage.sqlite3"
     }()
+    
     
     
 }

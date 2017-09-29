@@ -17,7 +17,7 @@ public class CWContactHelper: NSObject {
 
     static let share = CWContactHelper()
     ///默认的分组
-    fileprivate var defaultGroup = [CWUserModel]()
+    private var defaultGroup = [CWUserModel]()
     
     var contactsData = [CWUserModel]()
     var contactsDict = [String: CWUserModel]()

@@ -26,7 +26,7 @@ class CWAboutHeaderView: UIView {
         }
     }
     
-    fileprivate lazy var titleLabel:UILabel = {
+    private lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
         titleLabel.font = UIFont.systemFont(ofSize: 17)
         titleLabel.textAlignment = .center
@@ -34,7 +34,7 @@ class CWAboutHeaderView: UIView {
         return titleLabel
     }()
     
-    fileprivate lazy var imageView:UIImageView = {
+    private lazy var imageView:UIImageView = {
         let imageView = UIImageView()
         return imageView
     }()

@@ -25,12 +25,9 @@ class CWUserGroup: NSObject {
         super.init()
     }
     
-    
-    /**
-     添加联系人
-     
-     - parameter model: 联系人实例
-     */
+    /// 添加联系人
+    ///
+    /// - Parameter model: 联系人实例
     func append(_ model: CWUserModel) {
         contactList.append(model)
     }

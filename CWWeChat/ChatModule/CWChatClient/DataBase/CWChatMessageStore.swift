@@ -21,29 +21,28 @@ class CWChatMessageStore: CWChatBaseStore {
     
     //MARK: 数据库属性
     //消息唯一id
-    private let id = Expression<Int64>("id")
+    private let f_id = Expression<Int64>("id")
     // 消息id
-    private let messageId = Expression<String>("msgid")
+    private let f_messageId = Expression<String>("msgid")
     //用户唯一id
-    private let senderId = Expression<String>("sid")
-    private let target_Id = Expression<String>("tid")
+    private let f_targetId = Expression<String>("tid")
     // 消息时间
-    private let date = Expression<Double>("date")
+    private let f_date = Expression<Double>("date")
     /// type
-    private let chatType = Expression<Int>("chat_type")
+    private let f_chatType = Expression<Int>("chattype")
     /// 发送方
-    private let direction = Expression<Int>("direction")
+    private let f_direction = Expression<Int>("direction")
     /// 消息类型 文本 图片
-    private let messageType = Expression<Int>("msg_type")
+    private let f_messageType = Expression<Int>("msgtype")
     /// 内容
-    private let content = Expression<String>("content")
+    private let f_content = Expression<String>("content")
     /// 接收状态
-    private let sendStatus = Expression<Int>("send_status")
+    private let f_sendStatus = Expression<Int>("sendstatus")
     /// 是否已读
-    private let readed = Expression<Bool>("readed")
+    private let f_readed = Expression<Bool>("readed")
     
     /// 拓展字端
-    private let ext1 = Expression<String>("ext1")
+    private let f_ext1 = Expression<String>("ext1")
 
     func messageTable(_ targetId: String) -> Table {
         if tableExistList[targetId] == nil {
@@ -57,21 +56,20 @@ class CWChatMessageStore: CWChatBaseStore {
         do {
             let table = Table("message_"+targetId)
             let create = table.create(ifNotExists: true) { t in
-                t.column(id, primaryKey: .autoincrement)
-                t.column(messageId, unique: true)
-                t.column(senderId)
-                t.column(target_Id)
-                t.column(date)
-                t.column(chatType, defaultValue: 0)
-                t.column(direction, defaultValue: 0)
-                t.column(messageType, defaultValue: 0)
-                t.column(content, defaultValue: "")
-                t.column(sendStatus, defaultValue: 0)
-                t.column(readed, defaultValue: false)
-                t.column(ext1, defaultValue: "")}
+                t.column(f_id, primaryKey: .autoincrement)
+                t.column(f_messageId, unique: true)
+                t.column(f_targetId)
+                t.column(f_date)
+                t.column(f_chatType, defaultValue: 0)
+                t.column(f_direction, defaultValue: 0)
+                t.column(f_messageType, defaultValue: 0)
+                t.column(f_content, defaultValue: "")
+                t.column(f_sendStatus, defaultValue: 0)
+                t.column(f_readed, defaultValue: false)
+                t.column(f_ext1, defaultValue: "")}
             log.verbose(create.asSQL())
             try messageDB.run(create)
-            _ = table.createIndex(messageId)
+            _ = table.createIndex(f_messageId)
             
             tableExistList[targetId] = true
         } catch {
@@ -87,20 +85,15 @@ extension CWChatMessageStore {
 
     func appendMessage(_ message: CWMessage) {
 
-        guard let sendId = message.senderId else {
-            log.error("插入消息失败,缺少消息sendId.")
-            return
-        }
         let body = message.messageBody.messageEncode
-        let insert = messageTable(message.targetId).insert(messageId <- message.messageId,
-                                         target_Id <- message.targetId,
-                                         senderId <- sendId,
-                                         date <- message.timestamp,
-                                         chatType <- message.chatType.rawValue,
-                                         direction <- message.direction.rawValue,
-                                         messageType <- message.messageType.rawValue,
-                                         content <- body,
-                                         sendStatus <- message.sendStatus.rawValue)
+        let insert = messageTable(message.targetId).insert(f_messageId <- message.messageId,
+                                         f_targetId <- message.targetId,
+                                         f_date <- message.timestamp,
+                                         f_chatType <- message.chatType.rawValue,
+                                         f_direction <- message.direction.rawValue,
+                                         f_messageType <- message.messageType.rawValue,
+                                         f_content <- body,
+                                         f_sendStatus <- message.sendStatus.rawValue)
         log.verbose(insert.asSQL())
         do {
             try messageDB.run(insert)
@@ -114,7 +107,7 @@ extension CWChatMessageStore {
 extension CWChatMessageStore {
 
     func lastMessage(by targetId: String) -> CWMessage? {
-        let query = messageTable(targetId).filter(target_Id == targetId).order(date.desc)
+        let query = messageTable(targetId).filter(f_targetId == targetId).order(f_date.desc)
         do {
             let raw = try messageDB.pluck(query)
             return createMessageByRow(raw)
@@ -131,11 +124,11 @@ extension CWChatMessageStore {
         
         var messages = [CWMessage]()
         
-        var query = messageTable(targetId).filter(targetId == target_Id)
+        var query = messageTable(targetId).filter(targetId == f_targetId)
         if timestamp != nil {
-            query = query.filter(date < timestamp!)
+            query = query.filter(f_date < timestamp!)
         }
-        query = query.order(date.desc).limit(count)
+        query = query.order(f_date.desc).limit(count)
         
         do {
             let result = try messageDB.prepare(query)
@@ -156,22 +149,22 @@ extension CWChatMessageStore {
             return nil
         }
         
-        let type = CWMessageType(rawValue: row[messageType]) ?? CWMessageType.none
+        let type = CWMessageType(rawValue: row[f_messageType]) ?? CWMessageType.none
         var body: CWMessageBody!
         switch type {
         case .text:
-           body = CWTextMessageBody(text: row[content])
+           body = CWTextMessageBody(text: row[f_content])
         case .image:
             body = CWImageMessageBody()
-            body.messageDecode(string: row[content])
+            body.messageDecode(string: row[f_content])
             
         case .emoticon:
             body = CWEmoticonMessageBody()
-            body.messageDecode(string: row[content])
+            body.messageDecode(string: row[f_content])
             
         case .location:
             body = CWLocationMessageBody()
-            body.messageDecode(string: row[content])
+            body.messageDecode(string: row[f_content])
 
         default: break
             
@@ -182,14 +175,13 @@ extension CWChatMessageStore {
             return nil
         }
         
-        let _direction = CWMessageDirection(rawValue: row[direction]) ?? .unknown
-        let message = CWMessage(targetId: row[target_Id],
-                                    messageID: row[messageId],
-                                    direction: _direction,
-                                    timestamp: row[date],
+        let direction = CWMessageDirection(rawValue: row[f_direction]) ?? .unknown
+        let message = CWMessage(targetId: row[f_targetId],
+                                    messageID: row[f_messageId],
+                                    direction: direction,
+                                    timestamp: row[f_date],
                                     messageBody: messageBody)
-        message.sendStatus = CWMessageSendStatus(rawValue: row[sendStatus]) ?? .pending
-        message.senderId = row[senderId]
+        message.sendStatus = CWMessageSendStatus(rawValue: row[f_sendStatus]) ?? .pending
         return message
     }
 }
@@ -198,8 +190,8 @@ extension CWChatMessageStore {
 extension CWChatMessageStore {
     
     func markAllMessagesAsRead(_ targetId: String) {
-        let filter = messageTable(targetId).filter(target_Id == targetId).where(readed == false)
-        let update = filter.update(readed <- true)
+        let filter = messageTable(targetId).filter(f_targetId == targetId).where(f_readed == false)
+        let update = filter.update(f_readed <- true)
         do {
             try messageDB.run(update)
         } catch {
@@ -208,9 +200,9 @@ extension CWChatMessageStore {
         
     }
     
-    func markMessageRead(_ targetId: String, message_Id: String) {
-        let filter = messageTable(targetId).filter(messageId == message_Id)
-        let update = filter.update(readed <- true)
+    func markMessageRead(_ targetId: String, messageId: String) {
+        let filter = messageTable(targetId).filter(f_messageId == messageId)
+        let update = filter.update(f_readed <- true)
         do {
             try messageDB.run(update)
         } catch {
@@ -219,10 +211,10 @@ extension CWChatMessageStore {
     }
     
     func updateMessage(_ message: CWMessage) {
-        let filter = messageTable(message.targetId).filter(messageId == message.messageId)
+        let filter = messageTable(message.targetId).filter(f_messageId == message.messageId)
         let body = message.messageBody.messageEncode
-        let update = filter.update(sendStatus <- message.sendStatus.rawValue,
-                                   content <- body)
+        let update = filter.update(f_sendStatus <- message.sendStatus.rawValue,
+                                   f_content <- body)
 
         log.verbose(update.asSQL())
         do {
@@ -233,8 +225,8 @@ extension CWChatMessageStore {
     }
     
     func updateMessageDate(_ message: CWMessage) {
-        let filter = messageTable(message.targetId).filter(messageId == message.messageId)
-        let update = filter.update(date <- message.timestamp)
+        let filter = messageTable(message.targetId).filter(f_messageId == message.messageId)
+        let update = filter.update(f_date <- message.timestamp)
         log.verbose(update.asSQL())
         do {
             try messageDB.run(update)
@@ -253,11 +245,11 @@ extension CWChatMessageStore {
      
      - parameter messageID: 消息唯一的id messageID
      */
-    func deleteMessage(targetId: String, messageID:String) -> Bool {
-        let query = messageTable(targetId).filter(messageID == messageId)
+    func deleteMessage(targetId: String, messageId:String) -> Bool {
+        let query = messageTable(targetId).filter(messageId == f_messageId)
         do {
             let rowid = try messageDB.run(query.delete())
-            log.debug("删除消息成功: \(rowid), \(messageID)")
+            log.debug("删除消息成功: \(rowid), \(messageId)")
             return true
         } catch {
             log.error("删除消息失败: \(error)")

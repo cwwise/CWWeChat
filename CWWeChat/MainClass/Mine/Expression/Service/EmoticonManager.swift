@@ -29,10 +29,10 @@ class EmoticonManager {
     }
     
     // 主键
-    fileprivate let id = Expression<String>("id")
+    private let id = Expression<String>("id")
 
     /// 拓展字端
-    fileprivate let ext1 = Expression<String>("ext1")
+    private let ext1 = Expression<String>("ext1")
     
     
     /// 创建数据表

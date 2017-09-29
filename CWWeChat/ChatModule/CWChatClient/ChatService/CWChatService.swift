@@ -28,24 +28,18 @@ class CWChatService: XMPPModule {
     /// xmpp消息发送部分
     private(set) var messageTransmitter: CWMessageTransmitter
     /// 消息发送管理
-    fileprivate var dispatchManager: CWMessageDispatchManager
+    private(set) var dispatchManager: CWMessageDispatchManager
     /// 消息接收解析
     private(set) var messageParse: CWMessageParse
     
     override init!(dispatchQueue queue: DispatchQueue!) {
         // 消息发送和解析
-        messageTransmitter = CWMessageTransmitter(dispatchQueue: queue)
-        
+        messageTransmitter = CWMessageTransmitter()
         messageParse = CWMessageParse()
         dispatchManager = CWMessageDispatchManager()
         super.init(dispatchQueue: queue)
     }
 
-    @objc func didActivate() {
-        self.xmppStream.addDelegate(messageParse, delegateQueue: self.moduleQueue)
-        self.messageTransmitter.activate(self.xmppStream)
-    }
-    
     /// 收到消息执行
     /// 执行 消息变化和会话变化的代理，保存消息
     ///
@@ -110,6 +104,14 @@ class CWChatService: XMPPModule {
     
 }
 
+// MARK: - XMPPStreamDelegate
+extension CWChatService: XMPPStreamDelegate {
+    // 收到消息
+    func xmppStream(_ sender: XMPPStream!, didReceive message: XMPPMessage!) {
+        log.info(message)
+        messageParse.messageHandle.handleMessage(message: message)
+    }
+}
 
 // MARK: - CWChatManager
 extension CWChatService: CWChatManager {
@@ -180,10 +182,7 @@ extension CWChatService: CWChatManager {
     func sendMessage(_ message: CWMessage,
                      progress: CWMessageProgressBlock?,
                      completion: @escaping CWMessageCompletionBlock) {
-        // 添加信息
-        if message.senderId == nil {
-            message.senderId = CWChatClient.share.userId
-        }
+
         // 保存消息
         saveMessage(message)
         

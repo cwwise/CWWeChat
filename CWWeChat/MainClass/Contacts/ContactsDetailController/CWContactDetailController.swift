@@ -25,7 +25,7 @@ class CWContactDetailController: CWBaseTableViewController {
     
     let bag = DisposeBag()
     
-    fileprivate var contact: CWUserModel!
+    private var contact: CWUserModel!
     
     lazy var tableViewManager: CWTableViewManager = {
         let tableViewManager = CWTableViewManager(tableView: self.tableView)

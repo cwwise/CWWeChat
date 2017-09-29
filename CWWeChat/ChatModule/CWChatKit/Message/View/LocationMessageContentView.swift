@@ -25,7 +25,7 @@ class LocationMessageContentView: MessageContentView {
     }()
     
     // 地址
-    fileprivate var addressLabel: UILabel = {
+    private var addressLabel: UILabel = {
         let addressLabel = UILabel()
         addressLabel.font = UIFont.fontTextMessageText()
         addressLabel.numberOfLines = 1
@@ -34,7 +34,7 @@ class LocationMessageContentView: MessageContentView {
     }()
     
     // 详细地址
-    fileprivate var detailLabel: UILabel = {
+    private var detailLabel: UILabel = {
         let detailLabel = UILabel()
         detailLabel.font = UIFont.systemFont(ofSize: 12)
         detailLabel.numberOfLines = 0
@@ -43,7 +43,7 @@ class LocationMessageContentView: MessageContentView {
     }()
     
     // 详细地址
-    fileprivate var mapImageView: UIImageView = {
+    private var mapImageView: UIImageView = {
         let mapImageView = UIImageView()
         return mapImageView
     }()

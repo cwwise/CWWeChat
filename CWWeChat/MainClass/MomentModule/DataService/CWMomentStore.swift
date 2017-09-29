@@ -16,25 +16,25 @@ class CWMomentStore: NSObject {
     //MARK: 数据库属性
     let momentTable = Table("CWMoment")
     //消息唯一id
-    fileprivate let id = Expression<Int64>("id")
+    private let id = Expression<Int64>("id")
 
-    fileprivate let f_momentId = Expression<String>("momentId")
-    fileprivate let f_userId = Expression<String>("userId")
-    fileprivate let f_username = Expression<String>("username")
+    private let f_momentId = Expression<String>("momentId")
+    private let f_userId = Expression<String>("userId")
+    private let f_username = Expression<String>("username")
 
-    fileprivate let f_momenttype = Expression<Int>("momenttype")
+    private let f_momenttype = Expression<Int>("momenttype")
     //
-    fileprivate let f_imagename = Expression<String>("imagename")
-    fileprivate let f_videoname = Expression<String>("videoname")
-    fileprivate let f_content = Expression<String>("content")
+    private let f_imagename = Expression<String>("imagename")
+    private let f_videoname = Expression<String>("videoname")
+    private let f_content = Expression<String>("content")
     /// 时间戳
-    fileprivate let f_timestamp = Expression<Int>("timestamp")
+    private let f_timestamp = Expression<Int>("timestamp")
 
     // 是否发送成功，争对上传
-    fileprivate let f_sendSuccess = Expression<Bool>("sendSuccess")
-    fileprivate let f_isRead = Expression<Bool>("isRead")
-    fileprivate let f_isPraise = Expression<Bool>("isPraise")
-    fileprivate let f_isDelete = Expression<Bool>("isDelete")
+    private let f_sendSuccess = Expression<Bool>("sendSuccess")
+    private let f_isRead = Expression<Bool>("isRead")
+    private let f_isPraise = Expression<Bool>("isPraise")
+    private let f_isDelete = Expression<Bool>("isDelete")
     
     private override init() {
         super.init()

@@ -49,17 +49,17 @@ class CWVoiceRecorder: NSObject {
     
     var operationQueue: OperationQueue
     
-    fileprivate var startTime: CFTimeInterval! //录音开始时间
-    fileprivate var endTimer: CFTimeInterval! //录音结束时间
-    fileprivate var audioTimeInterval: NSNumber!
-    fileprivate var isFinishRecord: Bool = true
-    fileprivate var isCancelRecord: Bool = false
+    private var startTime: CFTimeInterval! //录音开始时间
+    private var endTimer: CFTimeInterval! //录音结束时间
+    private var audioTimeInterval: NSNumber!
+    private var isFinishRecord: Bool = true
+    private var isCancelRecord: Bool = false
     
-    fileprivate let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),//声音采样率
+    private let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),//声音采样率
                                   AVFormatIDKey : NSNumber(value: Int32(kAudioFormatLinearPCM) as Int32),//编码格式
                                   AVNumberOfChannelsKey : NSNumber(value: 1 as Int32),//采集音轨
                                   AVEncoderAudioQualityKey : NSNumber(value: Int32(AVAudioQuality.medium.rawValue) as Int32)]//音频质量
-    fileprivate var audioRecorder:AVAudioRecorder!
+    private var audioRecorder:AVAudioRecorder!
     
     var voiceName: String = {
         let random = arc4random() % 1000
@@ -67,7 +67,7 @@ class CWVoiceRecorder: NSObject {
         return voiceName
     }()
     
-    lazy fileprivate var directoryURL:URL = {
+    lazy private var directoryURL:URL = {
         let filePath = ""
         return URL(fileURLWithPath: filePath)
     }()

@@ -42,13 +42,11 @@ class CWChatMessageHandle: CWMessageHandle {
                 messageBody.messageDecode(string: body)
             default: break
             }
-            
-            let chatMessage = CWMessage(targetId: from, 
+            let chatMessage = CWMessage(targetId: from,
                                         messageID: messageId,
                                         direction: .receive,
                                         timestamp: messageDate.timeIntervalSince1970,
                                         messageBody: messageBody)
-            chatMessage.senderId = to
             
             self.delegate?.handMessageComplete(message: chatMessage)
             

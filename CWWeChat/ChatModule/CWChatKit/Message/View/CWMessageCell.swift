@@ -129,18 +129,18 @@ class CWMessageCell: UICollectionViewCell {
     }()
     
     ///手势操作
-    fileprivate(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+    private(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bubbleTapped(_:)))
         return tapGestureRecognizer
     }()
     
-    fileprivate(set) lazy var doubletapGesture: UITapGestureRecognizer = {
+    private(set) lazy var doubletapGesture: UITapGestureRecognizer = {
         let doubletapGesture = UITapGestureRecognizer(target: self, action: #selector(bubbleDoubleTapped(_:)))
         doubletapGesture.numberOfTapsRequired = 2
         return doubletapGesture
     }()
     
-    fileprivate(set) lazy var longPressGestureRecognizer: UILongPressGestureRecognizer = {
+    private(set) lazy var longPressGestureRecognizer: UILongPressGestureRecognizer = {
         let longpressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(bubbleLongPressed(_:)))
         longpressGestureRecognizer.delegate = self
         return longpressGestureRecognizer
@@ -206,7 +206,7 @@ class CWMessageCell: UICollectionViewCell {
             return
         }
         
-        let targetId = message.isSend ? message.targetId : message.senderId
+        let targetId = message.isSend ? message.targetId : CWChatKit.share.userId
         delegate.messageCellUserAvatarDidClick(targetId)
     }
     

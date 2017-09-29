@@ -104,9 +104,7 @@ public class CWMessage {
     public var direction: CWMessageDirection = .unknown
     /// 发送状态
     public var sendStatus: CWMessageSendStatus = .pending
-    /// 发送方id
-    public var senderId: String
-    /// 接收方id
+    /// 目标id
     public var targetId: String
     /// 消息体
     public var messageBody: CWMessageBody
@@ -118,7 +116,6 @@ public class CWMessage {
     public var ext: Dictionary<String, AnyObject>?
     
     public init(targetId: String,
-                senderId: String,
                 messageID: String = CWChatClientUtil.messageId,
                 direction: CWMessageDirection = .send,
                 timestamp: TimeInterval = CWChatClientUtil.messageDate,
@@ -127,7 +124,6 @@ public class CWMessage {
         self.messageBody = messageBody
         self.direction = direction
         
-        self.senderId = senderId
         self.targetId = targetId
         self.messageId = messageID
         self.timestamp = timestamp
@@ -154,18 +150,6 @@ extension CWMessage: Hashable, CustomStringConvertible {
     public static func ==(lhs: CWMessage, rhs: CWMessage) -> Bool {
         return lhs.messageId == rhs.messageId
     }
-}
-
-
-// MARK: - 便利方法
-extension CWMessage {
-
-    //
-    public convenience init(targetId: String, messageBody: CWMessageBody) {
-        let senderId = CWChatClient.share.userId
-        self.init(targetId: targetId, senderId: senderId, messageBody: messageBody)
-    }
-    
 }
 
 

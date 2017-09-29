@@ -39,11 +39,7 @@ class CWMessageModel: NSObject {
     public var targetId: String {
         return message.targetId
     }
-    
-    public var senderId: String {
-        return message.senderId!
-    }
-    
+
     public var transportProgress: Float = 0
     
     public var playStatus: CMessagePlayStatus = .none
@@ -59,7 +55,6 @@ class CWMessageModel: NSObject {
     
     // 消息
     
-    
     /// 是否显示时间
     public var showTime: Bool = false
     /// 是否显示用户名 
@@ -70,13 +65,11 @@ class CWMessageModel: NSObject {
         
         super.init()
     }
-    
-    
-    
-    
 }
 
 extension CWMessageModel {
+    
+    
     
 }
 

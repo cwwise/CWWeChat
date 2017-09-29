@@ -107,21 +107,21 @@ class CWConversationCell: UITableViewCell {
     }
     
     ///头像
-    fileprivate var headerImageView:UIImageView = {
+    private var headerImageView:UIImageView = {
         let headerImageView = UIImageView()
         headerImageView.contentMode = .scaleAspectFill
         return headerImageView
     }()
     
     ///用户名
-    fileprivate var usernameLabel:UILabel = {
+    private var usernameLabel:UILabel = {
         let usernameLabel = UILabel()
         usernameLabel.font = UIFont.systemFont(ofSize: 17)
         return usernameLabel
     }()
     
     ///时间
-    fileprivate var timeLabel:UILabel = {
+    private var timeLabel:UILabel = {
         let timeLabel = UILabel()
         timeLabel.font = UIFont.systemFont(ofSize: 12)
         timeLabel.textColor = UIColor.darkGray
@@ -129,7 +129,7 @@ class CWConversationCell: UITableViewCell {
     }()
     
     ///详细信息
-    fileprivate var contentLabel:UILabel = {
+    private var contentLabel:UILabel = {
         let contentLabel = UILabel()
         contentLabel.font = UIFont.systemFont(ofSize: 14)
         contentLabel.textColor = UIColor.gray
@@ -137,7 +137,7 @@ class CWConversationCell: UITableViewCell {
     }()
     
     ///badgeView
-    fileprivate var badgeView:CWBadgeView = {
+    private var badgeView:CWBadgeView = {
         let badgeView = CWBadgeView()
         badgeView.backgroundColor = UIColor.clear
         return badgeView

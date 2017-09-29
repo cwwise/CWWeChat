@@ -26,38 +26,10 @@ class CWMessageParse: NSObject {
     }()
 
     
-    func registerLocalNotification(with message: CWMessage) {
-        
-        
-        
-        
-    }
+    
 }
 
-// MARK: - XMPPStreamDelegate
-extension CWMessageParse: XMPPStreamDelegate {
-    
-    /**
-     <message xmlns="jabber:client" from="chenwei@hellochatim.p1.im/wei的MacBook Pro" to="haohao@hellochatim.p1.im/ios" type="chat" id="59D68F07-854E-4D5C-8E1F-63350E6C5CB1">
-     <body>chenwei</body>
-     </message>
-     */
-    // 收到消息
-    func xmppStream(_ sender: XMPPStream!, didReceive message: XMPPMessage!) {
-        
-        log.info(message)
-        messageHandle.handleMessage(message: message)
-        DispatchQueue.main.async {
-            if UIApplication.shared.applicationState == .background {
-                
-                
-            } else {
-                
-                
-            }
-        }
-    }
-}
+
 
 
 // MARK: - CWMessageHandleDelegate

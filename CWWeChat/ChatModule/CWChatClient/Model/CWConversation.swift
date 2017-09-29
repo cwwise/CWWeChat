@@ -36,7 +36,7 @@ public class CWConversation: NSObject {
         guard let service = CWChatClient.share.chatManager as? CWChatService else {
             return
         }
-        service.messageStore.markMessageRead(targetId, message_Id: messageId)
+        service.messageStore.markMessageRead(targetId, messageId: messageId)
     }
     
     /// 将所有未读消息设置为已读
@@ -59,11 +59,14 @@ public class CWConversation: NSObject {
     
         return nil
     }
+    
+    static public func ==(lhs: CWConversation, rhs: CWConversation) -> Bool {
+        return lhs.targetId == rhs.targetId
+    }
+    
 }
 
-public func ==(lhs: CWConversation, rhs: CWConversation) -> Bool {
-    return lhs.targetId == rhs.targetId
-}
+
 
 public typealias CWConversationResultCompletion = (_ messages: [CWMessage], _ error: CWChatError?) -> Void
 

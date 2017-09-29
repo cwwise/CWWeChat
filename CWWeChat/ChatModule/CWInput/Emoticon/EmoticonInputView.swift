@@ -39,8 +39,8 @@ public class EmoticonInputView: UIView {
 
     weak var delegate: EmoticonInputViewDelegate?
     
-    fileprivate var groupList = [EmoticonGroup]()
-    fileprivate var groupInfoList = [EmoticonGroupInfo]()
+    private var groupList = [EmoticonGroup]()
+    private var groupInfoList = [EmoticonGroupInfo]()
     
     var collectionView: UICollectionView!
     var pageControl: UIPageControl!

@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-let redPoint_Width:CGFloat = 8.0
+let kRedPointWidth:CGFloat = 8.0
 
 class CWMenuCell: UITableViewCell {
 
@@ -20,26 +20,26 @@ class CWMenuCell: UITableViewCell {
     }
     
     //
-    fileprivate lazy var iconImageView:UIImageView = {
+    private lazy var iconImageView:UIImageView = {
        let iconImageView = UIImageView()
         return iconImageView
     }()
     
-    fileprivate lazy var titleLabel:UILabel = {
+    private lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
         return titleLabel
     }()
     
-    fileprivate lazy var rightImageView:UIImageView = {
+    private lazy var rightImageView:UIImageView = {
         let rightImageView = UIImageView()
         return rightImageView
     }()
     
-    fileprivate lazy var redPointView:UIView = {
+    private lazy var redPointView:UIView = {
         let redPointView = UIView()
         redPointView.backgroundColor = UIColor.red
         redPointView.layer.masksToBounds = true
-        redPointView.layer.cornerRadius = redPoint_Width/2
+        redPointView.layer.cornerRadius = kRedPointWidth/2
         return redPointView
     }()
     
@@ -83,7 +83,7 @@ class CWMenuCell: UITableViewCell {
         self.redPointView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.rightImageView.snp.right).offset(1)
             make.centerY.equalTo(self.rightImageView.snp.top).offset(1)
-            make.width.height.equalTo(redPoint_Width)
+            make.width.height.equalTo(kRedPointWidth)
         }
     }
     

@@ -13,10 +13,11 @@ import XMPPFramework
 let sendMessageTimeoutInterval: TimeInterval = 30
 
 /// 发送消息
-class CWMessageTransmitter: XMPPModule {
+class CWMessageTransmitter: NSObject {
     
-    override init!(dispatchQueue queue: DispatchQueue!) {
-        super.init(dispatchQueue: queue)
+    var xmppStream: XMPPStream {
+        let manager = CWChatClient.share.loginManager as! CWXMPPManager
+        return manager.xmppStream
     }
     
     func sendMessage(content: String,

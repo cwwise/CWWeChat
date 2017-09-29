@@ -19,6 +19,10 @@ public class CWChatKit: NSObject {
     /// 单例
     public static let share = CWChatKit()
     
+    public var userId: String {
+        return CWChatClient.share.userId
+    }
+    
     public weak var userInfoDataSource: CWChatUserInfoDataSource?
 
     private var chatUserImagePath: String

@@ -28,7 +28,7 @@ class CWChatTextDisplayView: UIView {
         }
     }
     
-    fileprivate var textView:UITextView = {
+    private var textView:UITextView = {
         let textView = UITextView()
         textView.backgroundColor = UIColor.clear
         textView.textAlignment = .center

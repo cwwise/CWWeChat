@@ -164,9 +164,7 @@ extension CWBaseMessageController: CWChatKeyboardDelegate {
     
     func keyboard(_ keyboard: CWChatKeyboard, sendText text: String) {
         let textObject = CWTextMessageBody(text: text)
-        let message = CWMessage(targetId: conversation.targetId,
-                                direction: .send,
-                                messageBody: textObject)
+        let message = CWMessage(targetId: conversation.targetId, messageBody: textObject)
         self.sendMessage(message)
     }
     
@@ -174,9 +172,7 @@ extension CWBaseMessageController: CWChatKeyboardDelegate {
     func keyboard(_ keyboard: CWChatKeyboard, sendEmoticon emoticon: Emoticon) {
         let path = emoticon.originalUrl?.path
         let body = CWEmoticonMessageBody(localPath: path, remoteURL: nil)
-        let message = CWMessage(targetId: conversation.targetId,
-                                direction: .send,
-                                messageBody: body)
+        let message = CWMessage(targetId: conversation.targetId, messageBody: body)
         self.sendMessage(message)
     }
 }

@@ -40,7 +40,7 @@ class CWTableViewBoolCell: CWTableViewCell {
     }
     
     
-    fileprivate lazy var cellSwitch:UISwitch = {
+    private lazy var cellSwitch:UISwitch = {
         let cellSwitch = UISwitch()
         cellSwitch.addTarget(self, action: #selector(switchChangeStatus(_:)), for: .valueChanged)
         return cellSwitch

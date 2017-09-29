@@ -42,7 +42,7 @@ class CWChatTextParser: NSObject {
         return attributedText
     }
     
-    fileprivate class func enumeratePhoneParser(_ attributedText: NSMutableAttributedString) {
+    private class func enumeratePhoneParser(_ attributedText: NSMutableAttributedString) {
         
         let phonesResults = CWChatTextParseHelper.regexPhoneNumber.matches(in: attributedText.string,
                                                                       options: [.reportProgress],
@@ -69,7 +69,7 @@ class CWChatTextParser: NSObject {
     }
     
     
-    fileprivate class func enumerateURLParser(_ attributedText: NSMutableAttributedString) {
+    private class func enumerateURLParser(_ attributedText: NSMutableAttributedString) {
 
         let URLsResults = CWChatTextParseHelper.regexURLs.matches(in: attributedText.string,
                                                              options: [.reportProgress],
@@ -100,7 +100,7 @@ class CWChatTextParser: NSObject {
         
     }
     
-    fileprivate class func enumerateEmotionParser(_ attributedText: NSMutableAttributedString) {
+    private class func enumerateEmotionParser(_ attributedText: NSMutableAttributedString) {
 
         let emoticonResults = CWChatTextParseHelper.regexEmotions.matches(in: attributedText.string,
                                                                           options: [.reportProgress],

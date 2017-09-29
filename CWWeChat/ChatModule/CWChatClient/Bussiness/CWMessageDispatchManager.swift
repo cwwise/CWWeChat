@@ -91,9 +91,7 @@ class CWMessageDispatchManager: NSObject {
         
     }
     
-    /**
-     取消所有线程
-     */
+    /// 取消所有线程
     func cancelAllOperation() {
         messageQueue.cancelAllOperations()
     }

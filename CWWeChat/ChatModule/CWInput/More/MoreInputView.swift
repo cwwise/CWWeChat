@@ -20,7 +20,7 @@ class MoreInputView: UIView {
     
     weak var delegate: MoreInputViewDelegate?
     
-    fileprivate var items = [MoreItem]()
+    private var items = [MoreItem]()
     
     var pageItemCount: Int {
         return kOnePageLines * kOnePageLineItems

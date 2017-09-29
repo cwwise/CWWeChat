@@ -36,11 +36,11 @@ class CWMessageViewLayout: UICollectionViewFlowLayout {
         return CGSize(width: collectionViewWidth, height: contentHeight)
     }
     
-    fileprivate var collectionViewHeight: CGFloat {
+    private var collectionViewHeight: CGFloat {
         return collectionView!.frame.height
     }
     
-    fileprivate var collectionViewWidth: CGFloat {
+    private var collectionViewWidth: CGFloat {
         return collectionView!.frame.width
     }
     

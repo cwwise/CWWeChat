@@ -203,6 +203,21 @@ extension CWBaseConversationController: CWChatManagerDelegate {
             self.tabBarItem.badgeValue = "\(unread)"
         }
     }
+    
+    public func didReceive(message: CWMessage) {
+        
+        DispatchQueue.main.async {
+            if UIApplication.shared.applicationState == .background {
+                
+                
+            } else {
+                
+                
+            }
+        }
+        
+    }
+    
 }
 
 

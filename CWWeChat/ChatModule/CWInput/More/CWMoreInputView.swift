@@ -19,7 +19,7 @@ private let kOneItemHeight: CGFloat = 280/3
 
 public class CWMoreInputView: UIView {
     
-    fileprivate var items = [MoreItem]()
+    private var items = [MoreItem]()
     // 总共页数
     var totalPageCount: Int = 0
     var pageItemCount: Int = 0

@@ -21,20 +21,20 @@ class CWContactInfoCell: UITableViewCell {
     }
     
     //
-    fileprivate lazy var avatarImageView:UIImageView = {
+    private lazy var avatarImageView:UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.clipsToBounds = true
         avatarImageView.layer.cornerRadius = 5
         return avatarImageView
     }()
     
-    fileprivate lazy var nikenameLabel:UILabel = {
+    private lazy var nikenameLabel:UILabel = {
         let nikenameLabel = UILabel()
         nikenameLabel.font = UIFont.systemFont(ofSize: 17)
         return nikenameLabel
     }()
     
-    fileprivate lazy var usernameLabel:UILabel = {
+    private lazy var usernameLabel:UILabel = {
         let usernameLabel = UILabel()
         usernameLabel.font = UIFont.systemFont(ofSize: 14)
         return usernameLabel

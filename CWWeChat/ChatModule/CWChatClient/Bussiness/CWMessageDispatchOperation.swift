@@ -55,7 +55,7 @@ class CWMessageDispatchOperation: Operation {
     
     /// 控制并发任务的变量
     // 执行中
-    fileprivate var local_executing:Bool = false {
+    private var local_executing:Bool = false {
         willSet {
             self.willChangeValue(forKey: "isExecuting")
         }
@@ -64,7 +64,7 @@ class CWMessageDispatchOperation: Operation {
         }
     }
     
-    fileprivate var local_finished:Bool = false {
+    private var local_finished:Bool = false {
         willSet {
             self.willChangeValue(forKey: "isFinished")
         }
@@ -73,7 +73,7 @@ class CWMessageDispatchOperation: Operation {
         }
     }
     
-    fileprivate var local_cancelled:Bool = false {
+    private var local_cancelled:Bool = false {
         willSet {
             self.willChangeValue(forKey: "isCancelled")
         }
