@@ -1,11 +1,11 @@
 ![image](https://github.com/cwwise/CWWeChat/blob/master/source/Images/CWWeChat.png)
 ## CWWeChat
 [![Build Status](https://www.travis-ci.org/cwwise/CWWeChat.svg?branch=master)](https://www.travis-ci.org/cwwise/CWWeChat)
-[![Swift3.1](https://img.shields.io/badge/Swift-3.1-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift4.0](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 <img src="https://img.shields.io/badge/platform-iOS_9.0+-ff69b4.svg">
 [![License](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://github.com/cwwise/CWWeChat/blob/master/LICENSE)
 
-* **正在**仿做一个微信，swift3.1版本，集成XMPP聊天。
+* **正在**仿做一个微信，swift4.0版本，集成XMPP聊天。
 * 如果你喜欢，欢迎Star、Fork!
 
 
@@ -19,7 +19,7 @@
 
 
 ## <a id="运行说明"></a>运行说明
-- 运行环境Xcode8.3 iOS9以上，使用swift3.1。
+- 运行环境Xcode9.0 iOS9以上，使用swift4.0。
 - 项目使用cocoaPod管理，下载之后运行pod install
 
 ## <a id="功能"></a>功能
