@@ -63,9 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loginChatWithAccount(_ account: CWAccount) {
-        let options = CWChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
         let chatClient = CWChatClient.share
-        chatClient.initialize(with: options)
+        chatClient.initialize(with: CWChatClientOptions.default)
         
         chatClient.loginManager.login(username: account.username,
                                       password: account.password) { (username, error) in

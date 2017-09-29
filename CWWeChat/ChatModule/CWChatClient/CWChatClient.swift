@@ -53,7 +53,7 @@ public class CWChatClient: NSObject {
         let _ = chatroomManager.activate(xmppManager.xmppStream)
         self.chatroomManager = chatroomManager
         
-        self.options = CWChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
+        self.options = CWChatClientOptions.default
         super.init()
     }
     

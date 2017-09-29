@@ -106,7 +106,7 @@ class CWLoginController: UIViewController {
         
         self.userNameTextField.text = "haohao"
         self.passwordTextField.text = "1234567"
-
+        self.loginButton.isEnabled = true
     }
     
     func leftView(_ text: String) -> UIView {
@@ -148,7 +148,7 @@ class CWLoginController: UIViewController {
                 hud.mode = .text
                 if error == nil {
                     do {
-                        let account = CWAccount(username: "haohao", password: "1234567")
+                        let account = CWAccount(username: userName, password: password)
                         account.isLogin = true
                         try account.save()
                     } catch {

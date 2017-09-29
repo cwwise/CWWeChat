@@ -276,7 +276,6 @@ extension CWXMPPManager: XMPPStreamDelegate {
 extension CWMessageTransmitter: XMPPStreamManagementDelegate {
     
     func xmppStreamManagementDidRequestAck(_ sender: XMPPStreamManagement!) {
-        log.error("测试数据")
     }
     
     func xmppStreamManagement(_ sender: XMPPStreamManagement!, wasEnabled enabled: DDXMLElement!) {
@@ -308,7 +307,7 @@ extension CWXMPPManager: CWLoginManager {
     }
     
     var currentAccount: String {
-        guard let account = xmppStream.myJID.user else {
+        guard let myJID = xmppStream.myJID, let account = myJID.user else {
             return ""
         } 
         return account

@@ -192,7 +192,7 @@ public class CWChatToolBar: UIView {
         voiceButton.isSelected = false
         emoticonButton.isSelected = false
         moreButton.isSelected = false
-
+       // self.inputTextView.resignFirstResponder()
     }
     
     func prepareForBeginComment() {
