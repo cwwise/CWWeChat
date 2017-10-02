@@ -29,7 +29,7 @@ public enum MessageSendStatus : Int {
 }
 
 /// 消息类型
-public enum MessageType: Int {
+public enum MessageType: Int, Codable {
     case none               //未知消息
     case text               //文字
     case image              //图片
@@ -42,7 +42,7 @@ public enum MessageType: Int {
 }
 
 public class Message: NSObject {
-    
+    /// 会话id
     public var conversationId: String
     /// 会话类型
     public var chatType: ChatType
@@ -65,6 +65,12 @@ public class Message: NSObject {
     /// 消息扩展
     public var extra: [String: AnyObject]?
     
+    /// 实例化
+    ///
+    /// - Parameters:
+    ///   - conversationId: 会话id
+    ///   - from: 消息发起
+    ///   - body: body体
     public init(conversationId: String,
                 from: String,
                 body: MessageBody) {

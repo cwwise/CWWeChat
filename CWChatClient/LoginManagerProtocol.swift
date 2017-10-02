@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias LoginHandler = (String?, Error?) -> Void
+public typealias LoginHandler = (String?, ChatClientError?) -> Void
 
 public enum LoginStep: Int {
     case linking

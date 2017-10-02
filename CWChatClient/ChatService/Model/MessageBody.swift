@@ -8,7 +8,11 @@
 
 import Foundation
 
-public protocol MessageBody: class {
+public class MessageBody: Codable {
     /// 消息类型
-    var type: MessageType { get }
+    public private(set) var type: MessageType
+    
+    init() {
+       type = .none 
+    }
 }

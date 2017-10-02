@@ -8,9 +8,34 @@
 
 import Foundation
 
-public class ImageMessageBody: NSObject {
+public class ImageMessageBody: MessageBody {
+    /// 消息体类型
+    public override var type: MessageType {
+        return .image
+    }    /// 图片尺寸
+    public var size = CGSize.zero
     
+    /// 缩略图的本地路径
+    public var thumbnailLocalPath: String?
+    /// 缩略图服务器地址
+    public var thumbnailURL: URL?
     
+    /// 原图服务器地址
+    public var originalURL: URL?
+    /// 原图的本地路径
+    public var originalLocalPath: String?
     
+    init(path: String? = nil,
+         originalURL:URL? = nil,
+         size: CGSize = CGSize.zero) {
+        assert(path == nil && originalURL == nil, "本地路径和服务器路径不能同时为空")
+        self.originalLocalPath = path
+        self.originalURL = originalURL
+        self.size = size
+        super.init()
+    }
     
+    required public init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
 }

@@ -80,6 +80,14 @@
 		1F592A5F1EA8B805007558E9 /* CWFileMessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F592A5E1EA8B805007558E9 /* CWFileMessageBody.swift */; };
 		1F592A631EA8BD05007558E9 /* CWEmoticonMessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F592A621EA8BD05007558E9 /* CWEmoticonMessageBody.swift */; };
 		1F592A651EA8BD28007558E9 /* CWLocationMessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F592A641EA8BD28007558E9 /* CWLocationMessageBody.swift */; };
+		1F6146801F825383000D8E0C /* ChatMessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61467F1F825383000D8E0C /* ChatMessageStore.swift */; };
+		1F6146821F826E50000D8E0C /* ChatConversationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146811F826E50000D8E0C /* ChatConversationStore.swift */; };
+		1F6146841F827336000D8E0C /* XMPPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146831F827336000D8E0C /* XMPPManager.swift */; };
+		1F6146861F8273E0000D8E0C /* ChatClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146851F8273E0000D8E0C /* ChatClientError.swift */; };
+		1F6146891F8276F1000D8E0C /* MessageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146881F8276F1000D8E0C /* MessageOperation.swift */; };
+		1F61468B1F827819000D8E0C /* TextMessageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61468A1F827819000D8E0C /* TextMessageOperation.swift */; };
+		1F61468D1F8279E2000D8E0C /* MessageDispatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61468C1F8279E2000D8E0C /* MessageDispatchManager.swift */; };
+		1F6146921F827B07000D8E0C /* MessageHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146911F827B07000D8E0C /* MessageHandle.swift */; };
 		1F6AD4081F823DB60044C27D /* CWChatClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6AD4061F823DB60044C27D /* CWChatClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F6AD40B1F823DB60044C27D /* CWChatClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6AD4041F823DB60044C27D /* CWChatClient.framework */; };
 		1F6AD40C1F823DB60044C27D /* CWChatClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6AD4041F823DB60044C27D /* CWChatClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -386,6 +394,14 @@
 		1F592A5E1EA8B805007558E9 /* CWFileMessageBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWFileMessageBody.swift; sourceTree = "<group>"; };
 		1F592A621EA8BD05007558E9 /* CWEmoticonMessageBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWEmoticonMessageBody.swift; sourceTree = "<group>"; };
 		1F592A641EA8BD28007558E9 /* CWLocationMessageBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWLocationMessageBody.swift; sourceTree = "<group>"; };
+		1F61467F1F825383000D8E0C /* ChatMessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageStore.swift; sourceTree = "<group>"; };
+		1F6146811F826E50000D8E0C /* ChatConversationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConversationStore.swift; sourceTree = "<group>"; };
+		1F6146831F827336000D8E0C /* XMPPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMPPManager.swift; sourceTree = "<group>"; };
+		1F6146851F8273E0000D8E0C /* ChatClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatClientError.swift; sourceTree = "<group>"; };
+		1F6146881F8276F1000D8E0C /* MessageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageOperation.swift; sourceTree = "<group>"; };
+		1F61468A1F827819000D8E0C /* TextMessageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageOperation.swift; sourceTree = "<group>"; };
+		1F61468C1F8279E2000D8E0C /* MessageDispatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDispatchManager.swift; sourceTree = "<group>"; };
+		1F6146911F827B07000D8E0C /* MessageHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHandle.swift; sourceTree = "<group>"; };
 		1F6AD4041F823DB60044C27D /* CWChatClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CWChatClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6AD4061F823DB60044C27D /* CWChatClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWChatClient.h; sourceTree = "<group>"; };
 		1F6AD4071F823DB60044C27D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1193,6 +1209,24 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		1F6146871F8276DC000D8E0C /* DispatchQueue */ = {
+			isa = PBXGroup;
+			children = (
+				1F6146881F8276F1000D8E0C /* MessageOperation.swift */,
+				1F61468A1F827819000D8E0C /* TextMessageOperation.swift */,
+				1F61468C1F8279E2000D8E0C /* MessageDispatchManager.swift */,
+			);
+			path = DispatchQueue;
+			sourceTree = "<group>";
+		};
+		1F61468E1F827AB1000D8E0C /* MessageHandle */ = {
+			isa = PBXGroup;
+			children = (
+				1F6146911F827B07000D8E0C /* MessageHandle.swift */,
+			);
+			path = MessageHandle;
+			sourceTree = "<group>";
+		};
 		1F6AD4051F823DB60044C27D /* CWChatClient */ = {
 			isa = PBXGroup;
 			children = (
@@ -1228,6 +1262,8 @@
 			children = (
 				1F6AD42F1F8240BC0044C27D /* ChatService.swift */,
 				1F6AD4311F8240D20044C27D /* ChatDataService.swift */,
+				1F61468E1F827AB1000D8E0C /* MessageHandle */,
+				1F6146871F8276DC000D8E0C /* DispatchQueue */,
 				1F6AD42E1F8240AA0044C27D /* Store */,
 				1F6AD42D1F8240A30044C27D /* Model */,
 			);
@@ -1251,6 +1287,7 @@
 		1F6AD42C1F8240950044C27D /* XMPP */ = {
 			isa = PBXGroup;
 			children = (
+				1F6146831F827336000D8E0C /* XMPPManager.swift */,
 			);
 			path = XMPP;
 			sourceTree = "<group>";
@@ -1270,6 +1307,8 @@
 		1F6AD42E1F8240AA0044C27D /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				1F61467F1F825383000D8E0C /* ChatMessageStore.swift */,
+				1F6146811F826E50000D8E0C /* ChatConversationStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -1279,6 +1318,7 @@
 			children = (
 				1F6AD43C1F8241A30044C27D /* ChatBaseStore.swift */,
 				1F6AD4481F824CCB0044C27D /* ChatClientUtil.swift */,
+				1F6146851F8273E0000D8E0C /* ChatClientError.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1872,7 +1912,7 @@
 			attributes = {
 				CLASSPREFIX = CW;
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = cwwise;
 				TargetAttributes = {
 					1F3491791E8786EE00B36641 = {
@@ -2389,11 +2429,19 @@
 				1F6AD4381F8241540044C27D /* TextMessageBody.swift in Sources */,
 				1F6AD43A1F82416A0044C27D /* ImageMessageBody.swift in Sources */,
 				1F6AD43D1F8241A30044C27D /* ChatBaseStore.swift in Sources */,
+				1F6146801F825383000D8E0C /* ChatMessageStore.swift in Sources */,
 				1F6AD4431F8248EC0044C27D /* GroupManagerProtocol.swift in Sources */,
 				1F6AD4471F8249D90044C27D /* Conversation.swift in Sources */,
 				1F6AD4281F8240320044C27D /* ChatManagerProtocol.swift in Sources */,
 				1F6AD4301F8240BC0044C27D /* ChatService.swift in Sources */,
+				1F61468B1F827819000D8E0C /* TextMessageOperation.swift in Sources */,
+				1F6146841F827336000D8E0C /* XMPPManager.swift in Sources */,
+				1F6146861F8273E0000D8E0C /* ChatClientError.swift in Sources */,
 				1F6AD4111F823DC80044C27D /* ChatClient.swift in Sources */,
+				1F6146891F8276F1000D8E0C /* MessageOperation.swift in Sources */,
+				1F61468D1F8279E2000D8E0C /* MessageDispatchManager.swift in Sources */,
+				1F6146921F827B07000D8E0C /* MessageHandle.swift in Sources */,
+				1F6146821F826E50000D8E0C /* ChatConversationStore.swift in Sources */,
 				1F6AD4341F8240F10044C27D /* Message.swift in Sources */,
 				1F6AD43F1F8242A90044C27D /* LoginManagerProtocol.swift in Sources */,
 				1F6AD4491F824CCB0044C27D /* ChatClientUtil.swift in Sources */,
@@ -2641,6 +2689,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2673,6 +2722,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2703,6 +2753,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2734,6 +2785,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
