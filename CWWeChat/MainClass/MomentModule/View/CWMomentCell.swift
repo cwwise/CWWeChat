@@ -9,7 +9,6 @@
 import UIKit
 import YYText
 import Kingfisher
-import RxSwift
 
 protocol CWMomentCellDelegate: NSObjectProtocol {
     

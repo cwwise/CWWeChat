@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import RxCocoa
-import RxSwift
 
 class CWContactDetailController: CWBaseTableViewController {
 
@@ -23,7 +21,7 @@ class CWContactDetailController: CWBaseTableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let bag = DisposeBag()
+  //  let bag = DisposeBag()
     
     private var contact: CWUserModel!
     
@@ -79,10 +77,10 @@ class CWContactDetailController: CWBaseTableViewController {
         
         let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 100)
         let footerView = CWContactDetailFooterView(frame: frame)
-        footerView.button.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.goChatController()
-            }).disposed(by: bag)
+//        footerView.button.rx.tap
+//            .subscribe(onNext: { [weak self] in
+//                self?.goChatController()
+//            }).disposed(by: bag)
         
         self.tableView.tableFooterView = footerView
     }

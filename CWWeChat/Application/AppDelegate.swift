@@ -9,6 +9,8 @@
 import UIKit
 import SwiftyBeaver
 import UserNotifications
+import CWChatClient
+import CWChatKit
 
 let log = SwiftyBeaver.self
 

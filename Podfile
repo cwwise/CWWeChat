@@ -17,8 +17,8 @@ target 'CWWeChat' do
   pod 'Kingfisher'
 
   pod 'SQLite.swift'
-  pod 'RxSwift', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'rxswift4.0-swift4.0'
-  pod 'RxCocoa', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'rxswift4.0-swift4.0'
+  #pod 'RxSwift', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'rxswift4.0-swift4.0'
+  #pod 'RxCocoa', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'rxswift4.0-swift4.0'
 
   pod 'Alamofire'
       
@@ -35,11 +35,7 @@ target 'CWWeChat' do
   pod 'CWActionSheet'
   pod 'CWShareView'
 
-  # 表情
   pod 'FSPagerView'
-  
-  # animation
-  pod 'pop'
   
   # tool
   pod 'Hue'
@@ -65,6 +61,28 @@ target 'CWChatClient' do
     pod 'SwiftyJSON'
     pod 'Alamofire'
     pod 'SwiftyBeaver'
+end
+
+
+target 'CWChatKit' do
+    use_frameworks!
+    inhibit_all_warnings!
+    
+    pod 'Hue'
+    pod 'SwiftyJSON'
+    pod 'Alamofire'
+    pod 'SwiftyBeaver'
+    pod 'SwiftyImage'
+    pod 'Kingfisher'
+    pod 'SnapKit'
+
+end
+
+
+target 'CWChatInput' do
+    use_frameworks!
+    inhibit_all_warnings!
+    
 end
 
 
