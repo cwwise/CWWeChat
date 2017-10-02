@@ -53,5 +53,19 @@ target 'CWWeChat' do
     pod 'Nimble'
   end
 
-
 end
+
+
+target 'CWChatClient' do
+    use_frameworks!
+    inhibit_all_warnings!
+    
+    pod 'XMPPFramework'
+    pod 'SQLite.swift'
+    pod 'SwiftyJSON'
+    pod 'Alamofire'
+    pod 'SwiftyBeaver'
+end
+
+
+

@@ -1,14 +1,15 @@
 //
-//  CWChatKit.swift
-//  CWChatKit
+//  ImageMessageBody.swift
+//  CWChatClient
 //
 //  Created by chenwei on 2017/10/2.
 //  Copyright © 2017年 cwwise. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-public class CWChatKit: NSObject {
+public class ImageMessageBody: NSObject {
+    
     
     
     

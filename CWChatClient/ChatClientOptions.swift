@@ -1,5 +1,5 @@
 //
-//  CWChatClient.swift
+//  ChatClientOptions.swift
 //  CWChatClient
 //
 //  Created by chenwei on 2017/10/2.
@@ -8,9 +8,8 @@
 
 import Foundation
 
-public class CWChatClient: NSObject {
+public class ChatClientOptions: NSObject {
 
-    
     
     
 }
