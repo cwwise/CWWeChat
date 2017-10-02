@@ -1,7 +1,7 @@
 platform :ios, '9.0'
 
 target 'CWWeChat' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+
   use_frameworks!
   inhibit_all_warnings!
 
@@ -16,7 +16,7 @@ target 'CWWeChat' do
   pod 'SwiftyImage'
   pod 'Kingfisher'
 
-  pod 'SQLite.swift', git: 'https://github.com/stephencelis/SQLite.swift.git' , branch: 'swift-4'
+  pod 'SQLite.swift'
   pod 'RxSwift', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'rxswift4.0-swift4.0'
   pod 'RxCocoa', git: 'https://github.com/ReactiveX/RxSwift.git', branch: 'rxswift4.0-swift4.0'
 

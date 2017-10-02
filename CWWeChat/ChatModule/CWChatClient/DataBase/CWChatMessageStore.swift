@@ -18,7 +18,6 @@ class CWChatMessageStore: CWChatBaseStore {
         
     // 判断是否存在对应的表
     private var messageTableList = [String: Table]()
-    
     //MARK: 数据库属性
     //消息唯一id
     private let f_id = Expression<Int64>("id")
@@ -44,7 +43,7 @@ class CWChatMessageStore: CWChatBaseStore {
     private let f_ext1 = Expression<String>("ext1")
 
     /// http://www.jianshu.com/p/32563e843cc0
-    /// 全文检索
+    /// 全文检索(待完成)
     let textTable = VirtualTable("content")
     let f_body = Expression<String>("body")
     let f_bodyId = Expression<String>("msgid")
