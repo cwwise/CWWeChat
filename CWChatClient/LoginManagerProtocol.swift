@@ -22,7 +22,7 @@ public protocol LoginManagerDelegate: class {
 }
 
 /// 登录管理
-protocol LoginManager: class {
+public protocol LoginManager: class {
     /// 是否连接
     var isConnented: Bool { get }
     /// 是否登录成功

@@ -10,7 +10,7 @@ import UIKit
 import XMPPFramework
 
 protocol MessageHandleDelegate: class {
-    func handMessageComplete(message: Message)
+    func handMessageComplete(message: Message, conversationId: String)
 }
 
 class MessageHandle: NSObject {
@@ -19,12 +19,13 @@ class MessageHandle: NSObject {
     
     weak var nextMessageHandle: MessageHandle?
     
-    @discardableResult func handleMessage(message: XMPPMessage) -> Bool {
+    @discardableResult
+    func handleMessage(_ message: XMPPMessage) -> Bool {
         // 如果下一个响应者存在 并且消息不是错误消息
         guard let handle = self.nextMessageHandle else {
             return false
         }
-        return handle.handleMessage(message: message)
+        return handle.handleMessage(message)
     }
     
 }

@@ -38,6 +38,10 @@ public class Conversation: NSObject {
         self.type = type
     }
     
+    public func append(message: Message?) {
+        lastMessage = message
+    }
+    
     /// 获取指定ID的消息
     ///
     /// - Parameter messageId: 消息ID
