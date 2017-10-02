@@ -88,6 +88,9 @@
 		1F61468B1F827819000D8E0C /* TextMessageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61468A1F827819000D8E0C /* TextMessageOperation.swift */; };
 		1F61468D1F8279E2000D8E0C /* MessageDispatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61468C1F8279E2000D8E0C /* MessageDispatchManager.swift */; };
 		1F6146921F827B07000D8E0C /* MessageHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146911F827B07000D8E0C /* MessageHandle.swift */; };
+		1F6146941F827C9D000D8E0C /* ChatMessageHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146931F827C9D000D8E0C /* ChatMessageHandle.swift */; };
+		1F6146961F828538000D8E0C /* MessageParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146951F828538000D8E0C /* MessageParse.swift */; };
+		1F6146981F828B4C000D8E0C /* MessageTransmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146971F828B4C000D8E0C /* MessageTransmitter.swift */; };
 		1F6AD4081F823DB60044C27D /* CWChatClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6AD4061F823DB60044C27D /* CWChatClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F6AD40B1F823DB60044C27D /* CWChatClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6AD4041F823DB60044C27D /* CWChatClient.framework */; };
 		1F6AD40C1F823DB60044C27D /* CWChatClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6AD4041F823DB60044C27D /* CWChatClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -402,6 +405,9 @@
 		1F61468A1F827819000D8E0C /* TextMessageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageOperation.swift; sourceTree = "<group>"; };
 		1F61468C1F8279E2000D8E0C /* MessageDispatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDispatchManager.swift; sourceTree = "<group>"; };
 		1F6146911F827B07000D8E0C /* MessageHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHandle.swift; sourceTree = "<group>"; };
+		1F6146931F827C9D000D8E0C /* ChatMessageHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageHandle.swift; sourceTree = "<group>"; };
+		1F6146951F828538000D8E0C /* MessageParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageParse.swift; sourceTree = "<group>"; };
+		1F6146971F828B4C000D8E0C /* MessageTransmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTransmitter.swift; sourceTree = "<group>"; };
 		1F6AD4041F823DB60044C27D /* CWChatClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CWChatClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6AD4061F823DB60044C27D /* CWChatClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWChatClient.h; sourceTree = "<group>"; };
 		1F6AD4071F823DB60044C27D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1212,6 +1218,7 @@
 		1F6146871F8276DC000D8E0C /* DispatchQueue */ = {
 			isa = PBXGroup;
 			children = (
+				1F6146971F828B4C000D8E0C /* MessageTransmitter.swift */,
 				1F6146881F8276F1000D8E0C /* MessageOperation.swift */,
 				1F61468A1F827819000D8E0C /* TextMessageOperation.swift */,
 				1F61468C1F8279E2000D8E0C /* MessageDispatchManager.swift */,
@@ -1222,7 +1229,9 @@
 		1F61468E1F827AB1000D8E0C /* MessageHandle */ = {
 			isa = PBXGroup;
 			children = (
+				1F6146951F828538000D8E0C /* MessageParse.swift */,
 				1F6146911F827B07000D8E0C /* MessageHandle.swift */,
+				1F6146931F827C9D000D8E0C /* ChatMessageHandle.swift */,
 			);
 			path = MessageHandle;
 			sourceTree = "<group>";
@@ -2432,6 +2441,7 @@
 				1F6146801F825383000D8E0C /* ChatMessageStore.swift in Sources */,
 				1F6AD4431F8248EC0044C27D /* GroupManagerProtocol.swift in Sources */,
 				1F6AD4471F8249D90044C27D /* Conversation.swift in Sources */,
+				1F6146961F828538000D8E0C /* MessageParse.swift in Sources */,
 				1F6AD4281F8240320044C27D /* ChatManagerProtocol.swift in Sources */,
 				1F6AD4301F8240BC0044C27D /* ChatService.swift in Sources */,
 				1F61468B1F827819000D8E0C /* TextMessageOperation.swift in Sources */,
@@ -2440,11 +2450,13 @@
 				1F6AD4111F823DC80044C27D /* ChatClient.swift in Sources */,
 				1F6146891F8276F1000D8E0C /* MessageOperation.swift in Sources */,
 				1F61468D1F8279E2000D8E0C /* MessageDispatchManager.swift in Sources */,
+				1F6146981F828B4C000D8E0C /* MessageTransmitter.swift in Sources */,
 				1F6146921F827B07000D8E0C /* MessageHandle.swift in Sources */,
 				1F6146821F826E50000D8E0C /* ChatConversationStore.swift in Sources */,
 				1F6AD4341F8240F10044C27D /* Message.swift in Sources */,
 				1F6AD43F1F8242A90044C27D /* LoginManagerProtocol.swift in Sources */,
 				1F6AD4491F824CCB0044C27D /* ChatClientUtil.swift in Sources */,
+				1F6146941F827C9D000D8E0C /* ChatMessageHandle.swift in Sources */,
 				1F6AD4321F8240D20044C27D /* ChatDataService.swift in Sources */,
 				1F6AD4361F82410B0044C27D /* MessageBody.swift in Sources */,
 				1F6AD4261F8240140044C27D /* ChatClientOptions.swift in Sources */,

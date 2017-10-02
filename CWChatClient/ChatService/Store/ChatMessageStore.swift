@@ -36,9 +36,6 @@ class ChatMessageStore: ChatBaseStore {
     /// 拓展字端(json)
     private let f_extra = Expression<String>("extra")
     
-    private let messageEncoder = JSONEncoder()
-    private let messageDecoder = JSONDecoder()
-
     func messageTable(_ conversationId: String) -> Table {
         if tableExistList[conversationId] == nil {
             createMessageTable(conversationId: conversationId)
@@ -154,7 +151,9 @@ extension ChatMessageStore {
         }
         
         do {
-            let body = try messageDecoder.decode(MessageBody.self, from: data)
+            let messageType = MessageType(rawValue: row[f_messageType]) ?? .none
+            let bodyClass = ChatClientUtil.messageBodyClass(with: messageType)
+            let body = try messageDecoder.decode(bodyClass, from: data)
             let message = Message(conversationId: conversationId,
                                   from: row[f_from],
                                   body: body)

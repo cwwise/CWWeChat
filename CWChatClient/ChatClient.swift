@@ -13,13 +13,16 @@ let log = SwiftyBeaver.self
 
 public class ChatClient {
     
-    static let share = ChatClient()
+    public static let share = ChatClient()
     /// 版本
-    private(set) var version: String
-    /// login
-    private(set) var loginManager: LoginManager
- 
+    public private(set) var version: String
     
+    public private(set) var options: ChatClientOptions
+    /// login
+    public private(set) var loginManager: LoginManager
+ 
+    public private(set) var chatManager: ChatManager
+
     public var currentAccount: String {
         return self.loginManager.currentAccount
     }
@@ -29,6 +32,12 @@ public class ChatClient {
         
         let xmppManager = XMPPManager()
         self.loginManager = xmppManager
+        
+        let queue = DispatchQueue.global()
+        let chatService = ChatService(dispatchQueue: queue)
+        self.chatManager = chatService!
+        
+        self.options = ChatClientOptions.default
         
         setupLogger()
     }
