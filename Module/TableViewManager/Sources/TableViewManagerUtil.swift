@@ -18,3 +18,15 @@ extension UITableViewCell: Reusable {
 extension UITableViewHeaderFooterView: Reusable {
     static var identifier: String { return String(describing: self) }
 }
+
+func textHeightOfText(_ text: String?, width: CGFloat, attributes:[NSAttributedStringKey:AnyObject] ) -> CGFloat {
+    
+    guard let text = text else {
+        return 0
+    }
+    
+    let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+    let contentSize = text.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil).size
+    return ceil(contentSize.height)
+}
+

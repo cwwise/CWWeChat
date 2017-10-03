@@ -20,10 +20,10 @@ public enum CWButtonType {
 }
 
 class CWButtonItem: CWTableViewItem {
-    var style: CWButtonCellStyle = .common
+   // var style: CWButtonCellStyle = .common
 
     init(title: String, style: CWButtonCellStyle = .common) {
         super.init(title: title)
-        self.style = style
+    //    self.style = style
     }
 }

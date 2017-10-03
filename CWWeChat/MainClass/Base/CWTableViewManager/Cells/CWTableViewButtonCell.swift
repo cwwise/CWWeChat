@@ -46,15 +46,6 @@ class CWTableViewButtonCell: CWTableViewCell {
             return
         }
         
-        switch item.style {
-        case .common:
-            self.textLabel?.text = item.title
-            self.actionButton.isHidden = true
-        default:
-            self.actionButton.isHidden = false
-            self.actionButton.setTitle(item.title, for: .normal)
-        }
-        
     }
     
     override func awakeFromNib() {

@@ -66,7 +66,7 @@ public class Section: NSObject {
         
         let width = tableView.bounds.width - 2*kCellLeftMargin
         let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)]
-        let headerHeight: CGFloat = 0 + 7 + 15
+        let headerHeight = textHeightOfText(headerTitle, width: width, attributes: attributes)  + 7 + 15
         return headerHeight
     }
     
@@ -80,7 +80,7 @@ public class Section: NSObject {
         
         let width = tableView.bounds.width - 2*kCellLeftMargin
         let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)]
-        let footerHeight: CGFloat = 0 + 7 + 5
+        let footerHeight = textHeightOfText(footerTitle, width: width, attributes: attributes) + 7 + 5
         return footerHeight
     }
     

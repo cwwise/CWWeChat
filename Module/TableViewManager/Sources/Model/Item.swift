@@ -24,23 +24,20 @@ public protocol Row: NSObjectProtocol {
     var indexPath: IndexPath? { get }
 }
 
-public class Item: Row {
-   
+public class Item: NSObject, Row {
+    /// section
     public weak var section: Section?
     /// 文本
     public var title: String
-    /// 副标题
-    public var subTitle: String?
-    
     /// cell高度 默认49
-    public var cellHeight: CGFloat
+    public var cellHeight: CGFloat = kDefaultItemCellHeight
     ///  是否显示
     public var showDisclosureIndicator: Bool = true
     ///  是否不高亮
     public var disableHighlight: Bool = false
-    
+    /// 点击事件回调
     public var selectionAction: SelectionHandler?
-    
+    /// indexPath
     public var indexPath: IndexPath? {
         guard let index = section?.items.index(of: self),
             let sectionIndex = section?.index else {
@@ -49,15 +46,11 @@ public class Item: Row {
         return IndexPath(row: index, section: sectionIndex)
     }
     
-    public init(title: String, subTitle: String? = nil) {
+    public init(title: String, selectionAction: SelectionHandler? = nil) {
         self.title = title
-        self.subTitle = subTitle
-        cellHeight = kDefaultItemCellHeight
+        self.selectionAction = selectionAction
     }
 }
 
-extension Item {
-    
-    
-}
+
 
