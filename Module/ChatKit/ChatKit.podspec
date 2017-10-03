@@ -41,8 +41,8 @@ Pod::Spec.new do |s|
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
   s.framework  = "UIKit"
-  s.weak_framework = 'ChatClient'
   
+  s.dependency "ChatClient"
   s.dependency "Kingfisher"
   s.dependency "SQLite.swift"
   s.dependency "SwiftyJSON"

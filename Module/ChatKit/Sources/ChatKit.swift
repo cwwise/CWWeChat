@@ -8,6 +8,7 @@
 
 import Foundation
 import Kingfisher
+import ChatClient
 
 public class ChatKit: NSObject {
     
