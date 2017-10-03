@@ -42,5 +42,6 @@ Pod::Spec.new do |s|
     
   s.dependency "Hue"
   s.dependency "SnapKit"
+  s.dependency "Kingfisher"
 
 end

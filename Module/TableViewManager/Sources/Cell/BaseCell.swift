@@ -74,7 +74,7 @@ public class BaseCell: UITableViewCell {
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(titleLabel)
-        setupSnap()
+       // setupSnap()
     }
     
     func cellWillAppear() {

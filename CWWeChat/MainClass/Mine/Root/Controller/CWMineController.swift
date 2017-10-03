@@ -7,17 +7,39 @@
 //
 
 import UIKit
+import TableViewManager
 
-class CWMineController: CWMenuViewController {
+class CWMineController: CWBaseTableViewController {
 
+    lazy var tableViewManager: TableViewManager = {
+        let tableViewManager = TableViewManager(tableView: self.tableView)
+        tableViewManager.dataSource = self
+        return tableViewManager
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let mineHelper = CWMineHelper()
-        self.dataSource = mineHelper.mineMenuData
-        
         self.tableView.register(CWMineUserCell.self, forCellReuseIdentifier: "cell")
-        // Do any additional setup after loading the view.
+        setupItem()
+    }
+    
+    func setupItem() {
+        //占位
+        let item1 = MenuItem(iconImageName: "", title: "")
+        item1.cellHeight = 87
+        
+        let item2 = MenuItem(iconImageName: CWAsset.Mine_album.rawValue, title: "相册")
+        let item3 = MenuItem(iconImageName: CWAsset.Mine_favorites.rawValue, title: "收藏")
+        let item4 = MenuItem(iconImageName: CWAsset.Mine_wallet.rawValue, title: "钱包")
+        let item5 = MenuItem(iconImageName: CWAsset.Mine_card.rawValue, title: "优惠券")
+        let item6 = MenuItem(iconImageName: CWAsset.Mine_expression.rawValue, title: "表情")
+        let item7 = MenuItem(iconImageName: CWAsset.Mine_setting.rawValue, title: "设置")
+        
+        tableViewManager.append(itemsOf: item1)
+        tableViewManager.append(itemsOf: item2,item3,item4,item5)
+        tableViewManager.append(itemsOf: item6,item7)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,16 +49,9 @@ class CWMineController: CWMenuViewController {
     
 }
 
-extension CWMineController {
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 87
-        }
-        return super.tableView(tableView, heightForRowAt: indexPath)
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+extension CWMineController: TableViewManagerDataSource {
+ 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell? {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CWMineUserCell
             let model = CWUserModel(userId: "chenwei", username: "chenwei")
@@ -46,11 +61,10 @@ extension CWMineController {
             cell.userModel = model
             return cell
         }
-        return super.tableView(tableView, cellForRowAt: indexPath)
+        return nil
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        super.tableView(tableView, didSelectRowAt: indexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
             let personVC = CWPersonalInfoController()

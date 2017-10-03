@@ -39,6 +39,7 @@ public class TableViewManager: NSObject {
         tableView?.register(FooterTitleView.self,
                             forHeaderFooterViewReuseIdentifier: FooterTitleView.identifier)
         
+        register(cellClass: MenuCell.self, forCellReuseIdentifier: MenuItem.self)
         register(cellClass: BaseCell.self, forCellReuseIdentifier: Item.self)
         register(cellClass: BoolCell.self, forCellReuseIdentifier: BoolItem.self)
         register(cellClass: ButtonCell.self, forCellReuseIdentifier: ButtonItem.self)
@@ -48,9 +49,27 @@ public class TableViewManager: NSObject {
         tableView?.register(cellClass, forCellReuseIdentifier: String(describing: itemClass))
     }
     
-    public func appendSection(_ section: Section) {
+    public func append(_ section: Section) {
         section.tableViewManager = self
         sections.append(section)
+    }
+    
+    // MARK: 操作item
+    public func append(itemsOf items: [Item]) {
+        let section = Section(items: items)
+        self.append(section)
+    }
+    
+    public func append(itemsOf items: Item...) {
+        let section = Section(items: items)
+        self.append(section)
+    }
+    
+    // MARK: 操作section
+    public func append(contentsOf sections: [Section]) {
+        for section in sections {
+            self.append(section)
+        }
     }
     
 }
@@ -67,6 +86,10 @@ extension TableViewManager: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
+        if let cell = self.dataSource?.tableView(tableView, cellForRowAt: indexPath) {
+            return cell
+        }
+        
         let item = sections[indexPath.section][indexPath.row]
         let identifier = String(describing: item.classForCoder)        
         
@@ -104,7 +127,7 @@ extension TableViewManager: UITableViewDelegate {
         return footer
     }
     
-    public func tableView(_ tableView: UITableView, heightForFooerInSection section: Int) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         let section = sections[section]
         return section.footerHeight
     }

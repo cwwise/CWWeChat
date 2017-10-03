@@ -63,6 +63,7 @@ PODS:
   - SwiftyJSON (3.1.4)
   - TableViewManager (0.0.1):
     - Hue
+    - Kingfisher
     - SnapKit
   - XMPPFramework (3.7.0):
     - CocoaAsyncSocket (~> 7.6.0)
@@ -129,10 +130,10 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 91057725648ee4980308f1650af077d04b3654a0
   SwiftyImage: ebaa7c7b6163cd4ad102f3bb05a8fb276d35b4f3
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
-  TableViewManager: 38f2887b72e41d51a0b061ded40fea3c8ad2ec85
+  TableViewManager: d69402d7a37a5bde7cba8cae841746ed815bd071
   XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: d1ef2a9367e964707709dde8905f7ea0eb906e2a
+PODFILE CHECKSUM: de521600b8a8220860a8a33431bb28a98d457c63
 
 COCOAPODS: 1.3.1

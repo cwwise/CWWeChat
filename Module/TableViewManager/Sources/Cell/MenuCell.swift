@@ -1,36 +1,18 @@
 //
-//  CWMenuCell.swift
-//  CWWeChat
+//  MenuCell.swift
+//  TableViewManager
 //
-//  Created by chenwei on 16/5/28.
-//  Copyright © 2016年 chenwei. All rights reserved.
+//  Created by wei chen on 2017/10/3.
 //
 
 import UIKit
 import Kingfisher
 
-let kRedPointWidth:CGFloat = 8.0
+private let kRedPointWidth: CGFloat = 8.0
 
-class CWMenuCell: UITableViewCell {
-
-    var menuItem: CWMenuItem! {
-        didSet {
-            self.setupItem()
-        }
-    }
+class MenuCell: BaseCell {
     
-    //
-    private lazy var iconImageView:UIImageView = {
-       let iconImageView = UIImageView()
-        return iconImageView
-    }()
-    
-    private lazy var titleLabel:UILabel = {
-        let titleLabel = UILabel()
-        return titleLabel
-    }()
-    
-    private lazy var rightImageView:UIImageView = {
+    private lazy var rightImageView: UIImageView = {
         let rightImageView = UIImageView()
         return rightImageView
     }()
@@ -45,7 +27,7 @@ class CWMenuCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-       
+        
         self.accessoryType = .disclosureIndicator
         self.contentView.addSubview(iconImageView)
         self.contentView.addSubview(titleLabel)
@@ -60,7 +42,7 @@ class CWMenuCell: UITableViewCell {
         
         let leftOffset: CGFloat = 15
         let iconImageView_Width: CGFloat = 25
-
+        
         self.iconImageView.snp.makeConstraints { (make) in
             make.left.equalTo(self.contentView).offset(leftOffset)
             make.centerY.equalTo(self.contentView)
@@ -78,7 +60,7 @@ class CWMenuCell: UITableViewCell {
             make.centerY.equalTo(self.iconImageView)
             make.width.height.equalTo(31)
         }
-
+        
         //红点
         self.redPointView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.rightImageView.snp.right).offset(1)
@@ -88,24 +70,21 @@ class CWMenuCell: UITableViewCell {
     }
     
     
-    //设置值
-    func setupItem() {
+    override func cellWillAppear() {
+        guard let menuItem = item as? MenuItem else {
+            return
+        }
         
         self.iconImageView.image = UIImage(named: menuItem.iconImageName)
         self.titleLabel.text = menuItem.title
         
         if let rightIconURL = menuItem.rightIconURL {
-        
-            let url = URL(string: rightIconURL)!
+            let url = URL(string: rightIconURL)
             self.rightImageView.kf.setImage(with: url, placeholder: nil)
-        
+            self.rightImageView.isHidden = false
         } else {
-        
-            self.rightImageView.snp.updateConstraints({ (make) in
-                make.width.equalTo(0)
-            })
+            self.rightImageView.isHidden = true
         }
-        
         self.redPointView.isHidden = !menuItem.showRightRedPoint
     }
     
@@ -117,11 +96,9 @@ class CWMenuCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
     }
-
 }

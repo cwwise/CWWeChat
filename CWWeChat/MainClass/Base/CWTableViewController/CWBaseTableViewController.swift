@@ -19,7 +19,7 @@ class CWBaseTableViewController: UIViewController {
         tableView.separatorColor = UIColor.tableViewCellLineColor()
         let frame = CGRect(x: 0, y: 0, 
                            width: self.view.bounds.width, height: CGFloat.leastNormalMagnitude)
-        tableView.tableHeaderView = UIView(frame: frame) 
+        tableView.tableHeaderView = UIView(frame: frame)
         tableView.tableFooterView = UIView()
         return tableView
     }()

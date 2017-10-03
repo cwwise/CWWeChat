@@ -64,7 +64,6 @@ public class CWTableViewManager: NSObject {
         self.register(cellClass: CWTableViewCell.self, forCellReuseIdentifier: CWTableViewItem.self)
         self.register(cellClass: CWTableViewBoolCell.self, forCellReuseIdentifier: CWBoolItem.self)
         self.register(cellClass: CWTableViewButtonCell.self, forCellReuseIdentifier: CWButtonItem.self)
-
     }
     
     func register(cellClass: Swift.AnyClass, forCellReuseIdentifier itemClass: Swift.AnyClass) {
@@ -139,13 +138,11 @@ extension CWTableViewManager: UITableViewDelegate {
         delegate?.tableView?(tableView, didSelectRowAt: indexPath)
     }
     
-    
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if let cellHeight = delegate?.tableView?(tableView, heightForRowAt: indexPath) {
             return cellHeight
         }
-        
         let item = sections[indexPath.section][indexPath.row]
         return item.cellHeight
     }
@@ -160,20 +157,14 @@ extension CWTableViewManager: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerTitle = sections[section].headerTitle  else {
-            return nil
-        }
-        
+        let headerTitle = sections[section].headerTitle
         let headerTitleView = tableView.dequeueReusableHeaderFooterView(withIdentifier: CWTableHeaderTitleView.identifier) as! CWTableHeaderTitleView
         headerTitleView.text = headerTitle
         return headerTitleView
     }
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard let footerTitle = sections[section].footerTitle  else {
-            return nil
-        }
-        
+        let footerTitle = sections[section].footerTitle
         let footerTitleView = tableView.dequeueReusableHeaderFooterView(withIdentifier: CWTableFooterTitleView.identifier) as! CWTableFooterTitleView
         footerTitleView.text = footerTitle
         return footerTitleView
