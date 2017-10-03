@@ -85,10 +85,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   RxCocoa:
-    :commit: 7d344f6ca02683f6a52e61839ae0e01ecd4981eb
+    :commit: ecb9ba58435f703c361b3906ee29c2d45a605a4a
     :git: https://github.com/ReactiveX/RxSwift.git
   RxSwift:
-    :commit: 7d344f6ca02683f6a52e61839ae0e01ecd4981eb
+    :commit: ecb9ba58435f703c361b3906ee29c2d45a605a4a
     :git: https://github.com/ReactiveX/RxSwift.git
   SQLite.swift:
     :commit: 7312423d83bb713591a0d827a89fe664eba14451
