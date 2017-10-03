@@ -73,6 +73,26 @@ public class ConversationCell: UITableViewCell {
             return 
         }
         
+        // 是单聊
+        if model.type == .single {
+            
+            if let user = ChatKit.share.fetchUser(userId: model.conversationId) {
+                self.usernameLabel.text = user.nickname
+            } else {
+                self.usernameLabel.text = "单聊"
+            }
+            
+        } else {
+            
+            if let group = ChatKit.share.fetchGroup(groupId: model.conversationId){
+                self.usernameLabel.text = group.name
+            } else {
+                self.usernameLabel.text = "群聊"
+            }
+            
+        }
+        
+        
         self.timeLabel.text = model.lastMessageTime
         self.contentLabel.text = model.conversationTitle
         self.badgeView.badgeValue = model.unreadCount

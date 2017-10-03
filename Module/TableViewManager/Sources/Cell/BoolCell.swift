@@ -35,6 +35,7 @@ class BoolCell: BaseCell {
         let handele = booItem.switchChangeHandler else {
             return
         }
+        booItem.value = cellSwitch.isOn
         handele(booItem)
     }
     

@@ -60,7 +60,7 @@ class CWMomentStore: NSObject {
     
     /// 数据库路径
     lazy var path: String = {
-        let userPath = CWChatClient.share.userFilePath
+        let userPath = ""
         let path = "\(userPath)/chat/"
         if !FileManager.default.fileExists(atPath: path) {
             try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)

@@ -8,11 +8,12 @@
 
 import UIKit
 import YYText
+import TableViewManager
 
 class CWAboutController: CWBaseTableViewController {
     
-    lazy var tableViewManager: CWTableViewManager = {
-        return CWTableViewManager(tableView: self.tableView)
+    lazy var tableViewManager: TableViewManager = {
+        return TableViewManager(tableView: self.tableView)
     }()
     
     //github链接
@@ -81,17 +82,12 @@ class CWAboutController: CWBaseTableViewController {
     
     }
 
-}
-
-extension CWAboutController {
     func setupItemData() {
-        let item1 = CWTableViewItem(title: "去评分")
-        let item2 = CWTableViewItem(title: "功能介绍")
-        let item3 = CWTableViewItem(title: "系统通知")
-        let item4 = CWTableViewItem(title: "投诉")
-        
-        let section1 = CWTableViewSection(items: [item1, item2, item3, item4])
-        tableViewManager.addSection(contentsOf: [section1])
+        let item1 = Item(title: "去评分")
+        let item2 = Item(title: "功能介绍")
+        let item3 = Item(title: "系统通知")
+        let item4 = Item(title: "投诉")
+        tableViewManager.append(itemsOf: [item1, item2, item3, item4])
     }
 }
 

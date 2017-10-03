@@ -9,7 +9,7 @@ import UIKit
 
 public class ButtonItem: Item {
 
-    public override init(title: String, selectionAction: SelectionHandler?) {
+    public override init(title: String, selectionAction: SelectionHandler? = nil) {
         super.init(title: title, selectionAction: selectionAction)
         self.disableHighlight = true
     }

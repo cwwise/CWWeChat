@@ -29,13 +29,13 @@ public class User: NSObject {
 
 public class UserInfo: NSObject {
     // 真实名称
-    var realname: String?
+    public var realname: String?
     // 备注
-    var alias: String?
+    public var alias: String?
     // 签名
-    var sign: String?
+    public var sign: String?
     // email
-    var email: String?
+    public var email: String?
     
     public override var description: String {
         return "nickName:\(realname ?? "未设置"), sign:\(sign ?? "未设置")"

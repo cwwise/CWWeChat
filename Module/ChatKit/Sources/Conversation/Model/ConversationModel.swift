@@ -21,6 +21,10 @@ public class ConversationModel: NSObject {
         return conversation.unreadCount
     }
     
+    public var type: ChatType {
+        return conversation.type
+    }
+    
     /// 最后消息时间
     var lastMessageTime: String {
         

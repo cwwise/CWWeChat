@@ -7,36 +7,28 @@
 //
 
 import UIKit
+import TableViewManager
 
 class CWContactDetailController: CWBaseTableViewController {
 
-    var userId: String
-    
-    init(userId: String) {
-        self.userId = userId
-        super.init(nibName: nil, bundle: nil)
-    }
- 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
   //  let bag = DisposeBag()
     
     private var contact: CWUserModel!
     
-    lazy var tableViewManager: CWTableViewManager = {
-        let tableViewManager = CWTableViewManager(tableView: self.tableView)
+    lazy var tableViewManager: TableViewManager = {
+        let tableViewManager = TableViewManager(tableView: self.tableView)
         tableViewManager.delegate = self
         tableViewManager.dataSource = self
         return tableViewManager
     }()
     
+    var userId: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "详细资料"
 
-        CWContactHelper.share.fetchContactById(userId, complete: { (contact, error) in
+        CWContactHelper.share.fetchContactById(userId!, complete: { (contact, error) in
             self.contact = contact
             self.tableView.reloadData()
         })
@@ -47,7 +39,6 @@ class CWContactDetailController: CWBaseTableViewController {
         style.detailTextFont = UIFont.systemFont(ofSize: 15)
         style.detailTextColor = UIColor(hex: "333333")
 
-        tableViewManager.style = style
         
         self.tableView.register(CWContactInfoCell.self, forCellReuseIdentifier: CWContactInfoCell.identifier)
         self.tableView.register(CWContactDetailAlbumCell.self, forCellReuseIdentifier: CWContactDetailAlbumCell.identifier)
@@ -60,19 +51,19 @@ class CWContactDetailController: CWBaseTableViewController {
     }
     
     func setupData() {
-        let item1 = CWTableViewItem(title: "信息")
+        let item1 = Item(title: "")
         item1.cellHeight = 87
-        tableViewManager.addSection(itemsOf: [item1])
+        tableViewManager.append(itemsOf: item1)
 
-        let item2 = CWTableViewItem(title: "设置备注和标签")
-        tableViewManager.addSection(itemsOf: [item2])
+        let item2 = Item(title: "设置备注和标签")
+        tableViewManager.append(itemsOf: item2)
 
-        let item3 = CWTableViewItem(title: "地区")
-        let item4 = CWTableViewItem(title: "个人相册")
+        let item3 = Item(title: "地区")
+        let item4 = Item(title: "个人相册")
         item4.cellHeight = 87
         
-        let item5 = CWTableViewItem(title: "更多")
-        tableViewManager.addSection(itemsOf: [item3, item4, item5])
+        let item5 = Item(title: "更多")
+        tableViewManager.append(itemsOf: [item3, item4, item5])
 
         
         let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 100)
@@ -86,7 +77,7 @@ class CWContactDetailController: CWBaseTableViewController {
     }
 
     func goChatController() {
-        let chatVC = CWChatMessageController(targetId: userId)
+        let chatVC = CWChatMessageController(targetId: userId!)
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
@@ -102,9 +93,9 @@ class CWContactDetailController: CWBaseTableViewController {
 
 }
 
-extension CWContactDetailController: CWTableViewManagerDataSource {
+extension CWContactDetailController: TableViewManagerDataSource {
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell? {
+    func tableViewManager(_ tableViewManager: TableViewManager, cellForRowAt indexPath: IndexPath) -> UITableViewCell? {
 
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CWContactInfoCell.identifier,
@@ -126,7 +117,7 @@ extension CWContactDetailController: CWTableViewManagerDataSource {
 }
 
 
-extension CWContactDetailController: CWTableViewManagerDelegate {
+extension CWContactDetailController: TableViewManagerDelegate {
     
 }
 

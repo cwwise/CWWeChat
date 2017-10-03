@@ -86,7 +86,7 @@ extension TableViewManager: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if let cell = self.dataSource?.tableView(tableView, cellForRowAt: indexPath) {
+        if let cell = self.dataSource?.tableViewManager(self, cellForRowAt: indexPath) {
             return cell
         }
         
@@ -102,8 +102,18 @@ extension TableViewManager: UITableViewDataSource {
 }
 
 extension TableViewManager: UITableViewDelegate {
+    
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //默认取消选中
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let item = sections[indexPath.section][indexPath.row]
+        if let selectionAction = item.selectionAction {
+            selectionAction(item)
+        }
+        
+        // 不明白 为什么需要添加？
+        delegate?.tableView?(tableView, didSelectRowAt: indexPath)
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -113,7 +123,9 @@ extension TableViewManager: UITableViewDelegate {
     
     // MARK: Header && Footer
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderTitleView.identifier)
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderTitleView.identifier) as! HeaderTitleView
+        let headerTitle = sections[section].headerTitle
+        header.text = headerTitle
         return header
     }
     
@@ -123,7 +135,9 @@ extension TableViewManager: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: FooterTitleView.identifier)
+        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: FooterTitleView.identifier) as! FooterTitleView
+        let footerTitle = sections[section].footerTitle
+        footer.text = footerTitle
         return footer
     }
     

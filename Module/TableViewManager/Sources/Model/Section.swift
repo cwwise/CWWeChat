@@ -12,7 +12,12 @@ public class Section: NSObject {
     /// 主要内容 (rows)
     public private(set) var items: [Item] = [Item]()
     
-    public weak var tableViewManager: TableViewManager?
+    public weak var tableViewManager: TableViewManager? {
+        didSet {
+            headerHeight = calculateHeaderTitleHeight()
+            footerHeight = calculateFooterTitleHeight()
+        }
+    }
     
     /// The title of the header of the specified section of the table view.
     public var headerTitle: String? {
@@ -47,10 +52,7 @@ public class Section: NSObject {
         
         self.footerTitle = footerTitle
         self.headerTitle = headerTitle
-        // 手动调用计算高度
-        headerHeight = calculateHeaderTitleHeight()
-        footerHeight = calculateFooterTitleHeight()
-        
+  
         for item in items {
             self.addItem(item)
         }
@@ -59,8 +61,7 @@ public class Section: NSObject {
     func calculateHeaderTitleHeight() -> CGFloat {
         
         guard let headerTitle = headerTitle,
-            let tableViewManager = tableViewManager,
-            let tableView = tableViewManager.tableView else {
+            let tableView = tableViewManager?.tableView else {
             return 15
         }
         
@@ -73,8 +74,7 @@ public class Section: NSObject {
     func calculateFooterTitleHeight() -> CGFloat {
                 
         guard let footerTitle = footerTitle,
-            let tableViewManager = tableViewManager,
-            let tableView = tableViewManager.tableView else {
+            let tableView = tableViewManager?.tableView else {
                 return 5
         }
         

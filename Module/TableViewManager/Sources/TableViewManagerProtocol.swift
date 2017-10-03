@@ -16,11 +16,11 @@ extension TableViewManagerDelegate {
 }
 
 public protocol TableViewManagerDataSource: NSObjectProtocol {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell?
+    func tableViewManager(_ tableViewManager: TableViewManager, cellForRowAt indexPath: IndexPath) -> UITableViewCell?
 }
 
-extension TableViewManagerDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell? {
+public extension TableViewManagerDataSource {
+    func tableViewManager(_ tableViewManager: TableViewManager, cellForRowAt indexPath: IndexPath) -> UITableViewCell? {
         return nil
     }
 }

@@ -26,6 +26,11 @@ public class ChatClient {
     public var chatManager: ChatManager {
         return chatService
     }
+    
+    public var contactManager: ContactManager {
+        return contactService
+    }
+
 
     public var currentAccount: String {
         return self.loginManager.currentAccount
@@ -33,6 +38,8 @@ public class ChatClient {
     
     // 内部使用
     var chatService: ChatService
+    
+    var contactService: ContactService
     
     var xmppManager: XMPPManager
     
@@ -46,7 +53,10 @@ public class ChatClient {
         
         let queue = DispatchQueue.global()
         chatService = ChatService(dispatchQueue: queue)!
-        chatService.activate(xmppManager.xmppStream)        
+        chatService.activate(xmppManager.xmppStream)
+        
+        contactService = ContactService(dispatchQueue: queue)!
+        contactService.activate(xmppManager.xmppStream)
     }
     
     /// 初始化聊天信息

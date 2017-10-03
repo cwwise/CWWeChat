@@ -12,7 +12,24 @@ import ChatClient
 
 public class ChatKit: NSObject {
     
-    public override init() {
+    public static let share = ChatKit()
+
+    private override init() {
+
+        
+        
+        
         
     }
+    
+    
+    public func fetchUser(userId: String) -> User? {
+        return nil
+    }
+    
+    public func fetchGroup(groupId: String) -> Group? {
+        return nil
+    }
+    
+    
 }

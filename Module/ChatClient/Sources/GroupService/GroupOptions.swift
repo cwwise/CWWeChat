@@ -16,10 +16,10 @@ public enum ChatGroupStyle {
 
 public class GroupOptions: NSObject {
     ///  群组的类型
-    var style: ChatGroupStyle = .onlyOwnerInvite
+    public var style: ChatGroupStyle = .onlyOwnerInvite
     /// 群组的最大成员数
-    var maxUsersCount: Int = 200
+    public var maxUsersCount: Int = 200
     /// 邀请群成员时，是否需要发送邀请通知.若NO，被邀请的人自动加入群组
-    var IsInviteNeedConfirm: Bool = false
+    public var IsInviteNeedConfirm: Bool = false
     
 }

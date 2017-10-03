@@ -53,13 +53,7 @@ public class BaseCell: UITableViewCell {
         return subTitleLabel
     }()
     
-    lazy var iconImageView: UIImageView = {
-        let iconImageView = UIImageView()
-        iconImageView.contentMode = .scaleAspectFill
-        iconImageView.clipsToBounds = true
-        iconImageView.layer.cornerRadius = 5
-        return iconImageView
-    }()
+
     
     // 靠右边
     lazy var rightLabel:UILabel = {
@@ -69,12 +63,19 @@ public class BaseCell: UITableViewCell {
         return rightLabel
     }()
     
+    private lazy var rightImageView: UIImageView = {
+        let rightImageView = UIImageView()
+        return rightImageView
+    }()
+    
     var item: Item?
         
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(titleLabel)
-       // setupSnap()
+        self.contentView.addSubview(rightLabel)
+        self.contentView.addSubview(rightImageView)
+        setupSnap()
     }
     
     func cellWillAppear() {
@@ -102,6 +103,7 @@ public class BaseCell: UITableViewCell {
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView)
             make.left.equalTo(kCellLeftMargin)
+            make.right.lessThanOrEqualTo(-kCellLeftMargin)
         }
     }
     

@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import TableViewManager
 
 class CWContactSettingController: CWBaseTableViewController {
 
-    lazy var tableViewManager: CWTableViewManager = {
-        let tableViewManager = CWTableViewManager(tableView: self.tableView)
+    lazy var tableViewManager: TableViewManager = {
+        let tableViewManager = TableViewManager(tableView: self.tableView)
         tableViewManager.delegate = self
         tableViewManager.dataSource = self
         return tableViewManager
@@ -24,23 +25,31 @@ class CWContactSettingController: CWBaseTableViewController {
     }
     
     func setupData() {
-        let item1 = CWTableViewItem(title: "设置备注及标签")
-        tableViewManager.addSection(itemsOf: [item1])
+        let item1 = Item(title: "设置备注及标签")
+        tableViewManager.append(itemsOf: item1)
         
-        let item2 = CWTableViewItem(title: "把她推荐给朋友")
-        tableViewManager.addSection(itemsOf: [item2])
+        let item2 = Item(title: "把她推荐给朋友")
+        tableViewManager.append(itemsOf: item2)
         
-        let item3 = CWBoolItem(title: "设置为星标用户", value: true)
-        tableViewManager.addSection(itemsOf: [item3])
+        let item3 = BoolItem(title: "设置为星标用户", value: true) { (item) in
+            
+        }
+        tableViewManager.append(itemsOf: item3)
 
-        let item4 = CWBoolItem(title: "不让她看我的朋友圈", value: true)
-        let item5 = CWBoolItem(title: "不看她的朋友圈  ", value: true)
-        tableViewManager.addSection(itemsOf: [item4, item5])
+        let item4 = BoolItem(title: "不让她看我的朋友圈", value: true) { (item) in
+            
+        }
+        let item5 = BoolItem(title: "不看她的朋友圈  ", value: true) { (item) in
+            
+        }
+        tableViewManager.append(itemsOf: item4, item5)
 
-        let item6 = CWBoolItem(title: "加入黑名单", value: true)
-        let item7 = CWTableViewItem(title: "投诉")
+        let item6 = BoolItem(title: "加入黑名单", value: true) { (item) in
+            
+        }
+        let item7 = Item(title: "投诉")
         
-        tableViewManager.addSection(itemsOf: [item6, item7])
+        tableViewManager.append(itemsOf: item6, item7)
         
         let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 80)
         let footerView = UIView(frame: frame)
@@ -55,9 +64,8 @@ class CWContactSettingController: CWBaseTableViewController {
     
 }
 
-extension CWContactSettingController: CWTableViewManagerDelegate, CWTableViewManagerDataSource {
+extension CWContactSettingController: TableViewManagerDelegate, TableViewManagerDataSource {
     
-    
-    
+
     
 }

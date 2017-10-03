@@ -12,6 +12,14 @@ private let kRedPointWidth: CGFloat = 8.0
 
 class MenuCell: BaseCell {
     
+    lazy var iconImageView: UIImageView = {
+        let iconImageView = UIImageView()
+        iconImageView.contentMode = .scaleAspectFill
+        iconImageView.clipsToBounds = true
+        iconImageView.layer.cornerRadius = 5
+        return iconImageView
+    }()
+    
     private lazy var rightImageView: UIImageView = {
         let rightImageView = UIImageView()
         return rightImageView
@@ -30,7 +38,6 @@ class MenuCell: BaseCell {
         
         self.accessoryType = .disclosureIndicator
         self.contentView.addSubview(iconImageView)
-        self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(rightImageView)
         self.contentView.addSubview(redPointView)
         
@@ -44,15 +51,15 @@ class MenuCell: BaseCell {
         let iconImageView_Width: CGFloat = 25
         
         self.iconImageView.snp.makeConstraints { (make) in
-            make.left.equalTo(self.contentView).offset(leftOffset)
-            make.centerY.equalTo(self.contentView)
+            make.left.equalTo(leftOffset)
+            make.centerY.equalToSuperview()
             make.width.height.equalTo(iconImageView_Width)
         }
         
-        self.titleLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.iconImageView)
+        self.titleLabel.snp.remakeConstraints { (make) in
+            make.centerY.equalToSuperview()
             make.left.equalTo(self.iconImageView.snp.right).offset(leftOffset)
-            make.right.lessThanOrEqualTo(self.contentView).offset(leftOffset)
+            make.right.lessThanOrEqualTo(-leftOffset)
         }
         
         self.rightImageView.snp.makeConstraints { (make) in

@@ -107,7 +107,8 @@ extension ConversationListController: UITableViewDelegate, UITableViewDataSource
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ConversationCell
-        cell.conversationModel = conversationList[indexPath.row]
+        let conversationModel = conversationList[indexPath.row]
+        cell.conversationModel = conversationModel
         return cell
     }
 }

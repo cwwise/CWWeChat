@@ -14,6 +14,7 @@ class CWMineController: CWBaseTableViewController {
     lazy var tableViewManager: TableViewManager = {
         let tableViewManager = TableViewManager(tableView: self.tableView)
         tableViewManager.dataSource = self
+        tableViewManager.delegate = self
         return tableViewManager
     }()
     
@@ -29,16 +30,19 @@ class CWMineController: CWBaseTableViewController {
         let item1 = MenuItem(iconImageName: "", title: "")
         item1.cellHeight = 87
         
-        let item2 = MenuItem(iconImageName: CWAsset.Mine_album.rawValue, title: "相册")
+        let item2 = MenuItem(iconImageName: CWAsset.Mine_wallet.rawValue, title: "钱包")
+
         let item3 = MenuItem(iconImageName: CWAsset.Mine_favorites.rawValue, title: "收藏")
-        let item4 = MenuItem(iconImageName: CWAsset.Mine_wallet.rawValue, title: "钱包")
-        let item5 = MenuItem(iconImageName: CWAsset.Mine_card.rawValue, title: "优惠券")
+        let item4 = MenuItem(iconImageName: CWAsset.Mine_album.rawValue, title: "相册")
+        let item5 = MenuItem(iconImageName: CWAsset.Mine_card.rawValue, title: "卡包")
         let item6 = MenuItem(iconImageName: CWAsset.Mine_expression.rawValue, title: "表情")
+        
         let item7 = MenuItem(iconImageName: CWAsset.Mine_setting.rawValue, title: "设置")
         
         tableViewManager.append(itemsOf: item1)
-        tableViewManager.append(itemsOf: item2,item3,item4,item5)
-        tableViewManager.append(itemsOf: item6,item7)
+        tableViewManager.append(itemsOf: item2)
+        tableViewManager.append(itemsOf: item3,item4,item5,item6)
+        tableViewManager.append(itemsOf: item7)
         
     }
 
@@ -49,9 +53,9 @@ class CWMineController: CWBaseTableViewController {
     
 }
 
-extension CWMineController: TableViewManagerDataSource {
+extension CWMineController: TableViewManagerDataSource, TableViewManagerDelegate {
  
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell? {
+    func tableViewManager(_ tableViewManager: TableViewManager, cellForRowAt indexPath: IndexPath) -> UITableViewCell? {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CWMineUserCell
             let model = CWUserModel(userId: "chenwei", username: "chenwei")
@@ -76,6 +80,7 @@ extension CWMineController: TableViewManagerDataSource {
             return
         }
         else if indexPath.section == 2 {
+            
             let expressionVC = CWEmoticonListController()
             expressionVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(expressionVC, animated: true)
