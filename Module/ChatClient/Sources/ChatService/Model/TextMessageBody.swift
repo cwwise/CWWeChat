@@ -9,19 +9,32 @@
 import Foundation
 
 public class TextMessageBody: MessageBody {
+    
     /// 消息体类型
-    public override var type: MessageType {
+    public var type: MessageType {
         return .text
     }
     /// 文本内容
     public var text: String
     
-    public init(text: String) {
-        self.text = text
-        super.init()
+    // 内部使用 
+    init() {
+        self.text = ""
     }
     
-    required public init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
+    public init(text: String) {
+        self.text = text
+    }
+    
+    public func messageEncode() -> String {
+        return text
+    }
+    
+    public func messageDecode(string: String) {
+        self.text = string
+    }
+    
+    public var description: String {
+        return text
     }
 }

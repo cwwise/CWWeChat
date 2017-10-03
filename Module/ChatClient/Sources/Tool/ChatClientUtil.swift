@@ -24,15 +24,15 @@ class ChatClientUtil: NSObject {
         return date.timeIntervalSince1970
     }
     
-    static func messageBodyClass(with messageType: MessageType) -> MessageBody.Type {
+    static func messageBody(with messageType: MessageType) -> MessageBody {
         
         switch messageType {
         case .text:
-            return TextMessageBody.self
+            return TextMessageBody()
         case .image:
-            return ImageMessageBody.self
+            return ImageMessageBody()
         default:
-            return MessageBody.self
+            fatalError("错误")
         }
         
         

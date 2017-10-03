@@ -50,6 +50,10 @@ public class Conversation: NSObject {
         
         return nil
     }
+    
+    static public func ==(lhs: Conversation, rhs: Conversation) -> Bool {
+        return lhs.conversationId == rhs.conversationId
+    }
 }
 
 public typealias ConversationResultCompletion = ([Message], ChatClientError?) -> Void

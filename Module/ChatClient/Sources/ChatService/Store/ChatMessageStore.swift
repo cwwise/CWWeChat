@@ -75,26 +75,11 @@ class ChatMessageStore: ChatBaseStore {
 extension ChatMessageStore {
     
     @discardableResult
-    func insert(message: Message) -> Bool {
-        let textBody = message.messageBody as? TextMessageBody
-        print(textBody?.text)
+    func insertMessage(_ message: Message) -> Bool {
+
         do {
       
-            var messageContent: String?
-            if message.messageType == .text {
-              
-                messageContent = textBody?.text
-                print(messageContent ?? "")
-            } else {
-                let data = try messageEncoder.encode(message.messageBody)
-                messageContent = String(data: data, encoding: .utf8)
-            }
-            
-            guard let string = messageContent else {
-                log.error("解析消息错误--\(message)")
-                return false
-            }
-            
+            let string = message.messageBody.messageEncode()
             let table = messageTable(message.conversationId)
             let insert = table.insert(f_messageId <- message.messageId,
                                       f_from <- message.from,
@@ -156,38 +141,26 @@ extension ChatMessageStore {
     }
     
     func createMessage(by row: Row?, conversationId: String) -> Message? {
-        guard let row = row,
-            let data = row[f_content].data(using: .utf8) else {
+        guard let row = row else {
             return nil
         }
+ 
+        let messageType = MessageType(rawValue: row[f_messageType]) ?? .none
+        let messageBody = ChatClientUtil.messageBody(with: messageType)
+        messageBody.messageDecode(string: row[f_content])
         
-        do {
-            let messageType = MessageType(rawValue: row[f_messageType]) ?? .none
-            var messageBody: MessageBody!
-            // 文本
-            if messageType == .text {
-                messageBody = TextMessageBody(text: row[f_content])
-            } else {
-                let bodyClass = ChatClientUtil.messageBodyClass(with: messageType)
-                messageBody = try messageDecoder.decode(bodyClass, from: data)
-            }
-            
-            let message = Message(conversationId: conversationId,
-                                  from: row[f_from],
-                                  body: messageBody)
-            let direction = MessageDirection(rawValue: row[f_direction]) ?? .send
-            let sendStatus = MessageSendStatus(rawValue: row[f_sendStatus]) ?? .sending
-            let chatType = ChatType(rawValue: row[f_chatType]) ?? .single
-
-            message.direction = direction
-            message.chatType = chatType
-            message.sendStatus = sendStatus
-            
-            return message
-        } catch {
-            log.error(error)
-            return nil
-        }
+        let message = Message(conversationId: conversationId,
+                              from: row[f_from],
+                              body: messageBody)
+        let direction = MessageDirection(rawValue: row[f_direction]) ?? .send
+        let sendStatus = MessageSendStatus(rawValue: row[f_sendStatus]) ?? .sending
+        let chatType = ChatType(rawValue: row[f_chatType]) ?? .single
+        
+        message.direction = direction
+        message.chatType = chatType
+        message.sendStatus = sendStatus
+        
+        return message
     }
     
 }
@@ -219,14 +192,9 @@ extension ChatMessageStore {
 
     // 更新消息状态和消息内容
     func updateMessage(_ message: Message) {
-       
+        
         do {
-            let data = try messageEncoder.encode(message.messageBody)
-            guard let string = String(data: data, encoding: .utf8) else {
-                log.error("解析消息错误--\(message)")
-                return
-            }
-            
+            let string = message.messageBody.messageEncode()
             let filter = messageTable(message.conversationId).filter(f_messageId == message.messageId)
             let update = filter.update(f_sendStatus <- message.sendStatus.rawValue,
                                        f_content <- string)

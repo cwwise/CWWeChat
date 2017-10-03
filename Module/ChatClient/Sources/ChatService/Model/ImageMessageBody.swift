@@ -9,8 +9,17 @@
 import UIKit
 
 public class ImageMessageBody: MessageBody {
+   
+    public func messageEncode() -> String {
+        return ""
+    }
+    
+    public func messageDecode(string: String) {
+        
+    }
+    
     /// 消息体类型
-    public override var type: MessageType {
+    public var type: MessageType {
         return .image
     }    
     /// 图片尺寸
@@ -33,11 +42,10 @@ public class ImageMessageBody: MessageBody {
         self.originalLocalPath = path
         self.originalURL = originalURL
         self.size = size
-        super.init()
     }
     
-    required public init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
+    public var description: String {
+        return "图片"
     }
     
 }

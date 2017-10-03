@@ -22,8 +22,7 @@ class ChatMessageHandle: MessageHandle {
         guard let body = message.body(),
             let from = message.from().user,
             let _ = message.to().user,
-            let messageId = message.elementID(),
-            let data = body.data(using: .utf8) else {
+            let messageId = message.elementID() else {
                 return false
         }
         
@@ -36,33 +35,20 @@ class ChatMessageHandle: MessageHandle {
         if message.wasDelayed() {
             messageDate = message.delayedDeliveryDate().timeIntervalSince1970
         }
-                
         
-        do {
-            let conversationId = from
-            var messageBody: MessageBody!
-            // 文本
-            if messageType == .text {
-                messageBody = TextMessageBody(text: body)
-            } else {
-                let bodyClass = ChatClientUtil.messageBodyClass(with: messageType)
-                messageBody = try messageDecoder.decode(bodyClass, from: data)
-            }
-            
-            let chatMessage = Message(conversationId: conversationId,
-                                      from: from,
-                                      body: messageBody)
-            chatMessage.messageId = messageId
-            chatMessage.direction = .receive
-            chatMessage.timestamp = messageDate
-            
-            self.delegate?.handMessageComplete(message: chatMessage,
-                                               conversationId: conversationId)
-            
-        } catch {
-            log.error(error)
-            return false
-        }
+        let conversationId = from
+        let messageBody = ChatClientUtil.messageBody(with: messageType)
+        messageBody.messageDecode(string: body)
+        
+        let chatMessage = Message(conversationId: conversationId,
+                                  from: from,
+                                  body: messageBody)
+        chatMessage.messageId = messageId
+        chatMessage.direction = .receive
+        chatMessage.timestamp = messageDate
+        
+        self.delegate?.handMessageComplete(message: chatMessage,
+                                           conversationId: conversationId)
         return true
     }
     

@@ -85,4 +85,8 @@ public class Message: NSObject {
         self.from = from
         super.init()
     }
+    
+    public override var description: String {
+        return "messageType: \(messageType), body: \(messageBody)"
+    }
 }

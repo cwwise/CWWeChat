@@ -48,16 +48,14 @@ class ChatService: XMPPModule {
 
         executeDidReceiveMessages(message)
         // 保存消息
-        let textBody = message.messageBody as! TextMessageBody
-        print(textBody.text)
-        messageStore.insert(message: message)
+        messageStore.insertMessage(message)
     }
     
     public func saveMessage(_ message: Message)  {
         
        // updateConversation(with: message)
         // 保存消息
-        messageStore.insert(message: message)
+        //messageStore.insert(message: message)
     }
     
     func updateConversation(with message: Message, conversationId: String) {
