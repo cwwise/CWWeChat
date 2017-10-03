@@ -41,7 +41,11 @@ target 'CWWeChat' do
   pod 'Hue'
   pod 'SwiftyJSON'
   pod 'KVOController'
-    
+  
+  # 本地pod
+  pod 'ChatClient', :path => './Module/ChatClient/ChatClient.podspec'
+  pod 'ChatKit', :path => './Module/ChatKit/ChatKit.podspec'
+
   target 'CWWeChatTests' do
     inherit! :search_paths
     # Pods for testing
@@ -52,38 +56,16 @@ target 'CWWeChat' do
 end
 
 
-target 'CWChatClient' do
-    use_frameworks!
-    inhibit_all_warnings!
-    
-    pod 'XMPPFramework'
-    pod 'SQLite.swift'
-    pod 'SwiftyJSON'
-    pod 'Alamofire'
-    pod 'SwiftyBeaver'
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        if target.name == 'Quick' || target.name == 'Nimble'
+            print "Changing Quick swift version to 3.2\n"
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '3.2'
+            end
+        end
+    end
 end
-
-
-target 'CWChatKit' do
-    use_frameworks!
-    inhibit_all_warnings!
-    
-    pod 'Hue'
-    pod 'SwiftyJSON'
-    pod 'Alamofire'
-    pod 'SwiftyBeaver'
-    pod 'SwiftyImage'
-    pod 'Kingfisher'
-    pod 'SnapKit'
-
-end
-
-
-target 'CWChatInput' do
-    use_frameworks!
-    inhibit_all_warnings!
-    
-end
-
 
 

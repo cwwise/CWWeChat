@@ -1,5 +1,19 @@
 PODS:
   - Alamofire (4.5.1)
+  - ChatClient (0.0.1):
+    - Alamofire
+    - SQLite.swift
+    - SwiftyBeaver
+    - SwiftyJSON
+    - XMPPFramework
+  - ChatKit (0.0.1):
+    - Alamofire
+    - Hue
+    - Kingfisher
+    - SnapKit
+    - SQLite.swift
+    - SwiftyBeaver
+    - SwiftyJSON
   - CocoaAsyncSocket (7.6.1)
   - CocoaLumberjack (3.2.1):
     - CocoaLumberjack/Default (= 3.2.1)
@@ -46,6 +60,8 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - ChatClient (from `./Module/ChatClient/ChatClient.podspec`)
+  - ChatKit (from `./Module/ChatKit/ChatKit.podspec`)
   - CWActionSheet
   - CWShareView
   - FSPagerView
@@ -65,8 +81,16 @@ DEPENDENCIES:
   - XMPPFramework
   - YYText
 
+EXTERNAL SOURCES:
+  ChatClient:
+    :path: ./Module/ChatClient/ChatClient.podspec
+  ChatKit:
+    :path: ./Module/ChatKit/ChatKit.podspec
+
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  ChatClient: 8bd9f934a792776c998a072ce12185c14115ef0c
+  ChatKit: 45b9e938891e17a3daef3f8429f5cdb06b7431c9
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
   CocoaLumberjack: 2800c03334042fe80589423c8d80e582dcaec482
   CWActionSheet: 7ab61a8628bfe3c4b9932983e154181ea4c9cd2f
@@ -89,6 +113,6 @@ SPEC CHECKSUMS:
   XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: e856d64059e91640da2cc6ed279681635bbb43bb
+PODFILE CHECKSUM: 78b87502ecbe8aa84db2c6d0a338a4186d495619
 
 COCOAPODS: 1.3.1

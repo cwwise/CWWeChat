@@ -80,39 +80,6 @@
 		1F592A5F1EA8B805007558E9 /* CWFileMessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F592A5E1EA8B805007558E9 /* CWFileMessageBody.swift */; };
 		1F592A631EA8BD05007558E9 /* CWEmoticonMessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F592A621EA8BD05007558E9 /* CWEmoticonMessageBody.swift */; };
 		1F592A651EA8BD28007558E9 /* CWLocationMessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F592A641EA8BD28007558E9 /* CWLocationMessageBody.swift */; };
-		1F6146801F825383000D8E0C /* ChatMessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61467F1F825383000D8E0C /* ChatMessageStore.swift */; };
-		1F6146821F826E50000D8E0C /* ChatConversationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146811F826E50000D8E0C /* ChatConversationStore.swift */; };
-		1F6146841F827336000D8E0C /* XMPPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146831F827336000D8E0C /* XMPPManager.swift */; };
-		1F6146861F8273E0000D8E0C /* ChatClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146851F8273E0000D8E0C /* ChatClientError.swift */; };
-		1F6146891F8276F1000D8E0C /* MessageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146881F8276F1000D8E0C /* MessageOperation.swift */; };
-		1F61468B1F827819000D8E0C /* TextMessageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61468A1F827819000D8E0C /* TextMessageOperation.swift */; };
-		1F61468D1F8279E2000D8E0C /* MessageDispatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61468C1F8279E2000D8E0C /* MessageDispatchManager.swift */; };
-		1F6146921F827B07000D8E0C /* MessageHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146911F827B07000D8E0C /* MessageHandle.swift */; };
-		1F6146941F827C9D000D8E0C /* ChatMessageHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146931F827C9D000D8E0C /* ChatMessageHandle.swift */; };
-		1F6146961F828538000D8E0C /* MessageParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146951F828538000D8E0C /* MessageParse.swift */; };
-		1F6146981F828B4C000D8E0C /* MessageTransmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6146971F828B4C000D8E0C /* MessageTransmitter.swift */; };
-		1F6AD4081F823DB60044C27D /* CWChatClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6AD4061F823DB60044C27D /* CWChatClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F6AD40B1F823DB60044C27D /* CWChatClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6AD4041F823DB60044C27D /* CWChatClient.framework */; };
-		1F6AD40C1F823DB60044C27D /* CWChatClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6AD4041F823DB60044C27D /* CWChatClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1F6AD4111F823DC80044C27D /* ChatClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD4101F823DC80044C27D /* ChatClient.swift */; };
-		1F6AD41B1F823E580044C27D /* CWChatKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6AD4191F823E580044C27D /* CWChatKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F6AD41E1F823E580044C27D /* CWChatKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6AD4171F823E580044C27D /* CWChatKit.framework */; };
-		1F6AD41F1F823E580044C27D /* CWChatKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6AD4171F823E580044C27D /* CWChatKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1F6AD4241F823E8C0044C27D /* CWChatKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD4231F823E8C0044C27D /* CWChatKit.swift */; };
-		1F6AD4261F8240140044C27D /* ChatClientOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD4251F8240140044C27D /* ChatClientOptions.swift */; };
-		1F6AD4281F8240320044C27D /* ChatManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD4271F8240320044C27D /* ChatManagerProtocol.swift */; };
-		1F6AD4301F8240BC0044C27D /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD42F1F8240BC0044C27D /* ChatService.swift */; };
-		1F6AD4321F8240D20044C27D /* ChatDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD4311F8240D20044C27D /* ChatDataService.swift */; };
-		1F6AD4341F8240F10044C27D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD4331F8240F10044C27D /* Message.swift */; };
-		1F6AD4361F82410B0044C27D /* MessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD4351F82410B0044C27D /* MessageBody.swift */; };
-		1F6AD4381F8241540044C27D /* TextMessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD4371F8241540044C27D /* TextMessageBody.swift */; };
-		1F6AD43A1F82416A0044C27D /* ImageMessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD4391F82416A0044C27D /* ImageMessageBody.swift */; };
-		1F6AD43D1F8241A30044C27D /* ChatBaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD43C1F8241A30044C27D /* ChatBaseStore.swift */; };
-		1F6AD43F1F8242A90044C27D /* LoginManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD43E1F8242A90044C27D /* LoginManagerProtocol.swift */; };
-		1F6AD4431F8248EC0044C27D /* GroupManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD4421F8248EC0044C27D /* GroupManagerProtocol.swift */; };
-		1F6AD4451F8249640044C27D /* ContactManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD4441F8249640044C27D /* ContactManagerProtocol.swift */; };
-		1F6AD4471F8249D90044C27D /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD4461F8249D90044C27D /* Conversation.swift */; };
-		1F6AD4491F824CCB0044C27D /* ChatClientUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AD4481F824CCB0044C27D /* ChatClientUtil.swift */; };
 		1F6B9F141E8CAF4B00AD7FC7 /* CWMessageDispatchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F131E8CAF4B00AD7FC7 /* CWMessageDispatchOperation.swift */; };
 		1F6B9F161E8CB1C400AD7FC7 /* CWTextMessageDispatchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F151E8CB1C400AD7FC7 /* CWTextMessageDispatchOperation.swift */; };
 		1F6B9F181E8CC6E200AD7FC7 /* CWMessageHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B9F171E8CC6E200AD7FC7 /* CWMessageHandle.swift */; };
@@ -165,10 +132,7 @@
 		1FFC39801F73BD3B0016EDBA /* MapShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC397F1F73BD3B0016EDBA /* MapShowController.swift */; };
 		1FFC39821F73BD400016EDBA /* Map.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FFC39811F73BD400016EDBA /* Map.xcassets */; };
 		1FFC39831F73BDC20016EDBA /* MapLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48B6021F7226F3007EF312 /* MapLocationController.swift */; };
-		2E2A34B066A851E9EA2E92ED /* Pods_CWChatClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63278CA4407B71E70F6B67CA /* Pods_CWChatClient.framework */; };
-		3EC20D60333E8BE061113FCB /* Pods_CWWeChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 469130368B305A3D246AFF90 /* Pods_CWWeChatTests.framework */; };
-		41ED936E6607A455BCA6D359 /* Pods_CWChatInput.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1021BFD341E3997839C9061 /* Pods_CWChatInput.framework */; };
-		732B7F111A2AF06C5FB003A1 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5C5938ABFC0D0537A59353 /* Pods_CWWeChat.framework */; };
+		46B40669CBA35070557EB831 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B376C117EA7EEC77FD2C31A1 /* Pods_CWWeChat.framework */; };
 		8C0BFDD21E90EF70007343F1 /* CWBaseConversationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFDCC1E90EF70007343F1 /* CWBaseConversationController.swift */; };
 		8C0BFDD31E90EF70007343F1 /* CWConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFDCE1E90EF70007343F1 /* CWConversationModel.swift */; };
 		8C0BFDD41E90EF70007343F1 /* CWBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFDD01E90EF70007343F1 /* CWBadgeView.swift */; };
@@ -217,13 +181,6 @@
 		8C6AF8DB1F7026E0000FCE88 /* CWBaseMessageController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6AF8D91F7026DF000FCE88 /* CWBaseMessageController+Keyboard.swift */; };
 		8C6AF8DC1F7026E0000FCE88 /* CWBaseMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6AF8DA1F7026E0000FCE88 /* CWBaseMessageController.swift */; };
 		8C74B3EB1F6D76B400BDC819 /* CWAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C74B3EA1F6D76B400BDC819 /* CWAccount.swift */; };
-		8C78FDE41F828F5C0077D5BD /* CWChatInput.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C78FDE21F828F5C0077D5BD /* CWChatInput.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8C78FDE71F828F5C0077D5BD /* CWChatInput.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C78FDE01F828F5C0077D5BD /* CWChatInput.framework */; };
-		8C78FDE81F828F5C0077D5BD /* CWChatInput.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C78FDE01F828F5C0077D5BD /* CWChatInput.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8C78FDFA1F8296770077D5BD /* CWBaseConversationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C78FDF91F82936D0077D5BD /* CWBaseConversationController.swift */; };
-		8C78FDFB1F82967B0077D5BD /* CWConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C78FDF71F82936D0077D5BD /* CWConversationModel.swift */; };
-		8C78FDFC1F8296810077D5BD /* CWBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C78FDF41F82936D0077D5BD /* CWBadgeView.swift */; };
-		8C78FDFD1F8296860077D5BD /* CWConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C78FDF51F82936D0077D5BD /* CWConversationCell.swift */; };
 		8C84B9511E8D60360020D508 /* CWChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B9501E8D60360020D508 /* CWChatManager.swift */; };
 		8C84B9541E8D630B0020D508 /* CWChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B9531E8D630B0020D508 /* CWChatService.swift */; };
 		8C84B9561E8D6C840020D508 /* CWImageMessageDispatchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C84B9551E8D6C840020D508 /* CWImageMessageDispatchOperation.swift */; };
@@ -274,7 +231,7 @@
 		8CFF56051F28B62F000FC575 /* moments.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CFF56031F28B62F000FC575 /* moments.json */; };
 		8CFF56071F28B707000FC575 /* CWMomentFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF56061F28B707000FC575 /* CWMomentFlowLayout.swift */; };
 		8CFF56091F28B792000FC575 /* CWMomentAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF56081F28B792000FC575 /* CWMomentAttributes.swift */; };
-		D809BA1B486D8449F30E29C4 /* Pods_CWChatKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7813C741C43D13DAD7CACD27 /* Pods_CWChatKit.framework */; };
+		98390B15764C93DE87DA1B4F /* Pods_CWWeChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E6689CD6D79339AFFBDA48D /* Pods_CWWeChatTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,27 +242,6 @@
 			remoteGlobalIDString = 1F3491791E8786EE00B36641;
 			remoteInfo = CWWeChat;
 		};
-		1F6AD4091F823DB60044C27D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1F3491721E8786EE00B36641 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1F6AD4031F823DB60044C27D;
-			remoteInfo = CWChatClient;
-		};
-		1F6AD41C1F823E580044C27D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1F3491721E8786EE00B36641 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1F6AD4161F823E580044C27D;
-			remoteInfo = CWChatKit;
-		};
-		8C78FDE51F828F5C0077D5BD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1F3491721E8786EE00B36641 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8C78FDDF1F828F5C0077D5BD;
-			remoteInfo = CWChatInput;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -315,9 +251,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1F6AD40C1F823DB60044C27D /* CWChatClient.framework in Embed Frameworks */,
-				1F6AD41F1F823E580044C27D /* CWChatKit.framework in Embed Frameworks */,
-				8C78FDE81F828F5C0077D5BD /* CWChatInput.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,7 +268,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0424A3D46B97DE5A5F191505 /* Pods-CWChatInput.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWChatInput.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWChatInput/Pods-CWChatInput.debug.xcconfig"; sourceTree = "<group>"; };
 		10D400760F3B03FF64C20CD7 /* Pods-CWWeChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1F01651C1E9898BE001696F2 /* CWNewFrinedsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWNewFrinedsController.swift; sourceTree = "<group>"; };
 		1F01651E1E989A43001696F2 /* CWNewFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWNewFriendCell.swift; sourceTree = "<group>"; };
@@ -415,40 +347,6 @@
 		1F592A5E1EA8B805007558E9 /* CWFileMessageBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWFileMessageBody.swift; sourceTree = "<group>"; };
 		1F592A621EA8BD05007558E9 /* CWEmoticonMessageBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWEmoticonMessageBody.swift; sourceTree = "<group>"; };
 		1F592A641EA8BD28007558E9 /* CWLocationMessageBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWLocationMessageBody.swift; sourceTree = "<group>"; };
-		1F5D226B79B73DF3D7862409 /* Pods-CWChatKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWChatKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWChatKit/Pods-CWChatKit.debug.xcconfig"; sourceTree = "<group>"; };
-		1F61467F1F825383000D8E0C /* ChatMessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageStore.swift; sourceTree = "<group>"; };
-		1F6146811F826E50000D8E0C /* ChatConversationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConversationStore.swift; sourceTree = "<group>"; };
-		1F6146831F827336000D8E0C /* XMPPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMPPManager.swift; sourceTree = "<group>"; };
-		1F6146851F8273E0000D8E0C /* ChatClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatClientError.swift; sourceTree = "<group>"; };
-		1F6146881F8276F1000D8E0C /* MessageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageOperation.swift; sourceTree = "<group>"; };
-		1F61468A1F827819000D8E0C /* TextMessageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageOperation.swift; sourceTree = "<group>"; };
-		1F61468C1F8279E2000D8E0C /* MessageDispatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDispatchManager.swift; sourceTree = "<group>"; };
-		1F6146911F827B07000D8E0C /* MessageHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHandle.swift; sourceTree = "<group>"; };
-		1F6146931F827C9D000D8E0C /* ChatMessageHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageHandle.swift; sourceTree = "<group>"; };
-		1F6146951F828538000D8E0C /* MessageParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageParse.swift; sourceTree = "<group>"; };
-		1F6146971F828B4C000D8E0C /* MessageTransmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTransmitter.swift; sourceTree = "<group>"; };
-		1F6AD4041F823DB60044C27D /* CWChatClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CWChatClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F6AD4061F823DB60044C27D /* CWChatClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWChatClient.h; sourceTree = "<group>"; };
-		1F6AD4071F823DB60044C27D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F6AD4101F823DC80044C27D /* ChatClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatClient.swift; sourceTree = "<group>"; };
-		1F6AD4171F823E580044C27D /* CWChatKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CWChatKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F6AD4191F823E580044C27D /* CWChatKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWChatKit.h; sourceTree = "<group>"; };
-		1F6AD41A1F823E580044C27D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F6AD4231F823E8C0044C27D /* CWChatKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWChatKit.swift; sourceTree = "<group>"; };
-		1F6AD4251F8240140044C27D /* ChatClientOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatClientOptions.swift; sourceTree = "<group>"; };
-		1F6AD4271F8240320044C27D /* ChatManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManagerProtocol.swift; sourceTree = "<group>"; };
-		1F6AD42F1F8240BC0044C27D /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
-		1F6AD4311F8240D20044C27D /* ChatDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDataService.swift; sourceTree = "<group>"; };
-		1F6AD4331F8240F10044C27D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		1F6AD4351F82410B0044C27D /* MessageBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBody.swift; sourceTree = "<group>"; };
-		1F6AD4371F8241540044C27D /* TextMessageBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageBody.swift; sourceTree = "<group>"; };
-		1F6AD4391F82416A0044C27D /* ImageMessageBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMessageBody.swift; sourceTree = "<group>"; };
-		1F6AD43C1F8241A30044C27D /* ChatBaseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBaseStore.swift; sourceTree = "<group>"; };
-		1F6AD43E1F8242A90044C27D /* LoginManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManagerProtocol.swift; sourceTree = "<group>"; };
-		1F6AD4421F8248EC0044C27D /* GroupManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagerProtocol.swift; sourceTree = "<group>"; };
-		1F6AD4441F8249640044C27D /* ContactManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManagerProtocol.swift; sourceTree = "<group>"; };
-		1F6AD4461F8249D90044C27D /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
-		1F6AD4481F824CCB0044C27D /* ChatClientUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatClientUtil.swift; sourceTree = "<group>"; };
 		1F6B9F131E8CAF4B00AD7FC7 /* CWMessageDispatchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageDispatchOperation.swift; sourceTree = "<group>"; };
 		1F6B9F151E8CB1C400AD7FC7 /* CWTextMessageDispatchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTextMessageDispatchOperation.swift; sourceTree = "<group>"; };
 		1F6B9F171E8CC6E200AD7FC7 /* CWMessageHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageHandle.swift; sourceTree = "<group>"; };
@@ -500,14 +398,7 @@
 		1FA7244F1E9CAA44009B6456 /* CWTableFooterTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableFooterTitleView.swift; sourceTree = "<group>"; };
 		1FFC397F1F73BD3B0016EDBA /* MapShowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapShowController.swift; sourceTree = "<group>"; };
 		1FFC39811F73BD400016EDBA /* Map.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Map.xcassets; sourceTree = "<group>"; };
-		2D5C5938ABFC0D0537A59353 /* Pods_CWWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		31E51D349FC87AA2896572C6 /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
-		3893C8851CD32B01783EC9DA /* Pods-CWChatInput.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWChatInput.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWChatInput/Pods-CWChatInput.release.xcconfig"; sourceTree = "<group>"; };
-		3B7017F712E8F379DA03DCA3 /* Pods-CWChatKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWChatKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWChatKit/Pods-CWChatKit.release.xcconfig"; sourceTree = "<group>"; };
-		469130368B305A3D246AFF90 /* Pods_CWWeChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E432249E86A6597BF843358 /* Pods-CWChatClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWChatClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWChatClient/Pods-CWChatClient.release.xcconfig"; sourceTree = "<group>"; };
-		63278CA4407B71E70F6B67CA /* Pods_CWChatClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWChatClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7813C741C43D13DAD7CACD27 /* Pods_CWChatKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWChatKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C0BFDCC1E90EF70007343F1 /* CWBaseConversationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWBaseConversationController.swift; sourceTree = "<group>"; };
 		8C0BFDCE1E90EF70007343F1 /* CWConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWConversationModel.swift; sourceTree = "<group>"; };
 		8C0BFDD01E90EF70007343F1 /* CWBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWBadgeView.swift; sourceTree = "<group>"; };
@@ -556,18 +447,6 @@
 		8C6AF8D91F7026DF000FCE88 /* CWBaseMessageController+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CWBaseMessageController+Keyboard.swift"; sourceTree = "<group>"; };
 		8C6AF8DA1F7026E0000FCE88 /* CWBaseMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWBaseMessageController.swift; sourceTree = "<group>"; };
 		8C74B3EA1F6D76B400BDC819 /* CWAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWAccount.swift; sourceTree = "<group>"; };
-		8C78FDE01F828F5C0077D5BD /* CWChatInput.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CWChatInput.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C78FDE21F828F5C0077D5BD /* CWChatInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWChatInput.h; sourceTree = "<group>"; };
-		8C78FDE31F828F5C0077D5BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C78FDED1F828F820077D5BD /* MoreInputViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInputViewLayout.swift; sourceTree = "<group>"; };
-		8C78FDEF1F828F820077D5BD /* MoreInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInputView.swift; sourceTree = "<group>"; };
-		8C78FDF01F828F820077D5BD /* MoreItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreItem.swift; sourceTree = "<group>"; };
-		8C78FDF11F828F820077D5BD /* MoreItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreItemCell.swift; sourceTree = "<group>"; };
-		8C78FDF21F828F820077D5BD /* MoreInputDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInputDataHelper.swift; sourceTree = "<group>"; };
-		8C78FDF41F82936D0077D5BD /* CWBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWBadgeView.swift; sourceTree = "<group>"; };
-		8C78FDF51F82936D0077D5BD /* CWConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWConversationCell.swift; sourceTree = "<group>"; };
-		8C78FDF71F82936D0077D5BD /* CWConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWConversationModel.swift; sourceTree = "<group>"; };
-		8C78FDF91F82936D0077D5BD /* CWBaseConversationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWBaseConversationController.swift; sourceTree = "<group>"; };
 		8C84B9501E8D60360020D508 /* CWChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatManager.swift; sourceTree = "<group>"; };
 		8C84B9531E8D630B0020D508 /* CWChatService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatService.swift; sourceTree = "<group>"; };
 		8C84B9551E8D6C840020D508 /* CWImageMessageDispatchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWImageMessageDispatchOperation.swift; sourceTree = "<group>"; };
@@ -619,10 +498,10 @@
 		8CFF56031F28B62F000FC575 /* moments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = moments.json; sourceTree = "<group>"; };
 		8CFF56061F28B707000FC575 /* CWMomentFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentFlowLayout.swift; sourceTree = "<group>"; };
 		8CFF56081F28B792000FC575 /* CWMomentAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentAttributes.swift; sourceTree = "<group>"; };
+		8E6689CD6D79339AFFBDA48D /* Pods_CWWeChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B376C117EA7EEC77FD2C31A1 /* Pods_CWWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC9054EAE42E392A75546C97 /* Pods-CWWeChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.debug.xcconfig"; sourceTree = "<group>"; };
-		D1021BFD341E3997839C9061 /* Pods_CWChatInput.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWChatInput.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4A293988EBEF7146C1E79EF /* Pods-CWWeChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests.release.xcconfig"; sourceTree = "<group>"; };
-		F5FEE38576842CDE99402133 /* Pods-CWChatClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWChatClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWChatClient/Pods-CWChatClient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -630,11 +509,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C78FDE71F828F5C0077D5BD /* CWChatInput.framework in Frameworks */,
 				8CAB7D911F728999003F1E70 /* MapKit.framework in Frameworks */,
-				1F6AD41E1F823E580044C27D /* CWChatKit.framework in Frameworks */,
-				732B7F111A2AF06C5FB003A1 /* Pods_CWWeChat.framework in Frameworks */,
-				1F6AD40B1F823DB60044C27D /* CWChatClient.framework in Frameworks */,
+				46B40669CBA35070557EB831 /* Pods_CWWeChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,31 +518,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EC20D60333E8BE061113FCB /* Pods_CWWeChatTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1F6AD4001F823DB60044C27D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2E2A34B066A851E9EA2E92ED /* Pods_CWChatClient.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1F6AD4131F823E580044C27D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D809BA1B486D8449F30E29C4 /* Pods_CWChatKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8C78FDDC1F828F5C0077D5BD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				41ED936E6607A455BCA6D359 /* Pods_CWChatInput.framework in Frameworks */,
+				98390B15764C93DE87DA1B4F /* Pods_CWWeChatTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,12 +532,6 @@
 				31E51D349FC87AA2896572C6 /* Pods-CWWeChat.release.xcconfig */,
 				10D400760F3B03FF64C20CD7 /* Pods-CWWeChatTests.debug.xcconfig */,
 				E4A293988EBEF7146C1E79EF /* Pods-CWWeChatTests.release.xcconfig */,
-				F5FEE38576842CDE99402133 /* Pods-CWChatClient.debug.xcconfig */,
-				4E432249E86A6597BF843358 /* Pods-CWChatClient.release.xcconfig */,
-				0424A3D46B97DE5A5F191505 /* Pods-CWChatInput.debug.xcconfig */,
-				3893C8851CD32B01783EC9DA /* Pods-CWChatInput.release.xcconfig */,
-				1F5D226B79B73DF3D7862409 /* Pods-CWChatKit.debug.xcconfig */,
-				3B7017F712E8F379DA03DCA3 /* Pods-CWChatKit.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -712,9 +558,6 @@
 			children = (
 				1F34917C1E8786EE00B36641 /* CWWeChat */,
 				1F3491911E8786EE00B36641 /* CWWeChatTests */,
-				1F6AD4051F823DB60044C27D /* CWChatClient */,
-				1F6AD4181F823E580044C27D /* CWChatKit */,
-				8C78FDE11F828F5C0077D5BD /* CWChatInput */,
 				1F34917B1E8786EE00B36641 /* Products */,
 				10A807B59A8B6BCD0AB19B37 /* Pods */,
 				FD435830FB8A0BDDBF411282 /* Frameworks */,
@@ -726,9 +569,6 @@
 			children = (
 				1F34917A1E8786EE00B36641 /* CWWeChat.app */,
 				1F34918E1E8786EE00B36641 /* CWWeChatTests.xctest */,
-				1F6AD4041F823DB60044C27D /* CWChatClient.framework */,
-				1F6AD4171F823E580044C27D /* CWChatKit.framework */,
-				8C78FDE01F828F5C0077D5BD /* CWChatInput.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1266,126 +1106,6 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
-		1F6146871F8276DC000D8E0C /* DispatchQueue */ = {
-			isa = PBXGroup;
-			children = (
-				1F6146971F828B4C000D8E0C /* MessageTransmitter.swift */,
-				1F6146881F8276F1000D8E0C /* MessageOperation.swift */,
-				1F61468A1F827819000D8E0C /* TextMessageOperation.swift */,
-				1F61468C1F8279E2000D8E0C /* MessageDispatchManager.swift */,
-			);
-			path = DispatchQueue;
-			sourceTree = "<group>";
-		};
-		1F61468E1F827AB1000D8E0C /* MessageHandle */ = {
-			isa = PBXGroup;
-			children = (
-				1F6146951F828538000D8E0C /* MessageParse.swift */,
-				1F6146911F827B07000D8E0C /* MessageHandle.swift */,
-				1F6146931F827C9D000D8E0C /* ChatMessageHandle.swift */,
-			);
-			path = MessageHandle;
-			sourceTree = "<group>";
-		};
-		1F6AD4051F823DB60044C27D /* CWChatClient */ = {
-			isa = PBXGroup;
-			children = (
-				1F6AD4061F823DB60044C27D /* CWChatClient.h */,
-				1F6AD4101F823DC80044C27D /* ChatClient.swift */,
-				1F6AD4251F8240140044C27D /* ChatClientOptions.swift */,
-				1F6AD43E1F8242A90044C27D /* LoginManagerProtocol.swift */,
-				1F6AD4271F8240320044C27D /* ChatManagerProtocol.swift */,
-				1F6AD4421F8248EC0044C27D /* GroupManagerProtocol.swift */,
-				1F6AD4441F8249640044C27D /* ContactManagerProtocol.swift */,
-				1F6AD4291F8240770044C27D /* ChatService */,
-				1F6AD42B1F8240840044C27D /* ContactService */,
-				1F6AD42A1F82407B0044C27D /* GroupService */,
-				1F6AD42C1F8240950044C27D /* XMPP */,
-				1F6AD43B1F8241940044C27D /* Tool */,
-				1F6AD4071F823DB60044C27D /* Info.plist */,
-			);
-			path = CWChatClient;
-			sourceTree = "<group>";
-		};
-		1F6AD4181F823E580044C27D /* CWChatKit */ = {
-			isa = PBXGroup;
-			children = (
-				1F6AD4191F823E580044C27D /* CWChatKit.h */,
-				1F6AD4231F823E8C0044C27D /* CWChatKit.swift */,
-				8C78FDDA1F828E620077D5BD /* Conversation */,
-				8C78FDD81F828E610077D5BD /* Message */,
-				8C78FDD91F828E620077D5BD /* Tool */,
-				1F6AD41A1F823E580044C27D /* Info.plist */,
-			);
-			path = CWChatKit;
-			sourceTree = "<group>";
-		};
-		1F6AD4291F8240770044C27D /* ChatService */ = {
-			isa = PBXGroup;
-			children = (
-				1F6AD42F1F8240BC0044C27D /* ChatService.swift */,
-				1F6AD4311F8240D20044C27D /* ChatDataService.swift */,
-				1F61468E1F827AB1000D8E0C /* MessageHandle */,
-				1F6146871F8276DC000D8E0C /* DispatchQueue */,
-				1F6AD42E1F8240AA0044C27D /* Store */,
-				1F6AD42D1F8240A30044C27D /* Model */,
-			);
-			path = ChatService;
-			sourceTree = "<group>";
-		};
-		1F6AD42A1F82407B0044C27D /* GroupService */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = GroupService;
-			sourceTree = "<group>";
-		};
-		1F6AD42B1F8240840044C27D /* ContactService */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ContactService;
-			sourceTree = "<group>";
-		};
-		1F6AD42C1F8240950044C27D /* XMPP */ = {
-			isa = PBXGroup;
-			children = (
-				1F6146831F827336000D8E0C /* XMPPManager.swift */,
-			);
-			path = XMPP;
-			sourceTree = "<group>";
-		};
-		1F6AD42D1F8240A30044C27D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				1F6AD4461F8249D90044C27D /* Conversation.swift */,
-				1F6AD4331F8240F10044C27D /* Message.swift */,
-				1F6AD4351F82410B0044C27D /* MessageBody.swift */,
-				1F6AD4371F8241540044C27D /* TextMessageBody.swift */,
-				1F6AD4391F82416A0044C27D /* ImageMessageBody.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		1F6AD42E1F8240AA0044C27D /* Store */ = {
-			isa = PBXGroup;
-			children = (
-				1F61467F1F825383000D8E0C /* ChatMessageStore.swift */,
-				1F6146811F826E50000D8E0C /* ChatConversationStore.swift */,
-			);
-			path = Store;
-			sourceTree = "<group>";
-		};
-		1F6AD43B1F8241940044C27D /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-				1F6AD43C1F8241A30044C27D /* ChatBaseStore.swift */,
-				1F6AD4481F824CCB0044C27D /* ChatClientUtil.swift */,
-				1F6146851F8273E0000D8E0C /* ChatClientError.swift */,
-			);
-			path = Tool;
-			sourceTree = "<group>";
-		};
 		1F803BAD1F4D21F900DFDC4A /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -1745,77 +1465,6 @@
 			path = CWAccount;
 			sourceTree = "<group>";
 		};
-		8C78FDD81F828E610077D5BD /* Message */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Message;
-			sourceTree = "<group>";
-		};
-		8C78FDD91F828E620077D5BD /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tool;
-			sourceTree = "<group>";
-		};
-		8C78FDDA1F828E620077D5BD /* Conversation */ = {
-			isa = PBXGroup;
-			children = (
-				8C78FDF81F82936D0077D5BD /* Controller */,
-				8C78FDF61F82936D0077D5BD /* Model */,
-				8C78FDF31F82936D0077D5BD /* View */,
-			);
-			path = Conversation;
-			sourceTree = "<group>";
-		};
-		8C78FDE11F828F5C0077D5BD /* CWChatInput */ = {
-			isa = PBXGroup;
-			children = (
-				8C78FDEC1F828F820077D5BD /* More */,
-				8C78FDE21F828F5C0077D5BD /* CWChatInput.h */,
-				8C78FDE31F828F5C0077D5BD /* Info.plist */,
-			);
-			path = CWChatInput;
-			sourceTree = "<group>";
-		};
-		8C78FDEC1F828F820077D5BD /* More */ = {
-			isa = PBXGroup;
-			children = (
-				8C78FDED1F828F820077D5BD /* MoreInputViewLayout.swift */,
-				8C78FDEF1F828F820077D5BD /* MoreInputView.swift */,
-				8C78FDF01F828F820077D5BD /* MoreItem.swift */,
-				8C78FDF11F828F820077D5BD /* MoreItemCell.swift */,
-				8C78FDF21F828F820077D5BD /* MoreInputDataHelper.swift */,
-			);
-			path = More;
-			sourceTree = "<group>";
-		};
-		8C78FDF31F82936D0077D5BD /* View */ = {
-			isa = PBXGroup;
-			children = (
-				8C78FDF41F82936D0077D5BD /* CWBadgeView.swift */,
-				8C78FDF51F82936D0077D5BD /* CWConversationCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		8C78FDF61F82936D0077D5BD /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8C78FDF71F82936D0077D5BD /* CWConversationModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		8C78FDF81F82936D0077D5BD /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				8C78FDF91F82936D0077D5BD /* CWBaseConversationController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		8C84B9521E8D62F70020D508 /* ChatService */ = {
 			isa = PBXGroup;
 			children = (
@@ -1926,43 +1575,13 @@
 			isa = PBXGroup;
 			children = (
 				8CAB7D901F728999003F1E70 /* MapKit.framework */,
-				2D5C5938ABFC0D0537A59353 /* Pods_CWWeChat.framework */,
-				469130368B305A3D246AFF90 /* Pods_CWWeChatTests.framework */,
-				63278CA4407B71E70F6B67CA /* Pods_CWChatClient.framework */,
-				D1021BFD341E3997839C9061 /* Pods_CWChatInput.framework */,
-				7813C741C43D13DAD7CACD27 /* Pods_CWChatKit.framework */,
+				B376C117EA7EEC77FD2C31A1 /* Pods_CWWeChat.framework */,
+				8E6689CD6D79339AFFBDA48D /* Pods_CWWeChatTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		1F6AD4011F823DB60044C27D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1F6AD4081F823DB60044C27D /* CWChatClient.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1F6AD4141F823E580044C27D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1F6AD41B1F823E580044C27D /* CWChatKit.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8C78FDDD1F828F5C0077D5BD /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8C78FDE41F828F5C0077D5BD /* CWChatInput.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		1F3491791E8786EE00B36641 /* CWWeChat */ = {
@@ -1981,9 +1600,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				1F6AD40A1F823DB60044C27D /* PBXTargetDependency */,
-				1F6AD41D1F823E580044C27D /* PBXTargetDependency */,
-				8C78FDE61F828F5C0077D5BD /* PBXTargetDependency */,
 			);
 			name = CWWeChat;
 			productName = CWWeChat;
@@ -2010,66 +1626,6 @@
 			productName = CWWeChatTests;
 			productReference = 1F34918E1E8786EE00B36641 /* CWWeChatTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		1F6AD4031F823DB60044C27D /* CWChatClient */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1F6AD40F1F823DB60044C27D /* Build configuration list for PBXNativeTarget "CWChatClient" */;
-			buildPhases = (
-				2017E78E1434E48F435C5D62 /* [CP] Check Pods Manifest.lock */,
-				1F6AD3FF1F823DB60044C27D /* Sources */,
-				1F6AD4001F823DB60044C27D /* Frameworks */,
-				1F6AD4011F823DB60044C27D /* Headers */,
-				1F6AD4021F823DB60044C27D /* Resources */,
-				E542ACD04B192FACB65F5404 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CWChatClient;
-			productName = CWChatClient;
-			productReference = 1F6AD4041F823DB60044C27D /* CWChatClient.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		1F6AD4161F823E580044C27D /* CWChatKit */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1F6AD4201F823E590044C27D /* Build configuration list for PBXNativeTarget "CWChatKit" */;
-			buildPhases = (
-				F5D46506D5445D1A1E29A27F /* [CP] Check Pods Manifest.lock */,
-				1F6AD4121F823E580044C27D /* Sources */,
-				1F6AD4131F823E580044C27D /* Frameworks */,
-				1F6AD4141F823E580044C27D /* Headers */,
-				1F6AD4151F823E580044C27D /* Resources */,
-				09C2F1C1289E27B9F4F6594C /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CWChatKit;
-			productName = CWChatKit;
-			productReference = 1F6AD4171F823E580044C27D /* CWChatKit.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		8C78FDDF1F828F5C0077D5BD /* CWChatInput */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8C78FDE91F828F5C0077D5BD /* Build configuration list for PBXNativeTarget "CWChatInput" */;
-			buildPhases = (
-				AE42FDCF74F373CD95B030CA /* [CP] Check Pods Manifest.lock */,
-				8C78FDDB1F828F5C0077D5BD /* Sources */,
-				8C78FDDC1F828F5C0077D5BD /* Frameworks */,
-				8C78FDDD1F828F5C0077D5BD /* Headers */,
-				8C78FDDE1F828F5C0077D5BD /* Resources */,
-				CAD2F7893A939ABDED6B538D /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CWChatInput;
-			productName = CWChatInput;
-			productReference = 8C78FDE01F828F5C0077D5BD /* CWChatInput.framework */;
-			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -2099,23 +1655,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1F3491791E8786EE00B36641;
 					};
-					1F6AD4031F823DB60044C27D = {
-						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = UEL43GU3G3;
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
-					};
-					1F6AD4161F823E580044C27D = {
-						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = UEL43GU3G3;
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
-					};
-					8C78FDDF1F828F5C0077D5BD = {
-						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = UEL43GU3G3;
-						ProvisioningStyle = Automatic;
-					};
 				};
 			};
 			buildConfigurationList = 1F3491751E8786EE00B36641 /* Build configuration list for PBXProject "CWWeChat" */;
@@ -2133,9 +1672,6 @@
 			targets = (
 				1F3491791E8786EE00B36641 /* CWWeChat */,
 				1F34918D1E8786EE00B36641 /* CWWeChatTests */,
-				1F6AD4031F823DB60044C27D /* CWChatClient */,
-				1F6AD4161F823E580044C27D /* CWChatKit */,
-				8C78FDDF1F828F5C0077D5BD /* CWChatInput */,
 			);
 		};
 /* End PBXProject section */
@@ -2170,45 +1706,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1F6AD4021F823DB60044C27D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1F6AD4151F823E580044C27D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8C78FDDE1F828F5C0077D5BD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		09C2F1C1289E27B9F4F6594C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWChatKit/Pods-CWChatKit-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1D640594C54B864FCD6EDA71 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2219,6 +1719,8 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CWActionSheet/CWActionSheet.framework",
 				"${BUILT_PRODUCTS_DIR}/CWShareView/CWShareView.framework",
+				"${BUILT_PRODUCTS_DIR}/ChatClient/ChatClient.framework",
+				"${BUILT_PRODUCTS_DIR}/ChatKit/ChatKit.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework",
@@ -2242,6 +1744,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CWActionSheet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CWShareView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChatClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChatKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSPagerView.framework",
@@ -2263,24 +1767,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2017E78E1434E48F435C5D62 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CWChatClient-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		540AB1D8B651E6B690C66E52 /* [CP] Check Pods Manifest.lock */ = {
@@ -2319,39 +1805,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AE42FDCF74F373CD95B030CA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CWChatInput-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CAD2F7893A939ABDED6B538D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWChatInput/Pods-CWChatInput-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D84C54F97BA26BE6779E0E84 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2387,21 +1840,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E542ACD04B192FACB65F5404 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWChatClient/Pods-CWChatClient-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		EDBF6044B81957A6E50478CA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2418,24 +1856,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F5D46506D5445D1A1E29A27F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CWChatKit-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2662,58 +2082,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1F6AD3FF1F823DB60044C27D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1F6AD4381F8241540044C27D /* TextMessageBody.swift in Sources */,
-				1F6AD43A1F82416A0044C27D /* ImageMessageBody.swift in Sources */,
-				1F6AD43D1F8241A30044C27D /* ChatBaseStore.swift in Sources */,
-				1F6146801F825383000D8E0C /* ChatMessageStore.swift in Sources */,
-				1F6AD4431F8248EC0044C27D /* GroupManagerProtocol.swift in Sources */,
-				1F6AD4471F8249D90044C27D /* Conversation.swift in Sources */,
-				1F6146961F828538000D8E0C /* MessageParse.swift in Sources */,
-				1F6AD4281F8240320044C27D /* ChatManagerProtocol.swift in Sources */,
-				1F6AD4301F8240BC0044C27D /* ChatService.swift in Sources */,
-				1F61468B1F827819000D8E0C /* TextMessageOperation.swift in Sources */,
-				1F6146841F827336000D8E0C /* XMPPManager.swift in Sources */,
-				1F6146861F8273E0000D8E0C /* ChatClientError.swift in Sources */,
-				1F6AD4111F823DC80044C27D /* ChatClient.swift in Sources */,
-				1F6146891F8276F1000D8E0C /* MessageOperation.swift in Sources */,
-				1F61468D1F8279E2000D8E0C /* MessageDispatchManager.swift in Sources */,
-				1F6146981F828B4C000D8E0C /* MessageTransmitter.swift in Sources */,
-				1F6146921F827B07000D8E0C /* MessageHandle.swift in Sources */,
-				1F6146821F826E50000D8E0C /* ChatConversationStore.swift in Sources */,
-				1F6AD4341F8240F10044C27D /* Message.swift in Sources */,
-				1F6AD43F1F8242A90044C27D /* LoginManagerProtocol.swift in Sources */,
-				1F6AD4491F824CCB0044C27D /* ChatClientUtil.swift in Sources */,
-				1F6146941F827C9D000D8E0C /* ChatMessageHandle.swift in Sources */,
-				1F6AD4321F8240D20044C27D /* ChatDataService.swift in Sources */,
-				1F6AD4361F82410B0044C27D /* MessageBody.swift in Sources */,
-				1F6AD4261F8240140044C27D /* ChatClientOptions.swift in Sources */,
-				1F6AD4451F8249640044C27D /* ContactManagerProtocol.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1F6AD4121F823E580044C27D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8C78FDFC1F8296810077D5BD /* CWBadgeView.swift in Sources */,
-				1F6AD4241F823E8C0044C27D /* CWChatKit.swift in Sources */,
-				8C78FDFD1F8296860077D5BD /* CWConversationCell.swift in Sources */,
-				8C78FDFA1F8296770077D5BD /* CWBaseConversationController.swift in Sources */,
-				8C78FDFB1F82967B0077D5BD /* CWConversationModel.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8C78FDDB1F828F5C0077D5BD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2721,21 +2089,6 @@
 			isa = PBXTargetDependency;
 			target = 1F3491791E8786EE00B36641 /* CWWeChat */;
 			targetProxy = 1F34918F1E8786EE00B36641 /* PBXContainerItemProxy */;
-		};
-		1F6AD40A1F823DB60044C27D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1F6AD4031F823DB60044C27D /* CWChatClient */;
-			targetProxy = 1F6AD4091F823DB60044C27D /* PBXContainerItemProxy */;
-		};
-		1F6AD41D1F823E580044C27D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1F6AD4161F823E580044C27D /* CWChatKit */;
-			targetProxy = 1F6AD41C1F823E580044C27D /* PBXContainerItemProxy */;
-		};
-		8C78FDE61F828F5C0077D5BD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8C78FDDF1F828F5C0077D5BD /* CWChatInput */;
-			targetProxy = 8C78FDE51F828F5C0077D5BD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2866,7 +2219,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CC9054EAE42E392A75546C97 /* Pods-CWWeChat.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -2890,7 +2242,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 31E51D349FC87AA2896572C6 /* Pods-CWWeChat.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -2939,198 +2290,6 @@
 			};
 			name = Release;
 		};
-		1F6AD40D1F823DB60044C27D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5FEE38576842CDE99402133 /* Pods-CWChatClient.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UEL43GU3G3;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = CWChatClient/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cwwise.CWChatClient;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		1F6AD40E1F823DB60044C27D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E432249E86A6597BF843358 /* Pods-CWChatClient.release.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UEL43GU3G3;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = CWChatClient/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cwwise.CWChatClient;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		1F6AD4211F823E590044C27D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F5D226B79B73DF3D7862409 /* Pods-CWChatKit.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UEL43GU3G3;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = CWChatKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cwwise.CWChatKit;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		1F6AD4221F823E590044C27D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B7017F712E8F379DA03DCA3 /* Pods-CWChatKit.release.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UEL43GU3G3;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = CWChatKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cwwise.CWChatKit;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		8C78FDEA1F828F5C0077D5BD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0424A3D46B97DE5A5F191505 /* Pods-CWChatInput.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UEL43GU3G3;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = CWChatInput/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cwwise.CWChatInput;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		8C78FDEB1F828F5C0077D5BD /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3893C8851CD32B01783EC9DA /* Pods-CWChatInput.release.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UEL43GU3G3;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = CWChatInput/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cwwise.CWChatInput;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3157,33 +2316,6 @@
 			buildConfigurations = (
 				1F3491A61E8786EE00B36641 /* Debug */,
 				1F3491A71E8786EE00B36641 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1F6AD40F1F823DB60044C27D /* Build configuration list for PBXNativeTarget "CWChatClient" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1F6AD40D1F823DB60044C27D /* Debug */,
-				1F6AD40E1F823DB60044C27D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1F6AD4201F823E590044C27D /* Build configuration list for PBXNativeTarget "CWChatKit" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1F6AD4211F823E590044C27D /* Debug */,
-				1F6AD4221F823E590044C27D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8C78FDE91F828F5C0077D5BD /* Build configuration list for PBXNativeTarget "CWChatInput" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8C78FDEA1F828F5C0077D5BD /* Debug */,
-				8C78FDEB1F828F5C0077D5BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
