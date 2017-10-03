@@ -11,14 +11,14 @@ import XMPPFramework
 
 class MessageParse: NSObject {
     
-    lazy var messageHandle: MessageHandle = {
+    private lazy var messageHandle: MessageHandle = {
         let messageHandle = MessageHandle()
         messageHandle.delegate = self
         messageHandle.nextMessageHandle = self.chatMessageHandle
         return messageHandle
     }()
     
-    lazy var chatMessageHandle: ChatMessageHandle = {
+    private lazy var chatMessageHandle: ChatMessageHandle = {
         let chatMessageHandle = ChatMessageHandle()
         chatMessageHandle.delegate = self
         return chatMessageHandle
@@ -32,10 +32,10 @@ class MessageParse: NSObject {
 // MARK: - CWMessageHandleDelegate
 extension MessageParse: MessageHandleDelegate {
     
-    func handMessageComplete(message: Message, conversationId: String) {
+    func handMessageComplete(message: Message) {
         // 先保存消息
         let chatService = ChatClient.share.chatService
-        chatService.receive(message: message, conversationId: conversationId)
+        chatService.receive(message: message)
     
     }
     

@@ -14,7 +14,7 @@ import CWShareView
 private var webViewContentKey = "webViewContentKey"
 private var webViewBackgroundColorKey = "webViewBackgroundColorKey"
 
-private let webView_Items_Fixed_Space: CGFloat =  9
+private let kWebViewItemsFixedSpace: CGFloat =  9
 
 /// 展示网页信息
 class CWWebViewController: UIViewController {
@@ -118,7 +118,7 @@ class CWWebViewController: UIViewController {
             strong_self.progressView.setProgress(Float(strong_self.webView.estimatedProgress), animated: true)
             
             if strong_self.webView.estimatedProgress >= 1.0 {
-                UIView.animate(withDuration: 0.3, delay: 0.25, options: UIViewAnimationOptions(), animations: {
+                UIView.animate(withDuration: 0.25, animations: { 
                     strong_self.progressView.alpha = 0
                 }, completion: { (finished) in
                     strong_self.progressView.setProgress(0, animated: false)
@@ -150,18 +150,20 @@ class CWWebViewController: UIViewController {
     //MARK: 方法
     ///关闭
     @objc func navigationCloseButtonDown() {
-       _ = self.navigationController?.popViewController(animated: true)
+       self.navigationController?.popViewController(animated: true)
     }
     
     @objc func navigationBackButtonDown() {
         
         if self.webView.canGoBack {
             self.webView.goBack()
-            let spaceItem = UIBarButtonItem.fixBarItemSpaceWidth(webView_Items_Fixed_Space)
+            
+            let spaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+            spaceItem.width = kWebViewItemsFixedSpace
             self.navigationItem.leftBarButtonItems = [backButtonItem,spaceItem,closeButtonItem]
             
         } else {
-           _ = self.navigationController?.popViewController(animated: true)
+           self.navigationController?.popViewController(animated: true)
         }
         
     }

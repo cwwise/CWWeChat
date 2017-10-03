@@ -47,8 +47,7 @@ class ChatMessageHandle: MessageHandle {
         chatMessage.direction = .receive
         chatMessage.timestamp = messageDate
         
-        self.delegate?.handMessageComplete(message: chatMessage,
-                                           conversationId: conversationId)
+        self.delegate?.handMessageComplete(message: chatMessage)
         return true
     }
     

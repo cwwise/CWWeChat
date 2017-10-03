@@ -7,19 +7,40 @@
 //
 
 import UIKit
+import TableViewManager
 
-class CWDiscoverController: CWMenuViewController {
+class CWDiscoverController: CWBaseTableViewController {
 
+    lazy var tableViewManager: TableViewManager = {
+        let tableViewManager = TableViewManager(tableView: self.tableView)
+        return tableViewManager
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "发现"
         
-   
-        
         let discoverHelper = CWDiscoverHelper()
-        self.dataSource = discoverHelper.discoverMenuData
-        // Do any additional setup after loading the view.
+        
     }
+    
+    func setItem() {
+        
+        
+       // let item1 = Item(title: "朋友圈")
+        
+        let item1 = CWMenuItem(iconImageName: CWAsset.Discover_album.rawValue, title: "朋友圈")
+        let rightIconURL = "http://img4.duitang.com/uploads/item/201510/16/20151016113134_TZye4.thumb.224_0.jpeg";
+        item1.showRightRedPoint = true
+        let item2 = CWMenuItem(iconImageName: CWAsset.Discover_QRcode.rawValue, title: "扫一扫")
+        let item3 = CWMenuItem(iconImageName: CWAsset.Discover_shake.rawValue, title: "摇一摇")
+        let item4 = CWMenuItem(iconImageName: CWAsset.Discover_location.rawValue, title: "附近的人")
+        let item5 = CWMenuItem(iconImageName: CWAsset.Discover_bottle.rawValue, title: "漂流瓶")
+        let item6 = CWMenuItem(iconImageName: CWAsset.Discover_shopping.rawValue, title: "购物")
+        let item7 = CWMenuItem(iconImageName: CWAsset.Discover_game.rawValue, title: "游戏")
+        
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -32,7 +53,7 @@ class CWDiscoverController: CWMenuViewController {
 
 extension CWDiscoverController {
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
         

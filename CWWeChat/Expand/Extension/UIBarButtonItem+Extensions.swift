@@ -10,12 +10,6 @@ import UIKit
 
 extension UIBarButtonItem {
     
-    class func fixBarItemSpaceWidth(_ spaceWidth: CGFloat) -> UIBarButtonItem {
-        let fixspaceItem =  UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        fixspaceItem.width = spaceWidth
-        return fixspaceItem
-    }
-    
     convenience init(backTitle: String, target: AnyObject, action: Selector) {
         let view = UIButton(type: .custom)
         view.addTarget(target, action: action, for: .touchUpInside)

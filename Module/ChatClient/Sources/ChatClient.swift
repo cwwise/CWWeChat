@@ -46,9 +46,7 @@ public class ChatClient {
         
         let queue = DispatchQueue.global()
         chatService = ChatService(dispatchQueue: queue)!
-        chatService.activate(xmppManager.xmppStream)
-        
-        setupLogger()
+        chatService.activate(xmppManager.xmppStream)        
     }
     
     /// 初始化聊天信息
@@ -58,15 +56,4 @@ public class ChatClient {
         self.options = options
         xmppManager.options = options
     }
-    
-    ///设置Log日志
-    func setupLogger() {
-        // add log destinations. at least one is needed!
-        let console = ConsoleDestination()  // log to Xcode Console
-        console.minLevel = .debug // just log .info, .warning & .error
-        let file = FileDestination()  // log to default swiftybeaver.log file
-        log.addDestination(console)
-        log.addDestination(file)
-    }
-    
 }

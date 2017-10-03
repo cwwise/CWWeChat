@@ -14,11 +14,13 @@ public class User: NSObject {
     // 昵称
     public var nickname: String
     // 头像
-    public var avatarUrl: URL
+    public var avatarUrl: URL?
     /// 详细信息
     public var userInfo: UserInfo?
     
-    public init(username: String, nickname: String, avatarUrl: URL) {
+    public init(username: String,
+                nickname: String = "", 
+                avatarUrl: URL? = nil) {
         self.username = username
         self.nickname = nickname
         self.avatarUrl = avatarUrl

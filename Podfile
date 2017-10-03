@@ -43,6 +43,7 @@ target 'CWWeChat' do
   pod 'KVOController'
   
   # 本地pod
+  pod 'TableViewManager', :path => './Module/TableViewManager/TableViewManager.podspec'
   pod 'ChatClient', :path => './Module/ChatClient/ChatClient.podspec'
   pod 'ChatKit', :path => './Module/ChatKit/ChatKit.podspec'
   pod 'MomentKit', :path => './Module/MomentKit/MomentKit.podspec'

@@ -10,11 +10,11 @@ import UIKit
 import XMPPFramework
 
 protocol MessageHandleDelegate: class {
-    func handMessageComplete(message: Message, conversationId: String)
+    func handMessageComplete(message: Message)
 }
 
 extension MessageHandleDelegate {
-    func handMessageComplete(message: Message, conversationId: String) {}
+    func handMessageComplete(message: Message) {}
 }
 
 

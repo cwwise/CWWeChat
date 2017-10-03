@@ -70,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                            
                             if let username = username {
                                 log.debug("登录成功...\(username)")
-                            }
+                            }  
         }
     }
     

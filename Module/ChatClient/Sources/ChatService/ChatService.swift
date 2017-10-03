@@ -42,29 +42,29 @@ class ChatService: XMPPModule {
     /// 执行 消息变化和会话变化的代理，保存消息
     ///
     /// - Parameter message: 接收到的消息
-    public func receive(message: Message, conversationId: String) {
-        
-        updateConversation(with: message, conversationId: conversationId)
-
-        executeDidReceiveMessages(message)
+    public func receive(message: Message) {
         // 保存消息
         messageStore.insertMessage(message)
+        // 执行delegate
+        executeDidReceiveMessages(message)
+        // 更新会话
+        updateConversation(with: message)
     }
     
     public func saveMessage(_ message: Message)  {
         
-       // updateConversation(with: message)
+        updateConversation(with: message)
         // 保存消息
         //messageStore.insert(message: message)
     }
     
-    func updateConversation(with message: Message, conversationId: String) {
+    func updateConversation(with message: Message) {
         // 更新会话
         var exist: Bool = false
         let conversation = conversationStore.fecthConversation(type: message.chatType,
-                                                               conversationId: conversationId,
+                                                               conversationId: message.conversationId,
                                                                isExist: &exist)
-        
+        conversation.append(message: message)
         // 执行代理方法
         executeConversationUpdate(conversation)
         // 如果会话不存在 则保存到数据库
@@ -148,10 +148,31 @@ extension ChatService: ChatManager {
         }
     }
     
+    /// 更新消息
+    func updateMessage(_ message: Message) {
+        messageStore.updateMessage(message)
+    }
     
     func sendMessage(_ message: Message,
                      progress: SendMessageProgressBlock?,
                      completion: @escaping SendMessageCompletionHandle) {
+        
+        saveMessage(message)
+        
+        // 切换到主线程来处理
+        let _progress: SendMessageProgressBlock = { (progressValue) in
+            DispatchQueue.main.async(execute: { 
+                progress?(progressValue)
+            })
+        }
+        
+        let _completion: SendMessageCompletionHandle = { (message, error) in
+            DispatchQueue.main.async(execute: {
+                completion(message, error)
+            })
+        }
+        
+       dispatchManager.sendMessage(message, progress: _progress, completion: _completion)
         
     }
     

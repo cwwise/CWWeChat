@@ -24,9 +24,9 @@ public extension ChatManagerDelegate {
     func conversationDidUpdate(_ conversation: Conversation) {}
 }
 
-public typealias SendMessageCompletionHandle = (_ message: Message, _ error: ChatClientError?) -> Void
+public typealias SendMessageCompletionHandle = (Message, ChatClientError?) -> Void
 
-public typealias SendMessageProgressBlock = (_ progress: Float) -> Void
+public typealias SendMessageProgressBlock = (Float) -> Void
 
 /// 聊天管理
 public protocol ChatManager: class {
