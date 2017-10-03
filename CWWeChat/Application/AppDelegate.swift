@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyBeaver
 import UserNotifications
-
+import ChatClient
 
 let log = SwiftyBeaver.self
 
@@ -64,17 +64,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loginChatWithAccount(_ account: CWAccount) {
-        let chatClient = CWChatClient.share
-        chatClient.initialize(with: CWChatClientOptions.default)
-        
-        chatClient.loginManager.login(username: account.username,
-                                      password: account.password) { (username, error) in
-                                        
-                                        if let username = username {
-                                            log.debug("登录成功...\(username)")
-                                        }
+        let loginManager = ChatClient.share.loginManager     
+        loginManager.login(username: account.username, 
+                           password: account.password) { (username, error) in
+                           
+                            if let username = username {
+                                log.debug("登录成功...\(username)")
+                            }
         }
-     
     }
     
     func loginSuccess() {
@@ -92,10 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = CWChatNavigationController(rootViewController: emoticonController)
     }
     
-    func loginMomentSuccess() {
-        let momentController = CWMomentController()
-        self.window?.rootViewController = CWChatNavigationController(rootViewController: momentController)
-    }
     
     func logoutSuccess() {
         let loginVC = UIStoryboard.welcomeViewController()

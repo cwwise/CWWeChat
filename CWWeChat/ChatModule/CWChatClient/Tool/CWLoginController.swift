@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import ChatClient
 
 /// 登录界面
 class CWLoginController: UIViewController {
@@ -140,9 +141,8 @@ class CWLoginController: UIViewController {
 //        hud.bezelView.backgroundColor = UIColor.gray
         hud.label.text = "Loading..."
         
-        let chatClient = CWChatClient.share
-        chatClient.initialize(with: CWChatClientOptions.default)
-        chatClient.loginManager.login(username: userName, password: password) { (username, error) in
+        let loginManager = ChatClient.share.loginManager
+        loginManager.login(username: userName, password: password) { (username, error) in
            
             DispatchQueue.main.async(execute: {
                 hud.mode = .text
@@ -161,7 +161,6 @@ class CWLoginController: UIViewController {
                     
                     hud.hide(animated: true)
                 } else {
-                    hud.label.text = error?.errorDescription
                     hud.hide(animated: true, afterDelay: 1.0)
                 }
             })

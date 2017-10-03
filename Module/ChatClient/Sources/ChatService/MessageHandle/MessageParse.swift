@@ -34,7 +34,7 @@ extension MessageParse: MessageHandleDelegate {
     
     func handMessageComplete(message: Message, conversationId: String) {
         // 先保存消息
-        let chatService = ChatClient.share.chatManager as! ChatService
+        let chatService = ChatClient.share.chatService
         chatService.receive(message: message, conversationId: conversationId)
     
     }

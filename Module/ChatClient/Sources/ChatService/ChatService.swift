@@ -47,8 +47,9 @@ class ChatService: XMPPModule {
         updateConversation(with: message, conversationId: conversationId)
 
         executeDidReceiveMessages(message)
-
         // 保存消息
+        let textBody = message.messageBody as! TextMessageBody
+        print(textBody.text)
         messageStore.insert(message: message)
     }
     
@@ -142,11 +143,10 @@ extension ChatService: ChatManager {
         return conversation
     }
     
-    func deleteConversation(_ conversation: Conversation,
-                            deleteMessages: Bool = false) {
-        conversationStore.deleteConversation(conversationId: conversation.conversationId)
+    func deleteConversation(_ conversationId: String, deleteMessages: Bool) {
+        conversationStore.deleteConversation(conversationId: conversationId)
         if deleteMessages {
-            messageStore.deleteAllMessage(conversationId: conversation.conversationId)
+            messageStore.deleteAllMessage(conversationId: conversationId)
         }
     }
     

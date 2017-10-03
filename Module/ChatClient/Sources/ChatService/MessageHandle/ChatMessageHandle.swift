@@ -36,14 +36,22 @@ class ChatMessageHandle: MessageHandle {
         if message.wasDelayed() {
             messageDate = message.delayedDeliveryDate().timeIntervalSince1970
         }
+                
         
         do {
-            let bodyClass = ChatClientUtil.messageBodyClass(with: messageType)
-            let body = try messageDecoder.decode(bodyClass, from: data)
             let conversationId = from
+            var messageBody: MessageBody!
+            // 文本
+            if messageType == .text {
+                messageBody = TextMessageBody(text: body)
+            } else {
+                let bodyClass = ChatClientUtil.messageBodyClass(with: messageType)
+                messageBody = try messageDecoder.decode(bodyClass, from: data)
+            }
+            
             let chatMessage = Message(conversationId: conversationId,
                                       from: from,
-                                      body: body)
+                                      body: messageBody)
             chatMessage.messageId = messageId
             chatMessage.direction = .receive
             chatMessage.timestamp = messageDate

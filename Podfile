@@ -45,6 +45,7 @@ target 'CWWeChat' do
   # 本地pod
   pod 'ChatClient', :path => './Module/ChatClient/ChatClient.podspec'
   pod 'ChatKit', :path => './Module/ChatKit/ChatKit.podspec'
+  pod 'MomentKit', :path => './Module/MomentKit/MomentKit.podspec'
 
   target 'CWWeChatTests' do
     inherit! :search_paths

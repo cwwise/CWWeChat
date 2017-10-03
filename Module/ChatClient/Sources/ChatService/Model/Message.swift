@@ -48,7 +48,7 @@ public class Message: NSObject {
     public var chatType: ChatType
     /// 消息类型
     public var messageType: MessageType {
-        return self.body.type
+        return self.messageBody.type
     }
     /// 消息来源
     public var from: String
@@ -59,7 +59,7 @@ public class Message: NSObject {
     /// 发送状态
     public var sendStatus: MessageSendStatus
     /// 消息体
-    public var body: MessageBody
+    public var messageBody: MessageBody
     /// 消息发送时间
     public var timestamp: TimeInterval
     /// 消息扩展
@@ -78,7 +78,7 @@ public class Message: NSObject {
         self.chatType = .single
         self.messageId = ChatClientUtil.messageId
         self.conversationId = conversationId
-        self.body = body
+        self.messageBody = body
         self.sendStatus = .sending
         self.direction = .send
         self.timestamp = ChatClientUtil.currentTime

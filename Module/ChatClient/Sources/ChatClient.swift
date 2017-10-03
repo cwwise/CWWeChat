@@ -39,13 +39,14 @@ public class ChatClient {
     private init() {
         version = "0.0.1"
         
+        options = ChatClientOptions.default
+
         xmppManager = XMPPManager()
+        xmppManager.options = options
         
         let queue = DispatchQueue.global()
         chatService = ChatService(dispatchQueue: queue)!
         chatService.activate(xmppManager.xmppStream)
-        
-        self.options = ChatClientOptions.default
         
         setupLogger()
     }
@@ -55,6 +56,7 @@ public class ChatClient {
     /// - Parameter options: 配置项
     public func initialize(with options: ChatClientOptions) {
         self.options = options
+        xmppManager.options = options
     }
     
     ///设置Log日志

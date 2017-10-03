@@ -51,6 +51,13 @@ public protocol ChatManager: class {
     
     func fecthConversation(chatType: ChatType, conversationId: String) -> Conversation
     
+    /// 删除会话
+    ///
+    /// - Parameters:
+    ///   - targetId: 会话id
+    ///   - deleteMessages: 是否删除会话中的消息
+    func deleteConversation(_ conversationId: String, deleteMessages: Bool)
+    
     func sendMessage(_ message: Message,
                      progress: SendMessageProgressBlock?,
                      completion: @escaping SendMessageCompletionHandle)

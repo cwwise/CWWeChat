@@ -76,10 +76,21 @@ extension ChatMessageStore {
     
     @discardableResult
     func insert(message: Message) -> Bool {
-        
+        let textBody = message.messageBody as? TextMessageBody
+        print(textBody?.text)
         do {
-            let data = try messageEncoder.encode(message.body)
-            guard let string = String(data: data, encoding: .utf8) else {
+      
+            var messageContent: String?
+            if message.messageType == .text {
+              
+                messageContent = textBody?.text
+                print(messageContent ?? "")
+            } else {
+                let data = try messageEncoder.encode(message.messageBody)
+                messageContent = String(data: data, encoding: .utf8)
+            }
+            
+            guard let string = messageContent else {
                 log.error("解析消息错误--\(message)")
                 return false
             }
@@ -152,11 +163,18 @@ extension ChatMessageStore {
         
         do {
             let messageType = MessageType(rawValue: row[f_messageType]) ?? .none
-            let bodyClass = ChatClientUtil.messageBodyClass(with: messageType)
-            let body = try messageDecoder.decode(bodyClass, from: data)
+            var messageBody: MessageBody!
+            // 文本
+            if messageType == .text {
+                messageBody = TextMessageBody(text: row[f_content])
+            } else {
+                let bodyClass = ChatClientUtil.messageBodyClass(with: messageType)
+                messageBody = try messageDecoder.decode(bodyClass, from: data)
+            }
+            
             let message = Message(conversationId: conversationId,
                                   from: row[f_from],
-                                  body: body)
+                                  body: messageBody)
             let direction = MessageDirection(rawValue: row[f_direction]) ?? .send
             let sendStatus = MessageSendStatus(rawValue: row[f_sendStatus]) ?? .sending
             let chatType = ChatType(rawValue: row[f_chatType]) ?? .single
@@ -203,7 +221,7 @@ extension ChatMessageStore {
     func updateMessage(_ message: Message) {
        
         do {
-            let data = try messageEncoder.encode(message.body)
+            let data = try messageEncoder.encode(message.messageBody)
             guard let string = String(data: data, encoding: .utf8) else {
                 log.error("解析消息错误--\(message)")
                 return

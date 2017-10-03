@@ -8,6 +8,7 @@
 
 import UIKit
 import CWActionSheet
+import ChatClient
 
 class CWMineSettingController: CWBaseTableViewController {
 
@@ -86,7 +87,14 @@ class CWMineSettingController: CWBaseTableViewController {
     }
     
     func logout() {
-        CWChatClient.share.loginManager.logout()
+        do {
+            let account = try CWAccount.userAccount()
+            account.isLogin = false
+            try account.save()
+        } catch {
+        }
+        let loginManager = ChatClient.share.loginManager
+        loginManager.logout()
         if let appdelegate = UIApplication.shared.delegate as? AppDelegate {
             appdelegate.logoutSuccess()
         }
