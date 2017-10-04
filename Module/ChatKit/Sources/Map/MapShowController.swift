@@ -11,16 +11,16 @@ import MapKit
 import SnapKit
 import CWActionSheet
 
-class MapShowController: UIViewController {
+public class MapShowController: UIViewController {
     
     private var mapView: MKMapView!
     private var locationManager: CLLocationManager!
 
-    var coordinate: CLLocationCoordinate2D?
-    var address: String?
-    var detail: String?
+    public var coordinate: CLLocationCoordinate2D?
+    public var address: String?
+    public var detail: String?
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         locationManager = CLLocationManager()
@@ -183,7 +183,7 @@ class MapShowController: UIViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
+    public override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -191,7 +191,7 @@ class MapShowController: UIViewController {
 
 extension MapShowController: CLLocationManagerDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(locations)
     }
     
@@ -199,7 +199,7 @@ extension MapShowController: CLLocationManagerDelegate {
 
 extension MapShowController: MKMapViewDelegate {
     
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+    public func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
       //  searchLocation()
     }
     

@@ -19,18 +19,18 @@ public enum ChatType : Int {
     case chatroom
 }
 
-public class Conversation: NSObject {
+public class Conversation {
     /// 会话id 如果是群聊则是 groupId 单聊则是 对方账号
-    public private(set) var conversationId: String
+    public let conversationId: String
     /// 类型
-    public private(set) var type: ChatType
+    public let type: ChatType
     /// 最近一条消息
     public private(set) var lastMessage: Message?
     /// 是否置顶
     public var isTop: Bool = false
     /// 草稿
     public var draft: String?
-    /// 未读
+    /// 未读数
     public var unreadCount: Int = 0
     
     public init(conversationId: String, type: ChatType) {
@@ -50,11 +50,25 @@ public class Conversation: NSObject {
         
         return nil
     }
+}
+
+extension Conversation: CustomStringConvertible {
+    public var description: String {
+        return "会话:\(conversationId),类型:\(type)"
+    }
+}
+
+extension Conversation: Hashable, Equatable {
+    
+    public var hashValue: Int {
+        return conversationId.hashValue
+    }
     
     static public func ==(lhs: Conversation, rhs: Conversation) -> Bool {
         return lhs.conversationId == rhs.conversationId
     }
 }
+
 
 public typealias ConversationResultCompletion = ([Message], ChatClientError?) -> Void
 
@@ -67,7 +81,7 @@ extension Conversation {
     ///   - count: 获取的条数
     ///   - searchDirection: 消息搜索方向
     ///   - completion: 完成的回调
-    func fetchMessagesStart(from messageId: String? = nil,
+    public func fetchMessagesStart(from messageId: String? = nil,
                             count: Int = 20,
                             completion: ConversationResultCompletion) {
         
@@ -76,6 +90,44 @@ extension Conversation {
         completion(result, nil)
     }
     
+    
+    ///  从数据库获取指定类型的消息，取到的消息按时间排序，如果参考的时间戳为负数，则从最新消息取，如果count小于等于0当作1处理
+    ///
+    /// - Parameters:
+    ///   - type: 消息类型
+    ///   - timestamp: 参考时间戳
+    ///   - count: 获取的条数
+    ///   - searchDirection: 消息搜索方向
+    ///   - completion: 完成的回调
+    public func fetchMessagesWithType(_ type: MessageType = .text,
+                               timestamp: TimeInterval = -1,
+                               count: Int = 20,
+                               searchDirection: MessageSearchDirection = .down,
+                               completion: ConversationResultCompletion) {
+        
+        
+        
+        
+        
+    }
+    
+    /// 从数据库获取包含指定内容的消息，取到的消息按时间排序，如果参考的时间戳为负数，则从最新消息向前取，如果aCount小于等于0当作1处理
+    ///
+    /// - Parameters:
+    ///   - keyword: 搜索关键字，如果为空则忽略
+    ///   - timestamp: 参考时间戳
+    ///   - count: 获取的条数
+    ///   - searchDirection: 消息搜索方向
+    ///   - completion: 完成的回调
+    public func fetchMessagesWithKeyword(_ keyword: String,
+                                  timestamp: TimeInterval = -1,
+                                  count: Int = 20,
+                                  searchDirection: MessageSearchDirection = .down,
+                                  completion: ConversationResultCompletion) {
+        
+        
+        
+    }
     
 }
 

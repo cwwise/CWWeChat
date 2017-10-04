@@ -7,18 +7,15 @@
 
 import Foundation
 
-class LocationMessageBody: MessageBody {
-    var type: MessageType {
-        return .location
-    }    
+public class LocationMessageBody {
     /// 纬度
-    var latitude: Double
+    public var latitude: Double
     /// 经度
-    var longitude: Double
+    public var longitude: Double
     /// 位置信息
-    var address: String
+    public var address: String
     
-    var detail: String?
+    public var detail: String?
     
     init() {
         self.latitude = 0.0
@@ -26,24 +23,30 @@ class LocationMessageBody: MessageBody {
         self.address = ""
     }
     
-    init(latitude: Double,
+    public init(latitude: Double,
          longitude: Double,
          address: String = "") {
         self.latitude = latitude
         self.longitude = latitude
         self.address = address
     }
+}
+
+extension LocationMessageBody: MessageBody {
     
+    public var type: MessageType {
+        return .location
+    }    
     
-    func messageEncode() -> String {
+    public func messageEncode() -> String {
         return ""
     }
     
-    func messageDecode(string: String) {
+    public func messageDecode(string: String) {
         
     }
     
-    var description: String {
+    public var description: String {
         return "位置信息"
     }
 }

@@ -53,8 +53,6 @@ public class BaseCell: UITableViewCell {
         return subTitleLabel
     }()
     
-
-    
     // 靠右边
     lazy var rightLabel:UILabel = {
         let rightLabel = UILabel()

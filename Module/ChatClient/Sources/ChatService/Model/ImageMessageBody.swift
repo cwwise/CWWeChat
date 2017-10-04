@@ -8,20 +8,7 @@
 
 import UIKit
 
-public class ImageMessageBody: MessageBody {
-   
-    public func messageEncode() -> String {
-        return ""
-    }
-    
-    public func messageDecode(string: String) {
-        
-    }
-    
-    /// 消息体类型
-    public var type: MessageType {
-        return .image
-    }    
+public class ImageMessageBody {
     /// 图片尺寸
     public var size = CGSize.zero
     
@@ -43,9 +30,25 @@ public class ImageMessageBody: MessageBody {
         self.originalURL = originalURL
         self.size = size
     }
+}
+
+extension ImageMessageBody: MessageBody {
+    /// 消息体类型
+    public var type: MessageType {
+        return .image
+    } 
+    
+    public func messageEncode() -> String {
+        return ""
+    }
+    
+    public func messageDecode(string: String) {
+        
+    }
     
     public var description: String {
         return "图片"
     }
-    
 }
+
+

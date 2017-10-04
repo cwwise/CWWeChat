@@ -1,16 +1,14 @@
 //
-//  CWVoiceRecorder.swift
-//  CWWeChat
+//  VoiceRecorder.swift
+//  ChatKit
 //
-//  Created by chenwei on 16/7/12.
-//  Copyright © 2016年 chenwei. All rights reserved.
+//  Created by chenwei on 2017/10/4.
 //
 
 import UIKit
-
 import AVFoundation
 
-protocol CWVoiceRecorderDelegate {
+protocol VoiceRecorderDelegate {
     /**
      更新进度 , 0.0 - 9.0, 浮点数
      */
@@ -19,18 +17,18 @@ protocol CWVoiceRecorderDelegate {
     /**
      录音太短
      */
-//    func audioRecordTooShort()
+    //    func audioRecordTooShort()
     
     
     /**
      录音失败
      */
-//    func audioRecordFailed()
+    //    func audioRecordFailed()
     
     /**
      取消录音
      */
-//    func audioRecordCanceled()
+    //    func audioRecordCanceled()
     
     /**
      录音完成
@@ -41,9 +39,9 @@ protocol CWVoiceRecorderDelegate {
     func audioRecordFinish(_ filename: String, recordTime: Float)
 }
 
-class CWVoiceRecorder: NSObject {
-
-    var delegate: CWVoiceRecorderDelegate?
+class VoiceRecorder: NSObject {
+    
+    var delegate: VoiceRecorderDelegate?
     /// 最大录音时间
     let maxRecordTime: CGFloat = 60
     
@@ -56,14 +54,14 @@ class CWVoiceRecorder: NSObject {
     private var isCancelRecord: Bool = false
     
     private let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),//声音采样率
-                                  AVFormatIDKey : NSNumber(value: Int32(kAudioFormatLinearPCM) as Int32),//编码格式
-                                  AVNumberOfChannelsKey : NSNumber(value: 1 as Int32),//采集音轨
-                                  AVEncoderAudioQualityKey : NSNumber(value: Int32(AVAudioQuality.medium.rawValue) as Int32)]//音频质量
+        AVFormatIDKey : NSNumber(value: Int32(kAudioFormatLinearPCM) as Int32),//编码格式
+        AVNumberOfChannelsKey : NSNumber(value: 1 as Int32),//采集音轨
+        AVEncoderAudioQualityKey : NSNumber(value: Int32(AVAudioQuality.medium.rawValue) as Int32)]//音频质量
     private var audioRecorder:AVAudioRecorder!
     
     var voiceName: String = {
         let random = arc4random() % 1000
-        let voiceName = String(format: "\(String.UUIDString())%04d.wav", random)
+        let voiceName = String(format: "%04d.wav", random)
         return voiceName
     }()
     
@@ -76,14 +74,14 @@ class CWVoiceRecorder: NSObject {
     override init() {
         self.operationQueue = OperationQueue()
         super.init()
-
+        
         let audioSession = AVAudioSession.sharedInstance()
         audioSession.requestRecordPermission { (result) in
             if result {
                 do {
                     try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
                     try self.audioRecorder = AVAudioRecorder(url: self.directoryURL,
-                        settings: self.recordSettings)//初始化实例
+                                                             settings: self.recordSettings)//初始化实例
                     self.audioRecorder.delegate = self
                     self.audioRecorder.prepareToRecord()//准备录音
                 } catch {
@@ -140,7 +138,7 @@ class CWVoiceRecorder: NSObject {
         do {
             try audioSession.setActive(false)
         } catch {
-            log.error(error)
+
         }
         self.operationQueue.cancelAllOperations()
     }
@@ -170,10 +168,9 @@ class CWVoiceRecorder: NSObject {
     
 }
 
-extension CWVoiceRecorder: AVAudioRecorderDelegate {
+extension VoiceRecorder: AVAudioRecorderDelegate {
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        log.debug("录音路径--\(self.voiceName) \(flag)")
         if flag && self.isFinishRecord {
             if let delegate = self.delegate {
                 delegate.audioRecordFinish(self.voiceName, recordTime: self.audioTimeInterval.floatValue)

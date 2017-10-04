@@ -206,13 +206,6 @@ extension CWBaseMessageController: MoreInputViewDelegate {
     }
 }
 
-extension CWBaseMessageController: MapLocationControllerDelegate {
-    
-    func sendLocation(_ location: CLLocationCoordinate2D) {
-        
-    }
-}
-
 //
 extension CWBaseMessageController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

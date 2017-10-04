@@ -1,20 +1,21 @@
 //
-//  CWVoiceIndicatorView.swift
-//  CWWeChat
+//  VoiceIndicatorView.swift
+//  ChatKit
 //
-//  Created by chenwei on 16/7/13.
-//  Copyright © 2016年 chenwei. All rights reserved.
+//  Created by chenwei on 2017/10/4.
 //
 
 import UIKit
+import SnapKit
+import Hue
 
 /// 录音的提示图
-class CWVoiceIndicatorView: UIView {
+class VoiceIndicatorView: UIView {
     
     /// 取消提示
     lazy var cancelImageView: UIImageView = {
         let cancelImageView = UIImageView()
-        cancelImageView.image = CWAsset.RecordCancel.image
+    //    cancelImageView.image = CWAsset.RecordCancel.image
         return cancelImageView
     }()
     
@@ -27,15 +28,15 @@ class CWVoiceIndicatorView: UIView {
     
     var voiceSignalImageView: UIImageView = {
         let voiceSignalImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 62, height: 100))
-        voiceSignalImageView.image = CWAsset.RecordingBkg.image
+  //      voiceSignalImageView.image = CWAsset.RecordingBkg.image
         return voiceSignalImageView
     }()
-
+    
     
     ///音量的图片
     var signalValueImageView: UIImageView = {
         let signalValueImageView = UIImageView(frame: CGRect(x: 62, y: 0, width: 38, height: 100))
-        signalValueImageView.image = CWAsset.RecordingSignal001.image
+//        signalValueImageView.image = CWAsset.RecordingSignal001.image
         return signalValueImageView
     }()
     
@@ -44,21 +45,21 @@ class CWVoiceIndicatorView: UIView {
     //录音时间太短的提示
     lazy var tooShotPromptImageView: UIImageView = {
         let tooShotPromptImageView = UIImageView()
-        tooShotPromptImageView.image = CWAsset.MessageTooShort.image
+//        tooShotPromptImageView.image = CWAsset.MessageTooShort.image
         return tooShotPromptImageView
     }()
     
-     //中央的灰色背景 view
-//    var centerView: UIView! {
-//        didSet {
-//            centerView.layer.cornerRadius = 4.0
-//            centerView.layer.masksToBounds = true
-//        }
-//    }
+    //中央的灰色背景 view
+    //    var centerView: UIView! {
+    //        didSet {
+    //            centerView.layer.cornerRadius = 4.0
+    //            centerView.layer.masksToBounds = true
+    //        }
+    //    }
     
     //提示的 label
     lazy var noteLabel: UILabel = {
-       let noteLabel = UILabel()
+        let noteLabel = UILabel()
         noteLabel.textAlignment = .center
         noteLabel.text = "手指上滑，取消发送"
         noteLabel.font = UIFont.systemFont(ofSize: 14)
@@ -107,12 +108,12 @@ class CWVoiceIndicatorView: UIView {
         super.layoutSubviews()
         self.recordingView.center = CGPoint(x: self.bounds.width/2, y: self.bounds.height/2)
     }
-
+    
 }
 
 //对外交互的 view 控制
 // MARK: - @extension CWVoiceIndicatorView
-extension CWVoiceIndicatorView {
+extension VoiceIndicatorView {
     //正在录音
     func recording() {
         self.isHidden = false
@@ -164,19 +165,18 @@ extension CWVoiceIndicatorView {
         index = index > 7 ? 7 : index
         index = index < 0 ? 0 : index
         
-        let array = [
-            CWAsset.RecordingSignal001.image,
-            CWAsset.RecordingSignal002.image,
-            CWAsset.RecordingSignal003.image,
-            CWAsset.RecordingSignal004.image,
-            CWAsset.RecordingSignal005.image,
-            CWAsset.RecordingSignal006.image,
-            CWAsset.RecordingSignal007.image,
-            CWAsset.RecordingSignal008.image,
+        let array: [UIImage] = [
+//            CWAsset.RecordingSignal001.image,
+//            CWAsset.RecordingSignal002.image,
+//            CWAsset.RecordingSignal003.image,
+//            CWAsset.RecordingSignal004.image,
+//            CWAsset.RecordingSignal005.image,
+//            CWAsset.RecordingSignal006.image,
+//            CWAsset.RecordingSignal007.image,
+//            CWAsset.RecordingSignal008.image,
             ]
         
         self.signalValueImageView.image = array[index]
         
     }
 }
-

@@ -9,17 +9,17 @@
 import UIKit
 import MapKit
 
-protocol MapLocationControllerDelegate: class {
+public protocol MapLocationControllerDelegate: class {
     func sendLocation(_ location: CLLocationCoordinate2D)
 }
 
-class MapLocationController: UIViewController {
+public class MapLocationController: UIViewController {
 
-    weak var delegate: MapLocationControllerDelegate?
+    public weak var delegate: MapLocationControllerDelegate?
     
-    var mapView: MKMapView!
+    public var mapView: MKMapView!
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         mapView = MKMapView(frame: self.view.bounds)
@@ -37,7 +37,7 @@ class MapLocationController: UIViewController {
         
     }
 
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

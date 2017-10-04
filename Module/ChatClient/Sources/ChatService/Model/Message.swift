@@ -8,6 +8,15 @@
 
 import Foundation
 
+/// 消息搜索方向
+///
+/// - up: 向上搜索
+/// - down: 向下搜索
+public enum MessageSearchDirection: Int {
+    case up
+    case down
+}
+
 /// 消息方向
 ///
 /// - send: 发送方
@@ -41,9 +50,9 @@ public enum MessageType: Int {
     case notification       //通知
 }
 
-public class Message: NSObject {
+public class Message {
     /// 会话id
-    public var conversationId: String
+    public let conversationId: String
     /// 会话类型
     public var chatType: ChatType
     /// 消息类型
@@ -83,10 +92,23 @@ public class Message: NSObject {
         self.direction = .send
         self.timestamp = ChatClientUtil.currentTime
         self.from = from
-        super.init()
     }
-    
-    public override var description: String {
+}
+
+extension Message: CustomStringConvertible {
+    public var description: String {
         return "messageType: \(messageType), body: \(messageBody)"
     }
 }
+
+extension Message:  Equatable, Hashable {
+    public var hashValue: Int {
+        return messageId.hashValue
+    }
+    
+    public static func ==(lhs: Message, rhs: Message) -> Bool {
+        return lhs.messageId == rhs.messageId
+    }
+}
+
+

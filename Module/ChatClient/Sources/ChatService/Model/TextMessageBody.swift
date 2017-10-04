@@ -8,15 +8,9 @@
 
 import Foundation
 
-public class TextMessageBody: MessageBody {
-    
-    /// 消息体类型
-    public var type: MessageType {
-        return .text
-    }
+public class TextMessageBody {
     /// 文本内容
     public var text: String
-    
     // 内部使用 
     init() {
         self.text = ""
@@ -24,6 +18,13 @@ public class TextMessageBody: MessageBody {
     
     public init(text: String) {
         self.text = text
+    }
+}
+
+extension TextMessageBody: MessageBody {
+    /// 消息体类型
+    public var type: MessageType {
+        return .text
     }
     
     public func messageEncode() -> String {
@@ -37,4 +38,6 @@ public class TextMessageBody: MessageBody {
     public var description: String {
         return text
     }
+    
 }
+

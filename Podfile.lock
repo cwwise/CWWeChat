@@ -9,6 +9,7 @@ PODS:
   - ChatKit (0.0.1):
     - Alamofire
     - ChatClient
+    - CWActionSheet
     - Hue
     - Kingfisher
     - SnapKit
@@ -109,7 +110,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   ChatClient: 8bd9f934a792776c998a072ce12185c14115ef0c
-  ChatKit: c8c4e4e54e2ad187d7c728ccd74f8d7939c9c7cc
+  ChatKit: f89a2deceed0673196a63da51e7df3907551b6db
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
   CocoaLumberjack: 2800c03334042fe80589423c8d80e582dcaec482
   CWActionSheet: 7ab61a8628bfe3c4b9932983e154181ea4c9cd2f

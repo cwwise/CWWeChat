@@ -41,7 +41,8 @@ Pod::Spec.new do |s|
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
   s.framework  = "UIKit"
-  
+  s.framework  = "MapKit"
+
   s.dependency "ChatClient"
   s.dependency "Kingfisher"
   s.dependency "SQLite.swift"
@@ -51,5 +52,7 @@ Pod::Spec.new do |s|
   s.dependency "SwiftyBeaver"
   s.dependency "SnapKit"
   s.dependency "Hue"
+  s.dependency "CWActionSheet"
+   
 
 end
