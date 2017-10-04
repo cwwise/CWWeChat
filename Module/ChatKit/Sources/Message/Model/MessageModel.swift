@@ -38,6 +38,10 @@ class MessageModel {
         return message.messageId
     }
     
+    public var from: String {
+        return message.from
+    }
+    
     public var conversationId: String {
         return message.conversationId
     }
@@ -45,14 +49,6 @@ class MessageModel {
     public var transportProgress: Float = 0
     
     public var playStatus: MessagePlayStatus = .none
-    
-    // 图片
-    
-    // 语音
-    
-    // 位置
-    
-    // 消息
     
     /// 是否显示时间
     public var showTime: Bool = false
@@ -80,3 +76,45 @@ extension MessageModel: Hashable, Equatable, CustomStringConvertible {
 }
 
 
+// 添加拓展
+extension MessageType {
+    //获取cell的reuseIdentifier
+    var identifier: String {
+        switch self {
+        case .text:
+            return "ChatMessageTextCell"
+        case .image:
+            return "ChatMessageImageCell"
+        case .voice:
+            return "ChatMessageVoiceCell"
+        case .video:
+            return "ChatMessageVideoCell"
+        case .emoticon:
+            return "ChatMessageEmoticonCell"
+        case .file:
+            return "ChatMessageFileCell"
+        case .location:
+            return "ChatMessageLocationCell"
+        default:
+            return "ChatMessageCell"
+        }
+    }
+    
+    init(identifier: String) {
+        switch identifier {
+        case "ChatMessageTextCell":
+            self = .text
+        case "ChatMessageImageCell":
+            self = .image
+        case "ChatMessageVoiceCell":
+            self = .voice
+        case "ChatMessageEmoticonCell":
+            self = .emoticon
+        case "ChatMessageLocationCell":
+            self = .location
+        default:
+            self = .none
+        }
+    }
+    
+}

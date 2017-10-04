@@ -8,9 +8,6 @@
 
 import UIKit
 
-
-
-
 /// layout 部分
 class CWMessageLayoutSettings {
     

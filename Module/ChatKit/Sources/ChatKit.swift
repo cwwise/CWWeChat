@@ -14,6 +14,10 @@ public class ChatKit: NSObject {
     
     public static let share = ChatKit()
 
+    public var currentAccount: String {
+        return ChatClient.share.currentAccount
+    }
+    
     private override init() {
 
         
