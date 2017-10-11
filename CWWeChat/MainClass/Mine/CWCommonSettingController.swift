@@ -44,7 +44,9 @@ class CWCommonSettingController: CWBaseTableViewController {
         let item9 = Item(title: "存储空间")
         let section5 = Section(items: [item8, item9])
 
-        let item10 = ButtonItem(title: "清空聊天记录")
+        let item10 = ButtonItem(title: "清空聊天记录") { (item) in
+            
+        }
         let section6 = Section(items: [item10])
 
         let sections = [section1,section2,section3,section4,section5,section6]

@@ -8,14 +8,15 @@
 
 import UIKit
 import ChatClient
+import TableViewManager
 
 /// 个人信息
 class CWPersonalInfoController: CWBaseTableViewController {
     
     let contactManager = ChatClient.share.contactManager
     
-    lazy var tableViewManager: CWTableViewManager = {
-        let tableViewManager = CWTableViewManager(tableView: self.tableView)
+    lazy var tableViewManager: TableViewManager = {
+        let tableViewManager = TableViewManager(tableView: self.tableView)
         tableViewManager.delegate = self
         return tableViewManager
     }()
@@ -45,32 +46,30 @@ class CWPersonalInfoController: CWBaseTableViewController {
 extension CWPersonalInfoController {
     func setupItemData() {
 
-        let avatarItem = CWTableViewItem(title: "头像")
+        let avatarItem = Item(title: "头像")
         avatarItem.cellHeight = 87
-        avatarItem.rightImageURL = URL(string: "\(kImageBaseURLString)chenwei.jpg")
+       // avatarItem.rightImageURL = URL(string: "\(kImageBaseURLString)chenwei.jpg")
 
         let nikename = "武藤游戏boy"
-        let nikenameItem = CWTableViewItem(title: "名字", subTitle: nikename)
-        let usernameItem = CWTableViewItem(title: "微信号", subTitle: "chenwei")
+        let nikenameItem = Item(title: "名字", subTitle: nikename)
+        let usernameItem = Item(title: "微信号", subTitle: "chenwei")
+        usernameItem.disableHighlight = true
         usernameItem.showDisclosureIndicator = false
         
-        let qrCodeItem = CWTableViewItem(title: "我的二维码")
-        let locationItem = CWTableViewItem(title: "我的地址")
+        let qrCodeItem = Item(title: "我的二维码")
+        let locationItem = Item(title: "我的地址")
 
-        let section1 = CWTableViewSection(items: [avatarItem, nikenameItem, usernameItem, qrCodeItem, locationItem])
+        tableViewManager.append(itemsOf: [avatarItem, nikenameItem, usernameItem, qrCodeItem, locationItem])
 
-        let sexItem = CWTableViewItem(title: "性别", subTitle: "男")
-        let cityItem = CWTableViewItem(title: "地区", subTitle: "中国")
-        let mottoItem = CWTableViewItem(title: "个性签名", subTitle: "hello world")
+        let sexItem = Item(title: "性别", subTitle: "男")
+        let cityItem = Item(title: "地区", subTitle: "中国")
+        let mottoItem = Item(title: "个性签名", subTitle: "hello world")
         
-        let section2 = CWTableViewSection(items: [sexItem, cityItem, mottoItem])
-
-        tableViewManager.addSection(contentsOf: [section1, section2])
-
+        tableViewManager.append(itemsOf: [sexItem, cityItem, mottoItem])
     }
 }
 
-extension CWPersonalInfoController: CWTableViewManagerDelegate {
+extension CWPersonalInfoController: TableViewManagerDelegate {
     
     
     

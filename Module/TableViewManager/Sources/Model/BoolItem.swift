@@ -13,7 +13,7 @@ public class BoolItem: Item {
     
     public var switchChangeHandler: SelectionHandler?
     
-    public init(title: String, value: Bool = false, switchChangeHandler: @escaping SelectionHandler) {
+    public init(title: String, value: Bool = false, switchChangeHandler: SelectionHandler? = nil) {
         self.value = value
         self.switchChangeHandler = switchChangeHandler
         super.init(title: title)
