@@ -91,7 +91,7 @@ extension ConversationListController: UITableViewDelegate, UITableViewDataSource
         return [deleteAction,moreAction]
     }
     
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
         let conversation = conversationList[indexPath.row].conversation

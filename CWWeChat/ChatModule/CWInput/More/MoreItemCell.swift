@@ -9,7 +9,6 @@
 import UIKit
 import SnapKit
 
-
 class MoreItemCell: UICollectionViewCell {
     
     var item: MoreItem? {

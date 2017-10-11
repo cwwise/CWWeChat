@@ -53,14 +53,6 @@ public class BaseCell: UITableViewCell {
         return subTitleLabel
     }()
     
-    // 靠右边
-    lazy var rightLabel:UILabel = {
-        let rightLabel = UILabel()
-        rightLabel.textColor = UIColor.gray
-        rightLabel.font = kItemSubTitleFont
-        return rightLabel
-    }()
-    
     private lazy var rightImageView: UIImageView = {
         let rightImageView = UIImageView()
         return rightImageView
@@ -71,7 +63,7 @@ public class BaseCell: UITableViewCell {
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(titleLabel)
-        self.contentView.addSubview(rightLabel)
+        self.contentView.addSubview(subTitleLabel)
         self.contentView.addSubview(rightImageView)
         setupSnap()
     }
@@ -83,10 +75,16 @@ public class BaseCell: UITableViewCell {
             return
         }
         
-        if item.showDisclosureIndicator {
-            self.accessoryType = .disclosureIndicator
-        } else {
+        if item.showDisclosureIndicator == false {
             self.accessoryType = .none
+            self.subTitleLabel.snp.updateConstraints({ (make) in
+                make.right.equalTo(-kCellLeftMargin)
+            })
+        } else {
+            self.accessoryType = .disclosureIndicator
+            self.subTitleLabel.snp.updateConstraints({ (make) in
+                make.right.equalToSuperview()
+            })
         }
         
         if item.disableHighlight {
@@ -95,6 +93,7 @@ public class BaseCell: UITableViewCell {
             self.selectionStyle = .default
         }
         titleLabel.text = item.title
+        subTitleLabel.text = item.subTitle
     }
     
     func setupSnap() {
@@ -102,6 +101,12 @@ public class BaseCell: UITableViewCell {
             make.centerY.equalTo(self.contentView)
             make.left.equalTo(kCellLeftMargin)
             make.right.lessThanOrEqualTo(-kCellLeftMargin)
+        }
+        
+        subTitleLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.contentView)
+            make.left.greaterThanOrEqualTo(self.titleLabel.snp.right).offset(20)
+            make.right.equalTo(self.contentView)
         }
     }
     
@@ -114,7 +119,7 @@ public class BaseCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    /*
+    
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
         
@@ -122,8 +127,7 @@ public class BaseCell: UITableViewCell {
             return
         }
         
-        let lineWidth = 1/UIScreen.main.scale
-        context.setLineWidth(lineWidth)
+        context.setLineWidth(1.0/UIScreen.main.scale)
       //  context.setStrokeColor(UIColor(hex: "#e9e9e9").cgColor)
         
         if self.topLineStyle != .none {
@@ -145,5 +149,6 @@ public class BaseCell: UITableViewCell {
         }
         
     }
-     */
+    
+
 }

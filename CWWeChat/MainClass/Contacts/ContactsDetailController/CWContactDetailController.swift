@@ -8,6 +8,7 @@
 
 import UIKit
 import TableViewManager
+import ChatKit
 
 class CWContactDetailController: CWBaseTableViewController {
 
@@ -77,7 +78,7 @@ class CWContactDetailController: CWBaseTableViewController {
     }
 
     func goChatController() {
-        let chatVC = CWChatMessageController(targetId: userId!)
+        let chatVC = CWMessageController(conversationId: userId!)
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
     

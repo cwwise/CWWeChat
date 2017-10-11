@@ -12,6 +12,14 @@ open class MessageController: UIViewController {
 
     public var conversation: Conversation
     
+    public lazy var backgroundImageView: UIImageView = {
+        let backgroundImageView = UIImageView()
+        backgroundImageView.contentMode = .scaleAspectFill
+        backgroundImageView.frame = self.view.bounds
+        backgroundImageView.clipsToBounds = true
+        return backgroundImageView
+    }()
+    
     convenience public init(conversationId: String) {
         let chatManager = ChatClient.share.chatManager
         let conversation = chatManager.fecthConversation(chatType: .single,
@@ -30,13 +38,22 @@ open class MessageController: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.view.addSubview(backgroundImageView)
+        self.view.backgroundColor = UIColor.white
+        
+        // 获取数据
+        
     }
 
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }
+
+
+
+
+
+
+

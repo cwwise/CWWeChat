@@ -56,7 +56,9 @@ class MessageModel {
     public var showUsername: Bool = false
     
     public init(message: Message) {
-        self.message = message        
+        self.message = message
+        
+        // 计算frame部分
     }
 }
 

@@ -13,7 +13,11 @@ public class MessageCell: UICollectionViewCell {
     
     weak var delegate: MessageCellDelegate?
     
-    var message: MessageModel?
+    var message: MessageModel? {
+        didSet {
+            
+        }
+    }
     
     // MARK: 属性
     /// 用户名称
@@ -49,7 +53,6 @@ public class MessageCell: UICollectionViewCell {
             messageContentView = ImageMessageContentView()
         case .voice:
             messageContentView = VoiceMessageContentView()
-
         case .location:
             messageContentView = LocationMessageContentView()
         case .emoticon:
@@ -110,8 +113,11 @@ public class MessageCell: UICollectionViewCell {
     }
         
     // 设置
-    func refresh(message: MessageModel) {
-        self.message = message
+    func refresh() {
+        
+        guard let message = message else {
+            return
+        }
         
         updateState()
         // 赋值

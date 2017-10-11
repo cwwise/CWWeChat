@@ -115,7 +115,7 @@ class InputTextView: UITextView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        if self.text.characters.count == 0 && (placeHolder != nil) {
+        if self.text.count == 0 && (placeHolder != nil) {
             let placeHolderRect = CGRect(x: 10.0,
                                          y: 7.0,
                                          width: rect.size.width,

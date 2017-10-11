@@ -1,5 +1,5 @@
 //
-//  CWChatMessageController.swift
+//  CWMessageController.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/4/10.
@@ -7,20 +7,19 @@
 //
 
 import UIKit
+import ChatKit
 
-public class CWChatMessageController: CWBaseMessageController {
+public class CWMessageController: MessageController {
         
     override public func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = rightBarItem
         //背景图
         if let path = Bundle.main.path(forResource: "chat_background", ofType: "png") {
-            let imageView = UIImageView(frame: self.view.bounds)
-            imageView.contentMode = .scaleAspectFill
-            imageView.image = UIImage(contentsOfFile: path)
-            self.collectionView.backgroundView = imageView
+            let image = UIImage(contentsOfFile: path)
+            self.backgroundImageView.image = image
         }
-        
+
     }
     
     @objc func rightBarItemDown(_ barItem: UIBarButtonItem) {

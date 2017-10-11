@@ -9,7 +9,8 @@ import UIKit
 
 public struct MessageFrame {
     
-    
+    var heightOfCell: CGFloat = 0.0
+    var containerFrame: CGRect = CGRect.zero
     
     
 }
