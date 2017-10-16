@@ -34,13 +34,6 @@ class CWContactDetailController: CWBaseTableViewController {
             self.tableView.reloadData()
         })
         
-        let style = CWTableViewStyle()
-        style.titleTextFont = UIFont.systemFont(ofSize: 15)
-        style.titleTextColor = UIColor(hex: "333333")
-        style.detailTextFont = UIFont.systemFont(ofSize: 15)
-        style.detailTextColor = UIColor(hex: "333333")
-
-        
         self.tableView.register(CWContactInfoCell.self, forCellReuseIdentifier: CWContactInfoCell.identifier)
         self.tableView.register(CWContactDetailAlbumCell.self, forCellReuseIdentifier: CWContactDetailAlbumCell.identifier)
         setupData()

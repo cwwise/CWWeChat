@@ -84,8 +84,10 @@ extension CWChatDetailViewController {
         item12.showDisclosureIndicator = false
         tableViewManager.append(itemsOf: [item12])
 
-        let item13 = ButtonItem(title: "删除并退出")
-        tableViewManager.addSection(itemsOf: [item13])
+        let item13 = ButtonItem(title: "删除并退出") { (item) in
+            
+        }
+        tableViewManager.append(itemsOf: [item13])
 
     }
     

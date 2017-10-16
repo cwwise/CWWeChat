@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TableViewManager
 
 class CWContactDetailAlbumCell: UITableViewCell {
 
@@ -15,7 +16,7 @@ class CWContactDetailAlbumCell: UITableViewCell {
     lazy var titleLabel:UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "个人相册"
-        titleLabel.font = kCWItemTitleFont
+        titleLabel.font = kItemTitleFont
         return titleLabel
     }()
     
@@ -27,7 +28,7 @@ class CWContactDetailAlbumCell: UITableViewCell {
         self.contentView.addSubview(titleLabel)
         self.titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView)
-            make.left.equalTo(self.contentView).offset(kCWCellLeftMargin)
+            make.left.equalTo(self.contentView).offset(kCellLeftMargin)
         }
         setupUI()
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TableViewManager
 
 class CWContactDetailFooterView: UIView {
 
@@ -24,8 +25,8 @@ class CWContactDetailFooterView: UIView {
         self.addSubview(button)
         
         button.snp.makeConstraints { (make) in
-            make.left.equalTo(kCWCellLeftMargin)
-            make.right.equalTo(-kCWCellLeftMargin)
+            make.left.equalTo(kCellLeftMargin)
+            make.right.equalTo(-kCellLeftMargin)
             make.top.equalTo(15)
             make.height.equalTo(44)
         }

@@ -7,11 +7,11 @@
 
 import Foundation
 
-let kItemTitleFont = UIFont.systemFont(ofSize: 16)
-let kItemSubTitleFont = UIFont.systemFont(ofSize: 15)
+public let kItemTitleFont = UIFont.systemFont(ofSize: 16)
+public let kItemSubTitleFont = UIFont.systemFont(ofSize: 15)
 /// 样式
-let kCellLeftMargin: CGFloat = 20
-let kDefaultItemCellHeight: CGFloat = 45
+public let kCellLeftMargin: CGFloat = 20
+public let kDefaultItemCellHeight: CGFloat = 45
 
 public struct TableViewStyle {
     

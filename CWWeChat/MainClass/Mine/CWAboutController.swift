@@ -72,7 +72,7 @@ class CWAboutController: CWBaseTableViewController {
         
         if let tableFooterView = self.tableView.tableFooterView {
             // footerViw
-            tableFooterView.height = kScreenHeight - kNavigationBarHeight - headerViewHeight - 4*kCWDefaultItemCellHeight - 40
+            tableFooterView.height = kScreenHeight - kNavigationBarHeight - headerViewHeight - 4*kDefaultItemCellHeight - 40
             tableFooterView.addSubview(self.lienseLabel)
             self.lienseLabel.snp.makeConstraints { (make) in
                 make.left.right.equalTo(tableFooterView)

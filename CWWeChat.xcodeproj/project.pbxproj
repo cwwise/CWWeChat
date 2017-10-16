@@ -34,13 +34,6 @@
 		1F34921B1E878AD500B36641 /* UIView+Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491E41E878AD500B36641 /* UIView+Frame.swift */; };
 		1F34921D1E878AD500B36641 /* ChatTimeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491E71E878AD500B36641 /* ChatTimeTool.swift */; };
 		1F34921E1E878AD500B36641 /* CWUIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491E81E878AD500B36641 /* CWUIUtility.swift */; };
-		1F34921F1E878AD500B36641 /* CWTableViewBoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491EE1E878AD500B36641 /* CWTableViewBoolCell.swift */; };
-		1F3492201E878AD500B36641 /* CWTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491EF1E878AD500B36641 /* CWTableViewCell.swift */; };
-		1F3492211E878AD500B36641 /* CWTableViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491F01E878AD500B36641 /* CWTableViewItem.swift */; };
-		1F3492221E878AD500B36641 /* CWTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491F11E878AD500B36641 /* CWTableViewManager.swift */; };
-		1F3492231E878AD500B36641 /* CWTableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491F21E878AD500B36641 /* CWTableViewSection.swift */; };
-		1F3492241E878AD500B36641 /* CWTableViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491F31E878AD500B36641 /* CWTableViewStyle.swift */; };
-		1F3492251E878AD500B36641 /* CWBoolItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3491F51E878AD500B36641 /* CWBoolItem.swift */; };
 		1F3492261E878AD500B36641 /* receivemsg.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1F3491FC1E878AD500B36641 /* receivemsg.caf */; };
 		1F3492271E878AD500B36641 /* sendmsg.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1F3491FD1E878AD500B36641 /* sendmsg.caf */; };
 		1F3492281E878AD500B36641 /* shake_match.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1F3491FE1E878AD500B36641 /* shake_match.wav */; };
@@ -62,7 +55,6 @@
 		1F3492911E88227100B36641 /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3492901E88227100B36641 /* UITableView+Reusable.swift */; };
 		1F3D61551E9F2E7200A1DA4B /* CWContactInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3D61541E9F2E7200A1DA4B /* CWContactInfoCell.swift */; };
 		1F40948C1E9DCAEC008D959C /* CWChatImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F40948B1E9DCAEC008D959C /* CWChatImageView.swift */; };
-		1F40948E1E9DD326008D959C /* CWButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F40948D1E9DD326008D959C /* CWButtonItem.swift */; };
 		1F4094901E9DD64B008D959C /* CWCommonSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F40948F1E9DD64B008D959C /* CWCommonSettingController.swift */; };
 		1F4094921E9DD9B6008D959C /* CWMessageNoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4094911E9DD9B6008D959C /* CWMessageNoticeController.swift */; };
 		1F4094941E9DE5A7008D959C /* CWPrivacySettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4094931E9DE5A7008D959C /* CWPrivacySettingController.swift */; };
@@ -116,9 +108,6 @@
 		1FA724151E9B6E41009B6456 /* CWChatTextDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA724141E9B6E41009B6456 /* CWChatTextDisplayView.swift */; };
 		1FA724471E9C9EA9009B6456 /* CWAccountSafetyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA724461E9C9EA9009B6456 /* CWAccountSafetyController.swift */; };
 		1FA724491E9C9F84009B6456 /* CWMineSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA724481E9C9F84009B6456 /* CWMineSettingController.swift */; };
-		1FA7244B1E9CA7CB009B6456 /* CWTableViewButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7244A1E9CA7CB009B6456 /* CWTableViewButtonCell.swift */; };
-		1FA7244E1E9CA9DD009B6456 /* CWTableHeaderTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7244D1E9CA9DD009B6456 /* CWTableHeaderTitleView.swift */; };
-		1FA724501E9CAA44009B6456 /* CWTableFooterTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7244F1E9CAA44009B6456 /* CWTableFooterTitleView.swift */; };
 		46B40669CBA35070557EB831 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B376C117EA7EEC77FD2C31A1 /* Pods_CWWeChat.framework */; };
 		8C0BFDD71E90FD91007343F1 /* CWContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFDD61E90FD91007343F1 /* CWContactManager.swift */; };
 		8C0BFDD91E9127FD007343F1 /* CWGroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFDD81E9127FD007343F1 /* CWGroupManager.swift */; };
@@ -279,13 +268,6 @@
 		1F3491E41E878AD500B36641 /* UIView+Frame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Frame.swift"; sourceTree = "<group>"; };
 		1F3491E71E878AD500B36641 /* ChatTimeTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTimeTool.swift; sourceTree = "<group>"; };
 		1F3491E81E878AD500B36641 /* CWUIUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWUIUtility.swift; sourceTree = "<group>"; };
-		1F3491EE1E878AD500B36641 /* CWTableViewBoolCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewBoolCell.swift; sourceTree = "<group>"; };
-		1F3491EF1E878AD500B36641 /* CWTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewCell.swift; sourceTree = "<group>"; };
-		1F3491F01E878AD500B36641 /* CWTableViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewItem.swift; sourceTree = "<group>"; };
-		1F3491F11E878AD500B36641 /* CWTableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewManager.swift; sourceTree = "<group>"; };
-		1F3491F21E878AD500B36641 /* CWTableViewSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewSection.swift; sourceTree = "<group>"; };
-		1F3491F31E878AD500B36641 /* CWTableViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewStyle.swift; sourceTree = "<group>"; };
-		1F3491F51E878AD500B36641 /* CWBoolItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWBoolItem.swift; sourceTree = "<group>"; };
 		1F3491FC1E878AD500B36641 /* receivemsg.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = receivemsg.caf; sourceTree = "<group>"; };
 		1F3491FD1E878AD500B36641 /* sendmsg.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sendmsg.caf; sourceTree = "<group>"; };
 		1F3491FE1E878AD500B36641 /* shake_match.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shake_match.wav; sourceTree = "<group>"; };
@@ -307,7 +289,6 @@
 		1F3492901E88227100B36641 /* UITableView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
 		1F3D61541E9F2E7200A1DA4B /* CWContactInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWContactInfoCell.swift; sourceTree = "<group>"; };
 		1F40948B1E9DCAEC008D959C /* CWChatImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatImageView.swift; sourceTree = "<group>"; };
-		1F40948D1E9DD326008D959C /* CWButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWButtonItem.swift; sourceTree = "<group>"; };
 		1F40948F1E9DD64B008D959C /* CWCommonSettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWCommonSettingController.swift; sourceTree = "<group>"; };
 		1F4094911E9DD9B6008D959C /* CWMessageNoticeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMessageNoticeController.swift; sourceTree = "<group>"; };
 		1F4094931E9DE5A7008D959C /* CWPrivacySettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWPrivacySettingController.swift; sourceTree = "<group>"; };
@@ -361,9 +342,6 @@
 		1FA724141E9B6E41009B6456 /* CWChatTextDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWChatTextDisplayView.swift; sourceTree = "<group>"; };
 		1FA724461E9C9EA9009B6456 /* CWAccountSafetyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAccountSafetyController.swift; sourceTree = "<group>"; };
 		1FA724481E9C9F84009B6456 /* CWMineSettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMineSettingController.swift; sourceTree = "<group>"; };
-		1FA7244A1E9CA7CB009B6456 /* CWTableViewButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableViewButtonCell.swift; sourceTree = "<group>"; };
-		1FA7244D1E9CA9DD009B6456 /* CWTableHeaderTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableHeaderTitleView.swift; sourceTree = "<group>"; };
-		1FA7244F1E9CAA44009B6456 /* CWTableFooterTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWTableFooterTitleView.swift; sourceTree = "<group>"; };
 		31E51D349FC87AA2896572C6 /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
 		8C0BFDD61E90FD91007343F1 /* CWContactManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWContactManager.swift; sourceTree = "<group>"; };
 		8C0BFDD81E9127FD007343F1 /* CWGroupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWGroupManager.swift; sourceTree = "<group>"; };
@@ -767,42 +745,8 @@
 				8C0BFDF01E91FB4F007343F1 /* CWSearch */,
 				1F34926F1E87C06300B36641 /* CWTableViewController */,
 				1F34926A1E87B84100B36641 /* CWWebView */,
-				1F3491EC1E878AD500B36641 /* CWTableViewManager */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		1F3491EC1E878AD500B36641 /* CWTableViewManager */ = {
-			isa = PBXGroup;
-			children = (
-				1F3491F31E878AD500B36641 /* CWTableViewStyle.swift */,
-				1F3491F11E878AD500B36641 /* CWTableViewManager.swift */,
-				1F3491F21E878AD500B36641 /* CWTableViewSection.swift */,
-				1F3491F01E878AD500B36641 /* CWTableViewItem.swift */,
-				1F3491EF1E878AD500B36641 /* CWTableViewCell.swift */,
-				1FA7244C1E9CA9BA009B6456 /* Header */,
-				1F3491ED1E878AD500B36641 /* Cells */,
-				1F3491F41E878AD500B36641 /* Items */,
-			);
-			path = CWTableViewManager;
-			sourceTree = "<group>";
-		};
-		1F3491ED1E878AD500B36641 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				1F3491EE1E878AD500B36641 /* CWTableViewBoolCell.swift */,
-				1FA7244A1E9CA7CB009B6456 /* CWTableViewButtonCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		1F3491F41E878AD500B36641 /* Items */ = {
-			isa = PBXGroup;
-			children = (
-				1F40948D1E9DD326008D959C /* CWButtonItem.swift */,
-				1F3491F51E878AD500B36641 /* CWBoolItem.swift */,
-			);
-			path = Items;
 			sourceTree = "<group>";
 		};
 		1F3491F61E878AD500B36641 /* Discover */ = {
@@ -1142,15 +1086,6 @@
 				1F83A1231F5D533300FE61F9 /* MoreEmoticonBannerCell.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		1FA7244C1E9CA9BA009B6456 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				1FA7244D1E9CA9DD009B6456 /* CWTableHeaderTitleView.swift */,
-				1FA7244F1E9CAA44009B6456 /* CWTableFooterTitleView.swift */,
-			);
-			path = Header;
 			sourceTree = "<group>";
 		};
 		8C0BFDE91E91ED6B007343F1 /* Contacts */ = {
@@ -1680,7 +1615,6 @@
 				1F803BAF1F4D221300DFDC4A /* EmoticonService.swift in Sources */,
 				1F803BB21F4D30B300DFDC4A /* EmoticonPackage.swift in Sources */,
 				8C0BFDD91E9127FD007343F1 /* CWGroupManager.swift in Sources */,
-				1F34921F1E878AD500B36641 /* CWTableViewBoolCell.swift in Sources */,
 				1FA7240F1E9B6C72009B6456 /* CWEmoticonListController.swift in Sources */,
 				8CCA575C1F5EEDC60072EBF0 /* CWContactSettingController.swift in Sources */,
 				8CC856281F5D74AF00CA0546 /* CWChatGroupOptions.swift in Sources */,
@@ -1694,11 +1628,8 @@
 				1F4094901E9DD64B008D959C /* CWCommonSettingController.swift in Sources */,
 				8C1AA3E41F5D9D9B0001D739 /* CWLoginManager.swift in Sources */,
 				8CA9246D1F56F88300570846 /* EmoticonPageCell.swift in Sources */,
-				1F3492211E878AD500B36641 /* CWTableViewItem.swift in Sources */,
-				1F3492231E878AD500B36641 /* CWTableViewSection.swift in Sources */,
 				8CFCF5391E90E33700E56C31 /* CWChatConversationStore.swift in Sources */,
 				8C6AF8CF1F70264D000FCE88 /* MessageContentView.swift in Sources */,
-				1F3492251E878AD500B36641 /* CWBoolItem.swift in Sources */,
 				1FA527D21E9381EE00D1BE54 /* CWChatTextParser.swift in Sources */,
 				8C3CC3AE1F4DDEAD00CB7B61 /* EmoticonDetailFooterView.swift in Sources */,
 				8C0BFE131E9209F7007343F1 /* CWContactDetailController.swift in Sources */,
@@ -1744,14 +1675,12 @@
 				8C0BFE1C1E92196B007343F1 /* CWPlayMessageAudio.swift in Sources */,
 				8CFA1C0C1F7E6F3200748A6E /* CWChatClientUtil.swift in Sources */,
 				8C0BFE101E9209D8007343F1 /* CWContactCell.swift in Sources */,
-				1FA724501E9CAA44009B6456 /* CWTableFooterTitleView.swift in Sources */,
 				8CA9248A1F570F0900570846 /* CWRecordButton.swift in Sources */,
 				1F803BB81F4D8B0600DFDC4A /* EmoticonListBannerCell.swift in Sources */,
 				8CA924771F56F88300570846 /* Keyboard.swift in Sources */,
 				1F34920C1E878AD500B36641 /* CWXMPPManager.swift in Sources */,
 				1F34926C1E87B84100B36641 /* CWWebViewController.swift in Sources */,
 				8CA924711F56F88300570846 /* EmoticonPageCellLayout.swift in Sources */,
-				1FA7244E1E9CA9DD009B6456 /* CWTableHeaderTitleView.swift in Sources */,
 				1F3492061E878AD500B36641 /* CWConversation.swift in Sources */,
 				8C6AF8DC1F7026E0000FCE88 /* CWBaseMessageController.swift in Sources */,
 				8C0BFE0C1E9209D8007343F1 /* CWContactsController.swift in Sources */,
@@ -1759,11 +1688,9 @@
 				8C6AF8D11F70264D000FCE88 /* TextMessageContentView.swift in Sources */,
 				8C6AF8D21F70264D000FCE88 /* CWMessageCell.swift in Sources */,
 				1F01651F1E989A43001696F2 /* CWNewFriendCell.swift in Sources */,
-				1F3492221E878AD500B36641 /* CWTableViewManager.swift in Sources */,
 				1F3492111E878AD500B36641 /* NSString+Chat.swift in Sources */,
 				8C34AFA41E9BD84A00977742 /* CWChatDetailViewController.swift in Sources */,
 				1F6B9F1E1E8CCF4E00AD7FC7 /* CWMessageParse.swift in Sources */,
-				1F3492201E878AD500B36641 /* CWTableViewCell.swift in Sources */,
 				1F3492041E878AD500B36641 /* CWChatClient.swift in Sources */,
 				8C84B9561E8D6C840020D508 /* CWImageMessageDispatchOperation.swift in Sources */,
 				8CA7EB1F1EA1CE8900467C37 /* CWTextLinePositionModifier.swift in Sources */,
@@ -1771,7 +1698,6 @@
 				1F4094921E9DD9B6008D959C /* CWMessageNoticeController.swift in Sources */,
 				1FA724151E9B6E41009B6456 /* CWChatTextDisplayView.swift in Sources */,
 				8CA924791F56F88300570846 /* MoreInputViewLayout.swift in Sources */,
-				1F3492241E878AD500B36641 /* CWTableViewStyle.swift in Sources */,
 				1F803BB61F4D880700DFDC4A /* EmoticonListHeaderView.swift in Sources */,
 				1F3492371E878FD700B36641 /* CWChatUIConstant.swift in Sources */,
 				8C16ECD21EA2765300C46823 /* CWVoiceMessageBody.swift in Sources */,
@@ -1789,7 +1715,6 @@
 				1F3492191E878AD500B36641 /* UIImage+Extension.swift in Sources */,
 				1F3492871E87E27D00B36641 /* CWGameController.swift in Sources */,
 				1F8664371F00B74E0093F979 /* CWMomentReplyStore.swift in Sources */,
-				1F40948E1E9DD326008D959C /* CWButtonItem.swift in Sources */,
 				8C0BFE0D1E9209D8007343F1 /* CWSearchResultController.swift in Sources */,
 				1F803C241F4EAE5900DFDC4A /* Emoticon.swift in Sources */,
 				8C3CC3AA1F4DDBC100CB7B61 /* CWEmoticonDetailController.swift in Sources */,
@@ -1832,7 +1757,6 @@
 				1F83A1351F5F8A6000FE61F9 /* CWMessageLayoutSettings.swift in Sources */,
 				1F40948C1E9DCAEC008D959C /* CWChatImageView.swift in Sources */,
 				1F3D61551E9F2E7200A1DA4B /* CWContactInfoCell.swift in Sources */,
-				1FA7244B1E9CA7CB009B6456 /* CWTableViewButtonCell.swift in Sources */,
 				8C6AF8D41F70264D000FCE88 /* ImageMessageContentView.swift in Sources */,
 				1F3492071E878AD500B36641 /* CWMessageBody.swift in Sources */,
 				1F34922D1E878B8500B36641 /* CWChatClientOptions.swift in Sources */,
