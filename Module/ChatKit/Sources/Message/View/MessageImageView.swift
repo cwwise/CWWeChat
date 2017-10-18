@@ -1,16 +1,14 @@
 //
-//  CWChatImageView.swift
-//  CWWeChat
+//  MessageImageView.swift
+//  Alamofire
 //
-//  Created by chenwei on 16/4/6.
-//  Copyright © 2016年 chenwei. All rights reserved.
+//  Created by chenwei on 2017/10/18.
 //
 
 import UIKit
+import Hue
 
-/// 图片发送部分进度view
-class CWChatImageView: UIImageView {
-    
+class MessageImageView: UIImageView {
     //引导
     let activityView = UIActivityIndicatorView(activityIndicatorStyle: .white)
     
@@ -48,7 +46,7 @@ class CWChatImageView: UIImageView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-                
+        
         self.indicatorbackgroundView.frame = self.bounds
         self.activityView.center = CGPoint(x: self.bounds.midX, y: self.bounds.midY-10)
         
@@ -77,5 +75,6 @@ class CWChatImageView: UIImageView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 
 }

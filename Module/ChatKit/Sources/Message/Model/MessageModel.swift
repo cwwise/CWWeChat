@@ -47,6 +47,8 @@ public class MessageModel {
         return message.from
     }
     
+    public var transportProgress: Float = 0
+
     /// 播放状态
     public var playStatus: MessagePlayStatus = .none
     /// 是否显示时间
