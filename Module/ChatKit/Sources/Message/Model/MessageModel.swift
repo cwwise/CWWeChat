@@ -13,14 +13,19 @@ public enum MessagePlayStatus {
     case played
 }
 
-class MessageModel {
+public class MessageModel {
     
     private let message: Message
-    
+    /// 会话id
+    public var conversationId: String {
+        return message.conversationId
+    }
+    /// 发送方
     public var isSend: Bool {
         return message.direction == .send
     }
     
+    /// 消息内容
     public var messageBody: MessageBody {
         return message.messageBody
     }
@@ -29,27 +34,21 @@ class MessageModel {
     public var messageType: MessageType {
         return message.messageBody.type
     }
-    
+    /// 消息发送状态
     public var sendStatus: MessageSendStatus {
         return message.sendStatus
     }
-    
+    /// 消息唯一id
     public var messageId: String {
         return message.messageId
     }
-    
+    /// 来源
     public var from: String {
         return message.from
     }
     
-    public var conversationId: String {
-        return message.conversationId
-    }
-    
-    public var transportProgress: Float = 0
-    
+    /// 播放状态
     public var playStatus: MessagePlayStatus = .none
-    
     /// 是否显示时间
     public var showTime: Bool = false
     /// 是否显示用户名 
