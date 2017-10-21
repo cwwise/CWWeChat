@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 public class MessageLayoutSettings {
     
     public var kMessageToLeftPadding: CGFloat

@@ -23,16 +23,7 @@ class CWChatDetailViewController: CWBaseTableViewController {
         self.title = "聊天详情"       
         setupSignleChatItems()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-}
-
-extension CWChatDetailViewController {
-    
+  
     func setupSignleChatItems() {
         
         let item1 = BoolItem(title: "置顶聊天", value: false ) { (item) in
@@ -56,7 +47,6 @@ extension CWChatDetailViewController {
 
         tableViewManager.append(contentsOf: [section1, section2, section3, section4])
     }
-    
     
     func setupGroupChatItems() {
 
@@ -88,9 +78,11 @@ extension CWChatDetailViewController {
             
         }
         tableViewManager.append(itemsOf: [item13])
-
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 }
 
 extension CWChatDetailViewController: TableViewManagerDelegate {

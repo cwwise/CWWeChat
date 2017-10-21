@@ -19,7 +19,6 @@ public class CWMessageController: MessageController {
             let image = UIImage(contentsOfFile: path)
             self.backgroundImageView.image = image
         }
-
     }
     
     @objc func rightBarItemDown(_ barItem: UIBarButtonItem) {

@@ -23,7 +23,6 @@ class MessageViewLayout: UICollectionViewFlowLayout {
         return MessageLayoutAttributes.self
     }
     
-    
     override init() {
         super.init()
         sectionInset = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
@@ -42,30 +41,25 @@ class MessageViewLayout: UICollectionViewFlowLayout {
         
         attributesArray.forEach { attributes in
             if attributes.representedElementCategory == .cell {
-               // configure(attributes: attributes)
+                configure(attributes: attributes)
             }
         }
-        
+
         return attributesArray
     }
     
     open override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        
         guard let attributes = super.layoutAttributesForItem(at: indexPath) as? MessageLayoutAttributes else { return nil }
-        
         if attributes.representedElementCategory == UICollectionElementCategory.cell {
-            //configure(attributes: attributes)
+            configure(attributes: attributes)
         }
-        
         return attributes
     }
     
     
     // MARK: - Invalidation Context
     open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        
         return collectionView?.bounds.width != newBounds.width || collectionView?.bounds.height != newBounds.height
-        
     }
     
     open override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
