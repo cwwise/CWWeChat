@@ -1,7 +1,8 @@
-osx_image: xcode9.0
+osx_image: xcode9
 language: swift
 
 podfile: Podfile
+cache: cocoapods
 
 env:
   global:
