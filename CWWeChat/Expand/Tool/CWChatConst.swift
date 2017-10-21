@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import CocoaLumberjack
 
 let kScreenSize = UIScreen.main.bounds.size
 let kScreenWidth = UIScreen.main.bounds.size.width
@@ -17,8 +16,17 @@ let kScreenScale = UIScreen.main.scale
 
 let kNavigationBarHeight:CGFloat = 64
 
+let kDefaultHeadImage = UIImage(named: "default_head")
 
-// stolen from Kingfisher: https://github.com/onevcat/Kingfisher/blob/master/Sources/ThreadHelper.swift
+public let kImageBaseURLString = "http://qiniu.cwwise.com/"
+
+//MARK: UI相关
+public struct ChatSessionCellUI {
+    static let headerImageViewLeftPadding:CGFloat = 10.0
+    static let headerImageViewTopPadding:CGFloat = 10.0
+}
+
+// Kingfisher: https://github.com/onevcat/Kingfisher/blob/master/Sources/ThreadHelper.swift
 extension DispatchQueue {
     // This method will dispatch the `block` to self.
     // If `self` is the main queue, and current thread is main thread, the block

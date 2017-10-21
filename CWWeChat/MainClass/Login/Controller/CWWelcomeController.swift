@@ -25,6 +25,7 @@ class CWWelcomeController: UIViewController {
         let loginController = CWLoginController()
         self.navigationController?.pushViewController(loginController, animated: true)
     }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }

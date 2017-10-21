@@ -91,7 +91,7 @@ class CWMineUserCell: UITableViewCell {
     func setupUserInfomation() {
         
         let nikename = userModel.nickname ?? ""
-        self.avatarImageView.kf.setImage(with: userModel.avatarURL, placeholder: defaultHeadeImage)
+        self.avatarImageView.kf.setImage(with: userModel.avatarURL, placeholder: kDefaultHeadImage)
 
         nikenameLabel.text = nikename
         usernameLabel.text = userModel.username

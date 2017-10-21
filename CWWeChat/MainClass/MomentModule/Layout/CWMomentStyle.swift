@@ -8,6 +8,9 @@
 
 import UIKit
 
+let kChatImageMaxWidth = kScreenWidth * 0.45
+let kChatImageMinWidth = kScreenWidth * 0.25
+
 struct CWMomentUI {
     
     static let kTopMargin: CGFloat = 10

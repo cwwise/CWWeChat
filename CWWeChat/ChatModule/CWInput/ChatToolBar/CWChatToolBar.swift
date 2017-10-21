@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import YYText
 
 /// toolBar代理事件
 public protocol CWChatToolBarDelegate: NSObjectProtocol {
@@ -165,7 +164,7 @@ public class CWChatToolBar: UIView {
     func setupTopLine() {
         let line = UIView()
         line.width = self.width
-        line.height = YYTextCGFloatFromPixel(1)
+        line.height = 1/UIScreen.main.scale
         line.backgroundColor = UIColor(hex: "#e9e9e9")
         line.autoresizingMask = .flexibleWidth
         self.addSubview(line)

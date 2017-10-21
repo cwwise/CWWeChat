@@ -12,7 +12,7 @@ class MessageViewLayout: UICollectionViewFlowLayout {
 
     weak var delegate: MessageViewLayoutDelegate?
     
-    var setting = MessageLayoutSettings.share
+    var setting = MessageLayoutSettings()
     
     private var itemWidth: CGFloat {
         guard let collectionView = collectionView else { return 0 }

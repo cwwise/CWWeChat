@@ -13,6 +13,7 @@ class CWDiscoverController: CWBaseTableViewController {
 
     lazy var tableViewManager: TableViewManager = {
         let tableViewManager = TableViewManager(tableView: self.tableView)
+        tableViewManager.delegate = self
         return tableViewManager
     }()
     
@@ -24,7 +25,6 @@ class CWDiscoverController: CWBaseTableViewController {
     }
     
     func setupItem() {
-        
         
         let item1 = MenuItem(iconImageName: CWAsset.Discover_album.rawValue, title: "朋友圈")
         let rightIconURL = "http://img4.duitang.com/uploads/item/201510/16/20151016113134_TZye4.thumb.224_0.jpeg";
@@ -44,7 +44,6 @@ class CWDiscoverController: CWBaseTableViewController {
         tableViewManager.append(itemsOf: item6,item7)
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -53,8 +52,7 @@ class CWDiscoverController: CWBaseTableViewController {
 }
 
 
-
-extension CWDiscoverController {
+extension CWDiscoverController: TableViewManagerDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

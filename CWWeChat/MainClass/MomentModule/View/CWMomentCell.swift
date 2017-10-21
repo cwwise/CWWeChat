@@ -97,7 +97,7 @@ class CWMomentCell: UITableViewCell {
         let moment = layout.moment
         // 头像
         let avatarURL = URL(string: "\(kImageBaseURLString)\(moment.userId).jpg")
-        self.avatarImageView.kf.setImage(with: avatarURL, placeholder: defaultHeadeImage)
+        self.avatarImageView.kf.setImage(with: avatarURL, placeholder: kDefaultHeadImage)
         self.avatarImageView.frame = layout.avatarFrame
         // 姓名
         self.nameLabel.textLayout = layout.usernameTextLayout

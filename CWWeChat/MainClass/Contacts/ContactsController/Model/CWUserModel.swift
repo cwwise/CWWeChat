@@ -42,7 +42,7 @@ public class CWUserModel: NSObject {
     var pinyingInitial: String = ""
     
     // 详情
-    var detailInfo = CWUserInfo()
+   // var detailInfo = CWUserInfo()
     
     init(userId: String, username: String) {
         self.username = username

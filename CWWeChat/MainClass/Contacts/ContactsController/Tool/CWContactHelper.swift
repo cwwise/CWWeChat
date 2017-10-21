@@ -9,9 +9,11 @@
 import UIKit
 import SwiftyJSON
 
+
+
 typealias CWContactListChanged = ([[CWUserModel]], [String], Int) -> Void
 
-typealias CWFetchContactComplete = (CWUserModel,CWChatError?) -> Void
+typealias CWFetchContactComplete = (CWUserModel, NSError?) -> Void
 
 public class CWContactHelper: NSObject {
 
