@@ -18,6 +18,7 @@ public class ChatClient {
     public private(set) var version: String
     
     public private(set) var options: ChatClientOptions
+    
     /// login    
     public var loginManager: LoginManager {
         return xmppManager
@@ -30,7 +31,6 @@ public class ChatClient {
     public var contactManager: ContactManager {
         return contactService
     }
-
 
     public var currentAccount: String {
         return self.loginManager.currentAccount

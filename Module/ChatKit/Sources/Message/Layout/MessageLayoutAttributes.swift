@@ -1,16 +1,14 @@
 //
-//  CWMessageLayoutAttributes.swift
-//  CWWeChat
+//  MessageLayoutAttributes.swift
+//  ChatKit
 //
-//  Created by chenwei on 2017/7/14.
-//  Copyright © 2017年 cwcoder. All rights reserved.
+//  Created by chenwei on 2017/10/13.
 //
 
 import UIKit
 
-// 
-class CWMessageLayoutAttributes: UICollectionViewLayoutAttributes {
-    
+class MessageLayoutAttributes: UICollectionViewLayoutAttributes {
+
     var avaterFrame: CGRect
     
     var usernameFrame: CGRect
@@ -18,9 +16,9 @@ class CWMessageLayoutAttributes: UICollectionViewLayoutAttributes {
     var messageContainerFrame: CGRect
     
     var messageContainerInsets: UIEdgeInsets
-
+    
     var errorFrame: CGRect
-
+    
     var activityFrame: CGRect
     
     public override init() {
@@ -34,10 +32,10 @@ class CWMessageLayoutAttributes: UICollectionViewLayoutAttributes {
     }
     
     override func copy(with zone: NSZone? = nil) -> Any {
-        guard let copiedAttributes = super.copy(with: zone) as? CWMessageLayoutAttributes else {
+        guard let copiedAttributes = super.copy(with: zone) as? MessageLayoutAttributes else {
             return super.copy(with: zone)
         }
-            
+        
         copiedAttributes.avaterFrame = avaterFrame
         copiedAttributes.usernameFrame = usernameFrame
         copiedAttributes.messageContainerFrame = messageContainerFrame
@@ -48,8 +46,6 @@ class CWMessageLayoutAttributes: UICollectionViewLayoutAttributes {
         
         return copiedAttributes
     }
-    
-
     
     
 }

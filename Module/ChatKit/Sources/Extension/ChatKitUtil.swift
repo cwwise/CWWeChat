@@ -7,6 +7,17 @@
 
 import Foundation
 
+let kScreenWidth = UIScreen.main.bounds.size.width
+let kScreenHeight = UIScreen.main.bounds.size.height
+let kScreenScale = UIScreen.main.scale
+
+let kChatTextMaxWidth = kScreenWidth * 0.58
+//图片
+let kChatImageMaxWidth = kScreenWidth * 0.45
+let kChatImageMinWidth = kScreenWidth * 0.25
+
+let kChatVoiceMaxWidth = kScreenWidth * 0.3
+
 struct ChatCellUI {
     
     static let bubbleTopMargin: CGFloat = 2

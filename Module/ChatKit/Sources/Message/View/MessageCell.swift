@@ -204,3 +204,22 @@ extension MessageCell: UIGestureRecognizerDelegate {
     
     
 }
+
+
+// 
+extension MessageCell {
+    
+    override public func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+    
+        
+        
+        
+        
+    }
+    
+}
+
+
+
+
+
