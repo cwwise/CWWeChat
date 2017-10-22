@@ -10,7 +10,7 @@ import ChatClient
 
 open class MessageController: UIViewController {
 
-    var messageList: [MessageModel] = [MessageModel]()
+    public var messageList: [MessageModel] = [MessageModel]()
 
     public var conversation: Conversation
     
@@ -22,7 +22,7 @@ open class MessageController: UIViewController {
         return backgroundImageView
     }()
     
-    lazy var collectionView: UICollectionView = {
+    public lazy var collectionView: UICollectionView = {
         let frame = CGRect(x: 0, y: 0,
                            width: kScreenWidth, height: kScreenHeight)
         let layout = MessageViewLayout()
@@ -137,6 +137,16 @@ extension MessageController: UICollectionViewDelegate, UICollectionViewDataSourc
         messageCell.delegate = self
         messageCell.refresh()
         return messageCell
+    }
+    
+}
+
+extension MessageController: UICollectionViewDelegateFlowLayout {
+    
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let messagesFlowLayout = collectionViewLayout as? MessageViewLayout else { return .zero }
+        return CGSize(width: kScreenWidth-20, height: 50)
+        //        return messagesFlowLayout.sizeForItem(at: indexPath)
     }
     
 }

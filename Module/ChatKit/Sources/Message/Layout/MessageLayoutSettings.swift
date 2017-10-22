@@ -8,18 +8,20 @@
 import UIKit
 
 public class MessageLayoutSettings {
+  
+    public var messageToTopPadding: CGFloat
     
-    public var kMessageToLeftPadding: CGFloat
+    public var messageToBottomPadding: CGFloat
     
-    public var kMessageToTopPadding: CGFloat
+    // 内容距离左边的距离
+    public var contentToLeftPadding: CGFloat
     
-    public var kMessageToBottomPadding: CGFloat
     // 头像
     public var kAvaterSize: CGSize
     // 昵称
-    public var kUsernameSize: CGSize
+    public var usernameSize: CGSize
     
-    public var kUsernameLeftPadding: CGFloat
+    public var usernameLeftPadding: CGFloat
     
     public var contentTextFont: UIFont
     
@@ -27,12 +29,14 @@ public class MessageLayoutSettings {
     
     init() {
         kAvaterSize = CGSize(width: 40, height: 40)
-        kMessageToLeftPadding = 10
-        kMessageToTopPadding = 10
-        kMessageToBottomPadding = 10
         
-        kUsernameSize = CGSize(width: 120, height: 20)
-        kUsernameLeftPadding = 10
+        contentToLeftPadding = 10
+        
+        messageToTopPadding = 10
+        messageToBottomPadding = 10
+        
+        usernameSize = CGSize(width: 120, height: 20)
+        usernameLeftPadding = 10
         
         contentTextFont = UIFont.systemFont(ofSize: 16)
         errorSize = CGSize(width: 15, height: 15)

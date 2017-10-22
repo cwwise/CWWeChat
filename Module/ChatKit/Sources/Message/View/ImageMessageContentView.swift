@@ -10,8 +10,8 @@ import ChatClient
 
 class ImageMessageContentView: MessageContentView {
 
-    lazy var messageImageView: MessageImageView = {
-        let messageImageView = MessageImageView()
+    lazy var messageImageView: LoadingImageView = {
+        let messageImageView = LoadingImageView()
         messageImageView.backgroundColor = UIColor.gray
         return messageImageView
     }()

@@ -19,10 +19,6 @@ public class ChatKit: NSObject {
     }
     
     private override init() {
-
-        
-        
-        
         
     }
     

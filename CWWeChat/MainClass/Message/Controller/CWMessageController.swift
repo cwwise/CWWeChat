@@ -8,6 +8,7 @@
 
 import UIKit
 import ChatKit
+import ChatClient
 
 public class CWMessageController: MessageController {
         
@@ -19,6 +20,31 @@ public class CWMessageController: MessageController {
             let image = UIImage(contentsOfFile: path)
             self.backgroundImageView.image = image
         }
+        
+        setupTestData()
+    }
+    
+    func setupTestData() {
+        
+        let conversationId = self.conversation.conversationId
+        let from = ChatKit.share.currentAccount
+        // 文字
+        let textList = ["小明，如果你暗恋的女神向你表白，你的第一反应是什么", "生下来吧，算我的。", "。。。。"]
+        let textMessageList = textList.map { (text) -> Message in
+            let textMessage = TextMessageBody(text: "测试数据")
+            return Message(conversationId: conversationId, from: from, body: textMessage)
+        }
+        
+        // 语音
+        
+        // 图片
+        
+        // 位置
+        
+        let textModelList = textMessageList.map { return MessageModel(message: $0) }
+        self.messageList.append(contentsOf: textModelList)
+        self.collectionView.reloadData()
+        self.updateMessageAndScrollBottom(false)
     }
     
     @objc func rightBarItemDown(_ barItem: UIBarButtonItem) {

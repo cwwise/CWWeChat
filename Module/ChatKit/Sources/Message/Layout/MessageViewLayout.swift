@@ -92,10 +92,10 @@ extension MessageViewLayout {
         let size: CGSize = setting.kAvaterSize
         let origin: CGPoint
         if message.isSend {
-            origin = CGPoint(x: itemWidth - setting.kMessageToLeftPadding - size.width,
-                             y: setting.kMessageToTopPadding)
+            origin = CGPoint(x: itemWidth - setting.contentToLeftPadding - size.width,
+                             y: setting.messageToTopPadding)
         } else {
-            origin = CGPoint(x: setting.kMessageToLeftPadding, y: setting.kMessageToTopPadding)
+            origin = CGPoint(x: setting.contentToLeftPadding, y: setting.messageToTopPadding)
         }
         return CGRect(origin: origin, size: size)
     }
@@ -103,17 +103,17 @@ extension MessageViewLayout {
     // 昵称(如果有昵称，则昵称和头像y一样)
     func setupUsernameFrame(with attributes: MessageLayoutAttributes, message: MessageModel) {
         
-        var size: CGSize = setting.kUsernameSize
+        var size: CGSize = setting.usernameSize
         let origin: CGPoint
         if message.showUsername == false {
             size = CGSize.zero
         }
         
         if message.isSend {
-            origin = CGPoint(x: attributes.avaterFrame.minX - setting.kUsernameLeftPadding - size.width,
+            origin = CGPoint(x: attributes.avaterFrame.minX - setting.usernameLeftPadding - size.width,
                              y: attributes.avaterFrame.minY)
         } else {
-            origin = CGPoint(x: attributes.avaterFrame.maxX + setting.kUsernameLeftPadding,
+            origin = CGPoint(x: attributes.avaterFrame.maxX + setting.usernameLeftPadding,
                              y: attributes.avaterFrame.minY)
         }
         attributes.usernameFrame = CGRect(origin: origin, size: size)
@@ -126,32 +126,26 @@ extension MessageViewLayout {
         
         switch message.messageType {
         case .text:
-            break
-//            let content = (message.messageBody as! TextMessageBody).text
-//            let size = CGSize(width: kChatTextMaxWidth, height: CGFloat.greatestFiniteMagnitude)
-//            var edge: UIEdgeInsets
-//            if message.isSend {
-//                edge = ChatCellUI.right_edge_insets
-//            } else {
-//                edge = ChatCellUI.left_edge_insets
-//            }
-//            
-//            let modifier = CWTextLinePositionModifier(font: setting.contentTextFont)
-//            // YYTextContainer
-//            let textContainer = YYTextContainer(size: size)
-//            textContainer.linePositionModifier = modifier
-//            textContainer.maximumNumberOfRows = 0
-//            
-//            let textFont = setting.contentTextFont
-//            let textAttributes = [NSAttributedStringKey.font: textFont,
-//                                  NSAttributedStringKey.foregroundColor: UIColor.black]
-//            
-//            let textAttri = CWChatTextParser.parseText(content, attributes: textAttributes)!
-//            let textLayout = YYTextLayout(container: textContainer, text: textAttri)!
-//            
-//            contentSize = CGSize(width: textLayout.textBoundingSize.width+edge.left+edge.right,
-//                                 height: textLayout.textBoundingSize.height+edge.top+edge.bottom)
-//            message.textLayout = textLayout
+            
+            let content = (message.messageBody as! TextMessageBody).text
+            let size = CGSize(width: kChatTextMaxWidth, height: CGFloat.greatestFiniteMagnitude)
+            var edge: UIEdgeInsets
+            if message.isSend {
+                edge = ChatCellUI.right_edge_insets
+            } else {
+                edge = ChatCellUI.left_edge_insets
+            }
+            
+            let textFont = setting.contentTextFont
+            let textAttributes = [NSAttributedStringKey.font: textFont,
+                                  NSAttributedStringKey.foregroundColor: UIColor.black]
+            
+            let textAttributedString = NSAttributedString(string: content, attributes: textAttributes)
+            let options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading]
+            let frame = textAttributedString.boundingRect(with: size, options: options, context: nil)
+       
+            contentSize = CGSize(width: ceil(frame.size.width)+edge.left+edge.right,
+                                 height: ceil(frame.size.height)+edge.top+edge.bottom)
             
         case .image:
             let imageSize = (message.messageBody as! ImageMessageBody).size
@@ -194,10 +188,10 @@ extension MessageViewLayout {
         
         let origin: CGPoint
         if message.isSend {
-            origin = CGPoint(x: attributes.avaterFrame.minX - setting.kUsernameLeftPadding - contentSize.width,
+            origin = CGPoint(x: attributes.avaterFrame.minX - setting.usernameLeftPadding - contentSize.width,
                              y: attributes.usernameFrame.minY)
         } else {
-            origin = CGPoint(x: attributes.avaterFrame.maxX + setting.kUsernameLeftPadding,
+            origin = CGPoint(x: attributes.avaterFrame.maxX + setting.usernameLeftPadding,
                              y: attributes.usernameFrame.minY)
         }
         attributes.messageContainerFrame = CGRect(origin: origin, size: contentSize)

@@ -39,7 +39,7 @@ class CWContactDetailController: CWBaseTableViewController {
         setupData()
         
         
-        let barItemImage = UIImage(named: "barbuttonicon_more")
+        let barItemImage = UIImage(named: "nav_more")
         let rightBarItem = UIBarButtonItem(image: barItemImage, style: .done, target: self, action: #selector(rightBarItemClick))
         self.navigationItem.rightBarButtonItem = rightBarItem
     }
