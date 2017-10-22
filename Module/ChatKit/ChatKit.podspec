@@ -38,7 +38,11 @@ Pod::Spec.new do |s|
   # s.resource  = "icon.png"
   # s.resources = "Resources/*.png"
 
-  # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
+
+  s.ios.deployment_target = '9.0'
+  s.ios.resource_bundle = { 'ChatKitAssets' => 'Assets/ChatKitAssets.bundle' }
+
+
 
   s.framework  = "UIKit"
   s.framework  = "MapKit"

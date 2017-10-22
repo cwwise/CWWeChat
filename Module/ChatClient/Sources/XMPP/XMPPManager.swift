@@ -256,6 +256,7 @@ extension XMPPManager: XMPPStreamDelegate {
        // log.debug(iq)
     }
     
+    
     func xmppStream(_ sender: XMPPStream!, didReceive iq: XMPPIQ!) -> Bool {
         // log.debug(iq)
         if iq.requiresResponse {
@@ -266,6 +267,31 @@ extension XMPPManager: XMPPStreamDelegate {
         return true
     }
     
+    
+}
+
+extension XMPPManager: XMPPStreamManagementDelegate {
+    
+    func xmppStreamManagementDidRequestAck(_ sender: XMPPStreamManagement!) {
+        
+    }
+    
+    func xmppStreamManagement(_ sender: XMPPStreamManagement!, wasEnabled enabled: DDXMLElement!) {
+        log.debug("xmppStreamManagement wasEnabled")
+    }
+    
+    func xmppStreamManagement(_ sender: XMPPStreamManagement!, wasNotEnabled failed: DDXMLElement!) {
+        log.error("xmppStreamManagement wasNotEnabled")
+    }
+    
+    func xmppStreamManagement(_ sender: XMPPStreamManagement!, didReceiveAckForStanzaIds stanzaIds: [Any]!) {
+        // 收到id
+        guard let messageid = stanzaIds as? [String] , messageid.count != 0 else {
+            return
+        }
+        log.debug(messageid)
+        NotificationCenter.default.post(name: kMessageDispatchSuccessNotification, object: messageid)
+    }
 }
 
 extension XMPPManager: LoginManager {

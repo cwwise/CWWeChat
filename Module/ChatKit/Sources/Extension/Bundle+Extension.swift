@@ -9,10 +9,11 @@ import Foundation
 
 extension Bundle {
     
-    static func messageKitAssetBundle() -> Bundle {
-        let podBundle = Bundle(for: MessageController.self)
+    static func chatKitAssetBundle() -> Bundle {
         
-        guard let resourceBundleUrl = podBundle.url(forResource: "MessageKitAssets", withExtension: "bundle") else {
+        let podBundle = Bundle(for: ChatKit.self)
+        
+        guard let resourceBundleUrl = podBundle.url(forResource: "ChatKitAssets", withExtension: "bundle") else {
             fatalError("MessageKit: Could not create path to the assets bundle")
         }
         

@@ -81,7 +81,7 @@ public class ConversationCell: UITableViewCell {
             } else {
                 self.usernameLabel.text = "单聊"
             }
-            
+            self.headerImageView.image = ChatAsset.defaultHeadImage.image
         } else {
             
             if let group = ChatKit.share.fetchGroup(groupId: model.conversationId){
@@ -89,7 +89,8 @@ public class ConversationCell: UITableViewCell {
             } else {
                 self.usernameLabel.text = "群聊"
             }
-            
+//            self.headerImageView.image = ChatAsset.defaultHeadImage.image
+
         }
         
         

@@ -31,3 +31,7 @@ struct ChatCellUI {
     /// 右边气泡背景区域 间距
     static let right_edge_insets = UIEdgeInsets(top: 2+10, left: 17, bottom: 11+9.5, right: 17)
 }
+
+
+let kChatKitAssetBundle = Bundle.chatKitAssetBundle()
+
