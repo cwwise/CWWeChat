@@ -14,15 +14,15 @@ class ChatMessageHandle: MessageHandle {
     @discardableResult
     override func handleMessage(_ message: XMPPMessage) -> Bool {
         
-        if message.isChatMessageWithBody() == false {
+        if message.isChatMessageWithBody == false {
            return false
         }
         
         // 内容 来源 目标人 消息id
-        guard let body = message.body(),
-            let from = message.from().user,
-            let _ = message.to().user,
-            let messageId = message.elementID() else {
+        guard let body = message.body,
+            let from = message.from?.user,
+            let _ = message.to?.user,
+            let messageId = message.elementID else {
                 return false
         }
         
@@ -32,8 +32,8 @@ class ChatMessageHandle: MessageHandle {
         let messageType = MessageType(rawValue: bodyValue) ?? .none
         
         var messageDate = ChatClientUtil.currentTime
-        if message.wasDelayed() {
-            messageDate = message.delayedDeliveryDate().timeIntervalSince1970
+        if message.wasDelayed == true, let deliveryDate = message.delayedDeliveryDate {
+            messageDate = deliveryDate.timeIntervalSince1970
         }
         
         let conversationId = from

@@ -53,7 +53,7 @@ public extension XMPPModule {
         var delegate: AnyObject?
         var queue: DispatchQueue?
         
-        while delegateEnumerator?.getNextDelegate(&delegate, delegateQueue: &queue) == true {
+        while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) == true {
             //执行Delegate的方法
             action(delegate, queue)
         }

@@ -196,7 +196,7 @@ extension XMPPManager: XMPPStreamDelegate {
             if isLoginUser {
                 try xmppStream.authenticate(withPassword: password)
             } else {
-                let result = xmppStream.supportsInBandRegistration()
+                let result = xmppStream.supportsInBandRegistration
                 log.debug("注册支持\(result)")
                 try xmppStream.register(withPassword: password)
             }
@@ -216,7 +216,7 @@ extension XMPPManager: XMPPStreamDelegate {
     
     // 验证成功
     func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
-        self.completion?(xmppStream.myJID.user, nil)
+        self.completion?(xmppStream.myJID!.user, nil)
         self.completion = nil
         
         goOnline()
@@ -225,7 +225,7 @@ extension XMPPManager: XMPPStreamDelegate {
     }
     
     func xmppStreamDidRegister(_ sender: XMPPStream!) {
-        self.completion?(xmppStream.myJID.user, nil)
+        self.completion?(xmppStream.myJID!.user, nil)
         self.completion = nil
     }
     
@@ -258,7 +258,7 @@ extension XMPPManager: XMPPStreamDelegate {
     
     func xmppStream(_ sender: XMPPStream!, didReceive iq: XMPPIQ!) -> Bool {
         // log.debug(iq)
-        if iq.requiresResponse() {
+        if iq.requiresResponse {
             
         } else {
             
@@ -271,11 +271,11 @@ extension XMPPManager: XMPPStreamDelegate {
 extension XMPPManager: LoginManager {
     
     var isConnented: Bool {
-        return xmppStream.isConnected()
+        return xmppStream.isConnected
     }
     
     var isLogined: Bool {
-        return xmppStream.isAuthenticated()
+        return xmppStream.isAuthenticated
     }
     
     var currentAccount: String {

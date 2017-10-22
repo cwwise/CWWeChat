@@ -30,7 +30,7 @@ class ChatService: XMPPModule {
     /// 消息接收解析
     private(set) var messageParse: MessageParse
     
-    override init!(dispatchQueue queue: DispatchQueue!) {
+    override init(dispatchQueue queue: DispatchQueue!) {
         // 消息发送和解析
         messageTransmitter = MessageTransmitter()
         messageParse = MessageParse()

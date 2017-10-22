@@ -26,7 +26,7 @@ target 'CWWeChat' do
   pod 'SwiftyBeaver'
   
   # chat
-  pod 'XMPPFramework'
+  pod 'XMPPFramework', :git => 'https://github.com/robbiehanson/XMPPFramework.git', :branch => 'master'
   
   # UI
   pod 'PPBadgeViewSwift'

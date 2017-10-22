@@ -52,10 +52,10 @@ public class ChatClient {
         xmppManager.options = options
         
         let queue = DispatchQueue.global()
-        chatService = ChatService(dispatchQueue: queue)!
+        chatService = ChatService(dispatchQueue: queue)
         chatService.activate(xmppManager.xmppStream)
         
-        contactService = ContactService(dispatchQueue: queue)!
+        contactService = ContactService(dispatchQueue: queue)
         contactService.activate(xmppManager.xmppStream)
     }
     

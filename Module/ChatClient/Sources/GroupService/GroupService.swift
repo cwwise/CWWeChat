@@ -12,14 +12,16 @@ import XMPPFramework
 class GroupService: XMPPModule {
     
     var room: XMPPRoom!
-
+    
+    var storage = XMPPRoomCoreDataStorage.sharedInstance()!
+    
     lazy var groupChat: XMPPMUC = {
         let groupChat = XMPPMUC(dispatchQueue: self.moduleQueue)
-        return groupChat!
+        return groupChat
     }()
     
     @objc func didActivate() {
-        self.groupChat.activate(self.xmppStream)
+        self.groupChat.activate(self.xmppStream!)
         self.groupChat.addDelegate(self, delegateQueue: self.moduleQueue)
     }
 }
@@ -51,11 +53,11 @@ extension GroupService: GroupManager {
                      completion: GroupCompletion?) {
         
         let options = ChatClient.share.options
-        let jid = XMPPJID(string: "chenwei@conference."+options.domain)
+        guard  let jid = XMPPJID(string: "chenwei@conference."+options.domain)
+            else { return }
         
-        let storage = XMPPRoomCoreDataStorage.sharedInstance()
-        room = XMPPRoom(roomStorage: storage, jid: jid)!
-        room.activate(self.xmppStream)
+        room = XMPPRoom(roomStorage: storage, jid: jid)
+        room.activate(self.xmppStream!)
         room.addDelegate(self, delegateQueue: self.moduleQueue)
         room.join(usingNickname: "陈威", history: nil)
     }
@@ -63,16 +65,14 @@ extension GroupService: GroupManager {
     /// 解散群组
     func dismissGroup(_ groupId: String) {
         let jid = XMPPJID(string: groupId)
-        let storage = XMPPRoomCoreDataStorage.sharedInstance()
-        room = XMPPRoom(roomStorage: storage, jid: jid)!
+        room = XMPPRoom(roomStorage: storage, jid: jid!)
         room.destroy()
     }
     
     /// 退出群组
     func quitGroup(_ groupId: String) {
         let jid = XMPPJID(string: groupId)
-        let storage = XMPPRoomCoreDataStorage.sharedInstance()
-        room = XMPPRoom(roomStorage: storage, jid: jid)!
+        room = XMPPRoom(roomStorage: storage, jid: jid!)
         if room.isJoined {
             room.leave()
         }
@@ -81,8 +81,7 @@ extension GroupService: GroupManager {
     /// 更新群组名称
     func updateGroupName(_ name: String, groupId: String) {
         let jid = XMPPJID(string: groupId)
-        let storage = XMPPRoomCoreDataStorage.sharedInstance()
-        room = XMPPRoom(roomStorage: storage, jid: jid)!
+        room = XMPPRoom(roomStorage: storage, jid: jid!)
         room.changeSubject(name)
     }
     
@@ -95,8 +94,7 @@ extension GroupService: GroupManager {
     /// 邀请用户
     func inviteUser(_ users: [String], to groupId: String, message: String) {
         let jid = XMPPJID(string: groupId)
-        let storage = XMPPRoomCoreDataStorage.sharedInstance()
-        room = XMPPRoom(roomStorage: storage, jid: jid)!
+        room = XMPPRoom(roomStorage: storage, jid: jid!)
         
         let options = ChatClient.share.options
         
@@ -122,8 +120,7 @@ extension GroupService: GroupManager {
     
     func generateGroup(_ groupId: String) -> XMPPRoom {
         let jid = XMPPJID(string: groupId)
-        let storage = XMPPRoomCoreDataStorage.sharedInstance()
-        room = XMPPRoom(roomStorage: storage, jid: jid)!
+        room = XMPPRoom(roomStorage: storage, jid: jid!)
         return room
     }
     

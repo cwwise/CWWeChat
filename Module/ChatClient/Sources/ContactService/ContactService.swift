@@ -15,21 +15,21 @@ class ContactService: XMPPModule {
     
     var xmppRoster: XMPPRoster = {
         let xmppRosterStorage = XMPPRosterMemoryStorage()
-        let xmppRoster = XMPPRoster(rosterStorage: xmppRosterStorage)
-        return xmppRoster!
+        let xmppRoster = XMPPRoster(rosterStorage: xmppRosterStorage!)
+        return xmppRoster
     }();
     
     var vCardModule: XMPPvCardTempModule = {
         let vCardStorage = XMPPvCardCoreDataStorage.sharedInstance()
-        let vCardModule = XMPPvCardTempModule(vCardStorage: vCardStorage)
-        return vCardModule!
+        let vCardModule = XMPPvCardTempModule(vCardStorage: vCardStorage!)
+        return vCardModule
     }()
     
     @objc func didActivate() {
         xmppRoster.addDelegate(self, delegateQueue: self.moduleQueue)
-        xmppRoster.activate(self.xmppStream)
+        xmppRoster.activate(self.xmppStream!)
         
-        vCardModule.activate(self.xmppStream)
+        vCardModule.activate(self.xmppStream!)
         vCardModule.addDelegate(self, delegateQueue: self.moduleQueue)
     }
     
@@ -70,7 +70,7 @@ extension ContactService: ContactManager {
             vCardTemp?.note = sign
         }
         
-        vCardModule.updateMyvCardTemp(vCardTemp)
+        vCardModule.updateMyvCardTemp(vCardTemp!)
     }
     
     func userInfo(with userId: String) -> User {
