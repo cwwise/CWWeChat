@@ -9,6 +9,8 @@ import UIKit
 
 public class MessageLayoutSettings {
   
+    public static let share = MessageLayoutSettings()
+    
     public var messageToTopPadding: CGFloat
     
     public var messageToBottomPadding: CGFloat
@@ -17,7 +19,7 @@ public class MessageLayoutSettings {
     public var contentToLeftPadding: CGFloat
     
     // 头像
-    public var kAvaterSize: CGSize
+    public var avaterSize: CGSize
     // 昵称
     public var usernameSize: CGSize
     
@@ -27,8 +29,8 @@ public class MessageLayoutSettings {
     
     public var errorSize: CGSize
     
-    init() {
-        kAvaterSize = CGSize(width: 40, height: 40)
+    private init() {
+        avaterSize = CGSize(width: 40, height: 40)
         
         contentToLeftPadding = 10
         

@@ -21,7 +21,7 @@ public class CWMessageController: MessageController {
             self.backgroundImageView.image = image
         }
         
-        setupTestData()
+      //  setupTestData()
     }
     
     func setupTestData() {
@@ -45,7 +45,7 @@ public class CWMessageController: MessageController {
         let textModelList = textMessageList.map { return MessageModel(message: $0) }
         self.messageList.append(contentsOf: textModelList)
         self.collectionView.reloadData()
-        self.updateMessageAndScrollBottom(false)
+        self.scrollToBottom(false)
     }
     
     @objc func rightBarItemDown(_ barItem: UIBarButtonItem) {

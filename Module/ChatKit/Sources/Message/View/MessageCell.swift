@@ -102,6 +102,7 @@ public class MessageCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        print(self.reuseIdentifier ?? "")
         self.contentView.addSubview(avatarImageView)
         self.contentView.addSubview(usernameLabel)
         self.contentView.addSubview(activityView)
@@ -114,6 +115,9 @@ public class MessageCell: UICollectionViewCell {
         guard let message = message else {
             return
         }
+        
+        //
+        setupFrame()
         
         updateState()
         // 赋值
@@ -210,9 +214,8 @@ extension MessageCell: UIGestureRecognizerDelegate {
 // 
 extension MessageCell {
     
-    public override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
-        super.apply(layoutAttributes)
-        guard let layoutAttributes = layoutAttributes as? MessageLayoutAttributes else {
+    func setupFrame() {
+        guard let layoutAttributes = message?.messageFrame else {
             return
         }
         

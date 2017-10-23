@@ -55,12 +55,15 @@ public class MessageModel {
     public var showTime: Bool = false
     /// 是否显示用户名 
     public var showUsername: Bool = false
+        
+    var messageFrame: MessageFrame = MessageFrame()
     
     public init(message: Message) {
         self.message = message
-        
         // 计算frame部分
+        MessageLayoutManager.share.configurate(message: self)
     }
+    
 }
 
 extension MessageModel: Hashable, Equatable, CustomStringConvertible {

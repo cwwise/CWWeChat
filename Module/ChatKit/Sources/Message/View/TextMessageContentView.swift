@@ -25,6 +25,7 @@ class TextMessageContentView: MessageContentView {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         guard let message = message else {
             messageLabel.frame = self.bounds
             return

@@ -55,8 +55,8 @@ public class MessageContentView: UIView {
     func updateProgress() {
         
     }
-    
-    override public func layoutSubviews() {
+
+    public override func layoutSubviews() {
         super.layoutSubviews()
         bubbleImageView.frame = self.bounds
     }

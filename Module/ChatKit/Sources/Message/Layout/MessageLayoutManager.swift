@@ -1,94 +1,45 @@
 //
-//  MessageLayout.swift
+//  MessageLayoutManager.swift
 //  ChatKit
 //
-//  Created by chenwei on 2017/10/13.
+//  Created by wei chen on 2017/10/23.
 //
 
 import UIKit
 import ChatClient
 
-class MessageViewLayout: UICollectionViewFlowLayout {
-
-    weak var delegate: MessageViewLayoutDelegate?
+class MessageLayoutManager {
+    
+    static let share = MessageLayoutManager()
     
     var setting = MessageLayoutSettings.share
-    
+
     private var itemWidth: CGFloat {
-        guard let collectionView = collectionView else { return 0 }
-        return collectionView.frame.width - sectionInset.left - sectionInset.right
+        return kScreenWidth
     }
     
-    open override class var layoutAttributesClass: AnyClass {
-        return MessageLayoutAttributes.self
-    }
-    
-    override init() {
-        super.init()
-        sectionInset = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Layout Attributes
-    open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    private init() {
         
-        guard let attributesArray = super.layoutAttributesForElements(in: rect) as? [MessageLayoutAttributes] else { 
-            return nil
-        }
+    }
+    
+    func configurate(message: MessageModel) {
         
-        attributesArray.forEach { attributes in
-            if attributes.representedElementCategory == .cell {
-                configure(attributes: attributes)
-            }
-        }
-
-        return attributesArray
+        setupAvatarFrame(with: message.messageFrame, message: message)
+        setupUsernameFrame(with: message.messageFrame, message: message)
+        setupContainerFrame(with: message.messageFrame, message: message)
+        setupStateFrame(with: message.messageFrame, message: message)
+        
+        // 计算高度
+        let itemHeight = message.messageFrame.messageContainerFrame.height + setting.messageToBottomPadding + setting.messageToTopPadding
+        
+        message.messageFrame.sizeOfItem = CGSize(width: itemWidth, height: itemHeight)
     }
-    
-    open override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        guard let attributes = super.layoutAttributesForItem(at: indexPath) as? MessageLayoutAttributes else { return nil }
-        if attributes.representedElementCategory == UICollectionElementCategory.cell {
-            configure(attributes: attributes)
-        }
-        return attributes
-    }
-    
-    
-    // MARK: - Invalidation Context
-    open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return collectionView?.bounds.width != newBounds.width || collectionView?.bounds.height != newBounds.height
-    }
-    
-    open override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
-        let context = super.invalidationContext(forBoundsChange: newBounds)
-        guard let flowLayoutContext = context as? UICollectionViewFlowLayoutInvalidationContext else { return context }
-        flowLayoutContext.invalidateFlowLayoutDelegateMetrics = shouldInvalidateLayout(forBoundsChange: newBounds)
-        return flowLayoutContext
-    }
-
 }
 
-extension MessageViewLayout {
-    
-    private func configure(attributes: MessageLayoutAttributes) {
-        
-        guard let collectionView = collectionView,
-            let message = delegate?.collectionView(collectionView, itemAt: attributes.indexPath) else {
-                return
-        }
-        
-        attributes.avaterFrame = avatarFrame(with: message)
-        
-        setupUsernameFrame(with: attributes, message: message)
-        setupContainerFrame(with: attributes, message: message)
-        setupStateFrame(with: attributes, message: message)
-    }
+extension MessageLayoutManager {
     
     // 头像
-    func avatarFrame(with message: MessageModel) -> CGRect {
+    func setupAvatarFrame(with attributes: MessageFrame, message: MessageModel) {
         let size: CGSize = setting.avaterSize
         let origin: CGPoint
         if message.isSend {
@@ -97,11 +48,11 @@ extension MessageViewLayout {
         } else {
             origin = CGPoint(x: setting.contentToLeftPadding, y: setting.messageToTopPadding)
         }
-        return CGRect(origin: origin, size: size)
+        attributes.avaterFrame = CGRect(origin: origin, size: size)
     }
     
     // 昵称(如果有昵称，则昵称和头像y一样)
-    func setupUsernameFrame(with attributes: MessageLayoutAttributes, message: MessageModel) {
+    func setupUsernameFrame(with attributes: MessageFrame, message: MessageModel) {
         
         var size: CGSize = setting.usernameSize
         let origin: CGPoint
@@ -119,7 +70,7 @@ extension MessageViewLayout {
         attributes.usernameFrame = CGRect(origin: origin, size: size)
     }
     
-    func setupContainerFrame(with attributes: MessageLayoutAttributes, message: MessageModel) {
+    func setupContainerFrame(with attributes: MessageFrame, message: MessageModel) {
         
         // 如果是文字
         var contentSize: CGSize = CGSize.zero
@@ -143,7 +94,7 @@ extension MessageViewLayout {
             let textAttributedString = NSAttributedString(string: content, attributes: textAttributes)
             let options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading]
             let frame = textAttributedString.boundingRect(with: size, options: options, context: nil)
-       
+            
             contentSize = CGSize(width: ceil(frame.size.width)+edge.left+edge.right,
                                  height: ceil(frame.size.height)+edge.top+edge.bottom)
             
@@ -184,7 +135,7 @@ extension MessageViewLayout {
             break
         }
         
-
+        
         let origin: CGPoint
         if message.isSend {
             origin = CGPoint(x: attributes.avaterFrame.minX - setting.usernameLeftPadding - contentSize.width,
@@ -196,7 +147,7 @@ extension MessageViewLayout {
         attributes.messageContainerFrame = CGRect(origin: origin, size: contentSize)
     }
     
-    func setupStateFrame(with attributes: MessageLayoutAttributes, message: MessageModel) {
+    func setupStateFrame(with attributes: MessageFrame, message: MessageModel) {
         let containerFrame = attributes.messageContainerFrame
         let origin: CGPoint
         if message.isSend {

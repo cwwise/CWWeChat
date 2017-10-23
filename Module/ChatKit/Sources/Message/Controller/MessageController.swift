@@ -25,8 +25,7 @@ open class MessageController: UIViewController {
     public lazy var collectionView: UICollectionView = {
         let frame = CGRect(x: 0, y: 0,
                            width: kScreenWidth, height: kScreenHeight)
-        let layout = MessageViewLayout()
-        layout.delegate = self
+        let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -124,11 +123,11 @@ extension MessageController: ChatManagerDelegate {
 extension MessageController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return messageList.count
+        return 1
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return messageList.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -147,9 +146,8 @@ extension MessageController: UICollectionViewDelegate, UICollectionViewDataSourc
 extension MessageController: UICollectionViewDelegateFlowLayout {
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let messagesFlowLayout = collectionViewLayout as? MessageViewLayout else { return .zero }
-        return CGSize(width: kScreenWidth-20, height: 50)
-        //        return messagesFlowLayout.sizeForItem(at: indexPath)
+        let message = messageList[indexPath.row]
+        return message.messageFrame.sizeOfItem
     }
     
 }
