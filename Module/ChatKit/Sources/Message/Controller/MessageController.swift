@@ -76,13 +76,13 @@ open class MessageController: UIViewController {
                 })
                 self.messageList.append(contentsOf: messageList)
                 self.collectionView.reloadData()
-                self.updateMessageAndScrollBottom(false)
+                self.scrollToBottom(false)
             }
         }
     }
     
     /// 滚动到底部
-    public func updateMessageAndScrollBottom(_ animated:Bool = true) {
+    public func scrollToBottom(_ animated:Bool = true) {
         if messageList.count == 0 {
             return
         }
@@ -115,17 +115,20 @@ extension MessageController: ChatManagerDelegate {
         
         let messageModel = MessageModel(message: message)
         messageList.append(messageModel)
-        self.collectionView.reloadData()
-        updateMessageAndScrollBottom(false)
-        
+        collectionView.reloadData()
+        scrollToBottom(false)
     }
     
 }
 
 extension MessageController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return messageList.count
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

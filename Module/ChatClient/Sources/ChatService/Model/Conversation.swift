@@ -52,13 +52,11 @@ public class Conversation {
     }
 }
 
-extension Conversation: CustomStringConvertible {
+extension Conversation: Hashable, CustomStringConvertible {
+    
     public var description: String {
         return "会话:\(conversationId),类型:\(type)"
     }
-}
-
-extension Conversation: Hashable, Equatable {
     
     public var hashValue: Int {
         return conversationId.hashValue
@@ -99,7 +97,7 @@ extension Conversation {
     ///   - count: 获取的条数
     ///   - searchDirection: 消息搜索方向
     ///   - completion: 完成的回调
-    public func fetchMessagesWithType(_ type: MessageType = .text,
+    public func fetchMessages(with type: MessageType = .text,
                                timestamp: TimeInterval = -1,
                                count: Int = 20,
                                searchDirection: MessageSearchDirection = .down,
@@ -119,7 +117,7 @@ extension Conversation {
     ///   - count: 获取的条数
     ///   - searchDirection: 消息搜索方向
     ///   - completion: 完成的回调
-    public func fetchMessagesWithKeyword(_ keyword: String,
+    public func fetchMessages(with keyword: String,
                                   timestamp: TimeInterval = -1,
                                   count: Int = 20,
                                   searchDirection: MessageSearchDirection = .down,

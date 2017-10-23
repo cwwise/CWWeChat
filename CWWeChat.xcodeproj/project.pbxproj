@@ -550,7 +550,6 @@
 			isa = PBXGroup;
 			children = (
 				1F3492461E87923000B36641 /* Controller */,
-				1F3492471E87923000B36641 /* Model */,
 				1F3492481E87923000B36641 /* Tool */,
 			);
 			path = Message;
@@ -644,13 +643,6 @@
 				8C34AFA31E9BD84A00977742 /* CWChatDetailViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		1F3492471E87923000B36641 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		1F3492481E87923000B36641 /* Tool */ = {
