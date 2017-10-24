@@ -39,6 +39,8 @@ open class MessageController: UIViewController {
         collectionView.register(MessageCell.self, forCellWithReuseIdentifier: MessageType.location.identifier)
         collectionView.register(MessageCell.self, forCellWithReuseIdentifier: MessageType.voice.identifier)
         
+        collectionView.register(TimeMessageHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+        
         return collectionView
     }()
     
@@ -64,6 +66,9 @@ open class MessageController: UIViewController {
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(collectionView)
         
+        let chatManager = ChatClient.share.chatManager
+        chatManager.addChatDelegate(self)
+        
         loadMessageData()
     }
     
@@ -85,7 +90,7 @@ open class MessageController: UIViewController {
         if messageList.count == 0 {
             return
         }
-        let indexPath = IndexPath(row: messageList.count-1, section: 0)
+        let indexPath = IndexPath(row: 0, section: messageList.count-1)
         self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: animated)
     }
     
@@ -123,16 +128,16 @@ extension MessageController: ChatManagerDelegate {
 extension MessageController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return messageList.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return messageList.count
+        return 1
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let message = messageList[indexPath.row]
+        let message = messageList[indexPath.section]
         let identifier = message.messageType.identifier
         let messageCell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! MessageCell
         messageCell.message = message
@@ -141,22 +146,34 @@ extension MessageController: UICollectionViewDelegate, UICollectionViewDataSourc
         return messageCell
     }
     
+    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! TimeMessageHeaderView
+        let message = messageList[indexPath.section]
+        
+        let date = Date(timeIntervalSince1970: message.timestamp)
+        header.timeLabel.text = ChatTimeTool.chatTimeString(from: date)
+        return header
+    }
+    
 }
 
 extension MessageController: UICollectionViewDelegateFlowLayout {
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let message = messageList[indexPath.row]
+        let message = messageList[indexPath.section]
         return message.messageFrame.sizeOfItem
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let message = messageList[section]
+        if message.showTime {
+            return CGSize(width: kScreenWidth, height: 40)
+        }
+        return CGSize(width: kScreenWidth, height: 0)
     }
     
 }
 
-extension MessageController: MessageViewLayoutDelegate {
-    func collectionView(_ collectionView: UICollectionView, itemAt indexPath: IndexPath) -> MessageModel {
-        return messageList[indexPath.row]
-    }
-}
 
 extension MessageController: MessageCellDelegate {
 

@@ -102,7 +102,6 @@ public class MessageCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        print(self.reuseIdentifier ?? "")
         self.contentView.addSubview(avatarImageView)
         self.contentView.addSubview(usernameLabel)
         self.contentView.addSubview(activityView)

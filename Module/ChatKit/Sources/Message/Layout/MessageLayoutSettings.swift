@@ -34,7 +34,7 @@ public class MessageLayoutSettings {
         
         contentToLeftPadding = 10
         
-        messageToTopPadding = 10
+        messageToTopPadding = 2
         messageToBottomPadding = 10
         
         usernameSize = CGSize(width: 120, height: 20)

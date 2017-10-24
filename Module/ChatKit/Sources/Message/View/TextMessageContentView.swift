@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import ChatClient
 
 class TextMessageContentView: MessageContentView {
 
-    private lazy var messageLabel: UILabel = {
-        let messageLabel = UILabel()
+    private lazy var messageLabel: MessageLabel = {
+        let messageLabel = MessageLabel()
         messageLabel.numberOfLines = 0
         return messageLabel
     }()
@@ -22,6 +23,14 @@ class TextMessageContentView: MessageContentView {
     
     override func refresh(message: MessageModel) {
         super.refresh(message: message)
+        
+        let textBody = message.messageBody as! TextMessageBody
+        let textFont = MessageLayoutSettings.share.contentTextFont
+        let textAttributes = [NSAttributedStringKey.font: textFont,
+                              NSAttributedStringKey.foregroundColor: UIColor.black]
+        
+        let textAttributedString = NSAttributedString(string: textBody.text, attributes: textAttributes)
+        messageLabel.attributedText = textAttributedString
     }
     
     override func layoutSubviews() {

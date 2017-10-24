@@ -47,15 +47,20 @@ public class MessageModel {
         return message.from
     }
     
+    /// 来源
+    public var timestamp: TimeInterval {
+        return message.timestamp
+    }
+    
     public var transportProgress: Float = 0
 
     /// 播放状态
     public var playStatus: MessagePlayStatus = .none
     /// 是否显示时间
-    public var showTime: Bool = false
+    public var showTime: Bool = true
     /// 是否显示用户名 
     public var showUsername: Bool = false
-        
+    
     var messageFrame: MessageFrame = MessageFrame()
     
     public init(message: Message) {

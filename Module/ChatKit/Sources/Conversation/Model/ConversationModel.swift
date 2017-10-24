@@ -31,9 +31,8 @@ public class ConversationModel: NSObject {
         guard let message = conversation.lastMessage else {
             return ""
         }
-        
         let date = Date(timeIntervalSince1970: message.timestamp)
-        return "\(date)"
+        return ChatTimeTool.chatTimeString(from: date)
     }
     
     public var conversationTitle: String {
