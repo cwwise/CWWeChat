@@ -9,9 +9,11 @@
 import Foundation
 import XMPPFramework
 
+private let serviceName = "conference"
+
 class GroupService: XMPPModule {
     
-    var room: XMPPRoom!
+    var roomList: [XMPPRoom] = []
     
     var storage = XMPPRoomCoreDataStorage.sharedInstance()!
     
@@ -20,7 +22,8 @@ class GroupService: XMPPModule {
         return groupChat
     }()
     
-    @objc func didActivate() {
+    @objc
+    func didActivate() {
         self.groupChat.activate(self.xmppStream!)
         self.groupChat.addDelegate(self, delegateQueue: self.moduleQueue)
     }
@@ -38,10 +41,7 @@ extension GroupService: GroupManager {
     func fetchJoinGroups() {
         
         // 来调用发现可用的服务
-        // groupChat.discoverServices()
-        
         //serviceName 默认是conference
-        let serviceName = "conference"
         let options = ChatClient.share.options
         groupChat.discoverRooms(forServiceNamed: serviceName+"."+options.domain)
     }
@@ -53,10 +53,14 @@ extension GroupService: GroupManager {
                      completion: GroupCompletion?) {
         
         let options = ChatClient.share.options
-        guard  let jid = XMPPJID(string: "chenwei@conference."+options.domain)
-            else { return }
         
-        room = XMPPRoom(roomStorage: storage, jid: jid)
+        guard let user = self.xmppStream?.myJID?.user,
+            let jid = XMPPJID(string: "\(user)@\(serviceName).\(options.domain)") else {
+                return
+        }
+        
+        let room = XMPPRoom(roomStorage: storage, jid: jid)
+        room.changeSubject(title)
         room.activate(self.xmppStream!)
         room.addDelegate(self, delegateQueue: self.moduleQueue)
         room.join(usingNickname: "陈威", history: nil)
@@ -64,15 +68,13 @@ extension GroupService: GroupManager {
     
     /// 解散群组
     func dismissGroup(_ groupId: String) {
-        let jid = XMPPJID(string: groupId)
-        room = XMPPRoom(roomStorage: storage, jid: jid!)
+        let room = generateGroupRoom(groupId)
         room.destroy()
     }
     
     /// 退出群组
     func quitGroup(_ groupId: String) {
-        let jid = XMPPJID(string: groupId)
-        room = XMPPRoom(roomStorage: storage, jid: jid!)
+        let room = generateGroupRoom(groupId)
         if room.isJoined {
             room.leave()
         }
@@ -80,8 +82,7 @@ extension GroupService: GroupManager {
     
     /// 更新群组名称
     func updateGroupName(_ name: String, groupId: String) {
-        let jid = XMPPJID(string: groupId)
-        room = XMPPRoom(roomStorage: storage, jid: jid!)
+        let room = generateGroupRoom(groupId)
         room.changeSubject(name)
     }
     
@@ -93,11 +94,10 @@ extension GroupService: GroupManager {
     
     /// 邀请用户
     func inviteUser(_ users: [String], to groupId: String, message: String) {
-        let jid = XMPPJID(string: groupId)
-        room = XMPPRoom(roomStorage: storage, jid: jid!)
-        
+
+        let room = generateGroupRoom(groupId)
         let options = ChatClient.share.options
-        
+
         var userjidList = [XMPPJID]()
         for user in users {
             let userjid = XMPPJID(user: user, domain: options.domain, resource: options.resource)!
@@ -114,14 +114,47 @@ extension GroupService: GroupManager {
     
     /// 接受入群邀请
     func acceptGroupInvite(_ groupId: String, invitorId: String) {
-        let group = generateGroup(groupId)
-        group.join(usingNickname: "测试数据", history: nil)
+        let room = generateGroupRoom(groupId)
+        room.join(usingNickname: "测试数据", history: nil)
     }
     
-    func generateGroup(_ groupId: String) -> XMPPRoom {
+    func generateGroupRoom(_ groupId: String) -> XMPPRoom {
         let jid = XMPPJID(string: groupId)
-        room = XMPPRoom(roomStorage: storage, jid: jid!)
+        let room = XMPPRoom(roomStorage: storage, jid: jid!)
+        room.addDelegate(self, delegateQueue: self.moduleQueue)
+        room.activate(self.xmppStream!)
         return room
+    }
+    
+}
+
+// 发现多人聊天
+extension GroupService: XMPPMUCDelegate {
+    func xmppMUC(_ sender: XMPPMUC!, didDiscoverRooms rooms: [Any]!, forServiceNamed serviceName: String!) {
+        guard let rooms = rooms else { return }
+        for item in rooms {
+            if let room = item as? DDXMLElement,
+                let jid = room.attribute(forName: "jid")?.stringValue,
+                let _ = room.attribute(forName: "name")?.stringValue {
+                
+                let groupRoom = generateGroupRoom(jid)
+                groupRoom.fetchConfigurationForm()
+            }
+        }
+    }
+    
+    func xmppMUC(_ sender: XMPPMUC!, failedToDiscoverRoomsForServiceNamed serviceName: String!, withError error: Error!) {
+        log.debug(error)
+    }
+    
+    /// 收到邀请
+    public func xmppMUC(_ sender: XMPPMUC!, roomJID: XMPPJID!, didReceiveInvitation message: XMPPMessage!) {
+        log.debug("收到邀请"+message.description)
+    }
+    
+    /// 收到邀请拒绝
+    func xmppMUC(_ sender: XMPPMUC!, roomJID: XMPPJID!, didReceiveInvitationDecline message: XMPPMessage!) {
+        log.debug("收到邀请拒绝"+message.description)
     }
     
 }
@@ -129,10 +162,41 @@ extension GroupService: GroupManager {
 
 extension GroupService: XMPPRoomDelegate {
     
-    public func xmppRoomDidCreate(_ sender: XMPPRoom!) {
-        //
-        sender.configureRoom(usingOptions: nil)
+    func xmppRoom(_ sender: XMPPRoom, didFetchConfigurationForm configForm: DDXMLElement) {
+
     }
+    
+   func xmppRoomDidCreate(_ sender: XMPPRoom!) {
+        //
+        configureRoom(sender)
+    }
+    
+    func configureRoom(_ xmppRoom: XMPPRoom) {
+        
+        let x = XMLElement(name: "x", xmlns: "jabber:x:data")
+        var p = XMLElement(name: "field")
+        p.addAttribute(withName: "var", stringValue: "muc#roomconfig_persistentroom")
+        p.addChild(XMLElement(name: "value", stringValue: "1"))
+        x.addChild(p)
+        
+        p = XMLElement(name: "field")
+        p.addAttribute(withName: "var", stringValue: "muc#roomconfig_maxusers")
+        p.addChild(XMLElement(name: "value", stringValue: "500"))
+        x.addChild(p)
+        
+        p = XMLElement(name: "field")
+        p.addAttribute(withName: "var", stringValue: "muc#roomconfig_changesubject")
+        p.addChild(XMLElement(name: "value", stringValue: "1"))
+        x.addChild(p)
+
+        p = XMLElement(name: "field")
+        p.addAttribute(withName: "var", stringValue: "muc#roomconfig_allowinvites")
+        p.addChild(XMLElement(name: "value", stringValue: "1"))
+        x.addChild(p)
+        
+        xmppRoom.configureRoom(usingOptions: x)
+    }
+    
     
     func xmppRoomDidJoin(_ sender: XMPPRoom!) {
         log.debug("xmppRoomDidJoin")

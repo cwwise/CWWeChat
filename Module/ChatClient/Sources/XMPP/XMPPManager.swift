@@ -253,12 +253,12 @@ extension XMPPManager: XMPPStreamDelegate {
     }
     
     func xmppStream(_ sender: XMPPStream!, didSend iq: XMPPIQ!) {
-       // log.debug(iq)
+        log.debug(iq)
     }
     
     
     func xmppStream(_ sender: XMPPStream!, didReceive iq: XMPPIQ!) -> Bool {
-        // log.debug(iq)
+        log.debug(iq)
         if iq.requiresResponse {
             
         } else {
@@ -289,7 +289,6 @@ extension XMPPManager: XMPPStreamManagementDelegate {
         guard let messageid = stanzaIds as? [String] , messageid.count != 0 else {
             return
         }
-        log.debug(messageid)
         NotificationCenter.default.post(name: kMessageDispatchSuccessNotification, object: messageid)
     }
 }

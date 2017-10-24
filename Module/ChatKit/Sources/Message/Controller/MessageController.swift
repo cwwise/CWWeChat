@@ -76,7 +76,8 @@ open class MessageController: UIViewController {
         self.conversation.fetchMessagesStart { (list, error) in
             if error == nil {
                 let messageList = list.map({ (message) -> MessageModel in
-                    return MessageModel(message: message)
+                    let messageModel = MessageModel(message: message)
+                    return messageModel
                 })
                 self.messageList.append(contentsOf: messageList)
                 self.collectionView.reloadData()
@@ -159,7 +160,7 @@ extension MessageController: UICollectionViewDelegate, UICollectionViewDataSourc
 
 extension MessageController: UICollectionViewDelegateFlowLayout {
     
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let message = messageList[indexPath.section]
         return message.messageFrame.sizeOfItem
     }
@@ -177,6 +178,26 @@ extension MessageController: UICollectionViewDelegateFlowLayout {
 
 extension MessageController: MessageCellDelegate {
 
+    public func messageCellDidTap(_ cell: MessageCell, link: URL) {
+        
+    }
+    
+    public func messageCellDidTap(_ cell: MessageCell, phone: String) {
+        
+    }
+    
+    public func messageCellDidTap(_ cell: MessageCell) {
+        
+    }
+    
+    public func messageCellResendButtonClick(_ cell: MessageCell) {
+        
+    }
+    
+    public func messageCellUserAvatarDidClick(_ userId: String) {
+        
+    }
+    
 }
 
 

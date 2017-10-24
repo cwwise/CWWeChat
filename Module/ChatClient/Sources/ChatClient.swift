@@ -32,6 +32,10 @@ public class ChatClient {
         return contactService
     }
 
+    public var groupManager: GroupManager {
+        return groupService
+    }
+
     public var currentAccount: String {
         return self.loginManager.currentAccount
     }
@@ -40,6 +44,8 @@ public class ChatClient {
     var chatService: ChatService
     
     var contactService: ContactService
+    
+    var groupService: GroupService
     
     var xmppManager: XMPPManager
     
@@ -57,6 +63,9 @@ public class ChatClient {
         
         contactService = ContactService(dispatchQueue: queue)
         contactService.activate(xmppManager.xmppStream)
+        
+        groupService = GroupService(dispatchQueue: queue)
+        groupService.activate(xmppManager.xmppStream)
     }
     
     /// 初始化聊天信息

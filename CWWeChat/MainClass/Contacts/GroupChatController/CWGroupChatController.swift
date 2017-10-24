@@ -8,6 +8,7 @@
 
 import UIKit
 import ChatKit
+import ChatClient
 
 class CWGroupChatController: ConversationListController {
 
@@ -20,14 +21,19 @@ class CWGroupChatController: ConversationListController {
         self.navigationItem.rightBarButtonItem = barButtonItem
     }
     
-    @objc func createGroupChat() {
-
+    @objc
+    func createGroupChat() {
+        let groupManager = ChatClient.share.groupManager
+        let options = GroupOptions()
+        groupManager.createGroup(title: "测试数据", invitees: [], message: "邀请朋友", setting: options, completion: nil)
     }
     
     // TODO: 应该只显示本地保存的群聊，后期修改
     func fetchGroupChat() {
        
-
+        let groupManager = ChatClient.share.groupManager
+        groupManager.fetchJoinGroups()
+        
     }
 
     override func didReceiveMemoryWarning() {

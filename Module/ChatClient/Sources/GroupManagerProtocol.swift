@@ -21,5 +21,11 @@ public protocol GroupManager {
     func removeGroupDelegate(_ delegate: GroupManagerDelegate)
 
     func fetchJoinGroups()
+    
+    func createGroup(title: String,
+                     invitees: [String],
+                     message: String,
+                     setting: GroupOptions,
+                     completion: GroupCompletion?)
 }
 
