@@ -23,6 +23,10 @@ class CWConversationController: ConversationListController {
             conversationList.append(ConversationModel(conversation: conversation))
         }
         
+        // 添加群聊
+        let conversation = Conversation(conversationId: "haohao@conference.cwwise.com", type: .group)
+        conversationList.append(ConversationModel(conversation: conversation))
+
         if #available(iOS 9.0, *) {
             self.registerForPreviewing(with: self, sourceView: self.tableView)
         } else {

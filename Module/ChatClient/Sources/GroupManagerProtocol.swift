@@ -8,9 +8,16 @@
 
 import Foundation
 
+/// 群组相关的回调
 public protocol GroupManagerDelegate {
     
+    func groupListDidUpdate(_ groupList: [Group])
+
 }
+public extension GroupManagerDelegate {
+    func groupListDidUpdate(_ groupList: [Group]) {}
+}
+
 
 public typealias GroupCompletion = (Group?, ChatClientError?) -> Void
 

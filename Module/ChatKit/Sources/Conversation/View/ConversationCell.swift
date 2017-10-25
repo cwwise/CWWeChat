@@ -89,10 +89,8 @@ public class ConversationCell: UITableViewCell {
             } else {
                 self.usernameLabel.text = "群聊"
             }
-//            self.headerImageView.image = ChatAsset.defaultHeadImage.image
-
+            self.headerImageView.image = ChatAsset.defaultHeadImage.image
         }
-        
         
         self.timeLabel.text = model.lastMessageTime
         self.contentLabel.text = model.conversationTitle

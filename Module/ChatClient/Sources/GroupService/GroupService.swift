@@ -13,9 +13,9 @@ private let serviceName = "conference"
 
 class GroupService: XMPPModule {
     
-    var roomList: [XMPPRoom] = []
+    var roomCache: [String: XMPPRoom] = [:]
     
-    var storage = XMPPRoomCoreDataStorage.sharedInstance()!
+    var roomStorage = XMPPRoomCoreDataStorage.sharedInstance()!
     
     lazy var groupChat: XMPPMUC = {
         let groupChat = XMPPMUC(dispatchQueue: self.moduleQueue)
@@ -59,9 +59,9 @@ extension GroupService: GroupManager {
                 return
         }
         
-        let room = XMPPRoom(roomStorage: storage, jid: jid)
-        room.changeSubject(title)
+        let room = XMPPRoom(roomStorage: roomStorage, jid: jid)
         room.activate(self.xmppStream!)
+        room.changeSubject(title)
         room.addDelegate(self, delegateQueue: self.moduleQueue)
         room.join(usingNickname: "陈威", history: nil)
     }
@@ -119,8 +119,11 @@ extension GroupService: GroupManager {
     }
     
     func generateGroupRoom(_ groupId: String) -> XMPPRoom {
+        if let room = roomCache[groupId] {
+            return room
+        }
         let jid = XMPPJID(string: groupId)
-        let room = XMPPRoom(roomStorage: storage, jid: jid!)
+        let room = XMPPRoom(roomStorage: roomStorage, jid: jid!)
         room.addDelegate(self, delegateQueue: self.moduleQueue)
         room.activate(self.xmppStream!)
         return room
@@ -131,16 +134,33 @@ extension GroupService: GroupManager {
 // 发现多人聊天
 extension GroupService: XMPPMUCDelegate {
     func xmppMUC(_ sender: XMPPMUC!, didDiscoverRooms rooms: [Any]!, forServiceNamed serviceName: String!) {
+        roomCache.removeAll()
         guard let rooms = rooms else { return }
+        
         for item in rooms {
             if let room = item as? DDXMLElement,
                 let jid = room.attribute(forName: "jid")?.stringValue,
                 let _ = room.attribute(forName: "name")?.stringValue {
                 
+                // 生成room
                 let groupRoom = generateGroupRoom(jid)
-                groupRoom.fetchConfigurationForm()
+                roomCache[jid] = groupRoom
             }
         }
+ 
+        let groupList = roomCache.map { (key, room) -> Group in
+            let group = Group(groupId: room.roomJID.bare)
+            return group
+        }
+        executeDelegateSelector { (delegate, queue) in
+            //执行Delegate的方法
+            if let delegate = delegate as? GroupManagerDelegate {
+                queue?.async(execute: {
+                    delegate.groupListDidUpdate(groupList)
+                })
+            }
+        }
+        
     }
     
     func xmppMUC(_ sender: XMPPMUC!, failedToDiscoverRoomsForServiceNamed serviceName: String!, withError error: Error!) {
@@ -150,6 +170,7 @@ extension GroupService: XMPPMUCDelegate {
     /// 收到邀请
     public func xmppMUC(_ sender: XMPPMUC!, roomJID: XMPPJID!, didReceiveInvitation message: XMPPMessage!) {
         log.debug("收到邀请"+message.description)
+        
     }
     
     /// 收到邀请拒绝

@@ -120,7 +120,6 @@ extension ChatMessageStore {
                        count: Int = 20) -> [Message]{
         
         var messages = [Message]()
-        
         var query = messageTable(conversationId)
         if let timestamp = timestamp {
             query = query.filter(f_date < timestamp)
@@ -152,6 +151,7 @@ extension ChatMessageStore {
         let message = Message(conversationId: conversationId,
                               from: row[f_from],
                               body: messageBody)
+        message.timestamp = row[f_date]
         let direction = MessageDirection(rawValue: row[f_direction]) ?? .send
         let sendStatus = MessageSendStatus(rawValue: row[f_sendStatus]) ?? .sending
         let chatType = ChatType(rawValue: row[f_chatType]) ?? .single

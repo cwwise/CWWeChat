@@ -150,7 +150,6 @@ extension MessageController: UICollectionViewDelegate, UICollectionViewDataSourc
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! TimeMessageHeaderView
         let message = messageList[indexPath.section]
-        
         let date = Date(timeIntervalSince1970: message.timestamp)
         header.timeLabel.text = ChatTimeTool.chatTimeString(from: date)
         return header

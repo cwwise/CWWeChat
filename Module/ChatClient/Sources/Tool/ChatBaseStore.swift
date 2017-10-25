@@ -39,7 +39,7 @@ class ChatBaseStore {
     /// 数据库路径
     lazy var path: String = {
         let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let userPath = documentPath
+        let userPath = "\(documentPath)/\(userId)"
         let path = "\(userPath)/chat/"
         if !FileManager.default.fileExists(atPath: path) {
             try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
