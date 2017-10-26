@@ -35,15 +35,12 @@ class ChatClientUtil: NSObject {
             fatalError("错误")
         }
         
-        
     }
-    
-    
 }
 
-public extension XMPPModule {
+extension XMPPModule {
     // 执行代理方法
-    public func executeDelegateSelector(_ action: ((AnyObject?, DispatchQueue?) -> Void)) {
+    func executeDelegateSelector(_ action: ((AnyObject?, DispatchQueue?) -> Void)) {
         // 处理事件
         // 检查delegate 是否存在，存在就执行方法
         guard let multicastDelegate = self.value(forKey: "multicastDelegate") as? GCDMulticastDelegate else {

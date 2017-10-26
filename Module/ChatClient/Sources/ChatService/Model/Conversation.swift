@@ -42,6 +42,11 @@ public class Conversation {
         lastMessage = message
     }
     
+    public func insert(message: Message) {
+        let messageStore = ChatClient.share.chatService.messageStore
+        messageStore.insertMessage(message)
+    }
+    
     /// 获取指定ID的消息
     ///
     /// - Parameter messageId: 消息ID
@@ -50,6 +55,8 @@ public class Conversation {
         
         return nil
     }
+    
+    
 }
 
 extension Conversation: Hashable, CustomStringConvertible {

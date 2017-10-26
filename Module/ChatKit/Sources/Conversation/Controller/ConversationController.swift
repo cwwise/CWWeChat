@@ -1,5 +1,5 @@
 //
-//  ConversationListController.swift
+//  ConversationController.swift
 //  ChatKit
 //
 //  Created by chenwei on 2017/10/3.
@@ -8,7 +8,7 @@
 import UIKit
 import ChatClient
 
-open class ConversationListController: UIViewController {
+open class ConversationController: UIViewController {
 
     public var chatManager = ChatClient.share.chatManager
 
@@ -65,7 +65,7 @@ open class ConversationListController: UIViewController {
 }
 
 //MARK: UITableViewDelegate UITableViewDataSource
-extension ConversationListController: UITableViewDelegate, UITableViewDataSource {
+extension ConversationController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
@@ -92,13 +92,7 @@ extension ConversationListController: UITableViewDelegate, UITableViewDataSource
     }
     
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
-        let conversation = conversationList[indexPath.row].conversation
-        
-        let chatVC = MessageController(conversation: conversation)
-        chatVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -115,7 +109,7 @@ extension ConversationListController: UITableViewDelegate, UITableViewDataSource
 
 
 // MARK: - UISearchBarDelegate
-extension ConversationListController: UISearchBarDelegate {
+extension ConversationController: UISearchBarDelegate {
     
     public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.tabBarController?.tabBar.isHidden = true
@@ -145,7 +139,7 @@ extension ConversationListController: UISearchBarDelegate {
 }
 
 
-extension ConversationListController: ChatManagerDelegate {
+extension ConversationController: ChatManagerDelegate {
     
     public func didReceive(message: Message) {
         // 发送本地推送

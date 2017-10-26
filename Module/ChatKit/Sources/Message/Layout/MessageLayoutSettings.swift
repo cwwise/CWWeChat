@@ -29,6 +29,9 @@ public class MessageLayoutSettings {
     
     public var errorSize: CGSize
     
+    // 文字设置
+    
+    
     private init() {
         avaterSize = CGSize(width: 40, height: 40)
         

@@ -10,7 +10,7 @@ import UIKit
 import ChatKit
 import ChatClient
 
-class CWGroupChatController: ConversationListController {
+class CWGroupChatController: ConversationController {
 
     let groupManager = ChatClient.share.groupManager
 

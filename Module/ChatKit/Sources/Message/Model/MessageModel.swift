@@ -42,12 +42,12 @@ public class MessageModel {
     public var messageId: String {
         return message.messageId
     }
-    /// 来源
+    /// 发送人
     public var from: String {
         return message.from
     }
     
-    /// 来源
+    /// 时间
     public var timestamp: TimeInterval {
         return message.timestamp
     }
@@ -57,10 +57,10 @@ public class MessageModel {
     /// 播放状态
     public var playStatus: MessagePlayStatus = .none
     /// 是否显示时间
-    public var showTime: Bool = true
+    public var showTime: Bool = false
     /// 是否显示用户名 
     public var showUsername: Bool = false
-    
+
     var messageFrame: MessageFrame = MessageFrame()
     
     public init(message: Message) {
@@ -68,7 +68,6 @@ public class MessageModel {
         // 计算frame部分
         MessageLayoutManager.share.configurate(message: self)
     }
-    
 }
 
 extension MessageModel: Hashable, Equatable, CustomStringConvertible {
@@ -89,6 +88,7 @@ extension MessageModel: Hashable, Equatable, CustomStringConvertible {
 
 // 添加拓展
 extension MessageType {
+        
     //获取cell的reuseIdentifier
     var identifier: String {
         switch self {

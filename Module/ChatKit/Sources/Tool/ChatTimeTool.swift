@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+/// 时间tool
 class ChatTimeTool {
     
     static let share = ChatTimeTool()

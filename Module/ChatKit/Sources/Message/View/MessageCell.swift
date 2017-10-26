@@ -117,14 +117,24 @@ public class MessageCell: UICollectionViewCell {
         
         //
         setupFrame()
-        
+        // 更新消息状态
         updateState()
-        // 赋值
-        let userId = message.from
-        let avatarURL = "\(userId).jpg"
-        avatarImageView.kf.setImage(with: URL(string: avatarURL), placeholder: nil)
         
-        self.messageContentView.refresh(message: message)
+        // 设置头像信息
+        // 如果是自己发送的 
+        let avatarURL: URL
+        if message.isSend {
+            
+        } else {
+            
+        }
+        
+        let userId = message.from
+        let avatar = "\(userId).jpg"
+        avatarImageView.kf.setImage(with: URL(string: avatar),
+                                    placeholder: ChatAsset.defaultHeadImage.image)
+        
+        messageContentView.refresh(message: message)
     }
     
     func updateState() {

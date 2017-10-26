@@ -24,6 +24,7 @@ public class ChatKit: NSObject {
     
     
     public func fetchUser(userId: String) -> User? {
+        
         return nil
     }
     

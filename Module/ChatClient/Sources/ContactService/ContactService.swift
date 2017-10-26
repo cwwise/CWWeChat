@@ -58,7 +58,6 @@ extension ContactService: ContactManager {
         self.completion = completion
     }
     
-    
     func updateMyUserInfo(_ userInfo: [UserInfoUpdateTag: String]) {
         
         let vCardTemp = vCardModule.myvCardTemp

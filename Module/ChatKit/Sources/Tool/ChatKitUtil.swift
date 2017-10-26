@@ -18,6 +18,8 @@ let kChatImageMinWidth = kScreenWidth * 0.25
 
 let kChatVoiceMaxWidth = kScreenWidth * 0.3
 
+let kChatKitAssetBundle = Bundle.chatKitAssetBundle()
+
 struct ChatCellUI {
     
     static let bubbleTopMargin: CGFloat = 2
@@ -33,5 +35,50 @@ struct ChatCellUI {
 }
 
 
-let kChatKitAssetBundle = Bundle.chatKitAssetBundle()
+class ChatKitUtil {
+    
+    
+    
+    
+}
+
+
+class MessageTimeUtil {
+    var maxMessageCount: Int = 15
+    var lastMessageTime: TimeInterval?
+    var messageMaxInterval: TimeInterval = 60*3
+    var currentCount: Int = 0
+    
+    func handleMessage(_ message: MessageModel) {
+        
+        currentCount += 1
+        // 先判断消息的时间间隔
+        guard let messageTime = lastMessageTime else {
+            message.showTime = true
+            lastMessageTime = message.timestamp
+            return
+        }
+        
+        lastMessageTime = message.timestamp
+        // 先判断消息时间间隔
+        if message.timestamp - messageTime > messageMaxInterval {
+            message.showTime = true
+            return
+        }
+        
+        if currentCount > maxMessageCount {
+            message.showTime = true
+            currentCount = 0
+        }
+        
+    }
+}
+
+
+
+
+
+
+
+
 

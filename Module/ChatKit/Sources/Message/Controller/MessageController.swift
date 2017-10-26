@@ -10,10 +10,15 @@ import ChatClient
 
 open class MessageController: UIViewController {
 
-    public var messageList: [MessageModel] = [MessageModel]()
+    private var messageList: [MessageModel] = [MessageModel]()
 
     public var conversation: Conversation
-    
+    /// 显示时间处理
+    private var messageTool: MessageTimeUtil = {
+        let messageTool = MessageTimeUtil()
+        return messageTool
+    }()
+
     public lazy var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView()
         backgroundImageView.contentMode = .scaleAspectFill
@@ -77,6 +82,7 @@ open class MessageController: UIViewController {
             if error == nil {
                 let messageList = list.map({ (message) -> MessageModel in
                     let messageModel = MessageModel(message: message)
+                    self.messageTool.handleMessage(messageModel)
                     return messageModel
                 })
                 self.messageList.append(contentsOf: messageList)
@@ -93,6 +99,16 @@ open class MessageController: UIViewController {
         }
         let indexPath = IndexPath(row: 0, section: messageList.count-1)
         self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: animated)
+    }
+    
+    func sendMessage(_ message: Message) {
+        
+        let messageModel = MessageModel(message: message)
+        messageTool.handleMessage(messageModel)
+        self.messageList.append(messageModel)
+        
+        self.collectionView.reloadData()
+        self.scrollToBottom(true)
     }
     
     deinit {
@@ -120,6 +136,7 @@ extension MessageController: ChatManagerDelegate {
         
         let messageModel = MessageModel(message: message)
         messageList.append(messageModel)
+        messageTool.handleMessage(messageModel)
         collectionView.reloadData()
         scrollToBottom(false)
     }

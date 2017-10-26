@@ -10,7 +10,7 @@ import UIKit
 import ChatClient
 import ChatKit
 
-class CWConversationController: ConversationListController {
+class CWConversationController: ConversationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,7 @@ class CWConversationController: ConversationListController {
     @objc func sendMessage() {
         
         let conversationId = "chenwei"
-        let chatVC = MessageController(conversationId: conversationId)
+        let chatVC = CWMessageController(conversationId: conversationId)
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
@@ -75,7 +75,7 @@ extension CWConversationController: UIViewControllerPreviewingDelegate {
         // Create a detail view controller and set its properties.        
         let conversationModel = self.conversationList[indexPath.row]
 
-        let viewController = MessageController(conversation: conversationModel.conversation)
+        let viewController = CWMessageController(conversation: conversationModel.conversation)
         viewController.conversation = conversationModel.conversation
         viewController.hidesBottomBarWhenPushed = true
         /*
