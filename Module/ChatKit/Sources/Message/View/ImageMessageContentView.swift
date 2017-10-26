@@ -76,10 +76,6 @@ class ImageMessageContentView: MessageContentView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        guard let _ = message else {
-            return
-        }
         maskLayer.frame = self.bounds
         messageImageView.frame = self.bounds
     }

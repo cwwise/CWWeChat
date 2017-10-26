@@ -10,7 +10,7 @@ import ChatClient
 
 open class MessageController: UIViewController {
 
-    private var messageList: [MessageModel] = [MessageModel]()
+    public var messageList: [MessageModel] = [MessageModel]()
 
     public var conversation: Conversation
     /// 显示时间处理

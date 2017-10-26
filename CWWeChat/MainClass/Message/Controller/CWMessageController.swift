@@ -30,8 +30,8 @@ public class CWMessageController: MessageController {
         let from = ChatKit.share.currentAccount
         // 文字
         let textList = ["小明，如果你暗恋的女神向你表白，你的第一反应是什么", "生下来吧，算我的。", "。。。。"]
-        let textMessageList = textList.map { (text) -> Message in
-            let textMessage = TextMessageBody(text: "测试数据")
+        var tempMessageList = textList.map { (text) -> Message in
+            let textMessage = TextMessageBody(text: text)
             return Message(conversationId: conversationId, from: from, body: textMessage)
         }
         
@@ -39,12 +39,24 @@ public class CWMessageController: MessageController {
         
         
         // 图片
+        let url1 = URL(string: "http://7xsmd8.com1.z0.glb.clouddn.com/cwwechat005.jpg")
+        let size1 = CGSize(width: 600, height: 800)
+        let image1 = ImageMessageBody(originalURL: url1, size: size1)
+        let imageMessage1 = Message(conversationId: conversationId, from: from, body: image1)
         
+        // 本地图片
+        let path2 = Bundle.main.path(forResource: "cwwechat003", ofType: "jpg")
+        let size2 = CGSize(width: 600, height: 800)
+        let image2 = ImageMessageBody(path: path2, size: size2)
+        let imageMessage2 = Message(conversationId: conversationId, from: from, body: image2)
+
+        tempMessageList.append(imageMessage1)
+        tempMessageList.append(imageMessage2)
+
         // 位置
         
-        let textModelList = textMessageList.map { return MessageModel(message: $0) }
-        
-        
+        let textModelList = tempMessageList.map { return MessageModel(message: $0) }
+        self.messageList.append(contentsOf: textModelList)
         
         self.collectionView.reloadData()
         self.scrollToBottom(false)
