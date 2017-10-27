@@ -46,7 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             account = try CWAccount.userAccount()
         } catch {
-            
         }
         
         guard let current = account else {
