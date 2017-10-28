@@ -8,6 +8,9 @@
 
 import UIKit
 
+let kHeightOfContactCell: CGFloat   =   54.0
+let kHeightOfHeader: CGFloat        =   22.0
+
 /// 联系人
 class CWContactsController: UIViewController {
 
@@ -91,13 +94,10 @@ class CWContactsController: UIViewController {
 
 }
 
-private let kHeightOfContactsCell: CGFloat   =   54.0
-private let kHeightOfHeader: CGFloat        =   22.0
-
 extension CWContactsController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return kHeightOfContactsCell
+        return kHeightOfContactCell
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -150,7 +150,6 @@ extension CWContactsController: UITableViewDataSource, UITableViewDelegate {
       
             let userId = groupList[indexPath.section][indexPath.row].userId
             let detail = CWContactDetailController()
-            detail.userId = userId
             detail.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(detail, animated: true)
         }

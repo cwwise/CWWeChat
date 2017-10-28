@@ -60,7 +60,7 @@ extension CWSearchResultController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return kHeight_ContactCell
+        return kHeightOfContactCell
     }
  
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

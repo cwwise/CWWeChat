@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SQLite.Swift
+import SQLite
 
 class ChatMessageStore: ChatBaseStore {
     /// 判断是否存在对应的表

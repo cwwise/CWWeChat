@@ -9,12 +9,15 @@
 import UIKit
 import TableViewManager
 import ChatKit
+import ChatClient
+import RxCocoa
+import RxSwift
 
 class CWContactDetailController: CWBaseTableViewController {
 
-  //  let bag = DisposeBag()
+    let bag = DisposeBag()
     
-    private var contact: CWUserModel!
+    private var contact: Contact!
     
     lazy var tableViewManager: TableViewManager = {
         let tableViewManager = TableViewManager(tableView: self.tableView)
@@ -22,18 +25,11 @@ class CWContactDetailController: CWBaseTableViewController {
         tableViewManager.dataSource = self
         return tableViewManager
     }()
-    
-    var userId: String?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "详细资料"
 
-        CWContactHelper.share.fetchContactById(userId!, complete: { (contact, error) in
-            self.contact = contact
-            self.tableView.reloadData()
-        })
-        
         self.tableView.register(CWContactInfoCell.self, forCellReuseIdentifier: CWContactInfoCell.identifier)
         self.tableView.register(CWContactDetailAlbumCell.self, forCellReuseIdentifier: CWContactDetailAlbumCell.identifier)
         setupData()
@@ -62,16 +58,16 @@ class CWContactDetailController: CWBaseTableViewController {
         
         let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 100)
         let footerView = CWContactDetailFooterView(frame: frame)
-//        footerView.button.rx.tap
-//            .subscribe(onNext: { [weak self] in
-//                self?.goChatController()
-//            }).disposed(by: bag)
+        footerView.button.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.goChatController()
+            }).disposed(by: bag)
         
         self.tableView.tableFooterView = footerView
     }
 
     func goChatController() {
-        let chatVC = CWMessageController(conversationId: userId!)
+        let chatVC = CWMessageController(conversationId: contact.username)
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
@@ -94,13 +90,11 @@ extension CWContactDetailController: TableViewManagerDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CWContactInfoCell.identifier,
                                                      for: indexPath) as! CWContactInfoCell
-            if contact != nil {
-                cell.userModel = contact
-            }
+            cell.userModel = contact
             return cell
         } else if indexPath.section == 2 && indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CWContactDetailAlbumCell.identifier,
-                                                     for: indexPath)
+                      Contact                               for: indexPath)
             
             
             return cell

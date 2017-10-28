@@ -24,10 +24,10 @@ public enum UserInfoUpdateTag: String {
 /// 好友相关的回调
 public protocol ContactManagerDelegate {
     /// 用户信息修改回调
-    func onUserInfoChanged(user: User)
+    func onUserInfoChanged(user: Contact)
 }
 
-public typealias ContactCompletion = ([User], ChatClientError?) -> Void
+public typealias ContactCompletion = ([Contact], ChatClientError?) -> Void
 
 public protocol ContactManager {
     
@@ -42,7 +42,11 @@ public protocol ContactManager {
     /// - Parameter delegate: 代理
     func removeContactDelegate(_ delegate: ContactManagerDelegate)
     
-    func updateMyUserInfo(_ userInfo: [UserInfoUpdateTag: String])
     
-    func userInfo(with userId: String) -> User
+    
+    
+    
+    func updateMyUserInfo(_ userInfo: [UserInfoUpdateTag: String])
+
+    
 }

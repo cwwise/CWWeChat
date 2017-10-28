@@ -8,15 +8,15 @@
 
 import Foundation
 
-public class User: NSObject {
-    // 聊天账号
+public class Contact {
+    // 聊天账号 (chenwei)  @cwwise.com
     public var username: String
     // 昵称
     public var nickname: String
     // 头像
     public var avatarUrl: URL?
     /// 详细信息
-    public var userInfo: UserInfo?
+    public var info: ContactInfo?
     
     public init(username: String,
                 nickname: String = "", 
@@ -27,17 +27,27 @@ public class User: NSObject {
     }    
 }
 
-public class UserInfo: NSObject {
+extension Contact: Hashable {
+    public var hashValue: Int {
+        return username.hashValue
+    }
+    
+    public static func ==(lhs: Contact, rhs: Contact) -> Bool {
+        return lhs.username == rhs.username
+    }
+}
+
+public class ContactInfo: CustomStringConvertible {
     // 真实名称
     public var realname: String?
-    // 备注
-    public var alias: String?
     // 签名
     public var sign: String?
     // email
     public var email: String?
-    
-    public override var description: String {
+    // 备注
+    public var remarkname: String?
+
+    public var description: String {
         return "nickName:\(realname ?? "未设置"), sign:\(sign ?? "未设置")"
     }
 }

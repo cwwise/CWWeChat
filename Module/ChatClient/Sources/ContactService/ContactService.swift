@@ -25,12 +25,17 @@ class ContactService: XMPPModule {
         return vCardModule
     }()
     
-    @objc func didActivate() {
+    @objc 
+    func didActivate() {
         xmppRoster.addDelegate(self, delegateQueue: self.moduleQueue)
         xmppRoster.activate(self.xmppStream!)
         
         vCardModule.activate(self.xmppStream!)
         vCardModule.addDelegate(self, delegateQueue: self.moduleQueue)
+        
+        
+        // 开始获取好友列表
+        
     }
     
 }
@@ -72,7 +77,7 @@ extension ContactService: ContactManager {
         vCardModule.updateMyvCardTemp(vCardTemp!)
     }
     
-    func userInfo(with userId: String) -> User {
+    func userInfo(with username: String) -> Contact {
    //     let jid = chatJID(with: userId)
         
 //        if let vCardTemp = vCardModule.vCardTemp(for: jid, shouldFetch: true) {
@@ -82,13 +87,13 @@ extension ContactService: ContactManager {
 //            let user = User(userId: userId)
 //            return user
 //        }
-        return User(username: userId)
+        return Contact(username: username)
     }
     
 }
 
 // 根据 XMPPvCardTemp生成CWUser
-extension User {
+extension Contact {
     
 //    convenience init(userId: String, vCardTemp: XMPPvCardTemp) {
 //        let userInfo = CWUserInfo()

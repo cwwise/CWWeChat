@@ -23,7 +23,7 @@ public class ChatKit: NSObject {
     }
     
     
-    public func fetchUser(userId: String) -> User? {
+    public func fetchUser(userId: String) -> Contact? {
         
         return nil
     }

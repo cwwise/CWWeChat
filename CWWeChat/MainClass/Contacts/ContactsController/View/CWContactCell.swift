@@ -11,7 +11,7 @@ import UIKit
 private let kContactCellLeftMargin:CGFloat     =    10.0
 private let kContactCellTopMargin:CGFloat     =    9.0
 
-let kHeight_ContactCell: CGFloat = 54
+let kContactCellHeight: CGFloat = 54
 
 class CWContactCell: UITableViewCell {
     

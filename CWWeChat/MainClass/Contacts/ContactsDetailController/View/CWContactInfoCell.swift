@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ChatClient
 
 // 修改命名 统一一些距离
 private let space_x: CGFloat  =  14.0
@@ -14,7 +15,7 @@ private let space_y: CGFloat  =  12.0
 
 class CWContactInfoCell: UITableViewCell {
 
-    var userModel: CWUserModel! {
+    var userModel: User? {
         didSet {
             self.setupUserInfomation()
         }
@@ -86,9 +87,13 @@ class CWContactInfoCell: UITableViewCell {
     
     func setupUserInfomation() {
         
-        let nikename = userModel.nickname ?? ""
+        guard let userModel = userModel else {
+            return
+        }
         
-        avatarImageView.kf.setImage(with: userModel.avatarURL, placeholder: kDefaultHeadImage)
+        let nikename = userModel.nickname
+        
+        avatarImageView.kf.setImage(with: userModel.avatarUrl, placeholder: kDefaultHeadImage)
         
         nikenameLabel.text = nikename
         usernameLabel.text = "微信号："+userModel.username
