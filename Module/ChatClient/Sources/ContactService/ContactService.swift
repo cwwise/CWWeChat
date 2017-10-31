@@ -82,12 +82,12 @@ extension ContactService: ContactManager {
 //            let user = User(userId: userId)
 //            return user
 //        }
-        return User(username: userId)
+        return User(username: userId, nickname: "")
     }
     
 }
 
-// 根据 XMPPvCardTemp生成CWUser
+// 根据 XMPPvCardTemp生成User
 extension User {
     
 //    convenience init(userId: String, vCardTemp: XMPPvCardTemp) {

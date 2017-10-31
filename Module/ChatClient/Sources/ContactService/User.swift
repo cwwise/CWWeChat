@@ -8,18 +8,18 @@
 
 import Foundation
 
-public class User: NSObject {
-    // 聊天账号
+public class User {
+    /// 聊天账号
     public var username: String
-    // 昵称
+    /// 昵称
     public var nickname: String
-    // 头像
+    /// 头像
     public var avatarUrl: URL?
     /// 详细信息
     public var userInfo: UserInfo?
     
     public init(username: String,
-                nickname: String = "", 
+                nickname: String,
                 avatarUrl: URL? = nil) {
         self.username = username
         self.nickname = nickname
@@ -27,7 +27,7 @@ public class User: NSObject {
     }    
 }
 
-public class UserInfo: NSObject {
+public class UserInfo: CustomStringConvertible {
     // 真实名称
     public var realname: String?
     // 备注
@@ -37,7 +37,7 @@ public class UserInfo: NSObject {
     // email
     public var email: String?
     
-    public override var description: String {
+    public var description: String {
         return "nickName:\(realname ?? "未设置"), sign:\(sign ?? "未设置")"
     }
 }

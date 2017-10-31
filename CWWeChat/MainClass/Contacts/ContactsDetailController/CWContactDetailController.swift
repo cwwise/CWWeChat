@@ -9,10 +9,12 @@
 import UIKit
 import TableViewManager
 import ChatKit
+import RxSwift
+import RxCocoa
 
 class CWContactDetailController: CWBaseTableViewController {
 
-  //  let bag = DisposeBag()
+    let bag = DisposeBag()
     
     private var contact: CWUserModel!
     
@@ -62,10 +64,10 @@ class CWContactDetailController: CWBaseTableViewController {
         
         let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 100)
         let footerView = CWContactDetailFooterView(frame: frame)
-//        footerView.button.rx.tap
-//            .subscribe(onNext: { [weak self] in
-//                self?.goChatController()
-//            }).disposed(by: bag)
+        footerView.button.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.goChatController()
+            }).disposed(by: bag)
         
         self.tableView.tableFooterView = footerView
     }

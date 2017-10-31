@@ -92,7 +92,6 @@
 		8C0BFE0B1E9209D8007343F1 /* CWContactsController+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFE001E9209D8007343F1 /* CWContactsController+SearchBar.swift */; };
 		8C0BFE0C1E9209D8007343F1 /* CWContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFE011E9209D8007343F1 /* CWContactsController.swift */; };
 		8C0BFE0D1E9209D8007343F1 /* CWSearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFE021E9209D8007343F1 /* CWSearchResultController.swift */; };
-		8C0BFE0E1E9209D8007343F1 /* CWUserGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFE041E9209D8007343F1 /* CWUserGroup.swift */; };
 		8C0BFE0F1E9209D8007343F1 /* CWUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFE051E9209D8007343F1 /* CWUserModel.swift */; };
 		8C0BFE101E9209D8007343F1 /* CWContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFE071E9209D8007343F1 /* CWContactCell.swift */; };
 		8C0BFE111E9209D8007343F1 /* CWContactHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFE081E9209D8007343F1 /* CWContactHeaderView.swift */; };
@@ -281,7 +280,6 @@
 		8C0BFE001E9209D8007343F1 /* CWContactsController+SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CWContactsController+SearchBar.swift"; sourceTree = "<group>"; };
 		8C0BFE011E9209D8007343F1 /* CWContactsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWContactsController.swift; sourceTree = "<group>"; };
 		8C0BFE021E9209D8007343F1 /* CWSearchResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWSearchResultController.swift; sourceTree = "<group>"; };
-		8C0BFE041E9209D8007343F1 /* CWUserGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWUserGroup.swift; sourceTree = "<group>"; };
 		8C0BFE051E9209D8007343F1 /* CWUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWUserModel.swift; sourceTree = "<group>"; };
 		8C0BFE071E9209D8007343F1 /* CWContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWContactCell.swift; sourceTree = "<group>"; };
 		8C0BFE081E9209D8007343F1 /* CWContactHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWContactHeaderView.swift; sourceTree = "<group>"; };
@@ -871,7 +869,6 @@
 		8C0BFE031E9209D8007343F1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8C0BFE041E9209D8007343F1 /* CWUserGroup.swift */,
 				8C0BFE051E9209D8007343F1 /* CWUserModel.swift */,
 			);
 			path = Model;
@@ -1205,6 +1202,8 @@
 				"${BUILT_PRODUCTS_DIR}/MomentKit/MomentKit.framework",
 				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs/OHHTTPStubs.framework",
 				"${BUILT_PRODUCTS_DIR}/PPBadgeViewSwift/PPBadgeViewSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
@@ -1233,6 +1232,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MomentKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PPBadgeViewSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
@@ -1453,7 +1454,6 @@
 				1F8664381F00B74E0093F979 /* CWMomentStore.swift in Sources */,
 				8CA7EAF41E9D41DE00467C37 /* CWAboutController.swift in Sources */,
 				1F3492711E87C06300B36641 /* CWBaseTableViewController.swift in Sources */,
-				8C0BFE0E1E9209D8007343F1 /* CWUserGroup.swift in Sources */,
 				8CA924721F56F88300570846 /* EmoticonGroup.swift in Sources */,
 				1F3492161E878AD500B36641 /* UIColor+Extension.swift in Sources */,
 				8C0BFE111E9209D8007343F1 /* CWContactHeaderView.swift in Sources */,

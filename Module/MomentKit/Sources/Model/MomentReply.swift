@@ -8,13 +8,13 @@
 
 import UIKit
 
-enum CWMomentReplyType: Int {
+enum MomentReplyType: Int {
     case unkown
     case comment
     case praise
 }
 
-class CWMomentReply: NSObject {
+class MomentReply: NSObject {
     // 对应的id
     var momentId: String!
 
@@ -26,7 +26,7 @@ class CWMomentReply: NSObject {
     var receiveUserName: String?
     
     var replyDate: Date = Date()
-    var replyType: CWMomentReplyType = .unkown
+    var replyType: MomentReplyType = .unkown
     
     // 初始化方法
     init(replyId: String,

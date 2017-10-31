@@ -1,5 +1,5 @@
 //
-//  CWMoment.swift
+//  Moment.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/3/29.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum CWMomentType: Int {
+enum MomentType: Int {
     case normal // 图文
     case vidio  // 视频
     case url
@@ -16,7 +16,7 @@ enum CWMomentType: Int {
 }
 
 /// 图片
-class CWMomentPhoto: NSObject {
+class MomentPhoto: NSObject {
     var thumbnailURL: URL
     var largetURL: URL
     var size: CGSize = CGSize.zero
@@ -28,14 +28,14 @@ class CWMomentPhoto: NSObject {
     }
 }
 
-class CWMomentVideo: NSObject {
+class MomentVideo: NSObject {
     var videoURL: URL
     init(videoURL: URL) {
         self.videoURL = videoURL
     }
 }
 
-class CWMultimedia: NSObject {
+class Multimedia: NSObject {
     var url: URL
     var imageURL: URL
     var title: String
@@ -61,16 +61,16 @@ class CWMoment: NSObject {
     
     var date: Date
     
-    var type: CWMomentType = .normal
+    var type: MomentType = .normal
 
     var content: String?
-    var videoModel: CWMomentVideo?
-    var multimedia: CWMultimedia?
-    var imageArray = [CWMomentPhoto]()
+    var videoModel: MomentVideo?
+    var multimedia: Multimedia?
+    var imageArray = [MomentPhoto]()
     
     
-    var commentArray = [CWMomentReply]()
-    var praiseArray = [CWMomentReply]()
+    var commentArray = [MomentReply]()
+    var praiseArray = [MomentReply]()
         
     // 是否上传成功
     var sendSuccess: Bool = true

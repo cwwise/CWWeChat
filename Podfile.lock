@@ -17,17 +17,17 @@ PODS:
     - SwiftyBeaver
     - SwiftyJSON
   - CocoaAsyncSocket (7.6.1)
-  - CocoaLumberjack (3.2.1):
-    - CocoaLumberjack/Default (= 3.2.1)
-    - CocoaLumberjack/Extensions (= 3.2.1)
-  - CocoaLumberjack/Default (3.2.1)
-  - CocoaLumberjack/Extensions (3.2.1):
+  - CocoaLumberjack (3.3.0):
+    - CocoaLumberjack/Default (= 3.3.0)
+    - CocoaLumberjack/Extensions (= 3.3.0)
+  - CocoaLumberjack/Default (3.3.0)
+  - CocoaLumberjack/Extensions (3.3.0):
     - CocoaLumberjack/Default
   - CWActionSheet (0.0.6)
   - CWShareView (0.0.2)
-  - FSPagerView (0.7.0)
+  - FSPagerView (0.7.1)
   - Hue (3.0.0)
-  - Kingfisher (4.1.0)
+  - Kingfisher (4.2.0)
   - KissXML (5.2.0)
   - KVOController (1.2.0)
   - libidn (1.33)
@@ -56,6 +56,9 @@ PODS:
     - OHHTTPStubs/Default
   - PPBadgeViewSwift (2.0.0)
   - Quick (1.2.0)
+  - RxCocoa (4.0.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.0.0)
   - SnapKit (4.0.0)
   - SQLite.swift (0.11.4):
     - SQLite.swift/standard (= 0.11.4)
@@ -90,6 +93,8 @@ DEPENDENCIES:
   - OHHTTPStubs/Swift
   - PPBadgeViewSwift
   - Quick
+  - RxCocoa
+  - RxSwift
   - SnapKit
   - SQLite.swift
   - SwiftyBeaver
@@ -122,12 +127,12 @@ SPEC CHECKSUMS:
   ChatClient: 8bd9f934a792776c998a072ce12185c14115ef0c
   ChatKit: 3ead4e15ba94b8c14d1add6d52d5d5ede04ae71c
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
-  CocoaLumberjack: 2800c03334042fe80589423c8d80e582dcaec482
+  CocoaLumberjack: 3c8c74683302f9012bb168e1c4b7ae3c0b558431
   CWActionSheet: 7ab61a8628bfe3c4b9932983e154181ea4c9cd2f
   CWShareView: a7befa2a75fa1113c587b69b03b48556b488316d
-  FSPagerView: 7042409096ef3fc050a3f5f4ccc941e8a5a2b330
+  FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
   Hue: b8fe1e43eef13631331eebecb2198b68e2622f95
-  Kingfisher: f14df8cbe576bf55f211fa589e9869bceb4ea87d
+  Kingfisher: 9ee7e788d8ba07c3f21ce0d43f33cec310a4f781
   KissXML: 1c1eeeb6b94e4522cd2f2373e5d0d03c9227738f
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
   libidn: 90fc1a62b60288dcf543f13f4ebca913f17d829f
@@ -137,6 +142,8 @@ SPEC CHECKSUMS:
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   PPBadgeViewSwift: dc520c183e11d87fbe19bdb223e8b47d158f3c6b
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SQLite.swift: 3e3bee21da701b5b9f87c4a672cb54f233505692
   SwiftyBeaver: 91057725648ee4980308f1650af077d04b3654a0
@@ -146,6 +153,6 @@ SPEC CHECKSUMS:
   XMPPFramework: 585b26f95cf67f294881c0aba3afd67346524ba5
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: eb414ad057c00448de33e7f13b0af921ccb50db5
+PODFILE CHECKSUM: f2256259ad6303c2680d3f2f392b4d149318a156
 
 COCOAPODS: 1.3.1
