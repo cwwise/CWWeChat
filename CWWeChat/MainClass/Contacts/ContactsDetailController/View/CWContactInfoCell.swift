@@ -15,7 +15,7 @@ private let space_y: CGFloat  =  12.0
 
 class CWContactInfoCell: UITableViewCell {
 
-    var userModel: User? {
+    var userModel: Contact? {
         didSet {
             self.setupUserInfomation()
         }

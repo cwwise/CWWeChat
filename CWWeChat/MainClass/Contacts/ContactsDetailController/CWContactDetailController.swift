@@ -93,10 +93,7 @@ extension CWContactDetailController: TableViewManagerDataSource {
             cell.userModel = contact
             return cell
         } else if indexPath.section == 2 && indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: CWContactDetailAlbumCell.identifier,
-                      Contact                               for: indexPath)
-            
-            
+            let cell = tableView.dequeueReusableCell(withIdentifier: CWContactDetailAlbumCell.identifier, for: indexPath)
             return cell
         } else {
             return nil

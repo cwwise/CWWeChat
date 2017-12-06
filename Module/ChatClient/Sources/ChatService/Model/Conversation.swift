@@ -24,14 +24,14 @@ public class Conversation {
     public let conversationId: String
     /// 类型
     public let type: ChatType
-    /// 最近一条消息
-    public private(set) var lastMessage: Message?
     /// 是否置顶
     public var isTop: Bool = false
     /// 草稿
     public var draft: String?
     /// 未读数
     public var unreadCount: Int = 0
+    /// 最近一条消息
+    public private(set) var lastMessage: Message?
     
     public init(conversationId: String, type: ChatType) {
         self.conversationId = conversationId

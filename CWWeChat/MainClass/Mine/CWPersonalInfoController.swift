@@ -76,7 +76,7 @@ extension CWPersonalInfoController: TableViewManagerDelegate {
 }
 
 extension CWPersonalInfoController: ContactManagerDelegate {
-    func onUserInfoChanged(user: User) {
+    func onUserInfoChanged(user: Contact) {
 
     }
 }

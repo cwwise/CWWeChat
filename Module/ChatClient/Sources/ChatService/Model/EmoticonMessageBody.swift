@@ -15,9 +15,7 @@ public class EmoticonMessageBody {
     
     public var size: CGSize = CGSize.zero
     
-    init() {
-        
-    }
+    init() {}
     
     public init(localPath: String? = nil,
                 remoteURL: URL? = nil) {

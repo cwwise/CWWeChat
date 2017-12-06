@@ -72,7 +72,7 @@ public class Message {
     /// 消息发送时间
     public var timestamp: TimeInterval
     /// 消息扩展
-    public var extra: [String: AnyObject]?
+    public var extra: [String: Any]?
     
     /// 实例化
     ///
@@ -101,7 +101,7 @@ extension Message: CustomStringConvertible {
     }
 }
 
-extension Message:  Equatable, Hashable {
+extension Message: Equatable, Hashable {
     public var hashValue: Int {
         return messageId.hashValue
     }

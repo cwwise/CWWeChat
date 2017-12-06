@@ -297,7 +297,7 @@ public class CWChatToolBar: UIView {
         let isShrinking = contentHeight < self.previousTextViewHeight
         var changeInHeight = contentHeight - self.previousTextViewHeight
         
-        let result = self.previousTextViewHeight == maxHeight || inputTextView.text.characters.count == 0
+        let result = self.previousTextViewHeight == maxHeight || inputTextView.text.count == 0
         if !isShrinking && result {
             changeInHeight = 0
         } else {

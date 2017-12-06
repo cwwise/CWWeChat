@@ -27,7 +27,7 @@ class CWChatTextParser: NSObject {
     class func parseText(_ text: String,
                          attributes: [NSAttributedStringKey: Any]) -> NSMutableAttributedString? {
 
-        if text.characters.count == 0 {
+        if text.count == 0 {
             return nil
         }
         

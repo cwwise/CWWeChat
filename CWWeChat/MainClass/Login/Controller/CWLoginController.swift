@@ -181,7 +181,7 @@ class CWLoginController: UIViewController {
         guard let text = textField.text else {
             return false
         }
-        return text.characters.count >= 6
+        return text.count >= 6
     }
     
     //
@@ -212,7 +212,7 @@ extension CWLoginController: UITextFieldDelegate {
             return true
         }
         
-        if string.characters.count + (textField.text?.characters.count)! > 25 {
+        if string.count + (textField.text?.count)! > 25 {
             return false
         }
         

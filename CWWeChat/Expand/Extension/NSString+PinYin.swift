@@ -25,7 +25,7 @@ extension String {
         let array = self.capitalized.components(separatedBy: " ")
         var pinYing = ""
         for temp in array {
-            if temp.characters.count == 0 {continue}
+            if temp.count == 0 {continue}
             let index = temp.index(temp.startIndex, offsetBy: 1)
             pinYing += temp[..<index]
         }
@@ -34,7 +34,7 @@ extension String {
     }
     
     var fistLetter: String {
-        if self.characters.count == 0 {return self}
+        if self.count == 0 {return self}
         let index = self.index(self.startIndex, offsetBy: 1)
         return String(self[..<index])
     }

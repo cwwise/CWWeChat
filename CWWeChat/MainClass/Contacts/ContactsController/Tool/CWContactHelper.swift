@@ -126,7 +126,7 @@ public class CWContactHelper: NSObject {
     
     // 判断是否为字母
     func matchLetter(string: String) -> Bool {
-        if string.characters.count == 0 {return false}
+        if string.count == 0 {return false}
         let index = string.index(string.startIndex, offsetBy: 1)
         let regextest = NSPredicate(format: "SELF MATCHES %@", "^[A-Za-z]+$")
         return regextest.evaluate(with: string[..<index])
