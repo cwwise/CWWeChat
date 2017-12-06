@@ -14,15 +14,15 @@ public class Contact {
     public var username: String
     // 用户唯一id
     public var userId: String!
-    // 昵称
+
     public var nickname: String
-    // 头像
+    /// 头像
     public var avatarUrl: URL?
     /// 详细信息
     public var info: ContactInfo?
     
     public init(username: String,
-                nickname: String = "", 
+                nickname: String,
                 avatarUrl: URL? = nil) {
         self.username = username
         self.nickname = nickname

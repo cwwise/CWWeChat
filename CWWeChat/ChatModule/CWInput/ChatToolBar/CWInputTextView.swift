@@ -18,8 +18,8 @@ class CWInputTextView: UITextView {
                 return
             }
             
-            if placeHolder.characters.count > maxChars {
-                let index = placeHolder.characters.index(placeHolder.startIndex, offsetBy: -8)
+            if placeHolder.count > maxChars {
+                let index = placeHolder.index(placeHolder.startIndex, offsetBy: -8)
                 placeHolder = String(placeHolder[..<index])
                 self.placeHolder = placeHolder.trimWhitespace() + "..."
             }
@@ -115,7 +115,7 @@ class CWInputTextView: UITextView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        if self.text.characters.count == 0 && (placeHolder != nil) {
+        if self.text.count == 0 && (placeHolder != nil) {
             let placeHolderRect = CGRect(x: 10.0,
                                          y: 7.0,
                                          width: rect.size.width,
@@ -137,7 +137,7 @@ class CWInputTextView: UITextView {
     }
     
     class func numberOfLinesForMessage(_ text:String) -> Int {
-        return text.characters.count / CWInputTextView.maxCharactersPerLine() + 1
+        return text.count / CWInputTextView.maxCharactersPerLine() + 1
     }
 
 }

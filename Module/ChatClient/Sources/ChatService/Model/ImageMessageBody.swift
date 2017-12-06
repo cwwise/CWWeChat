@@ -39,7 +39,6 @@ extension ImageMessageBody: MessageBody {
     }
     
     var info: [String: String] {
-        
         var info = ["size": NSStringFromCGSize(size)]
         if let urlString = self.originalURL?.absoluteString {
             info["url"] = urlString

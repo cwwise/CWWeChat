@@ -14,11 +14,11 @@ extension Bundle {
         let podBundle = Bundle(for: ChatKit.self)
         
         guard let resourceBundleUrl = podBundle.url(forResource: "ChatKitAssets", withExtension: "bundle") else {
-            fatalError("MessageKit: Could not create path to the assets bundle")
+            fatalError("chatKit: Could not create path to the assets bundle")
         }
         
         guard let resourceBundle = Bundle(url: resourceBundleUrl) else {
-            fatalError("MessageKit: Could not load the assets bundle")
+            fatalError("chatKit: Could not load the assets bundle")
         }
         
         return resourceBundle

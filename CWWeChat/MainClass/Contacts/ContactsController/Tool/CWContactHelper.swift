@@ -9,8 +9,6 @@
 import UIKit
 import SwiftyJSON
 
-
-
 typealias CWContactListChanged = ([[CWUserModel]], [String], Int) -> Void
 
 typealias CWFetchContactComplete = (CWUserModel, NSError?) -> Void
@@ -54,7 +52,7 @@ public class CWContactHelper: NSObject {
             return
         }
         let contantData = try? Data(contentsOf: URL(fileURLWithPath: filepath))
-        let contactList = JSON(data: contantData!)
+        let contactList = JSON(contantData!)
         
         for (_,subJson):(String, JSON) in contactList {
             let userId = subJson["userID"].stringValue

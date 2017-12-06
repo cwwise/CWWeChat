@@ -7,13 +7,15 @@
 //
 
 import UIKit
-
+import ChatClient
+ 
 class CWWelcomeController: UIViewController {
-
+    
     @IBOutlet weak var backgroundImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
   
+        
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         backgroundImageView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)

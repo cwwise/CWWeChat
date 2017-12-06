@@ -36,7 +36,10 @@ public class CWMessageController: MessageController {
         }
         
         // 语音
-        
+        let voicePath = ""
+        let voice1 = VoiceMessageBody(voicePath: voicePath, voiceLength: 40)
+        let voiceMessage = Message(conversationId: conversationId, from: from, body: voice1)
+        tempMessageList.append(voiceMessage)
         
         // 图片
         let url1 = URL(string: "http://7xsmd8.com1.z0.glb.clouddn.com/cwwechat005.jpg")
@@ -54,7 +57,10 @@ public class CWMessageController: MessageController {
         tempMessageList.append(imageMessage2)
 
         // 位置
-        
+        let location1 = LocationMessageBody(latitude: 122.0, longitude: 133.0, address: "测试位置")
+        let locationMessage1 = Message(conversationId: conversationId, from: from, body: location1)
+        tempMessageList.append(locationMessage1)
+
         let textModelList = tempMessageList.map { return MessageModel(message: $0) }
         self.messageList.append(contentsOf: textModelList)
         

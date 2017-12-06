@@ -87,14 +87,14 @@ extension ContactService: ContactManager {
 //            let user = User(userId: userId)
 //            return user
 //        }
-        return Contact(username: username)
+        return Contact(username: username, nickname: "")
+
     }
     
 }
 
-// 根据 XMPPvCardTemp生成CWUser
+
 extension Contact {
-    
 //    convenience init(userId: String, vCardTemp: XMPPvCardTemp) {
 //        let userInfo = CWUserInfo()
 //        userInfo.sign = vCardTemp.note
