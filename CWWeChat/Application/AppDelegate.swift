@@ -41,6 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupController() {
+        let loginVC = UIStoryboard.welcomeViewController()
+        self.window?.rootViewController = loginVC
+        return
         // 如果当前已经登录
         var account: CWAccount?
         do {

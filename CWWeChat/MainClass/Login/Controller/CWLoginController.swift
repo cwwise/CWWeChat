@@ -9,18 +9,22 @@
 import UIKit
 import MBProgressHUD
 import ChatClient
+import RxSwift
+import RxCocoa
 
 /// 登录界面
 class CWLoginController: UIViewController {
     
+    let disposeBag = DisposeBag()
+
     lazy var userNameTextField: UITextField = {
         let userNameTextField = UITextField()
         
         userNameTextField.font = UIFont.systemFont(ofSize: 15)
         userNameTextField.placeholder = "微信号/邮箱地址/QQ号"
         userNameTextField.leftViewMode = .always
-        userNameTextField.addTarget(self, action: #selector(textValueChanged(_:)), for: .editingChanged)
         userNameTextField.keyboardType = .asciiCapable
+        userNameTextField.returnKeyType = .next
         userNameTextField.spellCheckingType = .no
         userNameTextField.delegate = self
         userNameTextField.leftView = self.leftView("帐号")
@@ -33,9 +37,9 @@ class CWLoginController: UIViewController {
         passwordTextField.font = UIFont.systemFont(ofSize: 15)
         passwordTextField.placeholder = "请填写密码"
         passwordTextField.leftViewMode = .always
+        passwordTextField.returnKeyType = .done
         passwordTextField.isSecureTextEntry = true
         passwordTextField.delegate = self
-        passwordTextField.addTarget(self, action: #selector(textValueChanged(_:)), for: .editingChanged)
         passwordTextField.leftView = self.leftView("密码")
         return passwordTextField
     }()
@@ -55,6 +59,7 @@ class CWLoginController: UIViewController {
         self.view.backgroundColor = UIColor.white
         setupUI()
         setupNavigationBar()
+        setupRx()
     }
     
     func setupNavigationBar() {
@@ -106,8 +111,22 @@ class CWLoginController: UIViewController {
         }
         
         self.userNameTextField.text = "haohao"
-        self.passwordTextField.text = "1234567"
-
+//        self.passwordTextField.text = "1234567"
+    }
+    
+    func setupRx() {
+        let nickNameValid = userNameTextField.rx.text.orEmpty.map { (text) -> Bool in
+            let tLength = text.count
+            return tLength >= 3 && tLength <= 50
+            }.share(replay: 1)
+        
+        let passwordValid = passwordTextField.rx.text.orEmpty.map { (text) -> Bool in
+            let tLength = text.count
+            return tLength >= 3 && tLength <= 50
+            }.share(replay: 1)
+        
+        Observable.combineLatest(nickNameValid, passwordValid) {$0 && $1}.bind(to: loginButton.rx.isEnabled).disposed(by: disposeBag)
+        
     }
     
     func leftView(_ text: String) -> UIView {
@@ -119,8 +138,6 @@ class CWLoginController: UIViewController {
         leftView.addSubview(textLabel)
         return leftView
     }
-    
-
     
     // MARK: 点击事件
     @objc func cancelBarItemAction() {
@@ -171,19 +188,6 @@ class CWLoginController: UIViewController {
         
     }
     
-    @objc func textValueChanged(_ textField: UITextField) {
-        let first = judgeTextFieldIsAvailable(userNameTextField)
-        let seconde = judgeTextFieldIsAvailable(passwordTextField)
-        self.loginButton.isEnabled = first && seconde
-    }
-    
-    func judgeTextFieldIsAvailable(_ textField: UITextField) -> Bool {
-        guard let text = textField.text else {
-            return false
-        }
-        return text.count >= 6
-    }
-    
     //
     func loginSuccess() {
         
@@ -191,7 +195,6 @@ class CWLoginController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     deinit {
@@ -203,21 +206,17 @@ class CWLoginController: UIViewController {
 extension CWLoginController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return true
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if string == "" {
-            return true
-        }
-        
-        if string.count + (textField.text?.count)! > 25 {
+        textField.resignFirstResponder()
+        if textField == userNameTextField {
+            passwordTextField.becomeFirstResponder()
             return false
         }
-        
+            // 如果是密码 还需要判断
+        else if textField == passwordTextField {
+            
+        }
         return true
     }
-    
     
 }
