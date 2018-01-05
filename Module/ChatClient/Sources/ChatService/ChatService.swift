@@ -81,9 +81,9 @@ class ChatService: XMPPModule {
         executeDelegateSelector { (delegate, queue) in
             //执行Delegate的方法
             if let delegate = delegate as? ChatManagerDelegate {
-                queue?.async(execute: {
+                queue.async {
                     delegate.didReceive(message: message)
-                })
+                }
             }
         }
     }
@@ -93,9 +93,9 @@ class ChatService: XMPPModule {
         executeDelegateSelector { (delegate, queue) in
             //执行Delegate的方法
             if let delegate = delegate as? ChatManagerDelegate {
-                queue?.async(execute: {
+                queue.async {
                     delegate.conversationDidUpdate(conversation)
-                })
+                }
             }
         }
     }

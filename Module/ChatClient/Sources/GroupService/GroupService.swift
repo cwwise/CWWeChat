@@ -155,9 +155,9 @@ extension GroupService: XMPPMUCDelegate {
         executeDelegateSelector { (delegate, queue) in
             //执行Delegate的方法
             if let delegate = delegate as? GroupManagerDelegate {
-                queue?.async(execute: {
+                queue.async {
                     delegate.groupListDidUpdate(groupList)
-                })
+                }
             }
         }
         

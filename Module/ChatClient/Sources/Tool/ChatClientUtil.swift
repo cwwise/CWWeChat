@@ -40,7 +40,7 @@ class ChatClientUtil: NSObject {
 
 extension XMPPModule {
     // 执行代理方法
-    func executeDelegateSelector(_ action: ((AnyObject?, DispatchQueue?) -> Void)) {
+    func executeDelegateSelector(_ action: ((AnyObject, DispatchQueue) -> Void)) {
         // 处理事件
         // 检查delegate 是否存在，存在就执行方法
         guard let multicastDelegate = self.value(forKey: "multicastDelegate") as? GCDMulticastDelegate else {
@@ -50,10 +50,11 @@ extension XMPPModule {
         let delegateEnumerator = multicastDelegate.delegateEnumerator()
         var delegate: AnyObject?
         var queue: DispatchQueue?
-        
         while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) == true {
             //执行Delegate的方法
-            action(delegate, queue)
+            if let currentDelegate = delegate, let currentQueue = queue {
+                action(currentDelegate, currentQueue)
+            }
         }
     }
 }

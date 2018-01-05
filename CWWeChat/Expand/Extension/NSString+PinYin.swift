@@ -30,7 +30,6 @@ extension String {
             pinYing += temp[..<index]
         }
         return pinYing
-        
     }
     
     var fistLetter: String {
