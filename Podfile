@@ -10,7 +10,6 @@ target 'CWWeChat' do
   pod 'SnapKit'
 
   # request
-  pod 'OHHTTPStubs/Swift'
 
   pod 'YYText'
   pod 'SwiftyImage'
@@ -21,15 +20,13 @@ target 'CWWeChat' do
   pod 'RxCocoa'
 
   pod 'Alamofire'
-      
 # log
   pod 'SwiftyBeaver'
   
   # chat
   pod 'XMPPFramework', :git => 'https://github.com/robbiehanson/XMPPFramework.git', :branch => 'master'
-  
+
   # UI
-  pod 'PPBadgeViewSwift'
   pod 'MBProgressHUD'
  
   pod 'CWActionSheet'
