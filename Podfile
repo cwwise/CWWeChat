@@ -15,6 +15,7 @@ target 'CWWeChat' do
   pod 'SwiftyImage'
   pod 'Kingfisher'
 
+  pod 'SQLiteMigrationManager.swift'
   pod 'SQLite.swift'
   pod 'RxSwift'
   pod 'RxCocoa'
@@ -39,6 +40,8 @@ target 'CWWeChat' do
   pod 'SwiftyJSON'
   pod 'KVOController'
   
+  pod 'BuddyBuildSDK'
+
   # 本地pod
   pod 'TableViewManager', :path => './Module/TableViewManager/TableViewManager.podspec'
   pod 'ChatClient', :path => './Module/ChatClient/ChatClient.podspec'

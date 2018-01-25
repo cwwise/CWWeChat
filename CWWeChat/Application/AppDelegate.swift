@@ -11,6 +11,7 @@ import SwiftyBeaver
 import UserNotifications
 import ChatClient
 import ChatKit
+import BuddyBuildSDK
 
 let log = SwiftyBeaver.self
 
