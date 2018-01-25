@@ -133,6 +133,7 @@ extension GroupService: GroupManager {
 
 // 发现多人聊天
 extension GroupService: XMPPMUCDelegate {
+    
     func xmppMUC(_ sender: XMPPMUC!, didDiscoverRooms rooms: [Any]!, forServiceNamed serviceName: String!) {
         roomCache.removeAll()
         guard let rooms = rooms else { return }
@@ -149,7 +150,7 @@ extension GroupService: XMPPMUCDelegate {
         }
  
         let groupList = roomCache.map { (key, room) -> Group in
-            let group = Group(groupId: room.roomJID.bare)
+            let group = Group(groupId: room.roomJID.bare, name: "")
             return group
         }
         executeDelegateSelector { (delegate, queue) in

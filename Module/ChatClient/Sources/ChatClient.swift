@@ -57,9 +57,11 @@ public class ChatClient {
         xmppManager = XMPPManager()
         xmppManager.options = options
         
-        let queue = DispatchQueue.global()
-        chatService = ChatService(dispatchQueue: queue)
-        chatService.activate(xmppManager.xmppStream)
+        let queue = DispatchQueue(label: "com.chatclient.cwwise")
+        chatService = ChatService()
+//        chatService.activate(xmppManager.xmppStream)
+        xmppManager.xmppStream.addDelegate(chatService, delegateQueue: queue)
+        
         
         contactService = ContactService(dispatchQueue: queue)
         contactService.activate(xmppManager.xmppStream)

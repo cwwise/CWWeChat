@@ -68,8 +68,7 @@ public class CWMessageController: MessageController {
         self.scrollToBottom(false)
     }
     
-    @objc 
-    func rightBarItemDown(_ barItem: UIBarButtonItem) {
+    @objc func rightBarItemDown(_ barItem: UIBarButtonItem) {
         let chatDetailVC = CWChatDetailViewController()
         self.navigationController?.pushViewController(chatDetailVC, animated: true)
     }

@@ -9,7 +9,7 @@
 import Foundation
 import XMPPFramework
 
-class ChatService: XMPPModule {
+class ChatService: BaseService<ChatManagerDelegate>, XMPPStreamDelegate{
 
     /// 消息存储
     lazy private(set) var messageStore: ChatMessageStore = {
@@ -30,14 +30,14 @@ class ChatService: XMPPModule {
     /// 消息接收解析
     private(set) var messageParse: MessageParse
     
-    override init(dispatchQueue queue: DispatchQueue!) {
+    override init() {
         // 消息发送和解析
         messageTransmitter = MessageTransmitter()
         messageParse = MessageParse()
         dispatchManager = MessageDispatchManager()
-        super.init(dispatchQueue: queue)
     }
     
+
     /// 收到消息执行
     /// 执行 消息变化和会话变化的代理，保存消息
     ///
@@ -78,38 +78,26 @@ class ChatService: XMPPModule {
     /// - Parameter message: 消息实体
     private func executeDidReceiveMessages(_ message: Message) {
         
-        executeDelegateSelector { (delegate, queue) in
-            //执行Delegate的方法
-            if let delegate = delegate as? ChatManagerDelegate {
-                queue?.async(execute: {
-                    delegate.didReceive(message: message)
-                })
-            }
+        self.asyncExecute { (delegate) in
+            delegate.didReceive(message: message)
         }
     }
     
     private func executeConversationUpdate(_ conversation: Conversation) {
         
-        executeDelegateSelector { (delegate, queue) in
-            //执行Delegate的方法
-            if let delegate = delegate as? ChatManagerDelegate {
-                queue?.async(execute: {
-                    delegate.conversationDidUpdate(conversation)
-                })
-            }
+        self.asyncExecute { (delegate) in
+            delegate.conversationDidUpdate(conversation)
         }
+        
     }
     
-    
-}
-
-extension ChatService: XMPPStreamDelegate {
-
+    // MARK: XMPPStreamDelegate
     func xmppStream(_ sender: XMPPStream!, didReceive message: XMPPMessage!) {
         messageParse.handle(message: message)
     }
     
 }
+
 
 extension ChatService: ChatManager {
     func addChatDelegate(_ delegate: ChatManagerDelegate) {

@@ -76,9 +76,9 @@ extension ChatMessageStore {
     
     @discardableResult
     func insertMessage(_ message: Message) -> Bool {
-
+        
+        
         do {
-      
             let string = message.messageBody.messageEncode()
             let table = messageTable(message.conversationId)
             let insert = table.insert(f_messageId <- message.messageId,

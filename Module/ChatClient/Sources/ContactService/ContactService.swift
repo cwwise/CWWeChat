@@ -17,7 +17,7 @@ class ContactService: XMPPModule {
         let xmppRosterStorage = XMPPRosterMemoryStorage()
         let xmppRoster = XMPPRoster(rosterStorage: xmppRosterStorage!)
         return xmppRoster
-    }();
+    }()
     
     var vCardModule: XMPPvCardTempModule = {
         let vCardStorage = XMPPvCardCoreDataStorage.sharedInstance()
@@ -25,17 +25,13 @@ class ContactService: XMPPModule {
         return vCardModule
     }()
     
-    @objc 
-    func didActivate() {
+    @objc func didActivate() {
         xmppRoster.addDelegate(self, delegateQueue: self.moduleQueue)
         xmppRoster.activate(self.xmppStream!)
         
         vCardModule.activate(self.xmppStream!)
         vCardModule.addDelegate(self, delegateQueue: self.moduleQueue)
-        
-        
         // 开始获取好友列表
-        
     }
     
 }
@@ -63,6 +59,7 @@ extension ContactService: ContactManager {
         self.completion = completion
     }
     
+    // 更新信息
     func updateMyUserInfo(_ userInfo: [UserInfoUpdateTag: String]) {
         
         let vCardTemp = vCardModule.myvCardTemp

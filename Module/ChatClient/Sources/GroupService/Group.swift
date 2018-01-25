@@ -23,7 +23,7 @@ public class Group {
     // 此群是否为公开群
     public var isPublic: Bool = false
     
-    init(groupId: String) {
+    init(groupId: String, name: String) {
         self.setting = GroupOptions()
         self.groupId = groupId
     }

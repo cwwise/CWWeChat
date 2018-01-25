@@ -9,7 +9,7 @@ import Foundation
 
 class BaseService<T> {
     
-    public private(set) var multicastDelegate = MulticastDelegate<T>()
+    private var multicastDelegate = MulticastDelegate<T>()
     
     func addDelegate(_ delegate: T) {
         multicastDelegate.add(delegate)
@@ -26,6 +26,36 @@ class BaseService<T> {
     /// 删除所有delegate
     func deactivate() {
         multicastDelegate.removeAll()
+    }
+    
+    func syncExecute(action: (T) -> Void) {
+        ///遍历出所有的delegate
+        let delegateEnumerator = self.multicastDelegate.multicastDelegate.delegateEnumerator()
+        var delegate: AnyObject?
+        var queue: DispatchQueue?
+        while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) == true {
+            //执行Delegate的方法
+            if let currentDelegate = delegate as? T, let currentQueue = queue {
+                currentQueue.sync {
+                    action(currentDelegate)
+                }
+            }
+        }
+    }
+    
+    func asyncExecute(action: @escaping (T) -> Void) {
+        ///遍历出所有的delegate
+        let delegateEnumerator = self.multicastDelegate.multicastDelegate.delegateEnumerator()
+        var delegate: AnyObject?
+        var queue: DispatchQueue?
+        while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) == true {
+            //执行Delegate的方法
+            if let currentDelegate = delegate as? T, let currentQueue = queue {
+                currentQueue.async {
+                    action(currentDelegate)
+                }
+            }
+        }
     }
     
 }

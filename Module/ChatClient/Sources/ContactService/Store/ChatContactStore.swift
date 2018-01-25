@@ -10,8 +10,6 @@ import SQLite
 
 class ChatContactStore: ChatBaseStore {
 
-    
-    
     /// 数据库路径
     lazy override var path: String = {
         let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!

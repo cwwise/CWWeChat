@@ -19,7 +19,7 @@ target 'CWWeChat' do
   pod 'RxSwift'
   pod 'RxCocoa'
 
-  pod 'Alamofire'
+  pod 'Moya/RxSwift'
 # log
   pod 'SwiftyBeaver'
   
