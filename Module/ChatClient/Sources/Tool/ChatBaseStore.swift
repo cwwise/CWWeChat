@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SQLite
+import SQLite.Swift
 
 class ChatBaseStore {
     
