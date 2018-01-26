@@ -14,7 +14,7 @@ let kMessageDispatchSuccessNotification = NSNotification.Name("kMessageDispatchS
 let kNetworkReachabilityNotification = NSNotification.Name("kNetworkReachabilityNotification")
 
 // xmpp管理实例
-class XMPPManager: NSObject {
+class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelegate, XMPPStreamDelegate {
     
     /// xmpp流
     private(set) var xmppStream: XMPPStream
@@ -24,8 +24,6 @@ class XMPPManager: NSObject {
     private var autoPing: XMPPAutoPing
     /// xmpp队列
     private var xmppQueue: DispatchQueue
-        
-    private var multicastDelegate: GCDMulticastDelegate
     
     private var streamManagement: XMPPStreamManagement
     
@@ -35,6 +33,8 @@ class XMPPManager: NSObject {
     
     /// 这3个变量 注册和登录 用来临时记录
     var isLoginUser: Bool = true
+    
+    var username: String!
     var password: String!
     var completion: LoginHandler?
     
@@ -49,9 +49,7 @@ class XMPPManager: NSObject {
         let memoryStorage = XMPPStreamManagementMemoryStorage()
         streamManagement = XMPPStreamManagement(storage: memoryStorage)
         
-        multicastDelegate = GCDMulticastDelegate()
         super.init()
-        
         /// xmpp
         xmppStream.enableBackgroundingOnSocket = true
         xmppStream.addDelegate(self, delegateQueue: xmppQueue)
@@ -158,6 +156,28 @@ class XMPPManager: NSObject {
         
     }
     
+    func disconnect() {
+        self.xmppStream.disconnectAfterSending()
+    }
+    
+    func login(username: String, password: String) {
+        // 保存变量
+        self.isLoginUser = true
+        self.password = password
+        self.username = username
+        
+        connetService(user: username)
+    }
+    
+    func register(username: String, password: String, completion: LoginHandler?) {
+        // 保存变量
+        self.isLoginUser = false
+        self.password = password
+        self.username = username
+        
+        connetService(user: username)
+    }
+    
     // MARK: 销毁
     deinit {
         
@@ -174,11 +194,8 @@ class XMPPManager: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
     
-}
 
-// MARK: - XMPPStreamDelegate
-extension XMPPManager: XMPPStreamDelegate {
-    
+    // MARK: - XMPPStreamDelegate
     /// 开始连接
     func xmppStreamWillConnect(_ sender: XMPPStream!) {
         log.verbose("xmpp开始连接...")
@@ -268,10 +285,7 @@ extension XMPPManager: XMPPStreamDelegate {
     }
     
     
-}
-
-extension XMPPManager: XMPPStreamManagementDelegate {
-    
+    // MARK: - XMPPStreamManagement
     func xmppStreamManagementDidRequestAck(_ sender: XMPPStreamManagement!) {
         
     }
@@ -294,6 +308,18 @@ extension XMPPManager: XMPPStreamManagementDelegate {
 }
 
 extension XMPPManager: LoginManager {
+   
+    var currentAccount: String {
+        return self.username
+    }
+    
+    func register(username: String, password: String) {
+        
+    }
+    
+    func logout() {
+        
+    }
     
     var isConnented: Bool {
         return xmppStream.isConnected
@@ -303,46 +329,9 @@ extension XMPPManager: LoginManager {
         return xmppStream.isAuthenticated
     }
     
-    var currentAccount: String {
-        guard let jid = xmppStream.myJID,
-        let user = jid.user else {
-            return ""
-        } 
-        return user
-    }
-    
-    func login(username: String, password: String, completion: LoginHandler?) {
-        // 保存变量
-        self.isLoginUser = true
-        self.password = password
-        self.completion = completion
-        
-        connetService(user: username)
-    }
-    
-    func register(username: String, password: String, completion: LoginHandler?) {
-        // 保存变量
-        self.isLoginUser = false
-        self.password = password
-        self.completion = completion
-        
-        connetService(user: username)        
-    }
-    
-    func addLoginDelegate(_ delegate: LoginManagerDelegate) {
-        
-    }
-    
-    func removeLoginDelegate(_ delegate: LoginManagerDelegate) {
-        
-    }
-    
-    func logout() {
-        //停止发送消息
-        
-        //断开xmppStream
-        self.xmppStream.disconnect()
-    }
-    
     
 }
+
+
+
+

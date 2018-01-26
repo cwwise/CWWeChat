@@ -10,6 +10,7 @@ import Foundation
 import SwiftyBeaver
 
 let log = SwiftyBeaver.self
+let chatClient = ChatClient.share
 
 public class ChatClient {
     
@@ -59,7 +60,6 @@ public class ChatClient {
         
         let queue = DispatchQueue(label: "com.chatclient.cwwise")
         chatService = ChatService()
-//        chatService.activate(xmppManager.xmppStream)
         xmppManager.xmppStream.addDelegate(chatService, delegateQueue: queue)
         
         

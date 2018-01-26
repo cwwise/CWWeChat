@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class ChatDataService: NSObject {
+class ChatDataService {
 
     
 }

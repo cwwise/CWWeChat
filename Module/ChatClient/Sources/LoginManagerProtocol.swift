@@ -10,15 +10,20 @@ import Foundation
 
 public typealias LoginHandler = (String?, ChatClientError?) -> Void
 
-public enum LoginStep: Int {
-    case linking
-    case linkSuccess
-    case logining
-    case loginfailed
+public protocol LoginManagerDelegate: class {
+    /// 强制退出 密码修改 其他设备登录
+    func userAccountDidForceLogout()
+    
+    /// 登录之后 会调用登录成功或者登录失败
+    func loginSuccess()
+    func loginFailed(error: ChatClientError)
 }
 
-public protocol LoginManagerDelegate: class {
-    func onLogin(setp: LoginStep)
+public extension LoginManagerDelegate {
+    func userAccountDidForceLogout() {}
+    
+    func loginSuccess() {}
+    func loginFailed(error: ChatClientError) {}
 }
 
 /// 登录管理
@@ -30,13 +35,15 @@ public protocol LoginManager: class {
     /// 当前登录用户
     var currentAccount: String { get }
 
-    func login(username: String, password: String, completion: LoginHandler?)
+    func login(username: String, password: String)
     
-    func register(username: String, password: String, completion: LoginHandler?)
+    func register(username: String, password: String)
  
-    func addLoginDelegate(_ delegate: LoginManagerDelegate)
+    func addDelegate(_ delegate: LoginManagerDelegate)
     
-    func removeLoginDelegate(_ delegate: LoginManagerDelegate)
+    func addDelegate(_ delegate: LoginManagerDelegate, delegateQueue: DispatchQueue)
+    
+    func removeDelegate(_ delegate: LoginManagerDelegate)
     
     func logout()
 }
