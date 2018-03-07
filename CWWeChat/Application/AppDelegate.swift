@@ -26,10 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //设置logger
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        setupController()
+
+        loginMomentSuccess()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         setupLogger()
+        //loginXMPP()
+
         //注册推送信息
         registerRemoteNotification()
         
@@ -94,6 +97,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func loginEmoticonSuccess() {
         let emoticonController = CWEmoticonListController()
         self.window?.rootViewController = CWChatNavigationController(rootViewController: emoticonController)
+    }
+    
+
+    func loginMomentSuccess() {
+        let momentController = CWMomentListController()
+        self.window?.rootViewController = CWChatNavigationController(rootViewController: momentController)
     }
     
     func logoutSuccess() {

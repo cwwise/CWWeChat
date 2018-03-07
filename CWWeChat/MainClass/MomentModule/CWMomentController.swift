@@ -32,7 +32,7 @@ class CWMomentController: CWBaseTableViewController {
         
         let dataService = CWMomentDataService()
         
-        shareLayouts = dataService.parseMomentData()
+        shareLayouts = dataService.parseMomentLayoutData()
         
     }
     

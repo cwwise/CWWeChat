@@ -17,15 +17,17 @@ enum CWMomentReplyType: Int {
 class CWMomentReply: NSObject {
     // 对应的id
     var momentId: String!
-
+    //
     var replyId: String!
+    // 对应用户name和id
     var username: String!
     var userId: String!
-
+    // 对应回复人的name和id
     var receiveUserId: String?
     var receiveUserName: String?
-    
+    /// 回复时间
     var replyDate: Date = Date()
+    /// 类型
     var replyType: CWMomentReplyType = .unkown
     
     // 初始化方法
