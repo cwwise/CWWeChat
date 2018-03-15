@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0ADD3B1EF3413C2C7D28E06D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4759E86B5779CADDE6F995 /* CoreMedia.framework */; };
 		1F01651D1E9898BE001696F2 /* CWNewFrinedsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F01651C1E9898BE001696F2 /* CWNewFrinedsController.swift */; };
 		1F01651F1E989A43001696F2 /* CWNewFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F01651E1E989A43001696F2 /* CWNewFriendCell.swift */; };
 		1F0165221E989E43001696F2 /* CWGroupChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0165211E989E43001696F2 /* CWGroupChatController.swift */; };
@@ -85,9 +84,6 @@
 		1FA724471E9C9EA9009B6456 /* CWAccountSafetyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA724461E9C9EA9009B6456 /* CWAccountSafetyController.swift */; };
 		1FA724491E9C9F84009B6456 /* CWMineSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA724481E9C9F84009B6456 /* CWMineSettingController.swift */; };
 		46B40669CBA35070557EB831 /* Pods_CWWeChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B376C117EA7EEC77FD2C31A1 /* Pods_CWWeChat.framework */; };
-		5BF659B57059C47BDE97C2E7 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12722CAD111E2BD14C9C2618 /* BuddyBuildSDK.framework */; };
-		5E9E845A3032CADEFF8CBF5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20211C6828AC0B20B264076C /* QuartzCore.framework */; };
-		721EF50818CA80CFA8A06163 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C411BC19F1A6F8AAC4A06BB /* CoreTelephony.framework */; };
 		8C06DC0E1FED621B004309FE /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06DC0D1FED621B004309FE /* NotificationService.swift */; };
 		8C06DC121FED621B004309FE /* NotificationServerExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C06DC0B1FED621B004309FE /* NotificationServerExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8C0BFDF21E91FB4F007343F1 /* CWSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0BFDF11E91FB4F007343F1 /* CWSearchController.swift */; };
@@ -149,11 +145,6 @@
 		8CFF56071F28B707000FC575 /* CWMomentFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF56061F28B707000FC575 /* CWMomentFlowLayout.swift */; };
 		8CFF56091F28B792000FC575 /* CWMomentAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF56081F28B792000FC575 /* CWMomentAttributes.swift */; };
 		98390B15764C93DE87DA1B4F /* Pods_CWWeChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E6689CD6D79339AFFBDA48D /* Pods_CWWeChatTests.framework */; };
-		B733B2579919750392917E8F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E266BC67E2F150C9711EA9 /* CoreVideo.framework */; };
-		BCA53DA64F98D658D0BD79C0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D8519BB745DD35C0C366F6B /* SystemConfiguration.framework */; };
-		EBAEBED209FD4C79FB45A74B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FC564FA7AB79A4FC696F6F /* CoreText.framework */; };
-		F70B500E88BE3D73F8607DC1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9912CD8F3594BD88B908804D /* AVFoundation.framework */; };
-		FB030D56FB7D412F711FFB4D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B1754370D927ABA2B2DAB2 /* AssetsLibrary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,9 +189,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
 		01FC564FA7AB79A4FC696F6F /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		10D400760F3B03FF64C20CD7 /* Pods-CWWeChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		12722CAD111E2BD14C9C2618 /* BuddyBuildSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BuddyBuildSDK.framework; sourceTree = "<group>"; };
+=======
+		10D400760F3B03FF64C20CD7 /* Pods-CWWeChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests.debug.xcconfig"; sourceTree = "<group>"; };
+>>>>>>> parent of a32773d... Adding buddybuild SDK
 		1F01651C1E9898BE001696F2 /* CWNewFrinedsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWNewFrinedsController.swift; sourceTree = "<group>"; };
 		1F01651E1E989A43001696F2 /* CWNewFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWNewFriendCell.swift; sourceTree = "<group>"; };
 		1F0165211E989E43001696F2 /* CWGroupChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWGroupChatController.swift; sourceTree = "<group>"; };
@@ -283,11 +278,7 @@
 		1FA724481E9C9F84009B6456 /* CWMineSettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMineSettingController.swift; sourceTree = "<group>"; };
 		1FFE2F401F973D2D0033EC05 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		1FFE2F421F973D2D0033EC05 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
-		20211C6828AC0B20B264076C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		2D8519BB745DD35C0C366F6B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		31E51D349FC87AA2896572C6 /* Pods-CWWeChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.release.xcconfig"; sourceTree = "<group>"; };
-		3C411BC19F1A6F8AAC4A06BB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		42B1754370D927ABA2B2DAB2 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8C06DC0B1FED621B004309FE /* NotificationServerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C06DC0D1FED621B004309FE /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		8C06DC0F1FED621B004309FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -351,12 +342,9 @@
 		8CFF56061F28B707000FC575 /* CWMomentFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentFlowLayout.swift; sourceTree = "<group>"; };
 		8CFF56081F28B792000FC575 /* CWMomentAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWMomentAttributes.swift; sourceTree = "<group>"; };
 		8E6689CD6D79339AFFBDA48D /* Pods_CWWeChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9912CD8F3594BD88B908804D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B376C117EA7EEC77FD2C31A1 /* Pods_CWWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BD4759E86B5779CADDE6F995 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		CC9054EAE42E392A75546C97 /* Pods-CWWeChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat.debug.xcconfig"; sourceTree = "<group>"; };
 		E4A293988EBEF7146C1E79EF /* Pods-CWWeChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests.release.xcconfig"; sourceTree = "<group>"; };
-		E4E266BC67E2F150C9711EA9 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,15 +354,6 @@
 			files = (
 				8CAB7D911F728999003F1E70 /* MapKit.framework in Frameworks */,
 				46B40669CBA35070557EB831 /* Pods_CWWeChat.framework in Frameworks */,
-				5BF659B57059C47BDE97C2E7 /* BuddyBuildSDK.framework in Frameworks */,
-				FB030D56FB7D412F711FFB4D /* AssetsLibrary.framework in Frameworks */,
-				EBAEBED209FD4C79FB45A74B /* CoreText.framework in Frameworks */,
-				721EF50818CA80CFA8A06163 /* CoreTelephony.framework in Frameworks */,
-				BCA53DA64F98D658D0BD79C0 /* SystemConfiguration.framework in Frameworks */,
-				5E9E845A3032CADEFF8CBF5E /* QuartzCore.framework in Frameworks */,
-				F70B500E88BE3D73F8607DC1 /* AVFoundation.framework in Frameworks */,
-				0ADD3B1EF3413C2C7D28E06D /* CoreMedia.framework in Frameworks */,
-				B733B2579919750392917E8F /* CoreVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1044,15 +1023,6 @@
 				8E6689CD6D79339AFFBDA48D /* Pods_CWWeChatTests.framework */,
 				1FFE2F401F973D2D0033EC05 /* UserNotifications.framework */,
 				1FFE2F421F973D2D0033EC05 /* UserNotificationsUI.framework */,
-				12722CAD111E2BD14C9C2618 /* BuddyBuildSDK.framework */,
-				42B1754370D927ABA2B2DAB2 /* AssetsLibrary.framework */,
-				01FC564FA7AB79A4FC696F6F /* CoreText.framework */,
-				3C411BC19F1A6F8AAC4A06BB /* CoreTelephony.framework */,
-				2D8519BB745DD35C0C366F6B /* SystemConfiguration.framework */,
-				20211C6828AC0B20B264076C /* QuartzCore.framework */,
-				9912CD8F3594BD88B908804D /* AVFoundation.framework */,
-				BD4759E86B5779CADDE6F995 /* CoreMedia.framework */,
-				E4E266BC67E2F150C9711EA9 /* CoreVideo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1671,10 +1641,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = UEL43GU3G3;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/CWWeChat/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1698,10 +1665,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = UEL43GU3G3;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/CWWeChat/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
