@@ -16,13 +16,13 @@ class ChatService: BaseService<ChatManagerDelegate>, XMPPStreamDelegate{
     
     /// 消息存储
     lazy private(set) var messageStore: MessageStore = {
-        let messageStore = MessageStore(userId: ChatClient.share.currentAccount)
+        let messageStore = MessageStore(userId: ChatClient.share.username)
         return messageStore
     }()
     
     /// 会话存储
     lazy private(set) var conversationStore: ConversationStore = {
-        let conversationStore = ConversationStore(userId: ChatClient.share.currentAccount)
+        let conversationStore = ConversationStore(userId: ChatClient.share.username)
         return conversationStore
     }()
     

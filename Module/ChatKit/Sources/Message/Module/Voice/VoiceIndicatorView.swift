@@ -22,7 +22,7 @@ class VoiceIndicatorView: UIView {
     /// 录音整体的 view，控制是否隐藏
     lazy  var recordingView: UIView = {
         let recordingView = UIView()
-        recordingView.size = CGSize(width: 100, height: 100)
+        recordingView.bounds.size = CGSize(width: 100, height: 100)
         return recordingView
     }()
     

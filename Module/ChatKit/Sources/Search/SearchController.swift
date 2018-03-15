@@ -35,17 +35,17 @@ class SearchController: UISearchController {
     override init(searchResultsController: UIViewController?) {
         super.init(searchResultsController: searchResultsController)
         
-        self.searchBar.barTintColor = UIColor.searchBarTintColor()
-        self.searchBar.tintColor = UIColor.chatSystemColor()
+        self.searchBar.barTintColor = UIColor.searchBarTint
+        self.searchBar.tintColor = UIColor.chatSystem
         self.searchBar.layer.borderWidth = 0.5
-        self.searchBar.layer.borderColor = UIColor.searchBarBorderColor().cgColor
+        self.searchBar.layer.borderColor = UIColor.searchBarBorder.cgColor
         self.searchBar.sizeToFit()
         
         //通过KVO修改特性
         let searchField = self.searchBar.value(forKey: "_searchField") as! UITextField
         searchField.layer.masksToBounds = true
         searchField.layer.borderWidth = 0.5
-        searchField.layer.borderColor = UIColor.tableViewCellLineColor().cgColor
+        searchField.layer.borderColor = UIColor.tableViewCellLine.cgColor
         searchField.layer.cornerRadius = 5.0
     }
     

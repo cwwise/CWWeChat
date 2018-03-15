@@ -14,7 +14,7 @@ class VoiceMessageContentView: MessageContentView {
     /// voice图标的imageView
     lazy var voiceImageView:UIImageView = {
         let voiceImageView = UIImageView()
-        voiceImageView.size = CGSize(width: 12.5, height: 17)
+        voiceImageView.bounds.size = CGSize(width: 12.5, height: 17)
         voiceImageView.contentMode = .scaleAspectFit
         return voiceImageView
     }()
@@ -22,7 +22,7 @@ class VoiceMessageContentView: MessageContentView {
     lazy var redTipImageView:UIImageView = {
         let redTipImageView = UIImageView()
         redTipImageView.clipsToBounds = true
-        redTipImageView.backgroundColor = UIColor.redTipColor()
+        redTipImageView.backgroundColor = UIColor.redTip
         redTipImageView.layer.cornerRadius = kReddotWidth/2
         return redTipImageView
     }()

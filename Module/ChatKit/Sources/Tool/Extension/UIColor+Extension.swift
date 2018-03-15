@@ -11,50 +11,50 @@ import Hue
 
 extension UIColor {
     // 主要文字
-    class func normalTextColor() -> UIColor {
+    class var normalText: UIColor {
         return UIColor(hex: "#353535")
     }
     
-    class func chatSystemColor() -> UIColor {
+    class var chatSystem: UIColor {
         return UIColor(hex: "#09BB07")
     }
     
-    class func navigationBarCocor() -> UIColor {
+    class var navigationBar: UIColor {
         return UIColor(hex: "#141414")
     }
     
     //tableView背景色
-    class func tableViewBackgroundColor() -> UIColor {
+    class var tableViewBackground: UIColor {
         return UIColor(hex: "#EFEFF4")
     }
     
     //tableView分割线颜色
-    class func tableViewCellLineColor() -> UIColor {
+    class var tableViewCellLine: UIColor {
         return UIColor(hex: "#D9D9D9")
     }
     
     //searchBar Color
-    class func searchBarTintColor() -> UIColor {
+    class var searchBarTint: UIColor {
         return UIColor(hex: "#EEEEF3")
     }
     
-    class func defaultBlackColor() -> UIColor {
+    class var defaultBlack: UIColor {
         return UIColor(hex: "#2e3132")
     }
     
-    class func searchBarBorderColor() -> UIColor {
+    class var searchBarBorder: UIColor {
         return UIColor(hex: "#EEEEF3")
     }
     
-    class func redTipColor() -> UIColor {
+    class var redTip: UIColor {
         return UIColor(hex: "#D84042")
     }
     
-    class func chatBoxColor() -> UIColor {
+    class var chatBox: UIColor {
         return UIColor(hex: "#F4F4F6")
     }
     
-    class func chatBoxLineColor() -> UIColor {
+    class var chatBoxLine: UIColor {
         return UIColor(hex: "#BCBCBC")
     }
     

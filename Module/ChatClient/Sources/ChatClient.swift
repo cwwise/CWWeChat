@@ -39,7 +39,8 @@ public class ChatClient {
         return groupService
     }
 
-    public var currentAccount: String {
+    /// 用户名（username@wanzhao.com）
+    public var username: String {
         return self.loginManager.currentAccount
     }
     
@@ -80,4 +81,33 @@ public class ChatClient {
         self.options = options
         xmppManager.options = options
     }
+}
+
+// MARK: - Helper
+extension ChatClient {
+    
+    func registerNotification() {
+        /// 应用将要销毁
+        let terminate = NSNotification.Name.UIApplicationWillTerminate
+        NotificationCenter.default.addObserver(forName: terminate, object: nil, queue: OperationQueue
+            .main) { (noti) in
+                
+                
+                
+                
+                
+        }
+        
+        /// 系统时间变化
+        let timeChange = NSNotification.Name.UIApplicationSignificantTimeChange
+        NotificationCenter.default.addObserver(forName: timeChange, object: nil, queue: OperationQueue.main) { (noti) in
+            
+        }
+    }
+    
+    /// 移除通知
+    func removeNotifacation() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
 }

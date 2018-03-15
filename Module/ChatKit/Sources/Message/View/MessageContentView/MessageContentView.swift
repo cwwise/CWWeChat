@@ -16,6 +16,8 @@ public class MessageContentView: UIView {
     
     var message: MessageModel?
     
+    var menuItems: [UIMenuItem] = []
+    
     weak var delegate: MessageContentViewDelegate?
     
     // 展示气泡

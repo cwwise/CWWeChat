@@ -193,6 +193,31 @@ extension MessageController: UICollectionViewDelegateFlowLayout {
 
 
 extension MessageController: MessageCellDelegate {
+    public func messageCellFowardAction(_ cell: MessageCell) {
+        
+    }
+    
+    public func messageCellDeleteAction(_ cell: MessageCell) {
+        // 删除message
+        guard let indexPath = self.collectionView.indexPath(for: cell) else {
+            return
+        }
+        
+        let doneAction = UIAlertAction(title: "确定", style: .default) { (action) in
+            self.messageList.remove(at: indexPath.section)
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            
+        }
+        
+        let contoller = UIAlertController(title: "提示", message: "确定删除该条消息吗?", preferredStyle: .alert)
+        contoller.addAction(doneAction)
+        contoller.addAction(cancelAction)
+        self.present(contoller, animated: true, completion: nil)
+    }
+    
 
     public func messageCellDidTap(_ cell: MessageCell, link: URL) {
         

@@ -67,21 +67,21 @@ public class ConversationCell: UITableViewCell {
     }
     
     ///头像
-    public var headerImageView:UIImageView = {
+    public var headerImageView: UIImageView = {
         let headerImageView = UIImageView()
         headerImageView.contentMode = .scaleAspectFill
         return headerImageView
     }()
     
     ///用户名
-    public var usernameLabel:UILabel = {
+    public var usernameLabel: UILabel = {
         let usernameLabel = UILabel()
         usernameLabel.font = UIFont.systemFont(ofSize: 17)
         return usernameLabel
     }()
     
     ///时间
-    public var timeLabel:UILabel = {
+    public var timeLabel: UILabel = {
         let timeLabel = UILabel()
         timeLabel.font = UIFont.systemFont(ofSize: 12)
         timeLabel.textColor = UIColor.darkGray
@@ -89,7 +89,7 @@ public class ConversationCell: UITableViewCell {
     }()
     
     ///详细信息
-    public var contentLabel:UILabel = {
+    public var contentLabel: UILabel = {
         let contentLabel = UILabel()
         contentLabel.font = UIFont.systemFont(ofSize: 14)
         contentLabel.textColor = UIColor.gray

@@ -199,8 +199,11 @@ public class MessageCell: UICollectionViewCell {
     @objc
     func bubbleLongPressed(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
         if longPressGestureRecognizer.state == .began {
-            
-            
+            self.becomeFirstResponder()
+            let menu = UIMenuController.shared
+            menu.menuItems = self.messageContentView.menuItems
+            menu.setTargetRect(self.messageContentView.frame, in: self)
+            menu.setMenuVisible(true, animated: true)
         }
     }
     

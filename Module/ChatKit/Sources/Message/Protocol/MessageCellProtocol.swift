@@ -38,6 +38,14 @@ public protocol MessageCellDelegate: class {
     /// - Parameter userId: 用户id
     func messageCellUserAvatarDidClick(_ userId: String)
     
+    /// cell转发
+    ///
+    /// - Parameter cell: cell
+    func messageCellFowardAction(_ cell: MessageCell)
+    
+    
+    func messageCellDeleteAction(_ cell: MessageCell)
+    
 }
 
 public extension MessageCellDelegate {

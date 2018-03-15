@@ -30,9 +30,11 @@ class TimeMessageHeaderView: UICollectionReusableView {
     
     public override func layoutSubviews() {
         timeLabel.sizeToFit()
-        timeLabel.size = CGSize(width: timeLabel.width + 2*6.0, height: 18)
-        timeLabel.centerX = kScreenWidth/2
-        timeLabel.top = kChatTimeLabelMarginTop
+        
+        let size = timeLabel.bounds.size
+        let x = self.bounds.width - timeLabel.bounds.width + 2*6.0
+        let frame = CGRect(x: x/2, y: kChatTimeLabelMarginTop, width: timeLabel.bounds.width + 2*6.0, height: 18)
+        self.timeLabel.frame = frame
     }
     
     required public init?(coder aDecoder: NSCoder) {
