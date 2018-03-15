@@ -8,8 +8,8 @@
 
 import Foundation
 
-public class ChatClientOptions: NSObject {
-
+public class ChatClientOptions {
+    /// 默认配置
     public static var `default`: ChatClientOptions = {
         let options = ChatClientOptions(host: "cwwise.com", domain: "cwwise.com")
         return options
@@ -28,7 +28,6 @@ public class ChatClientOptions: NSObject {
         self.host = host
         self.domain = domain
         self.resource = "ios"
-        super.init()
     }
     
 }

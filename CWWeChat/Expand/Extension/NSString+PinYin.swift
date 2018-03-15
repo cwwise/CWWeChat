@@ -17,7 +17,7 @@ extension String {
         CFStringTransform(str, nil, kCFStringTransformStripDiacritics, false)
         
         let string = str as String
-        return string.capitalized.trimWhitespace()
+        return string.capitalized.trimWhitespace
     }
     
     // 首字母

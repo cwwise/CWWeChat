@@ -10,16 +10,19 @@ import Foundation
 import XMPPFramework
 
 class ChatService: BaseService<ChatManagerDelegate>, XMPPStreamDelegate{
-
+    
+    /// 会话缓存
+    fileprivate var conversationCache: [String: Conversation] = [:]
+    
     /// 消息存储
-    lazy private(set) var messageStore: ChatMessageStore = {
-        let messageStore = ChatMessageStore(userId: ChatClient.share.currentAccount)
+    lazy private(set) var messageStore: MessageStore = {
+        let messageStore = MessageStore(userId: ChatClient.share.currentAccount)
         return messageStore
     }()
     
     /// 会话存储
-    lazy private(set) var conversationStore: ChatConversationStore = {
-        let conversationStore = ChatConversationStore(userId: ChatClient.share.currentAccount)
+    lazy private(set) var conversationStore: ConversationStore = {
+        let conversationStore = ConversationStore(userId: ChatClient.share.currentAccount)
         return conversationStore
     }()
     
@@ -35,6 +38,8 @@ class ChatService: BaseService<ChatManagerDelegate>, XMPPStreamDelegate{
         messageTransmitter = MessageTransmitter()
         messageParse = MessageParse()
         dispatchManager = MessageDispatchManager()
+        super.init()
+        messageParse.delegate = self
     }
     
 
@@ -43,8 +48,12 @@ class ChatService: BaseService<ChatManagerDelegate>, XMPPStreamDelegate{
     ///
     /// - Parameter message: 接收到的消息
     public func receive(message: Message) {
+        
+        
+        
+        
         // 保存消息
-        messageStore.insertMessage(message)
+        messageStore.insert(message: message)
         // 执行delegate
         executeDidReceiveMessages(message)
         // 更新会话
@@ -98,19 +107,17 @@ class ChatService: BaseService<ChatManagerDelegate>, XMPPStreamDelegate{
     
 }
 
-
-extension ChatService: ChatManager {
-    func addChatDelegate(_ delegate: ChatManagerDelegate) {
-        addChatDelegate(delegate, delegateQueue: DispatchQueue.main)
-    }
-        
-    func addChatDelegate(_ delegate: ChatManagerDelegate, delegateQueue: DispatchQueue) {
-        self.addDelegate(delegate, delegateQueue: delegateQueue)
+// MARK: - MessageParseDelegate
+extension ChatService: MessageParseDelegate {
+    
+    func successParse(message: Message) {
+        receive(message: message)
     }
     
-    func removeChatDelegate(_ delegate: ChatManagerDelegate) {
-        self.removeDelegate(delegate)
-    }
+}
+
+
+extension ChatService: ChatManager {
     
     // MARK: 会话
     func fetchAllConversations() -> [Conversation] {
@@ -130,7 +137,7 @@ extension ChatService: ChatManager {
     }
     
     func deleteConversation(_ conversationId: String, deleteMessages: Bool) {
-        conversationStore.deleteConversation(conversationId: conversationId)
+        conversationStore.deleteConversation(with: conversationId)
         if deleteMessages {
             messageStore.deleteAllMessage(conversationId: conversationId)
         }

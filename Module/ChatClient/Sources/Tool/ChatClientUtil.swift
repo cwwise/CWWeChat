@@ -14,12 +14,12 @@ let messageDecoder = JSONDecoder()
 
 class ChatClientUtil: NSObject {
     
-    static var messageId: String {
+    static public var messageId: String {
         let uuid = UUID().uuidString
         return uuid
     }
     
-    static var currentTime: TimeInterval {
+    static public var currentTime: TimeInterval {
         let date = Date()
         return date.timeIntervalSince1970
     }

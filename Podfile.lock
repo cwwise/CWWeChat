@@ -1,8 +1,7 @@
 PODS:
   - Alamofire (4.6.0)
-  - BuddyBuildSDK (1.0.17)
   - ChatClient (0.0.1):
-    - Alamofire
+    - Moya
     - SQLite.swift
     - SwiftyBeaver
     - SwiftyJSON
@@ -41,6 +40,8 @@ PODS:
     - SQLite.swift
     - SwiftyBeaver
     - SwiftyJSON
+  - Moya (10.0.1):
+    - Moya/Core (= 10.0.1)
   - Moya/Core (10.0.1):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
@@ -57,6 +58,8 @@ PODS:
   - SQLite.swift (0.11.4):
     - SQLite.swift/standard (= 0.11.4)
   - SQLite.swift/standard (0.11.4)
+  - SQLiteMigrationManager.swift (0.3.0):
+    - SQLite.swift (~> 0.11.0)
   - SwiftyBeaver (1.5.1)
   - SwiftyImage (1.2.0)
   - SwiftyJSON (4.0.0)
@@ -74,7 +77,6 @@ PODS:
   - YYText (1.0.7)
 
 DEPENDENCIES:
-  - BuddyBuildSDK
   - ChatClient (from `./Module/ChatClient/ChatClient.podspec`)
   - ChatKit (from `./Module/ChatKit/ChatKit.podspec`)
   - CWActionSheet
@@ -92,6 +94,7 @@ DEPENDENCIES:
   - RxSwift
   - SnapKit
   - SQLite.swift
+  - SQLiteMigrationManager.swift
   - SwiftyBeaver
   - SwiftyImage
   - SwiftyJSON
@@ -119,8 +122,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
-  BuddyBuildSDK: 8ae12ee721098b356a961ea7dce70ae55f93a7d2
-  ChatClient: d421eae2af7a032faed60ed4c2275e1b08d6eeca
+  ChatClient: 02277b72b1bf2c33689a430b27b80d24427778a0
   ChatKit: 749c81d5ac53913142af729d9e3c8af9dd303b38
   CocoaAsyncSocket: 3541e024f48c54b251638ef72d51dd42808de932
   CocoaLumberjack: e033a5d8513357af2dd456eb66e202c325c30627
@@ -142,6 +144,7 @@ SPEC CHECKSUMS:
   RxSwift: c6e3b1c7b325c7d121cd4327e9d98b7ed746b570
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SQLite.swift: 3e3bee21da701b5b9f87c4a672cb54f233505692
+  SQLiteMigrationManager.swift: cf85e5825575e1ec1e5c470800feb53eee6e64cf
   SwiftyBeaver: 4f74563624b2c1e821c522c54142b5dd5ebb0f30
   SwiftyImage: ebaa7c7b6163cd4ad102f3bb05a8fb276d35b4f3
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
@@ -149,6 +152,6 @@ SPEC CHECKSUMS:
   XMPPFramework: 36b1a94ab8fb4292b6cad64ddfa8b452e58d6523
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 925a16424c0571a813f88bd609d49d70f1aec417
+PODFILE CHECKSUM: 6f7ce3b7b71d40a8866ff5ab34553a3bf9d5131d
 
 COCOAPODS: 1.4.0

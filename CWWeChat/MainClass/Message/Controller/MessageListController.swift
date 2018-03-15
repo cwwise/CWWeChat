@@ -1,5 +1,5 @@
 //
-//  CWMessageController.swift
+//  MessageListController.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/4/10.
@@ -10,7 +10,7 @@ import UIKit
 import ChatKit
 import ChatClient
 
-public class CWMessageController: MessageController {
+public class MessageListController: MessageController {
         
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +69,7 @@ public class CWMessageController: MessageController {
     }
     
     @objc func rightBarItemDown(_ barItem: UIBarButtonItem) {
-        let chatDetailVC = CWChatDetailViewController()
+        let chatDetailVC = ChatDetailController()
         self.navigationController?.pushViewController(chatDetailVC, animated: true)
     }
     

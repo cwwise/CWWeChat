@@ -9,7 +9,7 @@ import UIKit
 
 let BadgeViewWidth:CGFloat = 18
 
-class BadgeView: UIView {
+public class BadgeView: UIView {
     
     let textSideMargin: CGFloat = 8.0
     let badgeViewHeight: CGFloat = 16.0
@@ -41,7 +41,7 @@ class BadgeView: UIView {
         return self.badgeStrokeWidth * 2
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         
         var newFrame = self.frame
         
@@ -71,9 +71,7 @@ class BadgeView: UIView {
         self.setNeedsDisplay()
     }
     
-    
-    
-    override func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         
         guard self.badgeValue > 0 else {
             return

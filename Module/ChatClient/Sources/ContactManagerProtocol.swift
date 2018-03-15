@@ -42,11 +42,9 @@ public protocol ContactManager {
     /// - Parameter delegate: 代理
     func removeContactDelegate(_ delegate: ContactManagerDelegate)
     
+    func fectchContact(username: String) -> Contact?
     
+    func fectchContact(userId: String) -> Contact?
     
-    
-    
-    func updateMyUserInfo(_ userInfo: [UserInfoUpdateTag: String])
-
-    
+    func updateMyUserInfo(_ userInfo: [UserInfoUpdateTag: String])    
 }

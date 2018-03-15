@@ -11,7 +11,6 @@ import SwiftyBeaver
 import UserNotifications
 import ChatClient
 import ChatKit
-import BuddyBuildSDK
 
 let log = SwiftyBeaver.self
 
@@ -53,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             account = try CWAccount.userAccount()
         } catch {
+            
         }
         
         guard let current = account else {
@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if current.isLogin {
-            let tabBarController = CWChatTabBarController()
+            let tabBarController = RootTabBarController()
             self.window?.rootViewController = tabBarController
             loginChatWithAccount(current)
         } else {
@@ -83,24 +83,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loginSuccess() {
-        let tabBarController = CWChatTabBarController()
+        let tabBarController = RootTabBarController()
         self.window?.rootViewController = tabBarController
     }
     
     func loginMap() {
         let map = MapShowController()
-        self.window?.rootViewController = CWChatNavigationController(rootViewController: map)
+        self.window?.rootViewController = BaseNavigationController(rootViewController: map)
     }
     
     func loginEmoticonSuccess() {
         let emoticonController = CWEmoticonListController()
-        self.window?.rootViewController = CWChatNavigationController(rootViewController: emoticonController)
+        self.window?.rootViewController = BaseNavigationController(rootViewController: emoticonController)
     }
     
 
     func loginMomentSuccess() {
         let momentController = CWMomentListController()
-        self.window?.rootViewController = CWChatNavigationController(rootViewController: momentController)
+        self.window?.rootViewController = BaseNavigationController(rootViewController: momentController)
     }
     
     func logoutSuccess() {

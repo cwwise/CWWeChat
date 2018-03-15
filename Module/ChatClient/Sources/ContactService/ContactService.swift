@@ -37,7 +37,7 @@ class ContactService: XMPPModule {
 }
 
 extension ContactService: ContactManager {
-    
+  
     /// 添加代理
     ///
     /// - Parameter delegate: 代理
@@ -74,6 +74,14 @@ extension ContactService: ContactManager {
         vCardModule.updateMyvCardTemp(vCardTemp!)
     }
     
+    func fectchContact(username: String) -> Contact? {
+        return nil
+    }
+    
+    func fectchContact(userId: String) -> Contact? {
+        return nil
+    }
+    
     func userInfo(with username: String) -> Contact {
    //     let jid = chatJID(with: userId)
         
@@ -88,16 +96,4 @@ extension ContactService: ContactManager {
 
     }
     
-}
-
-
-extension Contact {
-//    convenience init(userId: String, vCardTemp: XMPPvCardTemp) {
-//        let userInfo = CWUserInfo()
-//        userInfo.sign = vCardTemp.note
-//        
-//        self.init(userId: userId, userInfo: userInfo)
-//        self.nickname = vCardTemp.nickname
-//    }
-//    
 }

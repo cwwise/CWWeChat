@@ -30,8 +30,7 @@ class CWMomentDataService: NSObject {
         }
         
         guard let momentList = JSON(momentData).dictionary?["data"]?.array else {
-            return momentLayouts
-
+            return []
         }
         
         

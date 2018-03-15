@@ -21,7 +21,7 @@ class CWInputTextView: UITextView {
             if placeHolder.count > maxChars {
                 let index = placeHolder.index(placeHolder.startIndex, offsetBy: -8)
                 placeHolder = String(placeHolder[..<index])
-                self.placeHolder = placeHolder.trimWhitespace() + "..."
+                self.placeHolder = placeHolder.trimWhitespace + "..."
             }
             self.setNeedsDisplay()
         }

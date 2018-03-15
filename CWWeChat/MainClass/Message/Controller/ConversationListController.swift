@@ -10,35 +10,29 @@ import UIKit
 import ChatClient
 import ChatKit
 
-class CWConversationController: ConversationController {
+class ConversationListController: ConversationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(sendMessage))
         self.navigationItem.rightBarButtonItem = barButtonItem
-         
-        let result = self.chatManager.fetchAllConversations()
-        for conversation in result {
-            conversationList.append(ConversationModel(conversation: conversation))
-        }
         
+        let chatManager = ChatClient.share.chatManager
+        let result = chatManager.fetchAllConversations()
+        conversationList.append(contentsOf: result)
+    
         // 添加群聊
         let conversation = Conversation(conversationId: "haohao@conference.cwwise.com", type: .group)
-        conversationList.append(ConversationModel(conversation: conversation))
+        conversationList.append(conversation)
 
-        if #available(iOS 9.0, *) {
-            self.registerForPreviewing(with: self, sourceView: self.tableView)
-        } else {
-            // Fallback on earlier versions
-        }
-        
+        self.registerForPreviewing(with: self, sourceView: self.tableView)
     }
     
     @objc func sendMessage() {
         
         let conversationId = "chenwei"
-        let chatVC = CWMessageController(conversationId: conversationId)
+        let chatVC = MessageListController(conversationId: conversationId)
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
@@ -46,9 +40,9 @@ class CWConversationController: ConversationController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let conversation = conversationList[indexPath.row].conversation
+        let conversation = conversationList[indexPath.row]
         
-        let chatVC = CWMessageController(conversation: conversation)
+        let chatVC = MessageListController(conversation: conversation)
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
@@ -60,7 +54,7 @@ class CWConversationController: ConversationController {
 }
 
 
-extension CWConversationController: UIViewControllerPreviewingDelegate {
+extension ConversationListController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         show(viewControllerToCommit, sender: self)
@@ -73,10 +67,10 @@ extension CWConversationController: UIViewControllerPreviewingDelegate {
             let cell = tableView.cellForRow(at: indexPath) else { return nil }
         
         // Create a detail view controller and set its properties.        
-        let conversationModel = self.conversationList[indexPath.row]
+        let conversation = self.conversationList[indexPath.row]
 
-        let viewController = CWMessageController(conversation: conversationModel.conversation)
-        viewController.conversation = conversationModel.conversation
+        let viewController = MessageListController(conversation: conversation)
+        viewController.conversation = conversation
         viewController.hidesBottomBarWhenPushed = true
         /*
          Set the height of the preview by setting the preferred content size of the detail view controller.
@@ -84,12 +78,8 @@ extension CWConversationController: UIViewControllerPreviewingDelegate {
          */
         viewController.preferredContentSize = CGSize(width: self.view.width, height: 400)
         
-        // Set the source rect to the cell frame, so surrounding elements are blurred.
-        if #available(iOS 9.0, *) {
-            previewingContext.sourceRect = cell.frame
-        } else {
-            // Fallback on earlier versions
-        }
+        previewingContext.sourceRect = cell.frame
+
         
         return viewController
     }

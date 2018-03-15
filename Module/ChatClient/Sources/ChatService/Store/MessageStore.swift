@@ -1,5 +1,5 @@
 //
-//  ChatMessageStore.swift
+//  MessageStore.swift
 //  ChatClient
 //
 //  Created by chenwei on 2017/10/2.
@@ -9,7 +9,7 @@
 import Foundation
 import SQLite
 
-class ChatMessageStore: ChatBaseStore {
+class MessageStore: ChatBaseStore {
     /// 判断是否存在对应的表
     private var tableExistList = [String: Bool]()
     //MARK: 数据库属性
@@ -72,12 +72,10 @@ class ChatMessageStore: ChatBaseStore {
 }
 
 // MARK: - 新增
-extension ChatMessageStore {
+extension MessageStore {
     
     @discardableResult
-    func insertMessage(_ message: Message) -> Bool {
-        
-        
+    func insert(message: Message) -> Bool {
         do {
             let string = message.messageBody.messageEncode()
             let table = messageTable(message.conversationId)
@@ -101,13 +99,13 @@ extension ChatMessageStore {
 }
 
 // MARK: 查找
-extension ChatMessageStore {
+extension MessageStore {
 
     func lastMessage(by conversationId: String) -> Message? {
         let query = messageTable(conversationId).order(f_date.desc)
         do {
             let raw = try chatDB.pluck(query)
-            return createMessage(by: raw, conversationId: conversationId)
+            return create(by: raw, conversationId: conversationId)
         } catch {
             log.error(error)
             return nil
@@ -128,7 +126,7 @@ extension ChatMessageStore {
         do {
             let result = try chatDB.prepare(query)
             for row in result.reversed() {
-                if let message = createMessage(by: row, conversationId: conversationId) {
+                if let message = create(by: row, conversationId: conversationId) {
                     messages.append(message)
                 }
             }
@@ -139,7 +137,7 @@ extension ChatMessageStore {
         return messages
     }
     
-    func createMessage(by row: Row?, conversationId: String) -> Message? {
+    func create(by row: Row?, conversationId: String) -> Message? {
         guard let row = row else {
             return nil
         }
@@ -167,7 +165,7 @@ extension ChatMessageStore {
 
 
 // MARK: - 修改
-extension ChatMessageStore {
+extension MessageStore {
     
     func markAllMessagesAsRead(_ conversationId: String) {
         let filter = messageTable(conversationId).where(f_readed == false)
@@ -218,7 +216,7 @@ extension ChatMessageStore {
 }
 
 // MARK: - 删除
-extension ChatMessageStore {
+extension MessageStore {
     
     /**
      删除一条消息

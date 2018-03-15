@@ -72,7 +72,7 @@ open class MessageController: UIViewController {
         self.view.addSubview(collectionView)
         
         let chatManager = ChatClient.share.chatManager
-        chatManager.addChatDelegate(self)
+        chatManager.addDelegate(self)
         
         loadMessageData()
     }
@@ -113,7 +113,7 @@ open class MessageController: UIViewController {
     
     deinit {
         let chatManager = ChatClient.share.chatManager
-        chatManager.removeChatDelegate(self)
+        chatManager.removeDelegate(self)
         NotificationCenter.default.removeObserver(self)
     }
 

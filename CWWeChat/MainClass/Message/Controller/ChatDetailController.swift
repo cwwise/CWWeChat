@@ -1,5 +1,5 @@
 //
-//  CWChatDetailViewController.swift
+//  ChatDetailController.swift
 //  CWWeChat
 //
 //  Created by wei chen on 2017/4/10.
@@ -9,7 +9,7 @@
 import UIKit
 import TableViewManager
 
-class CWChatDetailViewController: CWBaseTableViewController {
+class ChatDetailController: CWBaseTableViewController {
 
     lazy var tableViewManager: TableViewManager = {
         let tableViewManager = TableViewManager(tableView: self.tableView)
@@ -85,11 +85,11 @@ class CWChatDetailViewController: CWBaseTableViewController {
     }
 }
 
-extension CWChatDetailViewController: TableViewManagerDelegate {
+extension ChatDetailController: TableViewManagerDelegate {
 
 }
 
-extension CWChatDetailViewController: TableViewManagerDataSource {
+extension ChatDetailController: TableViewManagerDataSource {
     
     
 }

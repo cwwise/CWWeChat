@@ -1,5 +1,5 @@
 //
-//  CWChatNavigationController.swift
+//  BaseNavigationController.swift
 //  CWWeChat
 //
 //  Created by chenwei on 16/6/22.
@@ -8,13 +8,10 @@
 
 import UIKit
 
-class CWChatNavigationController: UINavigationController {
+class BaseNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //#Bug 需要解决，如果设置为false，则在好友搜索部分时，遇到问题
-        //self.navigationBar.translucent = false
         
         self.navigationBar.tintColor = UIColor.white
         self.navigationBar.barTintColor = UIColor.navigationBarCocor()

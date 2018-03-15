@@ -12,7 +12,7 @@ import Kingfisher
 // 一组有序的表情，构成一个表情包。
 // 一组有序的表情包，构成一个分区。
 /// 表情分区
-public class EmoticonZone: NSObject {
+public class EmoticonZone {
     var name: String
     // 表情包
     var packageList: [EmoticonPackage]
@@ -32,7 +32,7 @@ public class EmoticonZone: NSObject {
 }
 
 /// 表情包
-public class EmoticonPackage: NSObject {
+public class EmoticonPackage {
     
     /// 表情作者
     class EmoticonAuthor: NSObject {

@@ -12,7 +12,7 @@ import Foundation
 ///
 /// - single: 单聊
 /// - group: 群聊
-/// - chatRoom: 组聊
+/// - chatroom: 讨论组
 public enum ChatType : Int {
     case single
     case group
@@ -20,7 +20,7 @@ public enum ChatType : Int {
 }
 
 public class Conversation {
-    /// 会话id 如果是群聊则是 groupId 单聊则是 对方账号
+    /// 会话id
     public let conversationId: String
     /// 类型
     public let type: ChatType
@@ -30,12 +30,21 @@ public class Conversation {
     public var draft: String?
     /// 未读数
     public var unreadCount: Int = 0
+    /// 会话最后更新时间 (默认为当前时间戳)
+    public var timestamp: TimeInterval
     /// 最近一条消息
-    public private(set) var lastMessage: Message?
+    public private(set) var lastMessage: Message? {
+        didSet {
+            if let lastMessage = lastMessage {
+                self.timestamp = lastMessage.timestamp
+            }
+        }
+    }
     
     public init(conversationId: String, type: ChatType) {
         self.conversationId = conversationId
         self.type = type
+        self.timestamp = ChatClientUtil.currentTime
     }
     
     public func append(message: Message?) {
@@ -44,7 +53,7 @@ public class Conversation {
     
     public func insert(message: Message) {
         let messageStore = ChatClient.share.chatService.messageStore
-        messageStore.insertMessage(message)
+        messageStore.insert(message: message)
     }
     
     /// 获取指定ID的消息

@@ -10,7 +10,6 @@ target 'CWWeChat' do
   pod 'SnapKit'
 
   # request
-
   pod 'YYText'
   pod 'SwiftyImage'
   pod 'Kingfisher'
@@ -40,7 +39,6 @@ target 'CWWeChat' do
   pod 'SwiftyJSON'
   pod 'KVOController'
   
-  pod 'BuddyBuildSDK'
 
   # 本地pod
   pod 'TableViewManager', :path => './Module/TableViewManager/TableViewManager.podspec'
@@ -56,7 +54,6 @@ target 'CWWeChat' do
   end
 
 end
-
 
 
 post_install do |installer|

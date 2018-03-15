@@ -35,14 +35,14 @@ public protocol ChatManager: class {
     ///
     /// - Parameter delegate: 代理
     /// - Parameter delegateQueue: 代理执行线程
-    func addChatDelegate(_ delegate: ChatManagerDelegate)
+    func addDelegate(_ delegate: ChatManagerDelegate)
     
-    func addChatDelegate(_ delegate: ChatManagerDelegate, delegateQueue: DispatchQueue)
+    func addDelegate(_ delegate: ChatManagerDelegate, delegateQueue: DispatchQueue)
     
     /// 删除聊天代理
     ///
     /// - Parameter delegate: 代理
-    func removeChatDelegate(_ delegate: ChatManagerDelegate)
+    func removeDelegate(_ delegate: ChatManagerDelegate)
     
     /// 获取所有会话
     ///

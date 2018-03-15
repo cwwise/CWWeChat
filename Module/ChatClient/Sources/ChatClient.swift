@@ -9,6 +9,9 @@
 import Foundation
 import SwiftyBeaver
 
+@_exported import SwiftyJSON
+
+/// 打印
 let log = SwiftyBeaver.self
 
 public class ChatClient {

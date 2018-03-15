@@ -9,8 +9,9 @@
 import XMPPFramework
 import Alamofire
 
+/// 消息发送成功
 let kMessageDispatchSuccessNotification = NSNotification.Name("kMessageDispatchSuccessNotification")
-
+/// 网络变化通知
 let kNetworkReachabilityNotification = NSNotification.Name("kNetworkReachabilityNotification")
 
 // xmpp管理实例
@@ -29,10 +30,11 @@ class XMPPManager: NSObject {
     
     private var streamManagement: XMPPStreamManagement
     
-    var options: ChatClientOptions!
     /// 网络状态监听
-    public var reachable: NetworkReachabilityManager?
+    public var reachable: NetworkReachabilityManager!
     
+    var options: ChatClientOptions!
+
     /// 这3个变量 注册和登录 用来临时记录
     var isLoginUser: Bool = true
     var password: String!
@@ -104,8 +106,8 @@ class XMPPManager: NSObject {
             
             NotificationCenter.default.post(name: kNetworkReachabilityNotification, object: networkStatus)
         }
-        reachable?.listener = listener
-        reachable?.startListening()
+        reachable.listener = listener
+        reachable.startListening()
     }
     
     @objc func applicationWillEnterForeground(_ application: UIApplication) {

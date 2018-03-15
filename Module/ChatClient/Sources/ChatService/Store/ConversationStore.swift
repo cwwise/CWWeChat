@@ -1,5 +1,5 @@
 //
-//  ChatConversationStore.swift
+//  ConversationStore.swift
 //  ChatClient
 //
 //  Created by chenwei on 2017/10/2.
@@ -9,7 +9,7 @@
 import Foundation
 import SQLite.Swift
 
-class ChatConversationStore: ChatBaseStore {
+class ConversationStore: ChatBaseStore {
 
     /// Table
     let conversationTable = Table("conversation")
@@ -52,7 +52,7 @@ class ChatConversationStore: ChatBaseStore {
     }
 }
 
-extension ChatConversationStore {
+extension ConversationStore {
     // 添加会话
     @discardableResult
     func insert(conversation: Conversation) -> Bool {
@@ -89,7 +89,7 @@ extension ChatConversationStore {
 }
 
 // MARK: 查找
-extension ChatConversationStore {
+extension ConversationStore {
     
     func fecthAllConversations() -> [Conversation] {
         var list = [Conversation]()
@@ -144,13 +144,13 @@ extension ChatConversationStore {
 }
 
 // MARK: - 删除会话
-extension ChatConversationStore {
+extension ConversationStore {
     
     /// 删除会话
     ///
     /// - Parameter targetId: 会话id
     @discardableResult 
-    func deleteConversation(conversationId: String) -> Bool {
+    func deleteConversation(with conversationId: String) -> Bool {
         do {
             let query = conversationTable.filter(f_conversationId == conversationId)
             try chatDB.run(query.delete())

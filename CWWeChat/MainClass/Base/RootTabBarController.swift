@@ -1,5 +1,5 @@
 //
-//  CWChatTabBarController.swift
+//  RootTabBarController.swift
 //  CWWeChat
 //
 //  Created by chenwei on 16/6/22.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CWChatTabBarController: UITabBarController {
+class RootTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ class CWChatTabBarController: UITabBarController {
             ]
         
         let viewControllerArray = [
-            CWConversationController(),
+            ConversationListController(),
             CWContactsController(),
             CWDiscoverController(),
             CWMineController()
@@ -46,21 +46,21 @@ class CWChatTabBarController: UITabBarController {
         let selectAttributes = [NSAttributedStringKey.foregroundColor : UIColor.chatSystemColor()]
         let normalAttributes = [NSAttributedStringKey.foregroundColor : UIColor.lightGray]
         
-        var navigationVCArray = [CWChatNavigationController]()
+        var navigationVCArray = [BaseNavigationController]()
         for (index, controller) in viewControllerArray.enumerated() {
             controller.title = titleArray[index]
             controller.tabBarItem.image = normalImagesArray[index].withRenderingMode(.alwaysOriginal)
             controller.tabBarItem.selectedImage = selectedImagesArray[index].withRenderingMode(.alwaysOriginal)
             controller.tabBarItem.setTitleTextAttributes(normalAttributes, for: UIControlState())
             controller.tabBarItem.setTitleTextAttributes(selectAttributes, for: .selected)
-            let navigationController = CWChatNavigationController(rootViewController: controller)
+            let navigationController = BaseNavigationController(rootViewController: controller)
             navigationVCArray.append(navigationController)
         }
         self.viewControllers = navigationVCArray
     }
 
     deinit {
-        log.debug("CWChatTabBarController销毁")
+        log.debug("RootTabBarController销毁")
     }
     
     override func didReceiveMemoryWarning() {

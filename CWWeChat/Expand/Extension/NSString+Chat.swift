@@ -15,7 +15,7 @@ extension String {
         return uuid
     }
     
-    public func trimWhitespace() -> String {
+    public var trimWhitespace: String {
         return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
     
