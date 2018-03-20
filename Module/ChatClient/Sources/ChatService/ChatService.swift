@@ -9,7 +9,13 @@
 import Foundation
 import XMPPFramework
 
-class ChatService: BaseService<ChatManagerDelegate>, XMPPStreamDelegate{
+/**
+ 
+ 
+ 
+ */
+///
+class ChatService: XMPPStreamDelegate {
     
     /// 会话缓存
     fileprivate var conversationCache: [String: Conversation] = [:]
@@ -33,16 +39,16 @@ class ChatService: BaseService<ChatManagerDelegate>, XMPPStreamDelegate{
     /// 消息接收解析
     private(set) var messageParse: MessageParse
     
-    override init() {
+    var multicastDelegate = GCDMulticastDelegate()
+    
+    init() {
         // 消息发送和解析
         messageTransmitter = MessageTransmitter()
         messageParse = MessageParse()
         dispatchManager = MessageDispatchManager()
-        super.init()
         messageParse.delegate = self
     }
     
-
     /// 收到消息执行
     /// 执行 消息变化和会话变化的代理，保存消息
     ///
@@ -86,17 +92,11 @@ class ChatService: BaseService<ChatManagerDelegate>, XMPPStreamDelegate{
     ///
     /// - Parameter message: 消息实体
     private func executeDidReceiveMessages(_ message: Message) {
-        
-        self.asyncExecute { (delegate) in
-            delegate.didReceive(message: message)
-        }
+     
     }
     
     private func executeConversationUpdate(_ conversation: Conversation) {
         
-        self.asyncExecute { (delegate) in
-            delegate.conversationDidUpdate(conversation)
-        }
         
     }
     
@@ -105,6 +105,51 @@ class ChatService: BaseService<ChatManagerDelegate>, XMPPStreamDelegate{
         messageParse.handle(message: message)
     }
     
+    // MARK: - Delegate
+    func addDelegate(_ delegate: Any) {
+        multicastDelegate.add(delegate, delegateQueue: DispatchQueue.main)
+    }
+    
+    func removeDelegate(_ delegate: Any) {
+        multicastDelegate.remove(delegate)
+    }
+    
+    /// 删除所有delegate
+    func deactivate() {
+        multicastDelegate.removeAllDelegates()
+    }
+    
+    // MARK: - 执行方法
+    // TODO: - 合并这两个方法
+    func asyncExecuteChat(action: @escaping (ChatManager) -> Void) {
+        ///遍历出所有的delegate
+        let delegateEnumerator = self.multicastDelegate.delegateEnumerator()
+        var delegate: AnyObject?
+        var queue: DispatchQueue?
+        while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) == true {
+            //执行Delegate的方法
+            if let currentDelegate = delegate as? ChatManager, let currentQueue = queue {
+                currentQueue.async {
+                    action(currentDelegate)
+                }
+            }
+        }
+    }
+    
+    func asyncExecuteConversation(action: @escaping (ConversationManager) -> Void) {
+        ///遍历出所有的delegate
+        let delegateEnumerator = self.multicastDelegate.delegateEnumerator()
+        var delegate: AnyObject?
+        var queue: DispatchQueue?
+        while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) == true {
+            //执行Delegate的方法
+            if let currentDelegate = delegate as? ConversationManager, let currentQueue = queue {
+                currentQueue.async {
+                    action(currentDelegate)
+                }
+            }
+        }
+    }
 }
 
 // MARK: - MessageParseDelegate
@@ -118,6 +163,14 @@ extension ChatService: MessageParseDelegate {
 
 
 extension ChatService: ChatManager {
+    
+    func addDelegate(_ delegate: ChatManagerDelegate) {
+        
+    }
+    
+    func removeDelegate(_ delegate: ChatManagerDelegate) {
+        
+    }
     
     // MARK: 会话
     func fetchAllConversations() -> [Conversation] {
@@ -176,4 +229,50 @@ extension ChatService: ChatManager {
     }
     
 }
+
+
+extension ChatService: ConversationManager {
+    
+    func deleteConversation(_ conversation: Conversation, option: Bool) {
+        
+    }
+    
+   
+    func deleteMessage(_ message: Message) {
+        
+    }
+    
+    func deleteAllMessages() {
+        
+    }
+    
+    func markAllMessagesRead(for conversation: Conversation) {
+        
+    }
+    
+    func addDelegate(_ delegate: ConversationManagerDelegate) {
+        
+    }
+    
+    func removeDelegate(_ delegate: ConversationManagerDelegate) {
+        
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

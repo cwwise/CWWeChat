@@ -16,6 +16,7 @@ class CWAboutHeaderView: UIView {
             self.titleLabel.text = title
         }
     }
+    
     /// iconImage的名称
     var iconPath: String? {
         didSet {

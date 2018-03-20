@@ -224,7 +224,7 @@ extension MessageStore {
      - parameter messageID: 消息唯一的id messageID
      */
     @discardableResult
-    func deleteMessage(message: Message) -> Bool {
+    func deleteMessage(_ message: Message) -> Bool {
         let query = messageTable(message.conversationId).filter(f_messageId == message.messageId)
         do {
             let delete = query.delete()

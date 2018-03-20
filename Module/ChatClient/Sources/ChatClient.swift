@@ -27,14 +27,20 @@ public class ChatClient {
         return xmppManager
     }
 
+    /// 聊天管理
     public var chatManager: ChatManager {
+        return chatService
+    }
+    
+    /// 会话管理
+    public var conversationManager: ConversationManager {
         return chatService
     }
     
     public var contactManager: ContactManager {
         return contactService
     }
-
+    
     public var groupManager: GroupManager {
         return groupService
     }

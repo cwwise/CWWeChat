@@ -34,10 +34,7 @@ public protocol ChatManager: class {
     /// 添加聊天代理
     ///
     /// - Parameter delegate: 代理
-    /// - Parameter delegateQueue: 代理执行线程
     func addDelegate(_ delegate: ChatManagerDelegate)
-    
-    func addDelegate(_ delegate: ChatManagerDelegate, delegateQueue: DispatchQueue)
     
     /// 删除聊天代理
     ///
@@ -48,15 +45,6 @@ public protocol ChatManager: class {
     ///
     /// - Returns: 会话列表
     func fetchAllConversations() -> [Conversation]
-    
-    func fecthConversation(chatType: ChatType, conversationId: String) -> Conversation
-    
-    /// 删除会话
-    ///
-    /// - Parameters:
-    ///   - targetId: 会话id
-    ///   - deleteMessages: 是否删除会话中的消息
-    func deleteConversation(_ conversationId: String, deleteMessages: Bool)
     
     func sendMessage(_ message: Message,
                      progress: SendMessageProgressBlock?,

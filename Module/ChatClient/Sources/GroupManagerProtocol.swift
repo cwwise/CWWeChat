@@ -23,9 +23,9 @@ public typealias GroupCompletion = (Group?, ChatClientError?) -> Void
 
 public protocol GroupManager {
     
-    func addGroupDelegate(_ delegate: GroupManagerDelegate, delegateQueue: DispatchQueue)
+    func addDelegate(_ delegate: GroupManagerDelegate)
     
-    func removeGroupDelegate(_ delegate: GroupManagerDelegate)
+    func removeDelegate(_ delegate: GroupManagerDelegate)
 
     func fetchJoinGroups()
     

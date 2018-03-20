@@ -125,8 +125,9 @@ class CWLoginController: UIViewController {
             return tLength >= 3 && tLength <= 50
             }.share(replay: 1)
         
-        Observable.combineLatest(nickNameValid, passwordValid) {$0 && $1}.bind(to: loginButton.rx.isEnabled).disposed(by: disposeBag)
-        
+        Observable.combineLatest(nickNameValid, passwordValid) {$0 && $1}
+            .bind(to: loginButton.rx.isEnabled)
+            .disposed(by: disposeBag)
     }
     
     func leftView(_ text: String) -> UIView {

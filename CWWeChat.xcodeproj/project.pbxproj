@@ -543,6 +543,7 @@
 		1F3491F71E878AD500B36641 /* LoginModule */ = {
 			isa = PBXGroup;
 			children = (
+				1F4EAFE920610A8D00B28C3D /* ViewModel */,
 				8C56ED83201A31FA00171906 /* Model */,
 				1F3492421E87922A00B36641 /* Controller */,
 			);
@@ -670,6 +671,13 @@
 				1F3492701E87C06300B36641 /* CWBaseTableViewController.swift */,
 			);
 			path = CWTableViewController;
+			sourceTree = "<group>";
+		};
+		1F4EAFE920610A8D00B28C3D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		1F803BAD1F4D21F900DFDC4A /* Service */ = {

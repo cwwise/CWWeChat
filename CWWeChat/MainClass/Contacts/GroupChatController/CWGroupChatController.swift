@@ -22,7 +22,7 @@ class CWGroupChatController: ConversationController {
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createGroupChat))
         self.navigationItem.rightBarButtonItem = barButtonItem
         
-        groupManager.addGroupDelegate(self, delegateQueue: DispatchQueue.main)
+        groupManager.addDelegate(self)
     }
     
     @objc

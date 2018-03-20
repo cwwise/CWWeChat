@@ -7,6 +7,8 @@
 
 import Foundation
 
+// TODO: - 如果T可能是两个协议 怎么处理好。
+///
 class BaseService<T> {
     
     private var multicastDelegate = MulticastDelegate<T>()
@@ -28,21 +30,6 @@ class BaseService<T> {
         multicastDelegate.removeAll()
     }
     
-    func syncExecute(action: (T) -> Void) {
-        ///遍历出所有的delegate
-        let delegateEnumerator = self.multicastDelegate.multicastDelegate.delegateEnumerator()
-        var delegate: AnyObject?
-        var queue: DispatchQueue?
-        while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) == true {
-            //执行Delegate的方法
-            if let currentDelegate = delegate as? T, let currentQueue = queue {
-                currentQueue.sync {
-                    action(currentDelegate)
-                }
-            }
-        }
-    }
-    
     func asyncExecute(action: @escaping (T) -> Void) {
         ///遍历出所有的delegate
         let delegateEnumerator = self.multicastDelegate.multicastDelegate.delegateEnumerator()
@@ -52,6 +39,21 @@ class BaseService<T> {
             //执行Delegate的方法
             if let currentDelegate = delegate as? T, let currentQueue = queue {
                 currentQueue.async {
+                    action(currentDelegate)
+                }
+            }
+        }
+    }
+    
+    func syncExecute(action: (T) -> Void) {
+        ///遍历出所有的delegate
+        let delegateEnumerator = self.multicastDelegate.multicastDelegate.delegateEnumerator()
+        var delegate: AnyObject?
+        var queue: DispatchQueue?
+        while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) == true {
+            //执行Delegate的方法
+            if let currentDelegate = delegate as? T, let currentQueue = queue {
+                currentQueue.sync {
                     action(currentDelegate)
                 }
             }

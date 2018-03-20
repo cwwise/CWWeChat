@@ -51,8 +51,7 @@ open class MessageController: UIViewController {
     
     convenience public init(conversationId: String) {
         let chatManager = ChatClient.share.chatManager
-        let conversation = chatManager.fecthConversation(chatType: .single,
-                                                         conversationId: conversationId)
+        let conversation = Conversation(conversationId: conversationId, type: .single)
         self.init(conversation: conversation)
     }
     

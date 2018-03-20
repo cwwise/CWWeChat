@@ -35,8 +35,6 @@ Pod::Spec.new do |s|
 
   s.source_files  = "Sources", "Sources/**/*.{h,swift}"
 
-  # s.resource  = "icon.png"
-  # s.resources = "Resources/*.png"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 

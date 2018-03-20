@@ -128,12 +128,10 @@ class XMPPManager: NSObject {
         }
         
         let timeoutInterval: TimeInterval = 60
-        let resource = options.resource
-        let domain = options.domain
         
         xmppStream.hostName = options.host
         xmppStream.hostPort = options.port
-        xmppStream.myJID = XMPPJID(user: user, domain: domain, resource: resource)
+        xmppStream.myJID = XMPPJID(string: user, resource: options.resource)
         do {
             try xmppStream.connect(withTimeout: timeoutInterval)
         } catch {

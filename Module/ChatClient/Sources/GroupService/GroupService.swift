@@ -22,8 +22,7 @@ class GroupService: XMPPModule {
         return groupChat
     }()
     
-    @objc
-    func didActivate() {
+    @objc func didActivate() {
         self.groupChat.activate(self.xmppStream!)
         self.groupChat.addDelegate(self, delegateQueue: self.moduleQueue)
     }
@@ -31,11 +30,12 @@ class GroupService: XMPPModule {
 
 extension GroupService: GroupManager {
     
-    func addGroupDelegate(_ delegate: GroupManagerDelegate, delegateQueue: DispatchQueue) {
-        addDelegate(delegate, delegateQueue: delegateQueue)
+    func addDelegate(_ delegate: GroupManagerDelegate) {
+        super.addDelegate(delegate, delegateQueue: DispatchQueue.main)
     }
-    func removeGroupDelegate(_ delegate: GroupManagerDelegate) {
-        removeDelegate(delegate)
+    
+    func removeDelegate(_ delegate: GroupManagerDelegate) {
+        super.removeDelegate(delegate)
     }
     
     func fetchJoinGroups() {

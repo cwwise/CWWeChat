@@ -12,6 +12,8 @@ open class ConversationController: UIViewController {
 
     fileprivate var chatManager = ChatClient.share.chatManager
 
+    fileprivate var conversationManager = ChatClient.share.conversationManager
+
     public var conversationList = [Conversation]()
 
     public lazy var tableView: UITableView = {
@@ -48,7 +50,7 @@ open class ConversationController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.white
-        chatManager.addDelegate(self, delegateQueue: DispatchQueue.main)        
+        chatManager.addDelegate(self)
         setupUI()
     }
 
@@ -77,8 +79,7 @@ extension ConversationController: UITableViewDelegate, UITableViewDataSource {
             //数组中删除
             self.conversationList.remove(at: indexPath.row)
             //从数据库中删除
-            self.chatManager.deleteConversation(conversation.conversationId,
-                                                deleteMessages: true)
+            self.conversationManager.deleteConversation(conversation, option: true)
             //删除
             self.tableView.deleteRows(at: [indexPath], with: .none)
         }
