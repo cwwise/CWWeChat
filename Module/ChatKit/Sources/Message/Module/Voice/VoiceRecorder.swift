@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-protocol VoiceRecorderDelegate {
+protocol VoiceRecorderDelegate: class {
     /**
      更新进度 , 0.0 - 9.0, 浮点数
      */
@@ -18,8 +18,7 @@ protocol VoiceRecorderDelegate {
      录音太短
      */
     //    func audioRecordTooShort()
-    
-    
+
     /**
      录音失败
      */
@@ -41,7 +40,7 @@ protocol VoiceRecorderDelegate {
 
 class VoiceRecorder: NSObject {
     
-    var delegate: VoiceRecorderDelegate?
+    weak var delegate: VoiceRecorderDelegate?
     /// 最大录音时间
     let maxRecordTime: CGFloat = 60
     
@@ -53,10 +52,11 @@ class VoiceRecorder: NSObject {
     private var isFinishRecord: Bool = true
     private var isCancelRecord: Bool = false
     
-    private let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),//声音采样率
-        AVFormatIDKey : NSNumber(value: Int32(kAudioFormatLinearPCM) as Int32),//编码格式
-        AVNumberOfChannelsKey : NSNumber(value: 1 as Int32),//采集音轨
-        AVEncoderAudioQualityKey : NSNumber(value: Int32(AVAudioQuality.medium.rawValue) as Int32)]//音频质量
+    private let recordSettings = [AVSampleRateKey: NSNumber(value: 44100.0),//声音采样率
+        AVFormatIDKey: NSNumber(value: Int32(kAudioFormatLinearPCM)),//编码格式
+        AVNumberOfChannelsKey: NSNumber(value: 1),//采集音轨
+        AVEncoderAudioQualityKey: NSNumber(value: Int32(AVAudioQuality.medium.rawValue))]//音频质量
+
     private var audioRecorder:AVAudioRecorder!
     
     var voiceName: String = {
@@ -65,12 +65,11 @@ class VoiceRecorder: NSObject {
         return voiceName
     }()
     
-    lazy private var directoryURL:URL = {
+    lazy private var directoryURL: URL = {
         let filePath = ""
         return URL(fileURLWithPath: filePath)
     }()
-    
-    
+
     override init() {
         self.operationQueue = OperationQueue()
         super.init()

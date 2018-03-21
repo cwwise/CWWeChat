@@ -45,7 +45,6 @@ class CWGroupChatController: ConversationController {
 extension CWGroupChatController: GroupManagerDelegate {
     
     func groupListDidUpdate(_ groupList: [Group]) {
-        print(groupList)
+
     }
-    
 }

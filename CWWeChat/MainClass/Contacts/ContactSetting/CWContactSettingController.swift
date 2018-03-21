@@ -31,20 +31,20 @@ class CWContactSettingController: CWBaseTableViewController {
         let item2 = Item(title: "把她推荐给朋友")
         tableViewManager.append(itemsOf: item2)
         
-        let item3 = BoolItem(title: "设置为星标用户", value: true) { (item) in
+        let item3 = BoolItem(title: "设置为星标用户", value: true) { (_) in
             
         }
         tableViewManager.append(itemsOf: item3)
 
-        let item4 = BoolItem(title: "不让她看我的朋友圈", value: true) { (item) in
+        let item4 = BoolItem(title: "不让她看我的朋友圈", value: true) { (_) in
             
         }
-        let item5 = BoolItem(title: "不看她的朋友圈  ", value: true) { (item) in
+        let item5 = BoolItem(title: "不看她的朋友圈  ", value: true) { (_) in
             
         }
         tableViewManager.append(itemsOf: item4, item5)
 
-        let item6 = BoolItem(title: "加入黑名单", value: true) { (item) in
+        let item6 = BoolItem(title: "加入黑名单", value: true) { (_) in
             
         }
         let item7 = Item(title: "投诉")
@@ -65,7 +65,5 @@ class CWContactSettingController: CWBaseTableViewController {
 }
 
 extension CWContactSettingController: TableViewManagerDelegate, TableViewManagerDataSource {
-    
-
     
 }

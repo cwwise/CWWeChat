@@ -69,8 +69,7 @@ class CWMoreEmoticonController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.white
-        
-        
+
         collectionView.register(MoreEmoticonBannerCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
         collectionView.register(MoreEmoticonCell.self, forCellWithReuseIdentifier: "cell")
         self.view.addSubview(collectionView)
@@ -80,8 +79,6 @@ class CWMoreEmoticonController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
 
 }
 
@@ -121,9 +118,6 @@ extension CWMoreEmoticonController: UICollectionViewDelegate, UICollectionViewDa
 }
 
 extension CWMoreEmoticonController: UISearchBarDelegate {
-    
-    
-    
     
 }
 

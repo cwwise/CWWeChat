@@ -5,6 +5,7 @@
 //  Created by chenwei on 2017/8/23.
 //  Copyright © 2017年 cwcoder. All rights reserved.
 //
+// swiftlint:disable identifier_name
 
 import UIKit
 import Kingfisher
@@ -53,7 +54,7 @@ public class EmoticonPackage {
     var subTitle: String?
     
     // 更新时间
-    var updated_at: String?
+    var updatedAt: String?
     
     var cover: URL?
     // banner url 
@@ -83,5 +84,4 @@ extension EmoticonPackage: Resource {
         return id
     }
 }
-
 

@@ -4,7 +4,7 @@
 //
 //  Created by chenwei on 16/6/22.
 //  Copyright © 2016年 chenwei. All rights reserved.
-//
+//  swiftlint:disable line_length
 
 import UIKit
 import SwiftyBeaver
@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //设置logger
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        loginMomentSuccess()
+        loginSuccess()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         setupLogger()
@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func loginChatWithAccount(_ account: CWAccount) {
         let loginManager = ChatClient.share.loginManager     
         loginManager.login(username: account.username, 
-                           password: account.password) { (username, error) in
+                           password: account.password) { (username, _) in
                            
                             if let username = username {
                                 log.debug("登录成功...\(username)")
@@ -96,7 +96,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let emoticonController = CWEmoticonListController()
         self.window?.rootViewController = BaseNavigationController(rootViewController: emoticonController)
     }
-    
 
     func loginMomentSuccess() {
         let momentController = CWMomentListController()
@@ -123,13 +122,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.shared.registerForRemoteNotifications()
         if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().requestAuthorization(options: [.badge,.alert,.sound]) { (result, error) in
+            UNUserNotificationCenter.current()
+                .requestAuthorization(options: [.badge, .alert, .sound]) { (_, _) in
             }
         } else {
-            let userSetting = UIUserNotificationSettings(types: [.sound,.alert, .badge], categories: nil)
+            let userSetting = UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil)
             UIApplication.shared.registerUserNotificationSettings(userSetting)
         }
     }
 }
-
-

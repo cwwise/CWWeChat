@@ -10,7 +10,7 @@ import UIKit
 
 class MoreEmoticonCell: UICollectionViewCell {
     
-    var touchAction: ((MoreEmoticonCell)->Void)?
+    var touchAction: ((MoreEmoticonCell) -> Void)?
 
     lazy var itemButton: UIButton = {
         let itemBtn = UIButton()
@@ -22,8 +22,7 @@ class MoreEmoticonCell: UICollectionViewCell {
         itemBtn.layer.borderWidth = 0.5
         return itemBtn
     }()
-    
-    
+
     lazy var itemLabel: UILabel = {
         let itemL = UILabel()
         itemL.textColor = UIColor.gray
@@ -40,7 +39,7 @@ class MoreEmoticonCell: UICollectionViewCell {
         addsnap()
     }
     
-    func addsnap()  {
+    func addsnap() {
         itemButton.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView)
             make.centerX.equalTo(self.contentView)
@@ -65,7 +64,5 @@ class MoreEmoticonCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
     
 }

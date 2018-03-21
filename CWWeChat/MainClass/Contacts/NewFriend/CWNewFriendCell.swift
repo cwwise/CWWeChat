@@ -26,7 +26,7 @@ class CWNewFriendCell: UITableViewCell {
             make.left.equalTo(ChatSessionCellUI.headerImageViewLeftPadding)
             make.top.equalTo(ChatSessionCellUI.headerImageViewTopPadding)
             make.bottom.equalTo(-ChatSessionCellUI.headerImageViewTopPadding)
-            make.width.equalTo(self.avatarImageView.snp.height);
+            make.width.equalTo(self.avatarImageView.snp.height)
         }
         
         //用户名
@@ -51,7 +51,7 @@ class CWNewFriendCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    lazy var avatarImageView:UIImageView = {
+    lazy var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
         return avatarImageView
     }()
@@ -64,14 +64,14 @@ class CWNewFriendCell: UITableViewCell {
     }()
     
     //邀请信息
-    lazy var messageLabel:UILabel = {
+    lazy var messageLabel: UILabel = {
         let messageLabel = UILabel()
         messageLabel.backgroundColor = UIColor.gray
         messageLabel.font = UIFont.systemFont(ofSize: 14)
         return messageLabel
     }()
     
-    lazy var actionButton:UIButton = {
+    lazy var actionButton: UIButton = {
         let actionButton = UIButton(type: .custom)
         actionButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         return actionButton

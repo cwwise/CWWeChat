@@ -32,8 +32,7 @@ class CWMomentDataService: NSObject {
         guard let momentList = JSON(momentData).dictionary?["data"]?.array else {
             return []
         }
-        
-        
+
         for moment in momentList {
             let momentId = moment["momentId"].stringValue
             let username = moment["username"].stringValue
@@ -90,6 +89,5 @@ class CWMomentDataService: NSObject {
         }
         return momentLayouts
     }
-    
     
 }

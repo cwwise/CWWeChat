@@ -44,7 +44,7 @@ enum EmoticonRouter: URLRequestConvertible {
                 para["tag_type"] = "custom"
                 return ("/tags", para)
             case let .packageList(page, tags):
-                var para:[String: Any] = parameters
+                var para: [String: Any] = parameters
                 para["tags[]"] = tags
                 para["page"] = page
                 para["limit"] = EmoticonRouter.limit
@@ -59,8 +59,7 @@ enum EmoticonRouter: URLRequestConvertible {
             case .recommends:
                 return ("/recommends/last", parameters)
             }
-            
-            
+
         }()
         
         let url = try EmoticonRouter.baseURLString.asURL()
@@ -95,7 +94,7 @@ class EmoticonService {
                 }
                 complete(packageList, true)
                 
-            case .failure(_):
+            case .failure:
                 complete([], false)
             }
             
@@ -135,14 +134,13 @@ class EmoticonService {
                 }
                 complete(packageList, true)
                 
-            case .failure(_):
+            case .failure:
                 complete([], false)
 
             }
             
         }
     }
-    
 
     func fetchPackageDetail(with packageId: String, complete: @escaping InfoCompleteBlock) {
         
@@ -198,13 +196,12 @@ class EmoticonService {
                 
                 complete(emoticonPackage, true)
                 
-            case .failure(_):
+            case .failure:
                 complete(nil, false)
             }
             
         }
-        
-        
+
     }
     
     func downloadPackage(with packageId: String, complete: @escaping CompleteBlock) {
@@ -239,7 +236,7 @@ class EmoticonService {
             
             log.debug("progress--\(Float(completedResources.count)/Float(resources.count))")
             
-        }) { (skippedResources, failedResources, completedResources) in
+        }) { (_, _, completedResources) in
             
             log.debug("success--\(Float(completedResources.count)/Float(resources.count))")
             
@@ -249,9 +246,4 @@ class EmoticonService {
     }
     
 }
-
-
-
-
-
 

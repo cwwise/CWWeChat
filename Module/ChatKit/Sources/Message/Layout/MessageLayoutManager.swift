@@ -135,7 +135,6 @@ extension MessageLayoutManager {
             break
         }
         
-        
         let origin: CGPoint
         if message.isSend {
             origin = CGPoint(x: attributes.avaterFrame.minX - setting.usernameLeftPadding - contentSize.width,

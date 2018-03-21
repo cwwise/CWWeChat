@@ -22,7 +22,6 @@ extension EmoticonPageCellLayoutDelegate {
     }
 }
 
-
 class EmoticonPageCellLayout: UICollectionViewLayout {
 
     weak var delegate: EmoticonPageCellLayoutDelegate?
@@ -81,8 +80,8 @@ extension EmoticonPageCellLayout {
         
         let padding = (collectionViewWidth - CGFloat(emoticonColumn) * itemWidth) / 2.0
         let paddingLeft = CGFloatPixelRound(padding)
-        let _ = collectionViewWidth - paddingLeft - itemWidth * CGFloat(emoticonColumn) 
-        
+//        let _ = collectionViewWidth - paddingLeft - itemWidth * CGFloat(emoticonColumn)
+
         var itemHeight = (collectionViewHeight - edgeInset.top - edgeInset.bottom)/CGFloat(emoticonRow)
         itemHeight = CGFloatPixelRound(itemHeight)
 
@@ -117,17 +116,11 @@ extension EmoticonPageCellLayout {
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        
-        guard let _ = collectionView else {
-            return nil
-        }
-        
         visibleLayoutAttributes.removeAll(keepingCapacity: true)
         for (_, attributes) in cacheLayoutAttributes where attributes.frame.intersects(rect) {
             visibleLayoutAttributes.append(attributes)
         }
         return visibleLayoutAttributes
-        
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
@@ -135,9 +128,7 @@ extension EmoticonPageCellLayout {
     }
 }
 
-
 func CGFloatPixelRound(_ value: CGFloat) -> CGFloat {
     let scale = UIScreen.main.scale
     return round(value * scale) / scale
 }
-

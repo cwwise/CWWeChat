@@ -8,7 +8,7 @@
 import Foundation
 
 ///  会话管理器回调
-public protocol ConversationManagerDelegate {
+public protocol ConversationManagerDelegate: class {
     
     func didAddConversation(_ conversation: Conversation, totalUnreadCount: Int)
     

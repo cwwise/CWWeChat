@@ -98,8 +98,6 @@ extension EmoticonPageCell {
 
 }
 
-
-
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 extension EmoticonPageCell: UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -157,14 +155,12 @@ extension EmoticonPageCell: UICollectionViewDataSource, UICollectionViewDelegate
         
     }
     
-    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let index = Int(scrollView.contentOffset.x / scrollView.bounds.width)
         self.delegate?.emoticonPageCell(self, didScroll: index)
     }
     
 }
-
 
 extension EmoticonPageCell: EmoticonPageCellLayoutDelegate {
     

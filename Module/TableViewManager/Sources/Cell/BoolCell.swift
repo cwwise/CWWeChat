@@ -39,7 +39,6 @@ class BoolCell: BaseCell {
         handele(booItem)
     }
     
-    
     private lazy var cellSwitch: UISwitch = {
         let cellSwitch = UISwitch()
         cellSwitch.addTarget(self, action: #selector(switchChangeStatus(_:)), for: .valueChanged)

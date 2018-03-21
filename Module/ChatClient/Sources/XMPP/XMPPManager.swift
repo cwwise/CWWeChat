@@ -79,8 +79,14 @@ class XMPPManager: NSObject {
     
     /// 注册观察者
     func registerApplicationNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground(_:)), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive(_:)), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationWillEnterForeground(_:)),
+                                               name: NSNotification.Name.UIApplicationWillEnterForeground,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationWillResignActive(_:)),
+                                               name: NSNotification.Name.UIApplicationWillResignActive,
+                                               object: nil)
     }
     
     func setupNetworkReachable() {
@@ -117,8 +123,7 @@ class XMPPManager: NSObject {
     @objc func applicationWillResignActive(_ application: UIApplication) {
         
     }
-    
-    
+
     func connetService(user: String) {
         // 
         if reachable?.isReachable == false {
@@ -251,12 +256,12 @@ extension XMPPManager: XMPPStreamDelegate {
             log.error("异常登录")
         }
     }
-    
+    // swiftlint_disable identifier_name
     func xmppStream(_ sender: XMPPStream!, didSend iq: XMPPIQ!) {
         log.debug(iq)
     }
-    
-    
+
+    // swiftlint_disable identifier_name
     func xmppStream(_ sender: XMPPStream!, didReceive iq: XMPPIQ!) -> Bool {
         log.debug(iq)
         if iq.requiresResponse {
@@ -266,8 +271,7 @@ extension XMPPManager: XMPPStreamDelegate {
         }
         return true
     }
-    
-    
+
 }
 
 extension XMPPManager: XMPPStreamManagementDelegate {
@@ -286,7 +290,7 @@ extension XMPPManager: XMPPStreamManagementDelegate {
     
     func xmppStreamManagement(_ sender: XMPPStreamManagement!, didReceiveAckForStanzaIds stanzaIds: [Any]!) {
         // 收到id
-        guard let messageid = stanzaIds as? [String] , messageid.count != 0 else {
+        guard let messageid = stanzaIds as? [String], messageid.count != 0 else {
             return
         }
         NotificationCenter.default.post(name: kMessageDispatchSuccessNotification, object: messageid)
@@ -343,6 +347,5 @@ extension XMPPManager: LoginManager {
         //断开xmppStream
         self.xmppStream.disconnect()
     }
-    
     
 }

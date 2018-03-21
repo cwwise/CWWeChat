@@ -44,10 +44,10 @@ class FileMessageContentView: MessageContentView {
     override func refresh(message: MessageModel) {
         super.refresh(message: message)
         let body = message.messageBody as! FileMessageBody
-        setDataFromBody(body: body, message:message)
+        setDataFromBody(body: body, message: message)
     }
     
-    func setDataFromBody(body: FileMessageBody, message:MessageModel){
+    func setDataFromBody(body: FileMessageBody, message: MessageModel) {
         
         fileNameLabel.text = body.displayName
         fileSizeLabel.text = String(format: "%.2fK", body.fileLength/1024)
@@ -62,7 +62,7 @@ class FileMessageContentView: MessageContentView {
         
     }
     
-    func setLayoutViews(){
+    func setLayoutViews() {
         fileIconImageView.snp.makeConstraints { (make) in
             make.left.equalTo(20)
             make.centerY.equalToSuperview()

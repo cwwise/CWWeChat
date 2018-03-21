@@ -73,12 +73,11 @@ public class EmoticonInputView: UIView {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
-        
         let frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: 160)
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(EmoticonPageCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.delegate = self;
+        collectionView.delegate = self
         collectionView.isPagingEnabled = true
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
@@ -166,7 +165,6 @@ extension EmoticonInputView: UICollectionViewDataSource, UICollectionViewDelegat
         return cell
     }
     
-    
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
@@ -202,7 +200,7 @@ extension EmoticonInputView: UIScrollViewDelegate {
     }
 }
 
-//MARK: EmoticonToolViewDelegate
+//MARK: - EmoticonToolViewDelegate
 extension EmoticonInputView: EmoticonToolViewDelegate {
     
     // 这个是否需要直接把button事件添加到 EmoticonInputView
@@ -233,4 +231,3 @@ extension EmoticonInputView: EmoticonPageCellDelegate {
         groupInfoList[selectIndex].currentIndex = index
     }
 }
-

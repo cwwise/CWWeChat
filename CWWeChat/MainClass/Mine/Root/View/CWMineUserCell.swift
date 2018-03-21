@@ -10,9 +10,6 @@ import UIKit
 
 class CWMineUserCell: UITableViewCell {
 
-    let mine_space_x: CGFloat  =  14.0
-    let mine_space_y: CGFloat  =  12.0
-    
     var userModel: CWUserModel! {
         didSet {
             self.setupUserInfomation()
@@ -20,26 +17,26 @@ class CWMineUserCell: UITableViewCell {
     }
     
     //
-    private lazy var avatarImageView:UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.clipsToBounds = true
         avatarImageView.layer.cornerRadius = 5
         return avatarImageView
     }()
     
-    private lazy var nikenameLabel:UILabel = {
+    private lazy var nikenameLabel: UILabel = {
         let nikenameLabel = UILabel()
         nikenameLabel.font = UIFont.systemFont(ofSize: 17)
         return nikenameLabel
     }()
     
-    private lazy var usernameLabel:UILabel = {
+    private lazy var usernameLabel: UILabel = {
         let usernameLabel = UILabel()
         usernameLabel.font = UIFont.systemFont(ofSize: 14)
         return usernameLabel
     }()
     
-    private lazy var QRImageView:UIImageView = {
+    private lazy var QRImageView: UIImageView = {
         let QRImageView = UIImageView()
         QRImageView.image = CWAsset.Mine_cell_myQR.image
         return QRImageView
@@ -57,19 +54,18 @@ class CWMineUserCell: UITableViewCell {
         p_addSnap()
     }
     
-    //MARK: 添加约束
     func p_addSnap() {
         //头像
         avatarImageView.snp.makeConstraints { (make) in
-            make.left.equalTo(mine_space_x)
-            make.top.equalTo(mine_space_y)
+            make.left.equalTo(14.0)
+            make.top.equalTo(12.0)
             make.width.equalTo(self.avatarImageView.snp.height)
             make.centerY.equalTo(self.contentView)
         }
         
         //昵称
         nikenameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.avatarImageView.snp.right).offset(mine_space_x)
+            make.left.equalTo(self.avatarImageView.snp.right).offset(14.0)
             make.bottom.equalTo(self.avatarImageView.snp.centerY).offset(-3.5)
         }
         

@@ -57,7 +57,6 @@ public class MapShowController: UIViewController {
     
     func setupNavigationItem() {
         
-        
     }
     
     func setupLocationInfo() {
@@ -110,7 +109,7 @@ public class MapShowController: UIViewController {
     
     @objc func navigationLocation() {
         
-        let otherButtonTitle = ["腾讯地图","Apple地图"]
+        let otherButtonTitle = ["腾讯地图", "Apple地图"]
         let clickedHandler = { (actionSheet: ActionSheetView, index: Int) in
             
             if index == 0 {
@@ -139,7 +138,7 @@ public class MapShowController: UIViewController {
         request.region = region
         request.naturalLanguageQuery = "place"
         let search = MKLocalSearch(request: request)
-        search.start { (response, error) in
+        search.start { (response, _) in
             guard let response = response else {
                 return
             }
@@ -176,7 +175,6 @@ public class MapShowController: UIViewController {
                 if let locality = placemark.locality {
                     address += locality
                 }
-                print(address)
                 print(placemark.name ?? "未知地方")
             }
             
@@ -192,7 +190,7 @@ public class MapShowController: UIViewController {
 extension MapShowController: CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations)
+
     }
     
 }

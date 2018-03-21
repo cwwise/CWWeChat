@@ -23,17 +23,14 @@ class CWMomentAttributes: UICollectionViewLayoutAttributes {
     
     ///
     var toolButtonFrame: CGRect = .zero
-    
-    
+
     /// 点赞部分
     var praiseHeight: CGFloat = 0
     var praiseLayout: YYTextLayout?
     
     var commentHeight: CGFloat = 0
     var commentLayoutArray = [YYTextLayout]()
-    
-    
-    
+
 }
 
 extension CWMomentAttributes {
@@ -45,5 +42,4 @@ extension CWMomentAttributes {
     }
 
 }
-
 

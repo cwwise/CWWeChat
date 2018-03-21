@@ -81,21 +81,16 @@ class CWMomentCollectionCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
 }
 
 extension CWMomentCollectionCell {
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         
-        let layoutAttributes = layoutAttributes as! CWMomentAttributes
-        
-        
-        
-        
+        _ = layoutAttributes as! CWMomentAttributes
+
     }
-    
-    
+
 }
 

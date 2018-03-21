@@ -10,7 +10,8 @@ import UIKit
 import SwiftyJSON
 
 public class EmoticonGroup: NSObject {
-    // id
+    // swiftlint:disable identifier_name
+    ///
     var id: String
     // 表情组 名称
     var name: String
@@ -24,7 +25,8 @@ public class EmoticonGroup: NSObject {
     var count: Int {
         return emoticons.count
     }
-    
+
+    // swiftlint:disable identifier_name
     init(id: String,
          name: String = "",
          icon: String,
@@ -39,7 +41,7 @@ public class EmoticonGroup: NSObject {
 
 public extension EmoticonGroup {
     
-    convenience init?(identifier : String) {
+    convenience init?(identifier: String) {
         let bundle = Bundle.main
         guard let path = bundle.path(forResource: "emoticons.bundle/\(identifier)/Info", ofType: "plist"),
         let dict = NSDictionary(contentsOfFile: path) else {
@@ -59,7 +61,7 @@ public extension EmoticonGroup {
         for item in emoticonsArray {
             let id = item["id"].stringValue
             let title = item["title"].stringValue
-            let _ = item["type"].stringValue
+            _ = item["type"].stringValue
             // 需要添加@2x
             let imagePath = directory + "/" + id + "@2x.png"
             

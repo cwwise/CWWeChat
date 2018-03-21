@@ -7,7 +7,7 @@
 
 import Foundation
 
-// TODO: - 如果T可能是两个协议 怎么处理好。
+// TODO:  如果T可能是两个协议 怎么处理好。
 ///
 class BaseService<T> {
     

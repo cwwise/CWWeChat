@@ -21,8 +21,7 @@ public class ChatKit: NSObject {
     private override init() {
         
     }
-    
-    
+
     public func fetchUser(userId: String) -> Contact? {
         
         return nil
@@ -31,6 +30,5 @@ public class ChatKit: NSObject {
     public func fetchGroup(groupId: String) -> Group? {
         return nil
     }
-    
     
 }

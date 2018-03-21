@@ -10,8 +10,5 @@ import Foundation
 import UIKit
 
 extension AppDelegate {
-    
-    
-    
-    
+
 }

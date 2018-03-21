@@ -26,14 +26,14 @@ class RootTabBarController: UITabBarController {
             CWAsset.Tabbar_mainframe.image,
             CWAsset.Tabbar_contacts.image,
             CWAsset.Tabbar_discover.image,
-            CWAsset.Tabbar_me.image,
+            CWAsset.Tabbar_me.image
             ]
         
         let selectedImagesArray = [
             CWAsset.Tabbar_mainframeHL.image,
             CWAsset.Tabbar_contactsHL.image,
             CWAsset.Tabbar_discoverHL.image,
-            CWAsset.Tabbar_meHL.image,
+            CWAsset.Tabbar_meHL.image
             ]
         
         let viewControllerArray = [
@@ -43,8 +43,8 @@ class RootTabBarController: UITabBarController {
             CWMineController()
         ]
         
-        let selectAttributes = [NSAttributedStringKey.foregroundColor : UIColor.chatSystemColor()]
-        let normalAttributes = [NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+        let selectAttributes = [NSAttributedStringKey.foregroundColor: UIColor.chatSystemColor()]
+        let normalAttributes = [NSAttributedStringKey.foregroundColor: UIColor.lightGray]
         
         var navigationVCArray = [BaseNavigationController]()
         for (index, controller) in viewControllerArray.enumerated() {
@@ -67,16 +67,5 @@ class RootTabBarController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

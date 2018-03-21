@@ -37,7 +37,6 @@ class ConversationListController: ConversationController {
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
 
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let conversation = conversationList[indexPath.row]
@@ -52,7 +51,6 @@ class ConversationListController: ConversationController {
         // Dispose of any resources that can be recreated.
     }
 }
-
 
 extension ConversationListController: UIViewControllerPreviewingDelegate {
     
@@ -80,9 +78,7 @@ extension ConversationListController: UIViewControllerPreviewingDelegate {
         
         previewingContext.sourceRect = cell.frame
 
-        
         return viewController
     }
     
 }
-

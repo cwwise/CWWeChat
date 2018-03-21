@@ -10,8 +10,8 @@ import UIKit
 import ChatClient
 
 // 修改命名 统一一些距离
-private let space_x: CGFloat  =  14.0
-private let space_y: CGFloat  =  12.0
+private let spaceX: CGFloat  =  14.0
+private let spaceY: CGFloat  =  12.0
 
 class CWContactInfoCell: UITableViewCell {
 
@@ -22,20 +22,20 @@ class CWContactInfoCell: UITableViewCell {
     }
     
     //
-    private lazy var avatarImageView:UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.clipsToBounds = true
         avatarImageView.layer.cornerRadius = 5
         return avatarImageView
     }()
     
-    private lazy var nikenameLabel:UILabel = {
+    private lazy var nikenameLabel: UILabel = {
         let nikenameLabel = UILabel()
         nikenameLabel.font = UIFont.systemFont(ofSize: 17)
         return nikenameLabel
     }()
     
-    private lazy var usernameLabel:UILabel = {
+    private lazy var usernameLabel: UILabel = {
         let usernameLabel = UILabel()
         usernameLabel.font = UIFont.systemFont(ofSize: 14)
         return usernameLabel
@@ -61,19 +61,18 @@ class CWContactInfoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: 添加约束
     func p_addSnap() {
         //头像
         avatarImageView.snp.makeConstraints { (make) in
-            make.left.equalTo(space_x)
-            make.top.equalTo(space_y)
+            make.left.equalTo(spaceX)
+            make.top.equalTo(spaceY)
             make.width.equalTo(self.avatarImageView.snp.height)
             make.centerY.equalTo(self.contentView)
         }
         
         //昵称
         nikenameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.avatarImageView.snp.right).offset(space_x)
+            make.left.equalTo(self.avatarImageView.snp.right).offset(spaceX)
             make.bottom.equalTo(self.avatarImageView.snp.centerY).offset(-3.5)
         }
         

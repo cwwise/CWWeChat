@@ -11,12 +11,11 @@ import UIKit
 let KTimeFormate:String = "yyyy-MM-dd HH:mm:ss:SSS"
 let KMessageTimeFormate:String = "yyyy-MM-dd'T'HH:mm:ss'Z'"
 
-
 class ChatTimeTool: NSObject {
 
     static let shareChatTimeTool = ChatTimeTool()
     
-    var formatter:DateFormatter = {
+    var formatter: DateFormatter = {
        let formatter = DateFormatter()
         formatter.timeZone = TimeZone.current
         return formatter
@@ -44,26 +43,11 @@ class ChatTimeTool: NSObject {
         }
         return date!
     }
-    
-    internal class func stringFromDateString(_ dateString: String, fromDateFormat: String = KMessageTimeFormate, toDateFormat: String = KTimeFormate) -> String? {
-        let formatter = shareChatTimeTool.formatter
-        //格式化时间
-        formatter.dateFormat = fromDateFormat
-        let date = formatter.date(from: dateString)
-        if (date == nil) {
-            return nil
-        }
-        //转换成当前格式的string
-        formatter.dateFormat = toDateFormat
-        let dateString = formatter.string(from: date!)
-        return dateString
-    }
-    
+
     internal class func stringFromDateTimeInterval(_ timeInterval: TimeInterval) -> String {
         let date = Date(timeIntervalSince1970: timeInterval)
         return self.stringFromDate(date)
     }
-    
     
     internal class func timeStringFromSinceDate(_ date: Date) -> String {
         //当前时间和消息时间
@@ -82,12 +66,12 @@ class ChatTimeTool: NSObject {
             return dateFormatter.string(from: messageDate)
         }
         //昨天
-        else if (dateFormatter.date(from: currentDay)?.timeIntervalSince(dateFormatter.date(from: theDay)!) == 86400) {
+        else if dateFormatter.date(from: currentDay)?.timeIntervalSince(dateFormatter.date(from: theDay)!) == 86400 {
             dateFormatter.dateFormat = "ah:mm"
             return "昨天 \(dateFormatter.string(from: messageDate))"
         }
         //一周
-        else if (dateFormatter.date(from: currentDay)?.timeIntervalSince(dateFormatter.date(from: theDay)!) == 86400 * 7) {
+        else if dateFormatter.date(from: currentDay)?.timeIntervalSince(dateFormatter.date(from: theDay)!) == 86400 * 7 {
             dateFormatter.dateFormat = "EEEE ah:mm"
             return dateFormatter.string(from: messageDate)
         }
@@ -97,7 +81,5 @@ class ChatTimeTool: NSObject {
             return dateFormatter.string(from: messageDate)
 
         }
-        
     }
-    
 }

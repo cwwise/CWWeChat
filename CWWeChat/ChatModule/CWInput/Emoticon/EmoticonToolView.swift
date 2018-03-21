@@ -71,8 +71,8 @@ class EmoticonToolView: UIView {
     // 设置
     let settingButton: UIButton = {
         let settingButton = UIButton(type: .custom)
-        
-        settingButton.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+
+        settingButton.contentEdgeInsets = UIEdgeInsets()
         settingButton.setImage(UIImage(named: "EmotionsSetting"), for: .normal)
         settingButton.setBackgroundImage(UIImage(named: "EmotionsSendBtnGrey"), for: .normal)
         settingButton.setBackgroundImage(UIImage(named: "EmotionsSendBtnGrey"), for: .highlighted)
@@ -164,7 +164,7 @@ extension EmoticonToolView: UICollectionViewDelegate {
             }, completion: { (finshed) in
                 UIView.animate(withDuration: kDurationTime, delay: 0, options: .curveEaseInOut, animations: { 
                     self.sendButton.left = self.width-self.sendButton.width            
-                }, completion: { (finshed) in
+                }, completion: { (_) in
                     
                 })
             })
@@ -174,7 +174,7 @@ extension EmoticonToolView: UICollectionViewDelegate {
             }, completion: { (finshed) in
                 UIView.animate(withDuration: kDurationTime, delay: 0, options: .curveEaseInOut, animations: { 
                     self.settingButton.left = self.width-self.settingButton.width            
-                }, completion: { (finshed) in
+                }, completion: { (_) in
                     
                 })
             })

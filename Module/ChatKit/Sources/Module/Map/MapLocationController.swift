@@ -31,10 +31,7 @@ public class MapLocationController: UIViewController {
     }
     
     @objc func sendLocation() {
-        
-        //
-        
-        
+
     }
 
     override public func didReceiveMemoryWarning() {
@@ -44,7 +41,5 @@ public class MapLocationController: UIViewController {
 }
 
 extension MapLocationController: MKMapViewDelegate {
-    
-    
-    
+
 }

@@ -29,8 +29,7 @@ open class ConversationController: UIViewController {
         tableView.tableHeaderView = self.searchController.searchBar
         return tableView
     }()
-    
-    
+
     lazy var searchController: SearchController = {
         let searchController = SearchController(searchResultsController: self.searchResultController)
         searchController.searchResultsUpdater = self.searchResultController
@@ -66,13 +65,13 @@ open class ConversationController: UIViewController {
 
 }
 
-//MARK: UITableViewDelegate UITableViewDataSource
+//MARK:- UITableViewDelegate UITableViewDataSource
 extension ConversationController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let deleteTitle = "删除"
-        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: deleteTitle) { (action:UITableViewRowAction, indexPath) in
+        let deleteAction = UITableViewRowAction(style: .default, title: deleteTitle) { (action, indexPath) in
             
             //获取当前model
             let conversation = self.conversationList[indexPath.row]
@@ -85,11 +84,10 @@ extension ConversationController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let actionTitle = "标记已读"
-        let moreAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: actionTitle) { (action:UITableViewRowAction, indexPath) in
-            
+        let moreAction = UITableViewRowAction(style: .normal, title: actionTitle) { (action, _) in
             tableView.setEditing(false, animated: true)
         }
-        return [deleteAction,moreAction]
+        return [deleteAction, moreAction]
     }
     
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -113,8 +111,7 @@ extension ConversationController: UITableViewDelegate, UITableViewDataSource {
             }
             cell.headerImageView.image = ChatAsset.defaultHeadImage.image
         } else {
-            
-            if let group = ChatKit.share.fetchGroup(groupId: model.conversationId){
+            if let group = ChatKit.share.fetchGroup(groupId: model.conversationId) {
                 cell.usernameLabel.text = group.name
             } else {
                 cell.usernameLabel.text = "群聊"
@@ -151,13 +148,10 @@ extension ConversationController {
     
     /// 找到合适的位置 插入
     fileprivate func findInsertPlace(_ conversation: Conversation) -> Int {
-        
-        
-        
+
         return 0
     }
-    
-    
+
     // MARK: - Open
     open func timestampDescription(for conversation: Conversation) -> String {
         let date = Date(timeIntervalSince1970: conversation.timestamp)
@@ -200,7 +194,6 @@ extension ConversationController {
     
 }
 
-
 // MARK: - UISearchBarDelegate
 extension ConversationController: UISearchBarDelegate {
     
@@ -223,7 +216,7 @@ extension ConversationController: UISearchBarDelegate {
     public func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         let message = "语言搜索"
         let alertController = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
-        let alertAtion = UIAlertAction(title: "确定", style: .default) { (action) in
+        let alertAtion = UIAlertAction(title: "确定", style: .default) { (_) in
             
         }
         alertController.addAction(alertAtion)
@@ -231,18 +224,15 @@ extension ConversationController: UISearchBarDelegate {
     }
 }
 
-
 extension ConversationController: ChatManagerDelegate {
     
     public func didReceive(message: Message) {
         // 发送本地推送
         DispatchQueue.main.async {
             if UIApplication.shared.applicationState == .background {
-                
-                
+
             } else {
-                
-                
+
             }
         }
     }
@@ -264,10 +254,7 @@ extension ConversationController: ChatManagerDelegate {
         // 如果会话不存在 则加入刷新
         if index == -1 {
             conversationList.insert(conversation, at: 0)
-        }
-            // 如果是其他 则移动到第一个
-            // TODO: isTop设置需要
-        else if (index != 0) {
+        } else if index != 0 {
             let model = conversationList.remove(at: index)
             conversationList.insert(model, at: 0)
         }
@@ -276,7 +263,7 @@ extension ConversationController: ChatManagerDelegate {
         tableView.reloadData()
         if unread == 0 {
             self.tabBarItem.badgeValue = nil
-        } else if (unread > 99) {
+        } else if unread > 99 {
             self.tabBarItem.badgeValue = "99+"
         } else {
             self.tabBarItem.badgeValue = "\(unread)"
@@ -285,6 +272,4 @@ extension ConversationController: ChatManagerDelegate {
     }
     
 }
-
-
 

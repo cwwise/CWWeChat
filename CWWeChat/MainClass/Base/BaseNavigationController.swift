@@ -15,12 +15,12 @@ class BaseNavigationController: UINavigationController {
         
         self.navigationBar.tintColor = UIColor.white
         self.navigationBar.barTintColor = UIColor.navigationBarCocor()
-        self.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+        self.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
         // Do any additional setup after loading the view.
     }
     
-    override var preferredStatusBarStyle : UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
@@ -29,7 +29,6 @@ class BaseNavigationController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 

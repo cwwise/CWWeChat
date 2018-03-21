@@ -20,7 +20,6 @@ struct MigrationVersion1: Migration {
             return
         }
         
-        
     }
 }
 

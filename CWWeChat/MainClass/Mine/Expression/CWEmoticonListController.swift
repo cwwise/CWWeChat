@@ -45,7 +45,10 @@ class CWEmoticonListController: UIViewController {
         segmentedControl.addTarget(self, action: #selector(segmentedControlChanged(_:)), for: .valueChanged)
         self.navigationItem.titleView = self.segmentedControl
         
-        rightBarButtonItem = UIBarButtonItem(image: CWAsset.Nav_setting.image, style: .plain,target: self, action: #selector(rightBarButtonDown))        
+        rightBarButtonItem = UIBarButtonItem(image: CWAsset.Nav_setting.image,
+                                             style: .plain,
+                                             target: self,
+                                             action: #selector(rightBarButtonDown))
         self.navigationItem.rightBarButtonItem = self.rightBarButtonItem
 
         //模态视图需要添加取消
@@ -53,9 +56,7 @@ class CWEmoticonListController: UIViewController {
             let cancleItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(cancelBarButtonDown))
             self.navigationItem.leftBarButtonItem = cancleItem
         }
-        
-        
-        
+
     }
     
     // MARK: Action
@@ -68,7 +69,7 @@ class CWEmoticonListController: UIViewController {
         self.navigationController?.pushViewController(myExpression, animated: true)
     }
     
-    @objc func segmentedControlChanged(_ segmentedControl: UISegmentedControl)  {
+    @objc func segmentedControlChanged(_ segmentedControl: UISegmentedControl) {
         
         if segmentedControl.selectedSegmentIndex == currentIndex {
             return
@@ -97,14 +98,9 @@ class CWEmoticonListController: UIViewController {
         
     }
 
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
 }
-
-
-
-

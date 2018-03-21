@@ -330,7 +330,6 @@ extension CWChatKeyboard: EmoticonInputViewDelegate {
     }
     
     public func didPressDelete(_ inputView: EmoticonInputView) {
-        print("点击删除")
     }
 
     public func didPressSend(_ inputView: EmoticonInputView) {

@@ -91,17 +91,17 @@ class ToolView: UIView {
     }()
     
     //按钮的图片
-    var kVoiceImage:UIImage = UIImage(named: "chat_toolbar_voice")!
-    var kVoiceImageHL:UIImage = UIImage(named: "chat_toolbar_voice_HL")!
-    var kEmojiImage:UIImage = UIImage(named: "chat_toolbar_emotion")!
-    var kEmojiImageHL:UIImage = UIImage(named: "chat_toolbar_emotion_HL")!
+    var kVoiceImage: UIImage = UIImage(named: "chat_toolbar_voice")!
+    var kVoiceImageHL: UIImage = UIImage(named: "chat_toolbar_voice_HL")!
+    var kEmojiImage: UIImage = UIImage(named: "chat_toolbar_emotion")!
+    var kEmojiImageHL: UIImage = UIImage(named: "chat_toolbar_emotion_HL")!
     
     //图片名称待修改
-    var kMoreImage:UIImage = UIImage(named: "chat_toolbar_more")!
-    var kMoreImageHL:UIImage = UIImage(named: "chat_toolbar_more_HL")!
+    var kMoreImage: UIImage = UIImage(named: "chat_toolbar_more")!
+    var kMoreImageHL: UIImage = UIImage(named: "chat_toolbar_more_HL")!
     
-    var kKeyboardImage:UIImage = UIImage(named: "chat_toolbar_keyboard")!
-    var kKeyboardImageHL:UIImage = UIImage(named: "chat_toolbar_keyboard_HL")!
+    var kKeyboardImage: UIImage = UIImage(named: "chat_toolbar_keyboard")!
+    var kKeyboardImageHL: UIImage = UIImage(named: "chat_toolbar_keyboard_HL")!
     
     var allowVoice: Bool = true
     var allowFaceView: Bool = true
@@ -114,7 +114,7 @@ class ToolView: UIView {
     
     func setupUI() {
         
-        self.autoresizingMask = [UIViewAutoresizing.flexibleWidth,UIViewAutoresizing.flexibleTopMargin]
+        self.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.backgroundColor = UIColor(hex: "#E4EBF0")
         
         addSubview(self.voiceButton)
@@ -182,24 +182,22 @@ class ToolView: UIView {
             updateVoiceButtonImage(true)
             updateEmoticonButtonImage(true)
 
-        } else if (status == .audio) {
+        } else if status == .audio {
             self.recordButton.isHidden = false
             self.inputTextView.isHidden = true
             
             updateVoiceButtonImage(false)
             updateEmoticonButtonImage(true)
-        } else if (status == .emoticon) {
+        } else if status == .emoticon {
             
             self.recordButton.isHidden = true
             self.inputTextView.isHidden = false
             updateVoiceButtonImage(true)
             updateEmoticonButtonImage(true)
         }
-        
-        
+
     }
-    
-    
+
     func updateVoiceButtonImage(_ selected: Bool) {
         self.voiceButton.setImage(selected ? kVoiceImage:kKeyboardImage, for: .normal)
         self.voiceButton.setImage(selected ? kVoiceImageHL:kKeyboardImageHL, for: .highlighted)
@@ -212,9 +210,7 @@ class ToolView: UIView {
 
 }
 
-
-
-extension ToolView : UITextViewDelegate {
+extension ToolView: UITextViewDelegate {
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         self.delegate?.textViewShouldBeginEditing()
@@ -222,7 +218,3 @@ extension ToolView : UITextViewDelegate {
     }
     
 }
-
-
-
-

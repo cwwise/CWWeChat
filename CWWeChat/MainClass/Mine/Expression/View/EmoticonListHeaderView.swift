@@ -38,17 +38,10 @@ class EmoticonListHeaderView: UITableViewHeaderFooterView {
             make.left.equalTo(15)
             make.top.equalTo(30)
         }
-        
-        accessoryView.snp.makeConstraints { (make) in
-            
-        }
-        
+
     }
     
     @objc func accessoryAction() {
-        
-        
-        
         
     }
     

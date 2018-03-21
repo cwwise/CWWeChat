@@ -17,7 +17,7 @@ public class MessageCell: UICollectionViewCell {
     
     // MARK: 属性
     /// 用户名称
-    var usernameLabel:UILabel = {
+    var usernameLabel: UILabel = {
         let usernameLabel = UILabel()
         usernameLabel.backgroundColor = UIColor.clear
         usernameLabel.font = UIFont.systemFont(ofSize: 12)
@@ -26,7 +26,7 @@ public class MessageCell: UICollectionViewCell {
     }()
     
     /// 头像
-    lazy var avatarImageView:UIImageView = {
+    lazy var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.contentMode = .scaleAspectFit
         avatarImageView.backgroundColor = UIColor.gray
@@ -192,8 +192,7 @@ public class MessageCell: UICollectionViewCell {
     
     @objc
     func bubbleDoubleTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
-        
-        
+
     }
     
     @objc
@@ -218,10 +217,8 @@ public class MessageCell: UICollectionViewCell {
 }
 
 extension MessageCell: UIGestureRecognizerDelegate {
-    
-    
-}
 
+}
 
 // 
 extension MessageCell {
@@ -241,8 +238,3 @@ extension MessageCell {
     }
     
 }
-
-
-
-
-

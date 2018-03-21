@@ -36,7 +36,7 @@ class CWAboutController: CWBaseTableViewController {
                 return
             }
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: [:], completionHandler: { (result) in
+                UIApplication.shared.open(url, options: [:], completionHandler: { (_) in
                     log.debug("打开链接成功...")
                 })
             } else {

@@ -9,7 +9,7 @@
 import Foundation
 
 ///重复发送次数
-private let kMaxRepeatCount:Int = 5
+private let kMaxRepeatCount: Int = 5
 
 class MessageOperation: Operation {
     
@@ -27,19 +27,19 @@ class MessageOperation: Operation {
     
     /// 控制并发的变量
     override var isExecuting: Bool {
-        return local_executing
+        return localExecuting
     }
     
     override var isFinished: Bool {
-        return local_finished
+        return localFinished
     }
     
     override var isCancelled: Bool {
-        return local_cancelled
+        return localCancelled
     }
     
     override var isReady: Bool {
-        return local_ready
+        return localReady
     }
     
     /// 实现并发需要设置为YES
@@ -53,7 +53,7 @@ class MessageOperation: Operation {
     
     /// 控制并发任务的变量
     // 执行中
-    private var local_executing:Bool = false {
+    private var localExecuting: Bool = false {
         willSet {
             self.willChangeValue(forKey: "isExecuting")
         }
@@ -62,7 +62,7 @@ class MessageOperation: Operation {
         }
     }
     
-    private var local_finished:Bool = false {
+    private var localFinished: Bool = false {
         willSet {
             self.willChangeValue(forKey: "isFinished")
         }
@@ -71,7 +71,7 @@ class MessageOperation: Operation {
         }
     }
     
-    private var local_cancelled:Bool = false {
+    private var localCancelled: Bool = false {
         willSet {
             self.willChangeValue(forKey: "isCancelled")
         }
@@ -80,7 +80,7 @@ class MessageOperation: Operation {
         }
     }
     
-    private var local_ready:Bool = true {
+    private var localReady:Bool = true {
         willSet {
             self.willChangeValue(forKey: "isReady")
         }
@@ -125,7 +125,7 @@ class MessageOperation: Operation {
             return
         }
         
-        self.local_executing = true
+        self.localExecuting = true
         self.performSelector(inBackground: #selector(startOperation), with: nil)
     }
     
@@ -142,12 +142,12 @@ class MessageOperation: Operation {
      结束线程
      */
     func endOperation() {
-        self.local_executing = false
-        self.local_finished = true
+        self.localExecuting = false
+        self.localFinished = true
     }
     
     /// 消息状态
-    func noticationWithOperationState(_ state:Bool = false) {
+    func noticationWithOperationState(_ state: Bool = false) {
         self.messageSendResult = state
         endOperation()
         if state {
@@ -160,7 +160,7 @@ class MessageOperation: Operation {
         }
     }
     
-    func messageSendCallback(_ result:Bool) {
+    func messageSendCallback(_ result: Bool) {
         if result == false {
             repeatCount += 1
             if repeatCount > kMaxRepeatCount {
@@ -175,9 +175,9 @@ class MessageOperation: Operation {
     
     override var description: String {
         var string = "<\(self.classForCoder) id:\(self.message.messageId) "
-        string += " executing:" + (self.local_executing ?"YES":"NO")
-        string += " finished:" + (self.local_finished ?"YES":"NO")
-        string += " cancelled:" + (self.local_cancelled ?"YES":"NO")
+        string += " executing:" + (self.localExecuting ?"YES":"NO")
+        string += " finished:" + (self.localFinished ?"YES":"NO")
+        string += " cancelled:" + (self.localCancelled ?"YES":"NO")
         string += " sendResult:" + (self.messageSendResult ?"YES":"NO")
         string += " >"
         return string
@@ -188,4 +188,3 @@ class MessageOperation: Operation {
     }
     
 }
-

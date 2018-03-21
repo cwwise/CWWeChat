@@ -63,8 +63,7 @@ class EmoticonListCell: UITableViewCell {
         self.contentView.addSubview(downloadButton)
         
     }
-    
-    
+
     func addSnap() {
         
         iconImageView.snp.makeConstraints { (make) in
@@ -84,9 +83,7 @@ class EmoticonListCell: UITableViewCell {
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.right.equalTo(-40)
         }
-        
 
-        
         downloadButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
             make.right.equalTo(-10)
@@ -95,7 +92,7 @@ class EmoticonListCell: UITableViewCell {
         
     }
     
-    func setupInfo()  {
+    func setupInfo() {
         
         iconImageView.kf.setImage(with: emoticonInfo)
         titleLabel.text = emoticonInfo.name
@@ -103,15 +100,12 @@ class EmoticonListCell: UITableViewCell {
         
     }
 
-    
     // MARK: Action
     @objc func downloadAction() {
         
-        
-        
+
     } 
-    
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

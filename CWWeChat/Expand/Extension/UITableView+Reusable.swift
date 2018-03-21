@@ -12,7 +12,7 @@ protocol Reusable: class {
     static var identifier: String { get }
 }
 
-extension Reusable  {
+extension Reusable {
     static var identifier: String { return String(describing: self) }
 }
 
@@ -20,4 +20,3 @@ extension UITableViewCell: Reusable {}
 extension UICollectionViewCell: Reusable {}
 
 extension UITableViewHeaderFooterView: Reusable {}
-

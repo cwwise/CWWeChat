@@ -22,7 +22,7 @@ class EmoticonManager {
     
     private init() {
         if let qqemoticon = EmoticonGroup(identifier: "com.qq.classic") {
-            for item in qqemoticon.emoticons where item.title != nil  {
+            for item in qqemoticon.emoticons where item.title != nil {
                 localEmoticonList[item.title!] = item
             }
         }
@@ -36,24 +36,17 @@ class EmoticonManager {
     
     
     /// 创建数据表
-
-    
-    
     
     // MARK: Helper
      
-    
-    
 }
-
 
 // MARK: 增加
 extension EmoticonManager {
     
     func addEmoticonPackage(_ package: EmoticonPackage) {
         
-        
-        
+
     }
     
 }
@@ -81,8 +74,7 @@ extension EmoticonManager {
     // 获取当前用户的表情包
     func fetchEmoticonPackageList() -> [EmoticonPackage] {
         let packageList = [EmoticonPackage]()
-        
-    
+
         return packageList
     }
 }
@@ -91,12 +83,7 @@ extension EmoticonManager {
 extension EmoticonManager {
 
     func deleteEmoticonPackage(with id: String) {
-        
-        
-        
+
     }
     
 }
-
-
-

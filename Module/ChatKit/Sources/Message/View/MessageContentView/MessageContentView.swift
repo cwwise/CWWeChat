@@ -38,7 +38,7 @@ public class MessageContentView: UIView {
         
         if message.isSend {
             let image = #imageLiteral(resourceName: "sender_background_normal")
-            let _ = #imageLiteral(resourceName: "sender_background_highlight")
+            _ = #imageLiteral(resourceName: "sender_background_highlight")
             let cap = ChatCellUI.right_cap_insets
             bubbleImageView.image = image.resizableImage(withCapInsets: cap)
             //  bubbleImageView.highlightedImage = highlightedImage.resizableImage(withCapInsets: cap)
@@ -46,7 +46,7 @@ public class MessageContentView: UIView {
         } else {
             
             let image = #imageLiteral(resourceName: "receiver_background_normal")
-            let _ = #imageLiteral(resourceName: "receiver_background_highlight")
+            _ = #imageLiteral(resourceName: "receiver_background_highlight")
             
             let cap = ChatCellUI.left_cap_insets
             bubbleImageView.image = image.resizableImage(withCapInsets: cap)

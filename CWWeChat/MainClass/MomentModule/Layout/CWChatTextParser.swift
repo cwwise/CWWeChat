@@ -15,7 +15,8 @@ public let kChatTextKeyURL = "URL"
 private struct CWTextParser {
     static let highlightBorder: YYTextBorder = {
         let highlightBorder = YYTextBorder()
-        highlightBorder.insets = UIEdgeInsetsMake(-2, 0, -2, 0)
+
+        highlightBorder.insets = UIEdgeInsets(top: -2, left: 0, bottom: -2, right: 0)
         highlightBorder.fillColor = UIColor(hex: "#D4D1D1")
         return highlightBorder
     }()
@@ -61,14 +62,13 @@ class CWChatTextParser: NSObject {
                 
                 let text = attributedText.string as NSString
                 let phoneString = text.substring(with: phone.range) as String
-                highlight.userInfo = [kChatTextKeyPhone : phoneString]
+                highlight.userInfo = [kChatTextKeyPhone: phoneString]
                 attributedText.yy_setTextHighlight(highlight, range: phone.range)
             }
         }
         
     }
-    
-    
+
     fileprivate class func enumerateURLParser(_ attributedText: NSMutableAttributedString) {
 
         let URLsResults = CWChatTextParseHelper.regexURLs.matches(in: attributedText.string,
@@ -138,8 +138,7 @@ class CWChatTextParser: NSObject {
         }        
         
     }
-    
-    
+
 }
 
 class CWChatTextParseHelper {
@@ -148,10 +147,8 @@ class CWChatTextParseHelper {
      正则：匹配 [哈哈] [笑哭。。] 表情
      */
     class var regexEmotions: NSRegularExpression {
-        get {
-            let regularExpression = try! NSRegularExpression(pattern: "\\[[^ \\[\\]]+?\\]", options: [.caseInsensitive])
-            return regularExpression
-        }
+        let regularExpression = try! NSRegularExpression(pattern: "\\[[^ \\[\\]]+?\\]", options: [.caseInsensitive])
+        return regularExpression
     }
     
     /**
@@ -160,22 +157,17 @@ class CWChatTextParseHelper {
      ref: http://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url
      */
     class var regexURLs: NSRegularExpression {
-        get {
-            let regex: String = "((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|^[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)+([-A-Z0-9a-z_\\$\\.\\+!\\*\\(\\)/,:;@&=\\?~#%]*)*"
-            let regularExpression = try! NSRegularExpression(pattern: regex, options: [.caseInsensitive])
-            return regularExpression
-        }
+        let regex: String = "((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|^[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)+([-A-Z0-9a-z_\\$\\.\\+!\\*\\(\\)/,:;@&=\\?~#%]*)*"
+        let regularExpression = try! NSRegularExpression(pattern: regex, options: [.caseInsensitive])
+        return regularExpression
     }
     
     /**
      正则：匹配 7-25 位的数字, 010-62104321, 0373-5957800, 010-62104321-230
      */
     class var regexPhoneNumber: NSRegularExpression {
-        get {
-            let regex = "([\\d]{7,25}(?!\\d))|((\\d{3,4})-(\\d{7,8}))|((\\d{3,4})-(\\d{7,8})-(\\d{1,4}))"
-            let regularExpression = try! NSRegularExpression(pattern: regex, options: [.caseInsensitive])
-            return regularExpression
-        }
+        let regex = "([\\d]{7,25}(?!\\d))|((\\d{3,4})-(\\d{7,8}))|((\\d{3,4})-(\\d{7,8})-(\\d{1,4}))"
+        let regularExpression = try! NSRegularExpression(pattern: regex, options: [.caseInsensitive])
+        return regularExpression
     }
 }
-

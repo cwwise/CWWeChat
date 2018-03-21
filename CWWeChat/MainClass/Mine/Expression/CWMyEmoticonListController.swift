@@ -33,8 +33,8 @@ class CWMyEmoticonListController: CWBaseTableViewController {
     
     func setupUI() {
         
-        sortBarButtonItem = UIBarButtonItem(title: "排序", style: .plain,target: self, action: #selector(rightBarButtonDown))
-        doneBarButtonItem = UIBarButtonItem(title: "完成", style: .plain,target: self, action: #selector(rightBarButtonDown))
+        sortBarButtonItem = UIBarButtonItem(title: "排序", style: .plain, target: self, action: #selector(rightBarButtonDown))
+        doneBarButtonItem = UIBarButtonItem(title: "完成", style: .plain, target: self, action: #selector(rightBarButtonDown))
 
         self.navigationItem.rightBarButtonItem = sortBarButtonItem
         
@@ -50,8 +50,7 @@ class CWMyEmoticonListController: CWBaseTableViewController {
         self.tableView.delegate = self
         self.tableView.register(MyEmoticonCell.self, forCellReuseIdentifier: "cell")
     }
-    
-    
+
     @objc func cancelBarButtonDown() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -101,8 +100,7 @@ extension CWMyEmoticonListController: UITableViewDelegate, UITableViewDataSource
         controller.emoticonPackage = emoticonList[indexPath.row]
         self.navigationController?.pushViewController(controller, animated: true)
     }
-    
-    
+
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return .none
     }
@@ -126,4 +124,3 @@ extension CWMyEmoticonListController: MyEmoticonCellDelegate {
         self.tableView.deleteRows(at: [indexPath], with: .fade)
     }
 }
-

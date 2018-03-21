@@ -22,7 +22,7 @@ class CWMomentController: CWBaseTableViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height:  512/2+50)
+        let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 512/2+50)
         self.tableView.tableHeaderView =  CWMomentHeaderView(frame: frame)
         self.tableView.register(CWMomentCell.self, forCellReuseIdentifier: CWMomentCell.identifier)
         setupUI()
@@ -31,11 +31,8 @@ class CWMomentController: CWBaseTableViewController {
     func setupUI() {
         
         let dataService = CWMomentDataService()
-        
         shareLayouts = dataService.parseMomentLayoutData()
-        
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -60,10 +57,8 @@ extension CWMomentController: UITableViewDataSource, UITableViewDelegate {
         cell.setLayout(shareLayouts[indexPath.row])
         return cell
     }
-    
-    
-}
 
+}
 
 extension CWMomentController: CWMomentCellDelegate {
     func shareCell(_ cell: CWMomentCell, didClickImageAtIndex index: Int) {

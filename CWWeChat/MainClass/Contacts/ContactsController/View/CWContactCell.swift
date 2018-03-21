@@ -8,8 +8,8 @@
 
 import UIKit
 
-private let kContactCellLeftMargin:CGFloat     =    10.0
-private let kContactCellTopMargin:CGFloat     =    9.0
+private let kContactCellLeftMargin: CGFloat = 10.0
+private let kContactCellTopMargin: CGFloat = 9.0
 
 let kContactCellHeight: CGFloat = 54
 
@@ -35,7 +35,7 @@ class CWContactCell: UITableViewCell {
             make.left.equalTo(kContactCellLeftMargin)
             make.top.equalTo(kContactCellTopMargin)
             make.centerY.equalTo(self.contentView)
-            make.width.equalTo(avatarImageView.snp.height);
+            make.width.equalTo(avatarImageView.snp.height)
         }
         
         usernameLabel.snp.makeConstraints { (make) in
@@ -53,15 +53,15 @@ class CWContactCell: UITableViewCell {
         } else {
             self.avatarImageView.kf.setImage(with: contactModel.avatarURL, placeholder: kDefaultHeadImage) 
         }
-        self.usernameLabel.text = contactModel.nickname;
+        self.usernameLabel.text = contactModel.nickname
     }
     
-    lazy var avatarImageView:UIImageView = {
+    lazy var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
         return avatarImageView
     }()
     
-    lazy var usernameLabel:UILabel = {
+    lazy var usernameLabel: UILabel = {
         let usernameLabel = UILabel()
         usernameLabel.backgroundColor = UIColor.white
         usernameLabel.font = UIFont.systemFont(ofSize: 15)

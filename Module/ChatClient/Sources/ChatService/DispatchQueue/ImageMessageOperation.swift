@@ -35,8 +35,7 @@ class ImageMessageOperation: MessageOperation {
             for (key, value) in parameters {
                 multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
             }
-        }, to: url)
-        { (result) in
+        }, to: url) { (result) in
             switch result {
             case .success(let upload, _, _):
                 
@@ -58,7 +57,6 @@ class ImageMessageOperation: MessageOperation {
                 
             case .failure(let encodingError): 
                 log.error(encodingError)
-                break
             }
         }
         

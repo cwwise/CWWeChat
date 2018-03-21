@@ -32,15 +32,12 @@ class VoiceIndicatorView: UIView {
         return voiceSignalImageView
     }()
     
-    
     ///音量的图片
     var signalValueImageView: UIImageView = {
         let signalValueImageView = UIImageView(frame: CGRect(x: 62, y: 0, width: 38, height: 100))
 //        signalValueImageView.image = CWAsset.RecordingSignal001.image
         return signalValueImageView
     }()
-    
-    
     
     //录音时间太短的提示
     lazy var tooShotPromptImageView: UIImageView = {
@@ -75,7 +72,7 @@ class VoiceIndicatorView: UIView {
     }
     
     convenience init () {
-        self.init(frame:CGRect.zero)
+        self.init(frame: CGRect.zero)
         self.initContent()
     }
     
@@ -100,8 +97,7 @@ class VoiceIndicatorView: UIView {
             make.height.equalTo(20)
             make.bottom.equalTo(-6)
         }
-        
-        
+
     }
     
     override func layoutSubviews() {

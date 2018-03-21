@@ -57,8 +57,6 @@ extension CWMomentFlowLayout {
     }
     
     private func configure(attributes: CWMomentAttributes) {
-
-        print(attributes.frame)
         
     }
     

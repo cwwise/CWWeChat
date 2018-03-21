@@ -19,7 +19,7 @@ extension UITableViewHeaderFooterView: Reusable {
     static var identifier: String { return String(describing: self) }
 }
 
-func textHeightOfText(_ text: String?, width: CGFloat, attributes:[NSAttributedStringKey:AnyObject] ) -> CGFloat {
+func textHeightOfText(_ text: String?, width: CGFloat, attributes: [NSAttributedStringKey:AnyObject] ) -> CGFloat {
     
     guard let text = text else {
         return 0
@@ -29,4 +29,3 @@ func textHeightOfText(_ text: String?, width: CGFloat, attributes:[NSAttributedS
     let contentSize = text.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil).size
     return ceil(contentSize.height)
 }
-

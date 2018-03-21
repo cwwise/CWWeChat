@@ -5,6 +5,7 @@
 //  Created by chenwei on 2017/10/2.
 //  Copyright © 2017年 cwwise. All rights reserved.
 //
+// swiftlint:disable identifier_name
 
 import Foundation
 import SQLite
@@ -12,7 +13,7 @@ import SQLite
 class MessageStore: ChatBaseStore {
     /// 判断是否存在对应的表
     private var tableExistList = [String: Bool]()
-    //MARK: 数据库属性
+    //MARK: -数据库属性
     /// 主键
     private let f_id = Expression<Int64>("id")
     /// 消息id
@@ -162,7 +163,6 @@ extension MessageStore {
     }
     
 }
-
 
 // MARK: - 修改
 extension MessageStore {

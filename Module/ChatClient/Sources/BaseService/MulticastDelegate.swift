@@ -9,7 +9,8 @@ import Foundation
 import XMPPFramework
 
 class MulticastDelegate<T> {
-    
+
+    // swiftlint_disable weak_delegate
     var multicastDelegate = GCDMulticastDelegate()
     
     func add(_ delegate: T, delegateQueue: DispatchQueue = DispatchQueue.main) {

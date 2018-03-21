@@ -114,7 +114,7 @@ class ChatService: XMPPStreamDelegate {
     }
     
     // MARK: - 执行方法
-    // TODO: - 合并这两个方法
+    // TODO: 合并这两个方法
     func asyncExecuteChat(action: @escaping (ChatManagerDelegate) -> Void) {
         ///遍历出所有的delegate
         let delegateEnumerator = self.multicastDelegate.delegateEnumerator()
@@ -154,7 +154,6 @@ extension ChatService: MessageParseDelegate {
     }
     
 }
-
 
 extension ChatService: ChatManager {
     
@@ -240,4 +239,3 @@ extension ChatService: ConversationManager {
     }
     
 }
-

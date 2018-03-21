@@ -13,13 +13,13 @@ class LoadingImageView: UIImageView {
     //引导
     let activityView = UIActivityIndicatorView(activityIndicatorStyle: .white)
     
-    let indicatorbackgroundView:UIView = {
+    let indicatorbackgroundView: UIView = {
         let indicatorbackgroundView = UIView()
         indicatorbackgroundView.backgroundColor = UIColor(hex: "#808080").alpha(0.8)
         return indicatorbackgroundView
     }()
     
-    let indicatorLabel:UILabel = {
+    let indicatorLabel: UILabel = {
         let indicatorLabel = UILabel()
         indicatorLabel.font = UIFont.systemFont(ofSize: 11)
         indicatorLabel.textAlignment = .center
@@ -57,7 +57,7 @@ class LoadingImageView: UIImageView {
         self.indicatorLabel.frame = CGRect(origin: origin, size: size)
     }
     
-    func hideProgressView()  {
+    func hideProgressView() {
         //初始化状态
         self.indicatorbackgroundView.isHidden = true
         self.activityView.stopAnimating()

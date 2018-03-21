@@ -38,4 +38,3 @@ extension String {
         return String(self[..<index])
     }
 }
-

@@ -5,6 +5,7 @@
 //  Created by chenwei on 2017/8/24.
 //  Copyright © 2017年 cwcoder. All rights reserved.
 //
+// swiftlint:disable identifier_name
 
 import UIKit
 import Kingfisher
@@ -58,4 +59,3 @@ extension Emoticon: Resource {
         return id
     }
 }
-

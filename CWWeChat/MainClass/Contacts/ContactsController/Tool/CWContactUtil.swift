@@ -14,6 +14,4 @@ class CWContactUtil: NSObject {
 
     static let share = CWContactUtil()
 
-    
-    
 }

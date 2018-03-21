@@ -150,5 +150,4 @@ public class BaseCell: UITableViewCell {
         
     }
     
-
 }

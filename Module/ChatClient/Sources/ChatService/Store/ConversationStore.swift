@@ -4,7 +4,7 @@
 //
 //  Created by chenwei on 2017/10/2.
 //  Copyright © 2017年 cwwise. All rights reserved.
-//
+//  swiftlint:disable identifier_name
 
 import Foundation
 import SQLite.Swift
@@ -39,10 +39,10 @@ class ConversationStore: ChatBaseStore {
             try chatDB.run(conversationTable.create(ifNotExists: true) { t in
                 t.column(f_id, primaryKey: .autoincrement)
                 t.column(f_conversationId, unique: true)
-                t.column(f_chatType, defaultValue:0)
+                t.column(f_chatType, defaultValue: 0)
                 t.column(f_date)
                 t.column(f_isTop, defaultValue: false)
-                t.column(f_unreadCount, defaultValue:0)
+                t.column(f_unreadCount, defaultValue: 0)
                 t.column(f_draft)
             })
             _ = conversationTable.createIndex(f_chatType)
@@ -120,7 +120,7 @@ extension ConversationStore {
             } else {
                 conversation = Conversation(conversationId: conversationId, type: type)
             }
-        } catch  {
+        } catch {
             log.error(error)
             conversation = Conversation(conversationId: conversationId, type: type)
         }
@@ -173,4 +173,3 @@ extension ConversationStore {
     }
     
 }
-
