@@ -39,9 +39,9 @@ class CWDiscoverController: CWBaseTableViewController {
         let item7 = MenuItem(iconImageName: CWAsset.Discover_game.rawValue, title: "游戏")
         
         tableViewManager.append(itemsOf: item1)
-        tableViewManager.append(itemsOf: item2,item3)
-        tableViewManager.append(itemsOf: item4,item5)
-        tableViewManager.append(itemsOf: item6,item7)
+        tableViewManager.append(itemsOf: item2, item3)
+        tableViewManager.append(itemsOf: item4, item5)
+        tableViewManager.append(itemsOf: item6, item7)
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,21 +57,17 @@ extension CWDiscoverController: TableViewManagerDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        
         if indexPath.row == 0 {
-            
             let controller = CWMomentController()
             controller.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(controller, animated: true)
-            
         } else {
             let url = URL(string: "https://m.weibo.cn")!
             let gameViewController = CWGameController(url: url)
             gameViewController.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(gameViewController, animated: true)
         }
-    
-        
+
     }
     
 }

@@ -13,6 +13,7 @@ import ChatClient
 import ChatKit
 
 let log = SwiftyBeaver.self
+let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -44,18 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupController() {
-        let loginVC = UIStoryboard.welcomeViewController()
-        self.window?.rootViewController = loginVC
-        return
         // 如果当前已经登录
-        var account: CWAccount?
-        do {
-            account = try CWAccount.userAccount()
-        } catch {
-            
-        }
-        
-        guard let current = account else {
+        guard let current = AccountModel.userAccount() else {
             let loginVC = UIStoryboard.welcomeViewController()
             self.window?.rootViewController = loginVC
             return
@@ -71,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func loginChatWithAccount(_ account: CWAccount) {
+    func loginChatWithAccount(_ account: AccountModel) {
         let loginManager = ChatClient.share.loginManager     
         loginManager.login(username: account.username, 
                            password: account.password) { (username, _) in

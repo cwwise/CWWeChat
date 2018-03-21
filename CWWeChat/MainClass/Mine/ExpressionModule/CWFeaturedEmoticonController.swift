@@ -39,44 +39,48 @@ class CWFeaturedEmoticonController: UIViewController {
         
         self.view.backgroundColor = UIColor.white
         self.setupUI()
-        
-        Alamofire.request(EmoticonRouter.tagList).responseJSON { (response) in
-            
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                print("JSON: \(json)")
-            case .failure(let error):
-                print(error)
-            }
-            
-        }
-        
-        // banner
-        EmoticonService.shared.fetchRecommendList { (list, success) in
-            if success {
-                self.bannerList = list
-                self.tableView.reloadData()
+
+        let queue = DispatchQueue(label: "com.cwwise.chat")
+        let group = DispatchGroup()
+
+        group.enter()
+        queue.async(group: group, qos: .default, flags: []) {
+            // banner
+            EmoticonService.shared.fetchRecommendList { (list, success) in
+                if success {
+                    self.bannerList = list
+                }
+                group.leave()
             }
         }
-        let tag1 = "热门表情"
-        EmoticonService.shared.fetchPackageList(tag: [tag1]) { (list, success) in
-            if success {
-                let zone = EmoticonZone(name: tag1, packageList: list)
-                self.packageList.insert(zone, at: 0)
-                self.tableView.reloadData()
+
+        group.enter()
+        queue.async(group: group, qos: .default, flags: []) {
+            let tag1 = "热门表情"
+            EmoticonService.shared.fetchPackageList(tag: [tag1]) { (list, success) in
+                if success {
+                    let zone = EmoticonZone(name: tag1, packageList: list)
+                    self.packageList.insert(zone, at: 0)
+                }
+                group.leave()
             }
         }
-        
-        let tag2 = "二次元"
-        EmoticonService.shared.fetchPackageList(tag: [tag2]) { (list, success) in
-            if success {
-                let zone = EmoticonZone(name: tag1, packageList: list)
-                self.packageList.append(zone)
-                self.tableView.reloadData()
+
+        group.enter()
+        queue.async(group: group, qos: .default, flags: []) {
+            let tag2 = "二次元"
+            EmoticonService.shared.fetchPackageList(tag: [tag2]) { (list, success) in
+                if success {
+                    let zone = EmoticonZone(name: tag2, packageList: list)
+                    self.packageList.append(zone)
+                }
+                group.leave()
             }
         }
-        
+
+        group.notify(queue: DispatchQueue.main) {
+            self.tableView.reloadData()
+        }
     }
     
     func setupUI() {

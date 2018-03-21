@@ -15,9 +15,9 @@ protocol MyEmoticonCellDelegate: class{
 
 class MyEmoticonCell: UITableViewCell {
     
-    var delegate: MyEmoticonCellDelegate?
+    weak var delegate: MyEmoticonCellDelegate?
 
-    var iconImageView: AnimatedImageView!
+    var iconImageView: UIImageView!
     
     var titleLabel: UILabel!
     
@@ -37,7 +37,6 @@ class MyEmoticonCell: UITableViewCell {
     }
     
     func setupUI() {
-        
         deleteButton = UIButton(type: .custom)
         deleteButton.backgroundColor = UIColor(hex: "#F8F8F8")
         deleteButton.setTitle("移除", for: .normal)
@@ -46,8 +45,7 @@ class MyEmoticonCell: UITableViewCell {
         deleteButton.addTarget(self, action: #selector(deleteButtonDown), for: .touchUpInside)
         self.contentView.addSubview(deleteButton)
         
-        iconImageView = AnimatedImageView()
-        iconImageView.autoPlayAnimatedImage = false
+        iconImageView = UIImageView()
         iconImageView.contentMode = .scaleAspectFill
         self.addSubview(iconImageView)
         
@@ -80,13 +78,11 @@ class MyEmoticonCell: UITableViewCell {
 
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        
         if editing {
             self.deleteButton.isHidden = true
         } else {
             self.deleteButton.isHidden = false
         }
-        
     }
     
     @objc func deleteButtonDown() {

@@ -85,17 +85,10 @@ class CWMineSettingController: CWBaseTableViewController {
     }
     
     func logout() {
-        do {
-            let account = try CWAccount.userAccount()
-            account.isLogin = false
-            try account.save()
-        } catch {
-        }
+
         let loginManager = ChatClient.share.loginManager
         loginManager.logout()
-        if let appdelegate = UIApplication.shared.delegate as? AppDelegate {
-            appdelegate.logoutSuccess()
-        }
+        kAppDelegate.logoutSuccess()
     }
 
     override func didReceiveMemoryWarning() {

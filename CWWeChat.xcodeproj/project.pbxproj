@@ -51,6 +51,7 @@
 		1F4094961E9DEF2D008D959C /* MyEmoticonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4094951E9DEF2D008D959C /* MyEmoticonCell.swift */; };
 		1F4094981E9DEFCC008D959C /* CWPersonalInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4094971E9DEFCC008D959C /* CWPersonalInfoController.swift */; };
 		1F40949A1E9DFAC8008D959C /* CWAboutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4094991E9DFAC8008D959C /* CWAboutHeaderView.swift */; };
+		1F455D1820625CC3007BEE03 /* EmoticonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F455D1720625CC3007BEE03 /* EmoticonViewModel.swift */; };
 		1F592A3D1EA74884007558E9 /* CWWelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F592A3C1EA74884007558E9 /* CWWelcomeController.swift */; };
 		1F803BAF1F4D221300DFDC4A /* EmoticonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F803BAE1F4D221300DFDC4A /* EmoticonService.swift */; };
 		1F803BB21F4D30B300DFDC4A /* EmoticonPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F803BB11F4D30B300DFDC4A /* EmoticonPackage.swift */; };
@@ -104,7 +105,7 @@
 		8C3CC3AC1F4DDE6B00CB7B61 /* EmoticonDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CC3AB1F4DDE6B00CB7B61 /* EmoticonDetailHeaderView.swift */; };
 		8C3CC3AE1F4DDEAD00CB7B61 /* EmoticonDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3CC3AD1F4DDEAD00CB7B61 /* EmoticonDetailFooterView.swift */; };
 		8C4927891E939EA400B3C482 /* CWWeChat_ChatStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4927881E939EA400B3C482 /* CWWeChat_ChatStoreTests.swift */; };
-		8C74B3EB1F6D76B400BDC819 /* CWAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C74B3EA1F6D76B400BDC819 /* CWAccount.swift */; };
+		8C74B3EB1F6D76B400BDC819 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C74B3EA1F6D76B400BDC819 /* AccountModel.swift */; };
 		8C8C8CC31EC49D0800CED124 /* Emotion.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C8C8CC21EC49D0700CED124 /* Emotion.bundle */; };
 		8CA7EAF41E9D41DE00467C37 /* CWAboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7EAF31E9D41DE00467C37 /* CWAboutController.swift */; };
 		8CA7EB131E9FD5C600467C37 /* chat_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7EB121E9FD5C600467C37 /* chat_background.png */; };
@@ -239,6 +240,7 @@
 		1F4094951E9DEF2D008D959C /* MyEmoticonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEmoticonCell.swift; sourceTree = "<group>"; };
 		1F4094971E9DEFCC008D959C /* CWPersonalInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWPersonalInfoController.swift; sourceTree = "<group>"; };
 		1F4094991E9DFAC8008D959C /* CWAboutHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAboutHeaderView.swift; sourceTree = "<group>"; };
+		1F455D1720625CC3007BEE03 /* EmoticonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmoticonViewModel.swift; sourceTree = "<group>"; };
 		1F592A3C1EA74884007558E9 /* CWWelcomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWWelcomeController.swift; sourceTree = "<group>"; };
 		1F803BAE1F4D221300DFDC4A /* EmoticonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonService.swift; sourceTree = "<group>"; };
 		1F803BB11F4D30B300DFDC4A /* EmoticonPackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonPackage.swift; sourceTree = "<group>"; };
@@ -295,7 +297,7 @@
 		8C3CC3AB1F4DDE6B00CB7B61 /* EmoticonDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonDetailHeaderView.swift; sourceTree = "<group>"; };
 		8C3CC3AD1F4DDEAD00CB7B61 /* EmoticonDetailFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonDetailFooterView.swift; sourceTree = "<group>"; };
 		8C4927881E939EA400B3C482 /* CWWeChat_ChatStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWWeChat_ChatStoreTests.swift; sourceTree = "<group>"; };
-		8C74B3EA1F6D76B400BDC819 /* CWAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWAccount.swift; sourceTree = "<group>"; };
+		8C74B3EA1F6D76B400BDC819 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		8C8C8CC21EC49D0700CED124 /* Emotion.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Emotion.bundle; sourceTree = "<group>"; };
 		8CA7EAF31E9D41DE00467C37 /* CWAboutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CWAboutController.swift; sourceTree = "<group>"; };
 		8CA7EB121E9FD5C600467C37 /* chat_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_background.png; sourceTree = "<group>"; };
@@ -553,7 +555,6 @@
 			isa = PBXGroup;
 			children = (
 				1F3492461E87923000B36641 /* Controller */,
-				1F3492481E87923000B36641 /* Tool */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -562,15 +563,14 @@
 			isa = PBXGroup;
 			children = (
 				1FA724021E9B6C2D009B6456 /* Root */,
-				1FA724011E9B6C2D009B6456 /* Expression */,
-				1FA724461E9C9EA9009B6456 /* CWAccountSafetyController.swift */,
-				1FA724481E9C9F84009B6456 /* CWMineSettingController.swift */,
-				1F40948F1E9DD64B008D959C /* CWCommonSettingController.swift */,
-				8CA7EAF31E9D41DE00467C37 /* CWAboutController.swift */,
-				1F4094991E9DFAC8008D959C /* CWAboutHeaderView.swift */,
+				1FA724011E9B6C2D009B6456 /* ExpressionModule */,
+				1F455D1620625C93007BEE03 /* About */,
 				1F4094971E9DEFCC008D959C /* CWPersonalInfoController.swift */,
 				1F4094911E9DD9B6008D959C /* CWMessageNoticeController.swift */,
 				1F4094931E9DE5A7008D959C /* CWPrivacySettingController.swift */,
+				1FA724461E9C9EA9009B6456 /* CWAccountSafetyController.swift */,
+				1FA724481E9C9F84009B6456 /* CWMineSettingController.swift */,
+				1F40948F1E9DD64B008D959C /* CWCommonSettingController.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -641,13 +641,6 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		1F3492481E87923000B36641 /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tool;
-			sourceTree = "<group>";
-		};
 		1F34925A1E87B3A400B36641 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
@@ -670,6 +663,23 @@
 				1F3492701E87C06300B36641 /* CWBaseTableViewController.swift */,
 			);
 			path = CWTableViewController;
+			sourceTree = "<group>";
+		};
+		1F455D1520625C82007BEE03 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1F455D1720625CC3007BEE03 /* EmoticonViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1F455D1620625C93007BEE03 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				8CA7EAF31E9D41DE00467C37 /* CWAboutController.swift */,
+				1F4094991E9DFAC8008D959C /* CWAboutHeaderView.swift */,
+			);
+			path = About;
 			sourceTree = "<group>";
 		};
 		1F4EAFE920610A8D00B28C3D /* ViewModel */ = {
@@ -756,7 +766,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		1FA724011E9B6C2D009B6456 /* Expression */ = {
+		1FA724011E9B6C2D009B6456 /* ExpressionModule */ = {
 			isa = PBXGroup;
 			children = (
 				1FA7240D1E9B6C72009B6456 /* CWEmoticonListController.swift */,
@@ -764,18 +774,18 @@
 				1F803C1D1F4EAD2900DFDC4A /* CWMoreEmoticonController.swift */,
 				8C3CC3A91F4DDBC100CB7B61 /* CWEmoticonDetailController.swift */,
 				1FA7240E1E9B6C72009B6456 /* CWMyEmoticonListController.swift */,
+				1F455D1520625C82007BEE03 /* ViewModel */,
 				1F803BB01F4D302F00DFDC4A /* Model */,
 				1F803BAD1F4D21F900DFDC4A /* Service */,
 				1FA724111E9B6D29009B6456 /* View */,
 			);
-			path = Expression;
+			path = ExpressionModule;
 			sourceTree = "<group>";
 		};
 		1FA724021E9B6C2D009B6456 /* Root */ = {
 			isa = PBXGroup;
 			children = (
 				1FA724031E9B6C2D009B6456 /* Controller */,
-				1FA724061E9B6C2D009B6456 /* Tool */,
 				1FA724081E9B6C2D009B6456 /* View */,
 			);
 			path = Root;
@@ -787,13 +797,6 @@
 				1FA724041E9B6C2D009B6456 /* CWMineController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		1FA724061E9B6C2D009B6456 /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tool;
 			sourceTree = "<group>";
 		};
 		1FA724081E9B6C2D009B6456 /* View */ = {
@@ -929,7 +932,7 @@
 		8C74B3E91F6D76A600BDC819 /* CWAccount */ = {
 			isa = PBXGroup;
 			children = (
-				8C74B3EA1F6D76B400BDC819 /* CWAccount.swift */,
+				8C74B3EA1F6D76B400BDC819 /* AccountModel.swift */,
 			);
 			path = CWAccount;
 			sourceTree = "<group>";
@@ -1430,9 +1433,10 @@
 				8CD40A5F1EB233E70051772C /* CWContactDetailFooterView.swift in Sources */,
 				8CA924731F56F88300570846 /* EmoticonToolView.swift in Sources */,
 				1F592A3D1EA74884007558E9 /* CWWelcomeController.swift in Sources */,
-				8C74B3EB1F6D76B400BDC819 /* CWAccount.swift in Sources */,
+				8C74B3EB1F6D76B400BDC819 /* AccountModel.swift in Sources */,
 				1F803BBA1F4E670000DFDC4A /* EmoticonDetailCell.swift in Sources */,
 				1F34923C1E87918C00B36641 /* BaseNavigationController.swift in Sources */,
+				1F455D1820625CC3007BEE03 /* EmoticonViewModel.swift in Sources */,
 				1F34921A1E878AD500B36641 /* UIStoryboard+Extension.swift in Sources */,
 				8CA924881F570F0900570846 /* CWChatKeyboard.swift in Sources */,
 				1F01651D1E9898BE001696F2 /* CWNewFrinedsController.swift in Sources */,

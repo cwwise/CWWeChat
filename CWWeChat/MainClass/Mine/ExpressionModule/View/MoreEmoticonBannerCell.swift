@@ -41,6 +41,7 @@ class MoreEmoticonBannerCell: UICollectionReusableView {
 }
 
 extension MoreEmoticonBannerCell: FSPagerViewDelegate, FSPagerViewDataSource {
+
     func numberOfItems(in pagerView: FSPagerView) -> Int {
         return emoticonList.count
     }

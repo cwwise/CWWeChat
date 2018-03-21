@@ -166,17 +166,13 @@ class CWLoginController: UIViewController {
             DispatchQueue.main.async(execute: {
                 hud.mode = .text
                 if error == nil {
-                    do {
-                        let account = CWAccount(username: "haohao", password: "1234567")
-                        account.isLogin = true
-                        try account.save()
-                    } catch {
-                        log.error("保存account出错..")
-                    }
+
+                    let account = AccountModel(username: "haohao", password: "1234567")
+                    account.isLogin = true
+                    account.save()
                
                     // 登陆成功
-                    let appdelegate = UIApplication.shared.delegate as! AppDelegate
-                    appdelegate.loginSuccess()
+                    kAppDelegate.loginSuccess()
                     
                     hud.hide(animated: true)
                 } else {

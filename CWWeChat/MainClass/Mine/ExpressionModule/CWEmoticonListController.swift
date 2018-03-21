@@ -92,8 +92,7 @@ class CWEmoticonListController: UIViewController {
              
             newController.didMove(toParentViewController: self)
             oldController.willMove(toParentViewController: self)
-            oldController.removeFromParentViewController() 
-
+            oldController.removeFromParentViewController()
         }
         
     }

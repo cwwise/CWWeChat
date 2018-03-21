@@ -14,6 +14,7 @@ import Kingfisher
 // 一组有序的表情包，构成一个分区。
 /// 表情分区
 public class EmoticonZone {
+    
     var name: String
     // 表情包
     var packageList: [EmoticonPackage]
@@ -36,7 +37,7 @@ public class EmoticonZone {
 public class EmoticonPackage {
     
     /// 表情作者
-    class EmoticonAuthor: NSObject {
+    class EmoticonAuthor {
         var name: String = ""
         var avatar: URL?
         var banner: URL?
