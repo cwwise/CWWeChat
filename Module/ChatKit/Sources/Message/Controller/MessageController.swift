@@ -13,6 +13,7 @@ open class MessageController: UIViewController {
     public var messageList: [MessageModel] = [MessageModel]()
 
     public var conversation: Conversation
+    
     /// 显示时间处理
     private var messageTool: MessageTimeUtil = {
         let messageTool = MessageTimeUtil()
@@ -45,15 +46,8 @@ open class MessageController: UIViewController {
         collectionView.register(MessageCell.self, forCellWithReuseIdentifier: MessageType.voice.identifier)
         
         collectionView.register(TimeMessageHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
-        
         return collectionView
     }()
-    
-    convenience public init(conversationId: String) {
-        let chatManager = ChatClient.share.chatManager
-        let conversation = Conversation(conversationId: conversationId, type: .single)
-        self.init(conversation: conversation)
-    }
     
     public init(conversation: Conversation) {
         self.conversation = conversation
@@ -192,6 +186,7 @@ extension MessageController: UICollectionViewDelegateFlowLayout {
 
 
 extension MessageController: MessageCellDelegate {
+    
     public func messageCellFowardAction(_ cell: MessageCell) {
         
     }

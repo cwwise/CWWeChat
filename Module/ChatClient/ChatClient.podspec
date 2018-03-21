@@ -41,6 +41,7 @@ Pod::Spec.new do |s|
   s.framework  = "Foundation"
   s.dependency "XMPPFramework"
   s.dependency "SQLite.swift"
+  s.dependency "SQLiteMigrationManager.swift"
   s.dependency "SwiftyJSON"
   s.dependency "Moya"
   s.dependency "SwiftyBeaver"

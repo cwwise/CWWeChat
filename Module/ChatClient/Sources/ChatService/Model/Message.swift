@@ -48,6 +48,7 @@ public enum MessageType: Int {
     case location           //位置
     case emoticon           //表情
     case notification       //通知
+    case redpacket          //红包
 }
 
 public class Message {

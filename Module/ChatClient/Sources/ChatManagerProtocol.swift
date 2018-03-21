@@ -14,14 +14,10 @@ public protocol ChatManagerDelegate: class {
     ///
     /// - Parameter message: 消息实体
     func didReceive(message: Message)
-    
-    func conversationDidUpdate(_ conversation: Conversation)
-    
 }
 
 public extension ChatManagerDelegate {
     func didReceive(message: Message) {}
-    func conversationDidUpdate(_ conversation: Conversation) {}
 }
 
 public typealias SendMessageCompletionHandle = (Message, ChatClientError?) -> Void
@@ -41,10 +37,7 @@ public protocol ChatManager: class {
     /// - Parameter delegate: 代理
     func removeDelegate(_ delegate: ChatManagerDelegate)
     
-    /// 获取所有会话
-    ///
-    /// - Returns: 会话列表
-    func fetchAllConversations() -> [Conversation]
+
     
     func sendMessage(_ message: Message,
                      progress: SendMessageProgressBlock?,

@@ -18,8 +18,8 @@ class ConversationListController: ConversationController {
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(sendMessage))
         self.navigationItem.rightBarButtonItem = barButtonItem
         
-        let chatManager = ChatClient.share.chatManager
-        let result = chatManager.fetchAllConversations()
+        let conversationManager = ChatClient.share.conversationManager
+        let result = conversationManager.allConversations()
         conversationList.append(contentsOf: result)
     
         // 添加群聊
@@ -31,8 +31,8 @@ class ConversationListController: ConversationController {
     
     @objc func sendMessage() {
         
-        let conversationId = "chenwei"
-        let chatVC = MessageListController(conversationId: conversationId)
+        let conversation = Conversation(conversationId: "chenwei@cwwise.com", type: .single)
+        let chatVC = MessageListController(conversation: conversation)
         chatVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatVC, animated: true)
     }

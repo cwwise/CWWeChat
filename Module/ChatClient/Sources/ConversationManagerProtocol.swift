@@ -25,6 +25,11 @@ public protocol ConversationManager {
     /// - Parameter message: 消息实体
     func deleteMessage(_ message: Message)
     
+    /// 获取所有会话
+    ///
+    /// - Returns: 会话列表
+    func allConversations() -> [Conversation]
+    
     /// 删除会话
     ///
     /// - Parameters:

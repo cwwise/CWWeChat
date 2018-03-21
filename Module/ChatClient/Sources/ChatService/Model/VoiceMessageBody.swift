@@ -48,31 +48,16 @@ extension VoiceMessageBody: MessageBody {
     }
     
     public func messageEncode() -> String {
-        do {
-            let data = try JSONSerialization.data(withJSONObject: self.info, options: .prettyPrinted)
-            return String(data: data, encoding: .utf8) ?? ""
-        } catch {
-            return ""
-        }
+        return self.info.jsonEncoded
     }
     
     public func messageDecode(string: String) {
         guard let data = string.data(using: .utf8) else { return }
-        do {
-            let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: String]
-            if let voiceLength = json?["voiceLength"] {
-                self.voiceLength = Float(voiceLength) ?? 0
-            }
-            if let path = json?["path"] {
-                self.voicePath = path
-            }
-            if let urlstring = json?["voiceURL"],
-                let url = URL(string: urlstring) {
-                self.voiceURL = url
-            }
-        } catch {
-            
-        }
+        
+        let json = JSON(data)
+        self.voiceURL = json["voiceURL"].url
+        self.voicePath = json["path"].string
+        self.voiceLength = json["voiceLength"].floatValue
     }
     
     public var description: String {

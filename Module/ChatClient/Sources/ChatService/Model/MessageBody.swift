@@ -9,7 +9,7 @@
 import Foundation
 
 /**
- 这个地方处理待完善 
+ TODO: - 现在是将内容格式化成json之后保存到数据库 可能需要优化
  */
 public protocol MessageCodable {
     /// 保存到数据库中的字段

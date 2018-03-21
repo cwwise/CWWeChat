@@ -67,7 +67,8 @@ class CWContactDetailController: CWBaseTableViewController {
     }
 
     func goChatController() {
-        let chatVC = MessageListController(conversationId: contact.username)
+        let conversation = Conversation(conversationId: contact.username, type: .single)
+        let chatVC = MessageListController(conversation: conversation)
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
     

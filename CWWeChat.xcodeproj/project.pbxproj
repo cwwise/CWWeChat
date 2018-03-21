@@ -1047,6 +1047,7 @@
 				EDBF6044B81957A6E50478CA /* [CP] Copy Pods Resources */,
 				1F3492691E87B3F500B36641 /* Embed Frameworks */,
 				8CA7EB071E9E7CD500467C37 /* Embed App Extensions */,
+				1F4EB0042061F71500B28C3D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1262,6 +1263,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		1F4EB0042061F71500B28C3D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
 		540AB1D8B651E6B690C66E52 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

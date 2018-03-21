@@ -11,6 +11,10 @@ import Hue
 
 extension UIColor {
     // 主要文字
+    class var mainText: UIColor {
+        return UIColor(hex: "#333")
+    }
+    
     class var normalText: UIColor {
         return UIColor(hex: "#353535")
     }

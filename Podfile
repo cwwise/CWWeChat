@@ -39,6 +39,8 @@ target 'CWWeChat' do
   pod 'SwiftyJSON'
   pod 'KVOController'
   
+  pod 'SwiftLint'
+
 
   # 本地pod
   pod 'TableViewManager', :path => './Module/TableViewManager/TableViewManager.podspec'

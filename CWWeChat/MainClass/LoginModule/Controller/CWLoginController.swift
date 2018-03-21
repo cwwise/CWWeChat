@@ -110,7 +110,7 @@ class CWLoginController: UIViewController {
             make.top.equalTo(passwordTextField.snp.bottom).offset(30)
         }
         
-        self.userNameTextField.text = "haohao"
+        self.userNameTextField.text = "haohao@cwwise.com"
 //        self.passwordTextField.text = "1234567"
     }
     

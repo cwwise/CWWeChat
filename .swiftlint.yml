@@ -1,0 +1,6 @@
+disabled_rules: # 执行时排除掉的规则
+  - trailing_whitespace
+excluded: # 执行 linting 时忽略的路径。 优先级比 `included` 更高。
+  - Carthage
+  - Pods
+
