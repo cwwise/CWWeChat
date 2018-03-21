@@ -27,13 +27,9 @@ class ChatContactStore: ChatBaseStore {
 extension ChatContactStore {
 
     @discardableResult
-    func insert(contactList:[Contact]) -> Bool {
-        
-        
+    func insert(contactList: [Contact]) -> Bool {
+
         return true
     }
-    
-    
+
 }
-
-

@@ -45,9 +45,7 @@ public class Section: NSObject {
         return tableViewManager?.sections.index(of: self)
     }
     
-    public init(headerTitle: String? = nil,
-         footerTitle: String? = nil,
-         items: [Item] = [Item]()) {
+    public init(headerTitle: String? = nil, footerTitle: String? = nil, items: [Item] = [Item]()) {
         super.init()
         
         self.footerTitle = footerTitle

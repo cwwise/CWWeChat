@@ -27,7 +27,7 @@ extension UIView {
         }
     }
     
-    var size: CGSize  {
+    var size: CGSize {
         get { return self.frame.size }
         set {
             var frame = self.frame
@@ -76,7 +76,7 @@ extension UIView {
         }
     }
     
-    var top : CGFloat {
+    var top: CGFloat {
         get { return self.frame.origin.y }
         set {
             var frame = self.frame
@@ -85,7 +85,7 @@ extension UIView {
         }
     }
     
-    var bottom : CGFloat {
+    var bottom: CGFloat {
         get { return frame.origin.y + frame.size.height }
         set {
             var frame = self.frame
@@ -94,7 +94,7 @@ extension UIView {
         }
     }
     
-    var right : CGFloat {
+    var right: CGFloat {
         get { return self.frame.origin.x + self.frame.size.width }
         set {
             var frame = self.frame
@@ -103,7 +103,7 @@ extension UIView {
         }
     }
     
-    var left : CGFloat {
+    var left: CGFloat {
         get { return self.frame.origin.x }
         set {
             var frame = self.frame

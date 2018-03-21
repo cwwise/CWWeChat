@@ -19,5 +19,4 @@ extension UIFont {
         return UIFont.systemFont(ofSize: 17)
     }
     
-    
 }

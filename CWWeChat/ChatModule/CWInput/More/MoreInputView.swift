@@ -101,7 +101,7 @@ extension MoreInputView: UICollectionViewDataSource, UICollectionViewDelegate {
 
         let index = indexPath.row + pageItemCount*indexPath.section
         if index >= self.items.count {
-            cell.item = nil;
+            cell.item = nil
         } else {
             cell.item = self.items[index]
         }

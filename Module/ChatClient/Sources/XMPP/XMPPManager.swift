@@ -9,8 +9,9 @@
 import XMPPFramework
 import Alamofire
 
+/// 消息发送成功
 let kMessageDispatchSuccessNotification = NSNotification.Name("kMessageDispatchSuccessNotification")
-
+/// 网络变化通知
 let kNetworkReachabilityNotification = NSNotification.Name("kNetworkReachabilityNotification")
 
 // xmpp管理实例
@@ -27,10 +28,11 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
     
     private var streamManagement: XMPPStreamManagement
     
-    var options: ChatClientOptions!
     /// 网络状态监听
-    public var reachable: NetworkReachabilityManager?
+    public var reachable: NetworkReachabilityManager!
     
+    var options: ChatClientOptions!
+
     /// 这3个变量 注册和登录 用来临时记录
     var isLoginUser: Bool = true
     
@@ -75,8 +77,14 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
     
     /// 注册观察者
     func registerApplicationNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground(_:)), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive(_:)), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationWillEnterForeground(_:)),
+                                               name: NSNotification.Name.UIApplicationWillEnterForeground,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationWillResignActive(_:)),
+                                               name: NSNotification.Name.UIApplicationWillResignActive,
+                                               object: nil)
     }
     
     func setupNetworkReachable() {
@@ -102,8 +110,8 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
             
             NotificationCenter.default.post(name: kNetworkReachabilityNotification, object: networkStatus)
         }
-        reachable?.listener = listener
-        reachable?.startListening()
+        reachable.listener = listener
+        reachable.startListening()
     }
     
     @objc func applicationWillEnterForeground(_ application: UIApplication) {
@@ -113,8 +121,7 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
     @objc func applicationWillResignActive(_ application: UIApplication) {
         
     }
-    
-    
+
     func connetService(user: String) {
         // 
         if reachable?.isReachable == false {
@@ -124,12 +131,10 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
         }
         
         let timeoutInterval: TimeInterval = 60
-        let resource = options.resource
-        let domain = options.domain
         
         xmppStream.hostName = options.host
         xmppStream.hostPort = options.port
-        xmppStream.myJID = XMPPJID(user: user, domain: domain, resource: resource)
+        xmppStream.myJID = XMPPJID(string: user, resource: options.resource)
         do {
             try xmppStream.connect(withTimeout: timeoutInterval)
         } catch {
@@ -268,12 +273,12 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
             log.error("异常登录")
         }
     }
-    
+    // swiftlint_disable identifier_name
     func xmppStream(_ sender: XMPPStream!, didSend iq: XMPPIQ!) {
         log.debug(iq)
     }
-    
-    
+
+    // swiftlint_disable identifier_name
     func xmppStream(_ sender: XMPPStream!, didReceive iq: XMPPIQ!) -> Bool {
         log.debug(iq)
         if iq.requiresResponse {
@@ -283,7 +288,6 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
         }
         return true
     }
-    
     
     // MARK: - XMPPStreamManagement
     func xmppStreamManagementDidRequestAck(_ sender: XMPPStreamManagement!) {
@@ -300,7 +304,7 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
     
     func xmppStreamManagement(_ sender: XMPPStreamManagement!, didReceiveAckForStanzaIds stanzaIds: [Any]!) {
         // 收到id
-        guard let messageid = stanzaIds as? [String] , messageid.count != 0 else {
+        guard let messageid = stanzaIds as? [String], messageid.count != 0 else {
             return
         }
         NotificationCenter.default.post(name: kMessageDispatchSuccessNotification, object: messageid)
@@ -328,7 +332,6 @@ extension XMPPManager: LoginManager {
     var isLogined: Bool {
         return xmppStream.isAuthenticated
     }
-    
     
 }
 

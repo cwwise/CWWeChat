@@ -21,7 +21,7 @@ public enum MessageSearchDirection: Int {
 ///
 /// - send: 发送方
 /// - receive: 接受方
-public enum MessageDirection : Int {
+public enum MessageDirection: Int {
     case send = 1
     case receive
 }
@@ -31,7 +31,7 @@ public enum MessageDirection : Int {
 /// - sending: 正在发送
 /// - successed: 发送成功
 /// - failed: 发送失败
-public enum MessageSendStatus : Int {
+public enum MessageSendStatus: Int {
     case sending
     case successed
     case failed
@@ -48,6 +48,7 @@ public enum MessageType: Int {
     case location           //位置
     case emoticon           //表情
     case notification       //通知
+    case redpacket          //红包
 }
 
 public class Message {
@@ -106,9 +107,7 @@ extension Message: Equatable, Hashable {
         return messageId.hashValue
     }
     
-    public static func ==(lhs: Message, rhs: Message) -> Bool {
+    public static func == (lhs: Message, rhs: Message) -> Bool {
         return lhs.messageId == rhs.messageId
     }
 }
-
-

@@ -14,16 +14,16 @@ let kScreenWidth = UIScreen.main.bounds.size.width
 let kScreenHeight = UIScreen.main.bounds.size.height
 let kScreenScale = UIScreen.main.scale
 
-let kNavigationBarHeight:CGFloat = 64
+let kNavigationBarHeight: CGFloat = 64
 
 let kDefaultHeadImage = UIImage(named: "default_head")
 
 public let kImageBaseURLString = "http://qiniu.cwwise.com/"
 
-//MARK: UI相关
+//MARK:- UI相关
 public struct ChatSessionCellUI {
-    static let headerImageViewLeftPadding:CGFloat = 10.0
-    static let headerImageViewTopPadding:CGFloat = 10.0
+    static let headerImageViewLeftPadding: CGFloat = 10.0
+    static let headerImageViewTopPadding: CGFloat = 10.0
 }
 
 // Kingfisher: https://github.com/onevcat/Kingfisher/blob/master/Sources/ThreadHelper.swift
@@ -31,7 +31,7 @@ extension DispatchQueue {
     // This method will dispatch the `block` to self.
     // If `self` is the main queue, and current thread is main thread, the block
     // will be invoked immediately instead of being dispatched.
-    func safeAsync(_ block: @escaping ()->()) {
+    func safeAsync(_ block: @escaping () -> Void) {
         if self === DispatchQueue.main && Thread.isMainThread {
             block()
         } else {
@@ -40,21 +40,21 @@ extension DispatchQueue {
     }
 }
 
-typealias Task = (_ cancel : Bool) -> Void
+typealias Task = (_ cancel: Bool) -> Void
 
-@discardableResult func DispatchQueueDelay(_ time: TimeInterval, task: @escaping ()->()) ->  Task? {
+@discardableResult func DispatchQueueDelay(_ time: TimeInterval, task: @escaping () -> Void) -> Task? {
 
-    func dispatch_later(block: @escaping ()->()) {
+    func dispatch_later(block: @escaping () -> Void) {
         let t = DispatchTime.now() + time
         DispatchQueue.main.asyncAfter(deadline: t, execute: block)
     }
-    var closure: (()->Void)? = task
+    var closure: (() -> Void)? = task
     var result: Task?
     
     let delayedClosure: Task = {
         cancel in
         if let internalClosure = closure {
-            if (cancel == false) {
+            if cancel == false {
                 DispatchQueue.main.async(execute: internalClosure)
             }
         }
@@ -71,5 +71,3 @@ typealias Task = (_ cancel : Bool) -> Void
     }
     return result
 }
-
-

@@ -46,4 +46,6 @@ CWWeChat is released under the MIT license. See [LICENSE](https://github.com/cww
 ## <a id="参考和感谢"></a>参考和感谢
 - [TLChat](https://github.com/tbl00c/TLChat)
 - [键盘部分](https://github.com/bbbcode/KeyboardforChat)
+资源链接
+
 

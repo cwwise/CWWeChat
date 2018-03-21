@@ -20,13 +20,11 @@ class SearchResultController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
 }
 
 extension SearchResultController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
     }
-    
     
 }

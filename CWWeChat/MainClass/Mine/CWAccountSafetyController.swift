@@ -67,7 +67,6 @@ class CWAccountSafetyController: CWBaseTableViewController {
 
 }
 
-
 // MARK: - TableViewManagerDelegate
 extension CWAccountSafetyController: TableViewManagerDelegate {
     

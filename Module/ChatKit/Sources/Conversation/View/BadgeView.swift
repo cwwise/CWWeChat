@@ -7,9 +7,9 @@
 
 import UIKit
 
-let BadgeViewWidth:CGFloat = 18
+let kBadgeViewWidth: CGFloat = 18
 
-class BadgeView: UIView {
+public class BadgeView: UIView {
     
     let textSideMargin: CGFloat = 8.0
     let badgeViewHeight: CGFloat = 16.0
@@ -23,7 +23,7 @@ class BadgeView: UIView {
     var badgeBackgroundColor: UIColor = UIColor.red
     var badgeTextFont: UIFont = UIFont.systemFont(ofSize: 15)
     
-    var badgeValue:Int = 0 {
+    var badgeValue: Int = 0 {
         didSet {
             self.setNeedsLayout()
         }
@@ -41,7 +41,7 @@ class BadgeView: UIView {
         return self.badgeStrokeWidth * 2
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         
         var newFrame = self.frame
         
@@ -57,58 +57,54 @@ class BadgeView: UIView {
         let superviewWidth = superviewBounds.size.width
         
         newFrame.size.width = max(viewWidth, viewHeight)
-        newFrame.size.height = viewHeight;
+        newFrame.size.height = viewHeight
         
-        
-        newFrame.origin.x = superviewWidth - (viewWidth / 2.0) - 4;
-        newFrame.origin.y = -viewHeight / 2.0;
+        newFrame.origin.x = superviewWidth - (viewWidth / 2.0) - 4
+        newFrame.origin.y = -viewHeight / 2.0
         let x = ceil(newFrame.midX)
         let y = ceil(newFrame.midY)
         
-        self.bounds = CGRect(x: 0, y: 0, width: newFrame.width, height: newFrame.height).integral;
-        self.center = CGPoint(x: x, y: y);
+        self.bounds = CGRect(x: 0, y: 0, width: newFrame.width, height: newFrame.height).integral
+        self.center = CGPoint(x: x, y: y)
         
         self.setNeedsDisplay()
     }
     
-    
-    
-    override func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         
         guard self.badgeValue > 0 else {
             return
         }
         
         let context = UIGraphicsGetCurrentContext()
-        
-        
-        let rectToDraw = rect.insetBy(dx: marginToDrawInside, dy: marginToDrawInside);
-        let borderPath = UIBezierPath(roundedRect: rectToDraw, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+
+        let rectToDraw = rect.insetBy(dx: marginToDrawInside, dy: marginToDrawInside)
+        let borderPath = UIBezierPath(roundedRect: rectToDraw,
+                                      byRoundingCorners: .allCorners,
+                                      cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
         
         /* Background and shadow */
         context?.saveGState()
-        context?.addPath(borderPath.cgPath);
-        context?.setFillColor(self.badgeBackgroundColor.cgColor);
-        context?.drawPath(using: .fill);
+        context?.addPath(borderPath.cgPath)
+        context?.setFillColor(self.badgeBackgroundColor.cgColor)
+        context?.drawPath(using: .fill)
         context?.restoreGState()
-        
-        
+
         /* Stroke */
-        context?.saveGState();
-        context?.addPath(borderPath.cgPath);
-        context?.setLineWidth(self.badgeStrokeWidth);
-        context?.setStrokeColor(self.badgeStrokeColor.cgColor);
-        context?.drawPath(using: .stroke);
-        context?.restoreGState();
-        
-        
+        context?.saveGState()
+        context?.addPath(borderPath.cgPath)
+        context?.setLineWidth(self.badgeStrokeWidth)
+        context?.setStrokeColor(self.badgeStrokeColor.cgColor)
+        context?.drawPath(using: .stroke)
+        context?.restoreGState()
+
         /* Text */
         context?.saveGState()
         
-        var textFrame = rectToDraw;
-        let textSize = self.sizeOfTextForCurrentSettings;
+        var textFrame = rectToDraw
+        let textSize = self.sizeOfTextForCurrentSettings
         
-        textFrame.size.height = textSize.height;
+        textFrame.size.height = textSize.height
         textFrame.origin.y = rectToDraw.origin.y + CGFloat(floorf(Float(rectToDraw.size.height - textFrame.size.height)) / 2.0)
         
         var text = "\(badgeValue)" as NSString
@@ -120,11 +116,10 @@ class BadgeView: UIView {
         style.alignment = .center
         let attributes = [NSAttributedStringKey.font: self.badgeTextFont,
                           NSAttributedStringKey.foregroundColor: self.badgeTextColor,
-                          NSAttributedStringKey.paragraphStyle: style] as [NSAttributedStringKey : Any]
+                          NSAttributedStringKey.paragraphStyle: style] as [NSAttributedStringKey: Any]
         text.draw(in: textFrame, withAttributes: attributes)
         
         context?.restoreGState()
-        
         
     }
     

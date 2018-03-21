@@ -10,7 +10,6 @@ import UIKit
 
 class CWInputTextView: UITextView {
 
-    //MARK: 属性
     var placeHolder: String? {
         didSet {
             let maxChars = CWInputTextView.maxCharactersPerLine()
@@ -21,7 +20,7 @@ class CWInputTextView: UITextView {
             if placeHolder.count > maxChars {
                 let index = placeHolder.index(placeHolder.startIndex, offsetBy: -8)
                 placeHolder = String(placeHolder[..<index])
-                self.placeHolder = placeHolder.trimWhitespace() + "..."
+                self.placeHolder = placeHolder.trimWhitespace + "..."
             }
             self.setNeedsDisplay()
         }
@@ -31,9 +30,7 @@ class CWInputTextView: UITextView {
             self.setNeedsDisplay()
         }
     }
-    
-    
-    //MARK:  Text view overrides
+
     override var text: String! {
         didSet {
             self.setNeedsDisplay()
@@ -77,19 +74,18 @@ class CWInputTextView: UITextView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
     func setup() {
         placeHolderTextColor = UIColor.lightGray
         
         self.enablesReturnKeyAutomatically = true
-        self.keyboardType = .default;
-        self.autoresizingMask = .flexibleWidth;
+        self.keyboardType = .default
+        self.autoresizingMask = .flexibleWidth
         self.scrollIndicatorInsets = UIEdgeInsetsMake(10.0, 0.0, 10.0, 8.0)
-        self.contentInset = UIEdgeInsets.zero;
-        self.isScrollEnabled = true;
-        self.scrollsToTop = false;
-        self.isUserInteractionEnabled = true;
+        self.contentInset = UIEdgeInsets.zero
+        self.isScrollEnabled = true
+        self.scrollsToTop = false
+        self.isUserInteractionEnabled = true
         self.layer.borderWidth = 0.5
         self.layer.borderColor = UIColor.gray.cgColor
         self.layer.cornerRadius = 4
@@ -99,9 +95,9 @@ class CWInputTextView: UITextView {
         self.font = UIFont.systemFont(ofSize: 16.0)
         self.textColor = UIColor.black
         self.backgroundColor = UIColor.white
-        self.keyboardAppearance = .default;
-        self.returnKeyType = .send;
-        self.textAlignment = .left;
+        self.keyboardAppearance = .default
+        self.returnKeyType = .send
+        self.textAlignment = .left
     }
     
     
@@ -111,7 +107,6 @@ class CWInputTextView: UITextView {
         NotificationCenter.default.removeObserver(self)
     }
     
-    //MARK: Drawing
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
@@ -136,7 +131,7 @@ class CWInputTextView: UITextView {
         return 33
     }
     
-    class func numberOfLinesForMessage(_ text:String) -> Int {
+    class func numberOfLinesForMessage(_ text: String) -> Int {
         return text.count / CWInputTextView.maxCharactersPerLine() + 1
     }
 

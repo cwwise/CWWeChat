@@ -55,8 +55,7 @@ class MessageViewLayout: UICollectionViewFlowLayout {
         }
         return attributes
     }
-    
-    
+
     // MARK: - Invalidation Context
     open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return collectionView?.bounds.width != newBounds.width || collectionView?.bounds.height != newBounds.height
@@ -183,7 +182,6 @@ extension MessageViewLayout {
         default:
             break
         }
-        
 
         let origin: CGPoint
         if message.isSend {

@@ -33,9 +33,7 @@ class CWPersonalInfoController: CWBaseTableViewController {
     }
     
     @objc func updateUserInfo() {
-        
-        
-        
+
     }
     
     deinit {
@@ -71,8 +69,7 @@ extension CWPersonalInfoController {
 
 extension CWPersonalInfoController: TableViewManagerDelegate {
     
-    
-    
+
 }
 
 extension CWPersonalInfoController: ContactManagerDelegate {
@@ -80,4 +77,3 @@ extension CWPersonalInfoController: ContactManagerDelegate {
 
     }
 }
-

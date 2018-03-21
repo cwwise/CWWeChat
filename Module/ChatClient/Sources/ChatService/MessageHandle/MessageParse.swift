@@ -9,7 +9,13 @@
 import Foundation
 import XMPPFramework
 
-class MessageParse: NSObject {
+protocol MessageParseDelegate: class {
+    func successParse(message: Message)
+}
+
+class MessageParse {
+    
+    weak var delegate: MessageParseDelegate?
     
     private lazy var messageHandle: MessageHandle = {
         let messageHandle = MessageHandle()
@@ -33,10 +39,7 @@ class MessageParse: NSObject {
 extension MessageParse: MessageHandleDelegate {
     
     func handMessageComplete(message: Message) {
-        // 先保存消息
-        let chatService = ChatClient.share.chatService
-        chatService.receive(message: message)
-    
+        self.delegate?.successParse(message: message)
     }
     
 }

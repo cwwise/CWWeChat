@@ -12,15 +12,15 @@ import Foundation
 ///
 /// - single: 单聊
 /// - group: 群聊
-/// - chatRoom: 组聊
-public enum ChatType : Int {
+/// - chatroom: 讨论组
+public enum ChatType: Int {
     case single
     case group
     case chatroom
 }
 
 public class Conversation {
-    /// 会话id 如果是群聊则是 groupId 单聊则是 对方账号
+    /// 会话id
     public let conversationId: String
     /// 类型
     public let type: ChatType
@@ -30,12 +30,21 @@ public class Conversation {
     public var draft: String?
     /// 未读数
     public var unreadCount: Int = 0
+    /// 会话最后更新时间 (默认为当前时间戳)
+    public var timestamp: TimeInterval
     /// 最近一条消息
-    public private(set) var lastMessage: Message?
+    public private(set) var lastMessage: Message? {
+        didSet {
+            if let lastMessage = lastMessage {
+                self.timestamp = lastMessage.timestamp
+            }
+        }
+    }
     
     public init(conversationId: String, type: ChatType) {
         self.conversationId = conversationId
         self.type = type
+        self.timestamp = ChatClientUtil.currentTime
     }
     
     public func append(message: Message?) {
@@ -44,7 +53,7 @@ public class Conversation {
     
     public func insert(message: Message) {
         let messageStore = ChatClient.share.chatService.messageStore
-        messageStore.insertMessage(message)
+        messageStore.insert(message: message)
     }
     
     /// 获取指定ID的消息
@@ -55,8 +64,7 @@ public class Conversation {
         
         return nil
     }
-    
-    
+
 }
 
 extension Conversation: Hashable, CustomStringConvertible {
@@ -69,11 +77,10 @@ extension Conversation: Hashable, CustomStringConvertible {
         return conversationId.hashValue
     }
     
-    static public func ==(lhs: Conversation, rhs: Conversation) -> Bool {
+    static public func == (lhs: Conversation, rhs: Conversation) -> Bool {
         return lhs.conversationId == rhs.conversationId
     }
 }
-
 
 public typealias ConversationResultCompletion = ([Message], ChatClientError?) -> Void
 
@@ -87,15 +94,14 @@ extension Conversation {
     ///   - searchDirection: 消息搜索方向
     ///   - completion: 完成的回调
     public func fetchMessagesStart(from messageId: String? = nil,
-                            count: Int = 20,
-                            completion: ConversationResultCompletion) {
+                                   count: Int = 20,
+                                   completion: ConversationResultCompletion) {
         
         let messageStore = ChatClient.share.chatService.messageStore
         let result = messageStore.fecthMessages(conversationId: conversationId, count: count)
         completion(result, nil)
     }
-    
-    
+
     ///  从数据库获取指定类型的消息，取到的消息按时间排序，如果参考的时间戳为负数，则从最新消息取，如果count小于等于0当作1处理
     ///
     /// - Parameters:
@@ -105,15 +111,11 @@ extension Conversation {
     ///   - searchDirection: 消息搜索方向
     ///   - completion: 完成的回调
     public func fetchMessages(with type: MessageType = .text,
-                               timestamp: TimeInterval = -1,
-                               count: Int = 20,
-                               searchDirection: MessageSearchDirection = .down,
-                               completion: ConversationResultCompletion) {
-        
-        
-        
-        
-        
+                              timestamp: TimeInterval = -1,
+                              count: Int = 20,
+                              searchDirection: MessageSearchDirection = .down,
+                              completion: ConversationResultCompletion) {
+
     }
     
     /// 从数据库获取包含指定内容的消息，取到的消息按时间排序，如果参考的时间戳为负数，则从最新消息向前取，如果aCount小于等于0当作1处理
@@ -125,16 +127,12 @@ extension Conversation {
     ///   - searchDirection: 消息搜索方向
     ///   - completion: 完成的回调
     public func fetchMessages(with keyword: String,
-                                  timestamp: TimeInterval = -1,
-                                  count: Int = 20,
-                                  searchDirection: MessageSearchDirection = .down,
-                                  completion: ConversationResultCompletion) {
+                              timestamp: TimeInterval = -1,
+                              count: Int = 20,
+                              searchDirection: MessageSearchDirection = .down,
+                              completion: ConversationResultCompletion) {
         
-        
-        
+
     }
     
 }
-
- 
-

@@ -25,7 +25,7 @@ class MenuCell: BaseCell {
         return rightImageView
     }()
     
-    private lazy var redPointView:UIView = {
+    private lazy var redPointView: UIView = {
         let redPointView = UIView()
         redPointView.backgroundColor = UIColor.red
         redPointView.layer.masksToBounds = true
@@ -44,7 +44,7 @@ class MenuCell: BaseCell {
         p_addSnap()
     }
     
-    //MARK: 添加约束
+    //MARK: - 添加约束
     func p_addSnap() {
         
         let leftOffset: CGFloat = 15

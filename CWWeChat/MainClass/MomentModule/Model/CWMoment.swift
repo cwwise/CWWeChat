@@ -64,12 +64,14 @@ class CWMoment: NSObject {
     var type: CWMomentType = .normal
 
     var content: String?
+    
     var videoModel: CWMomentVideo?
     var multimedia: CWMultimedia?
     var imageArray = [CWMomentPhoto]()
     
-    
+    /// 评论列表
     var commentArray = [CWMomentReply]()
+    /// 点赞
     var praiseArray = [CWMomentReply]()
         
     // 是否上传成功

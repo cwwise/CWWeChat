@@ -7,13 +7,13 @@
 
 import Foundation
 
-public typealias SelectionHandler = (Item) -> ()
+public typealias SelectionHandler = (Item) -> (Void)
 
 public protocol Row: NSObjectProtocol {
     
     weak var section: Section? {get set}
  
-    var title: String {set get}
+    var title: String {get set}
 
     var cellHeight: CGFloat {get set}
     
@@ -54,6 +54,3 @@ public class Item: NSObject, Row {
         self.selectionAction = selectionAction
     }
 }
-
-
-

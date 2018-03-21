@@ -4,7 +4,7 @@
 //
 //  Created by chenwei on 16/6/22.
 //  Copyright © 2016年 chenwei. All rights reserved.
-//
+//  swiftlint:disable identifier_name
 
 /*
  https://github.com/AliSoftware/SwiftGen 在电脑上安装这个工具，自动生成 Asset 的 image enum 的 Extension

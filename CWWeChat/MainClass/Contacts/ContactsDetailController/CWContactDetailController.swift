@@ -33,8 +33,7 @@ class CWContactDetailController: CWBaseTableViewController {
         self.tableView.register(CWContactInfoCell.self, forCellReuseIdentifier: CWContactInfoCell.identifier)
         self.tableView.register(CWContactDetailAlbumCell.self, forCellReuseIdentifier: CWContactDetailAlbumCell.identifier)
         setupData()
-        
-        
+
         let barItemImage = UIImage(named: "nav_more")
         let rightBarItem = UIBarButtonItem(image: barItemImage, style: .done, target: self, action: #selector(rightBarItemClick))
         self.navigationItem.rightBarButtonItem = rightBarItem
@@ -55,7 +54,6 @@ class CWContactDetailController: CWBaseTableViewController {
         let item5 = Item(title: "更多")
         tableViewManager.append(itemsOf: [item3, item4, item5])
 
-        
         let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 100)
         let footerView = CWContactDetailFooterView(frame: frame)
         footerView.button.rx.tap
@@ -67,7 +65,8 @@ class CWContactDetailController: CWBaseTableViewController {
     }
 
     func goChatController() {
-        let chatVC = CWMessageController(conversationId: contact.username)
+        let conversation = Conversation(conversationId: contact.username, type: .single)
+        let chatVC = MessageListController(conversation: conversation)
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
@@ -101,8 +100,6 @@ extension CWContactDetailController: TableViewManagerDataSource {
     }
 }
 
-
 extension CWContactDetailController: TableViewManagerDelegate {
     
 }
-

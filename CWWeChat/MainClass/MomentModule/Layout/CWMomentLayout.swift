@@ -272,11 +272,7 @@ class CWMomentLayout: NSObject {
         highlightBorder.insets = UIEdgeInsets(top: -2, left: 0, bottom: -2, right: 2)
         highlightBorder.fillColor = CWMomentUI.kTextHighlightBackgroundColor
         
-        let commentAttri = NSMutableAttributedString()
-
-        
-        
-        
+        _ = NSMutableAttributedString()
     }
     
 }

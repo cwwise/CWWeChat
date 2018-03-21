@@ -10,9 +10,11 @@ import ChatClient
 
 open class ConversationController: UIViewController {
 
-    public var chatManager = ChatClient.share.chatManager
+    fileprivate var chatManager = ChatClient.share.chatManager
 
-    public var conversationList = [ConversationModel]()
+    fileprivate var conversationManager = ChatClient.share.conversationManager
+
+    public var conversationList = [Conversation]()
 
     public lazy var tableView: UITableView = {
         let tableView = UITableView(frame: self.view.bounds, style: .plain)
@@ -27,8 +29,7 @@ open class ConversationController: UIViewController {
         tableView.tableHeaderView = self.searchController.searchBar
         return tableView
     }()
-    
-    
+
     lazy var searchController: SearchController = {
         let searchController = SearchController(searchResultsController: self.searchResultController)
         searchController.searchResultsUpdater = self.searchResultController
@@ -48,7 +49,7 @@ open class ConversationController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.white
-        chatManager.addChatDelegate(self, delegateQueue: DispatchQueue.main)        
+        chatManager.addDelegate(self)
         setupUI()
     }
 
@@ -64,31 +65,29 @@ open class ConversationController: UIViewController {
 
 }
 
-//MARK: UITableViewDelegate UITableViewDataSource
+//MARK:- UITableViewDelegate UITableViewDataSource
 extension ConversationController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let deleteTitle = "删除"
-        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: deleteTitle) { (action:UITableViewRowAction, indexPath) in
+        let deleteAction = UITableViewRowAction(style: .default, title: deleteTitle) { (action, indexPath) in
             
             //获取当前model
-            let conversationModel = self.conversationList[indexPath.row]
+            let conversation = self.conversationList[indexPath.row]
             //数组中删除
             self.conversationList.remove(at: indexPath.row)
             //从数据库中删除
-            self.chatManager.deleteConversation(conversationModel.conversationId,
-                                                deleteMessages: true)
+            self.conversationManager.deleteConversation(conversation, option: true)
             //删除
             self.tableView.deleteRows(at: [indexPath], with: .none)
         }
         
         let actionTitle = "标记已读"
-        let moreAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: actionTitle) { (action:UITableViewRowAction, indexPath) in
-            
+        let moreAction = UITableViewRowAction(style: .normal, title: actionTitle) { (action, _) in
             tableView.setEditing(false, animated: true)
         }
-        return [deleteAction,moreAction]
+        return [deleteAction, moreAction]
     }
     
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -101,12 +100,99 @@ extension ConversationController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ConversationCell
-        let conversationModel = conversationList[indexPath.row]
-        cell.conversationModel = conversationModel
+        let model = conversationList[indexPath.row]
+            // 是单聊
+        if model.type == .single {
+            
+            if let user = ChatKit.share.fetchUser(userId: model.conversationId) {
+                cell.usernameLabel.text = user.nickname
+            } else {
+                cell.usernameLabel.text = "单聊"
+            }
+            cell.headerImageView.image = ChatAsset.defaultHeadImage.image
+        } else {
+            if let group = ChatKit.share.fetchGroup(groupId: model.conversationId) {
+                cell.usernameLabel.text = group.name
+            } else {
+                cell.usernameLabel.text = "群聊"
+            }
+            cell.headerImageView.image = ChatAsset.defaultHeadImage.image
+        }
+        
+        cell.timeLabel.text = self.timestampDescription(for: model)
+        cell.contentLabel.attributedText = self.contentAttributedString(for: model)
+        cell.badgeView.badgeValue = model.unreadCount
+        
+        if model.isTop {
+            cell.contentView.backgroundColor = UIColor(hex: "#F2F1F7")
+        } else {
+            cell.contentView.backgroundColor = UIColor.white
+        }
+        
         return cell
     }
 }
 
+// MARK: - Helper
+extension ConversationController {
+    
+    /// 排序
+    fileprivate func sort() {
+        
+    }
+    
+    /// 刷新
+    open func refresh() {
+        
+    }
+    
+    /// 找到合适的位置 插入
+    fileprivate func findInsertPlace(_ conversation: Conversation) -> Int {
+
+        return 0
+    }
+
+    // MARK: - Open
+    open func timestampDescription(for conversation: Conversation) -> String {
+        let date = Date(timeIntervalSince1970: conversation.timestamp)
+        return ChatTimeTool.chatTimeString(from: date)
+    }
+    
+    open func contentAttributedString(for conversation: Conversation) -> NSAttributedString {
+        let content = messageContent(for: conversation)
+        let attributedString = NSAttributedString(string: content, attributes: [:])
+        return attributedString
+    }
+    
+    private func messageContent(for conversation: Conversation) -> String {
+        if let draft = conversation.draft {
+            return "[草稿]"+draft
+        }
+        
+        guard let message = conversation.lastMessage else {
+            return ""
+        }
+        
+        var text = ""
+        switch message.messageType {
+        case .text, .notification:
+            text = message.messageBody.description
+        default:
+            text = "[\(message.messageBody.description)]"
+        }
+        
+        if conversation.type == .group {
+            if let contact = ChatClient.share.contactManager.fectchContact(username: message.from) {
+                text = "\(contact.username):" + text
+            }
+        }
+        
+        /// 待添加消息状态
+        
+        return text
+    }
+    
+}
 
 // MARK: - UISearchBarDelegate
 extension ConversationController: UISearchBarDelegate {
@@ -130,7 +216,7 @@ extension ConversationController: UISearchBarDelegate {
     public func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         let message = "语言搜索"
         let alertController = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
-        let alertAtion = UIAlertAction(title: "确定", style: .default) { (action) in
+        let alertAtion = UIAlertAction(title: "确定", style: .default) { (_) in
             
         }
         alertController.addAction(alertAtion)
@@ -138,18 +224,15 @@ extension ConversationController: UISearchBarDelegate {
     }
 }
 
-
 extension ConversationController: ChatManagerDelegate {
     
     public func didReceive(message: Message) {
         // 发送本地推送
         DispatchQueue.main.async {
             if UIApplication.shared.applicationState == .background {
-                
-                
+
             } else {
-                
-                
+
             }
         }
     }
@@ -160,7 +243,7 @@ extension ConversationController: ChatManagerDelegate {
         var unread = 0
         var index = -1
         for i in 0..<conversationList.count {
-            let model = conversationList[i].conversation
+            let model = conversationList[i]
             if model == conversation {
                 index = i
                 model.append(message: conversation.lastMessage)
@@ -170,12 +253,8 @@ extension ConversationController: ChatManagerDelegate {
         
         // 如果会话不存在 则加入刷新
         if index == -1 {
-            let model = ConversationModel(conversation: conversation)
-            conversationList.insert(model, at: 0)
-        }
-            // 如果是其他 则移动到第一个
-            // TODO: isTop设置需要
-        else if (index != 0) {
+            conversationList.insert(conversation, at: 0)
+        } else if index != 0 {
             let model = conversationList.remove(at: index)
             conversationList.insert(model, at: 0)
         }
@@ -184,7 +263,7 @@ extension ConversationController: ChatManagerDelegate {
         tableView.reloadData()
         if unread == 0 {
             self.tabBarItem.badgeValue = nil
-        } else if (unread > 99) {
+        } else if unread > 99 {
             self.tabBarItem.badgeValue = "99+"
         } else {
             self.tabBarItem.badgeValue = "\(unread)"
@@ -193,6 +272,4 @@ extension ConversationController: ChatManagerDelegate {
     }
     
 }
-
-
 

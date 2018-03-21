@@ -41,7 +41,7 @@ class CWMineController: CWBaseTableViewController {
         
         tableViewManager.append(itemsOf: item1)
         tableViewManager.append(itemsOf: item2)
-        tableViewManager.append(itemsOf: item3,item4,item5,item6)
+        tableViewManager.append(itemsOf: item3, item4, item5, item6)
         tableViewManager.append(itemsOf: item7)
         
     }
@@ -74,13 +74,10 @@ extension CWMineController: TableViewManagerDataSource, TableViewManagerDelegate
             let personVC = CWPersonalInfoController()
             personVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(personVC, animated: true)
-        }
-        else if indexPath.section == 1 {
+        } else if indexPath.section == 1 {
             
             return
-        }
-        else if indexPath.section == 2 {
-            
+        } else if indexPath.section == 2 {
             let expressionVC = CWEmoticonListController()
             expressionVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(expressionVC, animated: true)
@@ -92,4 +89,3 @@ extension CWMineController: TableViewManagerDataSource, TableViewManagerDelegate
         
     }
 }
-

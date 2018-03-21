@@ -51,10 +51,10 @@ class CWTextLinePositionModifier: NSObject, YYTextLinePositionModifier {
             return 0
         }
         
-        let ascent: CGFloat = self.font.pointSize * ascentScale;
+        let ascent: CGFloat = self.font.pointSize * ascentScale
         let descent: CGFloat = self.font.pointSize * descentScale
         let lineHeight: CGFloat = self.font.pointSize * self.lineHeightMultiple
-        return self.paddingTop + self.paddingBottom + ascent + descent + CGFloat((lineCount - 1)) * lineHeight;
+        return self.paddingTop + self.paddingBottom + ascent + descent + CGFloat((lineCount - 1)) * lineHeight
     }
     
 }

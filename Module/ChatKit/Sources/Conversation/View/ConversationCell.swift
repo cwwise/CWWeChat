@@ -15,11 +15,11 @@ public class ConversationCell: UITableViewCell {
         
         self.selectionStyle = .default
         
-        self.contentView.addSubview(self.headerImageView)
-        self.contentView.addSubview(self.usernameLabel)
-        self.contentView.addSubview(self.timeLabel)
-        self.contentView.addSubview(self.contentLabel)
-        self.headerImageView.addSubview(self.badgeView)
+        self.contentView.addSubview(headerImageView)
+        self.contentView.addSubview(usernameLabel)
+        self.contentView.addSubview(timeLabel)
+        self.contentView.addSubview(contentLabel)
+        self.headerImageView.addSubview(badgeView)
         
         p_snap()
     }
@@ -65,61 +65,23 @@ public class ConversationCell: UITableViewCell {
             make.right.equalTo(self.contentView).offset(-leftMargin)
         }
     }
-
-    /// 设置数据
-    func setupUI()  {
-        
-        guard let model = conversationModel else {
-            return 
-        }
-        
-        // 是单聊
-        if model.type == .single {
-            
-            if let user = ChatKit.share.fetchUser(userId: model.conversationId) {
-                self.usernameLabel.text = user.nickname
-            } else {
-                self.usernameLabel.text = "单聊"
-            }
-            self.headerImageView.image = ChatAsset.defaultHeadImage.image
-        } else {
-            
-            if let group = ChatKit.share.fetchGroup(groupId: model.conversationId){
-                self.usernameLabel.text = group.name
-            } else {
-                self.usernameLabel.text = "群聊"
-            }
-            self.headerImageView.image = ChatAsset.defaultHeadImage.image
-        }
-        
-        self.timeLabel.text = model.lastMessageTime
-        self.contentLabel.text = model.conversationTitle
-        self.badgeView.badgeValue = model.unreadCount
-    }
-    
-    //MARK: 属性
-    var conversationModel: ConversationModel? {
-        didSet {
-            self.setupUI()
-        }
-    }
     
     ///头像
-    private var headerImageView:UIImageView = {
+    public var headerImageView: UIImageView = {
         let headerImageView = UIImageView()
         headerImageView.contentMode = .scaleAspectFill
         return headerImageView
     }()
     
     ///用户名
-    private var usernameLabel:UILabel = {
+    public var usernameLabel: UILabel = {
         let usernameLabel = UILabel()
         usernameLabel.font = UIFont.systemFont(ofSize: 17)
         return usernameLabel
     }()
     
     ///时间
-    private var timeLabel:UILabel = {
+    public var timeLabel: UILabel = {
         let timeLabel = UILabel()
         timeLabel.font = UIFont.systemFont(ofSize: 12)
         timeLabel.textColor = UIColor.darkGray
@@ -127,7 +89,7 @@ public class ConversationCell: UITableViewCell {
     }()
     
     ///详细信息
-    private var contentLabel:UILabel = {
+    public var contentLabel: UILabel = {
         let contentLabel = UILabel()
         contentLabel.font = UIFont.systemFont(ofSize: 14)
         contentLabel.textColor = UIColor.gray
@@ -135,7 +97,7 @@ public class ConversationCell: UITableViewCell {
     }()
     
     ///badgeView
-    private var badgeView: BadgeView = {
+    public var badgeView: BadgeView = {
         let badgeView = BadgeView()
         badgeView.backgroundColor = UIColor.clear
         return badgeView

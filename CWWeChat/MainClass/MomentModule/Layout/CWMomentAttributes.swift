@@ -7,13 +7,30 @@
 //
 
 import UIKit
+import YYText
 
 class CWMomentAttributes: UICollectionViewLayoutAttributes {
     
+    /// 头像
+    var avatarFrame: CGRect = .zero
+    /// 用户名
+    var usernameFrame: CGRect = .zero
     
+    /// 图片或者新闻(音乐)
+    var multimediaFrame: CGRect = .zero
+    /// 图片大小(待修改 如果图片只有一张需要根据比例算)
+    var pictureSize: CGSize = .zero
     
+    ///
+    var toolButtonFrame: CGRect = .zero
+
+    /// 点赞部分
+    var praiseHeight: CGFloat = 0
+    var praiseLayout: YYTextLayout?
     
-    
+    var commentHeight: CGFloat = 0
+    var commentLayoutArray = [YYTextLayout]()
+
 }
 
 extension CWMomentAttributes {
@@ -25,5 +42,4 @@ extension CWMomentAttributes {
     }
 
 }
-
 

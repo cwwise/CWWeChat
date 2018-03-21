@@ -23,16 +23,15 @@ public enum MoreItemType: Int {
     case cards
 }
 
-
 public class MoreItem: NSObject {
 
     public var type: MoreItemType
     public var title: String
     public var imagename: String
     
-    public init(title:String,
-                imagename:String,
-                type:MoreItemType) {
+    public init(title: String,
+                imagename: String,
+                type: MoreItemType) {
         self.title = title
         self.imagename = imagename
         self.type = type

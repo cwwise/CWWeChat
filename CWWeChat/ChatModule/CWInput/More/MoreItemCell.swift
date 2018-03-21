@@ -17,7 +17,7 @@ class MoreItemCell: UICollectionViewCell {
         }
     }
     
-    var touchAction: ((MoreItem)->Void)?
+    var touchAction: ((MoreItem) -> Void)?
     
     lazy var itemButton: UIButton = {
         let itemBtn = UIButton()
@@ -46,7 +46,7 @@ class MoreItemCell: UICollectionViewCell {
         addsnap()
     }
     
-    func addsnap()  {
+    func addsnap() {
         itemButton.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView)
             make.centerX.equalTo(self.contentView)
@@ -80,8 +80,7 @@ class MoreItemCell: UICollectionViewCell {
         itemLabel.text = cellitem.title
         itemButton.setImage(UIImage(named: cellitem.imagename), for: .normal)
     }
-    
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

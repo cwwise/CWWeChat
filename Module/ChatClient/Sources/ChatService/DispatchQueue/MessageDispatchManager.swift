@@ -89,6 +89,6 @@ class MessageDispatchManager: NSObject {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        log.debug("CWMessageDispatchManager销毁..")
+        log.debug("MessageDispatchManager销毁..")
     }
 }

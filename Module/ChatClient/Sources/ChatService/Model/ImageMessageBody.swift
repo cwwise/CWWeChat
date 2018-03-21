@@ -51,36 +51,19 @@ extension ImageMessageBody: MessageBody {
     }
     
     public func messageEncode() -> String {
-        do {
-            let data = try JSONSerialization.data(withJSONObject: self.info, options: .prettyPrinted)
-            return String(data: data, encoding: .utf8) ?? ""
-        } catch {
-            return ""
-        }
+        return self.info.jsonEncoded
     }
     
     public func messageDecode(string: String) {
         guard let data = string.data(using: .utf8) else { return }
-        do {
-            let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: String]
-            if let size = json?["size"] {
-                self.size = CGSizeFromString(size)
-            }
-            if let path = json?["path"] {
-                self.originalLocalPath = path
-            }
-            if let urlstring = json?["url"],
-                let url = URL(string: urlstring) {
-                self.originalURL = url
-            }
-        } catch {
-            
-        }
+        let json = JSON(data)
+        self.size = CGSizeFromString(json["size"].stringValue)
+        self.originalLocalPath = json["path"].string
+        self.originalURL = json["url"].url
     }
     
     public var description: String {
         return "图片"
     }
 }
-
 

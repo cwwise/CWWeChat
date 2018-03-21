@@ -29,7 +29,7 @@ public class CWChatToolBar: UIView {
     // MARK: 属性
     /// 输入框
     lazy var inputTextView: CWInputTextView = {
-        let inputTextView = CWInputTextView(frame:CGRect.zero)
+        let inputTextView = CWInputTextView(frame: CGRect.zero)
         inputTextView.delegate = self
         return inputTextView
     }()
@@ -45,11 +45,11 @@ public class CWChatToolBar: UIView {
     }()
     
     /// 文字和录音切换
-    lazy var voiceButton: UIButton =  {
+    lazy var voiceButton: UIButton = {
         let voiceButton = UIButton(type: .custom)
         voiceButton.autoresizingMask = [.flexibleTopMargin]
 
-        voiceButton.setNormalImage(self.kVoiceImage, highlighted:self.kVoiceImageHL)
+        voiceButton.setNormalImage(self.kVoiceImage, highlighted: self.kVoiceImageHL)
         voiceButton.addTarget(self, action: #selector(handelVoiceClick(_:)), for: .touchDown)
         return voiceButton
     }()
@@ -58,7 +58,7 @@ public class CWChatToolBar: UIView {
     lazy var moreButton: UIButton = {
         let moreButton = UIButton(type: .custom)
         moreButton.autoresizingMask = [.flexibleTopMargin]
-        moreButton.setNormalImage(self.kMoreImage, highlighted:self.kMoreImageHL)
+        moreButton.setNormalImage(self.kMoreImage, highlighted: self.kMoreImageHL)
         moreButton.addTarget(self, action: #selector(handelMoreClick(_:)), for: .touchDown)
         return moreButton
     }()
@@ -86,26 +86,25 @@ public class CWChatToolBar: UIView {
     }
 
     //按钮的图片
-    var kVoiceImage:UIImage = CWAsset.Chat_toolbar_voice.image
-    var kVoiceImageHL:UIImage = CWAsset.Chat_toolbar_voice_HL.image
-    var kEmojiImage:UIImage = CWAsset.Chat_toolbar_emotion.image
-    var kEmojiImageHL:UIImage = CWAsset.Chat_toolbar_emotion_HL.image
+    var kVoiceImage: UIImage = CWAsset.Chat_toolbar_voice.image
+    var kVoiceImageHL: UIImage = CWAsset.Chat_toolbar_voice_HL.image
+    var kEmojiImage: UIImage = CWAsset.Chat_toolbar_emotion.image
+    var kEmojiImageHL: UIImage = CWAsset.Chat_toolbar_emotion_HL.image
     
     //图片名称待修改
-    var kMoreImage:UIImage = CWAsset.Chat_toolbar_more.image
-    var kMoreImageHL:UIImage = CWAsset.Chat_toolbar_more_HL.image
+    var kMoreImage: UIImage = CWAsset.Chat_toolbar_more.image
+    var kMoreImageHL: UIImage = CWAsset.Chat_toolbar_more_HL.image
     
-    var kKeyboardImage:UIImage = CWAsset.Chat_toolbar_keyboard.image
-    var kKeyboardImageHL:UIImage = CWAsset.Chat_toolbar_keyboard_HL.image
+    var kKeyboardImage: UIImage = CWAsset.Chat_toolbar_keyboard.image
+    var kKeyboardImageHL: UIImage = CWAsset.Chat_toolbar_keyboard_HL.image
     
-    //MARK: 初始化
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
     }
     
     func setupUI() {
-        self.autoresizingMask = [UIViewAutoresizing.flexibleWidth,UIViewAutoresizing.flexibleTopMargin]
+        self.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.backgroundColor = UIColor.white
         
         addSubview(self.voiceButton)
@@ -159,8 +158,7 @@ public class CWChatToolBar: UIView {
                                      width: textViewWidth, height: height)
         recordButton.frame = inputTextView.frame
     }
-    
-    
+
     func setupTopLine() {
         let line = UIView()
         line.width = self.width
@@ -347,9 +345,9 @@ public class CWChatToolBar: UIView {
                                           height: prevFrame.height + changeInHeight)
        
         if numLines > 6 {
-            self.inputTextView.contentInset = UIEdgeInsetsMake(4, 0, 4, 0)
+            self.inputTextView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
         } else {
-            self.inputTextView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+            self.inputTextView.contentInset = UIEdgeInsets.zero
         }
         
         if numLines > 6 {
@@ -357,7 +355,6 @@ public class CWChatToolBar: UIView {
         }
     }
     
-    //MARK: 计算高度
     func textViewLineHeight() -> CGFloat {
         return 36.0
     }
@@ -365,7 +362,6 @@ public class CWChatToolBar: UIView {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 
 }
 

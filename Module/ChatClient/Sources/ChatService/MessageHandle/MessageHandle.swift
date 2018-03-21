@@ -18,7 +18,7 @@ extension MessageHandleDelegate {
 }
 
 
-class MessageHandle: NSObject {
+class MessageHandle {
 
     weak var delegate: MessageHandleDelegate?
     

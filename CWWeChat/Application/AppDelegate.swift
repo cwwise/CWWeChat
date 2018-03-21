@@ -4,16 +4,16 @@
 //
 //  Created by chenwei on 16/6/22.
 //  Copyright © 2016年 chenwei. All rights reserved.
-//
+//  swiftlint:disable line_length
 
 import UIKit
 import SwiftyBeaver
 import UserNotifications
 import ChatClient
 import ChatKit
-import BuddyBuildSDK
 
 let log = SwiftyBeaver.self
+let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,15 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        BuddyBuildSDK.setup()
-        
         
         //设置logger
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        setupController()
+
+        loginSuccess()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         setupLogger()
+        //loginXMPP()
+
         //注册推送信息
         registerRemoteNotification()
         
@@ -44,24 +45,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupController() {
-        let loginVC = UIStoryboard.welcomeViewController()
-        self.window?.rootViewController = loginVC
-        return
         // 如果当前已经登录
-        var account: CWAccount?
-        do {
-            account = try CWAccount.userAccount()
-        } catch {
-        }
-        
-        guard let current = account else {
+        guard let current = AccountModel.userAccount() else {
             let loginVC = UIStoryboard.welcomeViewController()
             self.window?.rootViewController = loginVC
             return
         }
         
         if current.isLogin {
-            let tabBarController = CWChatTabBarController()
+            let tabBarController = RootTabBarController()
             self.window?.rootViewController = tabBarController
             loginChatWithAccount(current)
         } else {
@@ -70,10 +62,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func loginChatWithAccount(_ account: CWAccount) {
+    func loginChatWithAccount(_ account: AccountModel) {
         let loginManager = ChatClient.share.loginManager     
         loginManager.login(username: account.username, 
-                           password: account.password) { (username, error) in
+                           password: account.password) { (username, _) in
                            
                             if let username = username {
                                 log.debug("登录成功...\(username)")
@@ -82,18 +74,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loginSuccess() {
-        let tabBarController = CWChatTabBarController()
+        let tabBarController = RootTabBarController()
         self.window?.rootViewController = tabBarController
     }
     
     func loginMap() {
         let map = MapShowController()
-        self.window?.rootViewController = CWChatNavigationController(rootViewController: map)
+        self.window?.rootViewController = BaseNavigationController(rootViewController: map)
     }
     
     func loginEmoticonSuccess() {
         let emoticonController = CWEmoticonListController()
-        self.window?.rootViewController = CWChatNavigationController(rootViewController: emoticonController)
+        self.window?.rootViewController = BaseNavigationController(rootViewController: emoticonController)
+    }
+
+    func loginMomentSuccess() {
+        let momentController = CWMomentListController()
+        self.window?.rootViewController = BaseNavigationController(rootViewController: momentController)
     }
     
     func logoutSuccess() {
@@ -116,13 +113,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.shared.registerForRemoteNotifications()
         if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().requestAuthorization(options: [.badge,.alert,.sound]) { (result, error) in
+            UNUserNotificationCenter.current()
+                .requestAuthorization(options: [.badge, .alert, .sound]) { (_, _) in
             }
         } else {
-            let userSetting = UIUserNotificationSettings(types: [.sound,.alert, .badge], categories: nil)
+            let userSetting = UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil)
             UIApplication.shared.registerUserNotificationSettings(userSetting)
         }
     }
 }
-
-

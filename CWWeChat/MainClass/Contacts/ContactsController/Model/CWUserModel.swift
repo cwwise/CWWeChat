@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class CWUserModel: NSObject {
+public class CWUserModel: Equatable {
 
     /// 用户id
     var userId: String
@@ -49,12 +49,13 @@ public class CWUserModel: NSObject {
         self.userId = userId
     }
     
-    override public var hashValue: Int {
+    public var hashValue: Int {
         return self.userId.hash
+    }
+
+    public static func ==(lhs: CWUserModel, rhs: CWUserModel) -> Bool {
+        return lhs.userId == rhs.userId
     }
     
 }
 
-func ==(lhs: CWUserModel, rhs: CWUserModel) -> Bool {
-    return lhs.userId == rhs.userId
-}

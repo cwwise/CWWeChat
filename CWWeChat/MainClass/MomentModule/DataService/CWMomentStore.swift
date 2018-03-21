@@ -5,6 +5,9 @@
 //  Created by wei chen on 2017/5/3.
 //  Copyright © 2017年 cwcoder. All rights reserved.
 //
+// swiftlint:disable identifier_name
+// TODO 完善swiftlint规则
+
 
 import UIKit
 import SQLite.Swift
@@ -12,8 +15,7 @@ import SQLite.Swift
 class CWMomentStore: NSObject {
 
     static let share = CWMomentStore()
-    // 添加前缀 field
-    //MARK: 数据库属性
+    //MARK: - 数据库属性
     let momentTable = Table("CWMoment")
     //消息唯一id
     private let id = Expression<Int64>("id")
@@ -40,7 +42,7 @@ class CWMomentStore: NSObject {
         super.init()
     }
     
-    lazy var momentDB:Connection = {
+    lazy var momentDB: Connection = {
         //数据
         do {
             let momentDB = try Connection(self.path)
@@ -95,12 +97,9 @@ class CWMomentStore: NSObject {
             log.error(error)
         }
     }
-    
-    
-    func insertMoment(_ moment: CWMoment) {
-        
 
-        
+    func insertMoment(_ moment: CWMoment) {
+
     }
     
     func insertMomentList(_ momentList: [CWMoment]) {
@@ -134,9 +133,7 @@ class CWMomentStore: NSObject {
         } catch {
             log.error(error)
         }
-        
-        
+
     }
-    
-    
+
 }

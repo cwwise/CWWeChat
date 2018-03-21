@@ -20,6 +20,6 @@ public class GroupOptions: NSObject {
     /// 群组的最大成员数
     public var maxUsersCount: Int = 200
     /// 邀请群成员时，是否需要发送邀请通知.若NO，被邀请的人自动加入群组
-    public var IsInviteNeedConfirm: Bool = false
+    public var isInviteNeedConfirm: Bool = false
     
 }

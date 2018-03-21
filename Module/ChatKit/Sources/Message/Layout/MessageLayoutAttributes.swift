@@ -47,5 +47,4 @@ class MessageLayoutAttributes: UICollectionViewLayoutAttributes {
         return copiedAttributes
     }
     
-    
 }

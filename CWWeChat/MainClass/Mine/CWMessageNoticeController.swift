@@ -24,16 +24,16 @@ class CWMessageNoticeController: CWBaseTableViewController {
 
     func setupItemData() {
         
-        let item1 = BoolItem(title: "接受新消息通知", value: true) { (item) in
+        let item1 = BoolItem(title: "接受新消息通知", value: true) { (_) in
             
         }
-        let item2 = BoolItem(title: "接收语音和视频聊天邀请通知", value: true) { (item) in
+        let item2 = BoolItem(title: "接收语音和视频聊天邀请通知", value: true) { (_) in
             
         }
         tableViewManager.append(itemsOf: item1,item2)
         
         let section2FooterTitle = "关闭后，当收到微信消息时，通知提示将不显示发信人和内容摘要。"
-        let item3 = BoolItem(title: "通知显示消息详情", value: true) { (item) in
+        let item3 = BoolItem(title: "通知显示消息详情", value: true) { (_) in
             
         }
         let section2 = Section(footerTitle: section2FooterTitle, items: [item3])
@@ -44,10 +44,10 @@ class CWMessageNoticeController: CWBaseTableViewController {
         let section3 = Section(footerTitle: section3FooterTitle, items: [item4])
         tableViewManager.append(section3)
 
-        let item5 = BoolItem(title: "声音") { (item) in
+        let item5 = BoolItem(title: "声音") { (_) in
             
         }
-        let item6 = BoolItem(title: "振动") { (item) in
+        let item6 = BoolItem(title: "振动") { (_) in
             
         }
         let section4FooterTitle = "当微信在运行时，你可以设置是否需要声音或者振动。"

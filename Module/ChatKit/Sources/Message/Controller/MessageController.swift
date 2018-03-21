@@ -13,6 +13,7 @@ open class MessageController: UIViewController {
     public var messageList: [MessageModel] = [MessageModel]()
 
     public var conversation: Conversation
+    
     /// 显示时间处理
     private var messageTool: MessageTimeUtil = {
         let messageTool = MessageTimeUtil()
@@ -45,16 +46,8 @@ open class MessageController: UIViewController {
         collectionView.register(MessageCell.self, forCellWithReuseIdentifier: MessageType.voice.identifier)
         
         collectionView.register(TimeMessageHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
-        
         return collectionView
     }()
-    
-    convenience public init(conversationId: String) {
-        let chatManager = ChatClient.share.chatManager
-        let conversation = chatManager.fecthConversation(chatType: .single,
-                                                         conversationId: conversationId)
-        self.init(conversation: conversation)
-    }
     
     public init(conversation: Conversation) {
         self.conversation = conversation
@@ -72,7 +65,7 @@ open class MessageController: UIViewController {
         self.view.addSubview(collectionView)
         
         let chatManager = ChatClient.share.chatManager
-        chatManager.addChatDelegate(self)
+        chatManager.addDelegate(self)
         
         loadMessageData()
     }
@@ -113,7 +106,7 @@ open class MessageController: UIViewController {
     
     deinit {
         let chatManager = ChatClient.share.chatManager
-        chatManager.removeChatDelegate(self)
+        chatManager.removeDelegate(self)
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -193,6 +186,32 @@ extension MessageController: UICollectionViewDelegateFlowLayout {
 
 
 extension MessageController: MessageCellDelegate {
+    
+    public func messageCellFowardAction(_ cell: MessageCell) {
+        
+    }
+    
+    public func messageCellDeleteAction(_ cell: MessageCell) {
+        // 删除message
+        guard let indexPath = self.collectionView.indexPath(for: cell) else {
+            return
+        }
+        
+        let doneAction = UIAlertAction(title: "确定", style: .default) { (action) in
+            self.messageList.remove(at: indexPath.section)
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            
+        }
+        
+        let contoller = UIAlertController(title: "提示", message: "确定删除该条消息吗?", preferredStyle: .alert)
+        contoller.addAction(doneAction)
+        contoller.addAction(cancelAction)
+        self.present(contoller, animated: true, completion: nil)
+    }
+    
 
     public func messageCellDidTap(_ cell: MessageCell, link: URL) {
         

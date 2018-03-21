@@ -9,6 +9,9 @@
 import Foundation
 import SwiftyBeaver
 
+@_exported import SwiftyJSON
+
+/// 打印
 let log = SwiftyBeaver.self
 let chatClient = ChatClient.share
 
@@ -25,19 +28,26 @@ public class ChatClient {
         return xmppManager
     }
 
+    /// 聊天管理
     public var chatManager: ChatManager {
+        return chatService
+    }
+    
+    /// 会话管理
+    public var conversationManager: ConversationManager {
         return chatService
     }
     
     public var contactManager: ContactManager {
         return contactService
     }
-
+    
     public var groupManager: GroupManager {
         return groupService
     }
 
-    public var currentAccount: String {
+    /// 用户名（username@wanzhao.com）
+    public var username: String {
         return self.loginManager.currentAccount
     }
     
@@ -77,4 +87,33 @@ public class ChatClient {
         self.options = options
         xmppManager.options = options
     }
+}
+
+// MARK: - Helper
+extension ChatClient {
+    
+    func registerNotification() {
+        /// 应用将要销毁
+        let terminate = NSNotification.Name.UIApplicationWillTerminate
+        NotificationCenter.default.addObserver(forName: terminate, object: nil, queue: OperationQueue
+            .main) { (noti) in
+                
+                
+                
+                
+                
+        }
+        
+        /// 系统时间变化
+        let timeChange = NSNotification.Name.UIApplicationSignificantTimeChange
+        NotificationCenter.default.addObserver(forName: timeChange, object: nil, queue: OperationQueue.main) { (noti) in
+            
+        }
+    }
+    
+    /// 移除通知
+    func removeNotifacation() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
 }

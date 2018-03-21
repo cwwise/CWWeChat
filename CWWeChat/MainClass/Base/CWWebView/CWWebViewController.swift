@@ -202,7 +202,6 @@ class CWWebViewController: UIViewController {
                                   shareItems: [shareList1, shareList2], 
                                   clickedHandler: clickedHandler)        
         shareView.show()
-        
     }
     
     deinit {

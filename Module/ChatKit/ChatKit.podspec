@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
 
   s.license      = { :type => "MIT", :file => "LICENSE" }
 
-  s.author             = { "ios_chenwei" => "wei18810109052@163.com" }
+  s.author        = { "ios_chenwei" => "wei18810109052@163.com" }
 
   s.platform     = :ios, "9.0"
 
@@ -43,7 +43,6 @@ Pod::Spec.new do |s|
   s.ios.resource_bundle = { 'ChatKitAssets' => 'Assets/ChatKitAssets.bundle' }
 
 
-
   s.framework  = "UIKit"
   s.framework  = "MapKit"
 
@@ -52,7 +51,7 @@ Pod::Spec.new do |s|
   s.dependency "SQLite.swift"
   s.dependency "SwiftyJSON"
     
-  s.dependency "Alamofire"
+  s.dependency "Moya"
   s.dependency "SwiftyBeaver"
   s.dependency "SnapKit"
   s.dependency "Hue"

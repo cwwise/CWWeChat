@@ -67,7 +67,8 @@ public class FPSLabel: UILabel {
         let color = UIColor(hue: 0.27 * (progress - 0.2), saturation: 1, brightness: 0.9, alpha: 1)
         
         let text = NSMutableAttributedString(string: "\(Int(fps)) FPS")
-        text.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, text.length - 3))
+
+        text.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSRange(location: 0, length: text.length - 3))
         attributedText = text
         
         _count = 0

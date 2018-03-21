@@ -9,40 +9,70 @@
 import UIKit
 import YYText
 
+protocol CWMomentFlowLayoutDelegate: NSObjectProtocol {
+    
+}
+
 class CWMomentFlowLayout: UICollectionViewFlowLayout {
+
+    weak var delegate: CWMomentFlowLayoutDelegate?
+    ///
+    var cellHeight: CGFloat = 0
+    
+    fileprivate var itemWidth: CGFloat {
+        guard let collectionView = collectionView else { return 0 }
+        return collectionView.frame.width - sectionInset.left - sectionInset.right
+    }
     
     override class var layoutAttributesClass: Swift.AnyClass {
         return CWMomentAttributes.self
     }
     
-    ///
-    var cellHeight: CGFloat = 0
+    override init() {
+        super.init()
+    }
     
-    /// 头像
-    var avatarFrame: CGRect = .zero
-    /// 用户名
-    var usernameFrame: CGRect = .zero
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    /// 图片或者新闻(音乐)
-    var multimediaFrame: CGRect = .zero
-    /// 图片大小(待修改 如果图片只有一张需要根据比例算)
-    var pictureSize: CGSize = .zero
-    
-    /// 
-    var toolButtonFrame: CGRect = .zero
-    
-    /// 点赞部分
-    var praiseHeight: CGFloat = 0
-    var praiseLayout: YYTextLayout?
-    
-    var commentHeight: CGFloat = 0
-    var commentLayoutArray = [YYTextLayout]()
 }
 
 
 extension CWMomentFlowLayout {
     
+    override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        
+        guard let attributesArray = super.layoutAttributesForElements(in: rect) as? [CWMomentAttributes] else {
+            return nil
+        }
+        
+        attributesArray.forEach { attributes in
+            if attributes.representedElementCategory == UICollectionElementCategory.cell {
+                configure(attributes: attributes)
+            }
+        }
+        
+        return attributesArray
+    }
+    
+    private func configure(attributes: CWMomentAttributes) {
+        
+    }
     
     
+    // MARK: - Invalidation Context
+    override open func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        
+        return collectionView?.bounds.width != newBounds.width || collectionView?.bounds.height != newBounds.height
+        
+    }
+    
+    open override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
+        let context = super.invalidationContext(forBoundsChange: newBounds)
+        guard let flowLayoutContext = context as? UICollectionViewFlowLayoutInvalidationContext else { return context }
+        flowLayoutContext.invalidateFlowLayoutDelegateMetrics = shouldInvalidateLayout(forBoundsChange: newBounds)
+        return flowLayoutContext
+    }
     
 }

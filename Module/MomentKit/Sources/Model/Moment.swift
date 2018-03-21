@@ -48,8 +48,6 @@ class Multimedia: NSObject {
     }
 }
 
-
-
 class CWMoment: NSObject {
     
     /// 分享id
@@ -67,8 +65,7 @@ class CWMoment: NSObject {
     var videoModel: MomentVideo?
     var multimedia: Multimedia?
     var imageArray = [MomentPhoto]()
-    
-    
+
     var commentArray = [MomentReply]()
     var praiseArray = [MomentReply]()
         

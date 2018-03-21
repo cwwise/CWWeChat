@@ -32,7 +32,7 @@ class CWCommonSettingController: CWBaseTableViewController {
         let item5 = Item(title: "照片和视频")
         let section2 = Section(items: [item2, item3, item4, item5])
 
-        let item6 = BoolItem(title: "听筒模式", value: false) { (item) in
+        let item6 = BoolItem(title: "听筒模式", value: false) { (_) in
             
         }
         let section3 = Section(items: [item6])
@@ -44,13 +44,12 @@ class CWCommonSettingController: CWBaseTableViewController {
         let item9 = Item(title: "存储空间")
         let section5 = Section(items: [item8, item9])
 
-        let item10 = ButtonItem(title: "清空聊天记录") { (item) in
+        let item10 = ButtonItem(title: "清空聊天记录") { (_) in
             
         }
         let section6 = Section(items: [item10])
 
-        let sections = [section1,section2,section3,section4,section5,section6]
+        let sections = [section1, section2, section3, section4, section5, section6]
         tableViewManager.append(contentsOf: sections)
     }
 }
-

@@ -4,6 +4,7 @@
 //
 //  Created by chenwei on 2017/10/4.
 //
+// swiftlint:disable identifier_name
 
 import Foundation
 
@@ -34,14 +35,9 @@ struct ChatCellUI {
     static let right_edge_insets = UIEdgeInsets(top: 2+10, left: 17, bottom: 11+9.5, right: 17)
 }
 
-
 class ChatKitUtil {
-    
-    
-    
-    
-}
 
+}
 
 class MessageTimeUtil {
     var maxMessageCount: Int = 15
@@ -73,12 +69,4 @@ class MessageTimeUtil {
         
     }
 }
-
-
-
-
-
-
-
-
 

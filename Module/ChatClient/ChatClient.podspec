@@ -35,17 +35,15 @@ Pod::Spec.new do |s|
 
   s.source_files  = "Sources", "Sources/**/*.{h,swift}"
 
-  # s.resource  = "icon.png"
-  # s.resources = "Resources/*.png"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
-  s.framework  = "UIKit"
-
+  s.framework  = "Foundation"
   s.dependency "XMPPFramework"
   s.dependency "SQLite.swift"
+  s.dependency "SQLiteMigrationManager.swift"
   s.dependency "SwiftyJSON"
-  s.dependency "Alamofire"
+  s.dependency "Moya"
   s.dependency "SwiftyBeaver"
 
 end

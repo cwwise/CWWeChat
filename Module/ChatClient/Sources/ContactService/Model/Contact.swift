@@ -10,11 +10,11 @@ import Foundation
 
 /// 联系人
 public class Contact {
-    // 聊天账号 (chenwei)  @cwwise.com
+    /// 聊天账号 (chenwei)  @cwwise.com
     public var username: String
-    // 用户唯一id
+    /// 用户唯一id
     public var userId: String!
-
+    /// 昵称
     public var nickname: String
     /// 头像
     public var avatarUrl: URL?

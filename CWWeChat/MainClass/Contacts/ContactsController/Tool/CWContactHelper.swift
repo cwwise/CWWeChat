@@ -41,8 +41,7 @@ public class CWContactHelper: NSObject {
         }
         // 如果没有找到，进行网络查询
     }
-    
-    
+
     func initTestData() {
         
         ///读取数据
@@ -54,7 +53,7 @@ public class CWContactHelper: NSObject {
         let contantData = try? Data(contentsOf: URL(fileURLWithPath: filepath))
         let contactList = JSON(contantData!)
         
-        for (_,subJson):(String, JSON) in contactList {
+        for subJson in contactList.arrayValue {
             let userId = subJson["userID"].stringValue
             let username = subJson["username"].stringValue
             let user = CWUserModel(userId: userId, username: username)
@@ -133,10 +132,10 @@ public class CWContactHelper: NSObject {
     //初始化默认的组
     func setupDefaultGroup() {
         
-        let titleArray = ["新的朋友","群聊", "标签", "公众号"]
-        let iconArray = ["contact_new_friend","contact_group_chat",
-                         "contact_signature","contact_official_account"]
-        let idArray = ["-1","-2", "-3", "-4"]
+        let titleArray = ["新的朋友", "群聊", "标签", "公众号"]
+        let iconArray = ["contact_new_friend", "contact_group_chat",
+                         "contact_signature", "contact_official_account"]
+        let idArray = ["-1", "-2", "-3", "-4"]
         
         for index in 0..<titleArray.count {
             let item = CWUserModel(userId: idArray[index], username: "")

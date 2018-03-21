@@ -20,34 +20,32 @@ class CWMomentDataService: NSObject {
         }
     }
     
-    
-    func parseMomentData() -> [CWMomentLayout] {
+    func parseMomentData() -> [CWMoment] {
         
-        var momentLayouts = [CWMomentLayout]()
-
+        var moments = [CWMoment]()
+        
         guard let path = Bundle.main.path(forResource: "moments", ofType: "json"),
             let momentData = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
-                return momentLayouts
+                return moments
         }
         
         guard let momentList = JSON(momentData).dictionary?["data"]?.array else {
-            return momentLayouts
+            return []
         }
-        
-        
+
         for moment in momentList {
             let momentId = moment["momentId"].stringValue
             let username = moment["username"].stringValue
             let userId = moment["userId"].stringValue
             let date = moment["date"].doubleValue
             let type = CWMomentType(rawValue: moment["type"].intValue) ?? .normal
-
+            
             let content = moment["content"].string
             let share_Date = Date(timeIntervalSince1970: date/1000)
             let momentModel = CWMoment(momentId: momentId,
-                                      username: username,
-                                      userId: userId,
-                                      date: share_Date)
+                                       username: username,
+                                       userId: userId,
+                                       date: share_Date)
             momentModel.content = content
             momentModel.type = type
             
@@ -67,23 +65,29 @@ class CWMomentDataService: NSObject {
                 let imageUrl = news["imageurl"]?.stringValue
                 let title = news["title"]?.stringValue
                 let source = news["source"]?.stringValue
-
+                
                 let newsurl = URL(string: url!)!
                 let newsImageUrl = URL(string: imageUrl!)!
-
-                let urlModel = CWMultimedia(url: newsurl, 
+                
+                let urlModel = CWMultimedia(url: newsurl,
                                             imageURL: newsImageUrl,
                                             title: title!, source: source)
                 momentModel.multimedia = urlModel
             }
-                        
-            let layout = CWMomentLayout(moment: momentModel)
-            momentLayouts.append(layout)
             
+            moments.append(momentModel)
+            
+        }
+        return moments
+    }
+    
+    func parseMomentLayoutData() -> [CWMomentLayout] {
+        var momentLayouts = [CWMomentLayout]()
+        for item in parseMomentData() {
+            let layout = CWMomentLayout(moment: item)
+            momentLayouts.append(layout)
         }
         return momentLayouts
     }
-    
-    
     
 }
