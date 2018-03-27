@@ -15,8 +15,7 @@ let kMessageDispatchSuccessNotification = NSNotification.Name("kMessageDispatchS
 let kNetworkReachabilityNotification = NSNotification.Name("kNetworkReachabilityNotification")
 
 // xmpp管理实例
-class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelegate, XMPPStreamDelegate {
-    
+class XMPPManager: NSObject {
     /// xmpp流
     private(set) var xmppStream: XMPPStream
     /// xmpp重新连接
@@ -35,7 +34,6 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
 
     /// 这3个变量 注册和登录 用来临时记录
     var isLoginUser: Bool = true
-    
     var username: String!
     var password: String!
     var completion: LoginHandler?
@@ -122,7 +120,7 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
         
     }
 
-    func connetService(user: String) {
+    func connetService(username: String) {
         // 
         if reachable?.isReachable == false {
             self.completion?(nil, ChatClientError(error: "网络连接失败"))
@@ -134,7 +132,7 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
         
         xmppStream.hostName = options.host
         xmppStream.hostPort = options.port
-        xmppStream.myJID = XMPPJID(string: user, resource: options.resource)
+        xmppStream.myJID = XMPPJID(string: username, resource: options.resource)
         do {
             try xmppStream.connect(withTimeout: timeoutInterval)
         } catch {
@@ -171,7 +169,7 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
         self.password = password
         self.username = username
         
-        connetService(user: username)
+        connetService(username: username)
     }
     
     func register(username: String, password: String, completion: LoginHandler?) {
@@ -180,7 +178,7 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
         self.password = password
         self.username = username
         
-        connetService(user: username)
+        connetService(username: username)
     }
     
     // MARK: 销毁
@@ -208,8 +206,10 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
     
     /// 连接失败
     func xmppStreamDidDisconnect(_ sender: XMPPStream!, withError error: Error!) {
-        self.completion?(nil, ChatClientError(error: "连接服务器失败"))
-        self.completion = nil
+        DispatchQueue.main.async {
+            self.completion?(nil, ChatClientError(error: "连接服务器失败"))
+            self.completion = nil
+        }
     }
     
     /// 已经连接，就输入密码
@@ -229,31 +229,37 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
     
     // 验证失败
     func xmppStream(_ sender: XMPPStream!, didNotAuthenticate error: DDXMLElement!) {
-        self.completion?(nil, ChatClientError(error: ""))
-        self.completion = nil
-        
+        DispatchQueue.main.async {
+            self.completion?(nil, ChatClientError(error: ""))
+            self.completion = nil
+        }
         //登陆失败之后 则断开连接
         sender.disconnect()
     }
     
     // 验证成功
     func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
-        self.completion?(xmppStream.myJID!.user, nil)
-        self.completion = nil
-        
+        DispatchQueue.main.async {
+            self.completion?(self.username, nil)
+            self.completion = nil
+        }
         goOnline()
         streamManagement.autoResume = true
         streamManagement.enable(withResumption: true, maxTimeout: 60)
     }
     
     func xmppStreamDidRegister(_ sender: XMPPStream!) {
-        self.completion?(xmppStream.myJID!.user, nil)
-        self.completion = nil
+        DispatchQueue.main.async {
+            self.completion?(self.username, nil)
+            self.completion = nil
+        }
     }
     
     func xmppStream(_ sender: XMPPStream!, didNotRegister error: DDXMLElement!) {
-        self.completion?(nil, ChatClientError(error: "注册失败"))
-        self.completion = nil
+        DispatchQueue.main.async {
+            self.completion?(nil, ChatClientError(error: "注册失败"))
+            self.completion = nil
+        }
     }
     
     // 收到错误信息
@@ -314,7 +320,18 @@ class XMPPManager: BaseService<LoginManagerDelegate>, XMPPStreamManagementDelega
 extension XMPPManager: LoginManager {
    
     var currentAccount: String {
-        return self.username
+        assert(username.count != 0, "请调用Login方法")
+        return username ?? ""
+    }
+    
+    func login(username: String, password: String, completion: LoginHandler?) {
+        // 保存变量
+        self.isLoginUser = true
+        self.password = password
+        self.completion = completion
+        self.username = username
+        
+        connetService(username: username)
     }
     
     func register(username: String, password: String) {
@@ -327,6 +344,14 @@ extension XMPPManager: LoginManager {
     
     var isConnented: Bool {
         return xmppStream.isConnected
+    }
+    
+    func addDelegate(_ delegate: LoginManagerDelegate) {
+
+    }
+    
+    func removeDelegate(_ delegate: LoginManagerDelegate) {
+        
     }
     
     var isLogined: Bool {

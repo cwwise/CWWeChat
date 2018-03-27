@@ -17,18 +17,18 @@ class CWLoginController: UIViewController {
     
     let disposeBag = DisposeBag()
 
-    lazy var userNameTextField: UITextField = {
-        let userNameTextField = UITextField()
+    lazy var usernameTextField: UITextField = {
+        let usernameTextField = UITextField()
         
-        userNameTextField.font = UIFont.systemFont(ofSize: 15)
-        userNameTextField.placeholder = "微信号/邮箱地址/QQ号"
-        userNameTextField.leftViewMode = .always
-        userNameTextField.keyboardType = .asciiCapable
-        userNameTextField.returnKeyType = .next
-        userNameTextField.spellCheckingType = .no
-        userNameTextField.delegate = self
-        userNameTextField.leftView = self.leftView("帐号")
-        return userNameTextField
+        usernameTextField.font = UIFont.systemFont(ofSize: 15)
+        usernameTextField.placeholder = "微信号/邮箱地址/QQ号"
+        usernameTextField.leftViewMode = .always
+        usernameTextField.keyboardType = .asciiCapable
+        usernameTextField.returnKeyType = .next
+        usernameTextField.spellCheckingType = .no
+        usernameTextField.delegate = self
+        usernameTextField.leftView = self.leftView("帐号")
+        return usernameTextField
     }()
     
     lazy var passwordTextField: UITextField = {
@@ -83,8 +83,8 @@ class CWLoginController: UIViewController {
         
         let margin: CGFloat = 20
         //账号和密码
-        self.view.addSubview(userNameTextField)
-        userNameTextField.snp.makeConstraints { (make) in
+        self.view.addSubview(usernameTextField)
+        usernameTextField.snp.makeConstraints { (make) in
             make.left.equalTo(margin)
             make.right.equalTo(-margin)
             make.height.equalTo(45)
@@ -96,7 +96,7 @@ class CWLoginController: UIViewController {
             make.left.equalTo(margin)
             make.right.equalTo(-margin)
             make.height.equalTo(45)
-            make.top.equalTo(userNameTextField.snp.bottom).offset(4)
+            make.top.equalTo(usernameTextField.snp.bottom).offset(4)
         }
         
         //登录按钮
@@ -110,12 +110,12 @@ class CWLoginController: UIViewController {
             make.top.equalTo(passwordTextField.snp.bottom).offset(30)
         }
         
-        self.userNameTextField.text = "haohao@cwwise.com"
+        self.usernameTextField.text = "haohao@cwwise.com"
 //        self.passwordTextField.text = "1234567"
     }
     
     func setupRx() {
-        let nickNameValid = userNameTextField.rx.text.orEmpty.map { (text) -> Bool in
+        let nickNameValid = usernameTextField.rx.text.orEmpty.map { (text) -> Bool in
             let tLength = text.count
             return tLength >= 3 && tLength <= 50
             }.share(replay: 1)
@@ -150,44 +150,39 @@ class CWLoginController: UIViewController {
         
         self.view.endEditing(true)
         
-        let userName = userNameTextField.text!
+        let username = usernameTextField.text!
         let password = passwordTextField.text!
         
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.mode = .indeterminate
 //        hud.contentColor = UIColor.white
-//        hud.bezelView.backgroundColor = UIColor.gray
         hud.label.text = "Loading..."
         
         let chatClient = ChatClient.share
         chatClient.initialize(with: ChatClientOptions.default)
-        chatClient.loginManager.login(username: userName, password: password) { (username, error) in
-           
-            DispatchQueue.main.async(execute: {
-                hud.mode = .text
-                if error == nil {
+        chatClient.loginManager.login(username: username, password: password) { (_, error) in
 
-                    let account = AccountModel(username: "haohao", password: "1234567")
-                    account.isLogin = true
-                    account.save()
-               
-                    // 登陆成功
-                    kAppDelegate.loginSuccess()
-                    
-                    hud.hide(animated: true)
-                } else {
-                    hud.label.text = error?.error
-                    hud.hide(animated: true, afterDelay: 1.0)
-                }
-            })
-  
+            hud.mode = .text
+            if error == nil {
+                let account = AccountModel(username: username, password: password)
+                account.isLogin = true
+                account.save()
+                self.loginSuccess()
+                // 登陆成功
+
+                hud.hide(animated: true)
+            } else {
+                hud.label.text = error?.error
+                hud.hide(animated: true, afterDelay: 1.0)
+            }
+
         }
         
     }
     
     //
     func loginSuccess() {
-        
+        kAppDelegate.loginSuccess()
     }
     
     override func didReceiveMemoryWarning() {
@@ -205,7 +200,7 @@ extension CWLoginController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
-        if textField == userNameTextField {
+        if textField == usernameTextField {
             passwordTextField.becomeFirstResponder()
             return false
         }

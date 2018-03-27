@@ -30,7 +30,6 @@ class ConversationListController: ConversationController {
     }
     
     @objc func sendMessage() {
-        
         let conversation = Conversation(conversationId: "chenwei@cwwise.com", type: .single)
         let chatVC = MessageListController(conversation: conversation)
         chatVC.hidesBottomBarWhenPushed = true

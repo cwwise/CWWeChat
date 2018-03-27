@@ -175,7 +175,7 @@ public class MessageCell: UICollectionViewCell {
             return
         }
         
-        let targetId = message.isSend ? message.from : ChatKit.share.currentAccount
+        let targetId = message.isSend ? message.from : ChatKit.share.username
         delegate?.messageCellUserAvatarDidClick(targetId)
     }
     

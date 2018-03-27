@@ -19,13 +19,6 @@ public protocol LoginManagerDelegate: class {
     func loginFailed(error: ChatClientError)
 }
 
-public extension LoginManagerDelegate {
-    func userAccountDidForceLogout() {}
-    
-    func loginSuccess() {}
-    func loginFailed(error: ChatClientError) {}
-}
-
 /// 登录管理
 public protocol LoginManager: class {
     /// 是否连接
@@ -40,8 +33,6 @@ public protocol LoginManager: class {
     func register(username: String, password: String)
  
     func addDelegate(_ delegate: LoginManagerDelegate)
-    
-    func addDelegate(_ delegate: LoginManagerDelegate, delegateQueue: DispatchQueue)
     
     func removeDelegate(_ delegate: LoginManagerDelegate)
     
