@@ -50,6 +50,7 @@ class XMPPManager: NSObject {
         streamManagement = XMPPStreamManagement(storage: memoryStorage)
         
         super.init()
+
         /// xmpp
         xmppStream.enableBackgroundingOnSocket = true
         xmppStream.addDelegate(self, delegateQueue: xmppQueue)
@@ -318,7 +319,7 @@ class XMPPManager: NSObject {
 }
 
 extension XMPPManager: LoginManager {
-   
+    
     var currentAccount: String {
         assert(username.count != 0, "请调用Login方法")
         return username ?? ""
@@ -339,7 +340,7 @@ extension XMPPManager: LoginManager {
     }
     
     func logout() {
-        
+        self.disconnect()
     }
     
     var isConnented: Bool {

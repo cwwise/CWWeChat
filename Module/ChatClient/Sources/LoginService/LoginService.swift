@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LoginService: BaseService<LoginManagerDelegate> {
+class LoginService {
     
     
     

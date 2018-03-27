@@ -74,6 +74,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarController = RootTabBarController()
         self.window?.rootViewController = tabBarController
     }
+<<<<<<< Updated upstream
+=======
+    
+    func loginEmoticonSuccess() {
+        let emoticonController = CWEmoticonListController()
+        self.window?.rootViewController = BaseNavigationController(rootViewController: emoticonController)
+    }
+>>>>>>> Stashed changes
 
     func loginMomentSuccess() {
         let momentController = CWMomentListController()

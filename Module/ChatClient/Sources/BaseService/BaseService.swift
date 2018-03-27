@@ -6,33 +6,37 @@
 //
 
 import Foundation
+import XMPPFramework
 
-// TODO:  如果T可能是两个协议 怎么处理好。
-///
-class BaseService<T> {
+protocol BaseService {
+    associatedtype T
+    var multicastDelegate: GCDMulticastDelegate { get set }
     
-    private var multicastDelegate = MulticastDelegate<T>()
+    func addDelegate(_ delegate: T)
     
+    func removeDelegate(_ delegate: T)
+    
+    func deactivate()
+    
+    func asyncExecute(action: @escaping (T) -> Void)
+}
+
+extension BaseService {
     func addDelegate(_ delegate: T) {
-        multicastDelegate.add(delegate)
-    }
-    
-    func addDelegate(_ delegate: T, delegateQueue: DispatchQueue) {
-        multicastDelegate.add(delegate, delegateQueue: delegateQueue)
+        multicastDelegate.add(delegate, delegateQueue: .main)
     }
     
     func removeDelegate(_ delegate: T) {
-        multicastDelegate.remove(delegate)
+        multicastDelegate.remove(self)
     }
     
-    /// 删除所有delegate
     func deactivate() {
-        multicastDelegate.removeAll()
+        multicastDelegate.removeAllDelegates()
     }
     
     func asyncExecute(action: @escaping (T) -> Void) {
         ///遍历出所有的delegate
-        let delegateEnumerator = self.multicastDelegate.multicastDelegate.delegateEnumerator()
+        let delegateEnumerator = self.multicastDelegate.delegateEnumerator()
         var delegate: AnyObject?
         var queue: DispatchQueue?
         while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) == true {
@@ -45,19 +49,18 @@ class BaseService<T> {
         }
     }
     
-    func syncExecute(action: (T) -> Void) {
+    func asyncExecute(action: @escaping (Any) -> Void) {
         ///遍历出所有的delegate
-        let delegateEnumerator = self.multicastDelegate.multicastDelegate.delegateEnumerator()
+        let delegateEnumerator = self.multicastDelegate.delegateEnumerator()
         var delegate: AnyObject?
         var queue: DispatchQueue?
         while delegateEnumerator.getNextDelegate(&delegate, delegateQueue: &queue) == true {
             //执行Delegate的方法
-            if let currentDelegate = delegate as? T, let currentQueue = queue {
-                currentQueue.sync {
+            if let currentDelegate = delegate, let currentQueue = queue {
+                currentQueue.async {
                     action(currentDelegate)
                 }
             }
         }
     }
-    
 }

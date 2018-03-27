@@ -28,7 +28,7 @@ public protocol LoginManager: class {
     /// 当前登录用户
     var currentAccount: String { get }
 
-    func login(username: String, password: String)
+    func login(username: String, password: String, completion: LoginHandler?)
     
     func register(username: String, password: String)
  

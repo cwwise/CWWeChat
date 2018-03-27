@@ -10,8 +10,6 @@ import ChatClient
 
 open class ConversationController: UIViewController {
 
-    fileprivate var chatManager = ChatClient.share.chatManager
-
     fileprivate var conversationManager = ChatClient.share.conversationManager
 
     public var conversationList = [Conversation]()
@@ -25,7 +23,7 @@ open class ConversationController: UIViewController {
         tableView.delegate = self
         
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        
+        tableView.register(ConversationCell.self, forCellReuseIdentifier: "cell")
         tableView.tableHeaderView = self.searchController.searchBar
         return tableView
     }()
@@ -49,13 +47,12 @@ open class ConversationController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.white
-        chatManager.addDelegate(self)
+        conversationManager.addDelegate(self)
         setupUI()
     }
 
     func setupUI() {
         self.view.addSubview(self.tableView)
-        tableView.register(ConversationCell.self, forCellReuseIdentifier: "cell")
     }
     
     override open func didReceiveMemoryWarning() {
@@ -138,6 +135,10 @@ extension ConversationController {
     
     /// 排序
     fileprivate func sort() {
+        
+        conversationList.sort { (left, right) -> Bool in
+            return left.timestamp > right.timestamp
+        }
         
     }
     
@@ -224,16 +225,32 @@ extension ConversationController: UISearchBarDelegate {
     }
 }
 
-extension ConversationController: ChatManagerDelegate {
+extension ConversationController: ConversationManagerDelegate {
     
-    public func didReceive(message: Message) {
-        // 发送本地推送
-        DispatchQueue.main.async {
-            if UIApplication.shared.applicationState == .background {
-
-            } else {
-
-            }
+    public func didDeleteConversation(_ conversation: Conversation, totalUnreadCount: Int) {
+        
+    }
+    
+    public func didAddConversation(_ conversation: Conversation, totalUnreadCount: Int) {
+        // 直接插入
+        
+        // 然后排序
+        
+    }
+    
+    public func didUpdateConversation(_ conversation: Conversation, totalUnreadCount: Int) {
+        
+        
+        
+    }
+    
+    func updateUnreadCount(_ count: Int) {
+        if count == 0 {
+            self.tabBarItem.badgeValue = nil
+        } else if count > 99 {
+            self.tabBarItem.badgeValue = "99+"
+        } else {
+            self.tabBarItem.badgeValue = "\(count)"
         }
     }
     
@@ -261,13 +278,7 @@ extension ConversationController: ChatManagerDelegate {
         
         // 其他情况 如是第一个 直接刷新
         tableView.reloadData()
-        if unread == 0 {
-            self.tabBarItem.badgeValue = nil
-        } else if unread > 99 {
-            self.tabBarItem.badgeValue = "99+"
-        } else {
-            self.tabBarItem.badgeValue = "\(unread)"
-        }
+   
         
     }
     
