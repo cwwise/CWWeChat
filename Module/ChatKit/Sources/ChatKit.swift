@@ -14,7 +14,7 @@ public class ChatKit: NSObject {
     
     public static let share = ChatKit()
 
-    public var currentAccount: String {
+    public var username: String {
         return ChatClient.share.username
     }
     

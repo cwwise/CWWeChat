@@ -16,7 +16,6 @@ let kNetworkReachabilityNotification = NSNotification.Name("kNetworkReachability
 
 // xmpp管理实例
 class XMPPManager: NSObject {
-    
     /// xmpp流
     private(set) var xmppStream: XMPPStream
     /// xmpp重新连接
@@ -37,6 +36,7 @@ class XMPPManager: NSObject {
 
     /// 这3个变量 注册和登录 用来临时记录
     var isLoginUser: Bool = true
+    var username: String!
     var password: String!
     var completion: LoginHandler?
     
@@ -124,7 +124,7 @@ class XMPPManager: NSObject {
         
     }
 
-    func connetService(user: String) {
+    func connetService(username: String) {
         // 
         if reachable?.isReachable == false {
             self.completion?(nil, ChatClientError(error: "网络连接失败"))
@@ -136,7 +136,7 @@ class XMPPManager: NSObject {
         
         xmppStream.hostName = options.host
         xmppStream.hostPort = options.port
-        xmppStream.myJID = XMPPJID(string: user, resource: options.resource)
+        xmppStream.myJID = XMPPJID(string: username, resource: options.resource)
         do {
             try xmppStream.connect(withTimeout: timeoutInterval)
         } catch {
@@ -191,8 +191,10 @@ extension XMPPManager: XMPPStreamDelegate {
     
     /// 连接失败
     func xmppStreamDidDisconnect(_ sender: XMPPStream!, withError error: Error!) {
-        self.completion?(nil, ChatClientError(error: "连接服务器失败"))
-        self.completion = nil
+        DispatchQueue.main.async {
+            self.completion?(nil, ChatClientError(error: "连接服务器失败"))
+            self.completion = nil
+        }
     }
     
     /// 已经连接，就输入密码
@@ -212,31 +214,37 @@ extension XMPPManager: XMPPStreamDelegate {
     
     // 验证失败
     func xmppStream(_ sender: XMPPStream!, didNotAuthenticate error: DDXMLElement!) {
-        self.completion?(nil, ChatClientError(error: ""))
-        self.completion = nil
-        
+        DispatchQueue.main.async {
+            self.completion?(nil, ChatClientError(error: ""))
+            self.completion = nil
+        }
         //登陆失败之后 则断开连接
         sender.disconnect()
     }
     
     // 验证成功
     func xmppStreamDidAuthenticate(_ sender: XMPPStream!) {
-        self.completion?(xmppStream.myJID!.user, nil)
-        self.completion = nil
-        
+        DispatchQueue.main.async {
+            self.completion?(self.username, nil)
+            self.completion = nil
+        }
         goOnline()
         streamManagement.autoResume = true
         streamManagement.enable(withResumption: true, maxTimeout: 60)
     }
     
     func xmppStreamDidRegister(_ sender: XMPPStream!) {
-        self.completion?(xmppStream.myJID!.user, nil)
-        self.completion = nil
+        DispatchQueue.main.async {
+            self.completion?(self.username, nil)
+            self.completion = nil
+        }
     }
     
     func xmppStream(_ sender: XMPPStream!, didNotRegister error: DDXMLElement!) {
-        self.completion?(nil, ChatClientError(error: "注册失败"))
-        self.completion = nil
+        DispatchQueue.main.async {
+            self.completion?(nil, ChatClientError(error: "注册失败"))
+            self.completion = nil
+        }
     }
     
     // 收到错误信息
@@ -308,11 +316,8 @@ extension XMPPManager: LoginManager {
     }
     
     var currentAccount: String {
-        guard let jid = xmppStream.myJID,
-        let user = jid.user else {
-            return ""
-        } 
-        return user
+        assert(username.count != 0, "请调用Login方法")
+        return username ?? ""
     }
     
     func login(username: String, password: String, completion: LoginHandler?) {
@@ -320,8 +325,9 @@ extension XMPPManager: LoginManager {
         self.isLoginUser = true
         self.password = password
         self.completion = completion
+        self.username = username
         
-        connetService(user: username)
+        connetService(username: username)
     }
     
     func register(username: String, password: String, completion: LoginHandler?) {
@@ -330,14 +336,14 @@ extension XMPPManager: LoginManager {
         self.password = password
         self.completion = completion
         
-        connetService(user: username)        
+        connetService(username: username)
     }
     
-    func addLoginDelegate(_ delegate: LoginManagerDelegate) {
-        
+    func addDelegate(_ delegate: LoginManagerDelegate) {
+
     }
     
-    func removeLoginDelegate(_ delegate: LoginManagerDelegate) {
+    func removeDelegate(_ delegate: LoginManagerDelegate) {
         
     }
     

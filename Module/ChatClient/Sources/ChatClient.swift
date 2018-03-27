@@ -45,7 +45,7 @@ public class ChatClient {
         return groupService
     }
 
-    /// 用户名（username@wanzhao.com）
+    /// 用户名（username@cwwise.com）
     public var username: String {
         return self.loginManager.currentAccount
     }
@@ -69,10 +69,8 @@ public class ChatClient {
         
         let queue = DispatchQueue(label: "com.chatclient.cwwise")
         chatService = ChatService()
-//        chatService.activate(xmppManager.xmppStream)
         xmppManager.xmppStream.addDelegate(chatService, delegateQueue: queue)
-        
-        
+
         contactService = ContactService(dispatchQueue: queue)
         contactService.activate(xmppManager.xmppStream)
         

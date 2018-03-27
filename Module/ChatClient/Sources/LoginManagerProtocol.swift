@@ -18,7 +18,11 @@ public enum LoginStep: Int {
 }
 
 public protocol LoginManagerDelegate: class {
-    func onLogin(setp: LoginStep)
+    /// 强制退出 密码修改 其他设备登录
+    func userAccountDidForceLogout()
+    /// 登录之后 会调用登录成功或者登录失败
+    func loginSuccess()
+    func loginFailed(error: ChatClientError)
 }
 
 /// 登录管理
@@ -34,9 +38,9 @@ public protocol LoginManager: class {
     
     func register(username: String, password: String, completion: LoginHandler?)
  
-    func addLoginDelegate(_ delegate: LoginManagerDelegate)
+    func addDelegate(_ delegate: LoginManagerDelegate)
     
-    func removeLoginDelegate(_ delegate: LoginManagerDelegate)
+    func removeDelegate(_ delegate: LoginManagerDelegate)
     
     func logout()
 }

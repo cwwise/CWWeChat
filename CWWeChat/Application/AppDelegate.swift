@@ -24,22 +24,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //设置logger
         self.window = UIWindow(frame: UIScreen.main.bounds)
-
-        loginSuccess()
+        setupController()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         setupLogger()
         //loginXMPP()
-
         //注册推送信息
         registerRemoteNotification()
-        
-        DispatchQueue.main.async {
-            if let window = self.window {
-                let label = FPSLabel(frame: CGRect(x: window.bounds.width - 55 - 8, y: 20, width: 55, height: 20))
-                label.autoresizingMask = [.flexibleLeftMargin, .flexibleBottomMargin]
-                window.addSubview(label)
-            }
+
+        /// 添加FPS
+        if let window = self.window {
+            let label = FPSLabel(frame: CGRect(x: window.bounds.width - 55 - 8, y: 20, width: 55, height: 20))
+            label.autoresizingMask = [.flexibleLeftMargin, .flexibleBottomMargin]
+            window.addSubview(label)
         }
         return true
     }
@@ -66,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let loginManager = ChatClient.share.loginManager     
         loginManager.login(username: account.username, 
                            password: account.password) { (username, _) in
-                           
+
                             if let username = username {
                                 log.debug("登录成功...\(username)")
                             }  
@@ -76,16 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func loginSuccess() {
         let tabBarController = RootTabBarController()
         self.window?.rootViewController = tabBarController
-    }
-    
-    func loginMap() {
-        let map = MapShowController()
-        self.window?.rootViewController = BaseNavigationController(rootViewController: map)
-    }
-    
-    func loginEmoticonSuccess() {
-        let emoticonController = CWEmoticonListController()
-        self.window?.rootViewController = BaseNavigationController(rootViewController: emoticonController)
     }
 
     func loginMomentSuccess() {
