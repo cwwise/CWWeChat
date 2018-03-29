@@ -10,7 +10,7 @@ import Foundation
 import XMPPFramework
 
 ///
-class ChatService: XMPPStreamDelegate {
+class ChatService: NSObject, XMPPStreamDelegate {
     
     /// 会话缓存
     fileprivate var conversationCache: [String: Conversation] = [:]
@@ -36,11 +36,13 @@ class ChatService: XMPPStreamDelegate {
     
     var multicastDelegate = GCDMulticastDelegate()
     
-    init() {
+    override init() {
         // 消息发送和解析
         messageTransmitter = MessageTransmitter()
         messageParse = MessageParse()
         dispatchManager = MessageDispatchManager()
+        
+        super.init()
         messageParse.delegate = self
     }
     
