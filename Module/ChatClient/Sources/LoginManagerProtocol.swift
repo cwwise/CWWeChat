@@ -30,8 +30,8 @@ public protocol LoginManager: class {
 
     func login(username: String, password: String, completion: LoginHandler?)
     
-    func register(username: String, password: String)
- 
+    func register(username: String, password: String, completion: LoginHandler?)
+
     func addDelegate(_ delegate: LoginManagerDelegate)
     
     func removeDelegate(_ delegate: LoginManagerDelegate)

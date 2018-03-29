@@ -15,7 +15,7 @@ let kMessageDispatchSuccessNotification = NSNotification.Name("kMessageDispatchS
 let kNetworkReachabilityNotification = NSNotification.Name("kNetworkReachabilityNotification")
 
 // xmpp管理实例
-class XMPPManager: NSObject {
+class XMPPManager: NSObject, XMPPStreamManagementDelegate, XMPPStreamDelegate {
     /// xmpp流
     private(set) var xmppStream: XMPPStream
     /// xmpp重新连接
@@ -162,24 +162,6 @@ class XMPPManager: NSObject {
     
     func disconnect() {
         self.xmppStream.disconnectAfterSending()
-    }
-    
-    func login(username: String, password: String) {
-        // 保存变量
-        self.isLoginUser = true
-        self.password = password
-        self.username = username
-        
-        connetService(username: username)
-    }
-    
-    func register(username: String, password: String, completion: LoginHandler?) {
-        // 保存变量
-        self.isLoginUser = false
-        self.password = password
-        self.username = username
-        
-        connetService(username: username)
     }
     
     // MARK: 销毁
@@ -333,10 +315,16 @@ extension XMPPManager: LoginManager {
         self.username = username
         
         connetService(username: username)
+        
     }
     
-    func register(username: String, password: String) {
+    func register(username: String, password: String, completion: LoginHandler?) {
+        // 保存变量
+        self.isLoginUser = false
+        self.password = password
+        self.username = username
         
+        connetService(username: username)
     }
     
     func logout() {
