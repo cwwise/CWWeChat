@@ -31,6 +31,7 @@ class CWMomentPictureView: UIView {
             self.addSubview(imageView)
         }
     }
+    
     // 待优化
     func setupView(with frame: CGRect, imageArray: [CWMomentPhoto], pictureSize: CGSize) {
         self.frame = frame

@@ -39,7 +39,7 @@ target 'CWWeChat' do
   pod 'SwiftyJSON'
   pod 'KVOController'
   
-  pod 'SwiftLint'
+#  pod 'SwiftLint'
 
 
   # 本地pod

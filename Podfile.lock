@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.7.0)
+  - Alamofire (4.7.2)
   - ChatClient (0.0.1):
     - Moya
     - SQLite.swift
@@ -17,18 +17,18 @@ PODS:
     - SQLite.swift
     - SwiftyBeaver
     - SwiftyJSON
-  - CocoaAsyncSocket (7.6.2)
-  - CocoaLumberjack (3.4.1):
-    - CocoaLumberjack/Default (= 3.4.1)
-    - CocoaLumberjack/Extensions (= 3.4.1)
-  - CocoaLumberjack/Default (3.4.1)
-  - CocoaLumberjack/Extensions (3.4.1):
+  - CocoaAsyncSocket (7.6.3)
+  - CocoaLumberjack (3.4.2):
+    - CocoaLumberjack/Default (= 3.4.2)
+    - CocoaLumberjack/Extensions (= 3.4.2)
+  - CocoaLumberjack/Default (3.4.2)
+  - CocoaLumberjack/Extensions (3.4.2):
     - CocoaLumberjack/Default
   - CWActionSheet (0.0.7)
   - CWShareView (0.0.2)
   - FSPagerView (0.7.1)
   - Hue (3.0.1)
-  - Kingfisher (4.6.4)
+  - Kingfisher (4.7.0)
   - KissXML (5.2.2)
   - KVOController (1.2.0)
   - libidn (1.33)
@@ -41,30 +41,29 @@ PODS:
     - SQLite.swift
     - SwiftyBeaver
     - SwiftyJSON
-  - Moya (11.0.1):
-    - Moya/Core (= 11.0.1)
-  - Moya/Core (11.0.1):
+  - Moya (11.0.2):
+    - Moya/Core (= 11.0.2)
+  - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
-  - Moya/RxSwift (11.0.1):
+  - Moya/RxSwift (11.0.2):
     - Moya/Core
     - RxSwift (~> 4.0)
-  - Nimble (7.0.3)
-  - Quick (1.2.0)
+  - Nimble (7.1.1)
+  - Quick (1.3.0)
   - Result (3.2.4)
   - RxCocoa (4.1.2):
     - RxSwift (~> 4.0)
   - RxSwift (4.1.2)
   - SnapKit (4.0.0)
-  - SQLite.swift (0.11.4):
-    - SQLite.swift/standard (= 0.11.4)
-  - SQLite.swift/standard (0.11.4)
+  - SQLite.swift (0.11.5):
+    - SQLite.swift/standard (= 0.11.5)
+  - SQLite.swift/standard (0.11.5)
   - SQLiteMigrationManager.swift (0.3.0):
     - SQLite.swift (~> 0.11.0)
-  - SwiftLint (0.25.0)
-  - SwiftyBeaver (1.5.1)
+  - SwiftyBeaver (1.5.2)
   - SwiftyImage (1.2.0)
-  - SwiftyJSON (4.0.0)
+  - SwiftyJSON (4.1.0)
   - TableViewManager (0.0.1):
     - Hue
     - Kingfisher
@@ -97,7 +96,6 @@ DEPENDENCIES:
   - SnapKit
   - SQLite.swift
   - SQLiteMigrationManager.swift
-  - SwiftLint
   - SwiftyBeaver
   - SwiftyImage
   - SwiftyJSON
@@ -105,57 +103,84 @@ DEPENDENCIES:
   - XMPPFramework (from `https://github.com/robbiehanson/XMPPFramework.git`, branch `master`)
   - YYText
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - CocoaAsyncSocket
+    - CocoaLumberjack
+    - CWActionSheet
+    - CWShareView
+    - FSPagerView
+    - Hue
+    - Kingfisher
+    - KissXML
+    - KVOController
+    - libidn
+    - MBProgressHUD
+    - Moya
+    - Nimble
+    - Quick
+    - Result
+    - RxCocoa
+    - RxSwift
+    - SnapKit
+    - SQLite.swift
+    - SQLiteMigrationManager.swift
+    - SwiftyBeaver
+    - SwiftyImage
+    - SwiftyJSON
+    - YYText
+
 EXTERNAL SOURCES:
   ChatClient:
-    :path: ./Module/ChatClient/ChatClient.podspec
+    :path: "./Module/ChatClient/ChatClient.podspec"
   ChatKit:
-    :path: ./Module/ChatKit/ChatKit.podspec
+    :path: "./Module/ChatKit/ChatKit.podspec"
   MomentKit:
-    :path: ./Module/MomentKit/MomentKit.podspec
+    :path: "./Module/MomentKit/MomentKit.podspec"
   TableViewManager:
-    :path: ./Module/TableViewManager/TableViewManager.podspec
+    :path: "./Module/TableViewManager/TableViewManager.podspec"
   XMPPFramework:
     :branch: master
     :git: https://github.com/robbiehanson/XMPPFramework.git
 
 CHECKOUT OPTIONS:
   XMPPFramework:
-    :commit: 510b6f80cb683541b22de4854bc040f480ff83bd
+    :commit: 6a2754ed448f6c77ef8cdaa6ea4fdf039481e51c
     :git: https://github.com/robbiehanson/XMPPFramework.git
 
 SPEC CHECKSUMS:
-  Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   ChatClient: 65302036dac7401c2fadd2462760676c27da7f51
   ChatKit: 2c87721be43c79bd8753726b85b2a4d7d29c74c1
-  CocoaAsyncSocket: 3541e024f48c54b251638ef72d51dd42808de932
-  CocoaLumberjack: 2e258a064cacc8eb9a2aca318e24d02a0a7fd56d
+  CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
+  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   CWActionSheet: 91390f102ef79ed59713f5b3c5af8fcbfe1e3e76
   CWShareView: a7befa2a75fa1113c587b69b03b48556b488316d
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
-  Kingfisher: 68498a706e46c2a050b0c9572f100e5db407f6e0
+  Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
   KissXML: 4418f32138aec43797891845d682b00fc8cd4677
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
   libidn: 90fc1a62b60288dcf543f13f4ebca913f17d829f
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MomentKit: 8339c0b4d508f0a6cb55d85b2a0f9d8b8cbe516b
-  Moya: 3d594ada51a21cc02b18739ab578a1984f900c8a
-  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
-  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  Moya: a725035953bc1c0eb1be505ab903984501d82440
+  Nimble: 391f07782af4b37914f9bd7b2ffbb952731b8202
+  Quick: 03278013f71aa05fe9ecabc94fbcc6835f1ee76f
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  SQLite.swift: 3e3bee21da701b5b9f87c4a672cb54f233505692
+  SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
   SQLiteMigrationManager.swift: cf85e5825575e1ec1e5c470800feb53eee6e64cf
-  SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
-  SwiftyBeaver: 4f74563624b2c1e821c522c54142b5dd5ebb0f30
+  SwiftyBeaver: 85daaaa2b3ae6e31b7b55c99430e8b91dac088af
   SwiftyImage: ebaa7c7b6163cd4ad102f3bb05a8fb276d35b4f3
-  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   TableViewManager: d357c47234e09ff858ab7d743b180009ee2a70ff
   XMPPFramework: 967df10e4dc4ba4ca5e04505fd2b2d2fd562d917
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 495aa62bcfcfa7f42989c277bca086d423bbf880
+PODFILE CHECKSUM: 1aff2dd1b95c934f30b8b50eb8510d6fee1941b7
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

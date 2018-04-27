@@ -1034,7 +1034,6 @@
 				1F3491771E8786EE00B36641 /* Frameworks */,
 				1F3491781E8786EE00B36641 /* Resources */,
 				1D640594C54B864FCD6EDA71 /* [CP] Embed Pods Frameworks */,
-				EDBF6044B81957A6E50478CA /* [CP] Copy Pods Resources */,
 				1F3492691E87B3F500B36641 /* Embed Frameworks */,
 				8CA7EB071E9E7CD500467C37 /* Embed App Extensions */,
 			);
@@ -1057,7 +1056,6 @@
 				1F34918B1E8786EE00B36641 /* Frameworks */,
 				1F34918C1E8786EE00B36641 /* Resources */,
 				D84C54F97BA26BE6779E0E84 /* [CP] Embed Pods Frameworks */,
-				DBBEA13132332568EC8745F8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1307,39 +1305,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DBBEA13132332568EC8745F8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChatTests/Pods-CWWeChatTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EDBF6044B81957A6E50478CA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat-resources.sh",
-				"${PODS_ROOT}/AMap2DMap/MAMapKit.framework/AMap.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CWWeChat/Pods-CWWeChat-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
