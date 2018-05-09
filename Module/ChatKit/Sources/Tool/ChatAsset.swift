@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 enum ChatAsset: String {
-
+    
     case defaultHeadImage = "defaultHeadImage"
     
     var image: UIImage? {

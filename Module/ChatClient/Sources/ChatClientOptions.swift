@@ -24,7 +24,7 @@ public class ChatClientOptions {
     /// 来源 app iOS 安卓等等
     public var resource: String
     
-    init(host: String, domain: String) {
+    public init(host: String, domain: String) {
         self.host = host
         self.domain = domain
         self.resource = "ios"

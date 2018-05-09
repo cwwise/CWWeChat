@@ -34,8 +34,8 @@ class XMPPManager: NSObject, XMPPStreamManagementDelegate, XMPPStreamDelegate {
 
     /// 这3个变量 注册和登录 用来临时记录
     var isLoginUser: Bool = true
-    var username: String!
-    var password: String!
+    var _username: String!
+    var _password: String!
     var completion: LoginHandler?
     
     /// 初始化方法
@@ -199,11 +199,11 @@ class XMPPManager: NSObject, XMPPStreamManagementDelegate, XMPPStreamDelegate {
     func xmppStreamDidConnect(_ sender: XMPPStream!) {
         do {
             if isLoginUser {
-                try xmppStream.authenticate(withPassword: password)
+                try xmppStream.authenticate(withPassword: _password)
             } else {
                 let result = xmppStream.supportsInBandRegistration
                 log.debug("注册支持\(result)")
-                try xmppStream.register(withPassword: password)
+                try xmppStream.register(withPassword: _password)
             }
         } catch {
             log.error(error)
@@ -302,27 +302,26 @@ class XMPPManager: NSObject, XMPPStreamManagementDelegate, XMPPStreamDelegate {
 
 extension XMPPManager: LoginManager {
     
-    var currentAccount: String {
-        assert(username.count != 0, "请调用Login方法")
-        return username ?? ""
+    var username: String {
+        assert(self._username.count != 0, "请调用Login方法")
+        return self._username ?? ""
     }
     
     func login(username: String, password: String, completion: LoginHandler?) {
         // 保存变量
         self.isLoginUser = true
-        self.password = password
+        self._password = password
+        self._username = username
+
         self.completion = completion
-        self.username = username
-        
         connetService(username: username)
-        
     }
     
     func register(username: String, password: String, completion: LoginHandler?) {
         // 保存变量
         self.isLoginUser = false
-        self.password = password
-        self.username = username
+        self._password = password
+        self._username = username
         
         connetService(username: username)
     }

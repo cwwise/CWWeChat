@@ -61,6 +61,7 @@ PODS:
   - SQLite.swift/standard (0.11.5)
   - SQLiteMigrationManager.swift (0.3.0):
     - SQLite.swift (~> 0.11.0)
+  - SwiftGen (5.3.0)
   - SwiftyBeaver (1.5.2)
   - SwiftyImage (1.2.0)
   - SwiftyJSON (4.1.0)
@@ -96,6 +97,7 @@ DEPENDENCIES:
   - SnapKit
   - SQLite.swift
   - SQLiteMigrationManager.swift
+  - SwiftGen
   - SwiftyBeaver
   - SwiftyImage
   - SwiftyJSON
@@ -126,6 +128,7 @@ SPEC REPOS:
     - SnapKit
     - SQLite.swift
     - SQLiteMigrationManager.swift
+    - SwiftGen
     - SwiftyBeaver
     - SwiftyImage
     - SwiftyJSON
@@ -174,6 +177,7 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
   SQLiteMigrationManager.swift: cf85e5825575e1ec1e5c470800feb53eee6e64cf
+  SwiftGen: 4379bd3640b0a212a0f6ea3c494adba385513d10
   SwiftyBeaver: 85daaaa2b3ae6e31b7b55c99430e8b91dac088af
   SwiftyImage: ebaa7c7b6163cd4ad102f3bb05a8fb276d35b4f3
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
@@ -181,6 +185,6 @@ SPEC CHECKSUMS:
   XMPPFramework: 967df10e4dc4ba4ca5e04505fd2b2d2fd562d917
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 1aff2dd1b95c934f30b8b50eb8510d6fee1941b7
+PODFILE CHECKSUM: d6e1843445adad6b51c90b03b33ff242176f2dda
 
 COCOAPODS: 1.5.0

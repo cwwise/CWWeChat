@@ -9,7 +9,9 @@ import Foundation
 import XMPPFramework
 
 protocol BaseService {
+   
     associatedtype T
+    
     var multicastDelegate: GCDMulticastDelegate { get set }
     
     func addDelegate(_ delegate: T)

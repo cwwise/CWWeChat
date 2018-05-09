@@ -41,6 +41,7 @@ target 'CWWeChat' do
   
 #  pod 'SwiftLint'
 
+  pod 'SwiftGen'
 
   # 本地pod
   pod 'TableViewManager', :path => './Module/TableViewManager/TableViewManager.podspec'
