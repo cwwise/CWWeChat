@@ -62,7 +62,7 @@ extension CWDiscoverController: TableViewManagerDelegate {
             controller.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(controller, animated: true)
         } else {
-            let url = URL(string: "https://m.weibo.cn")!
+            let url = URL(string: "https://cwwise.com")!
             let gameViewController = CWGameController(url: url)
             gameViewController.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(gameViewController, animated: true)

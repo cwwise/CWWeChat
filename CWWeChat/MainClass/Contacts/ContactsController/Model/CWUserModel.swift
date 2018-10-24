@@ -41,9 +41,6 @@ public class CWUserModel: Equatable {
     /// 拼音首字母
     var pinyingInitial: String = ""
     
-    // 详情
-   // var detailInfo = CWUserInfo()
-    
     init(userId: String, username: String) {
         self.username = username
         self.userId = userId
@@ -58,4 +55,6 @@ public class CWUserModel: Equatable {
     }
     
 }
+
+
 

@@ -88,7 +88,7 @@ class CWLoginController: UIViewController {
             make.left.equalTo(margin)
             make.right.equalTo(-margin)
             make.height.equalTo(45)
-            make.top.equalTo(30+64)
+            make.top.equalTo(30+kNavigationBarHeight)
         }
         
         self.view.addSubview(passwordTextField)

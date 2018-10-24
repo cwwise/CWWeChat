@@ -24,7 +24,8 @@ class CWSearchResultController: UIViewController {
 
     
     lazy var tableView:UITableView = {
-        let frame = CGRect(x: 0, y: 64, width: kScreenWidth, height: kScreenHeight-kNavigationBarHeight)
+        let frame = CGRect(x: 0, y: kNavigationBarHeight,
+                           width: kScreenWidth, height: kScreenHeight-kNavigationBarHeight)
         let tableView = UITableView(frame: frame, style: .grouped)
         tableView.backgroundColor = UIColor.white
         tableView.tableFooterView = UIView()

@@ -211,7 +211,7 @@ class EmoticonService {
             if let package = package {
                 
                 // 获取成功 开始下载图片
-                let urls = package.emoticonList.flatMap({ (emoticon) -> URL in
+                let urls = package.emoticonList.compactMap({ (emoticon) -> URL in
                     return emoticon.originalUrl!
                 })
                 // 保存到数据库
