@@ -14,7 +14,10 @@ let kScreenWidth = UIScreen.main.bounds.size.width
 let kScreenHeight = UIScreen.main.bounds.size.height
 let kScreenScale = UIScreen.main.scale
 
-let kNavigationBarHeight: CGFloat = 64
+let kIsiphoneX = UIApplication.shared.statusBarFrame.height > 20
+
+let kNavigationBarHeight: CGFloat = kIsiphoneX ? 88 : 64
+let kScreenBottomHeight: CGFloat = kIsiphoneX ? 34: 0
 
 let kDefaultHeadImage = UIImage(named: "default_head")
 

@@ -1,0 +1,7 @@
+xcassets:
+  paths:
+   - ../CWWeChat/Application/Assets.xcassets
+  templateName: swift4
+  output: ../CWWeChat/Expand/Extension/UIImage+CWChat2.swift
+
+

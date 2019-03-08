@@ -24,7 +24,7 @@ target 'CWWeChat' do
   pod 'SwiftyBeaver'
   
   # chat
-  pod 'XMPPFramework', :git => 'https://github.com/robbiehanson/XMPPFramework.git', :branch => 'master'
+  pod 'XMPPFramework/Swift'
 
   # UI
   pod 'MBProgressHUD'
@@ -39,8 +39,10 @@ target 'CWWeChat' do
   pod 'SwiftyJSON'
   pod 'KVOController'
   
+  pod 'SwiftDate'
 #  pod 'SwiftLint'
 
+  pod 'SwiftGen'
 
   # 本地pod
   pod 'TableViewManager', :path => './Module/TableViewManager/TableViewManager.podspec'

@@ -11,7 +11,7 @@ import SwiftyBeaver
 
 @_exported import SwiftyJSON
 
-/// 打印
+/// 遍历
 let log = SwiftyBeaver.self
 let chatClient = ChatClient.share
 
@@ -23,7 +23,7 @@ public class ChatClient {
     
     public private(set) var options: ChatClientOptions
     
-    /// login    
+    /// 登录管理
     public var loginManager: LoginManager {
         return xmppManager
     }
@@ -38,20 +38,22 @@ public class ChatClient {
         return chatService
     }
     
+    /// 联系人管理
     public var contactManager: ContactManager {
         return contactService
     }
     
+    /// 群组管理
     public var groupManager: GroupManager {
         return groupService
     }
 
-    /// 用户名（username@cwwise.com）
+    /// 用户名（username）
     public var username: String {
-        return self.loginManager.currentAccount
+        return self.loginManager.username
     }
     
-    // 内部使用
+    // MARK: - 内部使用
     var chatService: ChatService
     
     var contactService: ContactService

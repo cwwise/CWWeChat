@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 群
 public class Group {
     // 群组ID
     public var groupId: String
@@ -23,7 +24,7 @@ public class Group {
     // 此群是否为公开群
     public var isPublic: Bool = false
     
-    init(groupId: String, name: String) {
+    public init(groupId: String, name: String) {
         self.setting = GroupOptions()
         self.groupId = groupId
     }

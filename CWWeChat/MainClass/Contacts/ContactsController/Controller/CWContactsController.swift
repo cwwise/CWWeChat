@@ -150,6 +150,9 @@ extension CWContactsController: UITableViewDataSource, UITableViewDelegate {
       
             let userId = groupList[indexPath.section][indexPath.row].userId
             let detail = CWContactDetailController()
+            
+            
+            
             detail.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(detail, animated: true)
         }

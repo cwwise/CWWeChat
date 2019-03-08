@@ -16,6 +16,10 @@ public protocol LoginManagerDelegate: class {
     
     /// 登录之后 会调用登录成功或者登录失败
     func loginSuccess()
+    
+    /// 登录失败
+    ///
+    /// - Parameter error: 失败原因
     func loginFailed(error: ChatClientError)
 }
 
@@ -26,7 +30,7 @@ public protocol LoginManager: class {
     /// 是否登录成功
     var isLogined: Bool { get }
     /// 当前登录用户
-    var currentAccount: String { get }
+    var username: String { get }
 
     func login(username: String, password: String, completion: LoginHandler?)
     

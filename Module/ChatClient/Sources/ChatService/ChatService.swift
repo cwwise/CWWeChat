@@ -192,7 +192,6 @@ extension ChatService: ChatManager {
         }
         
        dispatchManager.sendMessage(message, progress: _progress, completion: _completion)
-        
     }
     
     func revokeMessage(_ message: Message, completion: SendMessageCompletionHandle) {
