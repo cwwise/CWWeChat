@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
 
   s.author             = { "ios_chenwei" => "wei18810109052@163.com" }
 
-  s.platform     = :ios, "8.0"
+  s.platform     = :ios, "10.0"
 
   s.source       = { :git => "https://github.com/cwwise/TableViewManager.git", :tag => "#{s.version}" }
 

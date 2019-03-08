@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
 
   s.license      = { :type => "MIT", :file => "LICENSE" }
 
-  s.author             = { "ios_chenwei" => "wei18810109052@163.com" }
+  s.author       = { "ios_chenwei" => "wei18810109052@163.com" }
 
   s.platform     = :ios, "10.0"
 
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
 
   s.source_files  = "Sources", "Sources/**/*.{h,swift}"
 
-
+  s.ios.deployment_target = '10.0'
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
   s.framework  = "Foundation"

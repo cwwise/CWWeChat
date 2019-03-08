@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
 
   s.author        = { "ios_chenwei" => "wei18810109052@163.com" }
 
-  s.platform     = :ios, "9.0"
+  s.platform     = :ios, "10.0"
 
   s.source       = { :git => "https://github.com/cwwise/ChatKit.git", :tag => "#{s.version}" }
 
@@ -39,9 +39,8 @@ Pod::Spec.new do |s|
   # s.resources = "Resources/*.png"
 
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
   s.ios.resource_bundle = { 'ChatKitAssets' => 'Assets/ChatKitAssets.bundle' }
-
 
   s.framework  = "UIKit"
   s.framework  = "MapKit"

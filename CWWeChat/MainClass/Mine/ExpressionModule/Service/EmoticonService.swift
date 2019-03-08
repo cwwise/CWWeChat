@@ -229,7 +229,7 @@ class EmoticonService {
     
     func downloadResources(_ resources: [URL], id: String) {
         
-        let cache = ImageCache(name: id, path: nil)
+        let cache = ImageCache(name: id)
         let options = KingfisherOptionsInfoItem.targetCache(cache)
         
         let prefetcher = ImagePrefetcher(resources: resources, options: [options], progressBlock: { (skippedResources, failedResources, completedResources) in
